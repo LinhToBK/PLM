@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs
+/04_Image
+/05_DataBase
+/bin
+/obj
+/packages
+/PLM_Lynx.AppHost
+/PLM_Lynx.ServiceDefaults

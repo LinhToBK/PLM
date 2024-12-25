@@ -1,0 +1,25 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PLM_Lynx.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Datacon" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=192.168.2.27;Initial Catalog=DSGL_PLM;Persist Security Info=True;User ID=sa;Password="132512Myl@@)%";Encrypt=False&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=192.168.2.27;Initial Catalog=DSGL_PLM;Persist Security Info=True;User ID=sa;Password="132512Myl@@)%";Encrypt=False</Value>
+    </Setting>
+    <Setting Name="LinkDataPart" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">F:\02. OnedriveFolder\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\05_DataBase\DSGLDataPart\</Value>
+    </Setting>
+    <Setting Name="TrashDataPart" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">F:\02. OnedriveFolder\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\05_DataBase\DSGLTraskPart\</Value>
+    </Setting>
+    <Setting Name="DWGTrueViewPath" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">"C:\Program Files\Autodesk\DWG TrueView 2023 - English\dwgviewr.exe"</Value>
+    </Setting>
+    <Setting Name="eDrawingView" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">"C:\Program Files\Common Files\eDrawings2025\eDrawings.exe"</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

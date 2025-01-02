@@ -41,10 +41,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 open.Title = "Vui lòng chọn file ";
                 string filternote = @"PDF Files (*.pdf)|*.pdf|";
                 filternote = filternote + @"STP Files (*.stp)|*.stp|";
-                filternote = filternote + @"STP Files (*.jpg)|*.jpg|";
+                filternote = filternote + @"JPG Files (*.jpg)|*.jpg|";
                 filternote = filternote + @"DWG Files (*.dwg)|*.dwg|";
                 filternote = filternote + @"DXF Files (*.dxf)|*.dxf|";
-                filternote = filternote + @"All Supported Files (*.pdf;*.stp;*.dwg;*.dxf;*.jpg)|*.jpg;*.pdf;*.stp;*.dwg;*.dxf";
+                filternote = filternote + @"PRT Files (*.prt)|*.prt|";
+                filternote = filternote + @"All Supported Files (*.prt;*.pdf;*.stp;*.dwg;*.dxf;*.jpg)|*.prt;*.jpg;*.pdf;*.stp;*.dwg;*.dxf";
                 open.Filter = filternote;
 
 
@@ -130,7 +131,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private bool IsAllowedExtension(string filePath)
         {
-            string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf" };
+            string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf",".step",".prt" };
             string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
             return allowedExtensions.Contains(fileExtension);
         }

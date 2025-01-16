@@ -30,6 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMakeNewPart));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.txtApplyTemPlate = new System.Windows.Forms.TextBox();
             this.txtFamilyDescription = new System.Windows.Forms.TextBox();
@@ -51,7 +52,6 @@
             this.dgvFamily = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAddPart = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -95,6 +95,15 @@
             this.splitContainer1.SplitterDistance = 546;
             this.splitContainer1.TabIndex = 1;
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(334, 169);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(101, 15);
+            this.label6.TabIndex = 10;
+            this.label6.Text = "Template Descript";
+            // 
             // btnApplyTemplate
             // 
             this.btnApplyTemplate.Location = new System.Drawing.Point(443, 165);
@@ -113,24 +122,23 @@
             this.txtApplyTemPlate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
             this.txtApplyTemPlate.Size = new System.Drawing.Size(181, 73);
             this.txtApplyTemPlate.TabIndex = 8;
-            //this.txtApplyTemPlate.TextChanged += new System.EventHandler(this.txtApplyTemPlate_TextChanged);
             // 
             // txtFamilyDescription
             // 
             this.txtFamilyDescription.Location = new System.Drawing.Point(229, 12);
             this.txtFamilyDescription.Name = "txtFamilyDescription";
             this.txtFamilyDescription.ReadOnly = true;
-            this.txtFamilyDescription.Size = new System.Drawing.Size(289, 22);
+            this.txtFamilyDescription.Size = new System.Drawing.Size(289, 23);
             this.txtFamilyDescription.TabIndex = 7;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label5.Location = new System.Drawing.Point(9, 169);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(283, 30);
+            this.label5.Size = new System.Drawing.Size(285, 30);
             this.label5.TabIndex = 5;
             this.label5.Text = "Gợi ý :  PartName nên ghi rõ tên model và tính năng \r\nDescription :nên ghi kích t" +
     "hước, vật liệu,";
@@ -138,22 +146,22 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label7.Location = new System.Drawing.Point(7, 237);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(332, 15);
+            this.label7.Size = new System.Drawing.Size(330, 15);
             this.label7.TabIndex = 5;
             this.label7.Text = "Có thể kéo thả file vào vùng Part File Attachment để thêm file\r\n";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label4.Location = new System.Drawing.Point(9, 211);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(316, 15);
+            this.label4.Size = new System.Drawing.Size(311, 15);
             this.label4.TabIndex = 5;
             this.label4.Text = "File đính kèm có đuôi : .jpg .PDF, .dwg, .dwf, .stp, iegs, .prt";
             // 
@@ -179,7 +187,7 @@
             // 
             this.txtPartName.Location = new System.Drawing.Point(92, 43);
             this.txtPartName.Name = "txtPartName";
-            this.txtPartName.Size = new System.Drawing.Size(426, 22);
+            this.txtPartName.Size = new System.Drawing.Size(426, 23);
             this.txtPartName.TabIndex = 1;
             // 
             // groupBox2
@@ -231,7 +239,7 @@
             this.btnAddFileAttachment.Name = "btnAddFileAttachment";
             this.btnAddFileAttachment.Size = new System.Drawing.Size(58, 60);
             this.btnAddFileAttachment.TabIndex = 0;
-            this.btnAddFileAttachment.Text = "Add File";
+            this.btnAddFileAttachment.Text = "Add\r\nFile";
             this.btnAddFileAttachment.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.btnAddFileAttachment.UseVisualStyleBackColor = true;
             this.btnAddFileAttachment.Click += new System.EventHandler(this.btnAddFileAttachment_Click);
@@ -263,7 +271,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(16, 99);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 15);
+            this.label1.Size = new System.Drawing.Size(74, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "Part Descript";
             // 
@@ -272,7 +280,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(16, 47);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 15);
+            this.label2.Size = new System.Drawing.Size(63, 15);
             this.label2.TabIndex = 0;
             this.label2.Text = "Part Name";
             // 
@@ -329,22 +337,13 @@
             this.btnAddPart.UseVisualStyleBackColor = true;
             this.btnAddPart.Click += new System.EventHandler(this.btnAddPart_Click);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(334, 169);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(103, 15);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Template Descript";
-            // 
             // frmMakeNewPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 527);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmMakeNewPart";

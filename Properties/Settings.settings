@@ -5,9 +5,9 @@
     <Setting Name="Datacon" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=192.168.2.27;Initial Catalog=DSGL_PLM;Persist Security Info=True;User ID=sa;Password="132512Myl@@)%";Trust Server Certificate=True&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=3.35.49.62;Initial Catalog=DSGL_PLM;Persist Security Info=True;User ID=sa;Password="yourStrongPass@123";Trust Server Certificate=True&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=192.168.2.27;Initial Catalog=DSGL_PLM;Persist Security Info=True;User ID=sa;Password="132512Myl@@)%";Trust Server Certificate=True</Value>
+      <Value Profile="(Default)">Data Source=3.35.49.62;Initial Catalog=DSGL_PLM;Persist Security Info=True;User ID=sa;Password="yourStrongPass@123";Trust Server Certificate=True</Value>
     </Setting>
     <Setting Name="LinkDataPart" Type="System.String" Scope="Application">
       <Value Profile="(Default)">F:\02. OnedriveFolder\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\05_DataBase\DSGLDataPart\</Value>

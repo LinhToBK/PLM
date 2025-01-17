@@ -26,8 +26,8 @@ namespace PLM_Lynx.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=192.168.2.27;Initial Catalog=DSGL_PLM;Persist Security Info=True;User" +
-            " ID=sa;Password=\"132512Myl@@)%\";Trust Server Certificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=3.35.49.62;Initial Catalog=DSGL_PLM;Persist Security Info=True;User I" +
+            "D=sa;Password=\"yourStrongPass@123\";Trust Server Certificate=True")]
         public string Datacon {
             get {
                 return ((string)(this["Datacon"]));

@@ -245,6 +245,12 @@
     <Compile Include="03_GUI_User_Interface\3_3_ECO\frmUpdateInforPart.Designer.cs">
       <DependentUpon>frmUpdateInforPart.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmDownloadFile.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmDownloadFile.Designer.cs">
+      <DependentUpon>frmDownloadFile.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmFilterSearch.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -324,6 +330,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmUpdateInforPart.resx">
       <DependentUpon>frmUpdateInforPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmDownloadFile.resx">
+      <DependentUpon>frmDownloadFile.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmFilterSearch.resx">
       <DependentUpon>frmFilterSearch.cs</DependentUpon>

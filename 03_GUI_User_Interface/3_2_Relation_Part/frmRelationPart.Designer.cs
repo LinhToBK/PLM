@@ -115,8 +115,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1043, 605);
-            this.splitContainer1.SplitterDistance = 142;
+            this.splitContainer1.Size = new System.Drawing.Size(1026, 717);
+            this.splitContainer1.SplitterDistance = 167;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer3
@@ -127,6 +127,7 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.AutoScroll = true;
             this.splitContainer3.Panel1.Controls.Add(this.label1);
             this.splitContainer3.Panel1.Controls.Add(this.btnFindPart);
             this.splitContainer3.Panel1.Controls.Add(this.label10);
@@ -140,16 +141,17 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dgvListTimKiem);
-            this.splitContainer3.Size = new System.Drawing.Size(1043, 142);
-            this.splitContainer3.SplitterDistance = 368;
+            this.splitContainer3.Size = new System.Drawing.Size(1026, 167);
+            this.splitContainer3.SplitterDistance = 362;
             this.splitContainer3.TabIndex = 8;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(14, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(174, 15);
+            this.label1.Size = new System.Drawing.Size(195, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Nhập thông tin để tìm kiếm Part";
             // 
@@ -179,7 +181,7 @@
             // 
             this.txtTimKiem.Location = new System.Drawing.Point(14, 43);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(174, 22);
+            this.txtTimKiem.Size = new System.Drawing.Size(174, 23);
             this.txtTimKiem.TabIndex = 1;
             this.txtTimKiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimKiem_KeyDown);
             // 
@@ -198,7 +200,7 @@
             this.txtStatusImagePart.Location = new System.Drawing.Point(165, 80);
             this.txtStatusImagePart.Name = "txtStatusImagePart";
             this.txtStatusImagePart.ReadOnly = true;
-            this.txtStatusImagePart.Size = new System.Drawing.Size(100, 22);
+            this.txtStatusImagePart.Size = new System.Drawing.Size(100, 23);
             this.txtStatusImagePart.TabIndex = 6;
             this.txtStatusImagePart.TextChanged += new System.EventHandler(this.txtStatusImagePart_TextChanged);
             // 
@@ -237,7 +239,7 @@
             this.dgvListTimKiem.Location = new System.Drawing.Point(0, 0);
             this.dgvListTimKiem.Name = "dgvListTimKiem";
             this.dgvListTimKiem.RowTemplate.Height = 23;
-            this.dgvListTimKiem.Size = new System.Drawing.Size(671, 142);
+            this.dgvListTimKiem.Size = new System.Drawing.Size(660, 167);
             this.dgvListTimKiem.TabIndex = 3;
             this.dgvListTimKiem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellDoubleClick);
             this.dgvListTimKiem.Click += new System.EventHandler(this.dgvListTimKiem_Click);
@@ -250,6 +252,7 @@
             // 
             // splitContainer2.Panel1
             // 
+            this.splitContainer2.Panel1.AutoScroll = true;
             this.splitContainer2.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.splitContainer2.Panel1.Controls.Add(this.label7);
             this.splitContainer2.Panel1.Controls.Add(this.txtListFileStatus);
@@ -270,8 +273,8 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.Cyan;
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer2.Size = new System.Drawing.Size(1043, 459);
-            this.splitContainer2.SplitterDistance = 369;
+            this.splitContainer2.Size = new System.Drawing.Size(1026, 546);
+            this.splitContainer2.SplitterDistance = 362;
             this.splitContainer2.TabIndex = 0;
             // 
             // label7
@@ -279,7 +282,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(13, 219);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(69, 15);
+            this.label7.Size = new System.Drawing.Size(65, 15);
             this.label7.TabIndex = 6;
             this.label7.Text = "Files Status";
             // 
@@ -290,7 +293,7 @@
             this.txtListFileStatus.Location = new System.Drawing.Point(86, 217);
             this.txtListFileStatus.Name = "txtListFileStatus";
             this.txtListFileStatus.ReadOnly = true;
-            this.txtListFileStatus.Size = new System.Drawing.Size(272, 22);
+            this.txtListFileStatus.Size = new System.Drawing.Size(272, 23);
             this.txtListFileStatus.TabIndex = 5;
             // 
             // label11
@@ -316,10 +319,10 @@
             // 
             this.dgvListFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListFile.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvListFile.Location = new System.Drawing.Point(0, 289);
+            this.dgvListFile.Location = new System.Drawing.Point(0, 292);
             this.dgvListFile.Name = "dgvListFile";
             this.dgvListFile.RowTemplate.Height = 23;
-            this.dgvListFile.Size = new System.Drawing.Size(369, 170);
+            this.dgvListFile.Size = new System.Drawing.Size(362, 254);
             this.dgvListFile.TabIndex = 3;
             this.dgvListFile.DoubleClick += new System.EventHandler(this.dgvListFile_DoubleClick);
             // 
@@ -338,7 +341,7 @@
             this.txtPartName.Location = new System.Drawing.Point(86, 94);
             this.txtPartName.Name = "txtPartName";
             this.txtPartName.ReadOnly = true;
-            this.txtPartName.Size = new System.Drawing.Size(141, 22);
+            this.txtPartName.Size = new System.Drawing.Size(141, 23);
             this.txtPartName.TabIndex = 2;
             // 
             // txtPartCode
@@ -346,18 +349,18 @@
             this.txtPartCode.Location = new System.Drawing.Point(86, 59);
             this.txtPartCode.Name = "txtPartCode";
             this.txtPartCode.ReadOnly = true;
-            this.txtPartCode.Size = new System.Drawing.Size(141, 22);
+            this.txtPartCode.Size = new System.Drawing.Size(141, 23);
             this.txtPartCode.TabIndex = 2;
             this.txtPartCode.TextChanged += new System.EventHandler(this.txtPartCode_TextChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Blue;
             this.label5.Location = new System.Drawing.Point(10, 254);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(115, 15);
+            this.label5.Size = new System.Drawing.Size(118, 15);
             this.label5.TabIndex = 1;
             this.label5.Text = "Click đúp để xem file";
             // 
@@ -366,7 +369,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(12, 167);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 15);
+            this.label4.Size = new System.Drawing.Size(67, 15);
             this.label4.TabIndex = 1;
             this.label4.Text = "Decriptions";
             // 
@@ -375,7 +378,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 98);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(61, 15);
+            this.label3.Size = new System.Drawing.Size(63, 15);
             this.label3.TabIndex = 1;
             this.label3.Text = "Part Name";
             // 
@@ -420,6 +423,7 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.AutoScroll = true;
             this.splitContainer4.Panel1.Controls.Add(this.label9);
             this.splitContainer4.Panel1.Controls.Add(this.label8);
             this.splitContainer4.Panel1.Controls.Add(this.label6);
@@ -431,8 +435,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.dgvChild);
-            this.splitContainer4.Size = new System.Drawing.Size(670, 459);
-            this.splitContainer4.SplitterDistance = 83;
+            this.splitContainer4.Size = new System.Drawing.Size(660, 546);
+            this.splitContainer4.SplitterDistance = 98;
             this.splitContainer4.TabIndex = 4;
             // 
             // label9
@@ -487,7 +491,7 @@
             this.btnCheckBefore.Name = "btnCheckBefore";
             this.btnCheckBefore.Size = new System.Drawing.Size(99, 37);
             this.btnCheckBefore.TabIndex = 0;
-            this.btnCheckBefore.Text = "Check up&Load ";
+            this.btnCheckBefore.Text = "Check Up&Load ";
             this.btnCheckBefore.UseVisualStyleBackColor = true;
             this.btnCheckBefore.Click += new System.EventHandler(this.btnCheckBefore_Click);
             // 
@@ -518,7 +522,7 @@
             this.dgvChild.Location = new System.Drawing.Point(0, 0);
             this.dgvChild.Name = "dgvChild";
             this.dgvChild.RowTemplate.Height = 23;
-            this.dgvChild.Size = new System.Drawing.Size(670, 372);
+            this.dgvChild.Size = new System.Drawing.Size(660, 444);
             this.dgvChild.TabIndex = 1;
             this.dgvChild.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChild_CellDoubleClick);
             // 
@@ -526,10 +530,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1043, 605);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1043, 597);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button1);
-            this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmRelationPart";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

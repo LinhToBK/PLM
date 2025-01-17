@@ -87,7 +87,7 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -97,7 +97,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1289, 508);
+            this.splitContainer1.Size = new System.Drawing.Size(1289, 576);
             this.splitContainer1.SplitterDistance = 646;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -110,6 +110,7 @@
             // 
             // splitContainer3.Panel1
             // 
+            this.splitContainer3.Panel1.AutoScroll = true;
             this.splitContainer3.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.splitContainer3.Panel1.Controls.Add(this.label5);
             this.splitContainer3.Panel1.Controls.Add(this.btnOpenRelationManage);
@@ -122,18 +123,19 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dgvListTimKiem);
-            this.splitContainer3.Size = new System.Drawing.Size(646, 508);
-            this.splitContainer3.SplitterDistance = 172;
+            this.splitContainer3.Size = new System.Drawing.Size(646, 576);
+            this.splitContainer3.SplitterDistance = 195;
+            this.splitContainer3.SplitterWidth = 5;
             this.splitContainer3.TabIndex = 6;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(12, 16);
+            this.label5.Location = new System.Drawing.Point(12, 18);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(248, 56);
+            this.label5.Size = new System.Drawing.Size(273, 60);
             this.label5.TabIndex = 2;
             this.label5.Text = "ECO bao gồm : \r\n1. Cập nhật thông tin của Part\r\n2. Xóa  ràng buộc của 2 Part\r\n3. " +
     "Sửa Quantity của Child Part đối với 1 Parent Part";
@@ -141,9 +143,9 @@
             // btnOpenRelationManage
             // 
             this.btnOpenRelationManage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btnOpenRelationManage.Location = new System.Drawing.Point(147, 87);
+            this.btnOpenRelationManage.Location = new System.Drawing.Point(147, 99);
             this.btnOpenRelationManage.Name = "btnOpenRelationManage";
-            this.btnOpenRelationManage.Size = new System.Drawing.Size(123, 23);
+            this.btnOpenRelationManage.Size = new System.Drawing.Size(123, 26);
             this.btnOpenRelationManage.TabIndex = 5;
             this.btnOpenRelationManage.Text = "Tạo ràng buộc mới";
             this.btnOpenRelationManage.UseVisualStyleBackColor = false;
@@ -152,11 +154,11 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.ForeColor = System.Drawing.Color.Blue;
-            this.label7.Location = new System.Drawing.Point(276, 16);
+            this.label7.Location = new System.Drawing.Point(289, 18);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(234, 84);
+            this.label7.Size = new System.Drawing.Size(257, 90);
             this.label7.TabIndex = 2;
             this.label7.Text = "Phím tắt : \r\n+) Alt + T => Thêm Part từ danh sách vào Infor \r\n+) Alt + P => Thêm " +
     "Parent\r\n+) Alt + C => Thêm Child\r\n+) Nhập ô tìm kiếm => Nhấn Enter để tra cứu\r\n+" +
@@ -164,9 +166,9 @@
             // 
             // btnSearchDetail
             // 
-            this.btnSearchDetail.Location = new System.Drawing.Point(12, 87);
+            this.btnSearchDetail.Location = new System.Drawing.Point(12, 99);
             this.btnSearchDetail.Name = "btnSearchDetail";
-            this.btnSearchDetail.Size = new System.Drawing.Size(123, 23);
+            this.btnSearchDetail.Size = new System.Drawing.Size(123, 26);
             this.btnSearchDetail.TabIndex = 4;
             this.btnSearchDetail.Text = "Tra cứu chi tiết";
             this.btnSearchDetail.UseVisualStyleBackColor = true;
@@ -176,10 +178,10 @@
             // 
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(340, 118);
-            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnTimKiem.Location = new System.Drawing.Point(340, 134);
+            this.btnTimKiem.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnTimKiem.Name = "btnTimKiem";
-            this.btnTimKiem.Size = new System.Drawing.Size(73, 29);
+            this.btnTimKiem.Size = new System.Drawing.Size(80, 33);
             this.btnTimKiem.TabIndex = 1;
             this.btnTimKiem.Text = "&Search";
             this.btnTimKiem.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -188,19 +190,19 @@
             // 
             // txtTimKiem
             // 
-            this.txtTimKiem.Location = new System.Drawing.Point(149, 121);
-            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtTimKiem.Location = new System.Drawing.Point(149, 137);
+            this.txtTimKiem.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtTimKiem.Name = "txtTimKiem";
-            this.txtTimKiem.Size = new System.Drawing.Size(179, 22);
+            this.txtTimKiem.Size = new System.Drawing.Size(179, 25);
             this.txtTimKiem.TabIndex = 0;
             this.txtTimKiem.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtTimKiem_KeyDown);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 125);
+            this.label1.Location = new System.Drawing.Point(12, 142);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(125, 15);
+            this.label1.Size = new System.Drawing.Size(141, 17);
             this.label1.TabIndex = 2;
             this.label1.Text = "Nhập từ khóa tìm kiếm";
             // 
@@ -209,10 +211,10 @@
             this.dgvListTimKiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListTimKiem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListTimKiem.Location = new System.Drawing.Point(0, 0);
-            this.dgvListTimKiem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvListTimKiem.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dgvListTimKiem.Name = "dgvListTimKiem";
             this.dgvListTimKiem.RowTemplate.Height = 23;
-            this.dgvListTimKiem.Size = new System.Drawing.Size(646, 332);
+            this.dgvListTimKiem.Size = new System.Drawing.Size(646, 376);
             this.dgvListTimKiem.TabIndex = 3;
             this.dgvListTimKiem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellDoubleClick);
             // 
@@ -220,7 +222,7 @@
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.splitContainer2.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.splitContainer2.Name = "splitContainer2";
             this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -231,9 +233,9 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer2.Size = new System.Drawing.Size(639, 508);
-            this.splitContainer2.SplitterDistance = 72;
-            this.splitContainer2.SplitterWidth = 5;
+            this.splitContainer2.Size = new System.Drawing.Size(639, 576);
+            this.splitContainer2.SplitterDistance = 81;
+            this.splitContainer2.SplitterWidth = 6;
             this.splitContainer2.TabIndex = 0;
             // 
             // groupBox2
@@ -247,7 +249,7 @@
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(639, 72);
+            this.groupBox2.Size = new System.Drawing.Size(639, 81);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Update Information of Part";
@@ -255,9 +257,9 @@
             // btnUpdatePart
             // 
             this.btnUpdatePart.BackColor = System.Drawing.Color.LightBlue;
-            this.btnUpdatePart.Location = new System.Drawing.Point(413, 16);
+            this.btnUpdatePart.Location = new System.Drawing.Point(413, 18);
             this.btnUpdatePart.Name = "btnUpdatePart";
-            this.btnUpdatePart.Size = new System.Drawing.Size(68, 48);
+            this.btnUpdatePart.Size = new System.Drawing.Size(68, 54);
             this.btnUpdatePart.TabIndex = 4;
             this.btnUpdatePart.Text = "&Update Part";
             this.btnUpdatePart.UseVisualStyleBackColor = false;
@@ -265,18 +267,18 @@
             // 
             // txtPartName
             // 
-            this.txtPartName.Location = new System.Drawing.Point(115, 42);
+            this.txtPartName.Location = new System.Drawing.Point(115, 48);
             this.txtPartName.Name = "txtPartName";
             this.txtPartName.ReadOnly = true;
-            this.txtPartName.Size = new System.Drawing.Size(286, 22);
+            this.txtPartName.Size = new System.Drawing.Size(286, 25);
             this.txtPartName.TabIndex = 3;
             // 
             // txtPartCode
             // 
-            this.txtPartCode.Location = new System.Drawing.Point(300, 14);
+            this.txtPartCode.Location = new System.Drawing.Point(300, 16);
             this.txtPartCode.Name = "txtPartCode";
             this.txtPartCode.ReadOnly = true;
-            this.txtPartCode.Size = new System.Drawing.Size(100, 22);
+            this.txtPartCode.Size = new System.Drawing.Size(100, 25);
             this.txtPartCode.TabIndex = 3;
             // 
             // btnAddPart
@@ -284,9 +286,9 @@
             this.btnAddPart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAddPart.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPart.Image")));
             this.btnAddPart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPart.Location = new System.Drawing.Point(9, 35);
+            this.btnAddPart.Location = new System.Drawing.Point(9, 40);
             this.btnAddPart.Name = "btnAddPart";
-            this.btnAddPart.Size = new System.Drawing.Size(87, 29);
+            this.btnAddPart.Size = new System.Drawing.Size(87, 33);
             this.btnAddPart.TabIndex = 1;
             this.btnAddPart.Text = "Add Par&t";
             this.btnAddPart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -296,11 +298,11 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.Blue;
-            this.label4.Location = new System.Drawing.Point(6, 18);
+            this.label4.Location = new System.Drawing.Point(6, 20);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(188, 14);
+            this.label4.Size = new System.Drawing.Size(209, 15);
             this.label4.TabIndex = 0;
             this.label4.Text = "Cập nhật Version DV/PV/MP, bản vẽ,...";
             // 
@@ -313,6 +315,7 @@
             // 
             // splitContainer4.Panel1
             // 
+            this.splitContainer4.Panel1.AutoScroll = true;
             this.splitContainer4.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitContainer4.Panel1.Controls.Add(this.label8);
             this.splitContainer4.Panel1.Controls.Add(this.label3);
@@ -332,49 +335,50 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.dgvListChild);
-            this.splitContainer4.Size = new System.Drawing.Size(639, 431);
-            this.splitContainer4.SplitterDistance = 194;
+            this.splitContainer4.Size = new System.Drawing.Size(639, 489);
+            this.splitContainer4.SplitterDistance = 220;
+            this.splitContainer4.SplitterWidth = 5;
             this.splitContainer4.TabIndex = 8;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 11);
+            this.label8.Location = new System.Drawing.Point(14, 12);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(70, 15);
+            this.label8.Size = new System.Drawing.Size(76, 17);
             this.label8.TabIndex = 7;
             this.label8.Text = "Parent Infor";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(264, 11);
+            this.label3.Location = new System.Drawing.Point(264, 12);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(64, 15);
+            this.label3.Size = new System.Drawing.Size(68, 17);
             this.label3.TabIndex = 2;
             this.label3.Text = "Child Infor";
             // 
             // txtChildCode
             // 
-            this.txtChildCode.Location = new System.Drawing.Point(381, 34);
+            this.txtChildCode.Location = new System.Drawing.Point(381, 39);
             this.txtChildCode.Name = "txtChildCode";
             this.txtChildCode.ReadOnly = true;
-            this.txtChildCode.Size = new System.Drawing.Size(129, 22);
+            this.txtChildCode.Size = new System.Drawing.Size(129, 25);
             this.txtChildCode.TabIndex = 3;
             // 
             // txtChildName
             // 
-            this.txtChildName.Location = new System.Drawing.Point(264, 69);
+            this.txtChildName.Location = new System.Drawing.Point(264, 78);
             this.txtChildName.Name = "txtChildName";
             this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(246, 22);
+            this.txtChildName.Size = new System.Drawing.Size(246, 25);
             this.txtChildName.TabIndex = 3;
             // 
             // txtQuantity
             // 
-            this.txtQuantity.Location = new System.Drawing.Point(458, 95);
+            this.txtQuantity.Location = new System.Drawing.Point(458, 108);
             this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(52, 22);
+            this.txtQuantity.Size = new System.Drawing.Size(52, 25);
             this.txtQuantity.TabIndex = 4;
             // 
             // btnAddChild
@@ -382,10 +386,10 @@
             this.btnAddChild.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
             this.btnAddChild.Image = ((System.Drawing.Image)(resources.GetObject("btnAddChild.Image")));
             this.btnAddChild.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddChild.Location = new System.Drawing.Point(264, 31);
-            this.btnAddChild.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddChild.Location = new System.Drawing.Point(264, 35);
+            this.btnAddChild.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnAddChild.Name = "btnAddChild";
-            this.btnAddChild.Size = new System.Drawing.Size(95, 29);
+            this.btnAddChild.Size = new System.Drawing.Size(95, 33);
             this.btnAddChild.TabIndex = 1;
             this.btnAddChild.Text = "Add &Child";
             this.btnAddChild.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -395,11 +399,11 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Times New Roman", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.Blue;
-            this.label6.Location = new System.Drawing.Point(14, 119);
+            this.label6.Location = new System.Drawing.Point(14, 135);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(248, 56);
+            this.label6.Size = new System.Drawing.Size(273, 60);
             this.label6.TabIndex = 5;
             this.label6.Text = "ECO Relation  bao gồm : \r\n1. Xóa  ràng buộc của 2 Part \r\n( Nếu xóa thì phải tạo l" +
     "ại đó nhé )\r\n2. Sửa Quantity của Child Part đối với 1 Parent Part";
@@ -409,9 +413,9 @@
             this.btnCheckListChild.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnCheckListChild.Image = ((System.Drawing.Image)(resources.GetObject("btnCheckListChild.Image")));
             this.btnCheckListChild.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCheckListChild.Location = new System.Drawing.Point(125, 31);
+            this.btnCheckListChild.Location = new System.Drawing.Point(125, 35);
             this.btnCheckListChild.Name = "btnCheckListChild";
-            this.btnCheckListChild.Size = new System.Drawing.Size(110, 60);
+            this.btnCheckListChild.Size = new System.Drawing.Size(110, 68);
             this.btnCheckListChild.TabIndex = 6;
             this.btnCheckListChild.Text = "Check \r\n&List Child";
             this.btnCheckListChild.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -423,10 +427,10 @@
             this.btnAddParent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAddParent.Image = ((System.Drawing.Image)(resources.GetObject("btnAddParent.Image")));
             this.btnAddParent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddParent.Location = new System.Drawing.Point(14, 31);
-            this.btnAddParent.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddParent.Location = new System.Drawing.Point(14, 35);
+            this.btnAddParent.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnAddParent.Name = "btnAddParent";
-            this.btnAddParent.Size = new System.Drawing.Size(95, 29);
+            this.btnAddParent.Size = new System.Drawing.Size(95, 33);
             this.btnAddParent.TabIndex = 1;
             this.btnAddParent.Text = "Add &Parent";
             this.btnAddParent.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -436,26 +440,26 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(381, 99);
+            this.label2.Location = new System.Drawing.Point(381, 112);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(54, 15);
+            this.label2.Size = new System.Drawing.Size(56, 17);
             this.label2.TabIndex = 2;
             this.label2.Text = "Quantity";
             // 
             // txtParentName
             // 
-            this.txtParentName.Location = new System.Drawing.Point(14, 92);
+            this.txtParentName.Location = new System.Drawing.Point(14, 104);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(221, 22);
+            this.txtParentName.Size = new System.Drawing.Size(221, 25);
             this.txtParentName.TabIndex = 3;
             // 
             // txtParentCode
             // 
-            this.txtParentCode.Location = new System.Drawing.Point(14, 65);
+            this.txtParentCode.Location = new System.Drawing.Point(14, 74);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(95, 22);
+            this.txtParentCode.Size = new System.Drawing.Size(95, 25);
             this.txtParentCode.TabIndex = 3;
             // 
             // btnDelete
@@ -466,10 +470,10 @@
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(398, 144);
-            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnDelete.Location = new System.Drawing.Point(398, 163);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(112, 29);
+            this.btnDelete.Size = new System.Drawing.Size(112, 33);
             this.btnDelete.TabIndex = 1;
             this.btnDelete.Text = "Delete Relation";
             this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -482,10 +486,10 @@
             this.btnModifyQuantity.Enabled = false;
             this.btnModifyQuantity.Image = ((System.Drawing.Image)(resources.GetObject("btnModifyQuantity.Image")));
             this.btnModifyQuantity.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModifyQuantity.Location = new System.Drawing.Point(264, 144);
-            this.btnModifyQuantity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnModifyQuantity.Location = new System.Drawing.Point(264, 163);
+            this.btnModifyQuantity.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnModifyQuantity.Name = "btnModifyQuantity";
-            this.btnModifyQuantity.Size = new System.Drawing.Size(132, 29);
+            this.btnModifyQuantity.Size = new System.Drawing.Size(132, 33);
             this.btnModifyQuantity.TabIndex = 1;
             this.btnModifyQuantity.Text = "Modify Quantity";
             this.btnModifyQuantity.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -497,21 +501,22 @@
             this.dgvListChild.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListChild.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListChild.Location = new System.Drawing.Point(0, 0);
-            this.dgvListChild.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dgvListChild.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dgvListChild.Name = "dgvListChild";
             this.dgvListChild.RowTemplate.Height = 23;
-            this.dgvListChild.Size = new System.Drawing.Size(639, 233);
+            this.dgvListChild.Size = new System.Drawing.Size(639, 264);
             this.dgvListChild.TabIndex = 0;
             this.dgvListChild.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListChild_CellDoubleClick);
             // 
             // frmECO
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1289, 508);
+            this.AutoScroll = true;
+            this.ClientSize = new System.Drawing.Size(1289, 576);
             this.Controls.Add(this.splitContainer1);
-            this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "frmECO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ECO";

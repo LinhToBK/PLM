@@ -42,18 +42,18 @@
             // 
             this.ckclstFilterPartCode.AllowDrop = true;
             this.ckclstFilterPartCode.FormattingEnabled = true;
-            this.ckclstFilterPartCode.Location = new System.Drawing.Point(4, 33);
+            this.ckclstFilterPartCode.Location = new System.Drawing.Point(4, 34);
             this.ckclstFilterPartCode.Margin = new System.Windows.Forms.Padding(4);
             this.ckclstFilterPartCode.Name = "ckclstFilterPartCode";
-            this.ckclstFilterPartCode.Size = new System.Drawing.Size(101, 157);
+            this.ckclstFilterPartCode.Size = new System.Drawing.Size(89, 164);
             this.ckclstFilterPartCode.TabIndex = 0;
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(30, 287);
+            this.btnOK.Location = new System.Drawing.Point(26, 305);
             this.btnOK.Margin = new System.Windows.Forms.Padding(4);
             this.btnOK.Name = "btnOK";
-            this.btnOK.Size = new System.Drawing.Size(100, 28);
+            this.btnOK.Size = new System.Drawing.Size(88, 30);
             this.btnOK.TabIndex = 1;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
@@ -61,10 +61,10 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(168, 287);
+            this.btnExit.Location = new System.Drawing.Point(147, 305);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(100, 28);
+            this.btnExit.Size = new System.Drawing.Size(88, 30);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Cancel";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -73,10 +73,10 @@
             // ckcPartCodeAll
             // 
             this.ckcPartCodeAll.AutoSize = true;
-            this.ckcPartCodeAll.Location = new System.Drawing.Point(4, 198);
+            this.ckcPartCodeAll.Location = new System.Drawing.Point(4, 206);
             this.ckcPartCodeAll.Margin = new System.Windows.Forms.Padding(4);
             this.ckcPartCodeAll.Name = "ckcPartCodeAll";
-            this.ckcPartCodeAll.Size = new System.Drawing.Size(167, 20);
+            this.ckcPartCodeAll.Size = new System.Drawing.Size(160, 21);
             this.ckcPartCodeAll.TabIndex = 2;
             this.ckcPartCodeAll.Text = "Choose All FamilyCode";
             this.ckcPartCodeAll.UseVisualStyleBackColor = true;
@@ -90,10 +90,10 @@
             this.flowLayoutPanel1.Controls.Add(this.ckclstFilterPartCode);
             this.flowLayoutPanel1.Controls.Add(this.ckcPartCodeAll);
             this.flowLayoutPanel1.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(30, 13);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(26, 14);
             this.flowLayoutPanel1.Margin = new System.Windows.Forms.Padding(4);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(214, 266);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(187, 283);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // label1
@@ -102,7 +102,7 @@
             this.label1.Location = new System.Drawing.Point(4, 0);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 16);
+            this.label1.Size = new System.Drawing.Size(75, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "FamilyCode";
             // 
@@ -111,7 +111,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Blue;
-            this.label2.Location = new System.Drawing.Point(3, 16);
+            this.label2.Location = new System.Drawing.Point(3, 17);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(149, 13);
             this.label2.TabIndex = 4;
@@ -119,14 +119,14 @@
             // 
             // frmFilterSearch
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(308, 323);
+            this.ClientSize = new System.Drawing.Size(270, 343);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnOK);
-            this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmFilterSearch";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

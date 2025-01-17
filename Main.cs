@@ -111,5 +111,11 @@ namespace PLM_Lynx
             frmManagePrice frm = new frmManagePrice();
             frm.ShowDialog();
         }
+
+        private void mnuMakeNewPO_Click(object sender, EventArgs e)
+        {
+            frmMakePO frm = new frmMakePO();
+            frm.ShowDialog();
+        }
     }
 }

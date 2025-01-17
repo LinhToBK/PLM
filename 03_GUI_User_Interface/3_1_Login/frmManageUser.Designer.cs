@@ -57,10 +57,10 @@
             this.btnModifyDept = new System.Windows.Forms.Button();
             this.btnAddDept = new System.Windows.Forms.Button();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.txtIdDept = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtDepartmentName = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.txtIdDept = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -79,17 +79,21 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.groupBox2);
-            this.splitContainer1.Size = new System.Drawing.Size(800, 450);
-            this.splitContainer1.SplitterDistance = 559;
+            this.splitContainer1.Size = new System.Drawing.Size(895, 591);
+            this.splitContainer1.SplitterDistance = 518;
+            this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
             // groupBox1
@@ -98,33 +102,39 @@
             this.groupBox1.Controls.Add(this.dgvListUser);
             this.groupBox1.Controls.Add(this.panel1);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(559, 450);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(518, 591);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Manage List Users";
             // 
             // panel2
             // 
+            this.panel2.AutoScroll = true;
             this.panel2.Controls.Add(this.btnSaveUser);
             this.panel2.Controls.Add(this.btnDeleteUser);
             this.panel2.Controls.Add(this.btnModifyUser);
             this.panel2.Controls.Add(this.btnAddUser);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(3, 365);
+            this.panel2.Location = new System.Drawing.Point(3, 386);
+            this.panel2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(553, 82);
+            this.panel2.Size = new System.Drawing.Size(512, 201);
             this.panel2.TabIndex = 1;
             // 
             // btnSaveUser
             // 
+            this.btnSaveUser.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnSaveUser.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveUser.Image")));
             this.btnSaveUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveUser.Location = new System.Drawing.Point(448, 18);
+            this.btnSaveUser.Location = new System.Drawing.Point(371, 9);
+            this.btnSaveUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSaveUser.Name = "btnSaveUser";
-            this.btnSaveUser.Size = new System.Drawing.Size(98, 44);
+            this.btnSaveUser.Size = new System.Drawing.Size(105, 38);
             this.btnSaveUser.TabIndex = 4;
             this.btnSaveUser.Text = "SaveUser";
             this.btnSaveUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -133,11 +143,13 @@
             // 
             // btnDeleteUser
             // 
+            this.btnDeleteUser.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteUser.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteUser.Image")));
             this.btnDeleteUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteUser.Location = new System.Drawing.Point(304, 18);
+            this.btnDeleteUser.Location = new System.Drawing.Point(251, 10);
+            this.btnDeleteUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDeleteUser.Name = "btnDeleteUser";
-            this.btnDeleteUser.Size = new System.Drawing.Size(98, 44);
+            this.btnDeleteUser.Size = new System.Drawing.Size(105, 38);
             this.btnDeleteUser.TabIndex = 3;
             this.btnDeleteUser.Text = "Delete User";
             this.btnDeleteUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -146,11 +158,13 @@
             // 
             // btnModifyUser
             // 
+            this.btnModifyUser.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnModifyUser.Image = ((System.Drawing.Image)(resources.GetObject("btnModifyUser.Image")));
             this.btnModifyUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModifyUser.Location = new System.Drawing.Point(160, 18);
+            this.btnModifyUser.Location = new System.Drawing.Point(129, 10);
+            this.btnModifyUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnModifyUser.Name = "btnModifyUser";
-            this.btnModifyUser.Size = new System.Drawing.Size(98, 44);
+            this.btnModifyUser.Size = new System.Drawing.Size(105, 38);
             this.btnModifyUser.TabIndex = 2;
             this.btnModifyUser.Text = "Modify User";
             this.btnModifyUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -159,11 +173,13 @@
             // 
             // btnAddUser
             // 
+            this.btnAddUser.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnAddUser.Image = ((System.Drawing.Image)(resources.GetObject("btnAddUser.Image")));
             this.btnAddUser.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddUser.Location = new System.Drawing.Point(14, 18);
+            this.btnAddUser.Location = new System.Drawing.Point(9, 10);
+            this.btnAddUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddUser.Name = "btnAddUser";
-            this.btnAddUser.Size = new System.Drawing.Size(98, 44);
+            this.btnAddUser.Size = new System.Drawing.Size(105, 38);
             this.btnAddUser.TabIndex = 1;
             this.btnAddUser.Text = "Add User";
             this.btnAddUser.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -174,10 +190,11 @@
             // 
             this.dgvListUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListUser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvListUser.Location = new System.Drawing.Point(3, 125);
+            this.dgvListUser.Location = new System.Drawing.Point(3, 147);
+            this.dgvListUser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvListUser.Name = "dgvListUser";
             this.dgvListUser.RowTemplate.Height = 23;
-            this.dgvListUser.Size = new System.Drawing.Size(553, 322);
+            this.dgvListUser.Size = new System.Drawing.Size(512, 440);
             this.dgvListUser.TabIndex = 1;
             this.dgvListUser.Click += new System.EventHandler(this.dgvListUser_Click);
             // 
@@ -194,88 +211,95 @@
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 18);
+            this.panel1.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.panel1.Location = new System.Drawing.Point(3, 22);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(553, 107);
+            this.panel1.Size = new System.Drawing.Size(512, 125);
             this.panel1.TabIndex = 0;
             // 
             // txtUserDepartment
             // 
-            this.txtUserDepartment.Location = new System.Drawing.Point(309, 43);
+            this.txtUserDepartment.Location = new System.Drawing.Point(335, 45);
+            this.txtUserDepartment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUserDepartment.Name = "txtUserDepartment";
-            this.txtUserDepartment.Size = new System.Drawing.Size(130, 22);
+            this.txtUserDepartment.Size = new System.Drawing.Size(148, 25);
             this.txtUserDepartment.TabIndex = 5;
             // 
             // txtUserRoles
             // 
-            this.txtUserRoles.Location = new System.Drawing.Point(75, 74);
+            this.txtUserRoles.Location = new System.Drawing.Point(86, 77);
+            this.txtUserRoles.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUserRoles.Name = "txtUserRoles";
-            this.txtUserRoles.Size = new System.Drawing.Size(130, 22);
+            this.txtUserRoles.Size = new System.Drawing.Size(148, 25);
             this.txtUserRoles.TabIndex = 3;
             // 
             // txtUserPassword
             // 
-            this.txtUserPassword.Location = new System.Drawing.Point(75, 43);
+            this.txtUserPassword.Location = new System.Drawing.Point(86, 45);
+            this.txtUserPassword.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUserPassword.Name = "txtUserPassword";
-            this.txtUserPassword.Size = new System.Drawing.Size(130, 22);
+            this.txtUserPassword.Size = new System.Drawing.Size(148, 25);
             this.txtUserPassword.TabIndex = 2;
             // 
             // txtUserPosition
             // 
-            this.txtUserPosition.Location = new System.Drawing.Point(309, 12);
+            this.txtUserPosition.Location = new System.Drawing.Point(335, 13);
+            this.txtUserPosition.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUserPosition.Name = "txtUserPosition";
-            this.txtUserPosition.Size = new System.Drawing.Size(130, 22);
+            this.txtUserPosition.Size = new System.Drawing.Size(148, 25);
             this.txtUserPosition.TabIndex = 4;
             // 
             // txtUserName
             // 
-            this.txtUserName.Location = new System.Drawing.Point(75, 12);
+            this.txtUserName.Location = new System.Drawing.Point(86, 13);
+            this.txtUserName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(130, 22);
+            this.txtUserName.Size = new System.Drawing.Size(148, 25);
             this.txtUserName.TabIndex = 1;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(232, 48);
+            this.label5.Location = new System.Drawing.Point(244, 49);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(71, 15);
+            this.label5.Size = new System.Drawing.Size(81, 17);
             this.label5.TabIndex = 0;
             this.label5.Text = "Department";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 78);
+            this.label2.Location = new System.Drawing.Point(10, 81);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(38, 15);
+            this.label2.Size = new System.Drawing.Size(40, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Roles";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(232, 16);
+            this.label4.Location = new System.Drawing.Point(244, 17);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(52, 15);
+            this.label4.Size = new System.Drawing.Size(57, 17);
             this.label4.TabIndex = 0;
             this.label4.Text = "Position";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 47);
+            this.label3.Location = new System.Drawing.Point(10, 49);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 15);
+            this.label3.Size = new System.Drawing.Size(66, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Password";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 16);
+            this.label1.Location = new System.Drawing.Point(10, 17);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 15);
+            this.label1.Size = new System.Drawing.Size(44, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Name";
             // 
@@ -285,10 +309,12 @@
             this.groupBox2.Controls.Add(this.panel4);
             this.groupBox2.Controls.Add(this.panel3);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.Location = new System.Drawing.Point(0, 0);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(237, 450);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox2.Size = new System.Drawing.Size(372, 591);
             this.groupBox2.TabIndex = 0;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Manage List Department";
@@ -296,11 +322,11 @@
             // dgvListDepartment
             // 
             this.dgvListDepartment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListDepartment.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvListDepartment.Location = new System.Drawing.Point(3, 125);
+            this.dgvListDepartment.Location = new System.Drawing.Point(3, 147);
+            this.dgvListDepartment.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dgvListDepartment.Name = "dgvListDepartment";
             this.dgvListDepartment.RowTemplate.Height = 23;
-            this.dgvListDepartment.Size = new System.Drawing.Size(231, 183);
+            this.dgvListDepartment.Size = new System.Drawing.Size(366, 162);
             this.dgvListDepartment.TabIndex = 2;
             this.dgvListDepartment.Click += new System.EventHandler(this.dgvListDepartment_Click);
             // 
@@ -311,17 +337,18 @@
             this.panel4.Controls.Add(this.btnDeleteDept);
             this.panel4.Controls.Add(this.btnModifyDept);
             this.panel4.Controls.Add(this.btnAddDept);
-            this.panel4.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel4.Location = new System.Drawing.Point(3, 308);
+            this.panel4.Location = new System.Drawing.Point(3, 317);
+            this.panel4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(231, 139);
+            this.panel4.Size = new System.Drawing.Size(366, 125);
             this.panel4.TabIndex = 1;
             // 
             // btnSaveDept
             // 
-            this.btnSaveDept.Location = new System.Drawing.Point(121, 40);
+            this.btnSaveDept.Location = new System.Drawing.Point(131, 10);
+            this.btnSaveDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnSaveDept.Name = "btnSaveDept";
-            this.btnSaveDept.Size = new System.Drawing.Size(101, 28);
+            this.btnSaveDept.Size = new System.Drawing.Size(97, 40);
             this.btnSaveDept.TabIndex = 3;
             this.btnSaveDept.Text = "Save Dept";
             this.btnSaveDept.UseVisualStyleBackColor = true;
@@ -332,9 +359,10 @@
             this.btnExit.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(49, 86);
+            this.btnExit.Location = new System.Drawing.Point(259, 56);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(143, 44);
+            this.btnExit.Size = new System.Drawing.Size(97, 40);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = false;
@@ -343,9 +371,10 @@
             // btnDeleteDept
             // 
             this.btnDeleteDept.BackColor = System.Drawing.SystemColors.MenuHighlight;
-            this.btnDeleteDept.Location = new System.Drawing.Point(121, 6);
+            this.btnDeleteDept.Location = new System.Drawing.Point(3, 56);
+            this.btnDeleteDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDeleteDept.Name = "btnDeleteDept";
-            this.btnDeleteDept.Size = new System.Drawing.Size(101, 28);
+            this.btnDeleteDept.Size = new System.Drawing.Size(97, 40);
             this.btnDeleteDept.TabIndex = 1;
             this.btnDeleteDept.Text = "Delete Dept";
             this.btnDeleteDept.UseVisualStyleBackColor = false;
@@ -354,9 +383,10 @@
             // btnModifyDept
             // 
             this.btnModifyDept.BackColor = System.Drawing.SystemColors.Info;
-            this.btnModifyDept.Location = new System.Drawing.Point(3, 40);
+            this.btnModifyDept.Location = new System.Drawing.Point(131, 56);
+            this.btnModifyDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnModifyDept.Name = "btnModifyDept";
-            this.btnModifyDept.Size = new System.Drawing.Size(101, 28);
+            this.btnModifyDept.Size = new System.Drawing.Size(97, 40);
             this.btnModifyDept.TabIndex = 2;
             this.btnModifyDept.Text = "Modify Dept";
             this.btnModifyDept.UseVisualStyleBackColor = false;
@@ -365,9 +395,10 @@
             // btnAddDept
             // 
             this.btnAddDept.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.btnAddDept.Location = new System.Drawing.Point(3, 6);
+            this.btnAddDept.Location = new System.Drawing.Point(3, 10);
+            this.btnAddDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnAddDept.Name = "btnAddDept";
-            this.btnAddDept.Size = new System.Drawing.Size(101, 28);
+            this.btnAddDept.Size = new System.Drawing.Size(97, 40);
             this.btnAddDept.TabIndex = 1;
             this.btnAddDept.Text = "Add Dept";
             this.btnAddDept.UseVisualStyleBackColor = false;
@@ -380,49 +411,54 @@
             this.panel3.Controls.Add(this.label6);
             this.panel3.Controls.Add(this.txtDepartmentName);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel3.Location = new System.Drawing.Point(3, 18);
+            this.panel3.Location = new System.Drawing.Point(3, 22);
+            this.panel3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(231, 107);
+            this.panel3.Size = new System.Drawing.Size(366, 125);
             this.panel3.TabIndex = 2;
+            // 
+            // txtIdDept
+            // 
+            this.txtIdDept.Location = new System.Drawing.Point(15, 46);
+            this.txtIdDept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtIdDept.Name = "txtIdDept";
+            this.txtIdDept.Size = new System.Drawing.Size(35, 25);
+            this.txtIdDept.TabIndex = 2;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(22, 16);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(20, 17);
+            this.label7.TabIndex = 1;
+            this.label7.Text = "ID";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(87, 43);
+            this.label6.Location = new System.Drawing.Point(103, 16);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(105, 15);
+            this.label6.Size = new System.Drawing.Size(116, 17);
             this.label6.TabIndex = 1;
             this.label6.Text = "Department Name";
             // 
             // txtDepartmentName
             // 
-            this.txtDepartmentName.Location = new System.Drawing.Point(70, 69);
+            this.txtDepartmentName.Location = new System.Drawing.Point(86, 46);
+            this.txtDepartmentName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtDepartmentName.Name = "txtDepartmentName";
-            this.txtDepartmentName.Size = new System.Drawing.Size(147, 22);
+            this.txtDepartmentName.Size = new System.Drawing.Size(167, 25);
             this.txtDepartmentName.TabIndex = 0;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 43);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(20, 15);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "ID";
-            // 
-            // txtIdDept
-            // 
-            this.txtIdDept.Location = new System.Drawing.Point(6, 69);
-            this.txtIdDept.Name = "txtIdDept";
-            this.txtIdDept.Size = new System.Drawing.Size(31, 22);
-            this.txtIdDept.TabIndex = 2;
             // 
             // frmManageUser
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(895, 591);
             this.Controls.Add(this.splitContainer1);
+            this.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmManageUser";
             this.Text = "Manager User";
             this.Load += new System.EventHandler(this.frmManageUser_Load);

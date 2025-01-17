@@ -39,9 +39,9 @@
             this.mnuManageFamily = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRelationPart = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPurchase = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuManagePrice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMakeNewPO = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFindPO = new System.Windows.Forms.ToolStripMenuItem();
-            this.mnuManagePrice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAboutMe = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUserGuide = new System.Windows.Forms.ToolStripMenuItem();
@@ -145,18 +145,6 @@
             this.mnuPurchase.Size = new System.Drawing.Size(67, 20);
             this.mnuPurchase.Text = "Purchase";
             // 
-            // mnuMakeNewPO
-            // 
-            this.mnuMakeNewPO.Name = "mnuMakeNewPO";
-            this.mnuMakeNewPO.Size = new System.Drawing.Size(219, 22);
-            this.mnuMakeNewPO.Text = "Make New PO";
-            // 
-            // mnuFindPO
-            // 
-            this.mnuFindPO.Name = "mnuFindPO";
-            this.mnuFindPO.Size = new System.Drawing.Size(219, 22);
-            this.mnuFindPO.Text = "Find PO ";
-            // 
             // mnuManagePrice
             // 
             this.mnuManagePrice.Name = "mnuManagePrice";
@@ -165,6 +153,19 @@
             this.mnuManagePrice.Size = new System.Drawing.Size(219, 22);
             this.mnuManagePrice.Text = "Manage Price";
             this.mnuManagePrice.Click += new System.EventHandler(this.mnuManagePrice_Click);
+            // 
+            // mnuMakeNewPO
+            // 
+            this.mnuMakeNewPO.Name = "mnuMakeNewPO";
+            this.mnuMakeNewPO.Size = new System.Drawing.Size(219, 22);
+            this.mnuMakeNewPO.Text = "Make New PO";
+            this.mnuMakeNewPO.Click += new System.EventHandler(this.mnuMakeNewPO_Click);
+            // 
+            // mnuFindPO
+            // 
+            this.mnuFindPO.Name = "mnuFindPO";
+            this.mnuFindPO.Size = new System.Drawing.Size(219, 22);
+            this.mnuFindPO.Text = "Find PO ";
             // 
             // mnuHelp
             // 

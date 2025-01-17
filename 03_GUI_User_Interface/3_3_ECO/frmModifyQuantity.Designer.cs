@@ -47,101 +47,101 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 36);
+            this.label1.Location = new System.Drawing.Point(27, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 15);
+            this.label1.Size = new System.Drawing.Size(72, 17);
             this.label1.TabIndex = 0;
             this.label1.Text = "Parent Part";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(268, 36);
+            this.label2.Location = new System.Drawing.Point(268, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(59, 15);
+            this.label2.Size = new System.Drawing.Size(64, 17);
             this.label2.TabIndex = 0;
             this.label2.Text = "Child Part";
             // 
             // txtParentCode
             // 
             this.txtParentCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtParentCode.Location = new System.Drawing.Point(27, 72);
-            this.txtParentCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtParentCode.Location = new System.Drawing.Point(27, 82);
+            this.txtParentCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(116, 22);
+            this.txtParentCode.Size = new System.Drawing.Size(116, 25);
             this.txtParentCode.TabIndex = 1;
             // 
             // txtParentName
             // 
             this.txtParentName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtParentName.Location = new System.Drawing.Point(27, 115);
-            this.txtParentName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtParentName.Location = new System.Drawing.Point(27, 130);
+            this.txtParentName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(207, 22);
+            this.txtParentName.Size = new System.Drawing.Size(207, 25);
             this.txtParentName.TabIndex = 2;
             // 
             // txtChildCode
             // 
             this.txtChildCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtChildCode.Location = new System.Drawing.Point(268, 72);
-            this.txtChildCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtChildCode.Location = new System.Drawing.Point(268, 82);
+            this.txtChildCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtChildCode.Name = "txtChildCode";
             this.txtChildCode.ReadOnly = true;
-            this.txtChildCode.Size = new System.Drawing.Size(116, 22);
+            this.txtChildCode.Size = new System.Drawing.Size(116, 25);
             this.txtChildCode.TabIndex = 1;
             // 
             // txtChildName
             // 
             this.txtChildName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtChildName.Location = new System.Drawing.Point(268, 115);
-            this.txtChildName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtChildName.Location = new System.Drawing.Point(268, 130);
+            this.txtChildName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtChildName.Name = "txtChildName";
             this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(194, 22);
+            this.txtChildName.Size = new System.Drawing.Size(194, 25);
             this.txtChildName.TabIndex = 2;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(27, 170);
+            this.label3.Location = new System.Drawing.Point(27, 193);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 15);
+            this.label3.Size = new System.Drawing.Size(81, 17);
             this.label3.TabIndex = 0;
             this.label3.Text = "Old Quantity";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(268, 170);
+            this.label4.Location = new System.Drawing.Point(268, 193);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(81, 15);
+            this.label4.Size = new System.Drawing.Size(86, 17);
             this.label4.TabIndex = 0;
             this.label4.Text = "New Quantity";
             // 
             // txtOldQuantity
             // 
             this.txtOldQuantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtOldQuantity.Location = new System.Drawing.Point(126, 166);
-            this.txtOldQuantity.Margin = new System.Windows.Forms.Padding(4);
+            this.txtOldQuantity.Location = new System.Drawing.Point(126, 189);
+            this.txtOldQuantity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOldQuantity.Name = "txtOldQuantity";
             this.txtOldQuantity.ReadOnly = true;
-            this.txtOldQuantity.Size = new System.Drawing.Size(56, 22);
+            this.txtOldQuantity.Size = new System.Drawing.Size(56, 25);
             this.txtOldQuantity.TabIndex = 3;
             // 
             // txtNewQuantity
             // 
             this.txtNewQuantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtNewQuantity.Location = new System.Drawing.Point(383, 166);
-            this.txtNewQuantity.Margin = new System.Windows.Forms.Padding(4);
+            this.txtNewQuantity.Location = new System.Drawing.Point(383, 189);
+            this.txtNewQuantity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNewQuantity.Name = "txtNewQuantity";
             this.txtNewQuantity.ReadOnly = true;
-            this.txtNewQuantity.Size = new System.Drawing.Size(56, 22);
+            this.txtNewQuantity.Size = new System.Drawing.Size(56, 25);
             this.txtNewQuantity.TabIndex = 3;
             // 
             // btnUpdate
@@ -149,10 +149,10 @@
             this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
             this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUpdate.Location = new System.Drawing.Point(94, 219);
-            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdate.Location = new System.Drawing.Point(94, 248);
+            this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(88, 26);
+            this.btnUpdate.Size = new System.Drawing.Size(88, 29);
             this.btnUpdate.TabIndex = 4;
             this.btnUpdate.Text = "Update";
             this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -162,10 +162,10 @@
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnCancel.Location = new System.Drawing.Point(288, 219);
-            this.btnCancel.Margin = new System.Windows.Forms.Padding(4);
+            this.btnCancel.Location = new System.Drawing.Point(288, 248);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(88, 26);
+            this.btnCancel.Size = new System.Drawing.Size(88, 29);
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = false;
@@ -176,7 +176,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Times New Roman", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(58, 9);
+            this.label5.Location = new System.Drawing.Point(58, 10);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(349, 22);
@@ -185,9 +185,9 @@
             // 
             // frmModifyQuantity
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(481, 268);
+            this.ClientSize = new System.Drawing.Size(481, 300);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.txtNewQuantity);
@@ -201,8 +201,8 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label1);
-            this.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "frmModifyQuantity";
             this.Text = "Update Quantity of Relation Part";
             this.Load += new System.EventHandler(this.frmModifyQuantity_Load);

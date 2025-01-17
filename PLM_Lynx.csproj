@@ -287,12 +287,6 @@
     <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\RelationPart_Detail_Info.Designer.cs">
       <DependentUpon>RelationPart_Detail_Info.cs</DependentUpon>
     </Compile>
-    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.Designer.cs">
-      <DependentUpon>frmFindPO.cs</DependentUpon>
-    </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMakeNewPO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -351,9 +345,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\RelationPart_Detail_Info.resx">
       <DependentUpon>RelationPart_Detail_Info.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.resx">
-      <DependentUpon>frmFindPO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmMakeNewPO.resx">
       <DependentUpon>frmMakeNewPO.cs</DependentUpon>

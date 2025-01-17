@@ -48,31 +48,26 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtKeySearch = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.ckcPRT = new System.Windows.Forms.CheckBox();
-            this.ckcPDF = new System.Windows.Forms.CheckBox();
-            this.ckcSTP = new System.Windows.Forms.CheckBox();
-            this.ckcDWG = new System.Windows.Forms.CheckBox();
-            this.ckcJPG = new System.Windows.Forms.CheckBox();
-            this.ckcWithImage = new System.Windows.Forms.CheckBox();
-            this.btnExportAll = new System.Windows.Forms.Button();
-            this.btnExportOnly = new System.Windows.Forms.Button();
-            this.groupboxChildImage = new System.Windows.Forms.GroupBox();
-            this.picChild = new System.Windows.Forms.PictureBox();
-            this.txtChildCode = new System.Windows.Forms.TextBox();
-            this.txtChildName = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtParentLog = new System.Windows.Forms.TextBox();
-            this.txtParentName = new System.Windows.Forms.TextBox();
-            this.txtParentCode = new System.Windows.Forms.TextBox();
             this.dgvParent = new System.Windows.Forms.DataGridView();
             this.Panel_Infor_Parent = new System.Windows.Forms.Panel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtParentLog = new System.Windows.Forms.TextBox();
             this.groupboxParentImage = new System.Windows.Forms.GroupBox();
             this.picParent = new System.Windows.Forms.PictureBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtParentName = new System.Windows.Forms.TextBox();
+            this.txtParentCode = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
+            this.dgvChild = new System.Windows.Forms.DataGridView();
             this.Panel_Child_Infor = new System.Windows.Forms.Panel();
             this.label3 = new System.Windows.Forms.Label();
-            this.dgvChild = new System.Windows.Forms.DataGridView();
+            this.txtChildCode = new System.Windows.Forms.TextBox();
+            this.txtChildName = new System.Windows.Forms.TextBox();
+            this.btnExportOnly = new System.Windows.Forms.Button();
+            this.btnExportFile = new System.Windows.Forms.Button();
+            this.ckcWithImage = new System.Windows.Forms.CheckBox();
+            this.groupboxChildImage = new System.Windows.Forms.GroupBox();
+            this.picChild = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -85,16 +80,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPart)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            this.groupboxChildImage.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picChild)).BeginInit();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParent)).BeginInit();
             this.Panel_Infor_Parent.SuspendLayout();
             this.groupboxParentImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picParent)).BeginInit();
             this.panel2.SuspendLayout();
-            this.Panel_Child_Infor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChild)).BeginInit();
+            this.Panel_Child_Infor.SuspendLayout();
+            this.groupboxChildImage.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picChild)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -352,146 +347,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(558, 822);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
-            // ckcPRT
-            // 
-            this.ckcPRT.AutoSize = true;
-            this.ckcPRT.Location = new System.Drawing.Point(242, 138);
-            this.ckcPRT.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ckcPRT.Name = "ckcPRT";
-            this.ckcPRT.Size = new System.Drawing.Size(44, 19);
-            this.ckcPRT.TabIndex = 7;
-            this.ckcPRT.Text = ".prt";
-            this.ckcPRT.UseVisualStyleBackColor = true;
-            // 
-            // ckcPDF
-            // 
-            this.ckcPDF.AutoSize = true;
-            this.ckcPDF.Location = new System.Drawing.Point(326, 76);
-            this.ckcPDF.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ckcPDF.Name = "ckcPDF";
-            this.ckcPDF.Size = new System.Drawing.Size(47, 19);
-            this.ckcPDF.TabIndex = 6;
-            this.ckcPDF.Text = ".pdf";
-            this.ckcPDF.UseVisualStyleBackColor = true;
-            // 
-            // ckcSTP
-            // 
-            this.ckcSTP.AutoSize = true;
-            this.ckcSTP.Location = new System.Drawing.Point(242, 107);
-            this.ckcSTP.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ckcSTP.Name = "ckcSTP";
-            this.ckcSTP.Size = new System.Drawing.Size(75, 19);
-            this.ckcSTP.TabIndex = 6;
-            this.ckcSTP.Text = ".stp/.step";
-            this.ckcSTP.UseVisualStyleBackColor = true;
-            // 
-            // ckcDWG
-            // 
-            this.ckcDWG.AutoSize = true;
-            this.ckcDWG.Location = new System.Drawing.Point(242, 76);
-            this.ckcDWG.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ckcDWG.Name = "ckcDWG";
-            this.ckcDWG.Size = new System.Drawing.Size(74, 19);
-            this.ckcDWG.TabIndex = 6;
-            this.ckcDWG.Text = ".dwg/dxf";
-            this.ckcDWG.UseVisualStyleBackColor = true;
-            // 
-            // ckcJPG
-            // 
-            this.ckcJPG.AutoSize = true;
-            this.ckcJPG.Location = new System.Drawing.Point(326, 107);
-            this.ckcJPG.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ckcJPG.Name = "ckcJPG";
-            this.ckcJPG.Size = new System.Drawing.Size(46, 19);
-            this.ckcJPG.TabIndex = 6;
-            this.ckcJPG.Text = ".jpg";
-            this.ckcJPG.UseVisualStyleBackColor = true;
-            // 
-            // ckcWithImage
-            // 
-            this.ckcWithImage.AutoSize = true;
-            this.ckcWithImage.Location = new System.Drawing.Point(16, 138);
-            this.ckcWithImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.ckcWithImage.Name = "ckcWithImage";
-            this.ckcWithImage.Size = new System.Drawing.Size(87, 19);
-            this.ckcWithImage.TabIndex = 5;
-            this.ckcWithImage.Text = "With Image";
-            this.ckcWithImage.UseVisualStyleBackColor = true;
-            // 
-            // btnExportAll
-            // 
-            this.btnExportAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnExportAll.Image = ((System.Drawing.Image)(resources.GetObject("btnExportAll.Image")));
-            this.btnExportAll.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.btnExportAll.Location = new System.Drawing.Point(170, 76);
-            this.btnExportAll.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportAll.Name = "btnExportAll";
-            this.btnExportAll.Size = new System.Drawing.Size(66, 64);
-            this.btnExportAll.TabIndex = 4;
-            this.btnExportAll.Text = "Export Drawing";
-            this.btnExportAll.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnExportAll.UseVisualStyleBackColor = false;
-            this.btnExportAll.Click += new System.EventHandler(this.btnExportAll_Click);
-            // 
-            // btnExportOnly
-            // 
-            this.btnExportOnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
-            this.btnExportOnly.Image = ((System.Drawing.Image)(resources.GetObject("btnExportOnly.Image")));
-            this.btnExportOnly.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExportOnly.Location = new System.Drawing.Point(16, 76);
-            this.btnExportOnly.Margin = new System.Windows.Forms.Padding(4);
-            this.btnExportOnly.Name = "btnExportOnly";
-            this.btnExportOnly.Size = new System.Drawing.Size(131, 45);
-            this.btnExportOnly.TabIndex = 4;
-            this.btnExportOnly.Text = "Export Excel File";
-            this.btnExportOnly.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportOnly.UseVisualStyleBackColor = false;
-            this.btnExportOnly.Click += new System.EventHandler(this.btnExportOnly_Click);
-            // 
-            // groupboxChildImage
-            // 
-            this.groupboxChildImage.Controls.Add(this.picChild);
-            this.groupboxChildImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupboxChildImage.Location = new System.Drawing.Point(404, 0);
-            this.groupboxChildImage.Margin = new System.Windows.Forms.Padding(4);
-            this.groupboxChildImage.Name = "groupboxChildImage";
-            this.groupboxChildImage.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxChildImage.Size = new System.Drawing.Size(148, 201);
-            this.groupboxChildImage.TabIndex = 3;
-            this.groupboxChildImage.TabStop = false;
-            this.groupboxChildImage.Text = "Image Part Con";
-            // 
-            // picChild
-            // 
-            this.picChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picChild.Location = new System.Drawing.Point(4, 20);
-            this.picChild.Margin = new System.Windows.Forms.Padding(4);
-            this.picChild.Name = "picChild";
-            this.picChild.Size = new System.Drawing.Size(140, 177);
-            this.picChild.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picChild.TabIndex = 2;
-            this.picChild.TabStop = false;
-            // 
-            // txtChildCode
-            // 
-            this.txtChildCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.txtChildCode.Location = new System.Drawing.Point(16, 36);
-            this.txtChildCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtChildCode.Name = "txtChildCode";
-            this.txtChildCode.ReadOnly = true;
-            this.txtChildCode.Size = new System.Drawing.Size(74, 23);
-            this.txtChildCode.TabIndex = 1;
-            // 
-            // txtChildName
-            // 
-            this.txtChildName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.txtChildName.Location = new System.Drawing.Point(102, 36);
-            this.txtChildName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtChildName.Name = "txtChildName";
-            this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(269, 23);
-            this.txtChildName.TabIndex = 1;
-            // 
             // panel1
             // 
             this.panel1.AutoScroll = true;
@@ -501,37 +356,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(552, 182);
             this.panel1.TabIndex = 3;
-            // 
-            // txtParentLog
-            // 
-            this.txtParentLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.txtParentLog.Location = new System.Drawing.Point(12, 66);
-            this.txtParentLog.Margin = new System.Windows.Forms.Padding(4);
-            this.txtParentLog.Multiline = true;
-            this.txtParentLog.Name = "txtParentLog";
-            this.txtParentLog.ReadOnly = true;
-            this.txtParentLog.Size = new System.Drawing.Size(330, 92);
-            this.txtParentLog.TabIndex = 1;
-            // 
-            // txtParentName
-            // 
-            this.txtParentName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.txtParentName.Location = new System.Drawing.Point(98, 34);
-            this.txtParentName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtParentName.Name = "txtParentName";
-            this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(244, 23);
-            this.txtParentName.TabIndex = 1;
-            // 
-            // txtParentCode
-            // 
-            this.txtParentCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.txtParentCode.Location = new System.Drawing.Point(12, 34);
-            this.txtParentCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtParentCode.Name = "txtParentCode";
-            this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(78, 23);
-            this.txtParentCode.TabIndex = 1;
             // 
             // dgvParent
             // 
@@ -562,6 +386,26 @@
             this.Panel_Infor_Parent.Size = new System.Drawing.Size(552, 167);
             this.Panel_Infor_Parent.TabIndex = 4;
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(12, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(110, 15);
+            this.label2.TabIndex = 3;
+            this.label2.Text = "Danh sách Part Cha";
+            // 
+            // txtParentLog
+            // 
+            this.txtParentLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.txtParentLog.Location = new System.Drawing.Point(12, 66);
+            this.txtParentLog.Margin = new System.Windows.Forms.Padding(4);
+            this.txtParentLog.Multiline = true;
+            this.txtParentLog.Name = "txtParentLog";
+            this.txtParentLog.ReadOnly = true;
+            this.txtParentLog.Size = new System.Drawing.Size(330, 92);
+            this.txtParentLog.TabIndex = 1;
+            // 
             // groupboxParentImage
             // 
             this.groupboxParentImage.Controls.Add(this.picParent);
@@ -586,14 +430,25 @@
             this.picParent.TabIndex = 0;
             this.picParent.TabStop = false;
             // 
-            // label2
+            // txtParentName
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 10);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 15);
-            this.label2.TabIndex = 3;
-            this.label2.Text = "Danh sách Part Cha";
+            this.txtParentName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.txtParentName.Location = new System.Drawing.Point(98, 34);
+            this.txtParentName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtParentName.Name = "txtParentName";
+            this.txtParentName.ReadOnly = true;
+            this.txtParentName.Size = new System.Drawing.Size(244, 23);
+            this.txtParentName.TabIndex = 1;
+            // 
+            // txtParentCode
+            // 
+            this.txtParentCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.txtParentCode.Location = new System.Drawing.Point(12, 34);
+            this.txtParentCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtParentCode.Name = "txtParentCode";
+            this.txtParentCode.ReadOnly = true;
+            this.txtParentCode.Size = new System.Drawing.Size(78, 23);
+            this.txtParentCode.TabIndex = 1;
             // 
             // panel2
             // 
@@ -604,37 +459,6 @@
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(552, 248);
             this.panel2.TabIndex = 5;
-            // 
-            // Panel_Child_Infor
-            // 
-            this.Panel_Child_Infor.AutoScroll = true;
-            this.Panel_Child_Infor.BackColor = System.Drawing.Color.LightGoldenrodYellow;
-            this.Panel_Child_Infor.Controls.Add(this.ckcPRT);
-            this.Panel_Child_Infor.Controls.Add(this.label3);
-            this.Panel_Child_Infor.Controls.Add(this.ckcPDF);
-            this.Panel_Child_Infor.Controls.Add(this.txtChildCode);
-            this.Panel_Child_Infor.Controls.Add(this.ckcSTP);
-            this.Panel_Child_Infor.Controls.Add(this.txtChildName);
-            this.Panel_Child_Infor.Controls.Add(this.ckcDWG);
-            this.Panel_Child_Infor.Controls.Add(this.ckcJPG);
-            this.Panel_Child_Infor.Controls.Add(this.btnExportOnly);
-            this.Panel_Child_Infor.Controls.Add(this.btnExportAll);
-            this.Panel_Child_Infor.Controls.Add(this.ckcWithImage);
-            this.Panel_Child_Infor.Controls.Add(this.groupboxChildImage);
-            this.Panel_Child_Infor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel_Child_Infor.Location = new System.Drawing.Point(3, 618);
-            this.Panel_Child_Infor.Name = "Panel_Child_Infor";
-            this.Panel_Child_Infor.Size = new System.Drawing.Size(552, 201);
-            this.Panel_Child_Infor.TabIndex = 6;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(11, 13);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 15);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Thông tin Part Con";
             // 
             // dgvChild
             // 
@@ -652,6 +476,117 @@
             this.dgvChild.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvChild_CellFormatting);
             this.dgvChild.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvChild_CellPainting);
             this.dgvChild.Click += new System.EventHandler(this.dgvChild_Click);
+            // 
+            // Panel_Child_Infor
+            // 
+            this.Panel_Child_Infor.AutoScroll = true;
+            this.Panel_Child_Infor.BackColor = System.Drawing.Color.LightGoldenrodYellow;
+            this.Panel_Child_Infor.Controls.Add(this.label3);
+            this.Panel_Child_Infor.Controls.Add(this.txtChildCode);
+            this.Panel_Child_Infor.Controls.Add(this.txtChildName);
+            this.Panel_Child_Infor.Controls.Add(this.btnExportOnly);
+            this.Panel_Child_Infor.Controls.Add(this.btnExportFile);
+            this.Panel_Child_Infor.Controls.Add(this.ckcWithImage);
+            this.Panel_Child_Infor.Controls.Add(this.groupboxChildImage);
+            this.Panel_Child_Infor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel_Child_Infor.Location = new System.Drawing.Point(3, 618);
+            this.Panel_Child_Infor.Name = "Panel_Child_Infor";
+            this.Panel_Child_Infor.Size = new System.Drawing.Size(552, 201);
+            this.Panel_Child_Infor.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(11, 13);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(107, 15);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Thông tin Part Con";
+            // 
+            // txtChildCode
+            // 
+            this.txtChildCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtChildCode.Location = new System.Drawing.Point(16, 36);
+            this.txtChildCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtChildCode.Name = "txtChildCode";
+            this.txtChildCode.ReadOnly = true;
+            this.txtChildCode.Size = new System.Drawing.Size(74, 23);
+            this.txtChildCode.TabIndex = 1;
+            // 
+            // txtChildName
+            // 
+            this.txtChildName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtChildName.Location = new System.Drawing.Point(102, 36);
+            this.txtChildName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtChildName.Name = "txtChildName";
+            this.txtChildName.ReadOnly = true;
+            this.txtChildName.Size = new System.Drawing.Size(269, 23);
+            this.txtChildName.TabIndex = 1;
+            // 
+            // btnExportOnly
+            // 
+            this.btnExportOnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnExportOnly.Image = ((System.Drawing.Image)(resources.GetObject("btnExportOnly.Image")));
+            this.btnExportOnly.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportOnly.Location = new System.Drawing.Point(16, 76);
+            this.btnExportOnly.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportOnly.Name = "btnExportOnly";
+            this.btnExportOnly.Size = new System.Drawing.Size(131, 45);
+            this.btnExportOnly.TabIndex = 4;
+            this.btnExportOnly.Text = "Export Excel File";
+            this.btnExportOnly.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExportOnly.UseVisualStyleBackColor = false;
+            this.btnExportOnly.Click += new System.EventHandler(this.btnExportOnly_Click);
+            // 
+            // btnExportFile
+            // 
+            this.btnExportFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnExportFile.Image = ((System.Drawing.Image)(resources.GetObject("btnExportFile.Image")));
+            this.btnExportFile.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExportFile.Location = new System.Drawing.Point(170, 76);
+            this.btnExportFile.Margin = new System.Windows.Forms.Padding(4);
+            this.btnExportFile.Name = "btnExportFile";
+            this.btnExportFile.Size = new System.Drawing.Size(131, 45);
+            this.btnExportFile.TabIndex = 4;
+            this.btnExportFile.Text = "Export Drawing";
+            this.btnExportFile.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportFile.UseVisualStyleBackColor = false;
+            this.btnExportFile.Click += new System.EventHandler(this.btnExportFile_Click);
+            // 
+            // ckcWithImage
+            // 
+            this.ckcWithImage.AutoSize = true;
+            this.ckcWithImage.Location = new System.Drawing.Point(16, 138);
+            this.ckcWithImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.ckcWithImage.Name = "ckcWithImage";
+            this.ckcWithImage.Size = new System.Drawing.Size(87, 19);
+            this.ckcWithImage.TabIndex = 5;
+            this.ckcWithImage.Text = "With Image";
+            this.ckcWithImage.UseVisualStyleBackColor = true;
+            // 
+            // groupboxChildImage
+            // 
+            this.groupboxChildImage.Controls.Add(this.picChild);
+            this.groupboxChildImage.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupboxChildImage.Location = new System.Drawing.Point(404, 0);
+            this.groupboxChildImage.Margin = new System.Windows.Forms.Padding(4);
+            this.groupboxChildImage.Name = "groupboxChildImage";
+            this.groupboxChildImage.Padding = new System.Windows.Forms.Padding(4);
+            this.groupboxChildImage.Size = new System.Drawing.Size(148, 201);
+            this.groupboxChildImage.TabIndex = 3;
+            this.groupboxChildImage.TabStop = false;
+            this.groupboxChildImage.Text = "Image Part Con";
+            // 
+            // picChild
+            // 
+            this.picChild.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picChild.Location = new System.Drawing.Point(4, 20);
+            this.picChild.Margin = new System.Windows.Forms.Padding(4);
+            this.picChild.Name = "picChild";
+            this.picChild.Size = new System.Drawing.Size(140, 177);
+            this.picChild.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picChild.TabIndex = 2;
+            this.picChild.TabStop = false;
             // 
             // frmFindPart
             // 
@@ -681,8 +616,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.tableLayoutPanel1.ResumeLayout(false);
-            this.groupboxChildImage.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picChild)).EndInit();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvParent)).EndInit();
             this.Panel_Infor_Parent.ResumeLayout(false);
@@ -690,9 +623,11 @@
             this.groupboxParentImage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picParent)).EndInit();
             this.panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvChild)).EndInit();
             this.Panel_Child_Infor.ResumeLayout(false);
             this.Panel_Child_Infor.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvChild)).EndInit();
+            this.groupboxChildImage.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picChild)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -709,7 +644,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtKeySearch;
         private System.Windows.Forms.Button btnExportOnly;
-        private System.Windows.Forms.Button btnExportAll;
+        private System.Windows.Forms.Button btnExportFile;
         private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.TextBox txtDescript;
         private System.Windows.Forms.TextBox txtName;
@@ -730,12 +665,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
-        private System.Windows.Forms.CheckBox ckcPDF;
-        private System.Windows.Forms.CheckBox ckcSTP;
-        private System.Windows.Forms.CheckBox ckcDWG;
-        private System.Windows.Forms.CheckBox ckcJPG;
         private System.Windows.Forms.CheckBox ckcWithImage;
-        private System.Windows.Forms.CheckBox ckcPRT;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel Panel_Infor_Parent;
         private System.Windows.Forms.Label label2;

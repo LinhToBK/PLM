@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PLM_Lynx._01_DAL_Data_Access_Layer;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using PLM_Lynx._03_GUI_User_Interface;
 using PLM_Lynx._03_GUI_User_Interface._3_4_FindPart;
@@ -21,6 +22,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private FindPartBLL PartBLL = new FindPartBLL();
         private CommonBLL CommonBLL = new CommonBLL();
         private DataTable DulieuTimKiem = new DataTable();
+        DataTransfer data = new DataTransfer();
+
 
 
         public frmFindPart()
@@ -29,11 +32,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Đăng ký sự kiện
             txtHighLight.TextChanged += txtHighLight_TextChanged;
             dgvSearch.CellPainting += dgvSearch_CellPainting;
-            ckcDWG.Checked = true;
-            ckcPDF.Checked = false;
-            ckcSTP.Checked = false;
-            ckcJPG.Checked = false;
-            ckcPRT.Checked = false;
+            
             ckcWithImage.Checked = false;
 
         }
@@ -498,44 +497,26 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         }
 
-        private void btnExportAll_Click(object sender, EventArgs e)
-        {
-            if(dgvSearch.Rows.Count ==0 )
-            {
-                MessageBox.Show("Chưa có dữ liệu");
-                return;
-            }    
-            string idpart = dgvSearch.CurrentRow.Cells[7].Value.ToString();
-            DataTable dt = PartBLL.GetBOMBLL(idpart);
-            if (dt.Rows.Count == 0)
-            {
-                MessageBox.Show("Không có dữ liệu trong danh sách ");
-                return;
-            }
+        //private void btnExportAll_Click(object sender, EventArgs e)
+        //{
+            
+        //}
 
-            DialogResult kq = MessageBox.Show("Bạn có muốn lưu file về máy không ? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (kq == DialogResult.Yes)
-            {
-                using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
-                {
-                    folderDialog.Description = "Chọn thư mục để lưu các file đã sao chép";
-                    if (folderDialog.ShowDialog() == DialogResult.OK)
-                    {
-                        string destinationFolder = folderDialog.SelectedPath;
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            string partcode = dr[1].ToString();
-                            CommonBLL.CopyFileByExtension(partcode, destinationFolder, ckcSTP.Checked, ckcDWG.Checked, ckcPDF.Checked, ckcJPG.Checked, ckcPRT.Checked);
-                        }
-                        MessageBox.Show("Đã lưu file thành công về máy tính ");
-                        
-                    }
-                }
-            }
-            else
-            {
-                return;
-            }    
+        private void btnExportFile_Click(object sender, EventArgs e)
+        {
+            
+            data._currentPartCode = dgvSearch.CurrentRow.Cells[0].Value.ToString();
+            data._currentPartName = dgvSearch.CurrentRow.Cells[1].Value.ToString();
+            data.listchild = dgvChild.DataSource as DataTable;
+            frmDownloadFile frm = new frmDownloadFile();
+
+
+            // Lấy dữ liệu partcode hiện tại
+            
+            
+            frm.inputData = data; // Do lưu  giá trị của currentpartcode rồi,, nên lát sẽ lấy lại
+            
+            frm.ShowDialog();
         }
     }
 }

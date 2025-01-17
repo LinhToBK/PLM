@@ -30,19 +30,19 @@
         {
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ckcStepFile = new System.Windows.Forms.CheckBox();
-            this.ckcPdfFile = new System.Windows.Forms.CheckBox();
-            this.ckcPrtFile = new System.Windows.Forms.CheckBox();
-            this.ckcDwgFile = new System.Windows.Forms.CheckBox();
-            this.ckcJpgFile = new System.Windows.Forms.CheckBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.ckcJpgFile = new System.Windows.Forms.CheckBox();
+            this.ckcDwgFile = new System.Windows.Forms.CheckBox();
+            this.ckcPrtFile = new System.Windows.Forms.CheckBox();
+            this.ckcPdfFile = new System.Windows.Forms.CheckBox();
+            this.ckcStepFile = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioCurrentPart = new System.Windows.Forms.RadioButton();
             this.radioChildren = new System.Windows.Forms.RadioButton();
+            this.radioCurrentPart = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -50,15 +50,15 @@
             this.txtPartCode = new System.Windows.Forms.TextBox();
             this.txtPartName = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioAllDocument = new System.Windows.Forms.RadioButton();
             this.radioNearestDocument = new System.Windows.Forms.RadioButton();
+            this.radioAllDocument = new System.Windows.Forms.RadioButton();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.ckcDV = new System.Windows.Forms.CheckBox();
-            this.ckcPV = new System.Windows.Forms.CheckBox();
             this.ckcMP = new System.Windows.Forms.CheckBox();
+            this.ckcPV = new System.Windows.Forms.CheckBox();
+            this.ckcDV = new System.Windows.Forms.CheckBox();
             this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.radioWriteLog = new System.Windows.Forms.RadioButton();
             this.radioNotWriteLog = new System.Windows.Forms.RadioButton();
+            this.radioWriteLog = new System.Windows.Forms.RadioButton();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDownLoad = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -105,51 +105,55 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Type of File";
             // 
-            // ckcStepFile
+            // label6
             // 
-            this.ckcStepFile.AutoSize = true;
-            this.ckcStepFile.Checked = true;
-            this.ckcStepFile.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckcStepFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckcStepFile.Location = new System.Drawing.Point(12, 41);
-            this.ckcStepFile.Name = "ckcStepFile";
-            this.ckcStepFile.Size = new System.Drawing.Size(78, 21);
-            this.ckcStepFile.TabIndex = 0;
-            this.ckcStepFile.Text = ".stp/step";
-            this.ckcStepFile.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(392, 21);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(44, 17);
+            this.label6.TabIndex = 1;
+            this.label6.Text = "Image";
             // 
-            // ckcPdfFile
+            // label5
             // 
-            this.ckcPdfFile.AutoSize = true;
-            this.ckcPdfFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckcPdfFile.Location = new System.Drawing.Point(107, 41);
-            this.ckcPdfFile.Name = "ckcPdfFile";
-            this.ckcPdfFile.Size = new System.Drawing.Size(50, 21);
-            this.ckcPdfFile.TabIndex = 0;
-            this.ckcPdfFile.Text = ".pdf";
-            this.ckcPdfFile.UseVisualStyleBackColor = true;
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(289, 21);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(58, 17);
+            this.label5.TabIndex = 1;
+            this.label5.Text = "AutoCad";
             // 
-            // ckcPrtFile
+            // label4
             // 
-            this.ckcPrtFile.AutoSize = true;
-            this.ckcPrtFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckcPrtFile.Location = new System.Drawing.Point(186, 41);
-            this.ckcPrtFile.Name = "ckcPrtFile";
-            this.ckcPrtFile.Size = new System.Drawing.Size(47, 21);
-            this.ckcPrtFile.TabIndex = 0;
-            this.ckcPrtFile.Text = ".prt";
-            this.ckcPrtFile.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(186, 21);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(72, 17);
+            this.label4.TabIndex = 1;
+            this.label4.Text = "Siemen NX";
             // 
-            // ckcDwgFile
+            // label3
             // 
-            this.ckcDwgFile.AutoSize = true;
-            this.ckcDwgFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ckcDwgFile.Location = new System.Drawing.Point(289, 41);
-            this.ckcDwgFile.Name = "ckcDwgFile";
-            this.ckcDwgFile.Size = new System.Drawing.Size(78, 21);
-            this.ckcDwgFile.TabIndex = 0;
-            this.ckcDwgFile.Text = ".dwg/dxf";
-            this.ckcDwgFile.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(107, 21);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(35, 17);
+            this.label3.TabIndex = 1;
+            this.label3.Text = "DOC";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(12, 21);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 17);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "3D CAD";
             // 
             // ckcJpgFile
             // 
@@ -162,55 +166,51 @@
             this.ckcJpgFile.Text = ".jpg";
             this.ckcJpgFile.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // ckcDwgFile
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(12, 21);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 17);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "3D CAD";
+            this.ckcDwgFile.AutoSize = true;
+            this.ckcDwgFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckcDwgFile.Location = new System.Drawing.Point(289, 41);
+            this.ckcDwgFile.Name = "ckcDwgFile";
+            this.ckcDwgFile.Size = new System.Drawing.Size(78, 21);
+            this.ckcDwgFile.TabIndex = 0;
+            this.ckcDwgFile.Text = ".dwg/dxf";
+            this.ckcDwgFile.UseVisualStyleBackColor = true;
             // 
-            // label3
+            // ckcPrtFile
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(107, 21);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 17);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "DOC";
+            this.ckcPrtFile.AutoSize = true;
+            this.ckcPrtFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckcPrtFile.Location = new System.Drawing.Point(186, 41);
+            this.ckcPrtFile.Name = "ckcPrtFile";
+            this.ckcPrtFile.Size = new System.Drawing.Size(47, 21);
+            this.ckcPrtFile.TabIndex = 0;
+            this.ckcPrtFile.Text = ".prt";
+            this.ckcPrtFile.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // ckcPdfFile
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(186, 21);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(72, 17);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Siemen NX";
+            this.ckcPdfFile.AutoSize = true;
+            this.ckcPdfFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckcPdfFile.Location = new System.Drawing.Point(107, 41);
+            this.ckcPdfFile.Name = "ckcPdfFile";
+            this.ckcPdfFile.Size = new System.Drawing.Size(50, 21);
+            this.ckcPdfFile.TabIndex = 0;
+            this.ckcPdfFile.Text = ".pdf";
+            this.ckcPdfFile.UseVisualStyleBackColor = true;
             // 
-            // label5
+            // ckcStepFile
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(289, 21);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(58, 17);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "AutoCad";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(392, 21);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(44, 17);
-            this.label6.TabIndex = 1;
-            this.label6.Text = "Image";
+            this.ckcStepFile.AutoSize = true;
+            this.ckcStepFile.Checked = true;
+            this.ckcStepFile.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckcStepFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.ckcStepFile.Location = new System.Drawing.Point(12, 41);
+            this.ckcStepFile.Name = "ckcStepFile";
+            this.ckcStepFile.Size = new System.Drawing.Size(78, 21);
+            this.ckcStepFile.TabIndex = 0;
+            this.ckcStepFile.Text = ".stp/step";
+            this.ckcStepFile.UseVisualStyleBackColor = true;
             // 
             // groupBox2
             // 
@@ -227,18 +227,6 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Download All Child or Only Part";
             // 
-            // radioCurrentPart
-            // 
-            this.radioCurrentPart.AutoSize = true;
-            this.radioCurrentPart.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioCurrentPart.Location = new System.Drawing.Point(12, 23);
-            this.radioCurrentPart.Name = "radioCurrentPart";
-            this.radioCurrentPart.Size = new System.Drawing.Size(159, 21);
-            this.radioCurrentPart.TabIndex = 0;
-            this.radioCurrentPart.TabStop = true;
-            this.radioCurrentPart.Text = "Download Current Part";
-            this.radioCurrentPart.UseVisualStyleBackColor = true;
-            // 
             // radioChildren
             // 
             this.radioChildren.AutoSize = true;
@@ -250,6 +238,18 @@
             this.radioChildren.TabStop = true;
             this.radioChildren.Text = "Download with Part Children";
             this.radioChildren.UseVisualStyleBackColor = true;
+            // 
+            // radioCurrentPart
+            // 
+            this.radioCurrentPart.AutoSize = true;
+            this.radioCurrentPart.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioCurrentPart.Location = new System.Drawing.Point(12, 23);
+            this.radioCurrentPart.Name = "radioCurrentPart";
+            this.radioCurrentPart.Size = new System.Drawing.Size(159, 21);
+            this.radioCurrentPart.TabIndex = 0;
+            this.radioCurrentPart.TabStop = true;
+            this.radioCurrentPart.Text = "Download Current Part";
+            this.radioCurrentPart.UseVisualStyleBackColor = true;
             // 
             // label7
             // 
@@ -316,18 +316,6 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Download Near Document";
             // 
-            // radioAllDocument
-            // 
-            this.radioAllDocument.AutoSize = true;
-            this.radioAllDocument.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.radioAllDocument.Location = new System.Drawing.Point(213, 25);
-            this.radioAllDocument.Name = "radioAllDocument";
-            this.radioAllDocument.Size = new System.Drawing.Size(102, 21);
-            this.radioAllDocument.TabIndex = 0;
-            this.radioAllDocument.TabStop = true;
-            this.radioAllDocument.Text = "Download all";
-            this.radioAllDocument.UseVisualStyleBackColor = true;
-            // 
             // radioNearestDocument
             // 
             this.radioNearestDocument.AutoSize = true;
@@ -339,6 +327,18 @@
             this.radioNearestDocument.TabStop = true;
             this.radioNearestDocument.Text = "Download Nearest Version";
             this.radioNearestDocument.UseVisualStyleBackColor = true;
+            // 
+            // radioAllDocument
+            // 
+            this.radioAllDocument.AutoSize = true;
+            this.radioAllDocument.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.radioAllDocument.Location = new System.Drawing.Point(213, 25);
+            this.radioAllDocument.Name = "radioAllDocument";
+            this.radioAllDocument.Size = new System.Drawing.Size(102, 21);
+            this.radioAllDocument.TabIndex = 0;
+            this.radioAllDocument.TabStop = true;
+            this.radioAllDocument.Text = "Download all";
+            this.radioAllDocument.UseVisualStyleBackColor = true;
             // 
             // groupBox4
             // 
@@ -356,17 +356,15 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Stage";
             // 
-            // ckcDV
+            // ckcMP
             // 
-            this.ckcDV.AutoSize = true;
-            this.ckcDV.Checked = true;
-            this.ckcDV.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckcDV.Location = new System.Drawing.Point(12, 24);
-            this.ckcDV.Name = "ckcDV";
-            this.ckcDV.Size = new System.Drawing.Size(44, 21);
-            this.ckcDV.TabIndex = 0;
-            this.ckcDV.Text = "DV";
-            this.ckcDV.UseVisualStyleBackColor = true;
+            this.ckcMP.AutoSize = true;
+            this.ckcMP.Location = new System.Drawing.Point(159, 24);
+            this.ckcMP.Name = "ckcMP";
+            this.ckcMP.Size = new System.Drawing.Size(47, 21);
+            this.ckcMP.TabIndex = 0;
+            this.ckcMP.Text = "MP";
+            this.ckcMP.UseVisualStyleBackColor = true;
             // 
             // ckcPV
             // 
@@ -378,15 +376,17 @@
             this.ckcPV.Text = "PV";
             this.ckcPV.UseVisualStyleBackColor = true;
             // 
-            // ckcMP
+            // ckcDV
             // 
-            this.ckcMP.AutoSize = true;
-            this.ckcMP.Location = new System.Drawing.Point(159, 24);
-            this.ckcMP.Name = "ckcMP";
-            this.ckcMP.Size = new System.Drawing.Size(47, 21);
-            this.ckcMP.TabIndex = 0;
-            this.ckcMP.Text = "MP";
-            this.ckcMP.UseVisualStyleBackColor = true;
+            this.ckcDV.AutoSize = true;
+            this.ckcDV.Checked = true;
+            this.ckcDV.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckcDV.Location = new System.Drawing.Point(12, 24);
+            this.ckcDV.Name = "ckcDV";
+            this.ckcDV.Size = new System.Drawing.Size(44, 21);
+            this.ckcDV.TabIndex = 0;
+            this.ckcDV.Text = "DV";
+            this.ckcDV.UseVisualStyleBackColor = true;
             // 
             // groupBox5
             // 
@@ -402,17 +402,6 @@
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Write Log File";
             // 
-            // radioWriteLog
-            // 
-            this.radioWriteLog.AutoSize = true;
-            this.radioWriteLog.Location = new System.Drawing.Point(15, 25);
-            this.radioWriteLog.Name = "radioWriteLog";
-            this.radioWriteLog.Size = new System.Drawing.Size(97, 21);
-            this.radioWriteLog.TabIndex = 0;
-            this.radioWriteLog.TabStop = true;
-            this.radioWriteLog.Text = "Write logfile";
-            this.radioWriteLog.UseVisualStyleBackColor = true;
-            // 
             // radioNotWriteLog
             // 
             this.radioNotWriteLog.AutoSize = true;
@@ -424,6 +413,17 @@
             this.radioNotWriteLog.Text = "Don\'t write log";
             this.radioNotWriteLog.UseVisualStyleBackColor = true;
             // 
+            // radioWriteLog
+            // 
+            this.radioWriteLog.AutoSize = true;
+            this.radioWriteLog.Location = new System.Drawing.Point(15, 25);
+            this.radioWriteLog.Name = "radioWriteLog";
+            this.radioWriteLog.Size = new System.Drawing.Size(97, 21);
+            this.radioWriteLog.TabIndex = 0;
+            this.radioWriteLog.TabStop = true;
+            this.radioWriteLog.Text = "Write logfile";
+            this.radioWriteLog.UseVisualStyleBackColor = true;
+            // 
             // btnExit
             // 
             this.btnExit.Location = new System.Drawing.Point(325, 595);
@@ -432,10 +432,11 @@
             this.btnExit.TabIndex = 9;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnDownLoad
             // 
-            this.btnDownLoad.Location = new System.Drawing.Point(108, 595);
+            this.btnDownLoad.Location = new System.Drawing.Point(194, 595);
             this.btnDownLoad.Name = "btnDownLoad";
             this.btnDownLoad.Size = new System.Drawing.Size(125, 38);
             this.btnDownLoad.TabIndex = 9;
@@ -466,6 +467,7 @@
             this.btnChooseFolder.TabIndex = 10;
             this.btnChooseFolder.Text = "...";
             this.btnChooseFolder.UseVisualStyleBackColor = true;
+            this.btnChooseFolder.Click += new System.EventHandler(this.btnChooseFolder_Click);
             // 
             // frmDownloadFile
             // 
@@ -495,6 +497,7 @@
             this.Name = "frmDownloadFile";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmDownloadFile";
+            this.Load += new System.EventHandler(this.frmDownloadFile_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);

@@ -467,9 +467,9 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         /// <param name="dwg"></param>
         /// <param name="pdf"></param>
         /// <param name="jpg"></param>
-        public void CopyFileByExtension(string partcode, string DestinationFolder , bool stp, bool dwg, bool pdf, bool jpg, bool prt)
+        public void CopyFileByExtension(string partcode, string DestinationFolder , bool stp, bool dwg, bool pdf, bool jpg, bool prt, bool DV , bool PV, bool MP)
         {
-            string SourceFolder  = GetFilePath(partcode);
+            string SourceFolder  = GetFilePath(partcode); 
 
             // Lấy danh sách các file có đuôi tương ứng trong SourceFolder
             bool allowstatus = false;
@@ -515,6 +515,9 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     return;
                 }
                 // Sao chép từng file sang thư mục đích
+                // List string : F:\02. OnedriveFolder\05_DataBase\DSGLDataPart\MOL\00011\MOL-00011-PV01-15-2025 14-39.pdf
+
+
                 foreach (var file in filesToCopy)
                 {
                     string fileName = Path.GetFileName(file);
@@ -531,6 +534,22 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 return;
             }    
                 
+
+        }
+
+
+        public void CopyFileWithStage (string file, string destinationfolder, string Stage, bool newest)
+        {
+            // Stage is : DV, MP, PV
+            // filename : GEA-00002_DV, GEA-00002_PV01
+            string filename = Path.GetFileName(file);
+            string destinationPath;
+            if(filename.Contains(Stage)== true )
+            {
+                destinationPath = Path.Combine(destinationfolder, filename);
+                File.Copy(file, destinationPath, overwrite: true);
+            }    
+
 
         }
 

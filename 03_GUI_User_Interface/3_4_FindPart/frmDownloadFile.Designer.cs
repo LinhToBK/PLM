@@ -291,7 +291,7 @@
             // 
             this.txtPartCode.Location = new System.Drawing.Point(80, 31);
             this.txtPartCode.Name = "txtPartCode";
-            this.txtPartCode.Size = new System.Drawing.Size(103, 25);
+            this.txtPartCode.Size = new System.Drawing.Size(89, 25);
             this.txtPartCode.TabIndex = 5;
             // 
             // txtPartName
@@ -442,21 +442,22 @@
             this.btnDownLoad.TabIndex = 9;
             this.btnDownLoad.Text = "Download";
             this.btnDownLoad.UseVisualStyleBackColor = true;
+            this.btnDownLoad.Click += new System.EventHandler(this.btnDownLoad_Click);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(188, 35);
+            this.label10.Location = new System.Drawing.Point(169, 35);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(45, 17);
+            this.label10.Size = new System.Drawing.Size(76, 17);
             this.label10.TabIndex = 3;
-            this.label10.Text = "Folder";
+            this.label10.Text = "Save Folder";
             // 
             // txtFolderDownload
             // 
-            this.txtFolderDownload.Location = new System.Drawing.Point(236, 31);
+            this.txtFolderDownload.Location = new System.Drawing.Point(251, 31);
             this.txtFolderDownload.Name = "txtFolderDownload";
-            this.txtFolderDownload.Size = new System.Drawing.Size(201, 25);
+            this.txtFolderDownload.Size = new System.Drawing.Size(186, 25);
             this.txtFolderDownload.TabIndex = 5;
             // 
             // btnChooseFolder

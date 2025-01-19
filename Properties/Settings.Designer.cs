@@ -36,8 +36,8 @@ namespace PLM_Lynx.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\tolin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\07. PLM Lynx Code\\PLM_Lynx\\" +
-            "05_DataBase\\DSGLDataPart\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("F:\\02. OnedriveFolder\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\07. PLM Lynx Code\\PL" +
+            "M_Lynx\\05_DataBase\\DSGLDataPart\\")]
         public string LinkDataPart {
             get {
                 return ((string)(this["LinkDataPart"]));
@@ -46,8 +46,8 @@ namespace PLM_Lynx.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\tolin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\07. PLM Lynx Code\\PLM_Lynx\\" +
-            "05_DataBase\\DSGLTraskPart\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("F:\\02. OnedriveFolder\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\07. PLM Lynx Code\\PL" +
+            "M_Lynx\\05_DataBase\\DSGLTraskPart\\")]
         public string TrashDataPart {
             get {
                 return ((string)(this["TrashDataPart"]));

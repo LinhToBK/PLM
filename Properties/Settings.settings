@@ -10,10 +10,10 @@
       <Value Profile="(Default)">Data Source=3.35.49.62;Initial Catalog=DSGL_PLM;Persist Security Info=True;User ID=sa;Password="yourStrongPass@123";Trust Server Certificate=True</Value>
     </Setting>
     <Setting Name="LinkDataPart" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Users\tolin\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\05_DataBase\DSGLDataPart\</Value>
+      <Value Profile="(Default)">F:\02. OnedriveFolder\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\05_DataBase\DSGLDataPart\</Value>
     </Setting>
     <Setting Name="TrashDataPart" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">C:\Users\tolin\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\05_DataBase\DSGLTraskPart\</Value>
+      <Value Profile="(Default)">F:\02. OnedriveFolder\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\05_DataBase\DSGLTraskPart\</Value>
     </Setting>
     <Setting Name="DWGTrueViewPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">"C:\Program Files\Autodesk\DWG TrueView 2023 - English\dwgviewr.exe"</Value>

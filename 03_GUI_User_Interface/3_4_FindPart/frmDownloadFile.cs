@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,7 +30,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_4_FindPart
             
             radioCurrentPart.Checked = true;
             radioNearestDocument.Checked = true;
-            radioWriteLog.Checked = true;
+            
 
         }
 
@@ -67,20 +68,85 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_4_FindPart
 
         private void btnDownLoad_Click(object sender, EventArgs e)
         {
-            if(fldpart ==  "") { return; };
-            // Download "Only Part" or without children 
-            if (radioCurrentPart.Checked == true)
+            if (Directory.Exists(txtFolderDownload.Text) == false)
             {
-                // Download OnlyPart
-
-                //commonbLL.CopyFileByExtension(_partcode,fldpart,ckcStepFile,ckc )
-                
+                MessageBox.Show("Cần chọn Folder Lưu File ");
+                btnChooseFolder.Focus();
+                return;
             }
-
             else
             {
-                // Download with the children
 
+                // Download "Only Part" or without children 
+                try
+                {
+                    if (radioCurrentPart.Checked == true)
+                    {
+                        // Download OnlyPart
+                        // Kiểm tra xem có sẽ Download mới nhất hay tất cả
+                        if (radioNearestDocument.Checked == true)
+                        {
+                            //  CopyFileByExtension(string partcode, string DestinationFolder, bool stp, bool dwg, bool pdf, bool jpg, bool prt)
+                            commonbLL.CopyFileByExtension(inputData._currentPartCode, inputData._currentPartName, fldpart, ckcStepFile.Checked, ckcDwgFile.Checked, ckcPdfFile.Checked, ckcJpgFile.Checked, ckcPrtFile.Checked);
+                            MessageBox.Show("Success Download !!! ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            commonbLL.CopyFileByExtension(inputData._currentPartCode,inputData._currentPartName, fldpart, ckcStepFile.Checked, ckcDwgFile.Checked, ckcPdfFile.Checked, ckcJpgFile.Checked, ckcPrtFile.Checked, ckcDV.Checked, ckcPV.Checked, ckcMP.Checked);
+                            MessageBox.Show("Success Download !!! ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+
+
+
+                    }
+
+                    else
+                    {
+                        // Download All   ( contains Child Part )
+                        if (radioNearestDocument.Checked == true)
+                        {
+                            //  CopyFileByExtension(string partcode, string DestinationFolder, bool stp, bool dwg, bool pdf, bool jpg, bool prt)
+                            commonbLL.CopyFileByExtension(inputData._currentPartCode, inputData._currentPartName, fldpart, ckcStepFile.Checked, ckcDwgFile.Checked, ckcPdfFile.Checked, ckcJpgFile.Checked, ckcPrtFile.Checked);
+                            // Download Child Part
+                            if(inputData.listchild.Rows.Count >0) 
+                            {
+                                foreach (DataRow dr in inputData.listchild.Rows)
+                                {
+                                    string childcode = dr[1].ToString();
+                                    string childname = dr[2].ToString();
+                                    commonbLL.CopyFileByExtension(childcode, childname, fldpart, ckcStepFile.Checked, ckcDwgFile.Checked, ckcPdfFile.Checked, ckcJpgFile.Checked, ckcPrtFile.Checked);
+
+                                }
+                                MessageBox.Show("Success Download !!! ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            } 
+                                
+                            
+                        }
+                        else
+                        {
+
+                            // Download Part
+                            commonbLL.CopyFileByExtension(inputData._currentPartCode, inputData._currentPartName, fldpart, ckcStepFile.Checked, ckcDwgFile.Checked, ckcPdfFile.Checked, ckcJpgFile.Checked, ckcPrtFile.Checked, ckcDV.Checked, ckcPV.Checked, ckcMP.Checked);
+
+                            if (inputData.listchild.Rows.Count > 0)
+                            {
+                                foreach (DataRow dr in inputData.listchild.Rows)
+                                {
+                                    string childcode = dr[1].ToString();
+                                    string childname = dr[2].ToString();
+                                    commonbLL.CopyFileByExtension(childcode,childname, fldpart, ckcStepFile.Checked, ckcDwgFile.Checked, ckcPdfFile.Checked, ckcJpgFile.Checked, ckcPrtFile.Checked, ckcDV.Checked, ckcPV.Checked, ckcMP.Checked);
+
+                                }
+                                MessageBox.Show("Success Download !!! ", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+
+                        }
+
+                    }
+
+
+                }
+                catch (Exception ex) { MessageBox.Show(ex.Message); };
             }
         }
     }

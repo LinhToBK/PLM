@@ -56,9 +56,6 @@
             this.ckcMP = new System.Windows.Forms.CheckBox();
             this.ckcPV = new System.Windows.Forms.CheckBox();
             this.ckcDV = new System.Windows.Forms.CheckBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.radioNotWriteLog = new System.Windows.Forms.RadioButton();
-            this.radioWriteLog = new System.Windows.Forms.RadioButton();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnDownLoad = new System.Windows.Forms.Button();
             this.label10 = new System.Windows.Forms.Label();
@@ -69,7 +66,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvListChild)).BeginInit();
             this.groupBox3.SuspendLayout();
             this.groupBox4.SuspendLayout();
-            this.groupBox5.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -322,10 +318,10 @@
             this.radioNearestDocument.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioNearestDocument.Location = new System.Drawing.Point(12, 25);
             this.radioNearestDocument.Name = "radioNearestDocument";
-            this.radioNearestDocument.Size = new System.Drawing.Size(182, 21);
+            this.radioNearestDocument.Size = new System.Drawing.Size(180, 21);
             this.radioNearestDocument.TabIndex = 0;
             this.radioNearestDocument.TabStop = true;
-            this.radioNearestDocument.Text = "Download Nearest Version";
+            this.radioNearestDocument.Text = "Download  Lastest Version";
             this.radioNearestDocument.UseVisualStyleBackColor = true;
             // 
             // radioAllDocument
@@ -334,10 +330,10 @@
             this.radioAllDocument.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.radioAllDocument.Location = new System.Drawing.Point(213, 25);
             this.radioAllDocument.Name = "radioAllDocument";
-            this.radioAllDocument.Size = new System.Drawing.Size(102, 21);
+            this.radioAllDocument.Size = new System.Drawing.Size(149, 21);
             this.radioAllDocument.TabIndex = 0;
             this.radioAllDocument.TabStop = true;
-            this.radioAllDocument.Text = "Download all";
+            this.radioAllDocument.Text = "Download all Version";
             this.radioAllDocument.UseVisualStyleBackColor = true;
             // 
             // groupBox4
@@ -388,45 +384,9 @@
             this.ckcDV.Text = "DV";
             this.ckcDV.UseVisualStyleBackColor = true;
             // 
-            // groupBox5
-            // 
-            this.groupBox5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox5.BackColor = System.Drawing.Color.Yellow;
-            this.groupBox5.Controls.Add(this.radioNotWriteLog);
-            this.groupBox5.Controls.Add(this.radioWriteLog);
-            this.groupBox5.Location = new System.Drawing.Point(12, 529);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(488, 60);
-            this.groupBox5.TabIndex = 8;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Write Log File";
-            // 
-            // radioNotWriteLog
-            // 
-            this.radioNotWriteLog.AutoSize = true;
-            this.radioNotWriteLog.Location = new System.Drawing.Point(214, 25);
-            this.radioNotWriteLog.Name = "radioNotWriteLog";
-            this.radioNotWriteLog.Size = new System.Drawing.Size(112, 21);
-            this.radioNotWriteLog.TabIndex = 0;
-            this.radioNotWriteLog.TabStop = true;
-            this.radioNotWriteLog.Text = "Don\'t write log";
-            this.radioNotWriteLog.UseVisualStyleBackColor = true;
-            // 
-            // radioWriteLog
-            // 
-            this.radioWriteLog.AutoSize = true;
-            this.radioWriteLog.Location = new System.Drawing.Point(15, 25);
-            this.radioWriteLog.Name = "radioWriteLog";
-            this.radioWriteLog.Size = new System.Drawing.Size(97, 21);
-            this.radioWriteLog.TabIndex = 0;
-            this.radioWriteLog.TabStop = true;
-            this.radioWriteLog.Text = "Write logfile";
-            this.radioWriteLog.UseVisualStyleBackColor = true;
-            // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(325, 595);
+            this.btnExit.Location = new System.Drawing.Point(267, 535);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(125, 38);
             this.btnExit.TabIndex = 9;
@@ -436,7 +396,7 @@
             // 
             // btnDownLoad
             // 
-            this.btnDownLoad.Location = new System.Drawing.Point(194, 595);
+            this.btnDownLoad.Location = new System.Drawing.Point(98, 535);
             this.btnDownLoad.Name = "btnDownLoad";
             this.btnDownLoad.Size = new System.Drawing.Size(125, 38);
             this.btnDownLoad.TabIndex = 9;
@@ -475,11 +435,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(500, 647);
+            this.ClientSize = new System.Drawing.Size(500, 587);
             this.Controls.Add(this.btnChooseFolder);
             this.Controls.Add(this.btnDownLoad);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox4);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.txtPartName);
@@ -508,8 +467,6 @@
             this.groupBox3.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -545,9 +502,6 @@
         private System.Windows.Forms.CheckBox ckcMP;
         private System.Windows.Forms.CheckBox ckcPV;
         private System.Windows.Forms.CheckBox ckcDV;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.RadioButton radioNotWriteLog;
-        private System.Windows.Forms.RadioButton radioWriteLog;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnDownLoad;
         private System.Windows.Forms.Label label10;

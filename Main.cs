@@ -115,6 +115,7 @@ namespace PLM_Lynx
         private void mnuMakeNewPO_Click(object sender, EventArgs e)
         {
             frmMakePO frm = new frmMakePO();
+            frm._usercurrent = tennguoidung;
             frm.ShowDialog();
         }
     }

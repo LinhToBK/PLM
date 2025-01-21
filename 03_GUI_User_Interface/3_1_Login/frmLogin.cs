@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using PLM_Lynx._03_GUI_User_Interface._3_5_Purchase;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
 {
@@ -16,6 +17,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
     {
         // Kế thừa lớp DangNhapBLL.cs
         private DangNhapBLL userBLL = new DangNhapBLL();
+        
         
 
 
@@ -27,16 +29,17 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
         private void btnDangNhap_Click(object sender, EventArgs e)
         {
             // Kiểm tra xem có trùng với điều kiện không
-            string username = txtDangNhap.Text;
-            string password = txtMatKhau.Text;
+            string username = txtDangNhap.Text.Trim(); ;
+            string password = txtMatKhau.Text.Trim(); ;
 
             bool IsStaff = userBLL.CheckDangnhapBLL(username, password);
             if (IsStaff)
             {
                 MessageBox.Show("Đăng nhập thành công ");
+                
                 frmMain frm = new frmMain();
                 frm.tennguoidung = username;
-                this.Hide();
+                this.Hide(); // form Login này bị ẩn đi 
                 frm.ShowDialog();
                 this.Close();
                 

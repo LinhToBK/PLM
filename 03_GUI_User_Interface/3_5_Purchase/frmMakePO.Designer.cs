@@ -238,9 +238,9 @@
             this.label10.AutoSize = true;
             this.label10.Location = new System.Drawing.Point(484, 49);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(75, 15);
+            this.label10.Size = new System.Drawing.Size(64, 15);
             this.label10.TabIndex = 1;
-            this.label10.Text = "Vendor Code";
+            this.label10.Text = "Supplier ID";
             // 
             // label4
             // 
@@ -256,9 +256,9 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(272, 123);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(67, 15);
+            this.label9.Size = new System.Drawing.Size(73, 15);
             this.label9.TabIndex = 1;
-            this.label9.Text = "Vendor Tel :";
+            this.label9.Text = "Supplier Tel :";
             // 
             // label11
             // 
@@ -277,16 +277,16 @@
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 30);
             this.label8.TabIndex = 1;
-            this.label8.Text = "Vendor \r\nLocation";
+            this.label8.Text = "Supplier \r\nLocation";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(272, 49);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(79, 15);
+            this.label7.Size = new System.Drawing.Size(85, 15);
             this.label7.TabIndex = 1;
-            this.label7.Text = "Vendor Name";
+            this.label7.Text = "Supplier Name";
             // 
             // label2
             // 
@@ -599,6 +599,7 @@
             // 
             this.txtStaffPosition.Location = new System.Drawing.Point(202, 41);
             this.txtStaffPosition.Name = "txtStaffPosition";
+            this.txtStaffPosition.ReadOnly = true;
             this.txtStaffPosition.Size = new System.Drawing.Size(80, 23);
             this.txtStaffPosition.TabIndex = 1;
             // 
@@ -626,6 +627,7 @@
             this.txtStaffDept.Font = new System.Drawing.Font("Segoe UI Semibold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtStaffDept.Location = new System.Drawing.Point(53, 41);
             this.txtStaffDept.Name = "txtStaffDept";
+            this.txtStaffDept.ReadOnly = true;
             this.txtStaffDept.Size = new System.Drawing.Size(83, 23);
             this.txtStaffDept.TabIndex = 1;
             // 
@@ -641,6 +643,7 @@
             this.Name = "frmMakePO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "frmMakePO";
+            this.Load += new System.EventHandler(this.frmMakePO_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

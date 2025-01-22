@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 //using System.Data.SqlClient;
 using Microsoft.Data.SqlClient;
 using System.Data;
@@ -14,7 +15,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
 {
     public class MakeNewPartDAL
     {
-
         private string Dataconnect = Properties.Settings.Default.Datacon;
 
         /// 01. INSERT - chèn New Part vào  bảng tblPart
@@ -62,8 +62,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
-
         /// 02. SELECT - Lấy dữ liệu của bảng tblFamily
         /// <returns></returns>
         public DataTable LoadFamilyDAL()
@@ -80,10 +78,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 adap.Fill(BangDuLieu);
             }
             return BangDuLieu;
-
         }
-
-
 
         /// <summary> 03. SELECT - Lấy  PartCode mới nhất
         /// <returns></return > Trả về chuỗi PartCode lớn nhất
@@ -98,18 +93,16 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 object result = cmd.ExecuteScalar();
 
                 // Kiểm tra kết quả
-                if(result !=null)
+                if (result != null)
                 {
                     return result.ToString();
-                }    
+                }
                 else
                 {
                     return null;
-                }    
+                }
             }
-    
         }
-
 
         /// <summary> 04. UPDATE - Cập nhật PartLog cho PartCode bất kì
         /// <param name="PartCode"></param>
@@ -128,7 +121,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         //cmd.Parameters.AddWithValue("@PartCode", PartCode);
                         cmd.Parameters.Add("@PartLogAdd", SqlDbType.NVarChar).Value = PartLogAdd;
                         cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
-
 
                         int rows = cmd.ExecuteNonQuery();
                         return rows > 0; // Trả về true nếu cập nhật thành công

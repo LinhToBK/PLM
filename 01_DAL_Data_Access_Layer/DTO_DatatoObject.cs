@@ -50,6 +50,16 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
 
     }
 
+    public class tblCommonInfor
+    {
+        public int InforID { get; set; }
+        public string InforName { get; set; }   
+        public string InforValue { get; set; }
+        public string InforLog { get; set; }
+
+
+    }
+
     public class ListNearPart
     {
         public int NoListNearPart { get; set; }

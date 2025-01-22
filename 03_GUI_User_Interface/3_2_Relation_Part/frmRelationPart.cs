@@ -213,12 +213,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void frmRelationPart_Load(object sender, EventArgs e)
         {
-            //dgvChild.ColumnCount = 3;
-            //dgvChild.Columns.Add("ColumnPartCode", "Part Code");
-            //dgvChild.Columns.Add("ColumnPartName", "Part Name");
-            //dgvChild.Columns.Add("ColumnQuantity", "Quantity");
-
-            //dgvChild = new DataGridView();
+            
             danhcon.Columns.Add("PartCode", typeof(string));
             danhcon.Columns.Add("PartName", typeof(string));
             danhcon.Columns.Add("Quantity", typeof(int));
@@ -254,31 +249,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 MessageBox.Show("Lỗi phát sinh khi  mở file : " + ex.Message);
             }
 
-            ////-- Thử chạy trực tiếp
-            //try
-            //{
-            //    //Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager.Open(dwgFilePath, false);
-            //    //Autodesk.Windows.DocumentView.Large.Equals(dwgFilePath);
-            //    // Đường dẫn tới ứng dụng DWG TrueView
-            //    string dwgTrueViewPath = @"C:\Program Files\Autodesk\DWG TrueView 2022 - English\dwgviewr.exe";
-            //    // "C:\Program Files\Autodesk\DWG TrueView 2022 - English\dwgviewr.exe"
-            //    MessageBox.Show("Tên File là : " + filename);
-            //    try
-            //    {
-            //        // Khởi chạy ứng dụng với tệp .dwg
-            //        Process.Start(dwgTrueViewPath, $"\"{filename}\"");
-            //    }
-            //    catch (Exception ex)
-            //    {
-            //        MessageBox.Show($"Không thể mở tệp: {ex.Message}");
-            //    }
-            //}
-            //catch (System.Exception ex)
-            //{
-            //    MessageBox.Show("Lỗi khi dùng hàm Open File : " + ex.Message);
-            //}
-
-            //// -- End : Thử chạy trực tiếp
 
         }
 

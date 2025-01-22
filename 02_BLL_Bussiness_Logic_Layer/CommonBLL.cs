@@ -620,5 +620,19 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 }
             }
         }
+
+
+
+
+
+        private CommonInforDAL _commonInforDAL = new CommonInforDAL();
+        public tblCommonInfor GetCommonInforValue(string inforname)
+        {
+            return  _commonInforDAL.GetCommonInforValue_DAL(inforname);
+        }
+
+
+
+
     } // End Class CommonBLL
 } // End NameSpace

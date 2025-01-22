@@ -31,17 +31,19 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMakePO));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.cboVendorName = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.txtVendorCode = new System.Windows.Forms.TextBox();
+            this.cboSupplierName = new System.Windows.Forms.ComboBox();
+            this.txtSupplierPhone = new System.Windows.Forms.TextBox();
+            this.txtSupplierTax = new System.Windows.Forms.TextBox();
+            this.txtSupplierID = new System.Windows.Forms.TextBox();
             this.txtPaymentTerms = new System.Windows.Forms.TextBox();
             this.txtCompanyLocation = new System.Windows.Forms.TextBox();
-            this.txtVendorLocation = new System.Windows.Forms.TextBox();
+            this.txtSupplierLocation = new System.Windows.Forms.TextBox();
             this.txtCompanyPhone = new System.Windows.Forms.TextBox();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
             this.txtPONo = new System.Windows.Forms.TextBox();
             this.txtOrderDate = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.label20 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
@@ -66,7 +68,7 @@
             this.PanelInfor = new System.Windows.Forms.Panel();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnAddItems = new System.Windows.Forms.Button();
-            this.btnViewDetailItems = new System.Windows.Forms.Button();
+            this.btnOldPO = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnViewNearPO = new System.Windows.Forms.Button();
@@ -115,17 +117,20 @@
             // panel1
             // 
             this.panel1.AutoScroll = true;
-            this.panel1.Controls.Add(this.cboVendorName);
-            this.panel1.Controls.Add(this.textBox2);
-            this.panel1.Controls.Add(this.txtVendorCode);
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel1.Controls.Add(this.cboSupplierName);
+            this.panel1.Controls.Add(this.txtSupplierPhone);
+            this.panel1.Controls.Add(this.txtSupplierTax);
+            this.panel1.Controls.Add(this.txtSupplierID);
             this.panel1.Controls.Add(this.txtPaymentTerms);
             this.panel1.Controls.Add(this.txtCompanyLocation);
-            this.panel1.Controls.Add(this.txtVendorLocation);
+            this.panel1.Controls.Add(this.txtSupplierLocation);
             this.panel1.Controls.Add(this.txtCompanyPhone);
             this.panel1.Controls.Add(this.txtCompanyName);
             this.panel1.Controls.Add(this.txtPONo);
             this.panel1.Controls.Add(this.txtOrderDate);
             this.panel1.Controls.Add(this.label3);
+            this.panel1.Controls.Add(this.label20);
             this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label4);
             this.panel1.Controls.Add(this.label9);
@@ -140,28 +145,37 @@
             this.panel1.Size = new System.Drawing.Size(647, 233);
             this.panel1.TabIndex = 0;
             // 
-            // cboVendorName
+            // cboSupplierName
             // 
-            this.cboVendorName.FormattingEnabled = true;
-            this.cboVendorName.Location = new System.Drawing.Point(351, 45);
-            this.cboVendorName.Name = "cboVendorName";
-            this.cboVendorName.Size = new System.Drawing.Size(121, 23);
-            this.cboVendorName.TabIndex = 3;
+            this.cboSupplierName.FormattingEnabled = true;
+            this.cboSupplierName.Location = new System.Drawing.Point(351, 45);
+            this.cboSupplierName.Name = "cboSupplierName";
+            this.cboSupplierName.Size = new System.Drawing.Size(141, 23);
+            this.cboSupplierName.TabIndex = 3;
+            this.cboSupplierName.SelectedIndexChanged += new System.EventHandler(this.cboSupplierName_SelectedIndexChanged);
             // 
-            // textBox2
+            // txtSupplierPhone
             // 
-            this.textBox2.Location = new System.Drawing.Point(351, 119);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(183, 23);
-            this.textBox2.TabIndex = 2;
+            this.txtSupplierPhone.Location = new System.Drawing.Point(351, 119);
+            this.txtSupplierPhone.Name = "txtSupplierPhone";
+            this.txtSupplierPhone.Size = new System.Drawing.Size(141, 23);
+            this.txtSupplierPhone.TabIndex = 2;
             // 
-            // txtVendorCode
+            // txtSupplierTax
             // 
-            this.txtVendorCode.Location = new System.Drawing.Point(565, 45);
-            this.txtVendorCode.Name = "txtVendorCode";
-            this.txtVendorCode.ReadOnly = true;
-            this.txtVendorCode.Size = new System.Drawing.Size(59, 23);
-            this.txtVendorCode.TabIndex = 2;
+            this.txtSupplierTax.Location = new System.Drawing.Point(538, 120);
+            this.txtSupplierTax.Name = "txtSupplierTax";
+            this.txtSupplierTax.ReadOnly = true;
+            this.txtSupplierTax.Size = new System.Drawing.Size(85, 23);
+            this.txtSupplierTax.TabIndex = 2;
+            // 
+            // txtSupplierID
+            // 
+            this.txtSupplierID.Location = new System.Drawing.Point(565, 45);
+            this.txtSupplierID.Name = "txtSupplierID";
+            this.txtSupplierID.ReadOnly = true;
+            this.txtSupplierID.Size = new System.Drawing.Size(59, 23);
+            this.txtSupplierID.TabIndex = 2;
             // 
             // txtPaymentTerms
             // 
@@ -183,14 +197,14 @@
             this.txtCompanyLocation.Size = new System.Drawing.Size(253, 33);
             this.txtCompanyLocation.TabIndex = 2;
             // 
-            // txtVendorLocation
+            // txtSupplierLocation
             // 
-            this.txtVendorLocation.Location = new System.Drawing.Point(351, 77);
-            this.txtVendorLocation.Multiline = true;
-            this.txtVendorLocation.Name = "txtVendorLocation";
-            this.txtVendorLocation.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtVendorLocation.Size = new System.Drawing.Size(273, 33);
-            this.txtVendorLocation.TabIndex = 2;
+            this.txtSupplierLocation.Location = new System.Drawing.Point(351, 77);
+            this.txtSupplierLocation.Multiline = true;
+            this.txtSupplierLocation.Name = "txtSupplierLocation";
+            this.txtSupplierLocation.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtSupplierLocation.Size = new System.Drawing.Size(273, 33);
+            this.txtSupplierLocation.TabIndex = 2;
             // 
             // txtCompanyPhone
             // 
@@ -233,10 +247,19 @@
             this.label3.TabIndex = 1;
             this.label3.Text = "PO NO";
             // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(495, 123);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(43, 15);
+            this.label20.TabIndex = 1;
+            this.label20.Text = "No.Tax";
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(484, 49);
+            this.label10.Location = new System.Drawing.Point(498, 49);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(64, 15);
             this.label10.TabIndex = 1;
@@ -254,7 +277,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(272, 123);
+            this.label9.Location = new System.Drawing.Point(270, 123);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 15);
             this.label9.TabIndex = 1;
@@ -273,7 +296,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(272, 78);
+            this.label8.Location = new System.Drawing.Point(280, 78);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 30);
             this.label8.TabIndex = 1;
@@ -282,7 +305,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(272, 49);
+            this.label7.Location = new System.Drawing.Point(264, 49);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 15);
             this.label7.TabIndex = 1;
@@ -317,6 +340,7 @@
             this.dgvListTimKiem.RowTemplate.Height = 23;
             this.dgvListTimKiem.Size = new System.Drawing.Size(308, 394);
             this.dgvListTimKiem.TabIndex = 2;
+            this.dgvListTimKiem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellDoubleClick);
             // 
             // splitContainer1
             // 
@@ -333,6 +357,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
+            this.splitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.splitContainer1.Panel2.Controls.Add(this.txtRate);
             this.splitContainer1.Panel2.Controls.Add(this.txtTotalVND);
             this.splitContainer1.Panel2.Controls.Add(this.txtRemark);
@@ -443,9 +468,10 @@
             // PanelInfor
             // 
             this.PanelInfor.AutoScroll = true;
+            this.PanelInfor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelInfor.Controls.Add(this.btnPreview);
             this.PanelInfor.Controls.Add(this.btnAddItems);
-            this.PanelInfor.Controls.Add(this.btnViewDetailItems);
+            this.PanelInfor.Controls.Add(this.btnOldPO);
             this.PanelInfor.Controls.Add(this.btnSearch);
             this.PanelInfor.Controls.Add(this.btnHelp);
             this.PanelInfor.Controls.Add(this.btnViewNearPO);
@@ -482,22 +508,23 @@
             // 
             this.btnAddItems.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItems.Image")));
             this.btnAddItems.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddItems.Location = new System.Drawing.Point(141, 193);
+            this.btnAddItems.Location = new System.Drawing.Point(139, 193);
             this.btnAddItems.Name = "btnAddItems";
             this.btnAddItems.Size = new System.Drawing.Size(141, 29);
             this.btnAddItems.TabIndex = 3;
             this.btnAddItems.Text = "Add Item for PO List";
             this.btnAddItems.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddItems.UseVisualStyleBackColor = true;
+            this.btnAddItems.Click += new System.EventHandler(this.btnAddItems_Click);
             // 
-            // btnViewDetailItems
+            // btnOldPO
             // 
-            this.btnViewDetailItems.Location = new System.Drawing.Point(173, 76);
-            this.btnViewDetailItems.Name = "btnViewDetailItems";
-            this.btnViewDetailItems.Size = new System.Drawing.Size(109, 23);
-            this.btnViewDetailItems.TabIndex = 3;
-            this.btnViewDetailItems.Text = "View Detail Items";
-            this.btnViewDetailItems.UseVisualStyleBackColor = true;
+            this.btnOldPO.Location = new System.Drawing.Point(173, 76);
+            this.btnOldPO.Name = "btnOldPO";
+            this.btnOldPO.Size = new System.Drawing.Size(109, 23);
+            this.btnOldPO.TabIndex = 3;
+            this.btnOldPO.Text = "Search Old PO";
+            this.btnOldPO.UseVisualStyleBackColor = true;
             // 
             // btnSearch
             // 
@@ -507,6 +534,7 @@
             this.btnSearch.Size = new System.Drawing.Size(34, 34);
             this.btnSearch.TabIndex = 2;
             this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnHelp
             // 
@@ -541,7 +569,7 @@
             this.txtStaffName.Location = new System.Drawing.Point(53, 7);
             this.txtStaffName.Name = "txtStaffName";
             this.txtStaffName.Size = new System.Drawing.Size(163, 23);
-            this.txtStaffName.TabIndex = 1;
+            this.txtStaffName.TabIndex = 0;
             // 
             // btnSavePO
             // 
@@ -585,6 +613,7 @@
             this.txtKeySearch.Name = "txtKeySearch";
             this.txtKeySearch.Size = new System.Drawing.Size(179, 23);
             this.txtKeySearch.TabIndex = 1;
+            this.txtKeySearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyDown);
             // 
             // label12
             // 
@@ -672,11 +701,11 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.ComboBox cboVendorName;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox txtVendorCode;
+        private System.Windows.Forms.ComboBox cboSupplierName;
+        private System.Windows.Forms.TextBox txtSupplierPhone;
+        private System.Windows.Forms.TextBox txtSupplierID;
         private System.Windows.Forms.TextBox txtPaymentTerms;
-        private System.Windows.Forms.TextBox txtVendorLocation;
+        private System.Windows.Forms.TextBox txtSupplierLocation;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox txtCompanyLocation;
@@ -692,7 +721,7 @@
         private System.Windows.Forms.TextBox txtStaffName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnViewDetailItems;
+        private System.Windows.Forms.Button btnOldPO;
         private System.Windows.Forms.Button btnViewNearPO;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Button btnAddItems;
@@ -714,5 +743,7 @@
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.Panel PanelInfor;
         private System.Windows.Forms.Button btnCancelPO;
+        private System.Windows.Forms.TextBox txtSupplierTax;
+        private System.Windows.Forms.Label label20;
     }
 }

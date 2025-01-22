@@ -191,6 +191,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="01_DAL_Data_Access_Layer\CommonInforDAL.cs" />
     <Compile Include="01_DAL_Data_Access_Layer\DangNhapDAL.cs" />
     <Compile Include="01_DAL_Data_Access_Layer\DTO_DatatoObject.cs" />
     <Compile Include="01_DAL_Data_Access_Layer\ECO_DAL.cs" />

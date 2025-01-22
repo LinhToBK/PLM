@@ -149,22 +149,24 @@
             // 
             this.mnuManagePrice.Name = "mnuManagePrice";
             this.mnuManagePrice.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.P)));
-            this.mnuManagePrice.Size = new System.Drawing.Size(219, 22);
+            | System.Windows.Forms.Keys.G)));
+            this.mnuManagePrice.Size = new System.Drawing.Size(222, 22);
             this.mnuManagePrice.Text = "Manage Price";
             this.mnuManagePrice.Click += new System.EventHandler(this.mnuManagePrice_Click);
             // 
             // mnuMakeNewPO
             // 
             this.mnuMakeNewPO.Name = "mnuMakeNewPO";
-            this.mnuMakeNewPO.Size = new System.Drawing.Size(219, 22);
+            this.mnuMakeNewPO.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.P)));
+            this.mnuMakeNewPO.Size = new System.Drawing.Size(222, 22);
             this.mnuMakeNewPO.Text = "Make New PO";
             this.mnuMakeNewPO.Click += new System.EventHandler(this.mnuMakeNewPO_Click);
             // 
             // mnuFindPO
             // 
             this.mnuFindPO.Name = "mnuFindPO";
-            this.mnuFindPO.Size = new System.Drawing.Size(219, 22);
+            this.mnuFindPO.Size = new System.Drawing.Size(222, 22);
             this.mnuFindPO.Text = "Find PO ";
             // 
             // mnuHelp

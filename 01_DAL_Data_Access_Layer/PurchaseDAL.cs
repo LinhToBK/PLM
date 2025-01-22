@@ -1,13 +1,8 @@
-﻿using System;
+﻿using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.Data;
-using Microsoft.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Office.Interop.Excel;
 using DataTable = System.Data.DataTable;
-using Azure.Core;
 
 namespace PLM_Lynx._01_DAL_Data_Access_Layer
 {
@@ -60,17 +55,23 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
     {
         private string Dataconnect = Properties.Settings.Default.Datacon;
 
-        public tblUsers GetUserInfor(string staffname)
+        /// <summary>
+        /// 01. SELECT - Get information of specific user by username
+        /// </summary>
+        /// <param name="staffname"></param>
+        /// <returns></returns>
+        public tblUsers GetUserInfor_DAL(string staffname)
         {
             tblUsers _tbluser = null;
 
-            DataTable BangDuLieu = new System.Data.DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string sql_query = @"
-                        select top 1 tblDepartment.Deptname, tblUsers.Roles, tblUsers.Position from tblUsers
-                        join tblDepartment on tblUsers.Department = tblDepartment.DeptID
-                        where Username = @Username ";
+                            select u.UserID, u.Username, u.Passwords, u.Roles, u.Position, u.Department, d.Deptname
+                            from tblUsers as u
+                            join tblDepartment as d on u.Department = d.DeptID
+                            where u.Username = @Username   ;
+                        ";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.AddWithValue("@Username", staffname);
@@ -96,6 +97,141 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
 
             return _tbluser;
+        }
+
+        /// <summary>
+        /// 02. SELECT - Get information of the lastest PO
+        /// </summary>
+        /// <param name="staffname"></param>
+        /// <returns></returns>
+        public tblPO GetInforPO_DAL()
+        {
+            tblPO _tblpo = null;
+
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"
+                       select top 1 tblPO.PODate, tblPO.POCode  from tblPO order by PODate desc  ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read()) // Nếu đọc được giá trị thì :
+                {
+                    _tblpo = new tblPO
+                    {
+                        PODate = Convert.ToDateTime(reader[0]),
+                        POCode = reader[1].ToString()
+                    };
+                }
+
+                conn.Close();
+            }
+
+            return _tblpo;
+        }
+
+
+
+        /// <summary>
+        /// 03. SELECT - Get All Supplier Name
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetListSupplier_DAL()
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"  select tblSupplier.SupName from tblSupplier";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
+        /// <summary>
+        /// 04. SELECT - Get information of Supplier by SupplierName
+        /// </summary>
+        /// <param name="SupplierName"></param>
+        /// <returns></returns>
+        public tblSupplier GetInforSupplier_DAL(string SupplierName)
+        {
+            tblSupplier _tblsupplier = null;
+
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"
+                            select Top 1 s.SupName, s.SupPhoneNumber, s.SupTaxID, s.SupLocation,s.SupRepresentative, s.SupID
+                            from tblSupplier as s where SupName = @SupName  ;
+                        ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@SupName", SupplierName);
+
+                conn.Open();
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                if (reader.Read()) // Nếu đọc được giá trị thì :
+                {
+                    _tblsupplier = new tblSupplier
+                    {
+                        SupName = reader[0].ToString(),
+                        SupPhoneNumber = reader[1].ToString(),
+                        SupTaxID = reader[2].ToString(),
+                        SupLocation = reader[3].ToString(),
+                        SupRepesentative = reader[4].ToString(),
+                        SupID = Convert.ToInt32(reader[5].ToString())
+                    };
+                }
+
+                conn.Close();
+            }
+
+            return _tblsupplier;
+
+        }
+
+
+
+
+        /// 01. SELECT - Get "PartCode" and "PartName" with keysearch
+        /// <param name="KeySearch"></param>
+        /// <returns> Bảng chứa danh sách các Part Chứa từ khóa đó
+        public DataTable FindwithwordDAL(string KeySearch)
+        {
+
+            //  select p.PartCode, p.PartName, p.PartDescript, p.PartStage, p.PartPrice, p.PartLog, p.PartFile from tblPart as p  where PartName like '%BA%'
+            //  Or PartCode like '%BA%' or PartDescript like '%BA%'
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"
+                        SELECT 
+                            p.PartCode, 
+                            p.PartName
+                            
+                        FROM 
+                            tblPart AS p  
+                        WHERE 
+                            p.PartName LIKE '%' + @KeySearch + '%' 
+                            OR p.PartCode LIKE '%' + @KeySearch + '%' 
+                            OR p.PartDescript LIKE '%' + @KeySearch + '%'";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@KeySearch", KeySearch);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
         }
     }
 }

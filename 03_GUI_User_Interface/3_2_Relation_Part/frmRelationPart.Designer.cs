@@ -115,8 +115,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1026, 717);
-            this.splitContainer1.SplitterDistance = 166;
+            this.splitContainer1.Size = new System.Drawing.Size(1060, 717);
+            this.splitContainer1.SplitterDistance = 165;
             this.splitContainer1.TabIndex = 0;
             // 
             // splitContainer3
@@ -141,8 +141,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dgvListTimKiem);
-            this.splitContainer3.Size = new System.Drawing.Size(1026, 166);
-            this.splitContainer3.SplitterDistance = 362;
+            this.splitContainer3.Size = new System.Drawing.Size(1060, 165);
+            this.splitContainer3.SplitterDistance = 372;
             this.splitContainer3.TabIndex = 8;
             // 
             // label1
@@ -239,7 +239,7 @@
             this.dgvListTimKiem.Location = new System.Drawing.Point(0, 0);
             this.dgvListTimKiem.Name = "dgvListTimKiem";
             this.dgvListTimKiem.RowTemplate.Height = 23;
-            this.dgvListTimKiem.Size = new System.Drawing.Size(660, 166);
+            this.dgvListTimKiem.Size = new System.Drawing.Size(684, 165);
             this.dgvListTimKiem.TabIndex = 3;
             this.dgvListTimKiem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellDoubleClick);
             this.dgvListTimKiem.Click += new System.EventHandler(this.dgvListTimKiem_Click);
@@ -273,8 +273,8 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.Cyan;
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer2.Size = new System.Drawing.Size(1026, 547);
-            this.splitContainer2.SplitterDistance = 362;
+            this.splitContainer2.Size = new System.Drawing.Size(1060, 548);
+            this.splitContainer2.SplitterDistance = 372;
             this.splitContainer2.TabIndex = 0;
             // 
             // label7
@@ -319,10 +319,10 @@
             // 
             this.dgvListFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListFile.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvListFile.Location = new System.Drawing.Point(0, 293);
+            this.dgvListFile.Location = new System.Drawing.Point(0, 294);
             this.dgvListFile.Name = "dgvListFile";
             this.dgvListFile.RowTemplate.Height = 23;
-            this.dgvListFile.Size = new System.Drawing.Size(362, 254);
+            this.dgvListFile.Size = new System.Drawing.Size(372, 254);
             this.dgvListFile.TabIndex = 3;
             this.dgvListFile.DoubleClick += new System.EventHandler(this.dgvListFile_DoubleClick);
             // 
@@ -435,8 +435,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.dgvChild);
-            this.splitContainer4.Size = new System.Drawing.Size(660, 547);
-            this.splitContainer4.SplitterDistance = 98;
+            this.splitContainer4.Size = new System.Drawing.Size(684, 548);
+            this.splitContainer4.SplitterDistance = 97;
             this.splitContainer4.TabIndex = 4;
             // 
             // label9
@@ -522,7 +522,7 @@
             this.dgvChild.Location = new System.Drawing.Point(0, 0);
             this.dgvChild.Name = "dgvChild";
             this.dgvChild.RowTemplate.Height = 23;
-            this.dgvChild.Size = new System.Drawing.Size(660, 445);
+            this.dgvChild.Size = new System.Drawing.Size(684, 447);
             this.dgvChild.TabIndex = 1;
             this.dgvChild.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChild_CellDoubleClick);
             // 
@@ -531,7 +531,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1043, 597);
+            this.ClientSize = new System.Drawing.Size(1077, 597);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

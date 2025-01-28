@@ -58,7 +58,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string query;
-                query = "select PartCode, PartName, PartDescript, PartStage, PartLog from tblPart where PartCode = @PartCode";
+                query = "select PartCode, PartName, PartDescript, PartStage, PartLog, PartPrice from tblPart where PartCode = @PartCode";
                 SqlCommand cmd = new SqlCommand(@query, conn);
                 cmd.Parameters.AddWithValue("@PartCode", PartCode);
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);

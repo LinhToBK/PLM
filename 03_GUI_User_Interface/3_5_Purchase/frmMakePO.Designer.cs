@@ -31,7 +31,10 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMakePO));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnClearList = new System.Windows.Forms.Button();
+            this.btnDeletePart = new System.Windows.Forms.Button();
             this.cboSupplierName = new System.Windows.Forms.ComboBox();
+            this.btnAddItems = new System.Windows.Forms.Button();
             this.txtSupplierPhone = new System.Windows.Forms.TextBox();
             this.txtSupplierTax = new System.Windows.Forms.TextBox();
             this.txtSupplierID = new System.Windows.Forms.TextBox();
@@ -67,7 +70,6 @@
             this.label14 = new System.Windows.Forms.Label();
             this.PanelInfor = new System.Windows.Forms.Panel();
             this.btnPreview = new System.Windows.Forms.Button();
-            this.btnAddItems = new System.Windows.Forms.Button();
             this.btnOldPO = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
@@ -118,7 +120,10 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel1.Controls.Add(this.btnClearList);
+            this.panel1.Controls.Add(this.btnDeletePart);
             this.panel1.Controls.Add(this.cboSupplierName);
+            this.panel1.Controls.Add(this.btnAddItems);
             this.panel1.Controls.Add(this.txtSupplierPhone);
             this.panel1.Controls.Add(this.txtSupplierTax);
             this.panel1.Controls.Add(this.txtSupplierID);
@@ -145,6 +150,34 @@
             this.panel1.Size = new System.Drawing.Size(647, 233);
             this.panel1.TabIndex = 0;
             // 
+            // btnClearList
+            // 
+            this.btnClearList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.btnClearList.Image = ((System.Drawing.Image)(resources.GetObject("btnClearList.Image")));
+            this.btnClearList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClearList.Location = new System.Drawing.Point(310, 195);
+            this.btnClearList.Name = "btnClearList";
+            this.btnClearList.Size = new System.Drawing.Size(82, 29);
+            this.btnClearList.TabIndex = 4;
+            this.btnClearList.Text = "Clear List";
+            this.btnClearList.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClearList.UseVisualStyleBackColor = false;
+            this.btnClearList.Click += new System.EventHandler(this.btnClearList_Click);
+            // 
+            // btnDeletePart
+            // 
+            this.btnDeletePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.btnDeletePart.Image = ((System.Drawing.Image)(resources.GetObject("btnDeletePart.Image")));
+            this.btnDeletePart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDeletePart.Location = new System.Drawing.Point(183, 195);
+            this.btnDeletePart.Name = "btnDeletePart";
+            this.btnDeletePart.Size = new System.Drawing.Size(92, 29);
+            this.btnDeletePart.TabIndex = 4;
+            this.btnDeletePart.Text = "Delete Part";
+            this.btnDeletePart.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeletePart.UseVisualStyleBackColor = false;
+            this.btnDeletePart.Click += new System.EventHandler(this.btnDeletePart_Click);
+            // 
             // cboSupplierName
             // 
             this.cboSupplierName.FormattingEnabled = true;
@@ -153,6 +186,20 @@
             this.cboSupplierName.Size = new System.Drawing.Size(141, 23);
             this.cboSupplierName.TabIndex = 3;
             this.cboSupplierName.SelectedIndexChanged += new System.EventHandler(this.cboSupplierName_SelectedIndexChanged);
+            // 
+            // btnAddItems
+            // 
+            this.btnAddItems.BackColor = System.Drawing.Color.Olive;
+            this.btnAddItems.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItems.Image")));
+            this.btnAddItems.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddItems.Location = new System.Drawing.Point(7, 195);
+            this.btnAddItems.Name = "btnAddItems";
+            this.btnAddItems.Size = new System.Drawing.Size(141, 29);
+            this.btnAddItems.TabIndex = 3;
+            this.btnAddItems.Text = "Add Item for PO List";
+            this.btnAddItems.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddItems.UseVisualStyleBackColor = false;
+            this.btnAddItems.Click += new System.EventHandler(this.btnAddItems_Click);
             // 
             // txtSupplierPhone
             // 
@@ -183,7 +230,7 @@
             this.txtPaymentTerms.Multiline = true;
             this.txtPaymentTerms.Name = "txtPaymentTerms";
             this.txtPaymentTerms.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPaymentTerms.Size = new System.Drawing.Size(518, 44);
+            this.txtPaymentTerms.Size = new System.Drawing.Size(518, 31);
             this.txtPaymentTerms.TabIndex = 2;
             this.txtPaymentTerms.Text = "90 days payment after T/T Base on";
             // 
@@ -287,7 +334,7 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(7, 166);
+            this.label11.Location = new System.Drawing.Point(7, 159);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(88, 15);
             this.label11.TabIndex = 1;
@@ -470,7 +517,6 @@
             this.PanelInfor.AutoScroll = true;
             this.PanelInfor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.PanelInfor.Controls.Add(this.btnPreview);
-            this.PanelInfor.Controls.Add(this.btnAddItems);
             this.PanelInfor.Controls.Add(this.btnOldPO);
             this.PanelInfor.Controls.Add(this.btnSearch);
             this.PanelInfor.Controls.Add(this.btnHelp);
@@ -490,7 +536,7 @@
             this.PanelInfor.Location = new System.Drawing.Point(3, 3);
             this.PanelInfor.Name = "PanelInfor";
             this.PanelInfor.Size = new System.Drawing.Size(308, 233);
-            this.PanelInfor.TabIndex = 4;
+            this.PanelInfor.TabIndex = 0;
             // 
             // btnPreview
             // 
@@ -504,26 +550,16 @@
             this.btnPreview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPreview.UseVisualStyleBackColor = true;
             // 
-            // btnAddItems
-            // 
-            this.btnAddItems.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItems.Image")));
-            this.btnAddItems.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddItems.Location = new System.Drawing.Point(139, 193);
-            this.btnAddItems.Name = "btnAddItems";
-            this.btnAddItems.Size = new System.Drawing.Size(141, 29);
-            this.btnAddItems.TabIndex = 3;
-            this.btnAddItems.Text = "Add Item for PO List";
-            this.btnAddItems.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddItems.UseVisualStyleBackColor = true;
-            this.btnAddItems.Click += new System.EventHandler(this.btnAddItems_Click);
-            // 
             // btnOldPO
             // 
+            this.btnOldPO.Image = ((System.Drawing.Image)(resources.GetObject("btnOldPO.Image")));
+            this.btnOldPO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnOldPO.Location = new System.Drawing.Point(173, 76);
             this.btnOldPO.Name = "btnOldPO";
             this.btnOldPO.Size = new System.Drawing.Size(109, 23);
             this.btnOldPO.TabIndex = 3;
             this.btnOldPO.Text = "Search Old PO";
+            this.btnOldPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOldPO.UseVisualStyleBackColor = true;
             // 
             // btnSearch
@@ -547,11 +583,14 @@
             // 
             // btnViewNearPO
             // 
+            this.btnViewNearPO.Image = ((System.Drawing.Image)(resources.GetObject("btnViewNearPO.Image")));
+            this.btnViewNearPO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnViewNearPO.Location = new System.Drawing.Point(9, 76);
             this.btnViewNearPO.Name = "btnViewNearPO";
             this.btnViewNearPO.Size = new System.Drawing.Size(104, 23);
             this.btnViewNearPO.TabIndex = 3;
             this.btnViewNearPO.Text = "View Near PO";
+            this.btnViewNearPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnViewNearPO.UseVisualStyleBackColor = true;
             // 
             // label5
@@ -745,5 +784,7 @@
         private System.Windows.Forms.Button btnCancelPO;
         private System.Windows.Forms.TextBox txtSupplierTax;
         private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.Button btnClearList;
+        private System.Windows.Forms.Button btnDeletePart;
     }
 }

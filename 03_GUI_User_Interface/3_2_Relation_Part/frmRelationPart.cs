@@ -143,17 +143,17 @@ namespace PLM_Lynx._03_GUI_User_Interface
             {
                 // Lấy PartCode
                 string PartCode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY 
-
+                MessageBox.Show("Đây là Partcode trước khi nhập vào : " + PartCode);
 
                 // Mở Form Detail
                 frmRelationPart_Detail_Info detailinfo = new frmRelationPart_Detail_Info();
-                
-                detailinfo.ShowDetailInfor(PartCode);
+
+                //detailinfo.partcode = PartCode;
                 detailinfo.ShowDialog();
 
 
-            } 
-                
+            }
+
         }
 
         private void btnAdd2Parent_Click(object sender, EventArgs e)

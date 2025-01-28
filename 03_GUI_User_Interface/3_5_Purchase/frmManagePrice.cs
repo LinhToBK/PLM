@@ -15,8 +15,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 {
     public partial class frmManagePrice : Form
     {
-
         private PurchaseBLL purchaseBLL = new PurchaseBLL();
+
         public frmManagePrice()
         {
             InitializeComponent();
@@ -27,10 +27,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private CommonBLL commonBLL = new CommonBLL();
         private DataTable DulieuTimKiem = new DataTable();
-        
 
         // =================================================================
-        //                          HÀM TỰ TẠO 
+        //                          HÀM TỰ TẠO
         // =================================================================
         public void LoadDataFindPart(string keysearch)
         {
@@ -51,51 +50,42 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dgvListTimKiem.Columns[5].Visible = false; //  = "Log";
             dgvListTimKiem.Columns[6].Visible = false; // "LinkFile";
 
-
             dgvListTimKiem.AllowUserToAddRows = false;
             dgvListTimKiem.EditMode = DataGridViewEditMode.EditProgrammatically;
-
         }
 
         private void convertvnd2usd()
         {
-            string vndprice = txtPartPrice.Text; 
-            if(vndprice.Length > 0)
+            string vndprice = txtPartPrice.Text;
+            if (vndprice.Length > 0)
             {
                 try
                 {
-                    float usdprice = (float) Convert.ToInt32(vndprice) / Convert.ToInt32(txtRate.Text);
+                    float usdprice = (float)Convert.ToInt32(vndprice) / Convert.ToInt32(txtRate.Text);
                     txtUSDPrice.Text = usdprice.ToString(cboPrecision.SelectedItem.ToString());
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
-                } 
-                
-            } 
-                
+                }
+            }
         }
 
-
-
-
         // =================================================================
-        //               FINISH :     HÀM TỰ TẠO 
+        //               FINISH :     HÀM TỰ TẠO
         // =================================================================
-
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn muốn thoát việc quản lý giá phải không ?","",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-            if(kq == DialogResult.Yes)
+            DialogResult kq = MessageBox.Show("Bạn muốn thoát việc quản lý giá phải không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.Yes)
             {
                 this.Close();
             }
             else
             {
                 return;
-            } 
-
+            }
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -121,7 +111,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void dgvListTimKiem_Click(object sender, EventArgs e)
         {
-
         }
 
         private void frmManagePrice_Load(object sender, EventArgs e)
@@ -131,8 +120,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             txtRate.Text = "25000";
             txtRate.Enabled = false;
             rdioVND.Checked = true;
-            cboPrecision.SelectedIndex = 1 ; //  Precision : 0.00
-
+            cboPrecision.SelectedIndex = 1; //  Precision : 0.00
         }
 
         private void ckcAllowModifyRate_CheckedChanged(object sender, EventArgs e)
@@ -143,12 +131,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void cboPrecision_SelectedIndexChanged(object sender, EventArgs e)
         {
-            convertvnd2usd(); 
+            convertvnd2usd();
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn muốn sửa giá của Part không ?","",MessageBoxButtons.YesNo,MessageBoxIcon.Question);  
+            DialogResult kq = MessageBox.Show("Bạn muốn sửa giá của Part không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 if (rdioVND.Checked == true)
@@ -163,29 +151,26 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     txtUSDPrice.ReadOnly = false;
                     txtUSDPrice.Focus();
                 }
-            }  
+            }
             else
             {
                 return;
-            }    
-
-
-              
+            }
         }
 
         private void txtPartPrice_TextChanged(object sender, EventArgs e)
         {
             // Khi sửa giá trị tiền của ô này thì đồng thời sẽ hiển thị giá USD
-            if(float.TryParse(txtPartPrice.Text, out float vndprice))
+            if (float.TryParse(txtPartPrice.Text, out float vndprice))
             {
                 // Tính giá sang USD
-                float usdprice = vndprice/float.Parse(txtRate.Text);
+                float usdprice = vndprice / float.Parse(txtRate.Text);
                 txtUSDPrice.Text = usdprice.ToString();
-            }    
+            }
             else
             {
                 txtUSDPrice.Text = string.Empty; // Nếu nhập sai định dạng số thì sẽ trả về giá trị = 0
-            }    
+            }
         }
 
         private void txtUSDPrice_TextChanged(object sender, EventArgs e)
@@ -198,7 +183,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 txtPartPrice.Text = vndprice.ToString();
             }
             else
-            {                              
+            {
                 txtPartPrice.Text = string.Empty; // Nếu nhập sai định dạng số thì sẽ trả về giá trị = 0
             }
         }
@@ -206,27 +191,25 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void btnSaveNewPrice_Click(object sender, EventArgs e)
         {
             // Kiểm tra giá trị  vndPrice có phải là số nguyên dương hay không ?
-            if(int.TryParse(txtPartPrice.Text.Trim(), out int vndprice))
+            if (int.TryParse(txtPartPrice.Text.Trim(), out int vndprice))
             {
                 string tb;
                 tb = "Bạn có muốn update giá của Part Code [ " + txtPartCode.Text + "]";
                 tb += " từ --- " + dgvListTimKiem.CurrentRow.Cells[4].Value.ToString() + " (VND) --- sang --- " + txtPartPrice.Text + " --- (VND) không ?";
 
-                 DialogResult kq = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(kq == DialogResult.Yes)
+                DialogResult kq = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (kq == DialogResult.Yes)
                 {
-                    if(purchaseBLL.CapnhatPriceBLL(txtPartCode.Text, txtPartPrice.Text))
+                    if (purchaseBLL.CapnhatPriceBLL(txtPartCode.Text, txtPartPrice.Text))
                     {
                         MessageBox.Show("Đã cập nhật thành công giá ");
                         LoadDataFindPart(txtPartCode.Text);
-                    }    
+                    }
                     else
                     {
-                        MessageBox.Show("Cập nhật thất bại");
-                    }    
-                } 
-                    
-
+                        MessageBox.Show("Cập<< nhật thất bại");
+                    }
+                }
             }
             else
             {
@@ -234,12 +217,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 txtPartPrice.Focus();
                 return;
             }
-
         }
 
         private void dgvListTimKiem_DoubleClick(object sender, EventArgs e)
         {
-            
         }
 
         private void dgvListTimKiem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -252,7 +233,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void dgvListTimKiem_SelectionChanged(object sender, EventArgs e)
         {
-            // Mỗi khi lên xuống bất kỳ 1 dòng nào thì giá trị sẽ tự động được thay đổi 
+            // Mỗi khi lên xuống bất kỳ 1 dòng nào thì giá trị sẽ tự động được thay đổi
             if (dgvListTimKiem.CurrentRow != null)
             {
                 txtPartCode.Text = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();  // Code
@@ -260,7 +241,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 txtPartName.Text = dgvListTimKiem.CurrentRow.Cells[2].Value.ToString();  // Descript
                 txtPartName.Text = dgvListTimKiem.CurrentRow.Cells[3].Value.ToString();  // Stage
                 txtPartPrice.Text = dgvListTimKiem.CurrentRow.Cells[4].Value.ToString();   // Price
-
             }
         }
     }

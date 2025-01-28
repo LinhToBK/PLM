@@ -215,7 +215,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string sql_query = @"
                         SELECT 
                             p.PartCode, 
-                            p.PartName
+                            p.PartName,
+                            p.PartPrice
                             
                         FROM 
                             tblPart AS p  

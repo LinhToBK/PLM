@@ -46,16 +46,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
             dgvSearch.Columns[1].Width = 200; // PartName
             dgvSearch.Columns[2].Width = 100; // PartDescript
             dgvSearch.Columns[3].Width = 50; // PartStage
-            dgvSearch.Columns[4].Width = 50; // PartPrice
+            //dgvSearch.Columns[4].Width = 50; // PartPrice
             //dgvSearch.Columns[5].Width = 100; // PartLog
             //dgvSearch.Columns[6].Width = 100; // Partfile
             dgvSearch.Columns[0].HeaderText = "Code";
             dgvSearch.Columns[1].HeaderText = "Name";
             dgvSearch.Columns[2].HeaderText = "Description";
             dgvSearch.Columns[3].HeaderText = "Stage";
-            dgvSearch.Columns[4].HeaderText = "Price";
-            dgvSearch.Columns[5].HeaderText = "Log";
-            dgvSearch.Columns[6].HeaderText = "LinkFile";
+            //dgvSearch.Columns[4].HeaderText = "Price";
+            //dgvSearch.Columns[5].HeaderText = "Log";
+            //dgvSearch.Columns[6].HeaderText = "LinkFile";
 
 
             dgvSearch.AllowUserToAddRows = false;
@@ -119,7 +119,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             txtCode.Text = dgvSearch.CurrentRow.Cells[0].Value.ToString(); // Code
             txtName.Text = dgvSearch.CurrentRow.Cells[1].Value.ToString(); // Name
             txtDescript.Text = dgvSearch.CurrentRow.Cells[2].Value.ToString(); // Description
-            txtLog.Text = dgvSearch.CurrentRow.Cells[5].Value.ToString(); // Log
+            //txtLog.Text = dgvSearch.CurrentRow.Cells[5].Value.ToString(); // Log
 
             // -- Hiển thị ảnh
             if (CommonBLL.UploadImagebyPartCode(txtCode.Text, picPart) == true)
@@ -166,7 +166,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //------
 
             // Hiển thị danh sách các PartParent và PartChild
-            string idpart = dgvSearch.CurrentRow.Cells[7].Value.ToString();
+            string idpart = dgvSearch.CurrentRow.Cells[4].Value.ToString();
             LoadDataChild(idpart);
             LoadDataParent(idpart);
 

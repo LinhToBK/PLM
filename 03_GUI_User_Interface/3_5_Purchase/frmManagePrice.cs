@@ -138,7 +138,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         {
             DialogResult kq = MessageBox.Show("Bạn muốn sửa giá của Part không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
-            {
+            {          
                 if (rdioVND.Checked == true)
                 {
                     txtPartPrice.Enabled = true;

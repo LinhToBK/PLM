@@ -1,8 +1,12 @@
-﻿using PLM_Lynx._01_DAL_Data_Access_Layer;
+﻿using Newtonsoft.Json;
+using PLM_Lynx._01_DAL_Data_Access_Layer;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using System;
+using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 {
@@ -12,6 +16,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private CommonBLL _commonbll = new CommonBLL();
         public string _usercurrent { get; set; }
         private DataTable table_ListTimKiem;
+
         //private DataTable table_ListItem {  get; set; }
         public DataTable table_ListItem = new DataTable();
 
@@ -78,6 +83,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         public frmMakePO()
         {
             InitializeComponent();
+            dgvListItem.CellValueChanged += dgvListItem_CellValueChanged;
+        }
+
+        private void DgvListItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         private void InitialTableListItem()
@@ -100,12 +111,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             txtStaffPosition.Text = _user_data.Position;
 
             // ---> Load information of PO No
-            tblPO _po_data = _purchasebll.GetInforPO();
-            DateTime thelastestdate = _po_data.PODate;
             DateTime today = DateTime.Now.Date;
+            tblPO _po_data = _purchasebll.GetInforPO();
+            DateTime thelastestdate = DateTime.Now.Date;
+            string thelastestPO = today.Date.ToString("yyyy-MM-dd") + "/000";
+            if (_po_data != null)
+            {
+                thelastestdate = _po_data.PODate;
+                thelastestPO = _po_data.POCode;
+                //MessageBox.Show(thelastestPO);
+            }
 
             string PO_no;
-            string thelastestPO = _po_data.POCode;
+
             if (thelastestdate.Date == today)
             {
                 // If the lastest day match with today
@@ -146,11 +164,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             table_ListItem.Columns.Add("PartName", typeof(string));
             table_ListItem.Columns.Add("Quantity", typeof(int));
             table_ListItem.Columns.Add("UnitPrice", typeof(int));
-            table_ListItem.Columns.Add("Discount", typeof(int));
+            table_ListItem.Columns.Add("Discount", typeof(double));
             table_ListItem.Columns.Add("Amount", typeof(decimal));
+            table_ListItem.Columns.Add("ID", typeof(int));
 
             dgvListItem.AllowUserToAddRows = false;
-            
+
+            // ---> Load Tolerance VND/USD : 0.0/0.00/0.00
+            CboTolerance.SelectedIndex = 1; //  Precision : 0.00
+
+            txtKeySearch.Focus();
         }
 
         private void cboSupplierName_SelectedIndexChanged(object sender, EventArgs e)
@@ -176,7 +199,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dgvListTimKiem.Columns[0].Width = 70; // PartCode
             dgvListTimKiem.Columns[1].Width = 200; // PartName
             dgvListTimKiem.Columns[2].Width = 60; // PartPrice
-
+            dgvListTimKiem.Columns[3].Width = 10; // PartPrice
 
             //dgvListTimKiem.Columns[0].HeaderText = "Code";
             //dgvListTimKiem.Columns[1].HeaderText = "Name";
@@ -228,10 +251,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
             string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
             string partname = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();
+            int partid = Convert.ToInt32(dgvListTimKiem.CurrentRow.Cells[3].Value.ToString());
 
             //decimal partprice = Convert.ToDecimal(dgvListTimKiem.CurrentRow.Cells[2].Value);
-            decimal partprice ;
-            if (dgvListTimKiem.CurrentRow.Cells[2].Value.ToString() == "" || dgvListTimKiem.CurrentRow.Cells[2].Value.ToString() =="0")
+            decimal partprice;
+            if (dgvListTimKiem.CurrentRow.Cells[2].Value.ToString() == "" || dgvListTimKiem.CurrentRow.Cells[2].Value.ToString() == "0")
             {
                 partprice = 0;
             }
@@ -264,7 +288,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 // Nếu không trùng thì mới thêm vào
                 string supplier = cboSupplierName.Items.ToString();
 
-                table_ListItem.Rows.Add(partcode, partname, 1, partprice, 0, 0);
+                table_ListItem.Rows.Add(partcode, partname, 1, partprice, 0, 0, partid);
                 dgvListItem.DataSource = table_ListItem;
 
                 // Set up formart for Column
@@ -277,14 +301,15 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 dgvListItem.Columns[3].ReadOnly = false;  // Unit Price can modify
                 dgvListItem.Columns[4].ReadOnly = false;  // Discount can modify
                 dgvListItem.Columns[5].ReadOnly = false;  // Amount can modify
+                dgvListItem.Columns[6].ReadOnly = true;  // ID can not  modify
             }
-        }
 
-        
+            CalculateTotal();
+        }
 
         private void btnDeletePart_Click(object sender, EventArgs e)
         {
-            // Check Row.Count before 
+            // Check Row.Count before
             if (dgvListItem.SelectedRows.Count > 0)
             {
                 string notice = dgvListItem.CurrentRow.Cells[1].Value.ToString();
@@ -306,8 +331,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     MessageBox.Show("The List Item is EMPTY \n Please choose the items firstly. ");
                     return;
                 }
-
             }
+            CalculateTotal();
         }
 
         private void btnClearList_Click(object sender, EventArgs e)
@@ -325,9 +350,184 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 {
                     dgvListItem.Rows.Clear();
                 }
+                CalculateTotal();
             }
         }
 
         #endregion
+
+        private void btnCancelPO_Click(object sender, EventArgs e)
+        {
+            string notice = "Do you want to cancel about - [ Make the New Purchase Order ] ?";
+            DialogResult kp = MessageBox.Show(notice, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kp == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            else
+            { return; }
+        }
+
+        /// <summary>
+        /// [ External Method ] : Calculate and show in textbox "Total"
+        /// </summary>
+        private void CalculateTotal()
+        {
+            decimal total = 0;
+            decimal amount = 0;
+
+            try
+            {
+                foreach (DataGridViewRow row in dgvListItem.Rows.Cast<DataGridViewRow>())
+                {
+                    if (row.Cells["UnitPrice"].Value != null && row.Cells["Quantity"].Value != null)
+                    {
+                        bool isValidPrice = decimal.TryParse(row.Cells["UnitPrice"].Value?.ToString(), out decimal priceUnit);
+                        bool isValidQuantity = decimal.TryParse(row.Cells["Quantity"].Value?.ToString(), out decimal quantity);
+                        bool isValidDiscount = decimal.TryParse(row.Cells["Discount"]?.Value?.ToString(), out decimal discount);
+
+                        if (isValidPrice && isValidQuantity)
+                        {
+                            discount = isValidDiscount ? discount : 0; // Nếu discount không hợp lệ, đặt mặc định là 0
+                            amount = priceUnit * quantity * (1 - discount * 0.01m);
+                            row.Cells["Amount"].Value = amount;
+                            total += amount;
+                        }
+                    }
+                }
+
+                txtTotalVND.Text = total.ToString("N0"); // Hiển thị số có dấu phân cách
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Lỗi: {ex.Message}", "Thông báo lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void dgvListItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // Đảm bảo không phải hàng tiêu đề
+            {
+                CalculateTotal();
+            }
+        }
+
+        private void convertvnd2usd()
+        {
+            if (float.TryParse(txtTotalVND.Text, out float vndprice) && float.TryParse(txtRate.Text, out float rate) && rate != 0)
+            {
+                // Tính giá sang USD
+                float usdprice = vndprice / rate;
+
+                // Kiểm tra SelectedIndex trước khi sử dụng
+                if (CboTolerance.SelectedIndex >= 0)
+                {
+                    string tolerance = @"N" + (CboTolerance.SelectedIndex + 1).ToString();
+                    txtTotalUSD.Text = usdprice.ToString(tolerance);
+                }
+                else
+                {
+                    txtTotalUSD.Text = usdprice.ToString("N2"); // Mặc định làm tròn 2 chữ số thập phân nếu chưa chọn độ chính xác
+                }
+            }
+            else
+            {
+                txtTotalUSD.Text = "0"; // Hoặc để trống tùy theo yêu cầu
+            }
+        }
+
+        private void CboTolerance_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            convertvnd2usd();
+        }
+
+        private void txtTotalVND_TextChanged(object sender, EventArgs e)
+        {
+            convertvnd2usd();
+        }
+
+        private void txtRate_TextChanged(object sender, EventArgs e)
+        {
+            convertvnd2usd();
+        }
+
+        /// <summary>
+        /// [ METHOD ] : Convert DataGridView =>  JSON File
+        /// </summary>
+        /// <param name="dataGridView"></param>
+        /// <returns></returns>
+        private string ConvertDataGridViewToJson(DataGridView dataGridView)
+        {
+            var rows = new List<Dictionary<string, object>>();
+
+            // Iterate through each row in the DataGridView
+            foreach (DataGridViewRow row in dataGridView.Rows)
+            {
+                if (!row.IsNewRow) // Skip the new row placeholder
+                {
+                    var rowData = new Dictionary<string, object>();
+
+                    // Iterate through each cell in the row
+                    //foreach (DataGridViewCell cell in row.Cells)
+                    //{
+                    //    string columnName = dataGridView.Columns[cell.ColumnIndex].HeaderText;
+                    //    rowData[columnName] = cell.Value;
+                    //}
+
+                    rowData["C"] = row.Cells[6].Value;
+                    rowData["Q"] = row.Cells[2].Value;
+                    rowData["P"] = row.Cells[3].Value;
+                    rowData["D"] = row.Cells[4].Value;
+
+                    rows.Add(rowData);
+                }
+            }
+
+            // Serialize the list of dictionaries to JSON
+            return JsonConvert.SerializeObject(rows, Formatting.Indented);
+        }
+
+        private void btnSavePO_Click(object sender, EventArgs e)
+        {
+            //  Check : Do "dgvListItem" have data ?
+            if (dgvListItem.Rows.Count == 0) { return; }
+
+            // Check : Are "txtTotalVN" is number ?
+            if (decimal.TryParse(txtTotalVND.Text, out decimal number) == false) { return; }
+
+            // Nếu OK mới có JsonFile
+
+            DialogResult savedlg = MessageBox.Show("Do you want to save new PO", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (savedlg == DialogResult.Yes)
+            {
+                string jsonfile = ConvertDataGridViewToJson(dgvListItem);
+                string POPartlist = jsonfile.Replace("\r", "").Replace("\n  ", "");
+                POPartlist = POPartlist.Replace("  ", " ");
+                //string POPartlist = Regex.Replace(jsonfile, @"\s+", " ");
+                string POnote = "+)" + txtPaymentTerms.Text + "\n" + "+)" + txtRemark.Text;
+
+                if (_purchasebll.InsertNewPOBLL(txtPONo.Text, txtOrderDate.Text, txtStaffName.Text, POPartlist, decimal.Parse(txtTotalVND.Text), POnote, Convert.ToInt32(txtSupplierID.Text)) == true)
+                {
+                    string notice = "Success to make the new Purchase Order";
+                    MessageBox.Show(notice);
+                    IdentityPONO();
+                }
+                else
+                {
+                    string notice = "Have the error when make the new purchase order \n Please confirm data again ";
+                    MessageBox.Show(notice, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                };
+            }
+            else { return; }
+        }
+
+        private void IdentityPONO()
+        {
+            string PO_no;
+            DateTime today = DateTime.Now.Date;
+            PO_no = txtPONo.Text.Substring(11);
+            PO_no = today.Date.ToString("yyyy-MM-dd") + "/" + (Convert.ToInt32(PO_no) + 1).ToString("D3");
+            txtPONo.Text = PO_no;
+        }
     }
 }

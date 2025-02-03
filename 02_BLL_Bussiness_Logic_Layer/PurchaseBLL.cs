@@ -43,7 +43,10 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return makeNewPODAL_.FindwithwordDAL(KeySearch); 
         }
-
+        public bool InsertNewPOBLL(string POCode, string PODate, string PONhanVien, string POPartlist, decimal POAmount, string PONote, int POSupplierID)
+        {
+              return makeNewPODAL_.InsertNewPODAL(POCode, PODate, PONhanVien, POPartlist, POAmount, PONote, POSupplierID);
+        }
 
     }
 }

@@ -31,13 +31,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMakePO));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnPreview = new System.Windows.Forms.Button();
             this.btnClearList = new System.Windows.Forms.Button();
             this.btnDeletePart = new System.Windows.Forms.Button();
             this.cboSupplierName = new System.Windows.Forms.ComboBox();
             this.btnAddItems = new System.Windows.Forms.Button();
             this.txtSupplierPhone = new System.Windows.Forms.TextBox();
             this.txtSupplierTax = new System.Windows.Forms.TextBox();
+            this.btnExportPO = new System.Windows.Forms.Button();
             this.txtSupplierID = new System.Windows.Forms.TextBox();
+            this.btnSavePO = new System.Windows.Forms.Button();
             this.txtPaymentTerms = new System.Windows.Forms.TextBox();
             this.txtCompanyLocation = new System.Windows.Forms.TextBox();
             this.txtSupplierLocation = new System.Windows.Forms.TextBox();
@@ -58,6 +61,7 @@
             this.dgvListTimKiem = new System.Windows.Forms.DataGridView();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.dgvListItem = new System.Windows.Forms.DataGridView();
+            this.CboTolerance = new System.Windows.Forms.ComboBox();
             this.txtRate = new System.Windows.Forms.TextBox();
             this.txtTotalVND = new System.Windows.Forms.TextBox();
             this.txtRemark = new System.Windows.Forms.TextBox();
@@ -69,16 +73,14 @@
             this.label18 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.PanelInfor = new System.Windows.Forms.Panel();
-            this.btnPreview = new System.Windows.Forms.Button();
+            this.BtnManageSupplier = new System.Windows.Forms.Button();
             this.btnOldPO = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.btnHelp = new System.Windows.Forms.Button();
             this.btnViewNearPO = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtStaffName = new System.Windows.Forms.TextBox();
-            this.btnSavePO = new System.Windows.Forms.Button();
             this.btnCancelPO = new System.Windows.Forms.Button();
-            this.btnExportPO = new System.Windows.Forms.Button();
             this.txtKeySearch = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
             this.txtStaffPosition = new System.Windows.Forms.TextBox();
@@ -120,13 +122,16 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel1.Controls.Add(this.btnPreview);
             this.panel1.Controls.Add(this.btnClearList);
             this.panel1.Controls.Add(this.btnDeletePart);
             this.panel1.Controls.Add(this.cboSupplierName);
             this.panel1.Controls.Add(this.btnAddItems);
             this.panel1.Controls.Add(this.txtSupplierPhone);
             this.panel1.Controls.Add(this.txtSupplierTax);
+            this.panel1.Controls.Add(this.btnExportPO);
             this.panel1.Controls.Add(this.txtSupplierID);
+            this.panel1.Controls.Add(this.btnSavePO);
             this.panel1.Controls.Add(this.txtPaymentTerms);
             this.panel1.Controls.Add(this.txtCompanyLocation);
             this.panel1.Controls.Add(this.txtSupplierLocation);
@@ -150,12 +155,24 @@
             this.panel1.Size = new System.Drawing.Size(647, 233);
             this.panel1.TabIndex = 0;
             // 
+            // btnPreview
+            // 
+            this.btnPreview.Image = ((System.Drawing.Image)(resources.GetObject("btnPreview.Image")));
+            this.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnPreview.Location = new System.Drawing.Point(349, 193);
+            this.btnPreview.Name = "btnPreview";
+            this.btnPreview.Size = new System.Drawing.Size(80, 29);
+            this.btnPreview.TabIndex = 3;
+            this.btnPreview.Text = "Preview";
+            this.btnPreview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPreview.UseVisualStyleBackColor = true;
+            // 
             // btnClearList
             // 
             this.btnClearList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnClearList.Image = ((System.Drawing.Image)(resources.GetObject("btnClearList.Image")));
             this.btnClearList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClearList.Location = new System.Drawing.Point(310, 195);
+            this.btnClearList.Location = new System.Drawing.Point(259, 193);
             this.btnClearList.Name = "btnClearList";
             this.btnClearList.Size = new System.Drawing.Size(82, 29);
             this.btnClearList.TabIndex = 4;
@@ -169,7 +186,7 @@
             this.btnDeletePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnDeletePart.Image = ((System.Drawing.Image)(resources.GetObject("btnDeletePart.Image")));
             this.btnDeletePart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDeletePart.Location = new System.Drawing.Point(183, 195);
+            this.btnDeletePart.Location = new System.Drawing.Point(159, 193);
             this.btnDeletePart.Name = "btnDeletePart";
             this.btnDeletePart.Size = new System.Drawing.Size(92, 29);
             this.btnDeletePart.TabIndex = 4;
@@ -181,7 +198,7 @@
             // cboSupplierName
             // 
             this.cboSupplierName.FormattingEnabled = true;
-            this.cboSupplierName.Location = new System.Drawing.Point(351, 45);
+            this.cboSupplierName.Location = new System.Drawing.Point(351, 37);
             this.cboSupplierName.Name = "cboSupplierName";
             this.cboSupplierName.Size = new System.Drawing.Size(141, 23);
             this.cboSupplierName.TabIndex = 3;
@@ -192,7 +209,7 @@
             this.btnAddItems.BackColor = System.Drawing.Color.Olive;
             this.btnAddItems.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItems.Image")));
             this.btnAddItems.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddItems.Location = new System.Drawing.Point(7, 195);
+            this.btnAddItems.Location = new System.Drawing.Point(10, 193);
             this.btnAddItems.Name = "btnAddItems";
             this.btnAddItems.Size = new System.Drawing.Size(141, 29);
             this.btnAddItems.TabIndex = 3;
@@ -203,40 +220,65 @@
             // 
             // txtSupplierPhone
             // 
-            this.txtSupplierPhone.Location = new System.Drawing.Point(351, 119);
+            this.txtSupplierPhone.Location = new System.Drawing.Point(351, 110);
             this.txtSupplierPhone.Name = "txtSupplierPhone";
             this.txtSupplierPhone.Size = new System.Drawing.Size(141, 23);
             this.txtSupplierPhone.TabIndex = 2;
             // 
             // txtSupplierTax
             // 
-            this.txtSupplierTax.Location = new System.Drawing.Point(538, 120);
+            this.txtSupplierTax.Location = new System.Drawing.Point(538, 111);
             this.txtSupplierTax.Name = "txtSupplierTax";
             this.txtSupplierTax.ReadOnly = true;
             this.txtSupplierTax.Size = new System.Drawing.Size(85, 23);
             this.txtSupplierTax.TabIndex = 2;
             // 
+            // btnExportPO
+            // 
+            this.btnExportPO.Image = ((System.Drawing.Image)(resources.GetObject("btnExportPO.Image")));
+            this.btnExportPO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnExportPO.Location = new System.Drawing.Point(437, 193);
+            this.btnExportPO.Name = "btnExportPO";
+            this.btnExportPO.Size = new System.Drawing.Size(89, 29);
+            this.btnExportPO.TabIndex = 5;
+            this.btnExportPO.Text = "Export PO";
+            this.btnExportPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportPO.UseVisualStyleBackColor = true;
+            // 
             // txtSupplierID
             // 
-            this.txtSupplierID.Location = new System.Drawing.Point(565, 45);
+            this.txtSupplierID.Location = new System.Drawing.Point(565, 37);
             this.txtSupplierID.Name = "txtSupplierID";
             this.txtSupplierID.ReadOnly = true;
             this.txtSupplierID.Size = new System.Drawing.Size(59, 23);
             this.txtSupplierID.TabIndex = 2;
             // 
+            // btnSavePO
+            // 
+            this.btnSavePO.Image = ((System.Drawing.Image)(resources.GetObject("btnSavePO.Image")));
+            this.btnSavePO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSavePO.Location = new System.Drawing.Point(534, 193);
+            this.btnSavePO.Name = "btnSavePO";
+            this.btnSavePO.Size = new System.Drawing.Size(89, 29);
+            this.btnSavePO.TabIndex = 5;
+            this.btnSavePO.Text = "Save PO";
+            this.btnSavePO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSavePO.UseVisualStyleBackColor = true;
+            this.btnSavePO.Click += new System.EventHandler(this.btnSavePO_Click);
+            // 
             // txtPaymentTerms
             // 
-            this.txtPaymentTerms.Location = new System.Drawing.Point(106, 151);
+            this.txtPaymentTerms.Location = new System.Drawing.Point(80, 140);
             this.txtPaymentTerms.Multiline = true;
             this.txtPaymentTerms.Name = "txtPaymentTerms";
             this.txtPaymentTerms.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPaymentTerms.Size = new System.Drawing.Size(518, 31);
+            this.txtPaymentTerms.Size = new System.Drawing.Size(544, 42);
             this.txtPaymentTerms.TabIndex = 2;
             this.txtPaymentTerms.Text = "90 days payment after T/T Base on";
             // 
             // txtCompanyLocation
             // 
-            this.txtCompanyLocation.Location = new System.Drawing.Point(10, 77);
+            this.txtCompanyLocation.Location = new System.Drawing.Point(10, 69);
             this.txtCompanyLocation.Multiline = true;
             this.txtCompanyLocation.Name = "txtCompanyLocation";
             this.txtCompanyLocation.ReadOnly = true;
@@ -246,7 +288,7 @@
             // 
             // txtSupplierLocation
             // 
-            this.txtSupplierLocation.Location = new System.Drawing.Point(351, 77);
+            this.txtSupplierLocation.Location = new System.Drawing.Point(351, 69);
             this.txtSupplierLocation.Multiline = true;
             this.txtSupplierLocation.Name = "txtSupplierLocation";
             this.txtSupplierLocation.ScrollBars = System.Windows.Forms.ScrollBars.Both;
@@ -255,7 +297,7 @@
             // 
             // txtCompanyPhone
             // 
-            this.txtCompanyPhone.Location = new System.Drawing.Point(80, 119);
+            this.txtCompanyPhone.Location = new System.Drawing.Point(80, 110);
             this.txtCompanyPhone.Name = "txtCompanyPhone";
             this.txtCompanyPhone.ReadOnly = true;
             this.txtCompanyPhone.Size = new System.Drawing.Size(183, 23);
@@ -263,7 +305,7 @@
             // 
             // txtCompanyName
             // 
-            this.txtCompanyName.Location = new System.Drawing.Point(10, 45);
+            this.txtCompanyName.Location = new System.Drawing.Point(10, 37);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.ReadOnly = true;
             this.txtCompanyName.Size = new System.Drawing.Size(253, 23);
@@ -297,7 +339,7 @@
             // label20
             // 
             this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(495, 123);
+            this.label20.Location = new System.Drawing.Point(495, 114);
             this.label20.Name = "label20";
             this.label20.Size = new System.Drawing.Size(43, 15);
             this.label20.TabIndex = 1;
@@ -306,7 +348,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(498, 49);
+            this.label10.Location = new System.Drawing.Point(498, 41);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(64, 15);
             this.label10.TabIndex = 1;
@@ -315,7 +357,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(7, 123);
+            this.label4.Location = new System.Drawing.Point(7, 114);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(70, 15);
             this.label4.TabIndex = 1;
@@ -324,7 +366,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(270, 123);
+            this.label9.Location = new System.Drawing.Point(270, 114);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(73, 15);
             this.label9.TabIndex = 1;
@@ -334,16 +376,17 @@
             // 
             this.label11.AutoSize = true;
             this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.Location = new System.Drawing.Point(7, 159);
+            this.label11.Location = new System.Drawing.Point(7, 146);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(88, 15);
+            this.label11.Size = new System.Drawing.Size(54, 30);
             this.label11.TabIndex = 1;
-            this.label11.Text = "Payment Terms";
+            this.label11.Text = "Payment\r\nTerms";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(280, 78);
+            this.label8.Location = new System.Drawing.Point(280, 70);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(53, 30);
             this.label8.TabIndex = 1;
@@ -352,7 +395,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(264, 49);
+            this.label7.Location = new System.Drawing.Point(264, 41);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(85, 15);
             this.label7.TabIndex = 1;
@@ -405,6 +448,7 @@
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.splitContainer1.Panel2.Controls.Add(this.CboTolerance);
             this.splitContainer1.Panel2.Controls.Add(this.txtRate);
             this.splitContainer1.Panel2.Controls.Add(this.txtTotalVND);
             this.splitContainer1.Panel2.Controls.Add(this.txtRemark);
@@ -428,20 +472,38 @@
             this.dgvListItem.RowTemplate.Height = 23;
             this.dgvListItem.Size = new System.Drawing.Size(647, 277);
             this.dgvListItem.TabIndex = 0;
+            this.dgvListItem.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListItem_CellValueChanged);
+            // 
+            // CboTolerance
+            // 
+            this.CboTolerance.FormattingEnabled = true;
+            this.CboTolerance.Items.AddRange(new object[] {
+            "0.0",
+            "0.00",
+            "0.000"});
+            this.CboTolerance.Location = new System.Drawing.Point(407, 44);
+            this.CboTolerance.Name = "CboTolerance";
+            this.CboTolerance.Size = new System.Drawing.Size(44, 23);
+            this.CboTolerance.TabIndex = 2;
+            this.CboTolerance.SelectedIndexChanged += new System.EventHandler(this.CboTolerance_SelectedIndexChanged);
             // 
             // txtRate
             // 
-            this.txtRate.Location = new System.Drawing.Point(457, 80);
+            this.txtRate.Location = new System.Drawing.Point(464, 80);
             this.txtRate.Name = "txtRate";
             this.txtRate.Size = new System.Drawing.Size(102, 23);
             this.txtRate.TabIndex = 1;
+            this.txtRate.Text = "25000";
+            this.txtRate.TextChanged += new System.EventHandler(this.txtRate_TextChanged);
             // 
             // txtTotalVND
             // 
-            this.txtTotalVND.Location = new System.Drawing.Point(457, 44);
+            this.txtTotalVND.Location = new System.Drawing.Point(464, 8);
             this.txtTotalVND.Name = "txtTotalVND";
+            this.txtTotalVND.ReadOnly = true;
             this.txtTotalVND.Size = new System.Drawing.Size(127, 23);
             this.txtTotalVND.TabIndex = 1;
+            this.txtTotalVND.TextChanged += new System.EventHandler(this.txtTotalVND_TextChanged);
             // 
             // txtRemark
             // 
@@ -453,24 +515,25 @@
             // 
             // txtTotalUSD
             // 
-            this.txtTotalUSD.Location = new System.Drawing.Point(457, 8);
+            this.txtTotalUSD.Location = new System.Drawing.Point(464, 44);
             this.txtTotalUSD.Name = "txtTotalUSD";
+            this.txtTotalUSD.ReadOnly = true;
             this.txtTotalUSD.Size = new System.Drawing.Size(127, 23);
             this.txtTotalUSD.TabIndex = 1;
             // 
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(561, 84);
+            this.label19.Location = new System.Drawing.Point(568, 84);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(66, 15);
             this.label19.TabIndex = 0;
-            this.label19.Text = "(USD/VND)";
+            this.label19.Text = "(VND/USD)";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(588, 48);
+            this.label16.Location = new System.Drawing.Point(595, 12);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(39, 15);
             this.label16.TabIndex = 0;
@@ -479,7 +542,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(590, 12);
+            this.label15.Location = new System.Drawing.Point(597, 48);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(37, 15);
             this.label15.TabIndex = 0;
@@ -516,16 +579,14 @@
             // 
             this.PanelInfor.AutoScroll = true;
             this.PanelInfor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.PanelInfor.Controls.Add(this.btnPreview);
+            this.PanelInfor.Controls.Add(this.BtnManageSupplier);
             this.PanelInfor.Controls.Add(this.btnOldPO);
             this.PanelInfor.Controls.Add(this.btnSearch);
             this.PanelInfor.Controls.Add(this.btnHelp);
             this.PanelInfor.Controls.Add(this.btnViewNearPO);
             this.PanelInfor.Controls.Add(this.label5);
             this.PanelInfor.Controls.Add(this.txtStaffName);
-            this.PanelInfor.Controls.Add(this.btnSavePO);
             this.PanelInfor.Controls.Add(this.btnCancelPO);
-            this.PanelInfor.Controls.Add(this.btnExportPO);
             this.PanelInfor.Controls.Add(this.txtKeySearch);
             this.PanelInfor.Controls.Add(this.label12);
             this.PanelInfor.Controls.Add(this.txtStaffPosition);
@@ -538,17 +599,14 @@
             this.PanelInfor.Size = new System.Drawing.Size(308, 233);
             this.PanelInfor.TabIndex = 0;
             // 
-            // btnPreview
+            // BtnManageSupplier
             // 
-            this.btnPreview.Image = ((System.Drawing.Image)(resources.GetObject("btnPreview.Image")));
-            this.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPreview.Location = new System.Drawing.Point(9, 193);
-            this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(80, 29);
-            this.btnPreview.TabIndex = 3;
-            this.btnPreview.Text = "Preview";
-            this.btnPreview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPreview.UseVisualStyleBackColor = true;
+            this.BtnManageSupplier.Location = new System.Drawing.Point(107, 170);
+            this.BtnManageSupplier.Name = "BtnManageSupplier";
+            this.BtnManageSupplier.Size = new System.Drawing.Size(109, 29);
+            this.BtnManageSupplier.TabIndex = 6;
+            this.BtnManageSupplier.Text = "Manage Supplier";
+            this.BtnManageSupplier.UseVisualStyleBackColor = true;
             // 
             // btnOldPO
             // 
@@ -610,48 +668,25 @@
             this.txtStaffName.Size = new System.Drawing.Size(163, 23);
             this.txtStaffName.TabIndex = 0;
             // 
-            // btnSavePO
-            // 
-            this.btnSavePO.Image = ((System.Drawing.Image)(resources.GetObject("btnSavePO.Image")));
-            this.btnSavePO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSavePO.Location = new System.Drawing.Point(191, 153);
-            this.btnSavePO.Name = "btnSavePO";
-            this.btnSavePO.Size = new System.Drawing.Size(89, 29);
-            this.btnSavePO.TabIndex = 5;
-            this.btnSavePO.Text = "Save PO";
-            this.btnSavePO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSavePO.UseVisualStyleBackColor = true;
-            // 
             // btnCancelPO
             // 
             this.btnCancelPO.Image = ((System.Drawing.Image)(resources.GetObject("btnCancelPO.Image")));
             this.btnCancelPO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnCancelPO.Location = new System.Drawing.Point(100, 153);
+            this.btnCancelPO.Location = new System.Drawing.Point(12, 170);
             this.btnCancelPO.Name = "btnCancelPO";
             this.btnCancelPO.Size = new System.Drawing.Size(89, 29);
             this.btnCancelPO.TabIndex = 5;
             this.btnCancelPO.Text = "Cancel PO";
             this.btnCancelPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnCancelPO.UseVisualStyleBackColor = true;
-            // 
-            // btnExportPO
-            // 
-            this.btnExportPO.Image = ((System.Drawing.Image)(resources.GetObject("btnExportPO.Image")));
-            this.btnExportPO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportPO.Location = new System.Drawing.Point(9, 153);
-            this.btnExportPO.Name = "btnExportPO";
-            this.btnExportPO.Size = new System.Drawing.Size(89, 29);
-            this.btnExportPO.TabIndex = 5;
-            this.btnExportPO.Text = "Export PO";
-            this.btnExportPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExportPO.UseVisualStyleBackColor = true;
+            this.btnCancelPO.Click += new System.EventHandler(this.btnCancelPO_Click);
             // 
             // txtKeySearch
             // 
             this.txtKeySearch.Location = new System.Drawing.Point(49, 116);
             this.txtKeySearch.Name = "txtKeySearch";
             this.txtKeySearch.Size = new System.Drawing.Size(179, 23);
-            this.txtKeySearch.TabIndex = 1;
+            this.txtKeySearch.TabIndex = 0;
             this.txtKeySearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyDown);
             // 
             // label12
@@ -786,5 +821,7 @@
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.Button btnClearList;
         private System.Windows.Forms.Button btnDeletePart;
+        private System.Windows.Forms.Button BtnManageSupplier;
+        private System.Windows.Forms.ComboBox CboTolerance;
     }
 }

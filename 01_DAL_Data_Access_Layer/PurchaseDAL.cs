@@ -111,7 +111,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string sql_query = @"
-                       select top 1 tblPO.PODate, tblPO.POCode  from tblPO order by PODate desc  ";
+                       select top 1 tblPO.PODate, tblPO.POCode  from tblPO order by PODate desc , POCode desc ";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
 
@@ -126,6 +126,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         POCode = reader[1].ToString()
                     };
                 }
+                
 
                 conn.Close();
             }
@@ -207,8 +208,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         public DataTable FindwithwordDAL(string KeySearch)
         {
 
-            //  select p.PartCode, p.PartName, p.PartDescript, p.PartStage, p.PartPrice, p.PartLog, p.PartFile from tblPart as p  where PartName like '%BA%'
-            //  Or PartCode like '%BA%' or PartDescript like '%BA%'
+            
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
@@ -216,7 +216,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         SELECT 
                             p.PartCode, 
                             p.PartName,
-                            p.PartPrice
+                            p.PartPrice,
+                            p.PartID
                             
                         FROM 
                             tblPart AS p  
@@ -233,6 +234,62 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 adap.Fill(BangDuLieu);
             }
             return BangDuLieu;
+        }
+
+
+        /// 03. INSERT - Insert 1 new PO to the tblPO
+        /// <param name="PartFamily"></param>
+        /// <param name="PartName"></param>
+        /// <param name="PartDescript"></param>
+        /// <returns></returns>
+        public bool InsertNewPODAL(string POCode, string PODate, string PONhanVien, string POPartlist, decimal POAmount, string PONote, int POSupplierID)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                // Mở kết nối
+                con.Open();
+                string POStatus = "Created";
+                string POLog = POStatus + " " + PODate;
+
+                // Tạo một giao dịch (Transaction) C#
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    string sql_query = @"insert tblPO(POCode, PODate, PONhanVien, POPartlist, POAmount, PONote, POStatus, POLog, POSupplierID )
+                             VALUES (@POCode, @PODate, @PONhanvien, @POPartlist, @POAmount, @PONote , @POStatus, @POLog, @POSupplierID );";
+
+                    SqlCommand cmd = new SqlCommand(sql_query, con, transaction);
+
+                    // Sử dụng Add với kiểu dữ liệu cụ thể thay vì AddWithValue
+                    cmd.Parameters.Add("@POCode", SqlDbType.NVarChar).Value = POCode;
+                    cmd.Parameters.Add("@PODate", SqlDbType.NVarChar).Value = PODate;
+                    cmd.Parameters.Add("@PONhanvien", SqlDbType.NVarChar).Value = PONhanVien;
+                    cmd.Parameters.Add("@POPartlist", SqlDbType.NVarChar).Value = POPartlist;
+                    cmd.Parameters.Add("@POAmount", SqlDbType.Decimal).Value = POAmount;
+                    cmd.Parameters.Add("@PONote", SqlDbType.NVarChar).Value = PONote;
+                    cmd.Parameters.Add("@POStatus", SqlDbType.NVarChar).Value = POStatus;
+                    cmd.Parameters.Add("@POLog", SqlDbType.NVarChar).Value = POLog;
+                    cmd.Parameters.Add("@POSupplierID", SqlDbType.Int).Value = POSupplierID;
+
+
+
+                    try
+                    {
+                        // Thực thi lệnh SQL
+                        int result = cmd.ExecuteNonQuery();
+
+                        // Nếu không có lỗi, xác nhận (Commit) giao dịch
+                        transaction.Commit();
+                        return true; // Trả về true nếu thêm thành công
+                    }
+                    catch (Exception ex)
+                    {
+                        // Khôi phục lại giao dịch khi có lỗi
+                        transaction.Rollback();
+                        Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
         }
     }
 }

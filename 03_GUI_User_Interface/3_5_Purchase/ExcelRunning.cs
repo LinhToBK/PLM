@@ -124,6 +124,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["A5:E5"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["A5:E5"].Value = _companyName;
                     rgn.Range["A5:E5"].Font.Bold = true;
+                    rgn.Range["A5:E5"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     // 5) Company Location 
@@ -131,6 +132,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["A6:E6"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["A6:E6"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["A6:E6"].Value = _companyLocation;
+                    
 
 
                     // 6) Company Telephone
@@ -155,6 +157,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["F5:J5"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["F5:J5"].Value = _supplierName;
                     rgn.Range["F5:J5"].Font.Bold = true;
+                    rgn.Range["F5:J5"].BorderAround2 (Excel.XlLineStyle.xlContinuous);
+
 
 
                     // 9) Supplier=> Location 

@@ -36,8 +36,7 @@ namespace PLM_Lynx.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F:\\02. OnedriveFolder\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\07. PLM Lynx Code\\PL" +
-            "M_Lynx\\05_DataBase\\DSGLDataPart\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Z:\\11.Technique\\LINH\\FolderDocument\\DSGLDataPart\\")]
         public string LinkDataPart {
             get {
                 return ((string)(this["LinkDataPart"]));
@@ -46,8 +45,7 @@ namespace PLM_Lynx.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("F:\\02. OnedriveFolder\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\07. PLM Lynx Code\\PL" +
-            "M_Lynx\\05_DataBase\\DSGLTraskPart\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Z:\\11.Technique\\LINH\\FolderDocument\\DSGLTraskPart\\")]
         public string TrashDataPart {
             get {
                 return ((string)(this["TrashDataPart"]));
@@ -69,6 +67,16 @@ namespace PLM_Lynx.Properties {
         public string eDrawingView {
             get {
                 return ((string)(this["eDrawingView"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("F:\\02. OnedriveFolder\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\07. PLM Lynx Code\\PL" +
+            "M_Lynx\\04_Image\\ABC.jpg")]
+        public string ABCCoLtd {
+            get {
+                return ((string)(this["ABCCoLtd"]));
             }
         }
     }

@@ -44,6 +44,7 @@ namespace PLM_Lynx
             }
 
             frmFindPart frm = new frmFindPart();
+           
             frm.MdiParent = this;
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();

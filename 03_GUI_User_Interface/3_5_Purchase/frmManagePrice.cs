@@ -1,15 +1,7 @@
 ﻿using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Runtime.CompilerServices.RuntimeHelpers;
-using System.Xml.Linq;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 {
@@ -33,22 +25,28 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         // =================================================================
         public void LoadDataFindPart(string keysearch)
         {
+
+            //0-p.PartCode,  
+            //1-p.PartName,    
+            //2-p.PartDescript,    
+            //3-p.PartStage,           
+            //4-p.PartID,                          
+            //5-p.PartPrice
             DulieuTimKiem = commonBLL.FindwithworBLL(keysearch);
             dgvListTimKiem.DataSource = DulieuTimKiem;
             dgvListTimKiem.Columns[0].Width = 80; // PartCode
             dgvListTimKiem.Columns[1].Width = 200; // PartName
-            //dgvListTimKiem.Columns[2].Width = 10; // PartDescript
+            
             dgvListTimKiem.Columns[3].Width = 50; // PartStage
-            dgvListTimKiem.Columns[4].Width = 50; // PartPrice
-            //dgvSearch.Columns[5].Width = 100; // PartLog
-            //dgvSearch.Columns[6].Width = 100; // Partfile
+            dgvListTimKiem.Columns[5].Width = 50; // PartPrice
+
             dgvListTimKiem.Columns[0].HeaderText = "PartCode";
             dgvListTimKiem.Columns[1].HeaderText = "PartName";
             dgvListTimKiem.Columns[2].Visible = false; //  "Description";
             dgvListTimKiem.Columns[3].HeaderText = "Stage";
-            dgvListTimKiem.Columns[4].HeaderText = "Price";
-            dgvListTimKiem.Columns[5].Visible = false; //  = "Log";
-            dgvListTimKiem.Columns[6].Visible = false; // "LinkFile";
+            dgvListTimKiem.Columns[4].Visible = false;
+            dgvListTimKiem.Columns[5].HeaderText = "Price";
+            
 
             dgvListTimKiem.AllowUserToAddRows = false;
             dgvListTimKiem.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -138,7 +136,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         {
             DialogResult kq = MessageBox.Show("Bạn muốn sửa giá của Part không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
-            {          
+            {
                 if (rdioVND.Checked == true)
                 {
                     txtPartPrice.Enabled = true;
@@ -236,11 +234,17 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             // Mỗi khi lên xuống bất kỳ 1 dòng nào thì giá trị sẽ tự động được thay đổi
             if (dgvListTimKiem.CurrentRow != null)
             {
+                //            p.PartCode,
+                //            p.PartName,
+                //            p.PartDescript,
+                //            p.PartStage,
+                //            p.PartID,
+                //            p.PartPrice
                 txtPartCode.Text = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();  // Code
                 txtPartName.Text = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();  // Name
-                txtPartName.Text = dgvListTimKiem.CurrentRow.Cells[2].Value.ToString();  // Descript
-                txtPartName.Text = dgvListTimKiem.CurrentRow.Cells[3].Value.ToString();  // Stage
-                txtPartPrice.Text = dgvListTimKiem.CurrentRow.Cells[4].Value.ToString();   // Price
+                txtDescript.Text = dgvListTimKiem.CurrentRow.Cells[2].Value.ToString();  // Descript
+                txtPartStage.Text = dgvListTimKiem.CurrentRow.Cells[3].Value.ToString();  // Stage
+                txtPartPrice.Text = dgvListTimKiem.CurrentRow.Cells[5].Value.ToString();   // Price
             }
         }
     }

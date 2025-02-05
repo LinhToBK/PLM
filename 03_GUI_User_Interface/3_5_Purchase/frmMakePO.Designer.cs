@@ -87,6 +87,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtStaffDept = new System.Windows.Forms.TextBox();
+            this.txtCompanyTaxCode = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListTimKiem)).BeginInit();
@@ -128,6 +129,7 @@
             this.panel1.Controls.Add(this.cboSupplierName);
             this.panel1.Controls.Add(this.btnAddItems);
             this.panel1.Controls.Add(this.txtSupplierPhone);
+            this.panel1.Controls.Add(this.txtCompanyTaxCode);
             this.panel1.Controls.Add(this.txtSupplierTax);
             this.panel1.Controls.Add(this.btnExportPO);
             this.panel1.Controls.Add(this.txtSupplierID);
@@ -166,6 +168,7 @@
             this.btnPreview.Text = "Preview";
             this.btnPreview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnPreview.UseVisualStyleBackColor = true;
+            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnClearList
             // 
@@ -244,6 +247,7 @@
             this.btnExportPO.Text = "Export PO";
             this.btnExportPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExportPO.UseVisualStyleBackColor = true;
+            this.btnExportPO.Click += new System.EventHandler(this.btnExportPO_Click);
             // 
             // txtSupplierID
             // 
@@ -297,10 +301,10 @@
             // 
             // txtCompanyPhone
             // 
-            this.txtCompanyPhone.Location = new System.Drawing.Point(80, 110);
+            this.txtCompanyPhone.Location = new System.Drawing.Point(71, 110);
             this.txtCompanyPhone.Name = "txtCompanyPhone";
             this.txtCompanyPhone.ReadOnly = true;
-            this.txtCompanyPhone.Size = new System.Drawing.Size(183, 23);
+            this.txtCompanyPhone.Size = new System.Drawing.Size(95, 23);
             this.txtCompanyPhone.TabIndex = 2;
             // 
             // txtCompanyName
@@ -512,6 +516,8 @@
             this.txtRemark.Name = "txtRemark";
             this.txtRemark.Size = new System.Drawing.Size(395, 55);
             this.txtRemark.TabIndex = 1;
+            this.txtRemark.Text = "1. Term and Condition : Under PO Contract\r\n2. Shipping Instruction\r\n3. Above unit" +
+    " price is not including VAT";
             // 
             // txtTotalUSD
             // 
@@ -734,6 +740,14 @@
             this.txtStaffDept.Size = new System.Drawing.Size(83, 23);
             this.txtStaffDept.TabIndex = 1;
             // 
+            // txtCompanyTaxCode
+            // 
+            this.txtCompanyTaxCode.Location = new System.Drawing.Point(178, 110);
+            this.txtCompanyTaxCode.Name = "txtCompanyTaxCode";
+            this.txtCompanyTaxCode.ReadOnly = true;
+            this.txtCompanyTaxCode.Size = new System.Drawing.Size(85, 23);
+            this.txtCompanyTaxCode.TabIndex = 2;
+            // 
             // frmMakePO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -823,5 +837,6 @@
         private System.Windows.Forms.Button btnDeletePart;
         private System.Windows.Forms.Button BtnManageSupplier;
         private System.Windows.Forms.ComboBox CboTolerance;
+        private System.Windows.Forms.TextBox txtCompanyTaxCode;
     }
 }

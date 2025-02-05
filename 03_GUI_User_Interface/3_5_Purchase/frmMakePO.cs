@@ -71,6 +71,15 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             {
                 txtCompanyLocation.Text = " Error !!! \n Cannot access the data";
             }
+            tblCommonInfor companytaxcode = _commonbll.GetCommonInforValue("CompanyTaxCode");
+            if (companytaxcode != null)
+            {
+                txtCompanyTaxCode.Text = companytaxcode.InforValue.ToString();
+            }
+            else
+            {
+                txtCompanyTaxCode.Text = " Error !!! \n Cannot access the data";
+            }
         }
 
         #endregion
@@ -528,6 +537,38 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             PO_no = txtPONo.Text.Substring(11);
             PO_no = today.Date.ToString("yyyy-MM-dd") + "/" + (Convert.ToInt32(PO_no) + 1).ToString("D3");
             txtPONo.Text = PO_no;
+        }
+
+        private void btnPreview_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnExportPO_Click(object sender, EventArgs e)
+        {
+            ExcelRunning _exportTemplate = new ExcelRunning();
+            _exportTemplate._orderPOno = txtPONo.Text.Replace("/", "_");
+            _exportTemplate._orderDate = txtOrderDate.Text;
+            // Company Information
+            _exportTemplate._companyName = txtCompanyName.Text;
+            _exportTemplate._companyLocation = txtCompanyLocation.Text;
+            _exportTemplate._companyTelephone = txtCompanyPhone.Text;
+            _exportTemplate._companyTaxcode = txtCompanyTaxCode.Text;
+            // Supplier Information
+            _exportTemplate._supplierName = cboSupplierName.SelectedItem.ToString();
+            _exportTemplate._supplierLocation = txtSupplierLocation.Text;
+            _exportTemplate._supplierTelephone = txtSupplierPhone.Text;
+            _exportTemplate._supplierTaxcode = txtSupplierTax.Text;
+            
+            // Remark
+            _exportTemplate._paymentterms = txtPaymentTerms.Text;
+            _exportTemplate._remark = txtRemark.Text;
+            _exportTemplate._purchasePerson = txtStaffName.Text;
+
+            // Partlist
+
+            
+            _exportTemplate.PurchaseTemplate_A();
         }
     }
 }

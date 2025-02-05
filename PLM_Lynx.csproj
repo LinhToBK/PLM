@@ -297,6 +297,7 @@
     <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\RelationPart_Detail_Info.Designer.cs">
       <DependentUpon>RelationPart_Detail_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\ExcelRunning.cs" />
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMakePO.cs">
       <SubType>Form</SubType>
     </Compile>

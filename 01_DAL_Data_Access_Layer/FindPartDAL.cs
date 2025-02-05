@@ -34,7 +34,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                             p.PartName, 
                             p.PartDescript, 
                             p.PartStage,
-                            p.PartID
+                            p.PartID,
+                            p.PartPrice
                            
                         FROM 
                             tblPart AS p  

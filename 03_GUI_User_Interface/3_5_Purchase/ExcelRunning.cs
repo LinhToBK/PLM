@@ -132,7 +132,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["A6:E6"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["A6:E6"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["A6:E6"].Value = _companyLocation;
-                    
+                    rgn.Range["A6:E6"].BorderAround2(Excel.XlLineStyle.xlContinuous);
+
 
 
                     // 6) Company Telephone
@@ -140,12 +141,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["A8:E8"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["A8:E8"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["A8:E8"].Value = @"Tel : " + _companyTelephone;
+                    rgn.Range["A8:E8"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
                     // 7) Company Tax Code
                     rgn.Range["A9:E9"].MergeCells = true;
                     rgn.Range["A9:E9"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["A9:E9"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["A9:E9"].Value = _companyTaxcode;
+                    rgn.Range["A9:E9"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     //-----------------------------------------
@@ -166,6 +169,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["F6:J6"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["F6:J6"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["F6:J6"].Value = _supplierLocation;
+                    rgn.Range["F6:J6"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     // 10) Supplier > Telephone
@@ -173,12 +177,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["F8:J8"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["F8:J8"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["F8:J8"].Value = @"Tel : " + _supplierTelephone;
+                    rgn.Range["F8:J8"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
                     // 11) Supplier =>Tax Code
                     rgn.Range["F9:J9"].MergeCells = true;
                     rgn.Range["F9:J9"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["F9:J9"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["F9:J9"].Value = _supplierTaxcode;
+                    rgn.Range["F9:J9"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     //-----------------------------------------
@@ -190,6 +196,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["K5:N5"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["K5:N5"].Value = @"SHIP TO / BILL TO";
                     rgn.Range["K5:N5"].Font.Bold = true;
+                    rgn.Range["K5:N5"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     // => To company
@@ -197,6 +204,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["K6:N6"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["K6:N6"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["K6:N6"].Value = _companyName;
+                    rgn.Range["K6:N6"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     // => to Location
@@ -204,18 +212,20 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["K7:N7"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["K7:N7"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["K7:N7"].Value = @"Tel : " + _companyLocation;
+                    rgn.Range["K7:N7"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
                     // 15) to Telephone
                     rgn.Range["K8:N8"].MergeCells = true;
                     rgn.Range["K8:N8"].HorizontalAlignment = Excel.XlHAlign.xlHAlignLeft;
                     rgn.Range["K8:N8"].VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     rgn.Range["K8:N8"].Value = _companyTelephone;
+                    rgn.Range["K8:N8"].BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     //-----------------------------------------
                     //=====> Fill  Term
                     //-----------------------------------------
-                    
+
                     var chooserange = rgn.Range["A11:A12"];
 
                     // Purchase Order
@@ -223,24 +233,28 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     chooserange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.Value = "Purchase \n Order";
+                    chooserange.BorderAround2(Excel.XlLineStyle.xlContinuous);
                     // Fill PO Number
                     chooserange = rgn.Range["B11:D12"];
                     chooserange.MergeCells = true;
                     chooserange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.Value = _orderPOno.Replace("_" ,"/");
+                    chooserange.BorderAround2(Excel.XlLineStyle.xlContinuous);
                     // Payment Terms
                     chooserange = rgn.Range["E11:E12"];
                     chooserange.MergeCells = true;
                     chooserange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.Value = "Payment \n Terms";
+                    chooserange.BorderAround2(Excel.XlLineStyle.xlContinuous);
                     // Fill Payment Terms
                     chooserange = rgn.Range["F11:N12"];
                     chooserange.MergeCells = true;
                     chooserange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.VerticalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.Value = _paymentterms ;
+                    chooserange.BorderAround2(Excel.XlLineStyle.xlContinuous);
 
 
                     // Fill Partlist

@@ -567,5 +567,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 _exportTemplate.PurchaseTemplate_A();
             }
         }
+
+        private void btnOldPO_Click(object sender, EventArgs e)
+        {
+            frmFindPO frm = new frmFindPO();
+            frm.ShowDialog();
+        }
     }
 }

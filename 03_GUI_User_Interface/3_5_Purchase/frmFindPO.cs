@@ -26,5 +26,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
             else return;
         }
+
+        private void BtnKeySearch_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Đây là đang search tài liệu ");
+        }
     }
 }

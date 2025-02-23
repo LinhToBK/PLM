@@ -126,15 +126,12 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         POCode = reader[1].ToString()
                     };
                 }
-                
 
                 conn.Close();
             }
 
             return _tblpo;
         }
-
-
 
         /// <summary>
         /// 03. SELECT - Get All Supplier Name
@@ -148,7 +145,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string sql_query = @"  select tblSupplier.SupName from tblSupplier";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
-
 
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
                 conn.Open();
@@ -196,34 +192,28 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
 
             return _tblsupplier;
-
         }
-
-
-
 
         /// 01. SELECT - Get "PartCode" and "PartName" with keysearch
         /// <param name="KeySearch"></param>
         /// <returns> Bảng chứa danh sách các Part Chứa từ khóa đó
         public DataTable FindwithwordDAL(string KeySearch)
         {
-
-            
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string sql_query = @"
-                        SELECT 
-                            p.PartCode, 
+                        SELECT
+                            p.PartCode,
                             p.PartName,
                             p.PartPrice,
                             p.PartID
-                            
-                        FROM 
-                            tblPart AS p  
-                        WHERE 
-                            p.PartName LIKE '%' + @KeySearch + '%' 
-                            OR p.PartCode LIKE '%' + @KeySearch + '%' 
+
+                        FROM
+                            tblPart AS p
+                        WHERE
+                            p.PartName LIKE '%' + @KeySearch + '%'
+                            OR p.PartCode LIKE '%' + @KeySearch + '%'
                             OR p.PartDescript LIKE '%' + @KeySearch + '%'";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
@@ -235,7 +225,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
             return BangDuLieu;
         }
-
 
         /// 03. INSERT - Insert 1 new PO to the tblPO
         /// <param name="PartFamily"></param>
@@ -269,8 +258,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     cmd.Parameters.Add("@POStatus", SqlDbType.NVarChar).Value = POStatus;
                     cmd.Parameters.Add("@POLog", SqlDbType.NVarChar).Value = POLog;
                     cmd.Parameters.Add("@POSupplierID", SqlDbType.Int).Value = POSupplierID;
-
-
 
                     try
                     {

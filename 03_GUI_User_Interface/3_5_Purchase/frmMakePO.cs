@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 {
@@ -100,20 +99,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             throw new NotImplementedException();
         }
 
-        private void InitialTableListItem()
-        {
-            // ---> Create DataTable ListItem
-            //table_ListItem.Columns.Add("PartCode", typeof(string));
-            //table_ListItem.Columns.Add("PartName", typeof(string));
-            //table_ListItem.Columns.Add("Quantity", typeof(int));
-            //table_ListItem.Columns.Add("UnitPrice", typeof(int));
-            //table_ListItem.Columns.Add("Discount", typeof(int));
-            //table_ListItem.Columns.Add("Amount", typeof(decimal));
-        }
-
         private void frmMakePO_Load(object sender, EventArgs e)
         {
             // ---> Load  information of users
+            txtKeySearch.Focus();
             txtStaffName.Text = _usercurrent;
             tblUsers _user_data = _purchasebll.GetUserInfor(_usercurrent);
             txtStaffDept.Text = _user_data.DepartmentName;
@@ -541,34 +530,42 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void btnExportPO_Click(object sender, EventArgs e)
         {
-            ExcelRunning _exportTemplate = new ExcelRunning();
-            _exportTemplate._orderPOno = txtPONo.Text.Replace("/", "_");
-            _exportTemplate._orderDate = txtOrderDate.Text;
-            // Company Information
-            _exportTemplate._companyName = txtCompanyName.Text;
-            _exportTemplate._companyLocation = txtCompanyLocation.Text;
-            _exportTemplate._companyTelephone = txtCompanyPhone.Text;
-            _exportTemplate._companyTaxcode = txtCompanyTaxCode.Text;
-            // Supplier Information
-            _exportTemplate._supplierName = cboSupplierName.SelectedItem.ToString();
-            _exportTemplate._supplierLocation = txtSupplierLocation.Text;
-            _exportTemplate._supplierTelephone = txtSupplierPhone.Text;
-            _exportTemplate._supplierTaxcode = txtSupplierTax.Text;
-            
-            // Remark
-            _exportTemplate._paymentterms = txtPaymentTerms.Text;
-            _exportTemplate._remark = txtRemark.Text;
-            _exportTemplate._purchasePerson = txtStaffName.Text;
+            if (table_ListItem.Rows.Count == 0)
+            {
+                MessageBox.Show("PO hiện tại đang trống ! \n Vui lòng điền các chi tiết để mua ");
+                return;
+            }
+            else
+            {
+                ExcelRunning _exportTemplate = new ExcelRunning();
+                _exportTemplate._orderPOno = txtPONo.Text.Replace("/", "_");
+                _exportTemplate._orderDate = txtOrderDate.Text;
+                // Company Information
+                _exportTemplate._companyName = txtCompanyName.Text;
+                _exportTemplate._companyLocation = txtCompanyLocation.Text;
+                _exportTemplate._companyTelephone = txtCompanyPhone.Text;
+                _exportTemplate._companyTaxcode = txtCompanyTaxCode.Text;
+                // Supplier Information
+                _exportTemplate._supplierName = cboSupplierName.SelectedItem.ToString();
+                _exportTemplate._supplierLocation = txtSupplierLocation.Text;
+                _exportTemplate._supplierTelephone = txtSupplierPhone.Text;
+                _exportTemplate._supplierTaxcode = txtSupplierTax.Text;
 
-            // Partlist
+                // Remark
+                _exportTemplate._paymentterms = txtPaymentTerms.Text;
+                _exportTemplate._remark = txtRemark.Text;
+                _exportTemplate._purchasePerson = txtStaffName.Text;
+                _exportTemplate._totalVND = txtTotalVND.Text;
 
-            
-            _exportTemplate.PurchaseTemplate_A();
+                // Partlist
+                _exportTemplate.Partlist = table_ListItem;
+
+                _exportTemplate.PurchaseTemplate_A();
+            }
         }
     }
 }

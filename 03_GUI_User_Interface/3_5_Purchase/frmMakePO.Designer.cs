@@ -31,12 +31,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMakePO));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.btnPreview = new System.Windows.Forms.Button();
             this.btnClearList = new System.Windows.Forms.Button();
             this.btnDeletePart = new System.Windows.Forms.Button();
             this.cboSupplierName = new System.Windows.Forms.ComboBox();
             this.btnAddItems = new System.Windows.Forms.Button();
             this.txtSupplierPhone = new System.Windows.Forms.TextBox();
+            this.txtCompanyTaxCode = new System.Windows.Forms.TextBox();
             this.txtSupplierTax = new System.Windows.Forms.TextBox();
             this.btnExportPO = new System.Windows.Forms.Button();
             this.txtSupplierID = new System.Windows.Forms.TextBox();
@@ -87,7 +87,6 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtStaffDept = new System.Windows.Forms.TextBox();
-            this.txtCompanyTaxCode = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListTimKiem)).BeginInit();
@@ -123,7 +122,6 @@
             // 
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.panel1.Controls.Add(this.btnPreview);
             this.panel1.Controls.Add(this.btnClearList);
             this.panel1.Controls.Add(this.btnDeletePart);
             this.panel1.Controls.Add(this.cboSupplierName);
@@ -157,25 +155,12 @@
             this.panel1.Size = new System.Drawing.Size(647, 233);
             this.panel1.TabIndex = 0;
             // 
-            // btnPreview
-            // 
-            this.btnPreview.Image = ((System.Drawing.Image)(resources.GetObject("btnPreview.Image")));
-            this.btnPreview.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnPreview.Location = new System.Drawing.Point(349, 193);
-            this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(80, 29);
-            this.btnPreview.TabIndex = 3;
-            this.btnPreview.Text = "Preview";
-            this.btnPreview.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPreview.UseVisualStyleBackColor = true;
-            this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
-            // 
             // btnClearList
             // 
             this.btnClearList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnClearList.Image = ((System.Drawing.Image)(resources.GetObject("btnClearList.Image")));
             this.btnClearList.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnClearList.Location = new System.Drawing.Point(259, 193);
+            this.btnClearList.Location = new System.Drawing.Point(303, 193);
             this.btnClearList.Name = "btnClearList";
             this.btnClearList.Size = new System.Drawing.Size(82, 29);
             this.btnClearList.TabIndex = 4;
@@ -189,7 +174,7 @@
             this.btnDeletePart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnDeletePart.Image = ((System.Drawing.Image)(resources.GetObject("btnDeletePart.Image")));
             this.btnDeletePart.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnDeletePart.Location = new System.Drawing.Point(159, 193);
+            this.btnDeletePart.Location = new System.Drawing.Point(181, 193);
             this.btnDeletePart.Name = "btnDeletePart";
             this.btnDeletePart.Size = new System.Drawing.Size(92, 29);
             this.btnDeletePart.TabIndex = 4;
@@ -226,7 +211,15 @@
             this.txtSupplierPhone.Location = new System.Drawing.Point(351, 110);
             this.txtSupplierPhone.Name = "txtSupplierPhone";
             this.txtSupplierPhone.Size = new System.Drawing.Size(141, 23);
-            this.txtSupplierPhone.TabIndex = 2;
+            this.txtSupplierPhone.TabIndex = 9;
+            // 
+            // txtCompanyTaxCode
+            // 
+            this.txtCompanyTaxCode.Location = new System.Drawing.Point(178, 110);
+            this.txtCompanyTaxCode.Name = "txtCompanyTaxCode";
+            this.txtCompanyTaxCode.ReadOnly = true;
+            this.txtCompanyTaxCode.Size = new System.Drawing.Size(85, 23);
+            this.txtCompanyTaxCode.TabIndex = 2;
             // 
             // txtSupplierTax
             // 
@@ -240,7 +233,7 @@
             // 
             this.btnExportPO.Image = ((System.Drawing.Image)(resources.GetObject("btnExportPO.Image")));
             this.btnExportPO.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnExportPO.Location = new System.Drawing.Point(437, 193);
+            this.btnExportPO.Location = new System.Drawing.Point(415, 193);
             this.btnExportPO.Name = "btnExportPO";
             this.btnExportPO.Size = new System.Drawing.Size(89, 29);
             this.btnExportPO.TabIndex = 5;
@@ -422,7 +415,7 @@
             this.label1.Location = new System.Drawing.Point(249, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(178, 25);
-            this.label1.TabIndex = 0;
+            this.label1.TabIndex = 3;
             this.label1.Text = "PURCHASE ORDER";
             // 
             // dgvListTimKiem
@@ -740,14 +733,6 @@
             this.txtStaffDept.Size = new System.Drawing.Size(83, 23);
             this.txtStaffDept.TabIndex = 1;
             // 
-            // txtCompanyTaxCode
-            // 
-            this.txtCompanyTaxCode.Location = new System.Drawing.Point(178, 110);
-            this.txtCompanyTaxCode.Name = "txtCompanyTaxCode";
-            this.txtCompanyTaxCode.ReadOnly = true;
-            this.txtCompanyTaxCode.Size = new System.Drawing.Size(85, 23);
-            this.txtCompanyTaxCode.TabIndex = 2;
-            // 
             // frmMakePO
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -811,7 +796,6 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnOldPO;
         private System.Windows.Forms.Button btnViewNearPO;
-        private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Button btnAddItems;
         private System.Windows.Forms.DataGridView dgvListTimKiem;
         private System.Windows.Forms.Button btnExportPO;

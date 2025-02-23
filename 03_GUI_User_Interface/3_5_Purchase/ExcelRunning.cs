@@ -521,46 +521,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 }
             }
 
-            //try
-            //{
-            //    // Tạo ứng dụng Excel
-            //    Excel.Application excelApp = new Excel.Application
-            //    {
-            //        Visible = true // Ẩn Excel trong khi xử lý
-            //    };
-
-            //    // Tạo Workbook và Worksheet
-            //    Excel.Workbook workbook = excelApp.Workbooks.Add(Type.Missing);
-            //    Excel.Worksheet worksheet = workbook.Sheets[1];
-            //    worksheet = workbook.ActiveSheet;
-            //    worksheet.Name = "ExportedWithChild";
-
-            //    // Ghi tiêu đề cột
-            //    for (int i = 1; i <= dgv.Columns.Count; i++)
-            //    {
-            //        worksheet.Cells[1, i] = dgv.Columns[i - 1].HeaderText;
-            //    }
-
-            //    // Ghi dữ liệu từ DataGridView
-            //    for (int i = 0; i < dgv.Rows.Count; i++)
-            //    {
-            //        for (int j = 0; j < dgv.Columns.Count; j++)
-            //        {
-            //            worksheet.Cells[i + 2, j + 1] = dgv.Rows[i].Cells[j].Value?.ToString();
-            //        }
-            //    }
-
-            //    // Lưu file Excel
-            //    workbook.SaveAs(filePath);
-            //    workbook.Close();
-            //    excelApp.Quit();
-
-            //    MessageBox.Show("Xuất Dữ Liệu Thành Công !", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show($"Error: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+           
         }
     }
 }

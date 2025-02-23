@@ -618,6 +618,7 @@
             this.btnOldPO.Text = "Search Old PO";
             this.btnOldPO.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnOldPO.UseVisualStyleBackColor = true;
+            this.btnOldPO.Click += new System.EventHandler(this.btnOldPO_Click);
             // 
             // btnSearch
             // 

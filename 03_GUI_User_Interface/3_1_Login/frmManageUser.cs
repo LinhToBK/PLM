@@ -149,6 +149,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             string pos = txtUserPosition.Text;
             string dept = txtUserDepartment.Text;
             string thongbao;
+            
+
             thongbao = "Bạn có muốn thêm dữ liệu : \n Tên :   " + username + "\n Vai trò :" + role + "\n Chức vụ : " + pos + "\n Phòng : " + dept;
             DialogResult result = MessageBox.Show(thongbao, "Notice !!!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)

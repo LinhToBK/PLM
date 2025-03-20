@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 {
@@ -34,6 +35,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return makeNewPODAL_.GetListSupplier_DAL();
         }
 
+
         public tblSupplier GetInforSupplier(string SupplierName)
         {
             return makeNewPODAL_.GetInforSupplier_DAL(SupplierName);
@@ -45,7 +47,28 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         }
         public bool InsertNewPOBLL(string POCode, string PODate, string PONhanVien, string POPartlist, decimal POAmount, string PONote, int POSupplierID)
         {
-              return makeNewPODAL_.InsertNewPODAL(POCode, PODate, PONhanVien, POPartlist, POAmount, PONote, POSupplierID);
+            //MessageBox.Show("POCode: " + POCode + "\nPODate: " + PODate + "\nPONhanVien: " + PONhanVien + "\nPOPartlist: " + POPartlist + "\nPOAmount: " + POAmount + "\nPONote: " + PONote + "\nPOSupplierID: " + POSupplierID);
+            return makeNewPODAL_.InsertNewPODAL(POCode, PODate, PONhanVien, POPartlist, POAmount, PONote, POSupplierID);
+        }
+
+
+        public DataTable GetAllInforSupplierBLL()
+        {
+           return purchaseDAL.GetAllInforSupplierDAL();
+        }
+
+        public bool InsertNewSupplierBLL(string Name, string Phone, string Tax, string Location, string Rep, string Note)
+        {
+            return purchaseDAL.InsertNewSupplierDAL(Name, Phone, Tax, Location, Rep, Note);
+        }
+
+        public bool UpdateOneSupplierBLL(string Name, string Phone, string TaxID, string Location, string Representative, string Note, int ID)
+        {
+            return purchaseDAL.UpdateOneSupplierDAL(Name, Phone, TaxID, Location, Representative, Note, ID);
+        }
+        public bool DeleteOneSupplierBLL(string Name)
+        {
+            return purchaseDAL.DeleteOneSupplierDAL(Name);
         }
 
     }

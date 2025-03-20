@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
 
 namespace PLM_Lynx._01_DAL_Data_Access_Layer
@@ -46,7 +47,155 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 return result == 1;  // Trả về giá trị true nếu thêm thành công
             }
         }
-    }   // end  Class : PurchaseDAL
+
+        /// <summary>
+        /// 02. SELECT - Get All information of Supplier
+        /// </summary>
+        /// <returns></returns>
+        public DataTable GetAllInforSupplierDAL()
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @" select * from tblSupplier";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
+        /// <summary>
+        /// 03. INSERT - Insert 1 new Supplier to the tblSupplier
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="Tax"></param>
+        /// <param name="Location"></param>
+        /// <param name="Rep"></param>
+        /// <param name="Note"></param>
+        /// <returns></returns>
+        public bool InsertNewSupplierDAL(string Name, string Phone, string Tax, string Location, string Rep, string Note)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                // Mở kết nối
+                con.Open();
+
+                // Tạo một giao dịch (Transaction) C#
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    string sql_query = @"insert tblSupplier(SupName, SupPhoneNumber, SupTaxID, SupLocation, SupRepresentative, SupNote)
+                             VALUES (@Name, @Phone, @Tax, @Location, @Rep, @Note );";
+
+                    SqlCommand cmd = new SqlCommand(sql_query, con, transaction);
+
+                    // Sử dụng Add với kiểu dữ liệu cụ thể thay vì AddWithValue
+                    cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = Name;
+                    cmd.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = Phone;
+                    cmd.Parameters.Add("@Tax", SqlDbType.NVarChar).Value = Tax;
+                    cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = Location;
+                    cmd.Parameters.Add("@Rep", SqlDbType.NVarChar).Value = Rep;
+                    cmd.Parameters.Add("@Note", SqlDbType.NVarChar).Value = Note;
+
+                    try
+                    {
+                        // Thực thi lệnh SQL
+                        int result = cmd.ExecuteNonQuery();
+
+                        // Nếu không có lỗi, xác nhận (Commit) giao dịch
+                        transaction.Commit();
+                        return true; // Trả về true nếu thêm thành công
+                    }
+                    catch (Exception ex)
+                    {
+                        // Khôi phục lại giao dịch khi có lỗi
+                        transaction.Rollback();
+                        Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public bool UpdateOneSupplierDAL(string Name, string Phone, string TaxID, string Location, string Representative, string Note, int ID)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    string sql_query = "UPDATE tblSupplier SET ";
+                    sql_query += "SupName = @Name , SupPhoneNumber = @Phone, SupTaxID = @TaxID, SupLocation = @Location , SupRepresentative = @Representative, SupNote = @Note where SupID = @ID ";
+                    MessageBox.Show(sql_query);
+
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = Name;
+                        cmd.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = Phone;
+                        cmd.Parameters.Add("@TaxID", SqlDbType.NVarChar).Value = TaxID;
+                        cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = Location;   
+                        cmd.Parameters.Add("@Representative", SqlDbType.NVarChar).Value = Representative;
+                        cmd.Parameters.Add("@Note", SqlDbType.NVarChar).Value = Note;
+                        //cmd.Parameters.Add("@ID", SqlDbType.Int).Value = ID;
+                        cmd.Parameters.AddWithValue("@ID", ID);
+
+                        cmd.ExecuteNonQuery(); // Thực thi lệnh UPDATE
+                    }
+
+                    transaction.Commit(); // Xác nhận giao dịch nếu không có lỗi
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Hoàn tác nếu có lỗi
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+
+        /// <summary>
+        /// 05. DELETE - Delete 1 Supplier by SupplierName
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <returns></returns>
+        public bool DeleteOneSupplierDAL(string Name)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+
+                string sql_query = "delete tblSupplier where SupName = @Name";
+                SqlCommand cmd = new SqlCommand(sql_query, con);
+                cmd.Parameters.AddWithValue("@Name", Name);
+                //--------------------------
+                con.Open();
+                int result;
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    return false;
+                }
+                return result == 1;  // Trả về giá trị true nếu thêm thành công 
+
+            }
+
+        }
+
+    }
+
+    // end  Class : PurchaseDAL
+    //=======================================================================================================
+    //=======================================================================================================
 
     /// <summary>
     /// DAL - Class for Make New PO
@@ -194,7 +343,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return _tblsupplier;
         }
 
-        /// 01. SELECT - Get "PartCode" and "PartName" with keysearch
+        /// 05. SELECT - Get "PartCode" and "PartName" with keysearch
         /// <param name="KeySearch"></param>
         /// <returns> Bảng chứa danh sách các Part Chứa từ khóa đó
         public DataTable FindwithwordDAL(string KeySearch)
@@ -226,7 +375,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
-        /// 03. INSERT - Insert 1 new PO to the tblPO
+        /// 06. INSERT - Insert 1 new PO to the tblPO
         /// <param name="PartFamily"></param>
         /// <param name="PartName"></param>
         /// <param name="PartDescript"></param>

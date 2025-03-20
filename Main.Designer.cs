@@ -47,12 +47,14 @@
             this.mnuUserGuide = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tstripUser = new System.Windows.Forms.ToolStripStatusLabel();
+            this.mnuManageSupplier = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // menuStrip1
             // 
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuEngineer,
             this.mnuSystem,
@@ -60,7 +62,8 @@
             this.mnuHelp});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1273, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(1455, 38);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -68,14 +71,19 @@
             // 
             this.mnuEngineer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuFindPart});
+            this.mnuEngineer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mnuEngineer.Image = ((System.Drawing.Image)(resources.GetObject("mnuEngineer.Image")));
+            this.mnuEngineer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mnuEngineer.Name = "mnuEngineer";
-            this.mnuEngineer.Size = new System.Drawing.Size(65, 20);
+            this.mnuEngineer.Size = new System.Drawing.Size(122, 32);
             this.mnuEngineer.Text = "Engineer";
             // 
             // mnuFindPart
             // 
+            this.mnuFindPart.Image = ((System.Drawing.Image)(resources.GetObject("mnuFindPart.Image")));
+            this.mnuFindPart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mnuFindPart.Name = "mnuFindPart";
-            this.mnuFindPart.Size = new System.Drawing.Size(121, 22);
+            this.mnuFindPart.Size = new System.Drawing.Size(224, 32);
             this.mnuFindPart.Text = "Find Part";
             this.mnuFindPart.Click += new System.EventHandler(this.mnuFindPart_Click);
             // 
@@ -87,8 +95,11 @@
             this.mnuManagerUser,
             this.mnuManageFamily,
             this.mnuRelationPart});
+            this.mnuSystem.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mnuSystem.Image = ((System.Drawing.Image)(resources.GetObject("mnuSystem.Image")));
+            this.mnuSystem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mnuSystem.Name = "mnuSystem";
-            this.mnuSystem.Size = new System.Drawing.Size(57, 20);
+            this.mnuSystem.Size = new System.Drawing.Size(108, 32);
             this.mnuSystem.Text = "System";
             // 
             // mnuMakeNewPart
@@ -96,7 +107,7 @@
             this.mnuMakeNewPart.Name = "mnuMakeNewPart";
             this.mnuMakeNewPart.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
-            this.mnuMakeNewPart.Size = new System.Drawing.Size(260, 22);
+            this.mnuMakeNewPart.Size = new System.Drawing.Size(407, 32);
             this.mnuMakeNewPart.Text = "Make New Part";
             this.mnuMakeNewPart.Click += new System.EventHandler(this.mnuMakeNewPart_Click);
             // 
@@ -105,7 +116,7 @@
             this.mnuECO.Name = "mnuECO";
             this.mnuECO.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.E)));
-            this.mnuECO.Size = new System.Drawing.Size(260, 22);
+            this.mnuECO.Size = new System.Drawing.Size(407, 32);
             this.mnuECO.Text = "ECO";
             this.mnuECO.Click += new System.EventHandler(this.mnuECO_Click);
             // 
@@ -113,7 +124,7 @@
             // 
             this.mnuManagerUser.Name = "mnuManagerUser";
             this.mnuManagerUser.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
-            this.mnuManagerUser.Size = new System.Drawing.Size(260, 22);
+            this.mnuManagerUser.Size = new System.Drawing.Size(407, 32);
             this.mnuManagerUser.Text = "Manage User";
             this.mnuManagerUser.Click += new System.EventHandler(this.mnuManagerUser_Click);
             // 
@@ -122,7 +133,7 @@
             this.mnuManageFamily.Name = "mnuManageFamily";
             this.mnuManageFamily.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.F)));
-            this.mnuManageFamily.Size = new System.Drawing.Size(260, 22);
+            this.mnuManageFamily.Size = new System.Drawing.Size(407, 32);
             this.mnuManageFamily.Text = "Manage Family";
             this.mnuManageFamily.Click += new System.EventHandler(this.mnuManageFamily_Click);
             // 
@@ -131,7 +142,7 @@
             this.mnuRelationPart.Name = "mnuRelationPart";
             this.mnuRelationPart.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
-            this.mnuRelationPart.Size = new System.Drawing.Size(260, 22);
+            this.mnuRelationPart.Size = new System.Drawing.Size(407, 32);
             this.mnuRelationPart.Text = "Manage Relation Part";
             this.mnuRelationPart.Click += new System.EventHandler(this.mnuRelationPart_Click);
             // 
@@ -140,33 +151,40 @@
             this.mnuPurchase.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuManagePrice,
             this.mnuMakeNewPO,
-            this.mnuFindPO});
+            this.mnuFindPO,
+            this.mnuManageSupplier});
+            this.mnuPurchase.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mnuPurchase.Image = ((System.Drawing.Image)(resources.GetObject("mnuPurchase.Image")));
+            this.mnuPurchase.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mnuPurchase.Name = "mnuPurchase";
-            this.mnuPurchase.Size = new System.Drawing.Size(67, 20);
+            this.mnuPurchase.Size = new System.Drawing.Size(123, 32);
             this.mnuPurchase.Text = "Purchase";
             // 
             // mnuManagePrice
             // 
+            this.mnuManagePrice.Image = ((System.Drawing.Image)(resources.GetObject("mnuManagePrice.Image")));
             this.mnuManagePrice.Name = "mnuManagePrice";
             this.mnuManagePrice.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.G)));
-            this.mnuManagePrice.Size = new System.Drawing.Size(222, 22);
+            this.mnuManagePrice.Size = new System.Drawing.Size(343, 32);
             this.mnuManagePrice.Text = "Manage Price";
             this.mnuManagePrice.Click += new System.EventHandler(this.mnuManagePrice_Click);
             // 
             // mnuMakeNewPO
             // 
+            this.mnuMakeNewPO.Image = ((System.Drawing.Image)(resources.GetObject("mnuMakeNewPO.Image")));
             this.mnuMakeNewPO.Name = "mnuMakeNewPO";
             this.mnuMakeNewPO.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.P)));
-            this.mnuMakeNewPO.Size = new System.Drawing.Size(222, 22);
+            this.mnuMakeNewPO.Size = new System.Drawing.Size(343, 32);
             this.mnuMakeNewPO.Text = "Make New PO";
             this.mnuMakeNewPO.Click += new System.EventHandler(this.mnuMakeNewPO_Click);
             // 
             // mnuFindPO
             // 
+            this.mnuFindPO.Image = ((System.Drawing.Image)(resources.GetObject("mnuFindPO.Image")));
             this.mnuFindPO.Name = "mnuFindPO";
-            this.mnuFindPO.Size = new System.Drawing.Size(222, 22);
+            this.mnuFindPO.Size = new System.Drawing.Size(343, 32);
             this.mnuFindPO.Text = "Find PO ";
             // 
             // mnuHelp
@@ -174,49 +192,60 @@
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAboutMe,
             this.mnuUserGuide});
+            this.mnuHelp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(44, 20);
+            this.mnuHelp.Size = new System.Drawing.Size(67, 32);
             this.mnuHelp.Text = "Help";
             // 
             // mnuAboutMe
             // 
             this.mnuAboutMe.Name = "mnuAboutMe";
-            this.mnuAboutMe.Size = new System.Drawing.Size(131, 22);
+            this.mnuAboutMe.Size = new System.Drawing.Size(224, 32);
             this.mnuAboutMe.Text = "About me";
             // 
             // mnuUserGuide
             // 
             this.mnuUserGuide.Name = "mnuUserGuide";
-            this.mnuUserGuide.Size = new System.Drawing.Size(131, 22);
+            this.mnuUserGuide.Size = new System.Drawing.Size(224, 32);
             this.mnuUserGuide.Text = "User Guide";
             // 
             // statusStrip1
             // 
+            this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tstripUser});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 588);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 787);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1273, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1455, 26);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
             // tstripUser
             // 
             this.tstripUser.Name = "tstripUser";
-            this.tstripUser.Size = new System.Drawing.Size(30, 17);
+            this.tstripUser.Size = new System.Drawing.Size(38, 20);
             this.tstripUser.Text = "User";
+            // 
+            // mnuManageSupplier
+            // 
+            this.mnuManageSupplier.Image = ((System.Drawing.Image)(resources.GetObject("mnuManageSupplier.Image")));
+            this.mnuManageSupplier.Name = "mnuManageSupplier";
+            this.mnuManageSupplier.Size = new System.Drawing.Size(343, 32);
+            this.mnuManageSupplier.Text = "Manage Supplier";
+            this.mnuManageSupplier.Click += new System.EventHandler(this.mnuManageSupplier_Click);
             // 
             // frmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1273, 610);
+            this.ClientSize = new System.Drawing.Size(1455, 813);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "frmMain";
             this.Text = "PLM Lynx";
             this.Load += new System.EventHandler(this.frmMain_Load);
@@ -250,6 +279,7 @@
         private System.Windows.Forms.ToolStripMenuItem mnuManageFamily;
         private System.Windows.Forms.ToolStripMenuItem mnuRelationPart;
         private System.Windows.Forms.ToolStripMenuItem mnuManagePrice;
+        private System.Windows.Forms.ToolStripMenuItem mnuManageSupplier;
     }
 }
 

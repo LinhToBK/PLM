@@ -119,5 +119,11 @@ namespace PLM_Lynx
             frm._usercurrent = tennguoidung;
             frm.ShowDialog();
         }
+
+        private void mnuManageSupplier_Click(object sender, EventArgs e)
+        {
+            frmManageSupplier frm = new frmManageSupplier();
+            frm.ShowDialog();
+        }
     }
 }

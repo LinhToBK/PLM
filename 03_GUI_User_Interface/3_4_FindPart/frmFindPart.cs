@@ -473,7 +473,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 if (sv.ShowDialog() == DialogResult.OK)
                 {
                     // Gọi hàm xuất dữ liệu
-                    string idpart = dgvSearch.CurrentRow.Cells[7].Value.ToString();
+                    string idpart = dgvSearch.CurrentRow.Cells[4].Value.ToString();
                     dgvChild.DataSource = PartBLL.GetBOMBLL(idpart);
 
                     if (ckcWithImage.Checked == true)

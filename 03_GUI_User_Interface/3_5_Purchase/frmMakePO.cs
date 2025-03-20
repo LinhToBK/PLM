@@ -504,15 +504,17 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 //string POPartlist = Regex.Replace(jsonfile, @"\s+", " ");
                 string POnote = "+)" + txtPaymentTerms.Text + "\n" + "+)" + txtRemark.Text;
 
+                //MessageBox.Show(POPartlist);
+
                 if (_purchasebll.InsertNewPOBLL(txtPONo.Text, txtOrderDate.Text, txtStaffName.Text, POPartlist, decimal.Parse(txtTotalVND.Text), POnote, Convert.ToInt32(txtSupplierID.Text)) == true)
                 {
-                    string notice = "Success to make the new Purchase Order";
+                    string notice = "Đã lưu PO này vào database";
                     MessageBox.Show(notice);
                     IdentityPONO();
                 }
                 else
                 {
-                    string notice = "Have the error when make the new purchase order \n Please confirm data again ";
+                    string notice = "Lỗi!!! \n Vui lòng kiểm tra lại dữ liệu. ";
                     MessageBox.Show(notice, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 };
             }

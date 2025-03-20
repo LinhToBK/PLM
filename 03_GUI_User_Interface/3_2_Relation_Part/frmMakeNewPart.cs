@@ -283,7 +283,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                                     string FileExtension = row.Cells[2].Value.ToString();
 
                                     // Tạo tên File mới dựa trên  tên thư mục và phần mở rộng của file
-                                    string NewFileName = FolderPath + "//" + newestpartcode + "_DV"+ FileExtension;
+                                    string NewFileName = FolderPath + "//" + newestpartcode + "_DV-0"+ FileExtension;
                                     // Tên đường dẫn đến folder + tên partcode mới + . đuôi file
                                     string TargetFilePart = Path.Combine(FolderPath, NewFileName);
 

@@ -316,6 +316,12 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice.Designer.cs">
       <DependentUpon>frmManagePrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.Designer.cs">
+      <DependentUpon>frmManageSupplier.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -374,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice.resx">
       <DependentUpon>frmManagePrice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.resx">
+      <DependentUpon>frmManageSupplier.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

@@ -77,6 +77,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 // Hiển thị danh sách file
                 if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == true)
                 {
+
                     txtListFileStatus.Text = "Danh sách file hiển thị ở bên dưới ";
                     // Lấy danh sách loại file
                     var categories = dgvListFile.Rows
@@ -90,6 +91,31 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     {
                         checklistTypeFile.Items.Add(category, true); // Mặc định tất cả các mục được chọn
                     }
+
+                    // Lấy danh sách Stage    - cắt tên file, chỉ lấy 4 phần tử cuối cùng
+                    var filenamelist = dgvListFile.Rows
+                                          .Cast<DataGridViewRow>()
+                                          .Where(row => !row.IsNewRow) // Loại bỏ hàng trống
+                                          .Select(row => row.Cells[0].Value?.ToString())
+                                          .Distinct()
+                                          .OrderBy(x => x)
+                                          .ToList();
+                    List<string> listStage = new List<string>();
+                    foreach (var stage in filenamelist)
+                    {
+                        string cutting = stage.Substring(10, 4);  // CLP-00001_DV-0.jpg => DV-0
+                        if (listStage.Contains(cutting) == false)
+                        {
+                            listStage.Add(cutting);
+                        }
+                    }
+
+                    foreach (var stage in listStage)
+                    {
+                        checklistStage.Items.Add(stage, true); // Mặc định tất cả các mục được chọn
+                    }
+
+
                 }
                 else
                 {
@@ -214,38 +240,67 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             var selectedStage = checklistStage.CheckedItems.Cast<string>().ToList();
 
+            if(selectedStage.Count ==0)
+            {
+                MessageBox.Show("Chưa chọn Stage, vui lòng chọn lại ");
+                return;
+            }
+            var selectedTypeFile = checklistTypeFile.CheckedItems.Cast<string>().ToList();
+            if (selectedTypeFile.Count == 0)
+            {
+                MessageBox.Show("Chưa chọn Type File, vui lòng chọn lại ");
+                return;
+            }
+
             foreach (DataGridViewRow row in dgvListFile.Rows)
             {
                 if (!row.IsNewRow) // Loại bỏ hàng mới  và hàng đang ẩn
                 {
                     string Namefile = row.Cells[0].Value?.ToString();
-                    row.Visible = false;
+                    string TypeFileValue = row.Cells[2].Value?.ToString();
+                    bool checkTypeFile = false;
+                    bool checkStage = false;
                     foreach (string stage in selectedStage)
                     {
                         if (Namefile.Contains(stage) == true)
                         {
-                            row.Visible = true; break;
+                            checkStage = true; break;
                         }
                     }
-                }
-            }
-            var selectedTypeFile = checklistTypeFile.CheckedItems.Cast<string>().ToList();
-
-            foreach (DataGridViewRow row in dgvListFile.Rows)
-            {
-                if (!row.IsNewRow || row.Visible == false) // Loại bỏ hàng mới  và hàng đang ẩn
-                {
-                    string TypeFileValue = row.Cells[2].Value?.ToString();
-                    row.Visible = false;
                     foreach (string stage in selectedTypeFile)
                     {
                         if (TypeFileValue.Contains(stage) == true)
                         {
-                            row.Visible = true; break;
+                            checkTypeFile  = true; break;
                         }
+                    }
+                    if (checkStage == true && checkTypeFile == true)
+                    {
+                        row.Visible = true;
+                    }
+                    else
+                    {
+                        row.Visible = false;
                     }
                 }
             }
+            
+
+            //foreach (DataGridViewRow row in dgvListFile.Rows)
+            //{
+            //    if (!row.IsNewRow || row.Visible == false) // Loại bỏ hàng mới  và hàng đang ẩn
+            //    {
+            //        string TypeFileValue = row.Cells[2].Value?.ToString();
+            //        row.Visible = false;
+            //        foreach (string stage in selectedTypeFile)
+            //        {
+            //            if (TypeFileValue.Contains(stage) == true)
+            //            {
+            //                row.Visible = true; break;
+            //            }
+            //        }
+            //    }
+            //}
         }
     }
 }

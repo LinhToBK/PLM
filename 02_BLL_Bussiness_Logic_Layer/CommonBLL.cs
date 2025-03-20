@@ -33,7 +33,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             string imagefilepath = Properties.Settings.Default.LinkDataPart;
             string[] input = partCode.Split('-');
             string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
-            imagefilepath = imagefilepath + "\\" + input[0] + "\\" + input[1] + "\\" + partCode + "_DV" + ".jpg";
+            imagefilepath = imagefilepath + "\\" + input[0] + "\\" + input[1] + "\\" + partCode + "_DV-0" + ".jpg";
             // Kiểm tra file có tồn tại
             if (System.IO.File.Exists(imagefilepath))
             {
@@ -124,7 +124,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     {
                         try
                         {
-                            string dwgTrueViewPath = Properties.Settings.Default.DWGTrueViewPath;
+                            string dwgTrueViewPath = Properties.Settings.Default.eDrawingView;
                             // "C:\Program Files\Autodesk\DWG TrueView 2022 - English\dwgviewr.exe"
                             try
                             {
@@ -387,11 +387,13 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     // Đính kèm ảnh
                     string partcode = dgv.Rows[i].Cells[1].Value.ToString();
                     //MessageBox.Show("PartCode Load : " + partcode);
-                    string imagepart = GetFilePath(partcode) + "/" + partcode + "_DV.jpg";
+                    string imagepart = GetFilePath(partcode) + "/" + partcode + "_DV-0.jpg";
                     // MessageBox.Show("Đường dẫn file" + imagepart);
 
                     // Xác định ô cần chèn ảnh
                     Excel.Range targetCell = worksheet.Cells[i + 2, 8]; // Ô J10
+                    targetCell.RowHeight = 50; // Đặt chiều cao ô
+                    targetCell.ColumnWidth = 50; // Đặt chiều rộng ô
                     // Kiểm tra ảnh có tồn tại khay không
                     if (System.IO.File.Exists(imagepart))
                     {
@@ -400,8 +402,8 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                         float cellTop = (float)targetCell.Top;     // Vị trí từ lề trên
                         //float cellWidth = (float)targetCell.Width; // Chiều rộng ô
                         //float cellHeight = (float)targetCell.Height; // Chiều cao ô
-                        float cellWidth = 100; // Chiều rộng ô
-                        float cellHeight = 100; // Chiều cao ô
+                        float cellWidth = 50; // Chiều rộng ô
+                        float cellHeight = 50; // Chiều cao ô
 
                         // Chèn ảnh vào vị trí ô
                         var picture = worksheet.Shapes.AddPicture(
@@ -419,6 +421,13 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                         targetCell.Value = "Không tìm thấy ảnh";
                     }
                 }
+
+                // Align all c
+                worksheet.Columns.AutoFit();
+
+                Excel.Range chooserange = worksheet.Range[worksheet.Cells[1][1], worksheet.Cells[dgv.Rows.Count + 2][7]];
+                chooserange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
+                chooserange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
 
                 // Lưu file Excel
                 workbook.SaveAs(filePath);
@@ -580,7 +589,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     //                     .Select(file => new FileInfo(file))
                     //                     .ToList();
 
-
                     // Lấy tất cả các file trong thư mục
                     var files = Directory.GetFiles(SourceFolder, "*.*") // Tìm tất cả các file
                                          .Where(file => allowedExtensions
@@ -621,18 +629,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
         }
 
-
-
-
-
         private CommonInforDAL _commonInforDAL = new CommonInforDAL();
+
         public tblCommonInfor GetCommonInforValue(string inforname)
         {
-            return  _commonInforDAL.GetCommonInforValue_DAL(inforname);
+            return _commonInforDAL.GetCommonInforValue_DAL(inforname);
         }
-
-
-
-
     } // End Class CommonBLL
 } // End NameSpace

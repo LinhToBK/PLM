@@ -5,15 +5,15 @@
     <Setting Name="Datacon" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=DESKTOP-E1HMKNP\SQLEXPRESS;Initial Catalog=DSGL_PLM;Integrated Security=True;Trust Server Certificate=True&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=LINHTO\LINHTOSQLSERVER;Initial Catalog=SAMPLE_PLM;Persist Security Info=True;User ID=sa;Password="L!nh15091994";Trust Server Certificate=True&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=DESKTOP-E1HMKNP\SQLEXPRESS;Initial Catalog=DSGL_PLM;Integrated Security=True;Trust Server Certificate=True</Value>
+      <Value Profile="(Default)">Data Source=LINHTO\LINHTOSQLSERVER;Initial Catalog=SAMPLE_PLM;Persist Security Info=True;User ID=sa;Password="L!nh15091994";Trust Server Certificate=True</Value>
     </Setting>
     <Setting Name="LinkDataPart" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Z:\11.Technique\LINH\FolderDocument\DSGLDataPart\</Value>
+      <Value Profile="(Default)">C:\Users\Admin\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\SAMPLE_DRAWING\DATA\</Value>
     </Setting>
     <Setting Name="TrashDataPart" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Z:\11.Technique\LINH\FolderDocument\DSGLTraskPart\</Value>
+      <Value Profile="(Default)">C:\Users\Admin\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\SAMPLE_DRAWING\TRASH\</Value>
     </Setting>
     <Setting Name="DWGTrueViewPath" Type="System.String" Scope="Application">
       <Value Profile="(Default)">"C:\Program Files\Autodesk\DWG TrueView 2023 - English\dwgviewr.exe"</Value>
@@ -22,7 +22,7 @@
       <Value Profile="(Default)">"C:\Program Files\Common Files\eDrawings2025\eDrawings.exe"</Value>
     </Setting>
     <Setting Name="ABCCoLtd" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">F:\02. OnedriveFolder\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\07. PLM Lynx Code\PLM_Lynx\04_Image\ABC.jpg</Value>
+      <Value Profile="(Default)">C:\Users\Admin\source\repos\LinhToBK\PLM\04_Image\ABCCoLtd.jpg</Value>
     </Setting>
   </Settings>
 </SettingsFile>

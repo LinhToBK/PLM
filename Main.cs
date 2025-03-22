@@ -125,5 +125,11 @@ namespace PLM_Lynx
             frmManageSupplier frm = new frmManageSupplier();
             frm.ShowDialog();
         }
+
+        private void mnuFindPO_Click(object sender, EventArgs e)
+        {
+            frmFindPO frm = new frmFindPO();
+            frm.ShowDialog();
+        }
     }
 }

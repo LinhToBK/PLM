@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.SqlClient;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -121,6 +122,17 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
+        /// <summary>
+        /// 04. UPDATE - Update 1 Supplier by SupplierID
+        /// </summary>
+        /// <param name="Name"></param>
+        /// <param name="Phone"></param>
+        /// <param name="TaxID"></param>
+        /// <param name="Location"></param>
+        /// <param name="Representative"></param>
+        /// <param name="Note"></param>
+        /// <param name="ID"></param>
+        /// <returns></returns>
         public bool UpdateOneSupplierDAL(string Name, string Phone, string TaxID, string Location, string Representative, string Note, int ID)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -139,7 +151,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         cmd.Parameters.Add("@Name", SqlDbType.NVarChar).Value = Name;
                         cmd.Parameters.Add("@Phone", SqlDbType.NVarChar).Value = Phone;
                         cmd.Parameters.Add("@TaxID", SqlDbType.NVarChar).Value = TaxID;
-                        cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = Location;   
+                        cmd.Parameters.Add("@Location", SqlDbType.NVarChar).Value = Location;
                         cmd.Parameters.Add("@Representative", SqlDbType.NVarChar).Value = Representative;
                         cmd.Parameters.Add("@Note", SqlDbType.NVarChar).Value = Note;
                         //cmd.Parameters.Add("@ID", SqlDbType.Int).Value = ID;
@@ -160,7 +172,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
         /// <summary>
         /// 05. DELETE - Delete 1 Supplier by SupplierName
         /// </summary>
@@ -170,7 +181,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
-
                 string sql_query = "delete tblSupplier where SupName = @Name";
                 SqlCommand cmd = new SqlCommand(sql_query, con);
                 cmd.Parameters.AddWithValue("@Name", Name);
@@ -185,10 +195,161 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 {
                     return false;
                 }
-                return result == 1;  // Trả về giá trị true nếu thêm thành công 
-
+                return result == 1;  // Trả về giá trị true nếu thêm thành công
             }
+        }
 
+        public DataTable AllInforPObyKeySearchDAL(string keysearch, bool byPart)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                if (byPart == true)
+                {
+                    sql_query = @"WITH ID AS (
+                                        SELECT TOP 1 tblPart.PartID
+                                        FROM tblPart
+                                        WHERE PartCode = @keysearch
+                                    )
+                                    SELECT p.POCode, p.PONhanVien, p.POSupplierID , p.POAmount ,p.POStatus, MONTH(p.PODate) AS pMonth, DAY(p.PODate) AS pDate
+                                    FROM tblPO AS p
+                                    WHERE p.POPartCode LIKE '%' + CAST((SELECT PartID FROM ID) AS NVARCHAR) + '%';";
+
+                    SqlCommand cmd = new SqlCommand(sql_query, conn);
+                    cmd.Parameters.Add("@keysearch", SqlDbType.NVarChar).Value = keysearch;
+                    SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                    conn.Open();
+                    adap.Fill(BangDuLieu);
+                    return BangDuLieu;
+                }
+                else
+                {
+                    sql_query = @"select p.POCode,p.PONhanVien, p.POSupplierID, p.POAmount, p.POStatus, MONTH(p.PODate) AS pMonth, DAY(p.PODate) AS pDate from tblPO as p where p.POCode LIKE '%' + @keysearch + '%';";
+                    SqlCommand cmd = new SqlCommand(sql_query, conn);
+                    cmd.Parameters.Add("@keysearch", SqlDbType.NVarChar).Value = keysearch;
+                    SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                    conn.Open();
+                    adap.Fill(BangDuLieu);
+                    return BangDuLieu;
+                }
+            }
+        }
+
+        public DataTable GetInfor1PObyPOCodeDAL(string POCode)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+
+                sql_query = @"select Top 1 * from tblPO where POCode = @Pocode";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@Pocode", SqlDbType.NVarChar).Value = POCode;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        /// <summary>
+        /// 06. SELECT - Get information of specific Supplier by SupplierID
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <returns></returns>
+        public DataTable GetInfor1Supplier_ByID_DAL(int ID)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+
+                sql_query = @"select Top 1 * from tblSupplier where SupID = @ID";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@ID", SqlDbType.NVarChar).Value = ID;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+
+        /// <summary>
+        /// 07. SELECT - Get PartCode by PartID
+        /// </summary>
+        /// <param name="IDPart"></param>
+        /// <returns></returns>
+        public string GetPartCode_DAL(int IDPart)
+        {
+            string PartCode = "";
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select PartCode from tblPart where PartID = @ID";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@ID", IDPart);
+                conn.Open();
+                PartCode = (string)cmd.ExecuteScalar();
+            }
+            return PartCode;
+        }
+        /// <summary>
+        /// 08. SELECT - Get PartCode by PartID
+        /// </summary>
+        /// <param name="IDPart"></param>
+        /// <returns></returns>
+        public string GetPartName_DAL(int IDPart)
+        {
+            string PartCode = "";
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select PartName from tblPart where PartID = @ID";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@ID", IDPart);
+                conn.Open();
+                PartCode = (string)cmd.ExecuteScalar();
+            }
+            return PartCode;
+        }
+
+
+        public bool UpdateStatusPO_DAL(string POCode, string Status)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    string sql_query;
+                    sql_query = @"  UPDATE tblPO 
+                                    SET 
+                                        POStatus = @Status ,
+                                        POLog = CONCAT(POLog, CHAR(13), CHAR(10), @Status , CONVERT(VARCHAR, GETDATE(), 120))
+                                    WHERE POCode = @POCode ";
+
+                    
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@POCode", SqlDbType.NVarChar).Value = POCode;
+                        cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = Status;
+
+
+                        cmd.ExecuteNonQuery(); // Thực thi lệnh UPDATE
+                    }
+
+                    transaction.Commit(); // Xác nhận giao dịch nếu không có lỗi
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Hoàn tác nếu có lỗi
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
         }
 
     }

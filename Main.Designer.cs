@@ -42,12 +42,12 @@
             this.mnuManagePrice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMakeNewPO = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFindPO = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuManageSupplier = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAboutMe = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUserGuide = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tstripUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.mnuManageSupplier = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +83,7 @@
             this.mnuFindPart.Image = ((System.Drawing.Image)(resources.GetObject("mnuFindPart.Image")));
             this.mnuFindPart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mnuFindPart.Name = "mnuFindPart";
-            this.mnuFindPart.Size = new System.Drawing.Size(224, 32);
+            this.mnuFindPart.Size = new System.Drawing.Size(175, 32);
             this.mnuFindPart.Text = "Find Part";
             this.mnuFindPart.Click += new System.EventHandler(this.mnuFindPart_Click);
             // 
@@ -104,6 +104,7 @@
             // 
             // mnuMakeNewPart
             // 
+            this.mnuMakeNewPart.Image = ((System.Drawing.Image)(resources.GetObject("mnuMakeNewPart.Image")));
             this.mnuMakeNewPart.Name = "mnuMakeNewPart";
             this.mnuMakeNewPart.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.N)));
@@ -113,6 +114,7 @@
             // 
             // mnuECO
             // 
+            this.mnuECO.Image = ((System.Drawing.Image)(resources.GetObject("mnuECO.Image")));
             this.mnuECO.Name = "mnuECO";
             this.mnuECO.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.E)));
@@ -122,6 +124,7 @@
             // 
             // mnuManagerUser
             // 
+            this.mnuManagerUser.Image = ((System.Drawing.Image)(resources.GetObject("mnuManagerUser.Image")));
             this.mnuManagerUser.Name = "mnuManagerUser";
             this.mnuManagerUser.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.M)));
             this.mnuManagerUser.Size = new System.Drawing.Size(407, 32);
@@ -130,6 +133,7 @@
             // 
             // mnuManageFamily
             // 
+            this.mnuManageFamily.Image = ((System.Drawing.Image)(resources.GetObject("mnuManageFamily.Image")));
             this.mnuManageFamily.Name = "mnuManageFamily";
             this.mnuManageFamily.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.F)));
@@ -139,6 +143,7 @@
             // 
             // mnuRelationPart
             // 
+            this.mnuRelationPart.Image = ((System.Drawing.Image)(resources.GetObject("mnuRelationPart.Image")));
             this.mnuRelationPart.Name = "mnuRelationPart";
             this.mnuRelationPart.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.R)));
@@ -184,8 +189,19 @@
             // 
             this.mnuFindPO.Image = ((System.Drawing.Image)(resources.GetObject("mnuFindPO.Image")));
             this.mnuFindPO.Name = "mnuFindPO";
+            this.mnuFindPO.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Alt) 
+            | System.Windows.Forms.Keys.P)));
             this.mnuFindPO.Size = new System.Drawing.Size(343, 32);
             this.mnuFindPO.Text = "Find PO ";
+            this.mnuFindPO.Click += new System.EventHandler(this.mnuFindPO_Click);
+            // 
+            // mnuManageSupplier
+            // 
+            this.mnuManageSupplier.Image = ((System.Drawing.Image)(resources.GetObject("mnuManageSupplier.Image")));
+            this.mnuManageSupplier.Name = "mnuManageSupplier";
+            this.mnuManageSupplier.Size = new System.Drawing.Size(343, 32);
+            this.mnuManageSupplier.Text = "Manage Supplier";
+            this.mnuManageSupplier.Click += new System.EventHandler(this.mnuManageSupplier_Click);
             // 
             // mnuHelp
             // 
@@ -193,20 +209,23 @@
             this.mnuAboutMe,
             this.mnuUserGuide});
             this.mnuHelp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.mnuHelp.Image = ((System.Drawing.Image)(resources.GetObject("mnuHelp.Image")));
             this.mnuHelp.Name = "mnuHelp";
-            this.mnuHelp.Size = new System.Drawing.Size(67, 32);
+            this.mnuHelp.Size = new System.Drawing.Size(87, 32);
             this.mnuHelp.Text = "Help";
             // 
             // mnuAboutMe
             // 
+            this.mnuAboutMe.Image = ((System.Drawing.Image)(resources.GetObject("mnuAboutMe.Image")));
             this.mnuAboutMe.Name = "mnuAboutMe";
-            this.mnuAboutMe.Size = new System.Drawing.Size(224, 32);
+            this.mnuAboutMe.Size = new System.Drawing.Size(194, 32);
             this.mnuAboutMe.Text = "About me";
             // 
             // mnuUserGuide
             // 
+            this.mnuUserGuide.Image = ((System.Drawing.Image)(resources.GetObject("mnuUserGuide.Image")));
             this.mnuUserGuide.Name = "mnuUserGuide";
-            this.mnuUserGuide.Size = new System.Drawing.Size(224, 32);
+            this.mnuUserGuide.Size = new System.Drawing.Size(194, 32);
             this.mnuUserGuide.Text = "User Guide";
             // 
             // statusStrip1
@@ -226,14 +245,6 @@
             this.tstripUser.Name = "tstripUser";
             this.tstripUser.Size = new System.Drawing.Size(38, 20);
             this.tstripUser.Text = "User";
-            // 
-            // mnuManageSupplier
-            // 
-            this.mnuManageSupplier.Image = ((System.Drawing.Image)(resources.GetObject("mnuManageSupplier.Image")));
-            this.mnuManageSupplier.Name = "mnuManageSupplier";
-            this.mnuManageSupplier.Size = new System.Drawing.Size(343, 32);
-            this.mnuManageSupplier.Text = "Manage Supplier";
-            this.mnuManageSupplier.Click += new System.EventHandler(this.mnuManageSupplier_Click);
             // 
             // frmMain
             // 

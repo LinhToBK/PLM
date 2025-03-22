@@ -543,30 +543,41 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
             else
             {
-                ExcelRunning _exportTemplate = new ExcelRunning();
-                _exportTemplate._orderPOno = txtPONo.Text.Replace("/", "_");
-                _exportTemplate._orderDate = txtOrderDate.Text;
-                // Company Information
-                _exportTemplate._companyName = txtCompanyName.Text;
-                _exportTemplate._companyLocation = txtCompanyLocation.Text;
-                _exportTemplate._companyTelephone = txtCompanyPhone.Text;
-                _exportTemplate._companyTaxcode = txtCompanyTaxCode.Text;
-                // Supplier Information
-                _exportTemplate._supplierName = cboSupplierName.SelectedItem.ToString();
-                _exportTemplate._supplierLocation = txtSupplierLocation.Text;
-                _exportTemplate._supplierTelephone = txtSupplierPhone.Text;
-                _exportTemplate._supplierTaxcode = txtSupplierTax.Text;
+                string tb = "Lưu ý ! \n Bạn nên lưu PO trước khi xuất Excel \n  ";
+                tb += tb + "Bạn có muốn tiếp tục không ?";
+                DialogResult kp = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (kp == DialogResult.No)
+                {
+                    return;
+                }
+                else
+                {
 
-                // Remark
-                _exportTemplate._paymentterms = txtPaymentTerms.Text;
-                _exportTemplate._remark = txtRemark.Text;
-                _exportTemplate._purchasePerson = txtStaffName.Text;
-                _exportTemplate._totalVND = txtTotalVND.Text;
+                    ExcelRunning _exportTemplate = new ExcelRunning();
+                    _exportTemplate._orderPOno = txtPONo.Text.Replace("/", "_");
+                    _exportTemplate._orderDate = txtOrderDate.Text;
+                    // Company Information
+                    _exportTemplate._companyName = txtCompanyName.Text;
+                    _exportTemplate._companyLocation = txtCompanyLocation.Text;
+                    _exportTemplate._companyTelephone = txtCompanyPhone.Text;
+                    _exportTemplate._companyTaxcode = txtCompanyTaxCode.Text;
+                    // Supplier Information
+                    _exportTemplate._supplierName = cboSupplierName.SelectedItem.ToString();
+                    _exportTemplate._supplierLocation = txtSupplierLocation.Text;
+                    _exportTemplate._supplierTelephone = txtSupplierPhone.Text;
+                    _exportTemplate._supplierTaxcode = txtSupplierTax.Text;
 
-                // Partlist
-                _exportTemplate.Partlist = table_ListItem;
+                    // Remark
+                    _exportTemplate._paymentterms = txtPaymentTerms.Text;
+                    _exportTemplate._remark = txtRemark.Text;
+                    _exportTemplate._purchasePerson = txtStaffName.Text;
+                    _exportTemplate._totalVND = txtTotalVND.Text;
 
-                _exportTemplate.PurchaseTemplate_A();
+                    // Partlist
+                    _exportTemplate.Partlist = table_ListItem;
+
+                    _exportTemplate.PurchaseTemplate_A();
+                }
             }
         }
 

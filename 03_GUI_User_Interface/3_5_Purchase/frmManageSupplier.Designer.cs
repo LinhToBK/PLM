@@ -170,6 +170,7 @@
             // 
             // btnDeleteSupplier
             // 
+            this.btnDeleteSupplier.Enabled = false;
             this.btnDeleteSupplier.Location = new System.Drawing.Point(355, 259);
             this.btnDeleteSupplier.Name = "btnDeleteSupplier";
             this.btnDeleteSupplier.Size = new System.Drawing.Size(142, 43);

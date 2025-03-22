@@ -34,13 +34,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             btnDeleteSupplier.Enabled = false;
             btnModifySupplier.Enabled = false;
 
-            //// -- Turnoff textbox
-            //txtName.Enabled = false;
-            //txtPhone.Enabled = false;
-            //txtTax.Enabled = false;
-            //txtLocation.Enabled = false;
-            //txtRepresentative.Enabled = false;
-            //txtNote.Enabled = false;
+           
         }
 
         private void LoadAllInforSupplier()
@@ -180,29 +174,29 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void btnDeleteSupplier_Click(object sender, EventArgs e)
         {
-            if (dgvSupplier.Rows.Count == 0)
-            {
-                MessageBox.Show("Không có dữ liệu", "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                return;
-            }
-            string thongbao = "Bạn có thực sự muốn xóa ----  " + dgvSupplier.CurrentRow.Cells[0].Value.ToString() + " ----- không? ";
+            //    if (dgvSupplier.Rows.Count == 0)
+            //    {
+            //        MessageBox.Show("Không có dữ liệu", "Thông báo ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //        return;
+            //    }
+            //    string thongbao = "Bạn có thực sự muốn xóa ----  " + dgvSupplier.CurrentRow.Cells[0].Value.ToString() + " ----- không? ";
 
-            DialogResult dia = MessageBox.Show(thongbao, "Thông báo ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            //    DialogResult dia = MessageBox.Show(thongbao, "Thông báo ", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            if (dia == DialogResult.Yes)
-            {
-                if (purchaseBLL.DeleteOneSupplierBLL(dgvSupplier.CurrentRow.Cells[0].Value.ToString()))
-                {
-                    MessageBox.Show("Đã xóa thành công ");
-                    LoadAllInforSupplier();
-                    ClearAllTextbox();
-                }
-                else
-                {
-                    MessageBox.Show("Đã phát sinh lỗi");
-                    return;
-                }
-            }
+            //    if (dia == DialogResult.Yes)
+            //    {
+            //        if (purchaseBLL.DeleteOneSupplierBLL(dgvSupplier.CurrentRow.Cells[0].Value.ToString()))
+            //        {
+            //            MessageBox.Show("Đã xóa thành công ");
+            //            LoadAllInforSupplier();
+            //            ClearAllTextbox();
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("Đã phát sinh lỗi");
+            //            return;
+            //        }
+            //    }
         }
 
         private void btnExit_Click(object sender, EventArgs e)

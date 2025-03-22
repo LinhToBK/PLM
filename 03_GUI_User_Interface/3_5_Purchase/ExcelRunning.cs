@@ -1,5 +1,7 @@
 ﻿using Microsoft.Office.Core;
 using Microsoft.Office.Interop.Excel;
+using PLM_Lynx._01_DAL_Data_Access_Layer;
+using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using System;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -38,6 +40,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         public string _purchasePerson { get; set; }
         public string _paymentterms { get; set; }
+
+
+
+        
 
         public void PurchaseTemplate_A()
         {
@@ -95,10 +101,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     rgn.Range["L1:M3"].MergeCells = true;
                     rgn.Range["L1:M3"].HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
 
-                    string ImageCompanyPath = Properties.Settings.Default.ABCCoLtd;
-                    //string ImageCompanyPath = Environment.CurrentDirectory;
-                    //ImageCompanyPath = ImageCompanyPath + @"\04_Image\ABCCoLtd.jpg";
-                    MessageBox.Show(ImageCompanyPath);
+                    //string ImageCompanyPath = Properties.Settings.Default.ABCCoLtd;
+                    string ImageCompanyPath = Environment.CurrentDirectory;
+                    ImageCompanyPath = ImageCompanyPath + @"\04_Image\ABCCoLtd.jpg";
+                    //MessageBox.Show(ImageCompanyPath);
 
                     if (System.IO.File.Exists(ImageCompanyPath))
                     {
@@ -239,6 +245,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     // Payment Terms
                     chooserange = rgn.Range["E11:E12"];
                     chooserange.MergeCells = true;
+                    chooserange.ColumnWidth = 11;
                     chooserange.BorderAround2(Excel.XlLineStyle.xlContinuous);
                     chooserange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
@@ -247,11 +254,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     // Fill Payment Terms
                     chooserange = rgn.Range["F11:N12"];
                     chooserange.MergeCells = true;
+                    
                     chooserange.BorderAround2(Excel.XlLineStyle.xlContinuous);
                     chooserange.HorizontalAlignment = Excel.XlHAlign.xlHAlignCenter;
                     chooserange.VerticalAlignment = Excel.XlVAlign.xlVAlignCenter;
                     chooserange.Value = _paymentterms;
-                    
+                    chooserange.WrapText = true;
+                    chooserange.Rows.AutoFit();
+                    chooserange.RowHeight = 30;
+
+
 
                     //  *****  Fill Partlist   *****
 

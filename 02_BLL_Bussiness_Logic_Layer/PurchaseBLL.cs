@@ -71,5 +71,34 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return purchaseDAL.DeleteOneSupplierDAL(Name);
         }
 
+        public DataTable AllInforPObyKeySearchBLL(string keysearch, bool byPart)
+        {
+            return purchaseDAL.AllInforPObyKeySearchDAL(keysearch, byPart);
+        }
+
+        public DataTable GetInfor1PObyPOCodeBLL(string POCode)
+        {
+            return purchaseDAL.GetInfor1PObyPOCodeDAL(POCode);
+        }
+
+        public DataTable GetInfor1Supplier_ByID_BLL(int ID)
+        {
+            return purchaseDAL.GetInfor1Supplier_ByID_DAL(ID);
+        }
+
+        public string GetPartCode_BLL(int IDPart)
+        {
+            return purchaseDAL.GetPartCode_DAL(IDPart);
+        }
+        public string GetPartName_BLL(int IDPart)
+        {
+            return purchaseDAL.GetPartName_DAL(IDPart);
+        }
+
+        public bool UpdateStatusPO_BLL(string POCode, string NewStatus)
+        {
+            return purchaseDAL.UpdateStatusPO_DAL(POCode, NewStatus);
+        }
+
     }
 }

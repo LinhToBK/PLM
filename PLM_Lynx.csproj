@@ -322,6 +322,12 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.Designer.cs">
       <DependentUpon>frmManageSupplier.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.Designer.cs">
+      <DependentUpon>frmUpdateStatus.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -384,6 +390,9 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.resx">
       <DependentUpon>frmManageSupplier.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.resx">
+      <DependentUpon>frmUpdateStatus.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -411,10 +420,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="04_Image\" />
-    <Folder Include="05_DataBase\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.8">
       <Visible>False</Visible>
@@ -428,6 +434,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="04_Image\ABCCoLtd.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PLMLYNX.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

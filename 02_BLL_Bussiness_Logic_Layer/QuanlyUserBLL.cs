@@ -39,7 +39,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         /// <param name="position"></param>
         /// <param name="dept"></param>
         /// <returns></returns>
-        public bool ThemUserBLL(string username, string password, string roles, string position, string dept)
+        public bool ThemUserBLL(string username, string password, string roles, string position, string dept, int level)
         {
             // Kiểm tra dữ liệu đầu vào  nếu cần
             if (string.IsNullOrEmpty(username)) { return false; }
@@ -49,11 +49,12 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             if (string.IsNullOrEmpty(dept)) { return false; }
 
 
+
             // Kiểm tra xem dept đã có trong list chưa
             if (UsersDAL.CheckNameDept(dept) == false) { return false; }
 
             // Nếu không phát sinh vấn đề thì tiến hành thêm dữ liệu
-            return UsersDAL.ThemUserDAL(username, password, roles, position, UsersDAL.ConvertNameDept2IDDept(dept));
+            return UsersDAL.ThemUserDAL(username, password, roles, position, UsersDAL.ConvertNameDept2IDDept(dept), level);
         }
 
 
@@ -64,7 +65,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         /// <param name="position"></param>
         /// <param name="dept"></param>
         /// <returns></returns>
-        public bool CapnhatUserBLL(string username, string password, string roles, string position, string dept)
+        public bool CapnhatUserBLL(string username, string password, string roles, string position, string dept, int level)
         {
             //  // Kiểm tra dữ liệu đầu vào  nếu cần
             if (string.IsNullOrEmpty(username)) { return false; }
@@ -74,7 +75,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             if (string.IsNullOrEmpty(dept)) { return false; }
 
             // Nếu không phát sinh vấn đề thì tiến hành cập nhật dữ liệu
-            return UsersDAL.CapnhatUserDAL(username, password, roles, position, UsersDAL.ConvertNameDept2IDDept(dept));
+            return UsersDAL.CapnhatUserDAL(username, password, roles, position, UsersDAL.ConvertNameDept2IDDept(dept), level);
         }
 
 
@@ -137,6 +138,13 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return UsersDAL.IsAdminDAL(username);
         }
+
+        public bool IsPurchase_BLL(string username)
+        {
+            return UsersDAL.IsPurchase_DAL(username);
+        }
+
+
 
     }
 }

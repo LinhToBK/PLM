@@ -26,8 +26,8 @@ namespace PLM_Lynx.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=LINHTO\\LINHTOSQLSERVER;Initial Catalog=SAMPLE_PLM;Persist Security In" +
-            "fo=True;User ID=sa;Password=\"L!nh15091994\";Trust Server Certificate=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=61.14.233.166;Initial Catalog=SAMPLE_PLM;User ID=sa;;Password=\"yourSt" +
+            "rongPass@123003\";Trust Server Certificate=True")]
         public string Datacon {
             get {
                 return ((string)(this["Datacon"]));

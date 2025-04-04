@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Security.AccessControl;
 using PLM_Lynx._01_DAL_Data_Access_Layer;
+
 //using Microsoft.Office.Interop.Excel;
 
 //using Microsoft.Office.Interop.Excel;
@@ -45,7 +46,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         public frmFindPO()
         {
             InitializeComponent();
-            
         }
 
         private void btnExit_Click(object sender, EventArgs e)
@@ -60,21 +60,17 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void LoadDataFindtblPO(string text)
         {
-            InforSearch =    purchaseBLL.AllInforPObyKeySearchBLL(txtKeySearch.Text, radioPart.Checked);
+            InforSearch = purchaseBLL.AllInforPObyKeySearchBLL(txtKeySearch.Text, radioPart.Checked);
             dgvSearch.DataSource = InforSearch;
-            
 
             dgvSearch.AllowUserToAddRows = false;
             dgvSearch.EditMode = DataGridViewEditMode.EditProgrammatically;
-           dgvSearch.Columns[0].Width = 120;
+            dgvSearch.Columns[0].Width = 120;
             dgvSearch.Columns[1].Width = 100;
         }
 
         private void dgvSearch_Click(object sender, EventArgs e)
         {
-
-
-
             if (dgvSearch.Rows.Count == 0)
             {
                 MessageBox.Show("Không có dữ liệu để chọn");
@@ -83,12 +79,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             else
             {
                 LoadPartlist();
-               
             }
-
-
         }
-
 
         public void LoadPartlist()
         {
@@ -97,7 +89,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             PONhanVien = InforthisPO.Rows[0]["PONhanVien"].ToString();
             POPartlist = InforthisPO.Rows[0]["POPartlist"].ToString();
             //POAmount = InforthisPO.Rows[0]["POAmount"].ToString();
-            POAmount =  Convert.ToDouble( InforthisPO.Rows[0]["POAmount"] ).ToString("N0");
+            POAmount = Convert.ToDouble(InforthisPO.Rows[0]["POAmount"]).ToString("N0");
             PONote = InforthisPO.Rows[0]["PONote"].ToString();
             POSupplierID = InforthisPO.Rows[0]["POSupplierID"].ToString();
             POStatus = InforthisPO.Rows[0]["POStatus"].ToString();
@@ -174,6 +166,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             {
                 LoadDataFindtblPO(txtKeySearch.Text);
                 ShowChecklist();
+                this.BeginInvoke(new Action(ApplyFilter));
             }
             else
             {
@@ -193,6 +186,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dgvSearch.Columns[1].Width = 100;
 
             ShowChecklist();
+            this.BeginInvoke(new Action(ApplyFilter));
+
         }
 
         private void dtpFilter_ValueChanged(object sender, EventArgs e)
@@ -225,7 +220,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 }
                 else
                 {
-
                     ExcelRunning _exportTemplate = new ExcelRunning();
                     _exportTemplate._orderPOno = txtPOCode.Text.Replace("/", "_");
                     _exportTemplate._orderDate = PODate;
@@ -261,7 +255,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void btnUpdateStatus_Click(object sender, EventArgs e)
         {
-            if(InforPartlist.Rows.Count == 0)
+            if (InforPartlist.Rows.Count == 0)
             {
                 MessageBox.Show("PO hiện tại đang trống ! \n Vui lòng chọn PO để cập nhật ");
                 return;
@@ -276,11 +270,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 frm.UpdateStatus += frmStatus_FormClosed;   // Nếu đóng thì load lại partlist
                 frm.ShowDialog();
             }
-
-            
-
-
-            
         }
 
         private void frmStatus_FormClosed(object sender, EventArgs e)
@@ -291,14 +280,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void btnCheck_Click(object sender, EventArgs e)
         {
-
-           
-
         }
 
         private void ShowChecklist()
         {
-            if(dgvSearch.Rows.Count == 0)
+            if (dgvSearch.Rows.Count == 0)
             {
                 //MessageBox.Show("Không có dữ liệu để chọn");
                 return;
@@ -315,7 +301,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                                       .ToList();
                 foreach (var category in listMonth)
                 {
-                    ckcMonth.Items.Add(category, false ); // Mặc định tất cả các mục được chọn
+                    if (!ckcMonth.Items.Contains(category))
+                    {
+                        ckcMonth.Items.Add(category, false); // Mặc định tất cả các mục được chọn
+                    }
                 }
                 // Lấy danh sách Date
                 var listDate = dgvSearch.Rows
@@ -327,7 +316,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                                       .ToList();
                 foreach (var category in listDate)
                 {
-                    ckcDate.Items.Add(category, false); // Mặc định tất cả các mục được chọn
+                    if (!ckcDate.Items.Contains(category))
+                    {
+                        ckcDate.Items.Add(category, false); // Mặc định tất cả các mục được chọn
+                    }
                 }
 
                 // Lấy danh sách Staff
@@ -340,7 +332,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                                       .ToList();
                 foreach (var category in listStaff)
                 {
-                    ckcStaff.Items.Add(category, false); // Mặc định tất cả các mục được chọn
+                    if (!ckcStaff.Items.Contains(category))
+                    {
+                        ckcStaff.Items.Add(category, false); // Mặc định tất cả các mục được chọn
+                    }
                 }
 
                 // Lấy danh sách Status
@@ -353,17 +348,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                                       .ToList();
                 foreach (var category in listStatus)
                 {
-                    ckcStatus.Items.Add(category, false); // Mặc định tất cả các mục được chọn
+                    if (!ckcStatus.Items.Contains(category))
+                    {
+                        ckcStatus.Items.Add(category, false); // Mặc định tất cả các mục được chọn
+                    }
                 }
-            }    
-
-            
-
+            }
         }
 
         private void ckcStatus_SelectedIndexChanged(object sender, EventArgs e)
         {
-            
         }
 
         private void ApplyFilter()

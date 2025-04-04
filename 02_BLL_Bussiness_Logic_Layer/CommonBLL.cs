@@ -19,6 +19,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
     public class CommonBLL
     {
         private FindPartDAL PartDAL = new FindPartDAL();
+        private CommonInforDAL _commoninforDAL = new CommonInforDAL();
 
         /// <summary>
         /// 01. UPLOAD - Tải ảnh của 1 PartCode lên trên PictureBox
@@ -635,5 +636,22 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return _commonInforDAL.GetCommonInforValue_DAL(inforname);
         }
+
+
+        public DataTable GetAllVersionInfor_BLL()
+        {
+            return _commoninforDAL.GetAllVersionInfor_DAL();
+        }
+
+        public bool UpdateCompanyInfor_BLL(string name, string location, string phone, string tax)
+        {
+            return _commonInforDAL.UpdateCompanyInfor_DAL(name, location, phone, tax);
+        }
+
+        public bool InsertNewVersion_BLL(string ID, string content)
+        {
+            return _commoninforDAL.InsertNewVersion_DAL(ID, content);
+        }
+
     } // End Class CommonBLL
 } // End NameSpace

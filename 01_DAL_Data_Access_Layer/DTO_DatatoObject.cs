@@ -66,10 +66,31 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         public string MeanListNearPart { get; set; }
     }
 
+    public class ListNearECO
+    {
+        public int NoListNearECO { get; set; }
+        public string MeanListNearECO { get; set; }
+    }
+
     public class DataTransfer
     {
         public string _currentPartCode { get; set; }
         public string _currentPartName { get; set; }
         public DataTable listchild { get; set; }
+    }
+
+
+    public class tblECO
+    {
+        public int ECONo { get; set; }
+        public  DateTime ECODate { get; set; }
+        public string ECOLog { get; set; }
+        public int ECOTypeID { get; set; }
+        public int ECOIDProposal { get; set; }
+        public int ECOIDApproved { get; set; }
+        public int ECOStatusID { get; set; }
+        public string ECOContent { get; set; }
+        public string ECONameProposal {  get; set; }
+        public string ECONameApproved { get; set; }
     }
 }

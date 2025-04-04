@@ -26,7 +26,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable ();
             using (SqlConnection conn = new SqlConnection(Datacon))
             {
-                string sql_query = "select c.Username, c.Passwords, c.Roles, c.Position,d.Deptname   from tblUsers as c inner join tblDepartment as d on c.Department = d.DeptID";
+                string sql_query = "select c.Username, c.Passwords, c.Roles, c.Position, d.Deptname , c.UserLevel   from tblUsers as c inner join tblDepartment as d on c.Department = d.DeptID";
 
                 SqlCommand cmd = new SqlCommand (sql_query, conn);
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
@@ -63,12 +63,12 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="position"></param>
         /// <param name="dept"></param>
         /// <returns></returns>
-        public bool ThemUserDAL(string username, string password , string role , string position,int dept )
+        public bool ThemUserDAL(string username, string password , string role , string position,int dept , int level)
         {
             using (SqlConnection con = new SqlConnection(Datacon))
             {
-                string sql_query = "insert into tblUsers ( Username, Passwords, Roles, Position, Department) values (";
-                sql_query = sql_query + "@Username, @Password, @Roles, @Position , @Department )";
+                string sql_query = "insert into tblUsers ( Username, Passwords, Roles, Position, Department , UserLevel) values (";
+                sql_query = sql_query + "@Username, @Password, @Roles, @Position , @Department, @Level  )";
                 SqlCommand cmd = new SqlCommand(sql_query, con);
                 //cmd.Parameters.AddWithValue("@Username", username);
                 //cmd.Parameters.AddWithValue("@Password", password);
@@ -79,6 +79,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 cmd.Parameters.Add("@Roles", SqlDbType.NVarChar).Value = role;
                 cmd.Parameters.Add("@Position", SqlDbType.NVarChar).Value = position;
                 cmd.Parameters.AddWithValue("@Department", dept);
+                cmd.Parameters.AddWithValue("@Level", level);
                 //--------------------------
                 con.Open ();
                 int result;
@@ -202,13 +203,13 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="position"></param>
         /// <param name="dept"></param>
         /// <returns></returns>
-        public bool CapnhatUserDAL(string username, string password, string role, string position, int dept)
+        public bool CapnhatUserDAL(string username, string password, string role, string position, int dept, int level)
         {
             using (SqlConnection con = new SqlConnection(Datacon))
             {
 
-                string sql_query = "update tblUsers set ";
-                sql_query = sql_query + "Passwords = @Password, Roles = @Roles, Position = @Position ,Department = @Department  ";
+                string sql_query = @"update tblUsers set ";
+                sql_query = sql_query + "Passwords = @Password, Roles = @Roles, Position = @Position , Department = @Department, UserLevel = @Level  ";
                 sql_query = sql_query + "where Username = @Username ";
                 SqlCommand cmd = new SqlCommand(sql_query, con);
                 cmd.Parameters.Add("@Username", SqlDbType.NVarChar).Value = username;
@@ -216,6 +217,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 cmd.Parameters.Add("@Roles", SqlDbType.NVarChar).Value = role;
                 cmd.Parameters.Add("@Position", SqlDbType.NVarChar).Value = position;
                 cmd.Parameters.AddWithValue("@Department", dept);
+                cmd.Parameters.AddWithValue("@Level", level);
                 //--------------------------
                 con.Open();
                 int result;
@@ -422,5 +424,30 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
 
         }
+
+
+        public bool IsPurchase_DAL(string username)
+        {
+            using (SqlConnection conn = new SqlConnection(Datacon))
+            {
+                // select COUNT(1) from tblUsers where Username = N'Tô Văn Linh' and Roles = N'Admin'
+
+                conn.Open();
+                string sql_query = @"select COUNT(1) from tblUsers where Username = @Username and Roles = 'Purchase' ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@Username", username);
+
+                int count;
+                try
+                {
+                    count = (int)cmd.ExecuteScalar();
+                }
+                catch { return false; }
+                return count == 1; // Trả về giá trị true nếu tìm thấy bản ghi
+            }
+
+        }
+
+
     }
 }

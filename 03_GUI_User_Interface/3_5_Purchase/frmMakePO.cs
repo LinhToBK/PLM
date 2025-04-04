@@ -543,8 +543,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
             else
             {
-                string tb = "Lưu ý ! \n Bạn nên lưu PO trước khi xuất Excel \n  ";
-                tb += tb + "Bạn có muốn tiếp tục không ?";
+                string tb = "Bạn có muốn xuất ra file Excel để xem trước không ?  ";
+               
                 DialogResult kp = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kp == DialogResult.No)
                 {
@@ -584,6 +584,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void btnOldPO_Click(object sender, EventArgs e)
         {
             frmFindPO frm = new frmFindPO();
+            frm.ShowDialog();
+        }
+
+        private void BtnManageSupplier_Click(object sender, EventArgs e)
+        {
+            frmManageSupplier frm = new frmManageSupplier();    
             frm.ShowDialog();
         }
     }

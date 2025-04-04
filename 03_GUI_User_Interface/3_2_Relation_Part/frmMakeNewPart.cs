@@ -5,19 +5,25 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using PLM_Lynx._01_DAL_Data_Access_Layer;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PLM_Lynx._03_GUI_User_Interface
 
 {
     public partial class frmMakeNewPart : Form
     {
+        private MakeNewPartBLL partBLL = new MakeNewPartBLL();
+        private CommonBLL commonBLL = new CommonBLL();
+        public int IDProposal { get; set; }
+        public string NameProposal { get; set; }
+        private ECO_BLL _ecoBLL = new ECO_BLL();
 
-        MakeNewPartBLL partBLL = new MakeNewPartBLL();
-        CommonBLL commonBLL = new CommonBLL();
         public frmMakeNewPart()
         {
             InitializeComponent();
@@ -28,7 +34,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
             dgvFileAttachment.AllowDrop = true;
             dgvFileAttachment.DragEnter += dgvFileAttachment_DragEnter;
             dgvFileAttachment.DragDrop += dgvFileAttachment_DragDrop;
-
         }
 
         /// <summary>
@@ -37,14 +42,28 @@ namespace PLM_Lynx._03_GUI_User_Interface
         /// <param name="sender"></param>
         /// <param name="e"></param>
         /// <exception cref="NotImplementedException"></exception>
-        /// 
+        ///
         private bool IsAllowedExtension(string filePath)
         {
-            string[] allowedExtensions = { ".stp", ".jpg", ".dwg" , ".dxf", ".pdf", ".prt", ".step"};
+            string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf", ".prt", ".step" };
             string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
             return allowedExtensions.Contains(fileExtension);
         }
 
+        private void LoadMaterial()
+        {
+            string MaterialLib = Environment.CurrentDirectory;
+            MaterialLib = MaterialLib + @"\04_CommonDoc\ListMaterial.txt";
+            if (File.Exists(MaterialLib))
+            {
+                string[] lines = File.ReadAllLines(MaterialLib); // Đọc tất cả các dòng trong file
+                cboMaterial.Items.AddRange(lines); // Thêm vào ComboBox
+            }
+            else
+            {
+                MessageBox.Show("Không load được danh sách vật liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         private void DgvFileAttachment_DragEnter(object sender, DragEventArgs e)
         {
@@ -53,23 +72,19 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void label1_Click(object sender, EventArgs e)
         {
-
         }
 
         private void label3_Click(object sender, EventArgs e)
         {
-
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
-            
         }
 
         private void btnListNear_Click(object sender, EventArgs e)
@@ -85,14 +100,14 @@ namespace PLM_Lynx._03_GUI_User_Interface
             {
                 // this.Close();
                 DialogResult kq = MessageBox.Show("Bạn muốn thoát việc tạo Part mới không ? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if(kq == DialogResult.Yes)
+                if (kq == DialogResult.Yes)
                 {
                     this.Close();
-                }    
+                }
                 else
                 {
                     return;
-                }    
+                }
             }
         }
 
@@ -100,6 +115,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             LoadFamily();
             LoadFamilytoComboBox();
+            LoadMaterial();
             // Thiết lập cấu hình cho dgvFileAttachment
             // Thiết lập các cột cho dgvListFile
             dgvFileAttachment.ColumnCount = 4;
@@ -113,10 +129,9 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //dgvFileAttachment.Columns[3].Width = 250;
 
             // Thêm vào Phần PartDecription
-            string descript = "+) Feature : \r\n+) Material :  \r\n+) Dimension : \r\n+) Finishing : ";
+            string descript = "+) Feature :  \r\n+) Dimension : \r\n+) Finishing : ";
             txtPartDescript.Text = descript;
             txtApplyTemPlate.Text = descript;
-
         }
 
         /// <summary>
@@ -137,23 +152,21 @@ namespace PLM_Lynx._03_GUI_User_Interface
         /// </summary>
         private void LoadFamilytoComboBox()
         {
-            cboPartFamily.Items.Clear();    
+            cboPartFamily.Items.Clear();
 
             foreach (DataGridViewRow row in dgvFamily.Rows)
             {
                 // Kiểm tra nếu hàng không phải là hàng mới ( để tránh lỗi )
                 if (!row.IsNewRow)
                 {
-                    // Lấy giá trị từ cột đầu tiên 
+                    // Lấy giá trị từ cột đầu tiên
                     var value = row.Cells[0].Value?.ToString();
-                    if (!string.IsNullOrEmpty(value) )
+                    if (!string.IsNullOrEmpty(value))
                     {
-                        cboPartFamily.Items.Add(value); 
+                        cboPartFamily.Items.Add(value);
                     }
-                } 
-                    
-            } 
-                
+                }
+            }
         }
 
         /// </summary> 03. Hàm : Lấy  tên file từ Add file và thêm vào DataGridView dgvFileAttachment
@@ -163,10 +176,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             // Tạo OpenFileDiaglog đển chọn file
             using (OpenFileDialog open = new OpenFileDialog())
-            {   
+            {
                 // Giới hạn các định dạng file được chọn
                 open.Title = "Vui lòng chọn file ";
-                string filternote =  @"PDF Files (*.pdf)|*.pdf|";
+                string filternote = @"PDF Files (*.pdf)|*.pdf|";
                 filternote = filternote + @"STP Files (*.stp)|*.stp|";
                 filternote = filternote + @"JPG Files (*.jpg)|*.jpg|";
                 filternote = filternote + @"DWG Files (*.dwg)|*.dwg|";
@@ -175,19 +188,15 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 filternote = filternote + @"All Supported Files (*.pdf;*.stp;*.dwg;*.dxf;*.jpg;*.prt)|*.jpg;*.pdf;*.stp;*.dwg;*.dxf;*.prt";
                 open.Filter = filternote;
 
-
-                // Nếu người dùng chọn 1 file 
-                if ( open.ShowDialog() == DialogResult.OK)
+                // Nếu người dùng chọn 1 file
+                if (open.ShowDialog() == DialogResult.OK)
                 {
-
-
                     FileInfo in4 = new FileInfo(open.FileName);
                     string ExtensionFile = in4.Extension;
-                   
-                    // Lấy phần mở rộng của tệp đã chọn
-                   
 
-                    // Kiểm tra nếu phần mở rộng đã tồn tại trong DataGridView 
+                    // Lấy phần mở rộng của tệp đã chọn
+
+                    // Kiểm tra nếu phần mở rộng đã tồn tại trong DataGridView
                     bool IsTrungExtension = false;
 
                     foreach (DataGridViewRow row in dgvFileAttachment.Rows)
@@ -198,42 +207,46 @@ namespace PLM_Lynx._03_GUI_User_Interface
                         {
                             IsTrungExtension = true;
                             break;
-                        }    
+                        }
+                    }
 
-                    } 
-                    
                     // Nếu không có phần mở rộng trùng, thêm tệp vào DataGritview
-                    if(!IsTrungExtension )
+                    if (!IsTrungExtension)
                     {
-                        
                         dgvFileAttachment.Rows.Add(in4.Name, in4.Length / 1024 + "KB", in4.Extension, in4.FullName);
                     }
                     else
                     {
                         MessageBox.Show("Đã có tệp có phần Entension trùng ");
                         return;
-                    } 
-                        
-                }    
-
-            }    
+                    }
+                }
+            }
         }
-
 
         private void btnAddPart_Click(object sender, EventArgs e)
         {
             string PartName = txtPartName.Text;
             string PartDescript = txtPartDescript.Text;
             string PartFamily = cboPartFamily.Text;
+            string PartMaterial = txtPartMaterial.Text;
             string ThongBao = "Bạn muốn thêm Part : \n " + "+) PartName : " + PartName + "\n +) PartFamily : " + PartFamily + "\n +) Part Description : " + PartDescript;
+            ThongBao = ThongBao + "\n +) Part Material : " + PartMaterial;
+            if (PartMaterial.Length > 20)
+            {
+                MessageBox.Show("Vật liệu không được quá 20 ký tự");
+                return;
+            }
 
-            DialogResult result = MessageBox.Show(ThongBao, "Thông báo ", MessageBoxButtons.YesNo, MessageBoxIcon.Information    );
-            if ( result == DialogResult.Yes)
+            int NewECONo = _ecoBLL.LoadECONo();
+
+            DialogResult result = MessageBox.Show(ThongBao, "Thông báo ", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            if (result == DialogResult.Yes)
             {
                 // Nếu Yes thì thực hiện việc Insert
-                if(partBLL.InsertNewPartBLL(PartFamily, PartName, PartDescript))
+                if (partBLL.InsertNewPartBLL(PartFamily, PartName, PartDescript, PartMaterial))
                 {
-                    //MessageBox.Show("Đã thêm part thành công !!! \n Vui lòng vào Hiển thị danh sách Part gần nhất để check lại. ");
+                    
 
                     //--------------------------------------
                     //--  Lấy PartCode từ PartName vừa tạo
@@ -242,10 +255,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     //--------------------------------------
                     //-- Tạo folder từ PartCode
                     //--------------------------------------
-                    if (newestpartcode !=null)
+                    if (newestpartcode != null)
                     {
                         string[] FolderName = newestpartcode.Split('-');
-                        // FolderName[0] : XXX : PartFamily 
+                        // FolderName[0] : XXX : PartFamily
                         // FolderName[1] : YYYYY : PartNo
                         // -- Tạo Folder  bằng PartCode mới
                         string FolderPath = Properties.Settings.Default.LinkDataPart + "//" + FolderName[0] + "//" + FolderName[1];
@@ -253,21 +266,21 @@ namespace PLM_Lynx._03_GUI_User_Interface
                         try
                         {
                             // Tạo thư mục
-                            if(!Directory.Exists(FolderPath))
+                            if (!Directory.Exists(FolderPath))
                             {
                                 Directory.CreateDirectory(FolderPath);
                                 //Ghichep = "Thư mục đã được tạo : " + newestpartcode;
                                 //MessageBox.Show("Thư mục đã được tạo : " + newestpartcode);
-                            }    
+                            }
                             else
                             {
                                 MessageBox.Show("Thư mục đã tồn tại ");
-                            }    
+                            }
                         }
                         catch (Exception ex)
                         {
                             MessageBox.Show("Đã xảy ra lỗi " + ex.Message);
-                        } 
+                        }
                         //------------------------------------------------------------
                         // --- Đổi tên  và save as copy các file vào folder vừa tạo
                         //------------------------------------------------------------
@@ -276,39 +289,53 @@ namespace PLM_Lynx._03_GUI_User_Interface
                             // Duyệt qua các hàng  trong DataGridView
                             foreach (DataGridViewRow row in dgvFileAttachment.Rows)
                             {
-                                if (row.Cells[3].Value !=null) //Kiểm tra tại cột FileName
+                                if (row.Cells[3].Value != null) //Kiểm tra tại cột FileName
                                 {
-                                    // Lấy đường dẫn của file từ cột trong Datagridview 
+                                    // Lấy đường dẫn của file từ cột trong Datagridview
                                     string SourceFilePath = row.Cells[3].Value.ToString();
                                     string FileExtension = row.Cells[2].Value.ToString();
 
                                     // Tạo tên File mới dựa trên  tên thư mục và phần mở rộng của file
-                                    string NewFileName = FolderPath + "//" + newestpartcode + "_DV-0"+ FileExtension;
+                                    string NewFileName = FolderPath + "//" + newestpartcode + "_V1.0" + FileExtension;
                                     // Tên đường dẫn đến folder + tên partcode mới + . đuôi file
                                     string TargetFilePart = Path.Combine(FolderPath, NewFileName);
 
                                     // Sao chép file vào thư mục đích với tên mới
                                     File.Copy(SourceFilePath, TargetFilePart, true);
                                     //MessageBox.Show("Đã sao chép thành công ");
-                                }    
-                            } 
+                                }
+                            }
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Xuất hiện lỗi: \n - "+ ex.Message);
+                            MessageBox.Show("Xuất hiện lỗi: \n - " + ex.Message);
                         }
 
                         //------------------------------------------------------------
                         // ---  Ghi lại vào LogFile với newest Part Code
-                        //------------------------------------------------------------
-                        string PartLogAdd = "Created - DV -" + DateTime.Now.ToString("MM/dd/yyyy");
-                        if(partBLL.CapNhatPartLogBLL(newestpartcode,PartLogAdd))
-                        {
-                            MessageBox.Show("Tạo thành công Part mới");
+                        // Phần này gồm 2 bước :
+                        // Bước 1 : Ghi ECONo vào PartLog trong tblPart
+                        // Bước 2 : Ghi nội dụng cho ECONo vào tblECO
 
+                        //------------------------------------------------------------
+                        string PartLogAdd = NewECONo.ToString(); ;
+                        if (partBLL.CapNhatPartLogBLL(newestpartcode, PartLogAdd) == true )
+                        {
+                            //MessageBox.Show("Tạo thành công Part mới");
+                            
+                            string ECOContent = "[{ \"p\": \"" + newestpartcode + "\", \"c\": \"created new part\" }]";
+                            int ECOTypeID = 1; // 1 - Tạo mới Part
+                            if ( _ecoBLL.InsertNewECO_BLL(NewECONo, IDProposal, NameProposal, ECOTypeID, ECOContent) ==true )
+                            {
+                                MessageBox.Show("Tạo thành công Part mới");
+                            }
+                            else
+                            {
+                                MessageBox.Show("Ghi ECO Thất Bại");
+                            }
                             //frmListNear frm = new frmListNear();
                             //frm.ShowDialog();
-                        }  
+                        }
                         else
                         {
                             MessageBox.Show("Ghi File Log Thất Bại");
@@ -319,28 +346,26 @@ namespace PLM_Lynx._03_GUI_User_Interface
                         txtPartDescript.Text = txtApplyTemPlate.Text;
                         txtFamilyDescription.Text = "";
                         dgvFileAttachment.Rows.Clear();
-                        
-                        
-
                     }
                     else
                     {
                         MessageBox.Show("Không tạo được PartCode mới");
                         txtPartName.Focus();
                         return;
-                    }    
+                    }
                 }
                 else
                 {
                     MessageBox.Show("Phát sinh lỗi \n Kiểm tra lại PartName");
-                }    
-                    
-            } 
+                }
+            }
             else
             {
-                // Nếu No thì return 
+                // Nếu No thì return
                 return;
-            }          
+            }
+
+            // Chương trình mới ;
         }
 
         private void btnAddFileAttachment_Click(object sender, EventArgs e)
@@ -351,7 +376,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private void btnDeleteFile_Click(object sender, EventArgs e)
         {
             // Kiểm tra xem có hàng nào được chọn không ?
-            if(dgvFileAttachment.SelectedRows.Count > 0)
+            if (dgvFileAttachment.SelectedRows.Count > 0)
             {
                 // Xóa hàng đầu tiên trong danh sách chọn
                 try
@@ -360,14 +385,14 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Phát sinh lỗi"+ ex.Message);
+                    MessageBox.Show("Phát sinh lỗi" + ex.Message);
                     return;
                 }
-            } 
+            }
             else
             {
                 MessageBox.Show("Vui lòng chọn 1 hàng để xóa");
-            }    
+            }
         }
 
         private void dgvFileAttachment_DragEnter(object sender, DragEventArgs e)
@@ -389,7 +414,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
             {
                 e.Effect = DragDropEffects.None;
             }
-
         }
 
         private void dgvFileAttachment_DragDrop(object sender, DragEventArgs e)
@@ -402,7 +426,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 {
                     // Hàm thêm dòng vào dgvFile Attachment
                     ThemFile2listFile(file);
-                    
                 }
                 else
                 {
@@ -413,10 +436,9 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void ThemFile2listFile(string file)
         {
-            
-            FileInfo in4 = new FileInfo(file);  
-            string ExtensionFile = in4.Extension;   
-            bool CheckTrung ;
+            FileInfo in4 = new FileInfo(file);
+            string ExtensionFile = in4.Extension;
+            bool CheckTrung;
             CheckTrung = false;
             foreach (DataGridViewRow row in dgvFileAttachment.Rows)
             {
@@ -432,7 +454,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //Nếu không có phần mở rộng trùng, thêm tệp vào DataGritview
             if (!CheckTrung)
             {
-
                 dgvFileAttachment.Rows.Add(in4.Name, in4.Length / 1024 + "KB", in4.Extension, in4.FullName);
             }
             else
@@ -447,17 +468,15 @@ namespace PLM_Lynx._03_GUI_User_Interface
             string selectfamily = cboPartFamily.SelectedItem.ToString();
             foreach (DataGridViewRow dr in dgvFamily.Rows)
             {
-                if (dr.Cells[0].Value !=null && dr.Cells[0].Value.ToString()== selectfamily)
+                if (dr.Cells[0].Value != null && dr.Cells[0].Value.ToString() == selectfamily)
                 {
                     // Nếu thấy giá trị trùng
                     txtFamilyDescription.Text = dr.Cells[2].Value.ToString();
                     return;
-                } 
-                    
+                }
             }
             // Nếu không thấy thì để giá trị của ô textbox là trống
             txtFamilyDescription.Text = "";
-                
         }
 
         private void dgvFileAttachment_DoubleClick(object sender, EventArgs e)
@@ -473,9 +492,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            // 
+            //
         }
 
-      
+        private void cboMaterial_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtPartMaterial.Text = cboMaterial.SelectedItem.ToString();
+        }
+
+        
+
+        
     }
 }

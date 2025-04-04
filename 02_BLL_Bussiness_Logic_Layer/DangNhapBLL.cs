@@ -22,5 +22,17 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return userDAL.CheckDangnhapDAL(username, password);
         }
 
+
+
+        public int GetUserID_BLL(string UserName)
+        {
+            return userDAL.GetUserID_DAL(UserName);
+        }
+
+        public int GetLevel_BLL(string UserName)
+        {
+            return userDAL.GetLevel_DAL(UserName);
+        }
+
     }
 }

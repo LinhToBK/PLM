@@ -19,13 +19,13 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         /// <param name="PartName"></param>
         /// <param name="PartDescript"></param>
         /// <returns></returns>
-        public bool InsertNewPartBLL(string PartFamily, string PartName, string PartDescript)
+        public bool InsertNewPartBLL(string PartFamily, string PartName, string PartDescript, string PartMaterial)
         {
 
             // Kiểm tra thông tin nhập vào
             if (string.IsNullOrEmpty(PartFamily)) { return false; }
             if (string.IsNullOrEmpty(PartName)) { return false; }
-            return (newpartDAL.InsertNewPartDAL(PartFamily, PartName, PartDescript));
+            return (newpartDAL.InsertNewPartDAL(PartFamily, PartName, PartDescript , PartMaterial));
         }
 
         public DataTable LoadFamilyBLL()

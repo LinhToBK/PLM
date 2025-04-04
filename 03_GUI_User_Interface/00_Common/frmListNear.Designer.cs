@@ -37,11 +37,13 @@
             // 
             // dgvListNearPart
             // 
+            this.dgvListNearPart.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListNearPart.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListNearPart.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvListNearPart.Location = new System.Drawing.Point(0, 136);
             this.dgvListNearPart.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dgvListNearPart.Name = "dgvListNearPart";
+            this.dgvListNearPart.RowHeadersWidth = 51;
             this.dgvListNearPart.RowTemplate.Height = 23;
             this.dgvListNearPart.Size = new System.Drawing.Size(800, 501);
             this.dgvListNearPart.TabIndex = 0;
@@ -53,7 +55,7 @@
             this.cboChooseNoRow.Location = new System.Drawing.Point(203, 63);
             this.cboChooseNoRow.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cboChooseNoRow.Name = "cboChooseNoRow";
-            this.cboChooseNoRow.Size = new System.Drawing.Size(276, 25);
+            this.cboChooseNoRow.Size = new System.Drawing.Size(276, 29);
             this.cboChooseNoRow.TabIndex = 1;
             this.cboChooseNoRow.SelectedIndexChanged += new System.EventHandler(this.cboChooseNoRow_SelectedIndexChanged);
             // 
@@ -62,7 +64,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(27, 68);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(164, 17);
+            this.label1.Size = new System.Drawing.Size(216, 23);
             this.label1.TabIndex = 2;
             this.label1.Text = "Chọn số đối tượng hiển thị";
             // 
@@ -73,13 +75,13 @@
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label2.Location = new System.Drawing.Point(589, 68);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(165, 15);
+            this.label2.Size = new System.Drawing.Size(216, 19);
             this.label2.TabIndex = 2;
             this.label2.Text = "Phím tắt cửa sổ Form : Escape";
             // 
             // frmListNear
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 637);
             this.Controls.Add(this.label2);

@@ -14,9 +14,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
 {
     public partial class frmListNear : Form
     {
-
         private bool IsLoading = true; // Flag để kiểm soát sự kiện
-        FindPartBLL PartBLL = new FindPartBLL();
+        private FindPartBLL PartBLL = new FindPartBLL();
 
         public void LoadDatatodgvListNear(int norow)
         {
@@ -24,9 +23,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
             dgvListNearPart.AllowUserToAddRows = false;
             dgvListNearPart.EditMode = DataGridViewEditMode.EditProgrammatically;
-
         }
-
 
         public frmListNear()
         {
@@ -34,7 +31,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             this.KeyPreview = true; // Cho phép Form nhận sự kiện phím trước
             this.KeyDown += new KeyEventHandler(frmListNear_KeyDown);
 
-            // Tạo danh sách  
+            // Tạo danh sách
             List<ListNearPart> Chonsoluong = new List<ListNearPart>
             {
                 new ListNearPart { NoListNearPart = 5, MeanListNearPart = "Chọn 5 Part tạo gần nhất" },
@@ -55,32 +52,22 @@ namespace PLM_Lynx._03_GUI_User_Interface
             }
             IsLoading = false;
 
-           // LoadDatatodgvListNear(cboChooseNoRow.SelectedValue);
-
-
+            // LoadDatatodgvListNear(cboChooseNoRow.SelectedValue);
         }
 
         private void cboChooseNoRow_SelectedIndexChanged(object sender, EventArgs e)
         {
-
             try
             {
-                // Lấy giá trị NoListNearPart đang được chọn
-                //int selectNo = Convert.ToInt32(cboChooseNoRow.SelectedValue);
-                if(!IsLoading)
+                if (!IsLoading)
                 {
-                   // MessageBox.Show("Đang chọn số lượng" + cboChooseNoRow.SelectedValue);
-                    LoadDatatodgvListNear(Convert.ToInt32(cboChooseNoRow.SelectedValue));   
-
+                    LoadDatatodgvListNear(Convert.ToInt32(cboChooseNoRow.SelectedValue));
                 }
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Xuất hiện lỗi : " + ex.Message);
-            } 
-            
-
+            }
         }
 
         private void frmListNear_Load(object sender, EventArgs e)
@@ -90,12 +77,11 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void frmListNear_KeyDown(object sender, KeyEventArgs e)
         {
-            // Đóng Form khi nhấn Escape ; 
-            if(e.KeyCode == Keys.Escape)
+            // Đóng Form khi nhấn Escape ;
+            if (e.KeyCode == Keys.Escape)
             {
                 this.Close();
             }
-                
         }
     }
 }

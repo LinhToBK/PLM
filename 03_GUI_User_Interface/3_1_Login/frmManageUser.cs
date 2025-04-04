@@ -16,6 +16,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
     public partial class frmManageUser : Form
     {
         private QuanlyUserBLL UserBLL = new QuanlyUserBLL();
+        private DataTable _tbldepartment = new DataTable();
 
         public frmManageUser()
         {
@@ -34,6 +35,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             //btnSaveDept.Enabled = false;
             txtUserName.Enabled = false;
             txtIdDept.Enabled = false;
+            cboDepartment.Enabled = false;
+            cboLevel.Enabled = false;
 
         }
 
@@ -45,8 +48,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
                 txtUserName.Text = "";
                 txtUserPassword.Text = "";
                 txtUserRoles.Text = "";
-                txtUserDepartment.Text = "";
+                //txtUserDepartment.Text = "";
                 txtUserPosition.Text = "";
+                cboDepartment.SelectedIndex = 1;
+                cboLevel.SelectedIndex = 2;
             }
             else
             {
@@ -62,13 +67,21 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
         {
             //throw new NotImplementedException();
             dgvListDepartment.DataSource = UserBLL.LayDatatblDepartment();
+            _tbldepartment = UserBLL.LayDatatblDepartment();
             dgvListDepartment.Columns[0].HeaderText = "STT";
             dgvListDepartment.Columns[1].HeaderText = "Tên Phòng";
             dgvListDepartment.Columns[0].Width = 30;
             dgvListDepartment.Columns[1].Width = 100;
             dgvListDepartment.AllowUserToAddRows = false; // Không cho người dùng thêm hàng dữ liệu
             dgvListDepartment.EditMode = DataGridViewEditMode.EditProgrammatically;
-            
+
+            // Load các department lên combox
+            // Xóa dữ liệu cũ trước khi load
+            cboDepartment.Items.Clear();
+             foreach (DataRow dr in _tbldepartment.Rows)
+            {
+                cboDepartment.Items.Add(dr[1].ToString());
+            }    
 
         }
 
@@ -120,11 +133,15 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             txtUserPassword.Text = dgvListUser.CurrentRow.Cells[1].Value.ToString();
             txtUserRoles.Text = dgvListUser.CurrentRow.Cells[2].Value.ToString();
             txtUserPosition.Text = dgvListUser.CurrentRow.Cells[3].Value.ToString();
-            txtUserDepartment.Text = dgvListUser.CurrentRow.Cells[4].Value.ToString();
+            //txtUserDepartment.Text = dgvListUser.CurrentRow.Cells[4].Value.ToString();
+            cboDepartment.Text = dgvListUser.CurrentRow.Cells[4].Value.ToString();
+            cboLevel.SelectedIndex = Convert.ToInt32(dgvListUser.CurrentRow.Cells[5].Value.ToString()) - 1;
 
             // -- Các control button 
             btnModifyUser.Enabled = true;
             btnDeleteUser.Enabled = true;
+            cboDepartment.Enabled = true;
+            cboLevel.Enabled = true;
 
         }
 
@@ -136,6 +153,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             btnAddUser.Enabled = false;
             ResetTextboxValue(true);
             txtUserName.Enabled = true; // cho phép nhập tên nhân viên mới
+            cboDepartment.Enabled = true; // Cho phép chọn Department
+            cboLevel.Enabled = true; // Cho phép chọn Level
+            cboDepartment.SelectedIndex = 0;
+            cboLevel.SelectedIndex = 2;
             txtUserName.Focus();
         }
 
@@ -147,16 +168,18 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             string pass = txtUserPassword.Text;
             string role = txtUserRoles.Text;
             string pos = txtUserPosition.Text;
-            string dept = txtUserDepartment.Text;
+            string dept = cboDepartment.SelectedItem.ToString();
+            int level = cboLevel.SelectedIndex + 1;
             string thongbao;
             
 
             thongbao = "Bạn có muốn thêm dữ liệu : \n Tên :   " + username + "\n Vai trò :" + role + "\n Chức vụ : " + pos + "\n Phòng : " + dept;
+            thongbao = thongbao + "\n Level : " + level;
             DialogResult result = MessageBox.Show(thongbao, "Notice !!!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 // Gọi phương thức  "ThemUserBLL" để  thêm dữ liệu
-                if (UserBLL.ThemUserBLL(username, pass, role, pos, dept))
+                if (UserBLL.ThemUserBLL(username, pass, role, pos, dept,level))
                 {
                     // Nếu OK
                     MessageBox.Show("Đã thêm User mới thành công ");
@@ -202,7 +225,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
         private void btnModifyUser_Click(object sender, EventArgs e)
         {
             // -----------------------------------------
-            // Description  : Khi người dùng nháy chuột vào 1 dòng bản ghi bất kì trên Grit View
+            // Description  : Khi người dùng nháy chuột vào 1 dòng bản ghi bất kì trên Grid View
             //              để hiển thị dữ liệu  và người dùng có thể sửa thông tin đó
             //              khi click vào thì sẽ lưu thông tin người dùng đã sửa và Database
             // -----------------------------------------
@@ -216,14 +239,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             string pass = txtUserPassword.Text;
             string role = txtUserRoles.Text;
             string pos = txtUserPosition.Text;
-            string dept = txtUserDepartment.Text;
+            string dept = cboDepartment.SelectedItem.ToString();
+            int level = cboLevel.SelectedIndex + 1;
             string thongbao;
             thongbao = "Bạn có muốn sửa dữ liệu : \n Tên :   " + username + "\n Vai trò :" + role + "\n Chức vụ : " + pos + "\n Phòng : " + dept;
+            thongbao = thongbao + "\n Level : " + level;
             DialogResult result = MessageBox.Show(thongbao, "Notice !!!!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
                 // Gọi phương thức  "CapnhatUserBLL" để  sửa dữ liệu
-                if (UserBLL.CapnhatUserBLL(username, pass, role, pos, dept))
+                if (UserBLL.CapnhatUserBLL(username, pass, role, pos, dept, level))
                 {
                     // Nếu OK
                     MessageBox.Show("Đã sửa User mới thành công ");

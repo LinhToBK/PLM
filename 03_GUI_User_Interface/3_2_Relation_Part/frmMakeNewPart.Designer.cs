@@ -52,6 +52,9 @@
             this.dgvFamily = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAddPart = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cboMaterial = new System.Windows.Forms.ComboBox();
+            this.txtPartMaterial = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -73,6 +76,8 @@
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.txtPartMaterial);
+            this.splitContainer1.Panel1.Controls.Add(this.cboMaterial);
             this.splitContainer1.Panel1.Controls.Add(this.label6);
             this.splitContainer1.Panel1.Controls.Add(this.btnApplyTemplate);
             this.splitContainer1.Panel1.Controls.Add(this.txtApplyTemPlate);
@@ -85,6 +90,7 @@
             this.splitContainer1.Panel1.Controls.Add(this.txtPartName);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
             this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.label8);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.label2);
             // 
@@ -98,17 +104,17 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(334, 169);
+            this.label6.Location = new System.Drawing.Point(356, 180);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(101, 15);
+            this.label6.Size = new System.Drawing.Size(102, 15);
             this.label6.TabIndex = 10;
             this.label6.Text = "Template Descript";
             // 
             // btnApplyTemplate
             // 
-            this.btnApplyTemplate.Location = new System.Drawing.Point(443, 165);
+            this.btnApplyTemplate.Location = new System.Drawing.Point(463, 176);
             this.btnApplyTemplate.Name = "btnApplyTemplate";
-            this.btnApplyTemplate.Size = new System.Drawing.Size(75, 23);
+            this.btnApplyTemplate.Size = new System.Drawing.Size(55, 23);
             this.btnApplyTemplate.TabIndex = 9;
             this.btnApplyTemplate.Text = "Apply";
             this.btnApplyTemplate.UseVisualStyleBackColor = true;
@@ -116,11 +122,11 @@
             // 
             // txtApplyTemPlate
             // 
-            this.txtApplyTemPlate.Location = new System.Drawing.Point(337, 191);
+            this.txtApplyTemPlate.Location = new System.Drawing.Point(343, 205);
             this.txtApplyTemPlate.Multiline = true;
             this.txtApplyTemPlate.Name = "txtApplyTemPlate";
             this.txtApplyTemPlate.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtApplyTemPlate.Size = new System.Drawing.Size(181, 73);
+            this.txtApplyTemPlate.Size = new System.Drawing.Size(175, 59);
             this.txtApplyTemPlate.TabIndex = 8;
             // 
             // txtFamilyDescription
@@ -136,12 +142,12 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(9, 169);
+            this.label5.Location = new System.Drawing.Point(9, 181);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(285, 30);
             this.label5.TabIndex = 5;
             this.label5.Text = "Gợi ý :  PartName nên ghi rõ tên model và tính năng \r\nDescription :nên ghi kích t" +
-    "hước, vật liệu,";
+    "hước bao";
             // 
             // label7
             // 
@@ -159,7 +165,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(9, 211);
+            this.label4.Location = new System.Drawing.Point(9, 218);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(311, 15);
             this.label4.TabIndex = 5;
@@ -180,7 +186,7 @@
             this.txtPartDescript.Multiline = true;
             this.txtPartDescript.Name = "txtPartDescript";
             this.txtPartDescript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPartDescript.Size = new System.Drawing.Size(426, 73);
+            this.txtPartDescript.Size = new System.Drawing.Size(426, 59);
             this.txtPartDescript.TabIndex = 2;
             // 
             // txtPartName
@@ -337,6 +343,31 @@
             this.btnAddPart.UseVisualStyleBackColor = true;
             this.btnAddPart.Click += new System.EventHandler(this.btnAddPart_Click);
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(16, 155);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(74, 15);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Part Material";
+            // 
+            // cboMaterial
+            // 
+            this.cboMaterial.FormattingEnabled = true;
+            this.cboMaterial.Location = new System.Drawing.Point(92, 151);
+            this.cboMaterial.Name = "cboMaterial";
+            this.cboMaterial.Size = new System.Drawing.Size(100, 23);
+            this.cboMaterial.TabIndex = 11;
+            this.cboMaterial.SelectedIndexChanged += new System.EventHandler(this.cboMaterial_SelectedIndexChanged);
+            // 
+            // txtPartMaterial
+            // 
+            this.txtPartMaterial.Location = new System.Drawing.Point(204, 151);
+            this.txtPartMaterial.Name = "txtPartMaterial";
+            this.txtPartMaterial.Size = new System.Drawing.Size(126, 23);
+            this.txtPartMaterial.TabIndex = 12;
+            // 
             // frmMakeNewPart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -393,5 +424,8 @@
         private System.Windows.Forms.Button btnApplyTemplate;
         private System.Windows.Forms.TextBox txtApplyTemPlate;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cboMaterial;
+        private System.Windows.Forms.TextBox txtPartMaterial;
     }
 }

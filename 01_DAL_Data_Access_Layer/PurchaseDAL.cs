@@ -144,7 +144,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 {
                     string sql_query = "UPDATE tblSupplier SET ";
                     sql_query += "SupName = @Name , SupPhoneNumber = @Phone, SupTaxID = @TaxID, SupLocation = @Location , SupRepresentative = @Representative, SupNote = @Note where SupID = @ID ";
-                    MessageBox.Show(sql_query);
+                    //MessageBox.Show(sql_query);
 
                     using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
                     {

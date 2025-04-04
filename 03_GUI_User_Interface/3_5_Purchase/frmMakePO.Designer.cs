@@ -608,6 +608,7 @@
             this.BtnManageSupplier.TabIndex = 6;
             this.BtnManageSupplier.Text = "Manage Supplier";
             this.BtnManageSupplier.UseVisualStyleBackColor = true;
+            this.BtnManageSupplier.Click += new System.EventHandler(this.BtnManageSupplier_Click);
             // 
             // btnOldPO
             // 

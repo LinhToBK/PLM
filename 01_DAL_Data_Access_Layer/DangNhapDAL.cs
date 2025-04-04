@@ -63,5 +63,77 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 return conn.Database;
             }
         }
+
+
+
+        /// <summary>
+        /// 03. [SELECT] Lấy UserID từ tblUsers với điều kiện Username
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <returns></returns>
+        public int GetUserID_DAL(string UserName)
+        {
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                conn.Open();
+                string sql_query = "select top 1 UserID from tblUsers where tblUsers.Username = @UserName";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@UserName", UserName);
+                int i;
+                try
+                {
+                    // Thực thi câu lệnh và kiểm tra giá trị trả về
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        i = Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        i = 0; // Không có kết quả
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    i = 0;
+                }
+                return i;
+            }
+        }
+
+        public int GetLevel_DAL(string UserName)
+        {
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                conn.Open();
+                string sql_query = "select top 1 UserLevel from tblUsers where tblUsers.Username = @UserName";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@UserName", UserName);
+                int i;
+                try
+                {
+                    // Thực thi câu lệnh và kiểm tra giá trị trả về
+                    object result = cmd.ExecuteScalar();
+                    if (result != null && result != DBNull.Value)
+                    {
+                        i = Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        i = 0; // Không có kết quả
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex.Message);
+                    i = 0;
+                }
+                return i;
+            }
+        }
+
+
+
     }
 }

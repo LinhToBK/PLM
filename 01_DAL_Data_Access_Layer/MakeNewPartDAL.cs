@@ -22,7 +22,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="PartName"></param>
         /// <param name="PartDescript"></param>
         /// <returns></returns>
-        public bool InsertNewPartDAL(string PartFamily, string PartName, string PartDescript)
+        public bool InsertNewPartDAL(string PartFamily, string PartName, string PartDescript, string PartMaterial)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
@@ -32,8 +32,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 // Tạo một giao dịch (Transaction) C#
                 using (SqlTransaction transaction = con.BeginTransaction())
                 {
-                    string sql_query = @"INSERT INTO tblPart (PartFamily, PartName, PartDescript)
-                             VALUES (@PartFamily, @PartName, @PartDescript);";
+                    string sql_query = @"INSERT INTO tblPart (PartFamily, PartName, PartDescript, PartMaterial)
+                             VALUES (@PartFamily, @PartName, @PartDescript, @PartMaterial);";
 
                     SqlCommand cmd = new SqlCommand(sql_query, con, transaction);
 
@@ -41,6 +41,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     cmd.Parameters.Add("@PartFamily", SqlDbType.NVarChar).Value = PartFamily;
                     cmd.Parameters.Add("@PartName", SqlDbType.NVarChar).Value = PartName;
                     cmd.Parameters.Add("@PartDescript", SqlDbType.NVarChar).Value = PartDescript;
+                    cmd.Parameters.Add("@PartMaterial", SqlDbType.NVarChar).Value = PartMaterial;
 
                     try
                     {

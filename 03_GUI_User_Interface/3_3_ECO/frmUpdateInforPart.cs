@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 {
@@ -16,18 +17,22 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
     {
         private ECO_BLL ecoBLL = new ECO_BLL();
         private CommonBLL commonBLL = new CommonBLL();
-        
+        private int _oldPartStage;
+        private int _newPartStage;
+        private string _oldPartMaterial;
+        private string _newPartMaterial;
+        private DataTable _tblPartStage = new DataTable();
+        public int IDProposal;
+        public string NameProposal;
+
         public frmUpdateInforPart()
         {
             InitializeComponent();
-
-
         }
 
         //==========================================================================
-        //              DANH SÁCH HÀM TỰ TẠO 
+        //              DANH SÁCH HÀM TỰ TẠO
         //==========================================================================
-
 
         /// <summary>
         /// 01. Hàm sẽ lấy 1 file trong máy tính và hiển thị lên dgvListUpload
@@ -48,13 +53,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 filternote = filternote + @"All Supported Files (*.prt;*.pdf;*.stp;*.dwg;*.dxf;*.jpg)|*.prt;*.jpg;*.pdf;*.stp;*.dwg;*.dxf";
                 open.Filter = filternote;
 
-
-                // Nếu người dùng chọn 1 file 
+                // Nếu người dùng chọn 1 file
                 if (open.ShowDialog() == DialogResult.OK)
                 {
                     FileInfo in4 = new FileInfo(open.FileName);
                     string ExtensionFile = in4.Extension;
-                    // Kiểm tra nếu phần mở rộng đã tồn tại trong DataGridView 
+                    // Kiểm tra nếu phần mở rộng đã tồn tại trong DataGridView
                     bool IsTrungExtension = false;
 
                     foreach (DataGridViewRow row in dgvListUpload.Rows)
@@ -66,13 +70,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                             IsTrungExtension = true;
                             break;
                         }
-
                     }
 
                     // Nếu không có phần mở rộng trùng, thêm tệp vào DataGritview
                     if (!IsTrungExtension)
                     {
-
                         dgvListUpload.Rows.Add(in4.Name, in4.Length / 1024 + "KB", in4.Extension, in4.FullName);
                     }
                     else
@@ -80,9 +82,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         MessageBox.Show("Đã có tệp có phần Entension trùng ");
                         return;
                     }
-
                 }
-
             }
         }
 
@@ -93,55 +93,55 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         public void LoadDataPart(string partcode)
         {
             txtPartCode.Text = partcode;
-            
+
             DataTable dt = ecoBLL.GetInforPartBLL(partcode);
             // Kiểm tra xem Datatable có dữ liệu không
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
                 // Có dữ liệu thì sẽ đẩy lên các ô textbox
-                txtPartName.Text=   dt.Rows[0][3].ToString();
-                txtPartDescript.Text = dt.Rows[0][5].ToString();
-                txtPartLog.Text = dt.Rows[0][9].ToString();
-                txtPartStage.Text = dt.Rows[0][6].ToString();
-
+                //                p.PartCode,   0
+                //                p.PartName,   1
+                //                p.PartDescript,  2
+                //                s.Stage as PartStage,  3
+                //                p.PartLog,         4
+                //                p.PartPrice,    5
+                //                p.PartMaterial       6
+                //                p.PartStageID   7
+                txtPartName.Text = dt.Rows[0][1].ToString();
+                txtPartDescript.Text = dt.Rows[0][2].ToString();
+                txtPartLog.Text = dt.Rows[0][4].ToString();
+                txtPartStage.Text = dt.Rows[0][3].ToString();
+                txtPartMaterial.Text = dt.Rows[0][6].ToString();
+                _oldPartStage = Convert.ToInt16(dt.Rows[0][7].ToString());
+                _oldPartMaterial = dt.Rows[0][6].ToString();
 
                 // Cập nhật lên danh sách file
-                if(commonBLL.GetAllFileinFolder(partcode, dgvListFile)== false)
+                if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == false)
                 {
                     MessageBox.Show("Không thể load folder chứa dữ liệu ");
                 }
                 else
                 {
                     txtListFileStatus.Text = "Kết nối được với dữ liệu của Part";
-                }  
-                
-                // Đặt giá trị DV là giá trị mặc định trong Combo Box
-                cboNewStage.SelectedIndex = 0;
-                
-                
-
-            } 
+                }
+            }
             else
             {
                 MessageBox.Show("Không lấy được dữ liệu từ Database");
                 this.Close();
-            }    
-
+            }
         }
 
         private bool IsAllowedExtension(string filePath)
         {
-            string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf",".step",".prt" };
+            string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf", ".step", ".prt" };
             string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
             return allowedExtensions.Contains(fileExtension);
         }
 
-
         //==========================================================================
-        //   KẾT THÚC-    DANH SÁCH HÀM TỰ TẠO 
+        //   KẾT THÚC-    DANH SÁCH HÀM TỰ TẠO
         //==========================================================================
-
-
 
         private void dgvListFile_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -162,17 +162,15 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            
             DialogResult kq = MessageBox.Show("Bạn có muốn thoát việc cập nhật không ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if( kq == DialogResult.Yes)
+            if (kq == DialogResult.Yes)
             {
                 this.Close();
-            } 
+            }
             else
             {
                 return;
-            }    
-                
+            }
         }
 
         private void btnAddNewFile_Click(object sender, EventArgs e)
@@ -233,19 +231,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 {
                     // Hàm thêm dòng vào dgvFile Attachment
                     ThemFile2listFile(file);
-
                 }
                 else
                 {
                     MessageBox.Show($"Tệp không hợp lệ: {file}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-
         }
 
         private void ThemFile2listFile(string file)
         {
-
             FileInfo in4 = new FileInfo(file);
             string ExtensionFile = in4.Extension;
             bool CheckTrung;
@@ -264,7 +259,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             //Nếu không có phần mở rộng trùng, thêm tệp vào DataGritview
             if (!CheckTrung)
             {
-
                 dgvListUpload.Rows.Add(in4.Name, in4.Length / 1024 + "KB", in4.Extension, in4.FullName);
             }
             else
@@ -274,8 +268,39 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
         }
 
+        private void LoadMaterialLib()
+        {
+            string MaterialLib = Environment.CurrentDirectory;
+            MaterialLib = MaterialLib + @"\04_CommonDoc\ListMaterial.txt";
+            if (File.Exists(MaterialLib))
+            {
+                string[] lines = File.ReadAllLines(MaterialLib); // Đọc tất cả các dòng trong file
+                cboMaterialLib.Items.AddRange(lines); // Thêm vào ComboBox
+            }
+            else
+            {
+                MessageBox.Show("Không load được danh sách vật liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+            // Load giá trị của Stage lên ComboBox
+            _tblPartStage = ecoBLL.GettblPartStage_BLL();
+            cboNewStage.Items.Clear();
+            if (_tblPartStage.Rows.Count == 0)
+            {
+                MessageBox.Show("Không load được danh sách Stage", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                foreach (DataRow dr in _tblPartStage.Rows)
+                {
+                    cboNewStage.Items.Add(dr[1].ToString());
+                }
+            }
+        }
+
         private void frmUpdateInforPart_Load(object sender, EventArgs e)
         {
+            LoadMaterialLib();
             // Thiết lập cấu hình cho dgvFileAttachment
             // Thiết lập các cột cho dgvListFile
             dgvListUpload.ColumnCount = 4;
@@ -287,121 +312,145 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem combobox NewStage đang dùng là Stage nào:
-            // MessageBox.Show(dgvListUpload.Rows.Count.ToString());
-            string statusnewstage;
-            statusnewstage = "";
-            
-
-            if(cboNewStage.SelectedItem.ToString() != txtPartStage.Text)
-            {
-                statusnewstage = "Đã cập nhật stage ";
-            }    
-
-            // Tổng hợp các thông báo trước khi cập nhật
+            // Bước 1 : Đặt tên các giá trị của ECO
+            string p = txtPartCode.Text;
+            if(txtNewMaterial.Text.Length > 20) { MessageBox.Show("Vật liệu mới không được quá 20 ký tự"); return; }
             string thongbao;
-            thongbao = "Kiểm tra lại các thông tin sau trước khi upload lên DataBase";
+
+            thongbao = "Kiểm tra lại các thông tin sau trước khi cập nhật dữ liệu ";
             thongbao += "\n +) PartName : " + txtPartName.Text;
             thongbao += "\n +) Part Descript :" + txtPartDescript.Text;
-            
-            string LogInfor;
-            LogInfor = txtNoteMore.Text;
-            string stage;
-            if(statusnewstage == "")
+
+           
+            // 1.1  Status cho việc update stage kay không ?
+            int s;
+            int os = _oldPartStage;
+            int ns;
+
+            _newPartStage = cboNewStage.SelectedIndex + 1;
+            if (_newPartStage > _oldPartStage)
             {
-                thongbao += "\n +) Part Stage : " + txtPartStage.Text;
-                LogInfor +=  " , Stage [ " + txtPartStage.Text + " ] No Change --- ";
-                stage = txtPartStage.Text;
-            }   
+                s = 1;  // Nếu lớn hơn chứng tỏ sẽ cập nhật stage mới
+                ns = _newPartStage;
+                thongbao += "\n +) Có cập nhật Stage mới : " + cboNewStage.SelectedItem.ToString();
+            }
             else
             {
-                // Đã cập nhật stage mới
-                thongbao += "\n +) Part Stage : " + cboNewStage.SelectedItem.ToString();
-                LogInfor += " , Stage Change : from [ " + txtPartStage.Text  + " ] to [ "  + cboNewStage.SelectedItem.ToString() + " ]";
-                stage = cboNewStage.SelectedItem.ToString();
+                s = 0;
+                ns = _oldPartStage;
+            }
+            // 1.2 Có cập nhật nội dung thêm hay không ?
+            int i;
+            string ic = "";
+            if (txtNoteMore.Text != "")
+            {
+                i = 1;
+                ic = txtNoteMore.Text;
+                thongbao += "\n +) Có cập nhật thêm nội dung " + txtNoteMore.Text;
+            }
+            else
+            {
+                i = 0;
+            }
+            // 1.3 Có cập nhật Material hay không ?
+            int m;
+            string om = txtPartMaterial.Text;
+            string nm = txtNewMaterial.Text.Trim();
+            if (om != nm && nm != "")
+            {
+                m = 1;
+                thongbao += "\n +) Có cập nhật Vật liệu mới : " + txtNewMaterial.Text;
+            }
+            else
+            {
+                m = 0;
             }
 
-            // Kiểm tra xem trong ListFileUpload có file hay không  
-            
-            if(dgvListUpload.Rows.Count > 1)
+            // 1.4 Có cập nhật bản vẽ hay không
+            int d;
+            if (dgvListUpload.Rows.Count > 1)
             {
-                // Nếu có thì thêm thông báo
-                thongbao += "\n +) Có đình kèm bản vẽ update";
-                LogInfor += " - Have File Attachment. ";
-                
-            } 
+                d = 1;
+                thongbao += "\n +) Có cập nhật bản vẽ mới : ";
+            }
             else
             {
-                thongbao += "\n +) Không có file nào được thêm mới ";
-                LogInfor += " - No have file attachment. ";
-            }    
-            
-            
-            // Chọn update hay không update
-            DialogResult kq = MessageBox.Show(thongbao, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                d = 0;
+            }
+
+            // Bước 2 : Lấy số ECO và tạo content
+            int NewECONo = ecoBLL.LoadECONo();
+
+            List<Tuple<string, object>> tableData = new List<Tuple<string, object>>
+                {
+                    new Tuple<string, object>("p", p),
+                    new Tuple<string, object>("s", s),
+                    new Tuple<string, object>("os", os),
+                    new Tuple<string, object>("ns", ns),
+                    new Tuple<string, object>("i", i),
+                    new Tuple<string, object>("ic", ic),
+                    new Tuple<string, object>("m", m),
+                    new Tuple<string, object>("om", om),
+                    new Tuple<string, object>("nm", nm),
+                    new Tuple<string, object>("d", d),
+                    // Cần thêm ghi version cũ với mới vào đây
+                };
+            Dictionary<string, object> jsonData = new Dictionary<string, object>();
+            foreach (var row in tableData)
+            {
+                jsonData[row.Item1] = row.Item2;
+            }
+
+            // Chuyển thành chuỗi JSON
+            string ECOContent = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+            ECOContent = "[" + ECOContent + "]";
+            int ECOTypeID = 2; // 2 là ECO cho việc cập nhật thông tin của Part
+            //MessageBox.Show(ECOContent);
+
+            // Bước 3 : Tiến hành tạo ECO
+            // Ghi ECO vào tblECO, nếu ghi OK thì sẽ tiến hành copy các file mới vào thư mục ECOTEMP với tên thư mục là ECONo.
+            // Nếu lưu thư mục bị lỗi thì sẽ xóa ECONo vừa tạo , xóa follderECONo nếu có , và thông báo lỗi
+
+            DialogResult kq = MessageBox.Show(thongbao, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
-                // Tiến hàng việc cập nhật
-                // 
-                //  Bước 1 : Update các du lieu len Base
-                string uploadstatus;
-
-                if (ecoBLL.CapnhatInforPartBLL(txtPartCode.Text, txtPartName.Text, txtPartDescript.Text, stage, LogInfor))
+                // Bước 3.1 Ghi ECO vào tblECO 
+                if (ecoBLL.InsertNewECO_BLL(NewECONo, IDProposal, NameProposal, ECOTypeID, ECOContent) == true)
                 {
-                    uploadstatus = "1. Đã cập nhật thành công DataBase \n";
-                    // Nếu OK thì mới cho copy file
-                    // Bước 2 : Đổi tên các file trong dgvFileUpload và lưu vào trong thư mục chứa dữ liệu
-                    string[] FolderName = txtPartCode.Text.Split('-');
-                    // FolderName[0] : XXX : PartFamily 
-                    // FolderName[1] : YYYYY : PartNo
-
-                    string FolderPath = Properties.Settings.Default.LinkDataPart  + FolderName[0] + "\\" + FolderName[1];
-                    try
+                   if(d == 1)
                     {
-                        // Duyệt qua các hàng  trong DataGridView
-                        foreach (DataGridViewRow row in dgvListUpload.Rows)
+                        MessageBox.Show("Tiến hàng copy vào thư mục tạm thời");
+                        // Nếu cập nhật bản vẽ   => Copy file vào thư mục ECOTEMP
+                        if(ecoBLL.CopyFile_to_ECOTEMP_BLL(NewECONo.ToString(),dgvListUpload) == true )
                         {
-                            if (row.Cells[3].Value != null) //Kiểm tra tại cột FileName
-                            {
-                                // Lấy đường dẫn của file từ cột trong Datagridview 
-                                string SourceFilePath = row.Cells[3].Value.ToString();
-                                string FileExtension = row.Cells[2].Value.ToString();
-
-                                // Tạo tên File mới dựa trên  tên thư mục và phần mở rộng của file
-                                string NewFileName = FolderPath + "//" + txtPartCode.Text + "-" + cboNewStage.SelectedItem.ToString() + DateTime.Now.ToString("MM-dd-yyyy HH-mm") + FileExtension;
-                                // Tên đường dẫn đến folder + tên partcode mới + . đuôi file
-                                string TargetFilePart = Path.Combine(FolderPath, NewFileName);
-
-                                // Sao chép file vào thư mục đích với tên mới
-                                File.Copy(SourceFilePath, TargetFilePart, true);
-                                //MessageBox.Show("Đã sao chép thành công ");
-                            }
-                         
+                            MessageBox.Show("Đã copy thành công vào thư mục ECOTEMP");
                         }
-                        uploadstatus += " +) Thành công copy file attachment vào DataBase \n";
+                        else
+                        {
+                            MessageBox.Show("Không thể copy file vào thư mục ECOTEMP");
+                            //Xóa ECO vừa tạo 
+                            ecoBLL.DeleteECO_BLL(NewECONo);
+                            return;
+                        }
 
                     }
-                    catch (Exception ex)
+                   else
                     {
-                        MessageBox.Show(ex.Message);
-                        uploadstatus += " +) Thất bại trong việc copy file vào Database \n ";
-
-                    }
-                }
-                else
-                {
-                    uploadstatus = " +) Lỗi khi cập nhật DataBase \n ";
+                        MessageBox.Show("Tạo yêu cầu  cập nhật Part thành công.");
+                    }    
                 }
 
-                MessageBox.Show(uploadstatus);
             }
             else
             {
-
                 return;
             }
 
+        }
 
+        private void cboMaterialLib_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtNewMaterial.Text = cboMaterialLib.SelectedItem.ToString();
         }
     }
 }

@@ -8,6 +8,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
     public partial class frmManagePrice : Form
     {
         private PurchaseBLL purchaseBLL = new PurchaseBLL();
+        public string tennguoidung;
 
         public frmManagePrice()
         {
@@ -246,6 +247,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 txtPartStage.Text = dgvListTimKiem.CurrentRow.Cells[3].Value.ToString();  // Stage
                 txtPartPrice.Text = dgvListTimKiem.CurrentRow.Cells[5].Value.ToString();   // Price
             }
+        }
+
+        private void btnMakeNewPO_Click(object sender, EventArgs e)
+        {
+            frmMakePO frm = new frmMakePO();
+            frm._usercurrent = tennguoidung;
+            frm.ShowDialog();
+        }
+
+        private void btnTraCuuPO_Click(object sender, EventArgs e)
+        {
+            frmFindPO frm = new frmFindPO();
+            frm.ShowDialog();
         }
     }
 }

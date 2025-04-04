@@ -107,6 +107,7 @@
             this.dgvListTimKiem.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvListTimKiem.Location = new System.Drawing.Point(3, 81);
             this.dgvListTimKiem.Name = "dgvListTimKiem";
+            this.dgvListTimKiem.RowHeadersWidth = 51;
             this.dgvListTimKiem.RowTemplate.Height = 23;
             this.dgvListTimKiem.Size = new System.Drawing.Size(518, 213);
             this.dgvListTimKiem.TabIndex = 2;
@@ -145,7 +146,7 @@
             this.txtPartStage.Location = new System.Drawing.Point(92, 53);
             this.txtPartStage.Name = "txtPartStage";
             this.txtPartStage.ReadOnly = true;
-            this.txtPartStage.Size = new System.Drawing.Size(59, 25);
+            this.txtPartStage.Size = new System.Drawing.Size(59, 29);
             this.txtPartStage.TabIndex = 6;
             // 
             // cboPrecision
@@ -158,7 +159,7 @@
             "0.0000"});
             this.cboPrecision.Location = new System.Drawing.Point(229, 53);
             this.cboPrecision.Name = "cboPrecision";
-            this.cboPrecision.Size = new System.Drawing.Size(57, 25);
+            this.cboPrecision.Size = new System.Drawing.Size(57, 29);
             this.cboPrecision.TabIndex = 5;
             this.cboPrecision.SelectedIndexChanged += new System.EventHandler(this.cboPrecision_SelectedIndexChanged);
             // 
@@ -167,7 +168,7 @@
             this.label6.AutoSize = true;
             this.label6.Location = new System.Drawing.Point(463, 58);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 17);
+            this.label6.Size = new System.Drawing.Size(63, 23);
             this.label6.TabIndex = 4;
             this.label6.Text = "( USD )";
             // 
@@ -176,7 +177,7 @@
             this.txtUSDPrice.Location = new System.Drawing.Point(312, 53);
             this.txtUSDPrice.Name = "txtUSDPrice";
             this.txtUSDPrice.ReadOnly = true;
-            this.txtUSDPrice.Size = new System.Drawing.Size(131, 25);
+            this.txtUSDPrice.Size = new System.Drawing.Size(131, 29);
             this.txtUSDPrice.TabIndex = 3;
             this.txtUSDPrice.TextChanged += new System.EventHandler(this.txtUSDPrice_TextChanged);
             // 
@@ -197,7 +198,7 @@
             this.rdioVND.AutoSize = true;
             this.rdioVND.Location = new System.Drawing.Point(12, 45);
             this.rdioVND.Name = "rdioVND";
-            this.rdioVND.Size = new System.Drawing.Size(53, 21);
+            this.rdioVND.Size = new System.Drawing.Size(67, 27);
             this.rdioVND.TabIndex = 1;
             this.rdioVND.TabStop = true;
             this.rdioVND.Text = "VND";
@@ -208,7 +209,7 @@
             this.rdioUSD.AutoSize = true;
             this.rdioUSD.Location = new System.Drawing.Point(12, 20);
             this.rdioUSD.Name = "rdioUSD";
-            this.rdioUSD.Size = new System.Drawing.Size(51, 21);
+            this.rdioUSD.Size = new System.Drawing.Size(64, 27);
             this.rdioUSD.TabIndex = 0;
             this.rdioUSD.TabStop = true;
             this.rdioUSD.Text = "USD";
@@ -220,7 +221,7 @@
             this.txtPartPrice.Location = new System.Drawing.Point(312, 20);
             this.txtPartPrice.Name = "txtPartPrice";
             this.txtPartPrice.ReadOnly = true;
-            this.txtPartPrice.Size = new System.Drawing.Size(131, 25);
+            this.txtPartPrice.Size = new System.Drawing.Size(131, 29);
             this.txtPartPrice.TabIndex = 1;
             this.txtPartPrice.TextChanged += new System.EventHandler(this.txtPartPrice_TextChanged);
             // 
@@ -239,7 +240,7 @@
             this.txtPartName.Location = new System.Drawing.Point(92, 86);
             this.txtPartName.Name = "txtPartName";
             this.txtPartName.ReadOnly = true;
-            this.txtPartName.Size = new System.Drawing.Size(417, 25);
+            this.txtPartName.Size = new System.Drawing.Size(417, 29);
             this.txtPartName.TabIndex = 1;
             // 
             // txtPartCode
@@ -247,7 +248,7 @@
             this.txtPartCode.Location = new System.Drawing.Point(92, 20);
             this.txtPartCode.Name = "txtPartCode";
             this.txtPartCode.ReadOnly = true;
-            this.txtPartCode.Size = new System.Drawing.Size(126, 25);
+            this.txtPartCode.Size = new System.Drawing.Size(126, 29);
             this.txtPartCode.TabIndex = 1;
             // 
             // lblTypeCurrent
@@ -255,7 +256,7 @@
             this.lblTypeCurrent.AutoSize = true;
             this.lblTypeCurrent.Location = new System.Drawing.Point(463, 25);
             this.lblTypeCurrent.Name = "lblTypeCurrent";
-            this.lblTypeCurrent.Size = new System.Drawing.Size(51, 17);
+            this.lblTypeCurrent.Size = new System.Drawing.Size(66, 23);
             this.lblTypeCurrent.TabIndex = 0;
             this.lblTypeCurrent.Text = "( VND )";
             // 
@@ -264,7 +265,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(166, 58);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(60, 17);
+            this.label8.Size = new System.Drawing.Size(78, 23);
             this.label8.TabIndex = 0;
             this.label8.Text = "Precision";
             // 
@@ -273,7 +274,7 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(229, 25);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(63, 17);
+            this.label4.Size = new System.Drawing.Size(82, 23);
             this.label4.TabIndex = 0;
             this.label4.Text = "Part Price";
             // 
@@ -282,7 +283,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 119);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 17);
+            this.label3.Size = new System.Drawing.Size(107, 23);
             this.label3.TabIndex = 0;
             this.label3.Text = "Part Descript";
             // 
@@ -291,7 +292,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(10, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 17);
+            this.label2.Size = new System.Drawing.Size(91, 23);
             this.label2.TabIndex = 0;
             this.label2.Text = "Part Name";
             // 
@@ -300,7 +301,7 @@
             this.label7.AutoSize = true;
             this.label7.Location = new System.Drawing.Point(12, 58);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(68, 17);
+            this.label7.Size = new System.Drawing.Size(87, 23);
             this.label7.TabIndex = 0;
             this.label7.Text = "Part Stage";
             // 
@@ -309,7 +310,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 17);
+            this.label1.Size = new System.Drawing.Size(85, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Part Code";
             // 
@@ -334,7 +335,7 @@
             this.ckcAllowModifyRate.AutoSize = true;
             this.ckcAllowModifyRate.Location = new System.Drawing.Point(21, 80);
             this.ckcAllowModifyRate.Name = "ckcAllowModifyRate";
-            this.ckcAllowModifyRate.Size = new System.Drawing.Size(107, 21);
+            this.ckcAllowModifyRate.Size = new System.Drawing.Size(134, 27);
             this.ckcAllowModifyRate.TabIndex = 5;
             this.ckcAllowModifyRate.Text = "Modify Tỷ giá";
             this.ckcAllowModifyRate.UseVisualStyleBackColor = true;
@@ -345,7 +346,7 @@
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(18, 25);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(104, 17);
+            this.label5.Size = new System.Drawing.Size(136, 23);
             this.label5.TabIndex = 4;
             this.label5.Text = "Tỷ giá USD/VND";
             // 
@@ -353,7 +354,7 @@
             // 
             this.txtRate.Location = new System.Drawing.Point(21, 51);
             this.txtRate.Name = "txtRate";
-            this.txtRate.Size = new System.Drawing.Size(100, 25);
+            this.txtRate.Size = new System.Drawing.Size(100, 29);
             this.txtRate.TabIndex = 3;
             // 
             // btnSaveNewPrice
@@ -405,6 +406,7 @@
             this.btnMakeNewPO.TabIndex = 3;
             this.btnMakeNewPO.Text = "Make New PO";
             this.btnMakeNewPO.UseVisualStyleBackColor = true;
+            this.btnMakeNewPO.Click += new System.EventHandler(this.btnMakeNewPO_Click);
             // 
             // btnTraCuuPO
             // 
@@ -414,6 +416,7 @@
             this.btnTraCuuPO.TabIndex = 2;
             this.btnTraCuuPO.Text = "Tra cứu PO";
             this.btnTraCuuPO.UseVisualStyleBackColor = true;
+            this.btnTraCuuPO.Click += new System.EventHandler(this.btnTraCuuPO_Click);
             // 
             // btnSearch
             // 
@@ -432,13 +435,13 @@
             // 
             this.txtKeySearch.Location = new System.Drawing.Point(9, 28);
             this.txtKeySearch.Name = "txtKeySearch";
-            this.txtKeySearch.Size = new System.Drawing.Size(209, 25);
+            this.txtKeySearch.Size = new System.Drawing.Size(209, 29);
             this.txtKeySearch.TabIndex = 0;
             this.txtKeySearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyDown);
             // 
             // frmManagePrice
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(524, 679);
             this.Controls.Add(this.tableLayoutPanel1);

@@ -17,7 +17,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private CommonBLL commonBLL = new CommonBLL();
         private ECO_BLL ecoBLL = new ECO_BLL();
-        
+        public int IDNguoidung;
+        public string Username;
+
 
         public frmECO()
         {
@@ -299,6 +301,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 frmUpdateInforPart frm = new frmUpdateInforPart();
 
                 frm.LoadDataPart(txtPartCode.Text);
+                frm.IDProposal = IDNguoidung;
+                frm.NameProposal = Username;
                 frm.ShowDialog();
             }  
             else

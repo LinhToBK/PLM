@@ -21,17 +21,33 @@ namespace PLM_Lynx
             //Application.Run(new frmLogin());
 
             frmLogin frm = new frmLogin();
-            frm.ShowDialog();
-            //if(frm.ShowDialog() == DialogResult.OK)
-            //{
-            //    Application.Run(new frmMain());
-                
-            //}    
-            //else
-            //{
-            //    Application.Exit();
-            //}
+            frm.CheckLicense();
+            if (frm.licstatus == true)
+            {
+                //MessageBox.Show("Vẫn còn hạn sử dụng");
+                frm.ShowDialog();
+            }
+            else
+            {
+                 DialogResult kq =   MessageBox.Show("Hết hạn sử dụng \n Vui lòng nhập code","",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+                if (kq == DialogResult.Yes)
+                {
+                    frmEnterLicencesCode frmlic = new frmEnterLicencesCode();
+                    frmlic.ShowDialog();
+                }
+                else
+                {
+                    Application.Exit();
+                }
 
+
+
+
+
+                }
+
+
+            // frm.ShowDialog();
             
    
         }

@@ -5,9 +5,9 @@
     <Setting Name="Datacon" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=LINHTO\LINHTOSQLSERVER;Initial Catalog=SAMPLE_PLM;Persist Security Info=True;User ID=sa;Password="L!nh15091994";Trust Server Certificate=True&lt;/ConnectionString&gt;
+  &lt;ConnectionString&gt;Data Source=61.14.233.166;Initial Catalog=SAMPLE_PLM;User ID=sa;;Password="yourStrongPass@123003";Trust Server Certificate=True&lt;/ConnectionString&gt;
 &lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=LINHTO\LINHTOSQLSERVER;Initial Catalog=SAMPLE_PLM;Persist Security Info=True;User ID=sa;Password="L!nh15091994";Trust Server Certificate=True</Value>
+      <Value Profile="(Default)">Data Source=61.14.233.166;Initial Catalog=SAMPLE_PLM;User ID=sa;;Password="yourStrongPass@123003";Trust Server Certificate=True</Value>
     </Setting>
     <Setting Name="LinkDataPart" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Users\Admin\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\SAMPLE_DRAWING\DATA\</Value>

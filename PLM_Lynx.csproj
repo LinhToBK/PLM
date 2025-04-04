@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>F:\02. OnedriveFolder\OneDrive\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\Admin\Desktop\Build\Setup\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,7 +25,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -213,6 +213,12 @@
     <Compile Include="02_BLL_Bussiness_Logic_Layer\PurchaseBLL.cs" />
     <Compile Include="02_BLL_Bussiness_Logic_Layer\QuanlyUserBLL.cs" />
     <Compile Include="02_BLL_Bussiness_Logic_Layer\RelationPartBLL.cs" />
+    <Compile Include="03_GUI_User_Interface\3_1_Login\frmEnterLicencesCode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_1_Login\frmEnterLicencesCode.Designer.cs">
+      <DependentUpon>frmEnterLicencesCode.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_1_Login\frmLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -236,6 +242,12 @@
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_3_ECO\frmECO.Designer.cs">
       <DependentUpon>frmECO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\frmListECO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\frmListECO.Designer.cs">
+      <DependentUpon>frmListECO.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_3_ECO\frmModifyQuantity.cs">
       <SubType>Form</SubType>
@@ -328,6 +340,24 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.Designer.cs">
       <DependentUpon>frmUpdateStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\frmAboutMe.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\frmAboutMe.Designer.cs">
+      <DependentUpon>frmAboutMe.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\frmLicenceCheck.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\frmLicenceCheck.Designer.cs">
+      <DependentUpon>frmLicenceCheck.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\frmUserGuide.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\frmUserGuide.Designer.cs">
+      <DependentUpon>frmUserGuide.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -336,6 +366,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\frmEnterLicencesCode.resx">
+      <DependentUpon>frmEnterLicencesCode.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\frmLogin.resx">
       <DependentUpon>frmLogin.cs</DependentUpon>
     </EmbeddedResource>
@@ -347,6 +380,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmECO.resx">
       <DependentUpon>frmECO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmListECO.resx">
+      <DependentUpon>frmListECO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmModifyQuantity.resx">
       <DependentUpon>frmModifyQuantity.cs</DependentUpon>
@@ -393,6 +429,15 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.resx">
       <DependentUpon>frmUpdateStatus.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\frmAboutMe.resx">
+      <DependentUpon>frmAboutMe.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\frmLicenceCheck.resx">
+      <DependentUpon>frmLicenceCheck.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\frmUserGuide.resx">
+      <DependentUpon>frmUserGuide.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
     </EmbeddedResource>
@@ -434,7 +479,13 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="04_Image\ABCCoLtd.jpg">
+    <Content Include="04_CommonDoc\ABCCoLtd.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="04_CommonDoc\BandoVN.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="04_CommonDoc\ListMaterial.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PLMLYNX.ico" />

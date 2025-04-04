@@ -53,6 +53,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 txtPartStage.Text = row0[3].ToString();
                 txtPartDescription.Text = row0[2].ToString();
                 txtPartLog.Text = row0[4].ToString();
+                txtPartMaterial.Text = row0[6].ToString();
                 decimal partprice;
                 if (row0[5].ToString() == "" || row0[5].ToString() == "0")
                 {
@@ -77,7 +78,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 // Hiển thị danh sách file
                 if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == true)
                 {
-
                     txtListFileStatus.Text = "Danh sách file hiển thị ở bên dưới ";
                     // Lấy danh sách loại file
                     var categories = dgvListFile.Rows
@@ -114,8 +114,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     {
                         checklistStage.Items.Add(stage, true); // Mặc định tất cả các mục được chọn
                     }
-
-
                 }
                 else
                 {
@@ -240,7 +238,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             var selectedStage = checklistStage.CheckedItems.Cast<string>().ToList();
 
-            if(selectedStage.Count ==0)
+            if (selectedStage.Count == 0)
             {
                 MessageBox.Show("Chưa chọn Stage, vui lòng chọn lại ");
                 return;
@@ -271,7 +269,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     {
                         if (TypeFileValue.Contains(stage) == true)
                         {
-                            checkTypeFile  = true; break;
+                            checkTypeFile = true; break;
                         }
                     }
                     if (checkStage == true && checkTypeFile == true)
@@ -284,7 +282,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     }
                 }
             }
-            
 
             //foreach (DataGridViewRow row in dgvListFile.Rows)
             //{
@@ -301,6 +298,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //        }
             //    }
             //}
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
         }
     }
 }

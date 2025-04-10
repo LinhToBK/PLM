@@ -130,7 +130,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                         {
                             string fileName_withExtension = Path.GetFileName(originalFilePath);
                             string newFilePath = Path.Combine(FolderECONopath, fileName_withExtension);
-                            MessageBox.Show("Tên đường dẫn file mới : " + newFilePath);
+                            //MessageBox.Show("Tên đường dẫn file mới : " + newFilePath);
 
                             // Copy file với phần mở rộng mới
                             File.Copy(originalFilePath, newFilePath, true);
@@ -168,6 +168,14 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return ecoDAL.Update_tblECO_Approved_DAL(IDApproved, NameApproved, ECONo);
         }
+
+        public bool Update_tblECO_Canceled_BLL(int IDApproved, string NameApproved, int ECONo)
+        {
+            return ecoDAL.Update_tblECO_Canceled_DAL(IDApproved, NameApproved, ECONo);
+        }
+
+
+
 
         public bool CopyFile_to_DataPart(string partcode, string version, int ECONo)
         {
@@ -367,5 +375,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return ecoDAL.Write_ECONo_to_tblPart_DAL(PartCode, ECONo);
         }
+
+        
     }
 }

@@ -148,7 +148,10 @@ namespace PLM_Lynx
 
         private void mnuAboutMe_Click(object sender, EventArgs e)
         {
-            frmAboutMe frm = new frmAboutMe();
+            //frmAboutMe frm = new frmAboutMe();
+            //frm.ShowDialog();
+
+            frmTesting frm = new frmTesting();
             frm.ShowDialog();
         }
 

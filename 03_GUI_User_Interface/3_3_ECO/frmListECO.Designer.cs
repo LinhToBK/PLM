@@ -39,6 +39,7 @@
             this.cboListNear = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtECOContent = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -54,7 +55,6 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApprove = new System.Windows.Forms.Button();
-            this.txtECOContent = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -202,6 +202,15 @@
             this.panel1.Size = new System.Drawing.Size(585, 211);
             this.panel1.TabIndex = 0;
             // 
+            // txtECOContent
+            // 
+            this.txtECOContent.Location = new System.Drawing.Point(293, 59);
+            this.txtECOContent.Multiline = true;
+            this.txtECOContent.Name = "txtECOContent";
+            this.txtECOContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtECOContent.Size = new System.Drawing.Size(264, 132);
+            this.txtECOContent.TabIndex = 2;
+            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -321,6 +330,7 @@
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "  Exit";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnCancel
             // 
@@ -334,6 +344,7 @@
             this.btnCancel.Text = "Cancel  ";
             this.btnCancel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnApprove
             // 
@@ -348,15 +359,6 @@
             this.btnApprove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnApprove.UseVisualStyleBackColor = true;
             this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
-            // 
-            // txtECOContent
-            // 
-            this.txtECOContent.Location = new System.Drawing.Point(293, 59);
-            this.txtECOContent.Multiline = true;
-            this.txtECOContent.Name = "txtECOContent";
-            this.txtECOContent.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtECOContent.Size = new System.Drawing.Size(264, 132);
-            this.txtECOContent.TabIndex = 2;
             // 
             // frmListECO
             // 

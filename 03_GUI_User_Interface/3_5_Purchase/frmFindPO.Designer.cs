@@ -175,12 +175,11 @@
             // dgvSearch
             // 
             this.dgvSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvSearch.Location = new System.Drawing.Point(0, 214);
             this.dgvSearch.Name = "dgvSearch";
             this.dgvSearch.RowHeadersWidth = 51;
             this.dgvSearch.RowTemplate.Height = 24;
-            this.dgvSearch.Size = new System.Drawing.Size(448, 406);
+            this.dgvSearch.Size = new System.Drawing.Size(380, 153);
             this.dgvSearch.TabIndex = 6;
             this.dgvSearch.Click += new System.EventHandler(this.dgvSearch_Click);
             // 

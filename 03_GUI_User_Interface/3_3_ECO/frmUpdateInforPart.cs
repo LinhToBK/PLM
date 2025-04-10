@@ -419,11 +419,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 {
                    if(d == 1)
                     {
-                        MessageBox.Show("Tiến hàng copy vào thư mục tạm thời");
+                        // MessageBox.Show("Tiến hàng copy vào thư mục tạm thời");
                         // Nếu cập nhật bản vẽ   => Copy file vào thư mục ECOTEMP
                         if(ecoBLL.CopyFile_to_ECOTEMP_BLL(NewECONo.ToString(),dgvListUpload) == true )
                         {
-                            MessageBox.Show("Đã copy thành công vào thư mục ECOTEMP");
+                            MessageBox.Show("Đã copy thành công vào thư mục ECOTEMP \n Tạo request [ Cập nhật Part ] thành công ");
                         }
                         else
                         {
@@ -436,7 +436,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     }
                    else
                     {
-                        MessageBox.Show("Tạo yêu cầu  cập nhật Part thành công.");
+                        MessageBox.Show("Tạo request [ Cập nhật Part ] thành công");
                     }    
                 }
 

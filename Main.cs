@@ -107,6 +107,8 @@ namespace PLM_Lynx
         private void mnuRelationPart_Click(object sender, EventArgs e)
         {
             frmRelationPart frm = new frmRelationPart();
+            frm.idProposal = idnguoidung;
+            frm.nameProposal = tennguoidung;
             frm.ShowDialog();
         }
 

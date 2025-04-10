@@ -7,6 +7,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PLM_Lynx._01_DAL_Data_Access_Layer
 {
@@ -148,6 +149,39 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
+
+        /// <summary>
+        /// 05. Xóa 1 ràng buộc của 2 Part bảng tblRelationTemp
+        /// </summary>
+        /// <param name="parentcode"></param>
+        /// <param name="childcode"></param>
+        /// <returns></returns>
+        public bool Delete_tblRelationTemp_DAL(string parentcode, string childcode)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"delete tblRelationTemp
+                            where ParentID = (select top 1 PartID from tblPart where PartCode = @ParentCode )
+                            and ChildID = (select top 1 PartID from tblPart where PartCode = @ChildCode )";
+                SqlCommand cmd = new SqlCommand(sql_query, con);
+                cmd.Parameters.Add("@ParentCode", SqlDbType.NVarChar).Value = parentcode;
+                cmd.Parameters.Add("@ChildCode", SqlDbType.NVarChar).Value = childcode;
+                //--------------------------
+                con.Open();
+                int result;
+                try
+                {
+                    result = cmd.ExecuteNonQuery();
+                }
+                catch
+                {
+                    return false;
+                }
+                return result == 1;  // Trả về giá trị true nếu thêm thành công
+            }
+        }
+
         public bool DeleteLogPartDAL(string parentcode, string childcode)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -189,17 +223,17 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 // string sql_query = @" select * from tblPart where PartCode = @PartCode";
                 string sql_query;
-                sql_query = @"SELECT 
-                                p.PartCode, 
-                                p.PartName, 
-                                p.PartDescript, 
+                sql_query = @"SELECT
+                                p.PartCode,
+                                p.PartName,
+                                p.PartDescript,
                                 s.Stage as PartStage,
-                                p.PartLog, 
-                                p.PartPrice, 
+                                p.PartLog,
+                                p.PartPrice,
                                 p.PartMaterial,
-                                p.PartStageID      
-                            FROM tblPart AS p  
-                            JOIN tblPartStage AS s ON p.PartStageID = s.IDStage  
+                                p.PartStageID
+                            FROM tblPart AS p
+                            JOIN tblPartStage AS s ON p.PartStageID = s.IDStage
                             WHERE p.PartCode = @PartCode;
                     ";
 
@@ -226,7 +260,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 string sql_query = @"
                                     UPDATE tblPart
-                                    SET 
+                                    SET
                                         PartLog = CONCAT( @ECONo,  CHAR(13), CHAR(10), '|', PartLog),
                                         PartMaterial = @PartMaterial,
                                         PartStageID = @PartStageID
@@ -243,7 +277,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         cmd.Parameters.Add("@PartMaterial", SqlDbType.NVarChar).Value = PartMaterial;
                         cmd.Parameters.Add("@PartStageID", SqlDbType.Int).Value = PartStageID;
                         cmd.Parameters.Add("@ECONo", SqlDbType.NVarChar).Value = ECONo.ToString();
-
 
                         int result = cmd.ExecuteNonQuery();
 
@@ -266,8 +299,108 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     return false;
                 }
             }
-
         }
+
+        public bool Update_tblECO_Approved_DAL(int IDApproved, string NameApproved , int ECONo)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                DateTime dt = DateTime.Now.Date;
+                string Log = "Approved " + dt.ToString("yyyy/MM/dd") + " || ";
+
+                string sql_query = @"
+                                    
+                                    UPDATE tblECO
+                                    SET ECOStatusID = 2  , 
+                                    ECOLog = CONCAT( @Log ,  CHAR(13), CHAR(10), '|', ECOLog)  ,
+                                    ECOIDApproved = @IDApproved ,
+                                    ECONameApproved = @NameApproved 
+
+                                    WHERE ECONo = @ECONo";
+
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();  // Bắt đầu Transaction
+
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@ECONo", SqlDbType.Int).Value = ECONo;
+                        cmd.Parameters.Add("@Log", SqlDbType.NVarChar).Value = Log;
+                        cmd.Parameters.Add("@IDApproved", SqlDbType.Int).Value = IDApproved;
+                        cmd.Parameters.Add("@NameApproved", SqlDbType.NVarChar).Value = NameApproved;
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result == 1)
+                        {
+                            transaction.Commit();  // Commit nếu thành công
+                            return true;
+                        }
+                        else
+                        {
+                            transaction.Rollback();  // Rollback nếu không cập nhật được dòng nào
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();  // Rollback nếu có lỗi xảy ra
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+
+
+        public bool Write_ECONo_to_tblPart_DAL(string PartCode, string ECONo)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                
+
+                string sql_query = @"
+                                    UPDATE tblPart
+                                    SET PartLog = CONCAT( @ECONo ,  CHAR(13), CHAR(10), '|', PartLog)
+                                    WHERE PartCode = @PartCode";
+
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();  // Bắt đầu Transaction
+
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@ECONo", SqlDbType.NVarChar).Value = ECONo;
+                        cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result == 1)
+                        {
+                            transaction.Commit();  // Commit nếu thành công
+                            return true;
+                        }
+                        else
+                        {
+                            transaction.Rollback();  // Rollback nếu không cập nhật được dòng nào
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();  // Rollback nếu có lỗi xảy ra
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+
+
 
         /// <summary>
         /// 07. Lấy thông tin về ECO mới nhất hiện tại
@@ -280,7 +413,10 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string sql_query = @"
-                       select  top 1  tblECO.ECONo, tblECO.ECODate from tblECO order by ECODate desc , ECONo desc ";
+                       SELECT TOP 1 tblECO.ECONo, tblECO.ECODate 
+                        FROM tblECO 
+                        WHERE CAST(tblECO.ECODate AS DATE) = CAST(GETDATE() AS DATE)
+                        ORDER BY ECODate DESC, ECONo DESC ";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
 
@@ -302,7 +438,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return _tbl_Eco;
         }
 
-
         public bool InsertNewECO_DAL(int ECONo, int IDProposal, string NameProposal, int ECOTypeID, string ECOContent)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -315,18 +450,16 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     DateTime ECODate = DateTime.Now.Date;
                     string ECOLog = "Created " + ECODate.ToString("yyyy/MM/dd") + " || ";
                     int ECOStatusID = 1;
-                   
 
                     // Tạo nội dung JSON hợp lệ
-                    
 
                     // Tạo giao dịch
                     using (SqlTransaction transaction = con.BeginTransaction())
                     {
                         string sql_query = @"
-                    INSERT INTO tblECO 
+                    INSERT INTO tblECO
                     (ECONo, ECODate, ECOLog, ECOTypeID, ECOIDProposal, ECONameProposal, ECOStatusID, ECOContent)
-                    VALUES 
+                    VALUES
                     (@ECONo, @ECODate, @ECOLog, @ECOTypeID, @ECOIDProposal, @ECONameProposal, @ECOStatusID, @ECOContent)";
 
                         using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
@@ -359,8 +492,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
-
         /// 04. SELECT - Lấy danh sách j5, 10, 15 ECO Gần nhất
         /// <param name="NoRow"></param>
         /// <returns></returns>
@@ -369,13 +500,11 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                
-                
-                string sql_query = $@"SELECT TOP {NoRow} e.ECONo, e.ECODate, t.ECOType, e.ECONameProposal, e.ECONameApproved, s.ECOStatus, e.ECOContent  , e.ECOTypeID
+                string sql_query = $@"SELECT TOP {NoRow} e.ECONo, e.ECODate, t.ECOType, e.ECONameProposal, e.ECONameApproved, s.ECOStatus, e.ECOContent  , e.ECOTypeID  , e.ECOStatusID
                                         FROM tblECO as e
-                                        JOIN tblECOStatus as s ON e.ECOStatusID = s.ECOStatusID 
+                                        JOIN tblECOStatus as s ON e.ECOStatusID = s.ECOStatusID
                                         JOIN tblECOType  as t ON e.ECOTypeID = t.ECOTypeID
-                                        ORDER BY e.ECODate DESC";
+                                        ORDER BY e.ECODate DESC , e.ECONo Desc";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.AddWithValue("@NoRow", NoRow);
@@ -387,7 +516,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
-
         /// <summary>
         /// 05. SELECT - Lấy danh sách tất cả Stage trong bảng tblPartStage
         /// </summary>
@@ -397,13 +525,10 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                
                 string sql_query;
                 sql_query = @" select  s.IDStage, s.Stage from tblPartStage as s ";
 
-
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
-                
 
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
                 conn.Open();
@@ -411,8 +536,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
             return BangDuLieu;
         }
-
-
 
         public bool DeleteECO_DAL(int ECONo)
         {
@@ -428,7 +551,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
                         {
                             cmd.Parameters.Add("@ECONo", SqlDbType.Int).Value = ECONo;
-                            
 
                             int result = cmd.ExecuteNonQuery();
 
@@ -454,9 +576,50 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
+        public bool InsertNewRelation_in_tblRelationTemp_DAL(string ParentCode, string ChildCode, int Quantity)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                // Mở kết nối
+                con.Open();
 
-      
+                // Tạo một giao dịch (Transaction) C#
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    string sql_query;
+                    sql_query = " INSERT INTO tblRelationTemp ( ParentID, ChildID )" +
+                        "VALUES (" +
+                        " (SELECT TOP 1 PartID FROM tblPart WHERE PartCode = @ParentCode )," +
+                        " (SELECT TOP 1 PartID FROM tblPart WHERE PartCode = @ChildCode ) ); " +
+                        " update tblRelationTemp set Quantity = @Quantity" +
+                        " where ParentID = (SELECT TOP 1 PartID FROM tblPart WHERE PartCode = @ParentCode)  and " +
+                        "        ChildID = (SELECT TOP 1 PartID FROM tblPart WHERE PartCode = @ChildCode ) ";
 
+                    SqlCommand cmd = new SqlCommand(sql_query, con, transaction);
 
+                    // Sử dụng Add với kiểu dữ liệu cụ thể thay vì AddWithValue
+                    cmd.Parameters.Add("@ParentCode", SqlDbType.NVarChar).Value = ParentCode;
+                    cmd.Parameters.Add("@ChildCode", SqlDbType.NVarChar).Value = ChildCode;
+                    cmd.Parameters.Add("@Quantity", SqlDbType.SmallInt).Value = Quantity;
+
+                    try
+                    {
+                        // Thực thi lệnh SQL
+                        int result = cmd.ExecuteNonQuery();
+
+                        // Nếu không có lỗi, xác nhận (Commit) giao dịch
+                        transaction.Commit();
+                        return true; // Trả về true nếu thêm thành công
+                    }
+                    catch (Exception ex)
+                    {
+                        // Khôi phục lại giao dịch khi có lỗi
+                        transaction.Rollback();
+                        Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
     }
 }

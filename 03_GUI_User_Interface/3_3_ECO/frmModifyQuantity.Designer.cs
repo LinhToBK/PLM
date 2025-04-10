@@ -50,7 +50,7 @@
             this.label1.Location = new System.Drawing.Point(27, 41);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(72, 17);
+            this.label1.Size = new System.Drawing.Size(94, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Parent Part";
             // 
@@ -60,7 +60,7 @@
             this.label2.Location = new System.Drawing.Point(268, 41);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(64, 17);
+            this.label2.Size = new System.Drawing.Size(84, 23);
             this.label2.TabIndex = 0;
             this.label2.Text = "Child Part";
             // 
@@ -71,7 +71,7 @@
             this.txtParentCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(116, 25);
+            this.txtParentCode.Size = new System.Drawing.Size(116, 29);
             this.txtParentCode.TabIndex = 1;
             // 
             // txtParentName
@@ -81,7 +81,7 @@
             this.txtParentName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(207, 25);
+            this.txtParentName.Size = new System.Drawing.Size(207, 29);
             this.txtParentName.TabIndex = 2;
             // 
             // txtChildCode
@@ -91,7 +91,7 @@
             this.txtChildCode.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtChildCode.Name = "txtChildCode";
             this.txtChildCode.ReadOnly = true;
-            this.txtChildCode.Size = new System.Drawing.Size(116, 25);
+            this.txtChildCode.Size = new System.Drawing.Size(116, 29);
             this.txtChildCode.TabIndex = 1;
             // 
             // txtChildName
@@ -101,7 +101,7 @@
             this.txtChildName.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtChildName.Name = "txtChildName";
             this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(194, 25);
+            this.txtChildName.Size = new System.Drawing.Size(194, 29);
             this.txtChildName.TabIndex = 2;
             // 
             // label3
@@ -110,7 +110,7 @@
             this.label3.Location = new System.Drawing.Point(27, 193);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(81, 17);
+            this.label3.Size = new System.Drawing.Size(108, 23);
             this.label3.TabIndex = 0;
             this.label3.Text = "Old Quantity";
             // 
@@ -120,7 +120,7 @@
             this.label4.Location = new System.Drawing.Point(268, 193);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 17);
+            this.label4.Size = new System.Drawing.Size(115, 23);
             this.label4.TabIndex = 0;
             this.label4.Text = "New Quantity";
             // 
@@ -131,7 +131,7 @@
             this.txtOldQuantity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtOldQuantity.Name = "txtOldQuantity";
             this.txtOldQuantity.ReadOnly = true;
-            this.txtOldQuantity.Size = new System.Drawing.Size(56, 25);
+            this.txtOldQuantity.Size = new System.Drawing.Size(56, 29);
             this.txtOldQuantity.TabIndex = 3;
             // 
             // txtNewQuantity
@@ -141,7 +141,7 @@
             this.txtNewQuantity.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.txtNewQuantity.Name = "txtNewQuantity";
             this.txtNewQuantity.ReadOnly = true;
-            this.txtNewQuantity.Size = new System.Drawing.Size(56, 25);
+            this.txtNewQuantity.Size = new System.Drawing.Size(56, 29);
             this.txtNewQuantity.TabIndex = 3;
             // 
             // btnUpdate
@@ -149,12 +149,12 @@
             this.btnUpdate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
             this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnUpdate.Location = new System.Drawing.Point(94, 248);
+            this.btnUpdate.Location = new System.Drawing.Point(31, 248);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(88, 29);
+            this.btnUpdate.Size = new System.Drawing.Size(151, 29);
             this.btnUpdate.TabIndex = 4;
-            this.btnUpdate.Text = "Update";
+            this.btnUpdate.Text = "Tạo request";
             this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnUpdate.UseVisualStyleBackColor = false;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
@@ -179,13 +179,13 @@
             this.label5.Location = new System.Drawing.Point(58, 10);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(349, 22);
+            this.label5.Size = new System.Drawing.Size(437, 26);
             this.label5.TabIndex = 0;
             this.label5.Text = "Kiểm tra đối tượng cần cập nhật số lượng";
             // 
             // frmModifyQuantity
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(481, 300);
             this.Controls.Add(this.btnCancel);

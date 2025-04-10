@@ -319,7 +319,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
                         //------------------------------------------------------------
                         string PartLogAdd = NewECONo.ToString(); ;
-                        if (partBLL.CapNhatPartLogBLL(newestpartcode, PartLogAdd) == true )
+                        if (_ecoBLL.Write_ECONo_to_tblPart_BLL(newestpartcode, PartLogAdd) == true )
                         {
                             //MessageBox.Show("Tạo thành công Part mới");
                             

@@ -17,24 +17,23 @@ namespace PLM_Lynx._03_GUI_User_Interface
 {
     public partial class frmRelationPart : Form
     {
-
         private RelationPartBLL relationpartBLL = new RelationPartBLL();
         private CommonBLL commonBLL = new CommonBLL();
-        
-        DataTable danhcon = new DataTable();
-        
-        
-        
+
+        private DataTable danhcon = new DataTable();
+
+        public int idProposal { get; set; } // ID của Proposal để truyền vào BLL    
+        public string nameProposal { get; set; }  // Tên của Proposal để truyền vào BLL
+
+
         public frmRelationPart()
         {
             InitializeComponent();
         }
 
-
         // ===============================================
-        //             DANH SÁCH HÀM TỰ TẠO 
+        //             DANH SÁCH HÀM TỰ TẠO
         // ================================================
-
 
         /// <summary>
         /// 01. Hàm tải dữ liệu tra cứu lên dgvListTimKiem
@@ -44,7 +43,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             dgvListTimKiem.DataSource = relationpartBLL.FindWithWordBLL(keysearch);
             dgvListTimKiem.Columns[0].Width = 80; // PartCode
-            dgvListTimKiem.Columns[1].Width = 200; // Part Name           
+            dgvListTimKiem.Columns[1].Width = 200; // Part Name
             dgvListTimKiem.Columns[2].Width = 250; // Part Description
             dgvListTimKiem.AllowUserToAddRows = false;
             dgvListTimKiem.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -55,7 +54,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void txtPartCode_TextChanged(object sender, EventArgs e)
         {
-
         }
 
         private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
@@ -70,37 +68,35 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private void btnSearch_Click(object sender, EventArgs e)
         {
             // --- Kiểm tra các điều kiện ban đầu
-            if(txtTimKiem.Text == "")
+            if (txtTimKiem.Text == "")
             {
                 MessageBox.Show("Bạn chưa nhập từ khóa vào ô tìm kiếm ");
                 txtTimKiem.Focus();
-            }     
+            }
             else
             {
                 LoadDataFindPart(txtTimKiem.Text);
                 dgvListTimKiem.Focus();
-            }    
+            }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn muốn thoát việc tạo liên kết giữa các Part phải không ?","Xác nhận thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes) 
-            { this.Close(); } // Đóng cửa sổ hiện tại 
-            else 
+            DialogResult result = MessageBox.Show("Bạn muốn thoát việc tạo liên kết giữa các Part phải không ?", "Xác nhận thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            { this.Close(); } // Đóng cửa sổ hiện tại
+            else
             { return; } // Không làm gì cả
-
         }
 
         private void dgvListTimKiem_Click(object sender, EventArgs e)
         {
             // Khi Click 1 vào ô thì cần lấy hình ảnh của partcode đang trỏ để hiển thị lên Picturebox
 
-
             // - Nếu dgvListTimKiem trống thì thông báo và quay lại ô tìm kiếm
-            if(dgvListTimKiem.Rows.Count == 0 )
+            if (dgvListTimKiem.Rows.Count == 0)
             {
-                MessageBox.Show("Không tìm thấy dữ liệu phù hợp "); 
+                MessageBox.Show("Không tìm thấy dữ liệu phù hợp ");
                 txtTimKiem.Focus();
                 return;
             }
@@ -112,7 +108,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
             string[] input = Partcode.Split('-');
             string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
             imagefilepath = imagefilepath + "\\" + input[0] + "\\" + input[1] + "\\" + Partcode + ".jpg";
-            
 
             // Kiểm tra file có tồn tại
             if (System.IO.File.Exists(imagefilepath))
@@ -123,9 +118,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     // Nếu có thì copy và hiển thị lên trên Picturebox
                     picTimKiem.Image = (Image)newimage.Clone();
                     txtStatusImagePart.Text = "Image is : ";
-
                 }
-
             }
             else
             {
@@ -139,10 +132,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Nếu Click đúp vào Cell trong dgvListTimKiem
             // Thì sẽ hiển thị form chi tiết của Part đang trỏ
 
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
                 // Lấy PartCode
-                string PartCode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY 
+                string PartCode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY
                 MessageBox.Show("Đây là Partcode trước khi nhập vào : " + PartCode);
 
                 // Mở Form Detail
@@ -150,76 +143,70 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
                 //detailinfo.partcode = PartCode;
                 detailinfo.ShowDialog();
-
-
             }
-
         }
 
         private void btnAdd2Parent_Click(object sender, EventArgs e)
         {
             // Lấy dữ liệu của dgvListTimKiem để đẩy lên các ô textbox của vùng Parrent
-            if(dgvListTimKiem.Rows.Count == 0)
+            if (dgvListTimKiem.Rows.Count == 0)
             {
-                MessageBox.Show("Không có giá trị để thêm vào ");;
+                MessageBox.Show("Không có giá trị để thêm vào "); ;
                 txtTimKiem.Focus();
                 return;
-            } 
+            }
 
-            string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString() ;
+            string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
             string partname = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();
             string partdescript = dgvListTimKiem.CurrentRow.Cells[2].Value.ToString();
-            
+
             // Kiểm tra xem partcode này có trong dgvChild không, nếu có thì thoát
-            bool isDuplicate = false ;
+            bool isDuplicate = false;
             foreach (DataGridViewRow row in dgvChild.Rows)
             {
                 // Kiểm tra giá trị của cột đầu tiên
-                if (row.Cells[0] !=null && row.Cells[0].Value.ToString() == partcode)
+                if (row.Cells[0] != null && row.Cells[0].Value.ToString() == partcode)
                 {
-                    isDuplicate = true ;
-                 
-                    break;
-                }    
-            }    
+                    isDuplicate = true;
 
-            // Nếu không trùng thì mới thêm vào 
-            if(isDuplicate == true )
+                    break;
+                }
+            }
+
+            // Nếu không trùng thì mới thêm vào
+            if (isDuplicate == true)
             {
                 MessageBox.Show("Giá trị này đã có trong danh sách con ");
                 return;
-            }  
+            }
             else
             {
                 txtPartCode.Text = partcode;
                 txtPartName.Text = partname;
                 txtPartDescripts.Text = partdescript;
-                // Đẩy danh sách file 
-                if(commonBLL.GetAllFileinFolder(partcode,dgvListFile) == true)
+                // Đẩy danh sách file
+                if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == true)
                 {
                     txtListFileStatus.Text = "Danh sách file ở bên dưới ";
-                }    
+                }
                 else
                 {
                     txtListFileStatus.Text = "Có vẻ không load được danh sách file";
-                } 
-                // Load ảnh 
-                if(commonBLL.UploadImagebyPartCode(partcode,picParent) == false)
+                }
+                // Load ảnh
+                if (commonBLL.UploadImagebyPartCode(partcode, picParent) == false)
                 {
                     MessageBox.Show("Không load được ảnh ");
-                }    
-            }    
+                }
+            }
         }
 
         private void frmRelationPart_Load(object sender, EventArgs e)
         {
-            
             danhcon.Columns.Add("PartCode", typeof(string));
             danhcon.Columns.Add("PartName", typeof(string));
             danhcon.Columns.Add("Quantity", typeof(int));
             dgvChild.AllowUserToAddRows = false;
-
-
         }
 
         private void btnClearParent_Click(object sender, EventArgs e)
@@ -248,27 +235,25 @@ namespace PLM_Lynx._03_GUI_User_Interface
             {
                 MessageBox.Show("Lỗi phát sinh khi  mở file : " + ex.Message);
             }
-
-
         }
 
         private void btnAddChild_Click(object sender, EventArgs e)
         {
             // Thêm vào dgvChild
-            if(dgvListTimKiem.Rows.Count ==0)
+            if (dgvListTimKiem.Rows.Count == 0)
             {
                 MessageBox.Show("Không có đối tượng part trong danh sách tìm kiếm \n Hãy nhập từ khóa tìm kiếm");
                 txtTimKiem.Focus();
                 return;
             }
-                                             
+
             string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
             string partname = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();
-            if(partcode == txtPartCode.Text)
+            if (partcode == txtPartCode.Text)
             {
                 MessageBox.Show("Lỗi : Trùng với Part Cha ");
                 return;
-            }   
+            }
             else
             {
                 // Kiểm tra giá trị này với giá trị của dgvChild hiện tại
@@ -302,62 +287,57 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     dgvChild.Columns[1].ReadOnly = true;
                     dgvChild.Columns[2].ReadOnly = false; // chỉ cột quantity mới được phép sửa
                 }
-
-
-            }    
+            }
         }
 
         private void btnDeleteChild_Click(object sender, EventArgs e)
         {
-            // Kiểm tra xem có hàng nào được chọn không 
-            if(dgvChild.SelectedRows.Count >0)
+            // Kiểm tra xem có hàng nào được chọn không
+            if (dgvChild.SelectedRows.Count > 0)
             {
                 DialogResult result = MessageBox.Show("Bạn muốn xóa dòng này phải không", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
-                    foreach(DataGridViewRow rw in dgvChild.SelectedRows)
+                    foreach (DataGridViewRow rw in dgvChild.SelectedRows)
                     {
-                        if(!rw.IsNewRow)
+                        if (!rw.IsNewRow)
                         {
                             dgvChild.Rows.Remove(rw);
-                        }    
-                    }    
-                } 
+                        }
+                    }
+                }
                 else
                 {
                     MessageBox.Show("Đang chưa chọn dòng nào để xóa");
-                }    
-                    
-            }    
+                }
+            }
         }
 
         private void btnClearChild_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn muốn xóa toàn bộ dữ liệu của List Child phải không ?","", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show("Bạn muốn xóa toàn bộ dữ liệu của List Child phải không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                if(dgvChild.DataSource is DataTable dt)
+                if (dgvChild.DataSource is DataTable dt)
                 {
                     dt.Clear();
-                }    
+                }
                 else
                 {
                     dgvChild.Rows.Clear();
-                }    
-            } 
+                }
+            }
         }
 
         private void dgvChild_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            string PartCode = dgvChild.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY 
-
+            string PartCode = dgvChild.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY
 
             // Mở Form Detail
             frmRelationPart_Detail_Info detailinfo = new frmRelationPart_Detail_Info();
 
             detailinfo.ShowDetailInfor(PartCode);
             detailinfo.ShowDialog();
-
         }
 
         private void btnCheckBefore_Click(object sender, EventArgs e)
@@ -366,12 +346,11 @@ namespace PLM_Lynx._03_GUI_User_Interface
             frmUploadRelationtoDataBase frm = new frmUploadRelationtoDataBase();
             string parentcode = txtPartCode.Text;
             string parentname = txtPartName.Text;
-
-
+            frm.idProposal = idProposal;
+            frm.nameProposal = nameProposal;
 
             // Copy dữ liệu từ DataGridView lên Form Check Data Upload
             frm.LayDatafrom_frmRelationPart(parentcode, parentname, danhcon);
-
 
             frm.ShowDialog();
             // Nếu OK hết thì button Upload DataBase mới được bật
@@ -385,7 +364,31 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void txtStatusImagePart_TextChanged(object sender, EventArgs e)
         {
+        }
 
+        private void btnUpload_Click(object sender, EventArgs e)
+        {
+            string tb = "Cần kiểm tra thông tin trước khi gửi yêu cầu tạo ràng buộc giữa các part";
+            DialogResult kq = MessageBox.Show(tb, "Chú ý ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                // Tạo form để kiểm tra việc upload dữ liệu
+                frmUploadRelationtoDataBase frm = new frmUploadRelationtoDataBase();
+                string parentcode = txtPartCode.Text;
+                string parentname = txtPartName.Text;
+                frm.idProposal = idProposal;
+                frm.nameProposal = nameProposal;
+
+                // Copy dữ liệu từ DataGridView lên Form Check Data Upload
+                frm.LayDatafrom_frmRelationPart(parentcode, parentname, danhcon);
+
+                frm.ShowDialog();
+                // Nếu OK hết thì button Upload DataBase mới được bật
+            }
         }
     }
 }

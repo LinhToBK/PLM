@@ -8,6 +8,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms.VisualStyles;
+using System.Globalization;
+using System.Text.RegularExpressions;
 
 namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 {
@@ -21,26 +24,28 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.GetListChildDAL(ParentCode);
         }
 
-        public bool CapnhatQuantityBLL(string parentcode, string childcode, int quantity)
+        public bool CapnhatQuantityBLL(string parentcode, string childcode, int quantity , string ECONo)
         {
             bool check = false;
 
-            if (ecoDAL.CapnhatLogPartDAL(parentcode, childcode, quantity) && ecoDAL.CapnhatQuantityDAL(parentcode, childcode, quantity))
+            if (ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) && ecoDAL.CapnhatQuantityDAL(parentcode, childcode, quantity) )
             {
                 check = true;
             }
 
             return check;
-
-
         }
 
-        public bool XoaRelationBLL(string parentcode, string childcode)
+        public bool XoaRelationBLL(string parentcode, string childcode , string ECONo)
         {
             bool check = false;
-            if (ecoDAL.DeleteLogPartDAL(parentcode, childcode) && ecoDAL.XoaRelationDAL(parentcode, childcode))
+            if ( ecoDAL.XoaRelationDAL(parentcode, childcode) && ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) )
             {
                 check = true;
+            }
+            else
+            {
+                check = false;
             }
             return check;
         }
@@ -50,25 +55,21 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.GetInforPartDAL(PartCode);
         }
 
-
         public bool UpdateInforPart_BLL(string PartCode, int PartStageID, string PartMaterial, int ECONo)
         {
-            return ecoDAL.Update_InforPart_DAL(PartCode, PartStageID, PartMaterial,  ECONo);
+            return ecoDAL.Update_InforPart_DAL(PartCode, PartStageID, PartMaterial, ECONo);
         }
-
 
         public tblECO GetLastest_ECO_BLL()
         {
             return ecoDAL.GetLastest_ECO_DAL();
         }
 
-        public bool InsertNewECO_BLL(int ECONo, int IDProposal, string NameProposal, int TypeID, string ECOContent)
+        public bool InsertNewECO_BLL(int ECONo, int IDProposal, string NameProposal, int TypeID, string     ECOContent)
         {
-
             // Trường hợp 1 : Make New Part
             return ecoDAL.InsertNewECO_DAL(ECONo, IDProposal, NameProposal, TypeID, ECOContent);
         }
-
 
         public DataTable GetListNearECO_BLL(int NoRow)
         {
@@ -80,6 +81,10 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.GettblPartStage_DAL();
         }
 
+        /// <summary>
+        /// Tạo số ECO Mới
+        /// </summary>
+        /// <returns></returns>
         public int LoadECONo()
         {
             string today = DateTime.Now.Date.ToString("yy/MM/dd");
@@ -97,7 +102,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 
             return NewECONo;
         }
-
 
         public bool CopyFile_to_ECOTEMP_BLL(string ECONo, DataGridView dgvFileUpdate)
         {
@@ -132,7 +136,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                             File.Copy(originalFilePath, newFilePath, true);
                         }
                     }
-
                 }
                 status = true;
             }
@@ -156,90 +159,213 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return status;
         }
 
-
-
         public bool DeleteECO_BLL(int ECONo)
         {
             return ecoDAL.DeleteECO_DAL(ECONo);
         }
 
-
-        public bool CopyFile_to_DataPart(string partcode, int ECONo, int PartStageID)
+        public bool Update_tblECO_Approved_BLL(int IDApproved, string NameApproved, int ECONo)
         {
-            bool status = false;
+            return ecoDAL.Update_tblECO_Approved_DAL(IDApproved, NameApproved, ECONo);
+        }
+
+        public bool CopyFile_to_DataPart(string partcode, string version, int ECONo)
+        {
+            bool status;
             // -------------------------------------------------
-            // ===        Bước 1 : Lấy các đường dẫn 
+            // ===        Bước 1 : Lấy các đường dẫn
             // -------------------------------------------------
             // Lấy đường dẫn thư mục ECOTEMP :
-            string FolderECONopath = Properties.Settings.Default.LinkDataPart + "\\ECOTEMP\\" + ECONo.ToString() + "\\";
+            string sourceDir = Properties.Settings.Default.LinkDataPart + "\\ECOTEMP\\" + ECONo.ToString() ;
             // Lấy đường dẫn thư mục chứa PartCode
             string[] FolderName = partcode.Split('-');
             // FolderName[0] : XXX : PartFamily
             // FolderName[1] : YYYYY : PartNo
             // -- Tạo Folder  bằng PartCode mới
-            string Folder_Part_Path = Properties.Settings.Default.LinkDataPart + "//" + FolderName[0] + "//" + FolderName[1];
+            string targetDir = Properties.Settings.Default.LinkDataPart + "//" + FolderName[0] + "//" + FolderName[1];
 
-            // -------------------------------------------------
-            // ===        Bước 2 : Lấy Datatable là bảng ghi tất cả file trong thư mục
-            // -------------------------------------------------
+            // Tên file 
+            string newBaseName = partcode + "_V" + version;
+            string[] files = Directory.GetFiles(sourceDir);
 
-            //------------------------------------------------------------
-            // --- Đổi tên  và save as copy các file vào folder vừa tạo
-            //------------------------------------------------------------
-            //try
-            //{
-            //    // Duyệt qua các hàng  trong DataGridView
-            //    foreach (DataGridViewRow row in dgvFileAttachment.Rows)
-            //    {
-            //        if (row.Cells[3].Value != null) //Kiểm tra tại cột FileName
-            //        {
-            //            // Lấy đường dẫn của file từ cột trong Datagridview
-            //            string SourceFilePath = row.Cells[3].Value.ToString();
-            //            string FileExtension = row.Cells[2].Value.ToString();
+            try
+            {
+                //int count = 1;
+                foreach (string filePath in files)
+                {
+                    string extension = Path.GetExtension(filePath); // Lấy đuôi file, ví dụ .pdf, .txt, .jpg
+                    string newFileName = $"{newBaseName}{extension}";
+                    string newFilePath = Path.Combine(targetDir, newFileName);
 
-            //            // Tạo tên File mới dựa trên  tên thư mục và phần mở rộng của file
-            //            string NewFileName = FolderPath + "//" + newestpartcode + "_V1.0" + FileExtension;
-            //            // Tên đường dẫn đến folder + tên partcode mới + . đuôi file
-            //            string TargetFilePart = Path.Combine(FolderPath, NewFileName);
+                    // Nếu có nhiều file, thêm số để tránh trùng tên
+                    //if (File.Exists(newFilePath))
+                    //{
+                    //    newFileName = $"{newBaseName}_{count}{extension}";
+                    //    newFilePath = Path.Combine(targetDir, newFileName);
+                    //    count++;
+                    //}
 
-            //            // Sao chép file vào thư mục đích với tên mới
-            //            File.Copy(SourceFilePath, TargetFilePart, true);
-            //            //MessageBox.Show("Đã sao chép thành công ");
-            //        }
-            //    }
-            //}
+                    File.Copy(filePath, newFilePath);
+                    //Console.WriteLine($"Đã copy: {newFileName}");
+                }
+                status = true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                status = false;
+            }
 
 
             return status;
         }
 
-
-        public float lastestVersion(string folderPath)
+        public int lastestVersion(string folderPath, int stage)
         {
             // Lấy tất cả các file trong thư mục
             string[] files = Directory.GetFiles(folderPath);
             // Tạo danh sách để lưu trữ các số phiên bản
-            float maxversion = 1;
-            
-            
+            int maxversion = 0;
+            int i;
+
             // Duyệt qua từng file và lấy số phiên bản từ tên file
             foreach (string file in files)
             {
                 // Lấy tên file mà không có đường dẫn
                 string fileName = Path.GetFileNameWithoutExtension(file);
-                // BOL-00002_V1.0
-                // Tách phần tên file để lấy số phiên bản
-                float i = Convert.ToSingle(fileName.Substring(11, fileName.Length - 11));
-                if(i > maxversion)
+                if (getstage(fileName) == stage)
                 {
-                    maxversion = i;
+                    // Chỉ kiểm tra với stage hiện tại
+                    i = getversion(fileName);
+                    if (i > maxversion)
+                    {
+                        maxversion = i;
+                    }
                 }
-
             }
 
-            return maxversion;
+            return maxversion + 1;
+        }
+
+        private int getversion(string filename)
+        {
+            string[] parts = filename.Split('_');
+            string version = parts[1]; // "V1.10"
+
+            string[] versionParts = version.Split('.');
+            return Convert.ToInt16(versionParts[1]);
+        }
+
+        private int getstage(string filename)
+        {
+            string[] parts = filename.Split('_');
+            string version = parts[1]; // "V1.10"
+
+            string[] versionParts = version.Split('.');
+            return Convert.ToInt16(versionParts[0].Substring(1));
+        }
+
+        public bool Delete_Folder_ECO (int ECONo)
+        {
+            // Xóa thư mục ECONo
+            bool status = false;
+            string FolderECONopath = Properties.Settings.Default.LinkDataPart;
+            FolderECONopath = FolderECONopath + "\\ECOTEMP\\" + ECONo.ToString() ;
+
+            if (Directory.Exists(FolderECONopath))
+            {
+                try
+                {
+                    RemoveFolderAttributes(FolderECONopath);
+                    Directory.Delete(FolderECONopath, true); // Xóa thư mục và tất cả file bên trong
+                    //MessageBox.Show("Cập nhật thành công");
+                    status = true;
+                }
+                catch (Exception deleteEx)
+                {
+                    MessageBox.Show("Lỗi khi xóa thư mục: " + deleteEx.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    status = false;
+                }
+            }
+            return status;
+        }
+
+        private void RemoveFolderAttributes(string path)
+        {
+            DirectoryInfo dir = new DirectoryInfo(path);
+            dir.Attributes = FileAttributes.Normal;
+
+            foreach (FileInfo file in dir.GetFiles("*", SearchOption.AllDirectories))
+            {
+                file.Attributes = FileAttributes.Normal;
+            }
+        }
+
+
+        public bool CopyFile_to_DataPart_If_UpStage(string partcode, int newstageID, int oldstageID)
+        {
+            bool status= false;
+            // -------------------------------------------------
+            // ===        Bước 1 : Lấy các đường dẫn
+            // ------------------------------------------------
+            string[] FolderName = partcode.Split('-');
+            // FolderName[0] : XXX : PartFamily
+            // FolderName[1] : YYYYY : PartNo
+            // -- Tạo Folder  bằng PartCode mới
+            string folderPath = Properties.Settings.Default.LinkDataPart + "//" + FolderName[0] + "//" + FolderName[1];
+            string[] files = Directory.GetFiles(folderPath);
+            int lastestversion = lastestVersion(folderPath, oldstageID) - 1;
+            // Tạo tên file mới
+            string newBaseName = partcode + "_V" + newstageID.ToString() + ".0";
+
+            
+
+            try
+            {
+                
+                foreach (string filePath in files)
+                {
+                    string extension = Path.GetExtension(filePath); // Lấy đuôi file, ví dụ .pdf, .txt, .jpg
+                    string filename = Path.GetFileNameWithoutExtension(filePath); // Lấy tên file không có đuôi
+                    int ver = getversion(filename);
+                    int stage = getstage(filename);
+                    if(stage == oldstageID && ver == lastestversion)
+                    {
+                        // Nếu trùng hợp hết thì sẽ lấy file  và copy với tên mới
+                        string newFileName = Path.Combine(folderPath, newBaseName + extension);
+                        File.Copy(filePath, newFileName, true);
+                    }
+                   
+                }
+                status = true;
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                status = false;
+            }
+
+
+            return status;
+            
             
         }
 
+        public bool InsertNewRelation_in_tblRelationTemp_BLL (string ParentCode, string ChildCode, int Quantity)
+        {
+            return ecoDAL.InsertNewRelation_in_tblRelationTemp_DAL(ParentCode, ChildCode, Quantity);
+        }
+
+        public bool Delete_tblRelationTemp_BLL(string parentcode, string childcode)
+        {
+            return ecoDAL.Delete_tblRelationTemp_DAL(parentcode, childcode);
+        }
+
+        public bool Write_ECONo_to_tblPart_BLL(string PartCode, string ECONo)
+        {
+            return ecoDAL.Write_ECONo_to_tblPart_DAL(PartCode, ECONo);
+        }
     }
 }

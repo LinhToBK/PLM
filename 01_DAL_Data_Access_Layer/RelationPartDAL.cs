@@ -188,5 +188,49 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 }
             }
         }
+
+        /// <summary>
+        /// 06. SELECT - Lấy danh sách các PartChild của 1 PartCode trong tblRelationTemp
+        /// </summary>
+        /// <param name="PartCode"></param>
+        /// <returns></returns>
+        public DataTable FindChild_In_tblRelationTemp_DAL(string PartCode)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string query;
+                //query = @"select ChildID from tblRelationTemp where ParentID = (select top 1 PartID from tblPart where PartCode = @PartCode ) ";
+
+                query = @"select  PartCode  from tblPart	
+                            where PartID in (  select ChildID   from tblRelationTemp 
+					        where ParentID = (select top 1 PartID from tblPart where PartCode = @PartCode))";
+                SqlCommand cmd = new SqlCommand(@query, conn);
+                cmd.Parameters.AddWithValue("@PartCode", PartCode);
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
+        public DataTable FindParent_in_tblRelationTemp_DAL(string PartCode)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string query;
+                //query = @"select ParentID from tblRelation where ChildID = (select top 1 PartID from tblPart where PartCode = @PartCode) ";
+                query = @"select  PartCode  from tblPart	
+                        where PartID in (  select ParentID   from tblRelationTemp 
+					        where ChildID = (select top 1 PartID from tblPart where PartCode = @PartCode))";
+                SqlCommand cmd = new SqlCommand(@query, conn);
+                cmd.Parameters.AddWithValue("@PartCode", PartCode);
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
     }
 }

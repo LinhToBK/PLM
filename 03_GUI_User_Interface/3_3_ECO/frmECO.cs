@@ -1,4 +1,5 @@
-﻿using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+﻿using Newtonsoft.Json;
+using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -232,8 +233,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 return;
             }
             frmModifyQuantity frm = new frmModifyQuantity();
-            frm.CapnhatControlModifyQuantity(txtParentCode.Text, txtParentName.Text, txtChildCode.Text, txtChildName.Text, oldquantity, txtQuantity.Text);
-
+            frm.parentcode = txtParentCode.Text;
+            frm.parentname = txtParentName.Text;
+            frm.childcode = txtChildCode.Text;
+            frm.childname = txtChildName.Text;
+            frm.oldquantity = oldquantity;
+            frm.newquantity = txtQuantity.Text;
+            frm.idnguoiyeucau = IDNguoidung;
+            frm.tennguoiyc = Username;
             frm.ShowDialog();
 
             // Sau khi cập nhật thì cần load lại DataGridView dgvListChild
@@ -258,20 +265,50 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
             if (kq == DialogResult.Yes)
             {
-                // thực hiện việc xóa ràng buộc 
-                if(ecoBLL.XoaRelationBLL(txtParentCode.Text, txtChildCode.Text))
+                //// thực hiện việc xóa ràng buộc 
+                //if(ecoBLL.XoaRelationBLL(txtParentCode.Text, txtChildCode.Text))
+                //{
+                //    MessageBox.Show("Đã xóa ràng buộc của 2 Part" + txtParentCode.Text + " và " + txtChildCode.Text);
+                //    // Nếu OK thì cần cập nhật lại DataGridView dgvListChild
+                //    LoadListChild(txtParentCode.Text) ;
+                //    btnDelete.Enabled = false; // Sau khi xóa cần tắt btnDelete để tránh click đúp
+                //    btnModifyQuantity.Enabled = false;
+                //}    
+                //else
+                //{
+                //    MessageBox.Show("Xuất hiện lỗi trong quá trình xóa");
+                //}
+
+                int ECONo = ecoBLL.LoadECONo();
+
+
+                List<Tuple<string, object>> tableData = new List<Tuple<string, object>>
                 {
-                    MessageBox.Show("Đã xóa ràng buộc của 2 Part" + txtParentCode.Text + " và " + txtChildCode.Text);
-                    // Nếu OK thì cần cập nhật lại DataGridView dgvListChild
-                    LoadListChild(txtParentCode.Text) ;
-                    btnDelete.Enabled = false; // Sau khi xóa cần tắt btnDelete để tránh click đúp
-                    btnModifyQuantity.Enabled = false;
-                }    
+                    new Tuple<string, object>("ParentCode", txtParentCode.Text),
+                    new Tuple<string, object>("ChildCode", txtChildCode.Text)
+                };
+                Dictionary<string, object> jsonData = new Dictionary<string, object>();
+                foreach (var row in tableData)
+                {
+                    jsonData[row.Item1] = row.Item2;
+                }
+
+                // Chuyển thành chuỗi JSON
+                string ECOContent = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+                ECOContent = "[" + ECOContent + "]";
+                int ECOTypeID = 5 ; // 4 là ECO cho sửa số lượng Part
+
+                if(ecoBLL.InsertNewECO_BLL(ECONo, IDNguoidung, Username, ECOTypeID, ECOContent))
+                {
+                    MessageBox.Show("Tạo ECO : Xóa ràng buộc  thành công");
+                    //this.Close();
+                }
                 else
                 {
-                    MessageBox.Show("Xuất hiện lỗi trong quá trình xóa");
-                }    
-                        
+                    MessageBox.Show("Xuất hiện lỗi khi tạo ECO \n Kiểm tra lại dữ liệu");
+                    return;
+                }
+
             }
             else
             {

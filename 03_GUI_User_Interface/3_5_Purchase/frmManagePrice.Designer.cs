@@ -33,8 +33,11 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvListTimKiem = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtExportPriceUSD = new System.Windows.Forms.TextBox();
+            this.txtExportPrice = new System.Windows.Forms.TextBox();
             this.txtPartStage = new System.Windows.Forms.TextBox();
             this.cboPrecision = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtUSDPrice = new System.Windows.Forms.TextBox();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -44,14 +47,15 @@
             this.txtDescript = new System.Windows.Forms.TextBox();
             this.txtPartName = new System.Windows.Forms.TextBox();
             this.txtPartCode = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.lblTypeCurrent = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.ckcAllowModifyRate = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
             this.txtRate = new System.Windows.Forms.TextBox();
@@ -62,20 +66,22 @@
             this.btnTraCuuPO = new System.Windows.Forms.Button();
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtKeySearch = new System.Windows.Forms.TextBox();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.txtPartPriceLog = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListTimKiem)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
             this.groupBox4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(429, 53);
+            this.btnExit.Location = new System.Drawing.Point(571, 28);
             this.btnExit.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 41);
+            this.btnExit.Size = new System.Drawing.Size(59, 90);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -97,7 +103,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 32.22037F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35.39232F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20.70117F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(524, 679);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(653, 679);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // dgvListTimKiem
@@ -109,7 +115,7 @@
             this.dgvListTimKiem.Name = "dgvListTimKiem";
             this.dgvListTimKiem.RowHeadersWidth = 51;
             this.dgvListTimKiem.RowTemplate.Height = 23;
-            this.dgvListTimKiem.Size = new System.Drawing.Size(518, 213);
+            this.dgvListTimKiem.Size = new System.Drawing.Size(647, 213);
             this.dgvListTimKiem.TabIndex = 2;
             this.dgvListTimKiem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellDoubleClick);
             this.dgvListTimKiem.SelectionChanged += new System.EventHandler(this.dgvListTimKiem_SelectionChanged);
@@ -117,8 +123,14 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.ckcAllowModifyRate);
+            this.groupBox1.Controls.Add(this.txtExportPriceUSD);
+            this.groupBox1.Controls.Add(this.txtRate);
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.txtExportPrice);
             this.groupBox1.Controls.Add(this.txtPartStage);
             this.groupBox1.Controls.Add(this.cboPrecision);
+            this.groupBox1.Controls.Add(this.label11);
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.txtUSDPrice);
             this.groupBox1.Controls.Add(this.groupBox3);
@@ -126,7 +138,9 @@
             this.groupBox1.Controls.Add(this.txtDescript);
             this.groupBox1.Controls.Add(this.txtPartName);
             this.groupBox1.Controls.Add(this.txtPartCode);
+            this.groupBox1.Controls.Add(this.label10);
             this.groupBox1.Controls.Add(this.lblTypeCurrent);
+            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.label3);
@@ -136,17 +150,35 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(3, 300);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(518, 234);
+            this.groupBox1.Size = new System.Drawing.Size(647, 234);
             this.groupBox1.TabIndex = 3;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Thông tin Part";
+            // 
+            // txtExportPriceUSD
+            // 
+            this.txtExportPriceUSD.Location = new System.Drawing.Point(415, 161);
+            this.txtExportPriceUSD.Name = "txtExportPriceUSD";
+            this.txtExportPriceUSD.ReadOnly = true;
+            this.txtExportPriceUSD.Size = new System.Drawing.Size(143, 29);
+            this.txtExportPriceUSD.TabIndex = 7;
+            this.txtExportPriceUSD.TextChanged += new System.EventHandler(this.txtExportPriceUSD_TextChanged);
+            // 
+            // txtExportPrice
+            // 
+            this.txtExportPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.txtExportPrice.Location = new System.Drawing.Point(415, 125);
+            this.txtExportPrice.Name = "txtExportPrice";
+            this.txtExportPrice.Size = new System.Drawing.Size(143, 29);
+            this.txtExportPrice.TabIndex = 7;
+            this.txtExportPrice.TextChanged += new System.EventHandler(this.txtExportPrice_TextChanged);
             // 
             // txtPartStage
             // 
             this.txtPartStage.Location = new System.Drawing.Point(92, 53);
             this.txtPartStage.Name = "txtPartStage";
             this.txtPartStage.ReadOnly = true;
-            this.txtPartStage.Size = new System.Drawing.Size(59, 29);
+            this.txtPartStage.Size = new System.Drawing.Size(126, 29);
             this.txtPartStage.TabIndex = 6;
             // 
             // cboPrecision
@@ -157,16 +189,25 @@
             "0.00",
             "0.000",
             "0.0000"});
-            this.cboPrecision.Location = new System.Drawing.Point(229, 53);
+            this.cboPrecision.Location = new System.Drawing.Point(330, 53);
             this.cboPrecision.Name = "cboPrecision";
             this.cboPrecision.Size = new System.Drawing.Size(57, 29);
             this.cboPrecision.TabIndex = 5;
             this.cboPrecision.SelectedIndexChanged += new System.EventHandler(this.cboPrecision_SelectedIndexChanged);
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(567, 164);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(63, 23);
+            this.label11.TabIndex = 4;
+            this.label11.Text = "( USD )";
+            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(463, 58);
+            this.label6.Location = new System.Drawing.Point(567, 58);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(63, 23);
             this.label6.TabIndex = 4;
@@ -174,10 +215,10 @@
             // 
             // txtUSDPrice
             // 
-            this.txtUSDPrice.Location = new System.Drawing.Point(312, 53);
+            this.txtUSDPrice.Location = new System.Drawing.Point(413, 53);
             this.txtUSDPrice.Name = "txtUSDPrice";
             this.txtUSDPrice.ReadOnly = true;
-            this.txtUSDPrice.Size = new System.Drawing.Size(131, 29);
+            this.txtUSDPrice.Size = new System.Drawing.Size(143, 29);
             this.txtUSDPrice.TabIndex = 3;
             this.txtUSDPrice.TextChanged += new System.EventHandler(this.txtUSDPrice_TextChanged);
             // 
@@ -218,21 +259,21 @@
             // txtPartPrice
             // 
             this.txtPartPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtPartPrice.Location = new System.Drawing.Point(312, 20);
+            this.txtPartPrice.Location = new System.Drawing.Point(413, 20);
             this.txtPartPrice.Name = "txtPartPrice";
             this.txtPartPrice.ReadOnly = true;
-            this.txtPartPrice.Size = new System.Drawing.Size(131, 29);
+            this.txtPartPrice.Size = new System.Drawing.Size(143, 29);
             this.txtPartPrice.TabIndex = 1;
             this.txtPartPrice.TextChanged += new System.EventHandler(this.txtPartPrice_TextChanged);
             // 
             // txtDescript
             // 
-            this.txtDescript.Location = new System.Drawing.Point(92, 119);
+            this.txtDescript.Location = new System.Drawing.Point(92, 125);
             this.txtDescript.Multiline = true;
             this.txtDescript.Name = "txtDescript";
             this.txtDescript.ReadOnly = true;
             this.txtDescript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDescript.Size = new System.Drawing.Size(417, 107);
+            this.txtDescript.Size = new System.Drawing.Size(259, 101);
             this.txtDescript.TabIndex = 1;
             // 
             // txtPartName
@@ -240,7 +281,7 @@
             this.txtPartName.Location = new System.Drawing.Point(92, 86);
             this.txtPartName.Name = "txtPartName";
             this.txtPartName.ReadOnly = true;
-            this.txtPartName.Size = new System.Drawing.Size(417, 29);
+            this.txtPartName.Size = new System.Drawing.Size(538, 29);
             this.txtPartName.TabIndex = 1;
             // 
             // txtPartCode
@@ -248,22 +289,40 @@
             this.txtPartCode.Location = new System.Drawing.Point(92, 20);
             this.txtPartCode.Name = "txtPartCode";
             this.txtPartCode.ReadOnly = true;
-            this.txtPartCode.Size = new System.Drawing.Size(126, 29);
+            this.txtPartCode.Size = new System.Drawing.Size(185, 29);
             this.txtPartCode.TabIndex = 1;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(564, 128);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(66, 23);
+            this.label10.TabIndex = 0;
+            this.label10.Text = "( VND )";
             // 
             // lblTypeCurrent
             // 
             this.lblTypeCurrent.AutoSize = true;
-            this.lblTypeCurrent.Location = new System.Drawing.Point(463, 25);
+            this.lblTypeCurrent.Location = new System.Drawing.Point(564, 25);
             this.lblTypeCurrent.Name = "lblTypeCurrent";
             this.lblTypeCurrent.Size = new System.Drawing.Size(66, 23);
             this.lblTypeCurrent.TabIndex = 0;
             this.lblTypeCurrent.Text = "( VND )";
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(349, 128);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(59, 46);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Export\r\nPrice";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(166, 58);
+            this.label8.Location = new System.Drawing.Point(243, 58);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(78, 23);
             this.label8.TabIndex = 0;
@@ -272,20 +331,20 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(229, 25);
+            this.label4.Location = new System.Drawing.Point(304, 25);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 23);
+            this.label4.Size = new System.Drawing.Size(104, 23);
             this.label4.TabIndex = 0;
-            this.label4.Text = "Part Price";
+            this.label4.Text = "Import Price";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(10, 119);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 23);
+            this.label3.Size = new System.Drawing.Size(72, 23);
             this.label3.TabIndex = 0;
-            this.label3.Text = "Part Descript";
+            this.label3.Text = "Descript";
             // 
             // label2
             // 
@@ -314,56 +373,40 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "Part Code";
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.ckcAllowModifyRate);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.txtRate);
-            this.groupBox2.Controls.Add(this.btnSaveNewPrice);
-            this.groupBox2.Controls.Add(this.btnModify);
-            this.groupBox2.Controls.Add(this.btnExit);
-            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupBox2.Location = new System.Drawing.Point(3, 540);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(518, 136);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Cập nhật";
-            // 
             // ckcAllowModifyRate
             // 
             this.ckcAllowModifyRate.AutoSize = true;
-            this.ckcAllowModifyRate.Location = new System.Drawing.Point(21, 80);
+            this.ckcAllowModifyRate.Location = new System.Drawing.Point(357, 197);
             this.ckcAllowModifyRate.Name = "ckcAllowModifyRate";
-            this.ckcAllowModifyRate.Size = new System.Drawing.Size(134, 27);
+            this.ckcAllowModifyRate.Size = new System.Drawing.Size(73, 27);
             this.ckcAllowModifyRate.TabIndex = 5;
-            this.ckcAllowModifyRate.Text = "Modify Tỷ giá";
+            this.ckcAllowModifyRate.Text = "Eable";
             this.ckcAllowModifyRate.UseVisualStyleBackColor = true;
             this.ckcAllowModifyRate.CheckedChanged += new System.EventHandler(this.ckcAllowModifyRate_CheckedChanged);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(18, 25);
+            this.label5.Location = new System.Drawing.Point(543, 199);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(136, 23);
+            this.label5.Size = new System.Drawing.Size(86, 23);
             this.label5.TabIndex = 4;
-            this.label5.Text = "Tỷ giá USD/VND";
+            this.label5.Text = "USD/VND";
             // 
             // txtRate
             // 
-            this.txtRate.Location = new System.Drawing.Point(21, 51);
+            this.txtRate.Location = new System.Drawing.Point(430, 196);
             this.txtRate.Name = "txtRate";
-            this.txtRate.Size = new System.Drawing.Size(100, 29);
+            this.txtRate.Size = new System.Drawing.Size(113, 29);
             this.txtRate.TabIndex = 3;
             // 
             // btnSaveNewPrice
             // 
             this.btnSaveNewPrice.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveNewPrice.Image")));
             this.btnSaveNewPrice.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSaveNewPrice.Location = new System.Drawing.Point(299, 53);
+            this.btnSaveNewPrice.Location = new System.Drawing.Point(399, 77);
             this.btnSaveNewPrice.Name = "btnSaveNewPrice";
-            this.btnSaveNewPrice.Size = new System.Drawing.Size(119, 41);
+            this.btnSaveNewPrice.Size = new System.Drawing.Size(160, 41);
             this.btnSaveNewPrice.TabIndex = 2;
             this.btnSaveNewPrice.Text = "Save New Price";
             this.btnSaveNewPrice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -375,11 +418,11 @@
             this.btnModify.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnModify.Image = ((System.Drawing.Image)(resources.GetObject("btnModify.Image")));
             this.btnModify.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModify.Location = new System.Drawing.Point(212, 53);
+            this.btnModify.Location = new System.Drawing.Point(399, 30);
             this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(75, 41);
+            this.btnModify.Size = new System.Drawing.Size(160, 41);
             this.btnModify.TabIndex = 1;
-            this.btnModify.Text = "Modify";
+            this.btnModify.Text = "Modify Price";
             this.btnModify.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModify.UseVisualStyleBackColor = false;
             this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
@@ -393,7 +436,7 @@
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(3, 3);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(518, 72);
+            this.groupBox4.Size = new System.Drawing.Size(647, 72);
             this.groupBox4.TabIndex = 0;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Tìm kiếm Part";
@@ -439,17 +482,39 @@
             this.txtKeySearch.TabIndex = 0;
             this.txtKeySearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyDown);
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.txtPartPriceLog);
+            this.groupBox2.Controls.Add(this.btnSaveNewPrice);
+            this.groupBox2.Controls.Add(this.btnExit);
+            this.groupBox2.Controls.Add(this.btnModify);
+            this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBox2.Location = new System.Drawing.Point(3, 540);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(647, 136);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Log";
+            // 
+            // txtPartPriceLog
+            // 
+            this.txtPartPriceLog.Location = new System.Drawing.Point(9, 28);
+            this.txtPartPriceLog.Multiline = true;
+            this.txtPartPriceLog.Name = "txtPartPriceLog";
+            this.txtPartPriceLog.Size = new System.Drawing.Size(342, 99);
+            this.txtPartPriceLog.TabIndex = 3;
+            // 
             // frmManagePrice
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 679);
+            this.ClientSize = new System.Drawing.Size(653, 679);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "frmManagePrice";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Quản lý giá";
+            this.Text = "Manage Price";
             this.Load += new System.EventHandler(this.frmManagePrice_Load);
             this.tableLayoutPanel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListTimKiem)).EndInit();
@@ -457,10 +522,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -472,7 +537,6 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnSaveNewPrice;
         private System.Windows.Forms.Button btnModify;
         private System.Windows.Forms.TextBox txtPartPrice;
@@ -499,5 +563,12 @@
         private System.Windows.Forms.TextBox txtUSDPrice;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtExportPriceUSD;
+        private System.Windows.Forms.TextBox txtExportPrice;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TextBox txtPartPriceLog;
     }
 }

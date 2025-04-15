@@ -52,7 +52,9 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 txtPartName.Text = row0[1].ToString();
                 txtPartStage.Text = row0[3].ToString();
                 txtPartDescription.Text = row0[2].ToString();
-                txtPartLog.Text = row0[4].ToString();
+
+                //txtPartLog.Text = row0[4].ToString();
+                LoadListECO(row0[4].ToString()); // Load danh sách ECO lên DataGridView
                 txtPartMaterial.Text = row0[6].ToString();
                 decimal partprice;
                 if (row0[5].ToString() == "" || row0[5].ToString() == "0")
@@ -302,6 +304,42 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void label3_Click(object sender, EventArgs e)
         {
+        }
+
+        private void LoadListECO(string PartLog)
+        {
+            string[] ecoNo = PartLog.Split('|');
+
+            DataTable dt = new DataTable();
+            // Tạo các cột
+            dt.Columns.Add("ECONo", typeof(int));
+            dt.Columns.Add("ECO Date", typeof(DateTime));
+            dt.Columns.Add("ECO Type", typeof(string));
+
+            // Ghi từng phần tử vào DataTable
+            foreach (string eco in ecoNo)
+            {
+                if (!string.IsNullOrWhiteSpace(eco)) // tránh dòng rỗng
+                {
+                    DataTable ecoinfor = RelationPartBLL.Get_tblECO_BLL(Convert.ToInt32(eco));
+                    if (ecoinfor.Rows.Count > 0)
+                    {
+                        // Tạo một hàng mới
+                        DataRow row = dt.NewRow();
+                        DataRow rowinfor = ecoinfor.Rows[0];
+                        row["ECONo"] = rowinfor[0];
+                        row["ECO Date"] = rowinfor[1];
+                        row["ECO Type"] = rowinfor[2];
+                        dt.Rows.Add(row);
+                    }
+                }
+            }
+
+            dgvListECO.DataSource = dt;
+            dgvListECO.AllowUserToAddRows = false; // Không cho phép thêm dòng mới
+            dgvListECO.Columns[0].Width = 100;
+            dgvListECO.Columns[1].Width = 100;
+            dgvListECO.Columns[2].Width = 200;
         }
     }
 }

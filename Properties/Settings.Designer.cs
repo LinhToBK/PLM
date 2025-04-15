@@ -23,32 +23,27 @@ namespace PLM_Lynx.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=61.14.233.166;Initial Catalog=SAMPLE_PLM;User ID=sa;;Password=\"yourSt" +
-            "rongPass@123003\";Trust Server Certificate=True")]
-        public string Datacon {
-            get {
-                return ((string)(this["Datacon"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_DRAWING\\DATA\\")]
         public string LinkDataPart {
             get {
                 return ((string)(this["LinkDataPart"]));
             }
+            set {
+                this["LinkDataPart"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_DRAWING\\TRASH\\")]
         public string TrashDataPart {
             get {
                 return ((string)(this["TrashDataPart"]));
+            }
+            set {
+                this["TrashDataPart"] = value;
             }
         }
         
@@ -76,6 +71,17 @@ namespace PLM_Lynx.Properties {
         public string ABCCoLtd {
             get {
                 return ((string)(this["ABCCoLtd"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=61.14.233.166;Initial Catalog=SAMPLE_0;User ID=sa;;Password=\"yourStro" +
+            "ngPass@123003\";Trust Server Certificate=True; Connect Timeout=60;")]
+        public string Datacon {
+            get {
+                return ((string)(this["Datacon"]));
             }
         }
     }

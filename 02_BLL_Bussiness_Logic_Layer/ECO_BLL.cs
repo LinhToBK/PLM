@@ -18,6 +18,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
     {
         private FindPartDAL findpartDAL = new FindPartDAL();
         private ECO_DAL ecoDAL = new ECO_DAL();
+        private CommonInforDAL commonInforDAL = new CommonInforDAL();
 
         public DataTable GetListChildBLL(string ParentCode)
         {
@@ -168,6 +169,10 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return ecoDAL.Update_tblECO_Approved_DAL(IDApproved, NameApproved, ECONo);
         }
+        public bool Update_tblECO_Approved_BLL(int IDApproved, string NameApproved, int ECONo, string ECOContent)
+        {
+            return ecoDAL.Update_tblECO_Approved_DAL(IDApproved, NameApproved, ECONo, ECOContent);
+        }
 
         public bool Update_tblECO_Canceled_BLL(int IDApproved, string NameApproved, int ECONo)
         {
@@ -256,7 +261,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return maxversion + 1;
         }
 
-        private int getversion(string filename)
+        public int getversion(string filename)
         {
             string[] parts = filename.Split('_');
             string version = parts[1]; // "V1.10"
@@ -265,7 +270,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return Convert.ToInt16(versionParts[1]);
         }
 
-        private int getstage(string filename)
+        public int getstage(string filename)
         {
             string[] parts = filename.Split('_');
             string version = parts[1]; // "V1.10"
@@ -376,6 +381,112 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.Write_ECONo_to_tblPart_DAL(PartCode, ECONo);
         }
 
-        
+        public DataTable Get_ECO_Information_BLL ( int ECONo)
+        {
+            return commonInforDAL.Get_ECO_Information_DAL(ECONo);
+        }
+
+
+        public bool GetAllFileinFolder_ECOTEMP(string ECONo, DataGridView dgvListFile)
+        {
+            // Chuyển partcode thành đường dẫn
+
+            //dgvListFile.AutoGenerateColumns = true;
+
+            string DataPath = Properties.Settings.Default.LinkDataPart;
+            
+            string filepath = DataPath + "\\" + "ECOTEMP" + "\\" + ECONo ;
+            try
+            {
+                // Xóa dữ liệu cũ trong DataGritView
+                dgvListFile.Rows.Clear();
+                dgvListFile.Columns.Clear();
+
+                dgvListFile.ColumnCount = 4;
+                dgvListFile.Columns[0].Name = "Name";
+                dgvListFile.Columns[1].Name = "Size";
+                dgvListFile.Columns[2].Name = "Type";
+                dgvListFile.Columns[3].Name = "Created";
+                dgvListFile.Columns[0].Width = 200;
+                dgvListFile.Columns[1].Width = 80;
+                dgvListFile.Columns[2].Width = 80;
+                dgvListFile.Columns[3].Width = 200;
+
+                // Lấy danh sách tất cả các file trong thư mục
+                string[] files = Directory.GetFiles(filepath);
+
+                // Duyệt qua danh sách file và thêm vào DataGritView
+                foreach (string file in files)
+                {
+                    FileInfo fileInfor = new FileInfo(file);
+
+                    // Thêm 1 dòng vào DataGritView
+                    dgvListFile.Rows.Add(fileInfor.Name, fileInfor.Length / 1024 + "KB", fileInfor.Extension, fileInfor.CreationTime);
+                    // Tên - Kích thước file - Đuôi file - Ngày khởi tạo
+                }
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra : " + ex.Message);
+                return false;
+            }
+        }
+
+        public bool GetAllFileinFolder_ECOTEMP(string partcode, DataGridView dgvListFile , string version)
+        {
+            // Chuyển partcode thành đường dẫn
+
+            //dgvListFile.AutoGenerateColumns = true;
+
+            string DataPath = Properties.Settings.Default.LinkDataPart;
+            string[] items = partcode.Split('-');
+
+            string filepath = DataPath + "\\" + items[0] + "\\" + items[1];
+            try
+            {
+                // Xóa dữ liệu cũ trong DataGritView
+                dgvListFile.Rows.Clear();
+                dgvListFile.Columns.Clear();
+
+                dgvListFile.ColumnCount = 4;
+                dgvListFile.Columns[0].Name = "Name";
+                dgvListFile.Columns[1].Name = "Size";
+                dgvListFile.Columns[2].Name = "Type";
+                dgvListFile.Columns[3].Name = "Created";
+                dgvListFile.Columns[0].Width = 200;
+                dgvListFile.Columns[1].Width = 80;
+                dgvListFile.Columns[2].Width = 80;
+                dgvListFile.Columns[3].Width = 200;
+
+                // Lấy danh sách tất cả các file trong thư mục
+                string[] files = Directory.GetFiles(filepath);
+                string ver = "_V" + version;
+
+                // Duyệt qua danh sách file và thêm vào DataGridView
+                foreach (string file in files)
+                {
+                    FileInfo fileInfor = new FileInfo(file);
+                    if(file.Contains(ver))
+                    {
+                        // Thêm 1 dòng vào DataGritView
+                        dgvListFile.Rows.Add(fileInfor.Name, fileInfor.Length / 1024 + "KB", fileInfor.Extension, fileInfor.CreationTime);
+                        // Tên - Kích thước file - Đuôi file - Ngày khởi tạo
+                    }
+
+
+                }
+                return true;
+            }
+            catch (System.Exception ex)
+            {
+                MessageBox.Show("Có lỗi xảy ra : " + ex.Message);
+                return false;
+            }
+        }
+
+
+
+
     }
 }

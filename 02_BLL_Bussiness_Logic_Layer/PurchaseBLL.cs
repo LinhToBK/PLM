@@ -15,9 +15,9 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         private PurchaseDAL purchaseDAL = new PurchaseDAL();
         private MakeNewPO_DAL makeNewPODAL_  = new MakeNewPO_DAL();
 
-        public bool CapnhatPriceBLL(string PartCode, string PartPrice)
+        public bool CapnhatPriceBLL(string PartCode, string PartPrice, string ExportPrice)
         {
-            return purchaseDAL.CapnhatPriceDAL(PartCode, PartPrice);
+            return purchaseDAL.CapnhatPriceDAL(PartCode, PartPrice, ExportPrice);
         }
 
         public tblUsers GetUserInfor(string staffname)

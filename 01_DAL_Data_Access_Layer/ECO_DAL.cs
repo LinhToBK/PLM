@@ -362,6 +362,61 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         }
 
 
+        public bool Update_tblECO_Approved_DAL(int IDApproved, string NameApproved, int ECONo, string ECOContent)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                DateTime dt = DateTime.Now.Date;
+                string Log = "Approved " + dt.ToString("yyyy/MM/dd") + " || ";
+
+                string sql_query = @"
+                                    
+                                    UPDATE tblECO
+                                    SET ECOStatusID = 2  , 
+                                    ECOLog = CONCAT( @Log ,  CHAR(13), CHAR(10), '|', ECOLog)  ,
+                                    ECOIDApproved = @IDApproved ,
+                                    ECOContent = @ECOContent,       
+                                    ECONameApproved = @NameApproved 
+
+                                    WHERE ECONo = @ECONo";
+
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();  // Bắt đầu Transaction
+
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@ECONo", SqlDbType.Int).Value = ECONo;
+                        cmd.Parameters.Add("@Log", SqlDbType.NVarChar).Value = Log;
+                        cmd.Parameters.Add("@IDApproved", SqlDbType.Int).Value = IDApproved;
+                        cmd.Parameters.Add("@NameApproved", SqlDbType.NVarChar).Value = NameApproved;
+                        cmd.Parameters.Add("@ECOContent", SqlDbType.NVarChar).Value = ECOContent;
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result == 1)
+                        {
+                            transaction.Commit();  // Commit nếu thành công
+                            return true;
+                        }
+                        else
+                        {
+                            transaction.Rollback();  // Rollback nếu không cập nhật được dòng nào
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();  // Rollback nếu có lỗi xảy ra
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+
         public bool Update_tblECO_Canceled_DAL(int IDApproved, string NameApproved, int ECONo)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))

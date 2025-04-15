@@ -2,17 +2,10 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="PLM_Lynx.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Datacon" Type="(Connection string)" Scope="Application">
-      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
-&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
-  &lt;ConnectionString&gt;Data Source=61.14.233.166;Initial Catalog=SAMPLE_PLM;User ID=sa;;Password="yourStrongPass@123003";Trust Server Certificate=True&lt;/ConnectionString&gt;
-&lt;/SerializableConnectionString&gt;</DesignTimeValue>
-      <Value Profile="(Default)">Data Source=61.14.233.166;Initial Catalog=SAMPLE_PLM;User ID=sa;;Password="yourStrongPass@123003";Trust Server Certificate=True</Value>
-    </Setting>
-    <Setting Name="LinkDataPart" Type="System.String" Scope="Application">
+    <Setting Name="LinkDataPart" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\Admin\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\SAMPLE_DRAWING\DATA\</Value>
     </Setting>
-    <Setting Name="TrashDataPart" Type="System.String" Scope="Application">
+    <Setting Name="TrashDataPart" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\Users\Admin\OneDrive\WORKING DSGLOBAL\06. PLM Lynx\SAMPLE_DRAWING\TRASH\</Value>
     </Setting>
     <Setting Name="DWGTrueViewPath" Type="System.String" Scope="Application">
@@ -23,6 +16,13 @@
     </Setting>
     <Setting Name="ABCCoLtd" Type="System.String" Scope="Application">
       <Value Profile="(Default)">C:\Users\Admin\source\repos\LinhToBK\PLM\04_Image\ABCCoLtd.jpg</Value>
+    </Setting>
+    <Setting Name="Datacon" Type="(Connection string)" Scope="Application">
+      <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;SerializableConnectionString xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;
+  &lt;ConnectionString&gt;Data Source=61.14.233.166;Initial Catalog=SAMPLE_0;User ID=sa;;Password="yourStrongPass@123003";Trust Server Certificate=True; Connect Timeout=60;&lt;/ConnectionString&gt;
+&lt;/SerializableConnectionString&gt;</DesignTimeValue>
+      <Value Profile="(Default)">Data Source=61.14.233.166;Initial Catalog=SAMPLE_0;User ID=sa;;Password="yourStrongPass@123003";Trust Server Certificate=True; Connect Timeout=60;</Value>
     </Setting>
   </Settings>
 </SettingsFile>

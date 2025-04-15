@@ -30,13 +30,21 @@
         {
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelCongty = new System.Windows.Forms.Panel();
+            this.btnVPS = new System.Windows.Forms.Button();
+            this.txtDataTrash = new System.Windows.Forms.TextBox();
+            this.txtDataPart = new System.Windows.Forms.TextBox();
+            this.txtVPS = new System.Windows.Forms.TextBox();
+            this.txtServer = new System.Windows.Forms.TextBox();
             this.btnSaveInfor = new System.Windows.Forms.Button();
             this.btnModifyCompany = new System.Windows.Forms.Button();
             this.txtCompanyTaxCode = new System.Windows.Forms.TextBox();
             this.txtCompanyLocation = new System.Windows.Forms.TextBox();
             this.txtCompanyPhone = new System.Windows.Forms.TextBox();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.Server = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -49,6 +57,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dgvVersion = new System.Windows.Forms.DataGridView();
+            this.btnDataPart = new System.Windows.Forms.Button();
+            this.btnTrashPart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -81,13 +91,23 @@
             // panelCongty
             // 
             this.panelCongty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panelCongty.Controls.Add(this.btnTrashPart);
+            this.panelCongty.Controls.Add(this.btnDataPart);
+            this.panelCongty.Controls.Add(this.btnVPS);
+            this.panelCongty.Controls.Add(this.txtDataTrash);
+            this.panelCongty.Controls.Add(this.txtDataPart);
+            this.panelCongty.Controls.Add(this.txtVPS);
+            this.panelCongty.Controls.Add(this.txtServer);
             this.panelCongty.Controls.Add(this.btnSaveInfor);
             this.panelCongty.Controls.Add(this.btnModifyCompany);
             this.panelCongty.Controls.Add(this.txtCompanyTaxCode);
             this.panelCongty.Controls.Add(this.txtCompanyLocation);
             this.panelCongty.Controls.Add(this.txtCompanyPhone);
             this.panelCongty.Controls.Add(this.txtCompanyName);
+            this.panelCongty.Controls.Add(this.label9);
             this.panelCongty.Controls.Add(this.label4);
+            this.panelCongty.Controls.Add(this.label8);
+            this.panelCongty.Controls.Add(this.Server);
             this.panelCongty.Controls.Add(this.label3);
             this.panelCongty.Controls.Add(this.label2);
             this.panelCongty.Controls.Add(this.label1);
@@ -97,9 +117,47 @@
             this.panelCongty.Size = new System.Drawing.Size(917, 193);
             this.panelCongty.TabIndex = 0;
             // 
+            // btnVPS
+            // 
+            this.btnVPS.Location = new System.Drawing.Point(21, 139);
+            this.btnVPS.Name = "btnVPS";
+            this.btnVPS.Size = new System.Drawing.Size(79, 34);
+            this.btnVPS.TabIndex = 4;
+            this.btnVPS.Text = "VPS Net";
+            this.btnVPS.UseVisualStyleBackColor = true;
+            // 
+            // txtDataTrash
+            // 
+            this.txtDataTrash.Location = new System.Drawing.Point(291, 143);
+            this.txtDataTrash.Name = "txtDataTrash";
+            this.txtDataTrash.Size = new System.Drawing.Size(427, 27);
+            this.txtDataTrash.TabIndex = 3;
+            // 
+            // txtDataPart
+            // 
+            this.txtDataPart.Location = new System.Drawing.Point(291, 96);
+            this.txtDataPart.Name = "txtDataPart";
+            this.txtDataPart.Size = new System.Drawing.Size(427, 27);
+            this.txtDataPart.TabIndex = 3;
+            // 
+            // txtVPS
+            // 
+            this.txtVPS.Location = new System.Drawing.Point(110, 143);
+            this.txtVPS.Name = "txtVPS";
+            this.txtVPS.PasswordChar = '*';
+            this.txtVPS.Size = new System.Drawing.Size(124, 27);
+            this.txtVPS.TabIndex = 3;
+            // 
+            // txtServer
+            // 
+            this.txtServer.Location = new System.Drawing.Point(110, 96);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.Size = new System.Drawing.Size(124, 27);
+            this.txtServer.TabIndex = 3;
+            // 
             // btnSaveInfor
             // 
-            this.btnSaveInfor.Location = new System.Drawing.Point(191, 103);
+            this.btnSaveInfor.Location = new System.Drawing.Point(765, 139);
             this.btnSaveInfor.Name = "btnSaveInfor";
             this.btnSaveInfor.Size = new System.Drawing.Size(129, 34);
             this.btnSaveInfor.TabIndex = 2;
@@ -109,7 +167,7 @@
             // 
             // btnModifyCompany
             // 
-            this.btnModifyCompany.Location = new System.Drawing.Point(23, 103);
+            this.btnModifyCompany.Location = new System.Drawing.Point(765, 92);
             this.btnModifyCompany.Name = "btnModifyCompany";
             this.btnModifyCompany.Size = new System.Drawing.Size(129, 34);
             this.btnModifyCompany.TabIndex = 0;
@@ -149,6 +207,15 @@
             this.txtCompanyName.TabIndex = 1;
             this.txtCompanyName.TextChanged += new System.EventHandler(this.txtCompanyName_TextChanged);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(242, 146);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(43, 20);
+            this.label9.TabIndex = 0;
+            this.label9.Text = "Trash";
+            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -157,6 +224,24 @@
             this.label4.Size = new System.Drawing.Size(82, 20);
             this.label4.TabIndex = 0;
             this.label4.Text = "Mã số thuế";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(244, 99);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(41, 20);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "Data";
+            // 
+            // Server
+            // 
+            this.Server.AutoSize = true;
+            this.Server.Location = new System.Drawing.Point(21, 99);
+            this.Server.Name = "Server";
+            this.Server.Size = new System.Drawing.Size(50, 20);
+            this.Server.TabIndex = 0;
+            this.Server.Text = "Server";
             // 
             // label3
             // 
@@ -279,6 +364,26 @@
             this.dgvVersion.Size = new System.Drawing.Size(917, 252);
             this.dgvVersion.TabIndex = 0;
             // 
+            // btnDataPart
+            // 
+            this.btnDataPart.Location = new System.Drawing.Point(724, 96);
+            this.btnDataPart.Name = "btnDataPart";
+            this.btnDataPart.Size = new System.Drawing.Size(35, 27);
+            this.btnDataPart.TabIndex = 5;
+            this.btnDataPart.Text = "...";
+            this.btnDataPart.UseVisualStyleBackColor = true;
+            this.btnDataPart.Click += new System.EventHandler(this.btnDataPart_Click);
+            // 
+            // btnTrashPart
+            // 
+            this.btnTrashPart.Location = new System.Drawing.Point(724, 143);
+            this.btnTrashPart.Name = "btnTrashPart";
+            this.btnTrashPart.Size = new System.Drawing.Size(35, 27);
+            this.btnTrashPart.TabIndex = 5;
+            this.btnTrashPart.Text = "...";
+            this.btnTrashPart.UseVisualStyleBackColor = true;
+            this.btnTrashPart.Click += new System.EventHandler(this.btnTrashPart_Click);
+            // 
             // frmAboutMe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -289,7 +394,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmAboutMe";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "frmAboutMe";
+            this.Text = "General Information";
             this.Load += new System.EventHandler(this.frmAboutMe_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
@@ -327,5 +432,15 @@
         private System.Windows.Forms.TextBox txtVersionID;
         private System.Windows.Forms.Button btnSaveVersion;
         private System.Windows.Forms.Button btnAddVersion;
+        private System.Windows.Forms.TextBox txtServer;
+        private System.Windows.Forms.Label Server;
+        private System.Windows.Forms.TextBox txtDataTrash;
+        private System.Windows.Forms.TextBox txtDataPart;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Button btnVPS;
+        private System.Windows.Forms.TextBox txtVPS;
+        private System.Windows.Forms.Button btnTrashPart;
+        private System.Windows.Forms.Button btnDataPart;
     }
 }

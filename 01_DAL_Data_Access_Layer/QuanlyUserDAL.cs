@@ -448,6 +448,20 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
 
         }
 
+        public DataTable Get_Count_tblUsers_DAL()
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Datacon))
+            {
+                string sql_query = "select COUNT(UserID) as c from tblUsers";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                conn.Open();
+                adapter.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
 
     }
 }

@@ -31,11 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmListECO));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelListECO = new System.Windows.Forms.Panel();
-            this.ckcProposal = new System.Windows.Forms.CheckedListBox();
-            this.ckcECOStatus = new System.Windows.Forms.CheckedListBox();
-            this.ckcECOType = new System.Windows.Forms.CheckedListBox();
-            this.ckcECODate = new System.Windows.Forms.CheckedListBox();
-            this.dgvListECO = new System.Windows.Forms.DataGridView();
+            this.dgvListECO = new Zuby.ADGV.AdvancedDataGridView();
             this.cboListNear = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -91,10 +87,6 @@
             // 
             this.panelListECO.AutoScroll = true;
             this.panelListECO.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.panelListECO.Controls.Add(this.ckcProposal);
-            this.panelListECO.Controls.Add(this.ckcECOStatus);
-            this.panelListECO.Controls.Add(this.ckcECOType);
-            this.panelListECO.Controls.Add(this.ckcECODate);
             this.panelListECO.Controls.Add(this.dgvListECO);
             this.panelListECO.Controls.Add(this.cboListNear);
             this.panelListECO.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -104,53 +96,23 @@
             this.panelListECO.Size = new System.Drawing.Size(1075, 392);
             this.panelListECO.TabIndex = 0;
             // 
-            // ckcProposal
-            // 
-            this.ckcProposal.FormattingEnabled = true;
-            this.ckcProposal.Location = new System.Drawing.Point(550, 12);
-            this.ckcProposal.Name = "ckcProposal";
-            this.ckcProposal.Size = new System.Drawing.Size(120, 104);
-            this.ckcProposal.TabIndex = 4;
-            this.ckcProposal.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcProposal_ItemCheck);
-            // 
-            // ckcECOStatus
-            // 
-            this.ckcECOStatus.FormattingEnabled = true;
-            this.ckcECOStatus.Location = new System.Drawing.Point(849, 12);
-            this.ckcECOStatus.Name = "ckcECOStatus";
-            this.ckcECOStatus.Size = new System.Drawing.Size(120, 104);
-            this.ckcECOStatus.TabIndex = 3;
-            this.ckcECOStatus.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcECOStatus_ItemCheck);
-            // 
-            // ckcECOType
-            // 
-            this.ckcECOType.FormattingEnabled = true;
-            this.ckcECOType.Location = new System.Drawing.Point(701, 12);
-            this.ckcECOType.Name = "ckcECOType";
-            this.ckcECOType.Size = new System.Drawing.Size(120, 104);
-            this.ckcECOType.TabIndex = 3;
-            this.ckcECOType.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcECOType_ItemCheck);
-            // 
-            // ckcECODate
-            // 
-            this.ckcECODate.FormattingEnabled = true;
-            this.ckcECODate.Location = new System.Drawing.Point(396, 12);
-            this.ckcECODate.Name = "ckcECODate";
-            this.ckcECODate.Size = new System.Drawing.Size(120, 104);
-            this.ckcECODate.TabIndex = 3;
-            this.ckcECODate.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcECODate_ItemCheck);
-            // 
             // dgvListECO
             // 
-            this.dgvListECO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListECO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListECO.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvListECO.Location = new System.Drawing.Point(0, 135);
+            this.dgvListECO.FilterAndSortEnabled = true;
+            this.dgvListECO.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListECO.Location = new System.Drawing.Point(0, 60);
+            this.dgvListECO.MaxFilterButtonImageHeight = 23;
             this.dgvListECO.Name = "dgvListECO";
+            this.dgvListECO.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvListECO.RowHeadersWidth = 51;
             this.dgvListECO.RowTemplate.Height = 24;
-            this.dgvListECO.Size = new System.Drawing.Size(1075, 257);
-            this.dgvListECO.TabIndex = 2;
+            this.dgvListECO.Size = new System.Drawing.Size(1075, 332);
+            this.dgvListECO.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListECO.TabIndex = 5;
+            this.dgvListECO.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListECO_CellClick);
+            this.dgvListECO.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListECO_CellDoubleClick);
             this.dgvListECO.Click += new System.EventHandler(this.dgvListECO_Click);
             // 
             // cboListNear
@@ -392,10 +354,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panelListECO;
         private System.Windows.Forms.ComboBox cboListNear;
-        private System.Windows.Forms.DataGridView dgvListECO;
-        private System.Windows.Forms.CheckedListBox ckcECOStatus;
-        private System.Windows.Forms.CheckedListBox ckcECOType;
-        private System.Windows.Forms.CheckedListBox ckcECODate;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label label5;
@@ -413,7 +371,7 @@
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApprove;
-        private System.Windows.Forms.CheckedListBox ckcProposal;
         private System.Windows.Forms.TextBox txtECOContent;
+        private Zuby.ADGV.AdvancedDataGridView dgvListECO;
     }
 }

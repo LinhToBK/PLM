@@ -10,12 +10,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
 {
     public partial class frmAboutMe : Form
     {
         private CommonBLL _commonbll = new CommonBLL();
+        
 
         public frmAboutMe()
         {
@@ -31,10 +33,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
             txtCompanyTaxCode.Enabled = false;
             txtCompanyPhone.Enabled = false;
             btnSaveInfor.Enabled = false;
+            btnDataPart.Enabled = false;
+            btnTrashPart.Enabled = false;
             //-------------
             txtVersionID.Enabled = false;
             txtVersionContent.Enabled = false;
             btnSaveVersion.Enabled = false;
+
+
 
             LoadCommonInfor();
             LoadAllVersionInfor();
@@ -79,6 +85,17 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
             {
                 txtCompanyTaxCode.Text = " Error !!! \n Cannot access the data";
             }
+
+            txtDataPart.Text = Properties.Settings.Default.LinkDataPart;
+            txtDataTrash.Text = Properties.Settings.Default.TrashDataPart;
+            string Connect = Properties.Settings.Default.Datacon;
+            string[] ServerNameList = Connect.Split(';');
+            string ServerName = ServerNameList[1];
+            string[] Server = ServerName.Split('=');
+            txtServer.Text = Server[1].ToString().Trim();
+
+
+
         }
 
         // Đẩy thông tin lên datagrid view
@@ -95,6 +112,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
             txtCompanyPhone.Enabled = true;
             txtCompanyLocation.Enabled = true;
             txtCompanyTaxCode.Enabled = true;
+            //txtDataPart.Enabled = true;
+            //txtDataTrash.Enabled = true;
+
+            btnDataPart.Enabled = true;
+            btnTrashPart.Enabled = true;
         }
 
         private void txtCompanyName_TextChanged(object sender, EventArgs e)
@@ -140,16 +162,20 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
             string contentphone = txtCompanyPhone.Text.Trim();
             string contentlocation = txtCompanyLocation.Text.Trim();
             string contenttax = txtCompanyTaxCode.Text.Trim();
+            string datapart = txtDataPart.Text.Trim();  
+            string datatrash = txtDataTrash.Text.Trim();
             string tb = "Bạn có muốn cập nhật những thông tin của công ty : ";
             tb = tb + "\n Tên công ty : " + contentname;
             tb = tb + "\n Số điện thoại : " + contentphone;
             tb = tb + "\n Địa chỉ : " + contentlocation;
             tb = tb + "\n Mã số thuế : " + contenttax;
+            tb = tb + "\n Đường dẫn dữ liệu : " + datapart;
+            tb = tb + "\n Đường dẫn thùng rác : " + datatrash;
 
             DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
-                if (_commonbll.UpdateCompanyInfor_BLL(contentname, contentlocation, contentphone, contenttax) == true)
+                if (_commonbll.UpdateCompanyInfor_BLL(contentname, contentlocation, contentphone, contenttax) && UpdateLinkFolder(datapart, datatrash))
                 {
                     MessageBox.Show("Đã cập nhật thành công thông tin công ty");
                     LoadCommonInfor();
@@ -158,6 +184,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
                     txtCompanyPhone.Enabled = false;
                     txtCompanyLocation.Enabled = false;
                     txtCompanyTaxCode.Enabled = false;
+                    txtDataPart.Enabled = false;
+                    txtDataTrash.Enabled = false;
                 }
                 else
                 {
@@ -194,6 +222,65 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
             else
             {
                 return;
+            }
+        }
+
+
+        private bool UpdateLinkFolder(string datapart, string trashpart)
+        {
+            // Kiểm tra đường dẫn có tồn tại hay không
+            if (System.IO.Directory.Exists(datapart) && System.IO.Directory.Exists(trashpart))
+            {
+                // Cập nhật đường dẫn vào file config
+                Properties.Settings.Default.LinkDataPart = datapart;
+                Properties.Settings.Default.TrashDataPart = trashpart;
+                Properties.Settings.Default.Save();
+                return true;
+            }
+            else
+            {
+                MessageBox.Show("Đường dẫn không tồn tại. Vui lòng kiểm tra lại.");
+                return false;
+            }
+        }
+
+        private void btnDataPart_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.Description = "Chọn thư mục";
+                folderDialog.ShowNewFolderButton = true;
+
+                DialogResult result = folderDialog.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+                {
+                    string selectedPath = folderDialog.SelectedPath + "\\";
+                    // MessageBox.Show("Đường dẫn đã chọn: " + selectedPath);
+
+                    // Ví dụ: gán vào TextBox
+                    txtDataPart.Text = selectedPath;
+                }
+            }
+        }
+
+        private void btnTrashPart_Click(object sender, EventArgs e)
+        {
+            using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
+            {
+                folderDialog.Description = "Chọn thư mục";
+                folderDialog.ShowNewFolderButton = true;
+
+                DialogResult result = folderDialog.ShowDialog();
+
+                if (result == DialogResult.OK && !string.IsNullOrWhiteSpace(folderDialog.SelectedPath))
+                {
+                    string selectedPath = folderDialog.SelectedPath + "\\";
+                    //MessageBox.Show("Đường dẫn đã chọn: " + selectedPath);
+
+                    // Ví dụ: gán vào TextBox
+                    txtDataTrash.Text = selectedPath;
+                }
             }
         }
     }

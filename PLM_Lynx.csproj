@@ -235,6 +235,12 @@
     <Compile Include="03_GUI_User_Interface\3_1_Login\frmManageUser.Designer.cs">
       <DependentUpon>frmManageUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\frmECO_Infor_Detail.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\frmECO_Infor_Detail.Designer.cs">
+      <DependentUpon>frmECO_Infor_Detail.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\frmUploadRelationtoDataBase.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -379,6 +385,9 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\frmManageUser.resx">
       <DependentUpon>frmManageUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\frmECO_Infor_Detail.resx">
+      <DependentUpon>frmECO_Infor_Detail.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\frmUploadRelationtoDataBase.resx">
       <DependentUpon>frmUploadRelationtoDataBase.cs</DependentUpon>
     </EmbeddedResource>
@@ -483,7 +492,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="04_CommonDoc\ABCCoLtd.jpg">
+    <Content Include="04_CommonDoc\companylogo.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="04_CommonDoc\BandoVN.jpg">

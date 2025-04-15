@@ -31,11 +31,7 @@
             this.btnExit = new System.Windows.Forms.Button();
             this.BtnKeySearch = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.ckcStatus = new System.Windows.Forms.CheckedListBox();
-            this.ckcStaff = new System.Windows.Forms.CheckedListBox();
-            this.ckcDate = new System.Windows.Forms.CheckedListBox();
-            this.ckcMonth = new System.Windows.Forms.CheckedListBox();
-            this.dgvSearch = new System.Windows.Forms.DataGridView();
+            this.dgvSearchAD = new Zuby.ADGV.AdvancedDataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioPart = new System.Windows.Forms.RadioButton();
             this.radioPO = new System.Windows.Forms.RadioButton();
@@ -62,17 +58,17 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearchAD)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartlist)).BeginInit();
             this.SuspendLayout();
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(388, 145);
+            this.btnExit.Location = new System.Drawing.Point(340, 92);
             this.btnExit.Margin = new System.Windows.Forms.Padding(3, 9, 3, 9);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(48, 54);
+            this.btnExit.Size = new System.Drawing.Size(91, 34);
             this.btnExit.TabIndex = 3;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -99,11 +95,7 @@
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.AutoScroll = true;
-            this.splitContainer1.Panel1.Controls.Add(this.ckcStatus);
-            this.splitContainer1.Panel1.Controls.Add(this.ckcStaff);
-            this.splitContainer1.Panel1.Controls.Add(this.ckcDate);
-            this.splitContainer1.Panel1.Controls.Add(this.ckcMonth);
-            this.splitContainer1.Panel1.Controls.Add(this.dgvSearch);
+            this.splitContainer1.Panel1.Controls.Add(this.dgvSearchAD);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
             this.splitContainer1.Panel1.Controls.Add(this.label1);
             this.splitContainer1.Panel1.Controls.Add(this.dtpFilter);
@@ -133,55 +125,23 @@
             this.splitContainer1.SplitterDistance = 448;
             this.splitContainer1.TabIndex = 0;
             // 
-            // ckcStatus
+            // dgvSearchAD
             // 
-            this.ckcStatus.FormattingEnabled = true;
-            this.ckcStatus.Location = new System.Drawing.Point(284, 145);
-            this.ckcStatus.Name = "ckcStatus";
-            this.ckcStatus.Size = new System.Drawing.Size(96, 54);
-            this.ckcStatus.TabIndex = 9;
-            this.ckcStatus.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcStatus_ItemCheck);
-            this.ckcStatus.SelectedIndexChanged += new System.EventHandler(this.ckcStatus_SelectedIndexChanged);
-            // 
-            // ckcStaff
-            // 
-            this.ckcStaff.FormattingEnabled = true;
-            this.ckcStaff.Location = new System.Drawing.Point(157, 145);
-            this.ckcStaff.Name = "ckcStaff";
-            this.ckcStaff.Size = new System.Drawing.Size(121, 54);
-            this.ckcStaff.TabIndex = 7;
-            this.ckcStaff.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcStaff_ItemCheck);
-            // 
-            // ckcDate
-            // 
-            this.ckcDate.AllowDrop = true;
-            this.ckcDate.FormattingEnabled = true;
-            this.ckcDate.Location = new System.Drawing.Point(91, 145);
-            this.ckcDate.Name = "ckcDate";
-            this.ckcDate.Size = new System.Drawing.Size(60, 54);
-            this.ckcDate.TabIndex = 7;
-            this.ckcDate.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcDate_ItemCheck);
-            // 
-            // ckcMonth
-            // 
-            this.ckcMonth.AllowDrop = true;
-            this.ckcMonth.FormattingEnabled = true;
-            this.ckcMonth.Location = new System.Drawing.Point(25, 145);
-            this.ckcMonth.Name = "ckcMonth";
-            this.ckcMonth.Size = new System.Drawing.Size(60, 54);
-            this.ckcMonth.TabIndex = 7;
-            this.ckcMonth.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.ckcMonth_ItemCheck);
-            // 
-            // dgvSearch
-            // 
-            this.dgvSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSearch.Location = new System.Drawing.Point(0, 214);
-            this.dgvSearch.Name = "dgvSearch";
-            this.dgvSearch.RowHeadersWidth = 51;
-            this.dgvSearch.RowTemplate.Height = 24;
-            this.dgvSearch.Size = new System.Drawing.Size(380, 153);
-            this.dgvSearch.TabIndex = 6;
-            this.dgvSearch.Click += new System.EventHandler(this.dgvSearch_Click);
+            this.dgvSearchAD.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.dgvSearchAD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSearchAD.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvSearchAD.FilterAndSortEnabled = true;
+            this.dgvSearchAD.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvSearchAD.Location = new System.Drawing.Point(0, 145);
+            this.dgvSearchAD.MaxFilterButtonImageHeight = 23;
+            this.dgvSearchAD.Name = "dgvSearchAD";
+            this.dgvSearchAD.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvSearchAD.RowHeadersWidth = 51;
+            this.dgvSearchAD.RowTemplate.Height = 24;
+            this.dgvSearchAD.Size = new System.Drawing.Size(448, 475);
+            this.dgvSearchAD.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvSearchAD.TabIndex = 10;
+            this.dgvSearchAD.Click += new System.EventHandler(this.dgvSearchAD_Click);
             // 
             // groupBox1
             // 
@@ -190,7 +150,7 @@
             this.groupBox1.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.Location = new System.Drawing.Point(340, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(96, 114);
+            this.groupBox1.Size = new System.Drawing.Size(96, 77);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             // 
@@ -404,7 +364,7 @@
             this.splitContainer1.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearchAD)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPartlist)).EndInit();
@@ -424,7 +384,6 @@
         private System.Windows.Forms.RadioButton radioPO;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.DateTimePicker dtpFilter;
-        private System.Windows.Forms.DataGridView dgvSearch;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -439,10 +398,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.DataGridView dgvPartlist;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.CheckedListBox ckcMonth;
-        private System.Windows.Forms.CheckedListBox ckcStaff;
-        private System.Windows.Forms.CheckedListBox ckcDate;
-        private System.Windows.Forms.CheckedListBox ckcStatus;
         private System.Windows.Forms.ColorDialog colorDialog1;
+        private Zuby.ADGV.AdvancedDataGridView dgvSearchAD;
     }
 }

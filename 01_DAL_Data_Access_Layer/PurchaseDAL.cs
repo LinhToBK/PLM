@@ -21,18 +21,25 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="position"></param>
         /// <param name="dept"></param>
         /// <returns></returns>
-        public bool CapnhatPriceDAL(string PartCode, string PartPrice)
+        public bool CapnhatPriceDAL(string PartCode, string PartPrice, string ExportPrice)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
+                string PartPriceLog;
+                string Date = DateTime.Now.Date.ToString("yyyy-MM-dd");
+                PartPriceLog = Date + " : Import -" + PartPrice + " - " + "Export-" + ExportPrice + " - " +  "|";
+
                 string sql_query;
                 sql_query = @"update tblPart
-                set PartLog =CONCAT(FORMAT(GETDATE(), 'MM-dd-yyyy HH:mm'), ' Update Price from [ ', (select top 1 PartPrice  from tblPart  where PartCode = @PartCode), ' ] to [ ', @PartPrice , ' ]', CHAR(13), CHAR(10), '|', PartLog),
-                PartPrice = @PartPrice
+                set PartPriceSale = @ExportPrice ,
+                PartPrice = @PartPrice,
+                PartPriceLog = CONCAT(PartPriceLog, @PartPriceLog )  
                 where PartCode = @PartCode ;";
                 SqlCommand cmd = new SqlCommand(sql_query, con);
                 cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
                 cmd.Parameters.Add("@PartPrice", SqlDbType.Decimal).Value = Convert.ToInt32(PartPrice);
+                cmd.Parameters.Add("@ExportPrice", SqlDbType.Decimal).Value = Convert.ToInt32(ExportPrice);
+                cmd.Parameters.Add("@PartPriceLog", SqlDbType.NVarChar).Value = PartPriceLog;
 
                 //--------------------------
                 con.Open();
@@ -516,7 +523,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         SELECT
                             p.PartCode,
                             p.PartName,
-                            p.PartPrice,
+                            p.PartPriceSale,
                             p.PartID
 
                         FROM

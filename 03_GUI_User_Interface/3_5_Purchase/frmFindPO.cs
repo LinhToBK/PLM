@@ -61,30 +61,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void LoadDataFindtblPO(string text)
         {
             InforSearch = purchaseBLL.AllInforPObyKeySearchBLL(txtKeySearch.Text, radioPart.Checked);
-            dgvSearch.DataSource = InforSearch;
-
-            dgvSearch.AllowUserToAddRows = false;
-            dgvSearch.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgvSearch.Columns[0].Width = 120;
-            dgvSearch.Columns[1].Width = 100;
-        }
-
-        private void dgvSearch_Click(object sender, EventArgs e)
-        {
-            if (dgvSearch.Rows.Count == 0)
-            {
-                MessageBox.Show("Không có dữ liệu để chọn");
-                return;
-            }
-            else
-            {
-                LoadPartlist();
-            }
+            dgvSearchAD.DataSource = InforSearch;
+            dgvSearchAD.AllowUserToAddRows = false;
+            dgvSearchAD.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgvSearchAD.Columns[0].Width = 120;
+            dgvSearchAD.Columns[1].Width = 100;
         }
 
         public void LoadPartlist()
         {
-            InforthisPO = purchaseBLL.GetInfor1PObyPOCodeBLL(dgvSearch.CurrentRow.Cells[0].Value.ToString());
+            InforthisPO = purchaseBLL.GetInfor1PObyPOCodeBLL(dgvSearchAD.CurrentRow.Cells[0].Value.ToString());
             PODate = InforthisPO.Rows[0]["PODate"].ToString();
             PONhanVien = InforthisPO.Rows[0]["PONhanVien"].ToString();
             POPartlist = InforthisPO.Rows[0]["POPartlist"].ToString();
@@ -105,7 +91,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dgvPartlist.Refresh();
 
             // Hiển thị thông tin lên textbox
-            txtPOCode.Text = dgvSearch.CurrentRow.Cells[0].Value.ToString();
+            txtPOCode.Text = dgvSearchAD.CurrentRow.Cells[0].Value.ToString();
             txtNhanvien.Text = PONhanVien;
             txtPOAmount.Text = POAmount;
             txtStatus.Text = POStatus;
@@ -165,8 +151,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             if (txtKeySearch.Text != "")
             {
                 LoadDataFindtblPO(txtKeySearch.Text);
-                ShowChecklist();
-                this.BeginInvoke(new Action(ApplyFilter));
             }
             else
             {
@@ -179,15 +163,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             // Lấy giá trị của datatimepicker
             string dateFrom = dtpFilter.Value.ToString("yyyy-MM-dd");
 
-            dgvSearch.DataSource = purchaseBLL.AllInforPObyKeySearchBLL(dateFrom, false);
-            dgvSearch.AllowUserToAddRows = false;
-            dgvSearch.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgvSearch.Columns[0].Width = 120;
-            dgvSearch.Columns[1].Width = 100;
-
-            ShowChecklist();
-            this.BeginInvoke(new Action(ApplyFilter));
-
+            dgvSearchAD.DataSource = purchaseBLL.AllInforPObyKeySearchBLL(dateFrom, false);
+            dgvSearchAD.AllowUserToAddRows = false;
+            dgvSearchAD.EditMode = DataGridViewEditMode.EditProgrammatically;
+            dgvSearchAD.Columns[0].Width = 120;
+            dgvSearchAD.Columns[1].Width = 100;
         }
 
         private void dtpFilter_ValueChanged(object sender, EventArgs e)
@@ -282,140 +262,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         {
         }
 
-        private void ShowChecklist()
+     
+
+        private void dgvSearchAD_Click(object sender, EventArgs e)
         {
-            if (dgvSearch.Rows.Count == 0)
+            if (dgvSearchAD.Rows.Count == 0)
             {
                 //MessageBox.Show("Không có dữ liệu để chọn");
                 return;
             }
             else
             {
-                // Lấy danh sách Month
-                var listMonth = dgvSearch.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[5].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listMonth)
-                {
-                    if (!ckcMonth.Items.Contains(category))
-                    {
-                        ckcMonth.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
-                // Lấy danh sách Date
-                var listDate = dgvSearch.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[6].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listDate)
-                {
-                    if (!ckcDate.Items.Contains(category))
-                    {
-                        ckcDate.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
-
-                // Lấy danh sách Staff
-                var listStaff = dgvSearch.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[1].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listStaff)
-                {
-                    if (!ckcStaff.Items.Contains(category))
-                    {
-                        ckcStaff.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
-
-                // Lấy danh sách Status
-                var listStatus = dgvSearch.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[4].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listStatus)
-                {
-                    if (!ckcStatus.Items.Contains(category))
-                    {
-                        ckcStatus.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
+                LoadPartlist();
             }
-        }
-
-        private void ckcStatus_SelectedIndexChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void ApplyFilter()
-        {
-            if (dgvSearch.DataSource is DataTable dt)
-            {
-                List<string> filters = new List<string>();
-
-                // Lọc theo Tháng
-                string monthFilter = GetCheckedItemsFilter(ckcMonth, "pMonth");
-                if (!string.IsNullOrEmpty(monthFilter)) filters.Add(monthFilter);
-
-                // Lọc theo Năm
-                string DateFilter = GetCheckedItemsFilter(ckcDate, "pDate");
-                if (!string.IsNullOrEmpty(DateFilter)) filters.Add(DateFilter);
-
-                // Lọc theo Nhân viên
-                string staffFilter = GetCheckedItemsFilter(ckcStaff, "PONhanvien");
-                if (!string.IsNullOrEmpty(staffFilter)) filters.Add(staffFilter);
-
-                // Lọc theo Trạng thái
-                string statusFilter = GetCheckedItemsFilter(ckcStatus, "POStatus");
-                if (!string.IsNullOrEmpty(statusFilter)) filters.Add(statusFilter);
-
-                // Ghép các điều kiện với AND
-                dt.DefaultView.RowFilter = string.Join(" AND ", filters);
-            }
-        }
-
-        // Hàm lấy danh sách các mục đã chọn và tạo điều kiện lọc
-        private string GetCheckedItemsFilter(CheckedListBox checkedListBox, string columnName)
-        {
-            if (checkedListBox.CheckedItems.Count == 0) return "";
-
-            List<string> selectedValues = checkedListBox.CheckedItems.Cast<string>()
-                                          .Select(item => $"'{item}'").ToList();
-
-            return $"{columnName} IN ({string.Join(",", selectedValues)})";
-        }
-
-        private void ckcStatus_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
-        }
-
-        private void ckcStaff_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
-        }
-
-        private void ckcDate_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
-        }
-
-        private void ckcMonth_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
         }
     }
 }

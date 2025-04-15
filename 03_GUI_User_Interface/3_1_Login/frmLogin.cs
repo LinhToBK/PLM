@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using PLM_Lynx._03_GUI_User_Interface._3_5_Purchase;
 using System.IO;
+using PLM_Lynx._03_GUI_User_Interface._3_6_Help;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
 {
@@ -137,6 +138,27 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             {
                 btnDangNhap.PerformClick();
                 e.SuppressKeyPress = true; // Ngăn không cho tiếng Bíp kêu khi nhấn enter
+            }
+        }
+
+        private void frmLogin_Load(object sender, EventArgs e)
+        {
+            GetImageLogo();
+        }
+
+        private void GetImageLogo()
+        {
+
+            string ImageCompanyPath = Environment.CurrentDirectory;
+            ImageCompanyPath = ImageCompanyPath + @"\04_CommonDoc\companylogo.jpg";
+            if (File.Exists(ImageCompanyPath))
+            {
+                pictureLogo.Image = Image.FromFile(ImageCompanyPath);
+                pictureLogo.SizeMode = PictureBoxSizeMode.StretchImage;
+            }
+            else
+            {
+                MessageBox.Show("Không tìm thấy file Logo.png trong thư mục Resources");
             }
         }
     }

@@ -20,6 +20,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
     {
         private FindPartDAL PartDAL = new FindPartDAL();
         private CommonInforDAL _commoninforDAL = new CommonInforDAL();
+        private ECO_BLL _eco_BLL = new ECO_BLL();
 
         /// <summary>
         /// 01. UPLOAD - Tải ảnh của 1 PartCode lên trên PictureBox
@@ -31,10 +32,15 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             // -- Hiển thị ảnh
 
-            string imagefilepath = Properties.Settings.Default.LinkDataPart;
-            string[] input = partCode.Split('-');
-            string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
-            imagefilepath = imagefilepath + "\\" + input[0] + "\\" + input[1] + "\\" + partCode + "_DV-0" + ".jpg";
+            // -- Lấy version lớn nhất của ảnh 
+
+            //string imagefilepath = Properties.Settings.Default.LinkDataPart;
+            //string[] input = partCode.Split('-');
+            //string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
+            //imagefilepath = imagefilepath + "\\" + input[0] + "\\" + input[1] + "\\" + partCode + "_DV-0" + ".jpg";
+
+            string imagefilepath = GetFilePath(partCode) + "\\" + GetImagePath_Lastest(partCode);
+
             // Kiểm tra file có tồn tại
             if (System.IO.File.Exists(imagefilepath))
             {
@@ -51,6 +57,44 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 pictureBox.Image = null;
                 return false;
             }
+        }
+
+        private string GetImagePath_Lastest(string partCode)
+        {
+            string imagefilepath = Properties.Settings.Default.LinkDataPart;
+            string[] input = partCode.Split('-');
+            string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
+
+            string[] files = Directory.GetFiles(filepath, "*.jpg");
+            //double maxversion = 1.0;
+
+            int stage = 1;
+            int version = 0;
+
+            // Duyệt qua từng file và lấy số phiên bản từ tên file
+            foreach (string file in files)
+            {
+                // Lấy tên file mà không có đường dẫn
+                string fileName = Path.GetFileNameWithoutExtension(file);
+                int checkstage =  _eco_BLL.getstage(fileName);
+                if(checkstage >= stage)
+                {
+                    stage = checkstage;
+                    int checkversion = _eco_BLL.getversion(fileName);
+                    if(checkversion > version)
+                    {
+                        version = checkversion;
+                        
+                    }
+                }    
+            }
+
+
+            string result = partCode + "_V" + stage.ToString() + "." + version.ToString() + ".jpg";
+            //MessageBox.Show(result);
+            return result;
+
+
         }
 
         /// <summary>

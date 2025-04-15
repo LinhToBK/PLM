@@ -153,5 +153,31 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         }
 
 
+        /// <summary>
+        /// 05. SELECT - Lấy thông tin tblECO dựa trên số ECO
+        /// </summary>
+        /// <returns></returns>
+        public DataTable Get_ECO_Information_DAL(int ECONo)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @" SELECT e.ECONo, e.ECODate, e.ECOLog, e.ECONameProposal, e.ECONameApproved, s.ECOStatus, t.ECOType, e.ECOContent , e.ECOStatusID, e.ECOTypeID
+                                    FROM tblECO AS e
+                                    JOIN tblECOStatus AS s ON e.ECOStatusID = s.ECOStatusID
+                                    JOIN tblECOType AS t ON e.ECOTypeID = t.ECOTypeID
+                                    WHERE e.ECONo = @ECONo ";
+                
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@ECONo", ECONo);
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
+
     }
 }

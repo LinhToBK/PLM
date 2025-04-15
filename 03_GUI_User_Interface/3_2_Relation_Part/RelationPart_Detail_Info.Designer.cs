@@ -33,14 +33,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.PicPart = new System.Windows.Forms.PictureBox();
             this.dgvListFile = new System.Windows.Forms.DataGridView();
             this.txtPartCode = new System.Windows.Forms.TextBox();
             this.txtPartName = new System.Windows.Forms.TextBox();
             this.txtPartDescription = new System.Windows.Forms.TextBox();
             this.txtPartStage = new System.Windows.Forms.TextBox();
-            this.txtPartLog = new System.Windows.Forms.TextBox();
             this.txtPicStatus = new System.Windows.Forms.TextBox();
             this.txtListFileStatus = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -48,6 +46,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.Panel_PartInfor = new System.Windows.Forms.Panel();
+            this.txtPartMaterial = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.txtPartPrice = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -56,14 +56,14 @@
             this.checklistTypeFile = new System.Windows.Forms.CheckedListBox();
             this.checklistStage = new System.Windows.Forms.CheckedListBox();
             this.PanelDataGridView = new System.Windows.Forms.Panel();
-            this.label10 = new System.Windows.Forms.Label();
-            this.txtPartMaterial = new System.Windows.Forms.TextBox();
+            this.dgvListECO = new Zuby.ADGV.AdvancedDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.PicPart)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListFile)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.Panel_PartInfor.SuspendLayout();
             this.Panel_Download.SuspendLayout();
             this.PanelDataGridView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListECO)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -71,7 +71,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(9, 33);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 17);
+            this.label1.Size = new System.Drawing.Size(85, 23);
             this.label1.TabIndex = 0;
             this.label1.Text = "Part Code";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -81,7 +81,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(9, 76);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(70, 17);
+            this.label2.Size = new System.Drawing.Size(91, 23);
             this.label2.TabIndex = 0;
             this.label2.Text = "Part Name";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -91,7 +91,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(9, 163);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 34);
+            this.label3.Size = new System.Drawing.Size(96, 46);
             this.label3.TabIndex = 0;
             this.label3.Text = "Part \r\nDescription";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -102,19 +102,10 @@
             this.label4.AutoSize = true;
             this.label4.Location = new System.Drawing.Point(9, 137);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(41, 17);
+            this.label4.Size = new System.Drawing.Size(52, 23);
             this.label4.TabIndex = 0;
             this.label4.Text = "Stage";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(9, 251);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 17);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Part Log";
             // 
             // PicPart
             // 
@@ -122,7 +113,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.PicPart.Location = new System.Drawing.Point(365, 7);
             this.PicPart.Name = "PicPart";
-            this.PicPart.Size = new System.Drawing.Size(127, 120);
+            this.PicPart.Size = new System.Drawing.Size(138, 120);
             this.PicPart.TabIndex = 1;
             this.PicPart.TabStop = false;
             // 
@@ -145,7 +136,7 @@
             this.txtPartCode.Location = new System.Drawing.Point(82, 29);
             this.txtPartCode.Name = "txtPartCode";
             this.txtPartCode.ReadOnly = true;
-            this.txtPartCode.Size = new System.Drawing.Size(112, 25);
+            this.txtPartCode.Size = new System.Drawing.Size(112, 29);
             this.txtPartCode.TabIndex = 3;
             // 
             // txtPartName
@@ -168,7 +159,7 @@
             this.txtPartDescription.Name = "txtPartDescription";
             this.txtPartDescription.ReadOnly = true;
             this.txtPartDescription.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPartDescription.Size = new System.Drawing.Size(351, 60);
+            this.txtPartDescription.Size = new System.Drawing.Size(362, 39);
             this.txtPartDescription.TabIndex = 3;
             // 
             // txtPartStage
@@ -177,29 +168,15 @@
             this.txtPartStage.Location = new System.Drawing.Point(54, 133);
             this.txtPartStage.Name = "txtPartStage";
             this.txtPartStage.ReadOnly = true;
-            this.txtPartStage.Size = new System.Drawing.Size(36, 25);
+            this.txtPartStage.Size = new System.Drawing.Size(36, 29);
             this.txtPartStage.TabIndex = 3;
-            // 
-            // txtPartLog
-            // 
-            this.txtPartLog.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtPartLog.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtPartLog.Location = new System.Drawing.Point(83, 233);
-            this.txtPartLog.Multiline = true;
-            this.txtPartLog.Name = "txtPartLog";
-            this.txtPartLog.ReadOnly = true;
-            this.txtPartLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPartLog.Size = new System.Drawing.Size(350, 84);
-            this.txtPartLog.TabIndex = 3;
             // 
             // txtPicStatus
             // 
             this.txtPicStatus.Location = new System.Drawing.Point(201, 29);
             this.txtPicStatus.Name = "txtPicStatus";
             this.txtPicStatus.ReadOnly = true;
-            this.txtPicStatus.Size = new System.Drawing.Size(158, 25);
+            this.txtPicStatus.Size = new System.Drawing.Size(158, 29);
             this.txtPicStatus.TabIndex = 3;
             this.txtPicStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -222,7 +199,7 @@
             this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.label7.Location = new System.Drawing.Point(9, 10);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(229, 15);
+            this.label7.Size = new System.Drawing.Size(284, 20);
             this.label7.TabIndex = 5;
             this.label7.Text = "Có thể nhấn \"Esc\" để thoát khỏi form này ";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -248,7 +225,7 @@
             this.label6.ForeColor = System.Drawing.Color.Blue;
             this.label6.Location = new System.Drawing.Point(338, 88);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(155, 30);
+            this.label6.Size = new System.Drawing.Size(189, 40);
             this.label6.TabIndex = 7;
             this.label6.Text = "Chọn hàng cần download. \r\nGiữ Ctrl để chọn nhiều hàng";
             // 
@@ -274,9 +251,9 @@
             // 
             this.Panel_PartInfor.AutoScroll = true;
             this.Panel_PartInfor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.Panel_PartInfor.Controls.Add(this.dgvListECO);
             this.Panel_PartInfor.Controls.Add(this.txtPartMaterial);
             this.Panel_PartInfor.Controls.Add(this.label10);
-            this.Panel_PartInfor.Controls.Add(this.txtPartLog);
             this.Panel_PartInfor.Controls.Add(this.txtPartName);
             this.Panel_PartInfor.Controls.Add(this.txtPartPrice);
             this.Panel_PartInfor.Controls.Add(this.txtPartStage);
@@ -286,7 +263,6 @@
             this.Panel_PartInfor.Controls.Add(this.label7);
             this.Panel_PartInfor.Controls.Add(this.txtPartDescription);
             this.Panel_PartInfor.Controls.Add(this.txtPicStatus);
-            this.Panel_PartInfor.Controls.Add(this.label5);
             this.Panel_PartInfor.Controls.Add(this.PicPart);
             this.Panel_PartInfor.Controls.Add(this.label1);
             this.Panel_PartInfor.Controls.Add(this.txtPartCode);
@@ -297,13 +273,30 @@
             this.Panel_PartInfor.Size = new System.Drawing.Size(496, 328);
             this.Panel_PartInfor.TabIndex = 0;
             // 
+            // txtPartMaterial
+            // 
+            this.txtPartMaterial.Location = new System.Drawing.Point(154, 133);
+            this.txtPartMaterial.Name = "txtPartMaterial";
+            this.txtPartMaterial.ReadOnly = true;
+            this.txtPartMaterial.Size = new System.Drawing.Size(119, 29);
+            this.txtPartMaterial.TabIndex = 7;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(94, 137);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(72, 23);
+            this.label10.TabIndex = 6;
+            this.label10.Text = "Material";
+            // 
             // txtPartPrice
             // 
             this.txtPartPrice.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.txtPartPrice.Location = new System.Drawing.Point(317, 133);
             this.txtPartPrice.Name = "txtPartPrice";
             this.txtPartPrice.ReadOnly = true;
-            this.txtPartPrice.Size = new System.Drawing.Size(130, 25);
+            this.txtPartPrice.Size = new System.Drawing.Size(130, 29);
             this.txtPartPrice.TabIndex = 3;
             // 
             // label9
@@ -311,7 +304,7 @@
             this.label9.AutoSize = true;
             this.label9.Location = new System.Drawing.Point(451, 137);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 17);
+            this.label9.Size = new System.Drawing.Size(56, 23);
             this.label9.TabIndex = 0;
             this.label9.Text = "(VND)";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -321,7 +314,7 @@
             this.label8.AutoSize = true;
             this.label8.Location = new System.Drawing.Point(277, 137);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(36, 17);
+            this.label8.Size = new System.Drawing.Size(47, 23);
             this.label8.TabIndex = 0;
             this.label8.Text = "Price";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -358,7 +351,7 @@
             this.checklistTypeFile.Location = new System.Drawing.Point(118, 14);
             this.checklistTypeFile.Name = "checklistTypeFile";
             this.checklistTypeFile.ScrollAlwaysVisible = true;
-            this.checklistTypeFile.Size = new System.Drawing.Size(102, 84);
+            this.checklistTypeFile.Size = new System.Drawing.Size(102, 76);
             this.checklistTypeFile.TabIndex = 7;
             // 
             // checklistStage
@@ -368,7 +361,7 @@
             this.checklistStage.Location = new System.Drawing.Point(8, 14);
             this.checklistStage.Name = "checklistStage";
             this.checklistStage.ScrollAlwaysVisible = true;
-            this.checklistStage.Size = new System.Drawing.Size(104, 84);
+            this.checklistStage.Size = new System.Drawing.Size(104, 76);
             this.checklistStage.TabIndex = 7;
             // 
             // PanelDataGridView
@@ -383,26 +376,25 @@
             this.PanelDataGridView.Size = new System.Drawing.Size(496, 196);
             this.PanelDataGridView.TabIndex = 0;
             // 
-            // label10
+            // dgvListECO
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(94, 137);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(56, 17);
-            this.label10.TabIndex = 6;
-            this.label10.Text = "Material";
-            // 
-            // txtPartMaterial
-            // 
-            this.txtPartMaterial.Location = new System.Drawing.Point(154, 133);
-            this.txtPartMaterial.Name = "txtPartMaterial";
-            this.txtPartMaterial.ReadOnly = true;
-            this.txtPartMaterial.Size = new System.Drawing.Size(119, 25);
-            this.txtPartMaterial.TabIndex = 7;
+            this.dgvListECO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListECO.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvListECO.FilterAndSortEnabled = true;
+            this.dgvListECO.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListECO.Location = new System.Drawing.Point(0, 228);
+            this.dgvListECO.MaxFilterButtonImageHeight = 23;
+            this.dgvListECO.Name = "dgvListECO";
+            this.dgvListECO.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvListECO.RowHeadersWidth = 51;
+            this.dgvListECO.RowTemplate.Height = 24;
+            this.dgvListECO.Size = new System.Drawing.Size(507, 79);
+            this.dgvListECO.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListECO.TabIndex = 8;
             // 
             // frmRelationPart_Detail_Info
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(502, 669);
@@ -423,6 +415,7 @@
             this.Panel_Download.PerformLayout();
             this.PanelDataGridView.ResumeLayout(false);
             this.PanelDataGridView.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListECO)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -433,14 +426,12 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox PicPart;
         private System.Windows.Forms.DataGridView dgvListFile;
         private System.Windows.Forms.TextBox txtPartCode;
         private System.Windows.Forms.TextBox txtPartName;
         private System.Windows.Forms.TextBox txtPartDescription;
         private System.Windows.Forms.TextBox txtPartStage;
-        private System.Windows.Forms.TextBox txtPartLog;
         private System.Windows.Forms.TextBox txtPicStatus;
         private System.Windows.Forms.TextBox txtListFileStatus;
         private System.Windows.Forms.Label label7;
@@ -458,5 +449,6 @@
         private System.Windows.Forms.Button btnApplyFilter;
         private System.Windows.Forms.TextBox txtPartMaterial;
         private System.Windows.Forms.Label label10;
+        private Zuby.ADGV.AdvancedDataGridView dgvListECO;
     }
 }

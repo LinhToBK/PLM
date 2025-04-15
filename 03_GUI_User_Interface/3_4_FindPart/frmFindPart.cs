@@ -41,11 +41,19 @@ namespace PLM_Lynx._03_GUI_User_Interface
         public void LoadDataFindPart(string keysearch)
         {
             DulieuTimKiem = PartBLL.FindWithWordBLL(keysearch);
+
+            //p.PartCode,  0
+            //p.PartName,     1
+            //p.PartDescript,       2
+            //s.Stage as PartStage,   3
+            //p.PartID,      4
+            //p.PartPrice,     5
+            //p.PartMaterial 6
             dgvSearch.DataSource = DulieuTimKiem;
             dgvSearch.Columns[0].Width = 80; // PartCode
             dgvSearch.Columns[1].Width = 200; // PartName
-            dgvSearch.Columns[2].Width = 100; // PartDescript
-            dgvSearch.Columns[3].Width = 50; // PartStage
+            dgvSearch.Columns[2].Width = 250; // PartDescript
+            dgvSearch.Columns[3].Width = 100; // PartStage
             //dgvSearch.Columns[4].Width = 50; // PartPrice
             //dgvSearch.Columns[5].Width = 100; // PartLog
             //dgvSearch.Columns[6].Width = 100; // Partfile
@@ -119,6 +127,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             txtCode.Text = dgvSearch.CurrentRow.Cells[0].Value.ToString(); // Code
             txtName.Text = dgvSearch.CurrentRow.Cells[1].Value.ToString(); // Name
             txtDescript.Text = dgvSearch.CurrentRow.Cells[2].Value.ToString(); // Description
+            txtStage.Text = dgvSearch.CurrentRow.Cells[3].Value.ToString(); // Stage
+            txtMaterial.Text = dgvSearch.CurrentRow.Cells[6].Value.ToString(); // Material
             //txtLog.Text = dgvSearch.CurrentRow.Cells[5].Value.ToString(); // Log
 
             // -- Hiển thị ảnh
@@ -134,36 +144,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Load các file trong partcode lên dgvListFile
             CommonBLL.GetAllFileinFolder(txtCode.Text, dgvListFile);
             //-----
-            //string imagefilepath = Properties.Settings.Default.LinkDataPart;
-            ////string Partcode = dgvSearch.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY
-            //string Partcode = txtCode.Text;
-            //string[] input = Partcode.Split('-');
-            //string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
-            //imagefilepath = imagefilepath  + input[0] + "\\" + input[1] + "\\" + Partcode + ".jpg";
-
-
-
-            //// Kiểm tra file có tồn tại
-            //if (System.IO.File.Exists(imagefilepath))
-            //{
-            //    //picPart.Image = Image.FromFile(imagefilepath);
-            //    picPart.SizeMode = PictureBoxSizeMode.StretchImage;
-            //    using (Image newimage = Image.FromFile(imagefilepath))
-            //    {
-            //        picPart.Image = (Image)newimage.Clone();
-            //        groupboxImagePart.Text = "";
-
-            //    }
-
-            //}   
-            //else
-            //{
-            //    groupboxImagePart.Text = "Không có ảnh";
-            //    //MessageBox.Show("Không có ảnh ");
-            //    picPart.Image = null;
-            //    //picChild.Image.Dispose();
-            //}
-            //------
+           
 
             // Hiển thị danh sách các PartParent và PartChild
             string idpart = dgvSearch.CurrentRow.Cells[4].Value.ToString();
@@ -309,6 +290,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             picChild.Refresh();
             txtChildCode.Text = dgvChild.CurrentRow.Cells[1].Value.ToString();
             txtChildName.Text = dgvChild.CurrentRow.Cells[2].Value.ToString();
+            
             //// -- Hiển thị ảnh
             if (CommonBLL.UploadImagebyPartCode(txtChildCode.Text, picChild) == true)
             {
@@ -423,27 +405,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-            // Lấy danh sách giá trị duy nhất từ 1 cột 
-            var GiaTri = DulieuTimKiem.AsEnumerable()
-                                        .Select(row => row.Field<string>("PartCode"))
-                                        .Distinct()
-                                        .ToList();
 
-            // Tạo form FilterSearch
-            frmFilterSearch frm = new frmFilterSearch(GiaTri);
-            if (frm.ShowDialog() == DialogResult.OK)
-            {
-                // Lấy các giá trị đã chọn từ frmFilterSearch
-                List<string> DanhsachFamilyCode = frm.DanhsachFamilyCodeOK;
-
-                // Áp dụng Row Filter
-                string Filter = string.Join(" OR ", DanhsachFamilyCode.Select(k => $"PartCode LIKE '%{k}%'"));
-                DataView dv = new DataView(DulieuTimKiem);
-                dv.RowFilter = Filter;
-
-                //// Gán DataView làm nguồn dữ liệu cho DataGridView
-                dgvSearch.DataSource = dv;
-            }
         }
 
         private void txtKeySearch_TextChanged(object sender, EventArgs e)

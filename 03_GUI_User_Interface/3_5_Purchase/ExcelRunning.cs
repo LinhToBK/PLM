@@ -103,7 +103,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
                     //string ImageCompanyPath = Properties.Settings.Default.ABCCoLtd;
                     string ImageCompanyPath = Environment.CurrentDirectory;
-                    ImageCompanyPath = ImageCompanyPath + @"\04_CommonDoc\ABCCoLtd.jpg";
+                    ImageCompanyPath = ImageCompanyPath + @"\04_CommonDoc\companylogo.jpg";
                     //MessageBox.Show(ImageCompanyPath);
 
                     if (System.IO.File.Exists(ImageCompanyPath))

@@ -131,6 +131,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return relation_partDAL.InsertNewRelationDAL(ParentCode, ChildCode, Quantity);
         }
 
-        
+        public DataTable Get_tblECO_BLL(int ECONo)
+        {
+            return relation_partDAL.Get_tblECO_DAL(ECONo);
+        }
+
+
     }
 }

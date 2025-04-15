@@ -31,17 +31,14 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFindPart));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.dgvSearch = new System.Windows.Forms.DataGridView();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvListFile = new System.Windows.Forms.DataGridView();
             this.groupboxImagePart = new System.Windows.Forms.GroupBox();
             this.picPart = new System.Windows.Forms.PictureBox();
-            this.txtLog = new System.Windows.Forms.TextBox();
             this.txtDescript = new System.Windows.Forms.TextBox();
             this.txtName = new System.Windows.Forms.TextBox();
             this.txtCode = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnFilter = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtHighLight = new System.Windows.Forms.TextBox();
             this.btnThemGanDay = new System.Windows.Forms.Button();
@@ -68,12 +65,14 @@
             this.ckcWithImage = new System.Windows.Forms.CheckBox();
             this.groupboxChildImage = new System.Windows.Forms.GroupBox();
             this.picChild = new System.Windows.Forms.PictureBox();
+            this.dgvSearch = new Zuby.ADGV.AdvancedDataGridView();
+            this.txtMaterial = new System.Windows.Forms.TextBox();
+            this.txtStage = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListFile)).BeginInit();
             this.groupboxImagePart.SuspendLayout();
@@ -90,6 +89,7 @@
             this.Panel_Child_Infor.SuspendLayout();
             this.groupboxChildImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picChild)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -119,47 +119,32 @@
             this.groupBox2.Controls.Add(this.dgvSearch);
             this.groupBox2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(0, 128);
+            this.groupBox2.Location = new System.Drawing.Point(0, 120);
             this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox2.Size = new System.Drawing.Size(566, 382);
+            this.groupBox2.Size = new System.Drawing.Size(566, 387);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Danh sách chi tiết có thuộc tính";
             // 
-            // dgvSearch
-            // 
-            this.dgvSearch.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSearch.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvSearch.Location = new System.Drawing.Point(4, 22);
-            this.dgvSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvSearch.Name = "dgvSearch";
-            this.dgvSearch.RowTemplate.Height = 23;
-            this.dgvSearch.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
-            this.dgvSearch.Size = new System.Drawing.Size(558, 356);
-            this.dgvSearch.TabIndex = 0;
-            this.dgvSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearch_CellDoubleClick);
-            this.dgvSearch.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvSearch_CellPainting);
-            this.dgvSearch.Click += new System.EventHandler(this.dgvSearch_Click);
-            // 
             // groupBox3
             // 
             this.groupBox3.AutoSize = true;
+            this.groupBox3.Controls.Add(this.txtStage);
+            this.groupBox3.Controls.Add(this.txtMaterial);
             this.groupBox3.Controls.Add(this.dgvListFile);
             this.groupBox3.Controls.Add(this.groupboxImagePart);
-            this.groupBox3.Controls.Add(this.txtLog);
             this.groupBox3.Controls.Add(this.txtDescript);
             this.groupBox3.Controls.Add(this.txtName);
             this.groupBox3.Controls.Add(this.txtCode);
             this.groupBox3.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.groupBox3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(0, 510);
+            this.groupBox3.Location = new System.Drawing.Point(0, 507);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox3.Size = new System.Drawing.Size(566, 312);
+            this.groupBox3.Size = new System.Drawing.Size(566, 315);
             this.groupBox3.TabIndex = 2;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Thông tin của part đang click";
@@ -169,10 +154,11 @@
             this.dgvListFile.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvListFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListFile.GridColor = System.Drawing.Color.White;
-            this.dgvListFile.Location = new System.Drawing.Point(15, 197);
+            this.dgvListFile.Location = new System.Drawing.Point(15, 196);
             this.dgvListFile.Margin = new System.Windows.Forms.Padding(4);
             this.dgvListFile.Name = "dgvListFile";
-            this.dgvListFile.Size = new System.Drawing.Size(459, 89);
+            this.dgvListFile.RowHeadersWidth = 51;
+            this.dgvListFile.Size = new System.Drawing.Size(493, 89);
             this.dgvListFile.TabIndex = 4;
             // 
             // groupboxImagePart
@@ -190,24 +176,13 @@
             // picPart
             // 
             this.picPart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picPart.Location = new System.Drawing.Point(4, 22);
+            this.picPart.Location = new System.Drawing.Point(4, 26);
             this.picPart.Margin = new System.Windows.Forms.Padding(4);
             this.picPart.Name = "picPart";
-            this.picPart.Size = new System.Drawing.Size(144, 138);
+            this.picPart.Size = new System.Drawing.Size(144, 134);
             this.picPart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picPart.TabIndex = 2;
             this.picPart.TabStop = false;
-            // 
-            // txtLog
-            // 
-            this.txtLog.Location = new System.Drawing.Point(15, 124);
-            this.txtLog.Margin = new System.Windows.Forms.Padding(4);
-            this.txtLog.Multiline = true;
-            this.txtLog.Name = "txtLog";
-            this.txtLog.ReadOnly = true;
-            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtLog.Size = new System.Drawing.Size(338, 60);
-            this.txtLog.TabIndex = 1;
             // 
             // txtDescript
             // 
@@ -226,7 +201,7 @@
             this.txtName.Margin = new System.Windows.Forms.Padding(4);
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(263, 25);
+            this.txtName.Size = new System.Drawing.Size(263, 29);
             this.txtName.TabIndex = 1;
             // 
             // txtCode
@@ -235,12 +210,11 @@
             this.txtCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(70, 25);
+            this.txtCode.Size = new System.Drawing.Size(70, 29);
             this.txtCode.TabIndex = 1;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnFilter);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtHighLight);
             this.groupBox1.Controls.Add(this.btnThemGanDay);
@@ -252,42 +226,28 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(566, 128);
+            this.groupBox1.Size = new System.Drawing.Size(566, 120);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Nhập dữ liệu tìm kiếm";
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Image = ((System.Drawing.Image)(resources.GetObject("btnFilter.Image")));
-            this.btnFilter.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnFilter.Location = new System.Drawing.Point(364, 58);
-            this.btnFilter.Margin = new System.Windows.Forms.Padding(4);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(120, 26);
-            this.btnFilter.TabIndex = 7;
-            this.btnFilter.Text = "Filter Search";
-            this.btnFilter.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnFilter.UseVisualStyleBackColor = true;
-            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label1.Location = new System.Drawing.Point(254, 95);
+            this.label1.Location = new System.Drawing.Point(265, 38);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 17);
+            this.label1.Size = new System.Drawing.Size(121, 23);
             this.label1.TabIndex = 6;
             this.label1.Text = "Highlight View";
             // 
             // txtHighLight
             // 
-            this.txtHighLight.Location = new System.Drawing.Point(364, 91);
+            this.txtHighLight.Location = new System.Drawing.Point(394, 35);
             this.txtHighLight.Margin = new System.Windows.Forms.Padding(4);
             this.txtHighLight.Name = "txtHighLight";
-            this.txtHighLight.Size = new System.Drawing.Size(122, 25);
+            this.txtHighLight.Size = new System.Drawing.Size(122, 29);
             this.txtHighLight.TabIndex = 5;
             this.txtHighLight.TextChanged += new System.EventHandler(this.txtHighLight_TextChanged);
             // 
@@ -296,9 +256,9 @@
             this.btnThemGanDay.Location = new System.Drawing.Point(8, 68);
             this.btnThemGanDay.Margin = new System.Windows.Forms.Padding(4);
             this.btnThemGanDay.Name = "btnThemGanDay";
-            this.btnThemGanDay.Size = new System.Drawing.Size(111, 50);
+            this.btnThemGanDay.Size = new System.Drawing.Size(305, 32);
             this.btnThemGanDay.TabIndex = 3;
-            this.btnThemGanDay.Text = "Danh sách \r\nthêm gần đây";
+            this.btnThemGanDay.Text = "Danh sách thêm gần đây";
             this.btnThemGanDay.UseVisualStyleBackColor = true;
             this.btnThemGanDay.Click += new System.EventHandler(this.btnThemGanDay_Click);
             // 
@@ -306,7 +266,7 @@
             // 
             this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
             this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSearch.Location = new System.Drawing.Point(222, 31);
+            this.btnSearch.Location = new System.Drawing.Point(219, 32);
             this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(38, 35);
@@ -320,7 +280,7 @@
             this.txtKeySearch.Location = new System.Drawing.Point(8, 35);
             this.txtKeySearch.Margin = new System.Windows.Forms.Padding(4);
             this.txtKeySearch.Name = "txtKeySearch";
-            this.txtKeySearch.Size = new System.Drawing.Size(206, 25);
+            this.txtKeySearch.Size = new System.Drawing.Size(206, 29);
             this.txtKeySearch.TabIndex = 1;
             this.txtKeySearch.TextChanged += new System.EventHandler(this.txtKeySearch_TextChanged);
             this.txtKeySearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyDown);
@@ -366,6 +326,7 @@
             this.dgvParent.Location = new System.Drawing.Point(0, 0);
             this.dgvParent.Margin = new System.Windows.Forms.Padding(4);
             this.dgvParent.Name = "dgvParent";
+            this.dgvParent.RowHeadersWidth = 51;
             this.dgvParent.RowTemplate.Height = 23;
             this.dgvParent.Size = new System.Drawing.Size(552, 182);
             this.dgvParent.TabIndex = 0;
@@ -391,7 +352,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 10);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(110, 15);
+            this.label2.Size = new System.Drawing.Size(135, 20);
             this.label2.TabIndex = 3;
             this.label2.Text = "Danh sách Part Cha";
             // 
@@ -422,10 +383,10 @@
             // picParent
             // 
             this.picParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picParent.Location = new System.Drawing.Point(4, 20);
+            this.picParent.Location = new System.Drawing.Point(4, 24);
             this.picParent.Margin = new System.Windows.Forms.Padding(4);
             this.picParent.Name = "picParent";
-            this.picParent.Size = new System.Drawing.Size(136, 143);
+            this.picParent.Size = new System.Drawing.Size(136, 139);
             this.picParent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picParent.TabIndex = 0;
             this.picParent.TabStop = false;
@@ -437,7 +398,7 @@
             this.txtParentName.Margin = new System.Windows.Forms.Padding(4);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(244, 23);
+            this.txtParentName.Size = new System.Drawing.Size(244, 27);
             this.txtParentName.TabIndex = 1;
             // 
             // txtParentCode
@@ -447,7 +408,7 @@
             this.txtParentCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(78, 23);
+            this.txtParentCode.Size = new System.Drawing.Size(78, 27);
             this.txtParentCode.TabIndex = 1;
             // 
             // panel2
@@ -469,6 +430,7 @@
             this.dgvChild.Location = new System.Drawing.Point(0, 0);
             this.dgvChild.Margin = new System.Windows.Forms.Padding(4);
             this.dgvChild.Name = "dgvChild";
+            this.dgvChild.RowHeadersWidth = 51;
             this.dgvChild.RowTemplate.Height = 23;
             this.dgvChild.Size = new System.Drawing.Size(552, 248);
             this.dgvChild.TabIndex = 0;
@@ -499,7 +461,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(11, 13);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(107, 15);
+            this.label3.Size = new System.Drawing.Size(131, 20);
             this.label3.TabIndex = 5;
             this.label3.Text = "Thông tin Part Con";
             // 
@@ -510,7 +472,7 @@
             this.txtChildCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtChildCode.Name = "txtChildCode";
             this.txtChildCode.ReadOnly = true;
-            this.txtChildCode.Size = new System.Drawing.Size(74, 23);
+            this.txtChildCode.Size = new System.Drawing.Size(74, 27);
             this.txtChildCode.TabIndex = 1;
             // 
             // txtChildName
@@ -520,7 +482,7 @@
             this.txtChildName.Margin = new System.Windows.Forms.Padding(4);
             this.txtChildName.Name = "txtChildName";
             this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(269, 23);
+            this.txtChildName.Size = new System.Drawing.Size(269, 27);
             this.txtChildName.TabIndex = 1;
             // 
             // btnExportOnly
@@ -559,7 +521,7 @@
             this.ckcWithImage.Location = new System.Drawing.Point(16, 138);
             this.ckcWithImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ckcWithImage.Name = "ckcWithImage";
-            this.ckcWithImage.Size = new System.Drawing.Size(87, 19);
+            this.ckcWithImage.Size = new System.Drawing.Size(108, 24);
             this.ckcWithImage.TabIndex = 5;
             this.ckcWithImage.Text = "With Image";
             this.ckcWithImage.UseVisualStyleBackColor = true;
@@ -580,17 +542,52 @@
             // picChild
             // 
             this.picChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picChild.Location = new System.Drawing.Point(4, 20);
+            this.picChild.Location = new System.Drawing.Point(4, 24);
             this.picChild.Margin = new System.Windows.Forms.Padding(4);
             this.picChild.Name = "picChild";
-            this.picChild.Size = new System.Drawing.Size(140, 177);
+            this.picChild.Size = new System.Drawing.Size(140, 173);
             this.picChild.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picChild.TabIndex = 2;
             this.picChild.TabStop = false;
             // 
+            // dgvSearch
+            // 
+            this.dgvSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvSearch.FilterAndSortEnabled = true;
+            this.dgvSearch.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvSearch.Location = new System.Drawing.Point(4, 26);
+            this.dgvSearch.MaxFilterButtonImageHeight = 23;
+            this.dgvSearch.Name = "dgvSearch";
+            this.dgvSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvSearch.RowHeadersWidth = 51;
+            this.dgvSearch.RowTemplate.Height = 24;
+            this.dgvSearch.Size = new System.Drawing.Size(558, 357);
+            this.dgvSearch.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvSearch.TabIndex = 0;
+            this.dgvSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearch_CellDoubleClick);
+            this.dgvSearch.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvSearch_CellPainting);
+            this.dgvSearch.Click += new System.EventHandler(this.dgvSearch_Click);
+            // 
+            // txtMaterial
+            // 
+            this.txtMaterial.Location = new System.Drawing.Point(219, 120);
+            this.txtMaterial.Name = "txtMaterial";
+            this.txtMaterial.ReadOnly = true;
+            this.txtMaterial.Size = new System.Drawing.Size(130, 29);
+            this.txtMaterial.TabIndex = 5;
+            // 
+            // txtStage
+            // 
+            this.txtStage.Location = new System.Drawing.Point(15, 120);
+            this.txtStage.Name = "txtStage";
+            this.txtStage.ReadOnly = true;
+            this.txtStage.Size = new System.Drawing.Size(130, 29);
+            this.txtStage.TabIndex = 5;
+            // 
             // frmFindPart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1128, 822);
@@ -607,7 +604,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).EndInit();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListFile)).EndInit();
@@ -628,6 +624,7 @@
             this.Panel_Child_Infor.PerformLayout();
             this.groupboxChildImage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picChild)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -645,7 +642,6 @@
         private System.Windows.Forms.TextBox txtKeySearch;
         private System.Windows.Forms.Button btnExportOnly;
         private System.Windows.Forms.Button btnExportFile;
-        private System.Windows.Forms.TextBox txtLog;
         private System.Windows.Forms.TextBox txtDescript;
         private System.Windows.Forms.TextBox txtName;
         private System.Windows.Forms.GroupBox groupboxChildImage;
@@ -660,10 +656,8 @@
         private System.Windows.Forms.TextBox txtParentCode;
         private System.Windows.Forms.DataGridView dgvListFile;
         private System.Windows.Forms.Button btnThemGanDay;
-        public System.Windows.Forms.DataGridView dgvSearch;
         private System.Windows.Forms.TextBox txtHighLight;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.CheckBox ckcWithImage;
         private System.Windows.Forms.Panel panel1;
@@ -673,5 +667,8 @@
         private System.Windows.Forms.Panel Panel_Child_Infor;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.DataGridView dgvChild;
+        private Zuby.ADGV.AdvancedDataGridView dgvSearch;
+        private System.Windows.Forms.TextBox txtMaterial;
+        private System.Windows.Forms.TextBox txtStage;
     }
 }

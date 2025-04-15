@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using PLM_Lynx._01_DAL_Data_Access_Layer;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -61,8 +62,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
 
             LoadDatatodgvListNearECO(5);
-            ShowChecklist();
-            this.BeginInvoke(new Action(ApplyFilter));
         }
 
         public void LoadDatatodgvListNearECO(int norow)
@@ -72,6 +71,22 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
             dgvListECO.AllowUserToAddRows = false;
             dgvListECO.EditMode = DataGridViewEditMode.EditProgrammatically;
+
+            // Đặt tiêu đề và chỉnh kích thước cột
+            dgvListECO.Columns[0].Width = 100;
+            dgvListECO.Columns[1].Width = 100;
+            dgvListECO.Columns[2].Width = 200;
+            dgvListECO.Columns[3].Width = 150;
+            dgvListECO.Columns[4].Width = 150;
+            dgvListECO.Columns[5].Width = 100;
+            dgvListECO.Columns[0].HeaderText = "ECONo";
+            dgvListECO.Columns[1].HeaderText = "ECODate";
+            dgvListECO.Columns[2].HeaderText = "ECOType";
+            dgvListECO.Columns[3].HeaderText = "Requester";
+            dgvListECO.Columns[4].HeaderText = "Approver";
+            dgvListECO.Columns[5].HeaderText = "Status";
+
+
         }
 
         private void cboListNear_SelectedIndexChanged(object sender, EventArgs e)
@@ -83,150 +98,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 if (!IsLoading)
                 {
                     LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                    ShowChecklist();
-                    this.BeginInvoke(new Action(ApplyFilter));
                 }
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Xuất hiện lỗi : " + ex.Message);
             }
-        }
-
-        // =============================
-        // Hiển thị lên các checklistbox
-        // =============================
-        private void ShowChecklist()
-        {
-            if (dgvListECO.Rows.Count == 0)
-            {
-                //MessageBox.Show("Không có dữ liệu để chọn");
-                return;
-            }
-            else
-            {
-                // Lấy danh sách Date
-                var listDate = dgvListECO.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[1].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listDate)
-                {
-                    if (!ckcECODate.Items.Contains(category))
-                    {
-                        ckcECODate.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
-
-                // Lấy danh sách Proposal
-                var listProposal = dgvListECO.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[3].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listProposal)
-                {
-                    if (!ckcProposal.Items.Contains(category))
-                    {
-                        ckcProposal.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
-
-                // Lấy danh sách Status
-                var listStatus = dgvListECO.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[5].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listStatus)
-                {
-                    if (!ckcECOStatus.Items.Contains(category))
-                    {
-                        ckcECOStatus.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
-
-                // Lấy danh sách Type
-                var listECOType = dgvListECO.Rows
-                                      .Cast<DataGridViewRow>()
-                                      .Where(row => !row.IsNewRow)
-                                      .Select(row => row.Cells[2].Value?.ToString())
-                                      .Distinct()
-                                      .OrderBy(x => x)
-                                      .ToList();
-                foreach (var category in listECOType)
-                {
-                    if (!ckcECOType.Items.Contains(category))
-                    {
-                        ckcECOType.Items.Add(category, false); // Mặc định tất cả các mục được chọn
-                    }
-                }
-            }
-        }
-
-        private void ApplyFilter()
-        {
-            if (dgvListECO.DataSource is DataTable dt)
-            {
-                List<string> filters = new List<string>();
-
-                // Lọc theo ngày
-                string DateFilter = GetCheckedItemsFilter(ckcECODate, "ECODate");
-                if (!string.IsNullOrEmpty(DateFilter)) filters.Add(DateFilter);
-
-                // Lọc theo Nhân viên
-                string ProposalFilter = GetCheckedItemsFilter(ckcProposal, "ECONameProposal");
-                if (!string.IsNullOrEmpty(ProposalFilter)) filters.Add(ProposalFilter);
-
-                // Lọc theo Trạng thái
-                string statusFilter = GetCheckedItemsFilter(ckcECOStatus, "ECOStatus");
-                if (!string.IsNullOrEmpty(statusFilter)) filters.Add(statusFilter);
-
-                // Lọc theo Type ECO
-                string TypeFilter = GetCheckedItemsFilter(ckcECOStatus, "ECOType");
-                if (!string.IsNullOrEmpty(TypeFilter)) filters.Add(TypeFilter);
-
-                // Ghép các điều kiện với AND
-                dt.DefaultView.RowFilter = string.Join(" AND ", filters);
-            }
-        }
-
-        // Hàm lấy danh sách các mục đã chọn và tạo điều kiện lọc
-        private string GetCheckedItemsFilter(CheckedListBox checkedListBox, string columnName)
-        {
-            if (checkedListBox.CheckedItems.Count == 0) return "";
-
-            List<string> selectedValues = checkedListBox.CheckedItems.Cast<string>()
-                                          .Select(item => $"'{item}'").ToList();
-
-            return $"{columnName} IN ({string.Join(",", selectedValues)})";
-        }
-
-        private void ckcECODate_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
-        }
-
-        private void ckcProposal_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
-        }
-
-        private void ckcECOType_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
-        }
-
-        private void ckcECOStatus_ItemCheck(object sender, ItemCheckEventArgs e)
-        {
-            this.BeginInvoke(new Action(ApplyFilter));
         }
 
         // =============================
@@ -435,7 +312,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 string stagestatus = dgvECOContent.Rows[0].Cells[1].Value.ToString();
                 int oldstage = Convert.ToInt32(dgvECOContent.Rows[0].Cells[2].Value.ToString());
                 int newstage = Convert.ToInt32(dgvECOContent.Rows[0].Cells[3].Value.ToString());
-                string Version;
+                string Version = "";
                 string[] FolderName = partcode.Split('-');
                 string Folder_Part_Path = Properties.Settings.Default.LinkDataPart + "//" + FolderName[0] + "//" + FolderName[1];
 
@@ -446,7 +323,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     {
                         MessageBox.Show("TH1 : Thay đổi cả Stage và có bản vẽ đính kèm");
                         Version = dgvECOContent.Rows[0].Cells[3].Value.ToString() + ".0";     // 2.0,, 3.0
-                                                                                              // Copy file từ ECOTEMP sang DataPart
+                        // Thêm thuộc tính version vào tblContent
+                        _content.Rows[0]["nd"] = Version;
+
+
+                        // Copy file từ ECOTEMP sang DataPart
                         if (_ecoBLL.CopyFile_to_DataPart(partcode, Version, ECONo))
                         {
                             // Nếu copy xong thì xóa thư mục trong ECOTEMP
@@ -470,7 +351,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     {
                         MessageBox.Show("TH2 : Thay đổi Stage nhưng không có bản vẽ đính kèm");
                         Version = dgvECOContent.Rows[0].Cells[3].Value.ToString() + ".0";     // 2.0,, 3.0
-                                                                                              // Copy file từ DataPart version mới nhất của stage cũ
+                        _content.Rows[0]["nd"] = Version;
+                        // Copy file từ DataPart version mới nhất của stage cũ
                         if (_ecoBLL.CopyFile_to_DataPart_If_UpStage(partcode, newstage, oldstage))
                         {
                             MessageBox.Show("Đã copy bản mới nhất của stage cũ sang stage mới");
@@ -485,6 +367,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     else if (stagestatus == "" && drawingstatus == "1")
                     {
                         Version = oldstage.ToString() + "." + _ecoBLL.lastestVersion(Folder_Part_Path, oldstage).ToString();
+                        _content.Rows[0]["nd"] = Version;
                         MessageBox.Show("Chỉ cập nhật bản vẽ, không cập nhật Stage");
                         // Copy file từ ECOTEMP sang DataPart
                         if (_ecoBLL.CopyFile_to_DataPart(partcode, Version, ECONo))
@@ -505,12 +388,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         }
                     }  // Hết trường hợp 3
 
+                    // Convert tblContent về dạng JSON
+                    string ECOContent = JsonConvert.SerializeObject(_content, Formatting.Indented);
+
                     // Load lại danh sách ECO
-                    if (_ecoBLL.Update_tblECO_Approved_BLL(userid, username, ECONo) == true)
+                    if (_ecoBLL.Update_tblECO_Approved_BLL(userid, username, ECONo, ECOContent) == true)
                     {
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                        ShowChecklist();
-                        this.BeginInvoke(new Action(ApplyFilter));
                     }
                     else
                     {
@@ -542,8 +426,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     {
                         MessageBox.Show("Đã phê duyệt ECO [ Thêm ràng buộc mới ] thành công");
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                        ShowChecklist();
-                        this.BeginInvoke(new Action(ApplyFilter));
                     }
                     else
                     {
@@ -619,8 +501,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     {
                         MessageBox.Show("Đã phê duyệt ECO [ Cập nhật số lương của Part ] thành công");
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                        ShowChecklist();
-                        this.BeginInvoke(new Action(ApplyFilter));
                     }
                     else
                     {
@@ -643,8 +523,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 {
                     MessageBox.Show("Đã phê duyệt ECO [ Xóa ràng buộc giữa 2 Part ] thành công");
                     LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                    ShowChecklist();
-                    this.BeginInvoke(new Action(ApplyFilter));
                 }
                 else
                 {
@@ -676,18 +554,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 }
 
                 // Case 4 : Cập nhật số lượng
-                if (this_ECOType == 4 )
+                if (this_ECOType == 4)
                 {
                     string tb = "Bạn có muốn hủy việc cập nhật số lượng không ? ";
                     DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                    if(kq == DialogResult.Yes)
+                    if (kq == DialogResult.Yes)
                     {
                         if (_ecoBLL.Update_tblECO_Canceled_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                         {
                             MessageBox.Show("Đã đưa request về trạng thái hủy ");
                             LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                            ShowChecklist();
-                            this.BeginInvoke(new Action(ApplyFilter));
                         }
                         else
                         {
@@ -712,8 +588,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         {
                             MessageBox.Show("Đã đưa request về trạng thái hủy ");
                             LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                            ShowChecklist();
-                            this.BeginInvoke(new Action(ApplyFilter));
                         }
                         else
                         {
@@ -762,8 +636,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     {
                         MessageBox.Show("Đã đưa request về trạng thái hủy ");
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                        ShowChecklist();
-                        this.BeginInvoke(new Action(ApplyFilter));
                     }
                     else
                     {
@@ -776,8 +648,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     {
                         MessageBox.Show("Đã đưa request về trạng thái hủy ");
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                        ShowChecklist();
-                        this.BeginInvoke(new Action(ApplyFilter));
                     }
                     else
                     {
@@ -814,14 +684,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
-                  if(Delete_Relation_in_tblRelationTemp() && _ecoBLL.Update_tblECO_Canceled_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
+                if (Delete_Relation_in_tblRelationTemp() && _ecoBLL.Update_tblECO_Canceled_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                 {
                     MessageBox.Show("Đã đưa request về trạng thái hủy ");
                     LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
-                    ShowChecklist();
-                    this.BeginInvoke(new Action(ApplyFilter));
-                }    
-                  else
+                }
+                else
                 {
                     MessageBox.Show("Phát sinh lỗi trong quá trình xóa các ràng buộc tạm thời trong tblRelationTemp ");
                 }
@@ -830,7 +698,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             {
                 return;
             }
-
         }
 
         private bool Delete_Relation_in_tblRelationTemp()
@@ -878,6 +745,21 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 MessageBox.Show(thongbao2);
                 return false;
             }
+        }
+
+        private void dgvListECO_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        private void dgvListECO_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Lấy thong tin ECONo của dòng được chọn
+            int ECONo = Convert.ToInt32(dgvListECO.CurrentRow.Cells[0].Value.ToString());
+            frmECO_Infor_Detail frm = new frmECO_Infor_Detail();
+            frm.ECONo = ECONo;
+            frm.ShowDialog();
+
         }
     }
 }

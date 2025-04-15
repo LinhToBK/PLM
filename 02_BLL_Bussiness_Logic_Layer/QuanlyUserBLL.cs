@@ -127,6 +127,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
              return UsersDAL.XoaDeptDAL(IDDept);
         }
 
+        public DataTable Get_Count_tblUsers_BLL()
+        {
+              return UsersDAL.Get_Count_tblUsers_DAL();
+        }
+
 
         //******************************************************************
         //       HỆ THỐNG QUYỀN QUẢN TRỊ

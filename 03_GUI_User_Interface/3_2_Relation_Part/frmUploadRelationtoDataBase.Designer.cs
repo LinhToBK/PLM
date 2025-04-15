@@ -46,7 +46,7 @@
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(164, 33);
             this.btnUpload.TabIndex = 0;
-            this.btnUpload.Text = "Upload to DataBase";
+            this.btnUpload.Text = "Make a ECO";
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
             // 
@@ -66,7 +66,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(80, 17);
+            this.label1.Size = new System.Drawing.Size(104, 23);
             this.label1.TabIndex = 1;
             this.label1.Text = "Parent Code";
             // 
@@ -75,7 +75,7 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(12, 73);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 17);
+            this.label2.Size = new System.Drawing.Size(110, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Parent Name";
             // 
@@ -84,7 +84,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 117);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(139, 17);
+            this.label3.Size = new System.Drawing.Size(187, 23);
             this.label3.TabIndex = 1;
             this.label3.Text = "List Child with Quantity";
             // 
@@ -95,6 +95,7 @@
             this.dgvListChild.Location = new System.Drawing.Point(0, 151);
             this.dgvListChild.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dgvListChild.Name = "dgvListChild";
+            this.dgvListChild.RowHeadersWidth = 51;
             this.dgvListChild.RowTemplate.Height = 23;
             this.dgvListChild.Size = new System.Drawing.Size(576, 357);
             this.dgvListChild.TabIndex = 2;
@@ -105,7 +106,7 @@
             this.txtParentCode.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(126, 25);
+            this.txtParentCode.Size = new System.Drawing.Size(126, 29);
             this.txtParentCode.TabIndex = 3;
             // 
             // txtParentName
@@ -114,12 +115,12 @@
             this.txtParentName.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(442, 25);
+            this.txtParentName.Size = new System.Drawing.Size(442, 29);
             this.txtParentName.TabIndex = 3;
             // 
             // frmUploadRelationtoDataBase
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(576, 508);

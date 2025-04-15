@@ -393,7 +393,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     new Tuple<string, object>("om", om),
                     new Tuple<string, object>("nm", nm),
                     new Tuple<string, object>("d", d),
-                    // Cần thêm ghi version cũ với mới vào đây
+                    new Tuple<string, object>("od", ""),
+                    new Tuple<string, object>("nd", ""),
+
                 };
             Dictionary<string, object> jsonData = new Dictionary<string, object>();
             foreach (var row in tableData)

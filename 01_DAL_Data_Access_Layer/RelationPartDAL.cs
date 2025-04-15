@@ -232,5 +232,26 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
             return BangDuLieu;
         }
+
+
+        public DataTable Get_tblECO_DAL(int ECONo)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string query;
+                //query = @"select ParentID from tblRelation where ChildID = (select top 1 PartID from tblPart where PartCode = @PartCode) ";
+                query = @"SELECT e.ECONo, e.ECODate, t.ECOType 
+                            FROM tblECO AS e
+                            JOIN tblECOType AS t ON e.ECOTypeID = t.ECOTypeID
+                            where e.ECONo = @ECONo ";
+                SqlCommand cmd = new SqlCommand(@query, conn);
+                cmd.Parameters.AddWithValue("@ECONo", ECONo);
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
     }
 }

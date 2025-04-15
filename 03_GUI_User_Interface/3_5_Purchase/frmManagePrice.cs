@@ -27,12 +27,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         public void LoadDataFindPart(string keysearch)
         {
 
-            //0-p.PartCode,  
-            //1-p.PartName,    
-            //2-p.PartDescript,    
-            //3-p.PartStage,           
-            //4-p.PartID,                          
-            //5-p.PartPrice
+            //p.0.PartCode,
+            //p.1.PartName,
+            //p.2.PartDescript,
+            //s.3.Stage as PartStage,
+            //p.4.PartID,
+            //p.5.PartPrice,
+            //p.6.PartMaterial,
+            //p.7.PartPriceSale
             DulieuTimKiem = commonBLL.FindwithworBLL(keysearch);
             dgvListTimKiem.DataSource = DulieuTimKiem;
             dgvListTimKiem.Columns[0].Width = 80; // PartCode
@@ -46,8 +48,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dgvListTimKiem.Columns[2].Visible = false; //  "Description";
             dgvListTimKiem.Columns[3].HeaderText = "Stage";
             dgvListTimKiem.Columns[4].Visible = false;
-            dgvListTimKiem.Columns[5].HeaderText = "Price";
-            
+            dgvListTimKiem.Columns[5].HeaderText = "ImportPrice";
+            dgvListTimKiem.Columns[7].HeaderText = "ExportPrice";
+
 
             dgvListTimKiem.AllowUserToAddRows = false;
             dgvListTimKiem.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -56,12 +59,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void convertvnd2usd()
         {
             string vndprice = txtPartPrice.Text;
+            string vndexportprice = txtExportPrice.Text;
             if (vndprice.Length > 0)
             {
                 try
                 {
                     float usdprice = (float)Convert.ToInt32(vndprice) / Convert.ToInt32(txtRate.Text);
                     txtUSDPrice.Text = usdprice.ToString(cboPrecision.SelectedItem.ToString());
+
+                    float usdexportprice = (float)Convert.ToInt32(vndexportprice) / Convert.ToInt32(txtRate.Text);
+                    txtExportPriceUSD.Text = usdexportprice.ToString(cboPrecision.SelectedItem.ToString());
                 }
                 catch (Exception ex)
                 {
@@ -142,12 +149,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 {
                     txtPartPrice.Enabled = true;
                     txtPartPrice.ReadOnly = false;
+                    txtExportPrice.Enabled = true;
+                    txtExportPrice.ReadOnly = false;
                     txtPartPrice.Focus();
                 }
                 else
                 {
                     txtUSDPrice.Enabled = true;
                     txtUSDPrice.ReadOnly = false;
+                    txtExportPriceUSD.Enabled = true;
+                    txtExportPriceUSD.ReadOnly = false;
                     txtUSDPrice.Focus();
                 }
             }
@@ -190,16 +201,17 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void btnSaveNewPrice_Click(object sender, EventArgs e)
         {
             // Kiểm tra giá trị  vndPrice có phải là số nguyên dương hay không ?
-            if (int.TryParse(txtPartPrice.Text.Trim(), out int vndprice))
+            if (int.TryParse(txtPartPrice.Text.Trim(), out int vndprice) && int.TryParse(txtExportPrice.Text.Trim(), out int vndexportprice))
             {
                 string tb;
-                tb = "Bạn có muốn update giá của Part Code [ " + txtPartCode.Text + "]";
-                tb += " từ --- " + dgvListTimKiem.CurrentRow.Cells[4].Value.ToString() + " (VND) --- sang --- " + txtPartPrice.Text + " --- (VND) không ?";
+                tb = "Bạn có muốn update giá của Part Code:  [ " + txtPartCode.Text + "]";
+                tb += " \r\n +)  Giá nhập :  " + dgvListTimKiem.CurrentRow.Cells[4].Value.ToString() + " (VND) --- => --- " + txtPartPrice.Text + " --- (VND) ";
+                tb += " \r\n +)  Giá xuất : " + dgvListTimKiem.CurrentRow.Cells[7].Value.ToString() + " (VND) --- => --- " + txtExportPrice.Text + " (VND)  không ?";
 
                 DialogResult kq = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
                 {
-                    if (purchaseBLL.CapnhatPriceBLL(txtPartCode.Text, txtPartPrice.Text))
+                    if (purchaseBLL.CapnhatPriceBLL(txtPartCode.Text, txtPartPrice.Text, txtExportPrice.Text))
                     {
                         MessageBox.Show("Đã cập nhật thành công giá ");
                         LoadDataFindPart(txtPartCode.Text);
@@ -246,6 +258,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 txtDescript.Text = dgvListTimKiem.CurrentRow.Cells[2].Value.ToString();  // Descript
                 txtPartStage.Text = dgvListTimKiem.CurrentRow.Cells[3].Value.ToString();  // Stage
                 txtPartPrice.Text = dgvListTimKiem.CurrentRow.Cells[5].Value.ToString();   // Price
+                txtExportPrice.Text = dgvListTimKiem.CurrentRow.Cells[7].Value.ToString(); // ExportPrice
+                txtPartPriceLog.Text = dgvListTimKiem.CurrentRow.Cells[8].Value.ToString();
             }
         }
 
@@ -260,6 +274,44 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         {
             frmFindPO frm = new frmFindPO();
             frm.ShowDialog();
+        }
+
+
+
+        /// <summary>
+        /// Thêm tính năng cho phần Exportprice
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+
+        private void txtExportPrice_TextChanged(object sender, EventArgs e)
+        {
+            // Khi sửa giá trị trong ô này thì ô txtUSDExportPrice cũng sẽ tự động thay đổi
+            if (float.TryParse(txtExportPrice.Text, out float vndexportprice))
+            {
+                // Tính giá sang USD
+                float usdexportprice = vndexportprice / float.Parse(txtRate.Text);
+                txtExportPriceUSD.Text = usdexportprice.ToString();
+            }
+            else
+            {
+                txtExportPriceUSD.Text = string.Empty; // Nếu nhập sai định dạng số thì sẽ trả về giá trị = 0
+            }
+        }
+
+        private void txtExportPriceUSD_TextChanged(object sender, EventArgs e)
+        {
+            // Khi sửa giá trị trong ô này thì ô txtExportPrice cũng sẽ tự động thay đổi
+            if (float.TryParse(txtExportPriceUSD.Text , out float usdexportprice))
+            {
+                // Tính giá sang USD
+                float vndexportprice = usdexportprice * float.Parse(txtRate.Text);
+                txtExportPrice.Text = vndexportprice.ToString();
+            }
+            else
+            {
+                txtExportPrice.Text = string.Empty; // Nếu nhập sai định dạng số thì sẽ trả về giá trị = 0
+            }
         }
     }
 }

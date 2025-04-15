@@ -147,18 +147,32 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
 
         private void btnAddUser_Click(object sender, EventArgs e)
         {
-            btnModifyUser.Enabled = false;
-            btnDeleteUser.Enabled = false;
-            btnSaveUser.Enabled = true;
-            btnAddUser.Enabled = false;
-            ResetTextboxValue(true);
-            txtUserName.Enabled = true; // cho phép nhập tên nhân viên mới
-            cboDepartment.Enabled = true; // Cho phép chọn Department
-            cboLevel.Enabled = true; // Cho phép chọn Level
-            cboDepartment.SelectedIndex = 0;
-            cboLevel.SelectedIndex = 2;
-            txtUserName.Focus();
+            // Kiểm tra giới hạn số lượng user
+            DataTable quatitys = UserBLL.Get_Count_tblUsers_BLL();
+            int quatity = Convert.ToInt16( quatitys.Rows[0]["c"].ToString());
+            if (quatity > 20)
+            {
+                MessageBox.Show("Số lượng user đã đạt giới hạn, không thể thêm mới được nữa");
+                return;
+            }
+            else
+            {
+
+                btnModifyUser.Enabled = false;
+                btnDeleteUser.Enabled = false;
+                btnSaveUser.Enabled = true;
+                btnAddUser.Enabled = false;
+                ResetTextboxValue(true);
+                txtUserName.Enabled = true; // cho phép nhập tên nhân viên mới
+                cboDepartment.Enabled = true; // Cho phép chọn Department
+                cboLevel.Enabled = true; // Cho phép chọn Level
+                cboDepartment.SelectedIndex = 0;
+                cboLevel.SelectedIndex = 2;
+                txtUserName.Focus();
+            }
         }
+
+        
 
         private void btnSaveUser_Click(object sender, EventArgs e)
         {

@@ -41,22 +41,21 @@
             this.txtPartName = new System.Windows.Forms.TextBox();
             this.txtPartCode = new System.Windows.Forms.TextBox();
             this.dgvListFile = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelPartCode = new System.Windows.Forms.Label();
+            this.labelTitle = new System.Windows.Forms.Label();
+            this.labelPartNewStage = new System.Windows.Forms.Label();
+            this.labelPartListFile = new System.Windows.Forms.Label();
+            this.labelPartNote = new System.Windows.Forms.Label();
+            this.labelPartNewMaterial = new System.Windows.Forms.Label();
+            this.labelPartMaterial = new System.Windows.Forms.Label();
+            this.labelPartStage = new System.Windows.Forms.Label();
+            this.labelPartDescript = new System.Windows.Forms.Label();
+            this.labelPartName = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.txtPartLog = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.btnDeleteFile = new System.Windows.Forms.Button();
+            this.dgvECO = new Zuby.ADGV.AdvancedDataGridView();
+            this.labelNote1 = new System.Windows.Forms.Label();
+            this.labelPartNewListFile = new System.Windows.Forms.Label();
             this.btnAddNewFile = new System.Windows.Forms.Button();
             this.dgvListUpload = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
@@ -70,6 +69,7 @@
             this.splitContainer2.Panel1.SuspendLayout();
             this.splitContainer2.Panel2.SuspendLayout();
             this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvECO)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListUpload)).BeginInit();
             this.SuspendLayout();
             // 
@@ -95,37 +95,37 @@
             this.splitContainer1.Panel1.Controls.Add(this.txtPartName);
             this.splitContainer1.Panel1.Controls.Add(this.txtPartCode);
             this.splitContainer1.Panel1.Controls.Add(this.dgvListFile);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.label6);
-            this.splitContainer1.Panel1.Controls.Add(this.label8);
-            this.splitContainer1.Panel1.Controls.Add(this.label12);
-            this.splitContainer1.Panel1.Controls.Add(this.label13);
-            this.splitContainer1.Panel1.Controls.Add(this.label10);
-            this.splitContainer1.Panel1.Controls.Add(this.label5);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartCode);
+            this.splitContainer1.Panel1.Controls.Add(this.labelTitle);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartNewStage);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartListFile);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartNote);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartNewMaterial);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartMaterial);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartStage);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartDescript);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPartName);
             // 
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(999, 524);
-            this.splitContainer1.SplitterDistance = 511;
+            this.splitContainer1.Size = new System.Drawing.Size(1049, 524);
+            this.splitContainer1.SplitterDistance = 536;
             this.splitContainer1.TabIndex = 0;
             // 
             // cboMaterialLib
             // 
             this.cboMaterialLib.FormattingEnabled = true;
-            this.cboMaterialLib.Location = new System.Drawing.Point(253, 174);
+            this.cboMaterialLib.Location = new System.Drawing.Point(298, 174);
             this.cboMaterialLib.Name = "cboMaterialLib";
-            this.cboMaterialLib.Size = new System.Drawing.Size(140, 29);
+            this.cboMaterialLib.Size = new System.Drawing.Size(117, 29);
             this.cboMaterialLib.TabIndex = 7;
             this.cboMaterialLib.SelectedIndexChanged += new System.EventHandler(this.cboMaterialLib_SelectedIndexChanged);
             // 
             // txtNewMaterial
             // 
             this.txtNewMaterial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtNewMaterial.Location = new System.Drawing.Point(177, 205);
+            this.txtNewMaterial.Location = new System.Drawing.Point(254, 205);
             this.txtNewMaterial.Name = "txtNewMaterial";
             this.txtNewMaterial.Size = new System.Drawing.Size(161, 29);
             this.txtNewMaterial.TabIndex = 6;
@@ -133,15 +133,15 @@
             // txtPartMaterial
             // 
             this.txtPartMaterial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.txtPartMaterial.Location = new System.Drawing.Point(103, 174);
+            this.txtPartMaterial.Location = new System.Drawing.Point(120, 174);
             this.txtPartMaterial.Name = "txtPartMaterial";
             this.txtPartMaterial.ReadOnly = true;
-            this.txtPartMaterial.Size = new System.Drawing.Size(129, 29);
+            this.txtPartMaterial.Size = new System.Drawing.Size(161, 29);
             this.txtPartMaterial.TabIndex = 6;
             // 
             // txtNoteMore
             // 
-            this.txtNoteMore.Location = new System.Drawing.Point(81, 240);
+            this.txtNoteMore.Location = new System.Drawing.Point(171, 240);
             this.txtNoteMore.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtNoteMore.Multiline = true;
             this.txtNoteMore.Name = "txtNoteMore";
@@ -152,7 +152,7 @@
             // txtListFileStatus
             // 
             this.txtListFileStatus.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txtListFileStatus.Location = new System.Drawing.Point(189, 299);
+            this.txtListFileStatus.Location = new System.Drawing.Point(280, 299);
             this.txtListFileStatus.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.txtListFileStatus.Name = "txtListFileStatus";
             this.txtListFileStatus.ReadOnly = true;
@@ -163,7 +163,7 @@
             // 
             this.cboNewStage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.cboNewStage.FormattingEnabled = true;
-            this.cboNewStage.Location = new System.Drawing.Point(314, 140);
+            this.cboNewStage.Location = new System.Drawing.Point(408, 140);
             this.cboNewStage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cboNewStage.Name = "cboNewStage";
             this.cboNewStage.Size = new System.Drawing.Size(80, 29);
@@ -172,7 +172,7 @@
             // txtPartStage
             // 
             this.txtPartStage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
-            this.txtPartStage.Location = new System.Drawing.Point(81, 140);
+            this.txtPartStage.Location = new System.Drawing.Point(120, 140);
             this.txtPartStage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPartStage.Name = "txtPartStage";
             this.txtPartStage.ReadOnly = true;
@@ -182,26 +182,26 @@
             // txtPartDescript
             // 
             this.txtPartDescript.BackColor = System.Drawing.SystemColors.Info;
-            this.txtPartDescript.Location = new System.Drawing.Point(95, 74);
+            this.txtPartDescript.Location = new System.Drawing.Point(120, 86);
             this.txtPartDescript.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPartDescript.Multiline = true;
             this.txtPartDescript.Name = "txtPartDescript";
-            this.txtPartDescript.Size = new System.Drawing.Size(298, 63);
+            this.txtPartDescript.Size = new System.Drawing.Size(368, 45);
             this.txtPartDescript.TabIndex = 2;
             // 
             // txtPartName
             // 
             this.txtPartName.BackColor = System.Drawing.SystemColors.Info;
-            this.txtPartName.Location = new System.Drawing.Point(95, 44);
+            this.txtPartName.Location = new System.Drawing.Point(120, 48);
             this.txtPartName.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPartName.Name = "txtPartName";
-            this.txtPartName.Size = new System.Drawing.Size(299, 29);
+            this.txtPartName.Size = new System.Drawing.Size(368, 29);
             this.txtPartName.TabIndex = 1;
             // 
             // txtPartCode
             // 
             this.txtPartCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.txtPartCode.Location = new System.Drawing.Point(95, 10);
+            this.txtPartCode.Location = new System.Drawing.Point(120, 10);
             this.txtPartCode.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtPartCode.Name = "txtPartCode";
             this.txtPartCode.ReadOnly = true;
@@ -212,123 +212,123 @@
             // 
             this.dgvListFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListFile.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvListFile.Location = new System.Drawing.Point(0, 321);
+            this.dgvListFile.Location = new System.Drawing.Point(0, 327);
             this.dgvListFile.Margin = new System.Windows.Forms.Padding(4);
             this.dgvListFile.Name = "dgvListFile";
             this.dgvListFile.RowHeadersWidth = 51;
-            this.dgvListFile.Size = new System.Drawing.Size(528, 197);
+            this.dgvListFile.Size = new System.Drawing.Size(536, 197);
             this.dgvListFile.TabIndex = 1;
             this.dgvListFile.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListFile_CellDoubleClick);
             // 
-            // label2
+            // labelPartCode
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(13, 13);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(85, 23);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Part Code";
+            this.labelPartCode.AutoSize = true;
+            this.labelPartCode.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartCode.Location = new System.Drawing.Point(13, 13);
+            this.labelPartCode.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartCode.Name = "labelPartCode";
+            this.labelPartCode.Size = new System.Drawing.Size(85, 23);
+            this.labelPartCode.TabIndex = 0;
+            this.labelPartCode.Text = "Part Code";
             // 
-            // label3
+            // labelTitle
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(210, 10);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(318, 32);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Thông tin hiện tại của Part";
+            this.labelTitle.AutoSize = true;
+            this.labelTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelTitle.Location = new System.Drawing.Point(243, 9);
+            this.labelTitle.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelTitle.Name = "labelTitle";
+            this.labelTitle.Size = new System.Drawing.Size(271, 28);
+            this.labelTitle.TabIndex = 0;
+            this.labelTitle.Text = "Update information of part";
             // 
-            // label6
+            // labelPartNewStage
             // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(163, 144);
-            this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(176, 23);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "=>Update New Stage";
+            this.labelPartNewStage.AutoSize = true;
+            this.labelPartNewStage.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartNewStage.Location = new System.Drawing.Point(217, 144);
+            this.labelPartNewStage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartNewStage.Name = "labelPartNewStage";
+            this.labelPartNewStage.Size = new System.Drawing.Size(176, 23);
+            this.labelPartNewStage.TabIndex = 0;
+            this.labelPartNewStage.Text = "=>Update New Stage";
             // 
-            // label8
+            // labelPartListFile
             // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(13, 298);
-            this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(206, 23);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Danh sách file trong code";
+            this.labelPartListFile.AutoSize = true;
+            this.labelPartListFile.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartListFile.Location = new System.Drawing.Point(13, 298);
+            this.labelPartListFile.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartListFile.Name = "labelPartListFile";
+            this.labelPartListFile.Size = new System.Drawing.Size(206, 23);
+            this.labelPartListFile.TabIndex = 0;
+            this.labelPartListFile.Text = "Danh sách file trong code";
             // 
-            // label12
+            // labelPartNote
             // 
-            this.label12.AutoSize = true;
-            this.label12.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label12.Location = new System.Drawing.Point(8, 254);
-            this.label12.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(93, 23);
-            this.label12.TabIndex = 0;
-            this.label12.Text = "Note More";
+            this.labelPartNote.AutoSize = true;
+            this.labelPartNote.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartNote.Location = new System.Drawing.Point(8, 254);
+            this.labelPartNote.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartNote.Name = "labelPartNote";
+            this.labelPartNote.Size = new System.Drawing.Size(93, 23);
+            this.labelPartNote.TabIndex = 0;
+            this.labelPartNote.Text = "Note More";
             // 
-            // label13
+            // labelPartNewMaterial
             // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label13.Location = new System.Drawing.Point(13, 209);
-            this.label13.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(196, 23);
-            this.label13.TabIndex = 0;
-            this.label13.Text = "=>Update New Material";
+            this.labelPartNewMaterial.AutoSize = true;
+            this.labelPartNewMaterial.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartNewMaterial.Location = new System.Drawing.Point(13, 209);
+            this.labelPartNewMaterial.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartNewMaterial.Name = "labelPartNewMaterial";
+            this.labelPartNewMaterial.Size = new System.Drawing.Size(196, 23);
+            this.labelPartNewMaterial.TabIndex = 0;
+            this.labelPartNewMaterial.Text = "=>Update New Material";
             // 
-            // label10
+            // labelPartMaterial
             // 
-            this.label10.AutoSize = true;
-            this.label10.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label10.Location = new System.Drawing.Point(13, 178);
-            this.label10.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(107, 23);
-            this.label10.TabIndex = 0;
-            this.label10.Text = "Part Material";
+            this.labelPartMaterial.AutoSize = true;
+            this.labelPartMaterial.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartMaterial.Location = new System.Drawing.Point(13, 178);
+            this.labelPartMaterial.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartMaterial.Name = "labelPartMaterial";
+            this.labelPartMaterial.Size = new System.Drawing.Size(107, 23);
+            this.labelPartMaterial.TabIndex = 0;
+            this.labelPartMaterial.Text = "Part Material";
             // 
-            // label5
+            // labelPartStage
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(11, 144);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(87, 23);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Part Stage";
+            this.labelPartStage.AutoSize = true;
+            this.labelPartStage.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartStage.Location = new System.Drawing.Point(11, 144);
+            this.labelPartStage.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartStage.Name = "labelPartStage";
+            this.labelPartStage.Size = new System.Drawing.Size(87, 23);
+            this.labelPartStage.TabIndex = 0;
+            this.labelPartStage.Text = "Part Stage";
             // 
-            // label4
+            // labelPartDescript
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(9, 96);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(107, 23);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Part Descript";
+            this.labelPartDescript.AutoSize = true;
+            this.labelPartDescript.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartDescript.Location = new System.Drawing.Point(9, 96);
+            this.labelPartDescript.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartDescript.Name = "labelPartDescript";
+            this.labelPartDescript.Size = new System.Drawing.Size(107, 23);
+            this.labelPartDescript.TabIndex = 0;
+            this.labelPartDescript.Text = "Part Descript";
             // 
-            // label1
+            // labelPartName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(11, 48);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(91, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Part Name";
+            this.labelPartName.AutoSize = true;
+            this.labelPartName.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPartName.Location = new System.Drawing.Point(11, 51);
+            this.labelPartName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelPartName.Name = "labelPartName";
+            this.labelPartName.Size = new System.Drawing.Size(91, 23);
+            this.labelPartName.TabIndex = 0;
+            this.labelPartName.Text = "Part Name";
             // 
             // splitContainer2
             // 
@@ -342,11 +342,10 @@
             // 
             this.splitContainer2.Panel1.AutoScroll = true;
             this.splitContainer2.Panel1.BackColor = System.Drawing.Color.LightGray;
-            this.splitContainer2.Panel1.Controls.Add(this.txtPartLog);
-            this.splitContainer2.Panel1.Controls.Add(this.label11);
-            this.splitContainer2.Panel1.Controls.Add(this.label9);
-            this.splitContainer2.Panel1.Controls.Add(this.label7);
             this.splitContainer2.Panel1.Controls.Add(this.btnDeleteFile);
+            this.splitContainer2.Panel1.Controls.Add(this.dgvECO);
+            this.splitContainer2.Panel1.Controls.Add(this.labelNote1);
+            this.splitContainer2.Panel1.Controls.Add(this.labelPartNewListFile);
             this.splitContainer2.Panel1.Controls.Add(this.btnAddNewFile);
             this.splitContainer2.Panel1.Controls.Add(this.dgvListUpload);
             // 
@@ -354,74 +353,71 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.btnExit);
             this.splitContainer2.Panel2.Controls.Add(this.btnUpload);
-            this.splitContainer2.Size = new System.Drawing.Size(484, 524);
+            this.splitContainer2.Size = new System.Drawing.Size(509, 524);
             this.splitContainer2.SplitterDistance = 441;
             this.splitContainer2.SplitterWidth = 5;
             this.splitContainer2.TabIndex = 0;
-            // 
-            // txtPartLog
-            // 
-            this.txtPartLog.Location = new System.Drawing.Point(88, 54);
-            this.txtPartLog.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtPartLog.Multiline = true;
-            this.txtPartLog.Name = "txtPartLog";
-            this.txtPartLog.ReadOnly = true;
-            this.txtPartLog.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtPartLog.Size = new System.Drawing.Size(385, 130);
-            this.txtPartLog.TabIndex = 3;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Blue;
-            this.label11.Location = new System.Drawing.Point(22, 16);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(372, 46);
-            this.label11.TabIndex = 2;
-            this.label11.Text = "1. Có thể kéo thả vào vùng upload file\r\n2. Chọn 1 dòng thì mới nhấn được \"Delete " +
-    "File\"";
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(11, 200);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(298, 23);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "Danh sách file updaload lên DataBase";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(11, 111);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(73, 23);
-            this.label7.TabIndex = 2;
-            this.label7.Text = "Part Log";
             // 
             // btnDeleteFile
             // 
             this.btnDeleteFile.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteFile.Image")));
             this.btnDeleteFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDeleteFile.Location = new System.Drawing.Point(379, 193);
+            this.btnDeleteFile.Location = new System.Drawing.Point(382, 186);
             this.btnDeleteFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteFile.Name = "btnDeleteFile";
-            this.btnDeleteFile.Size = new System.Drawing.Size(94, 30);
+            this.btnDeleteFile.Size = new System.Drawing.Size(112, 30);
             this.btnDeleteFile.TabIndex = 1;
             this.btnDeleteFile.Text = "&Delete File";
             this.btnDeleteFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDeleteFile.UseVisualStyleBackColor = true;
             this.btnDeleteFile.Click += new System.EventHandler(this.btnDeleteFile_Click);
             // 
+            // dgvECO
+            // 
+            this.dgvECO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvECO.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dgvECO.FilterAndSortEnabled = true;
+            this.dgvECO.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvECO.Location = new System.Drawing.Point(0, 0);
+            this.dgvECO.MaxFilterButtonImageHeight = 23;
+            this.dgvECO.Name = "dgvECO";
+            this.dgvECO.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvECO.RowHeadersWidth = 51;
+            this.dgvECO.RowTemplate.Height = 24;
+            this.dgvECO.Size = new System.Drawing.Size(509, 167);
+            this.dgvECO.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvECO.TabIndex = 3;
+            this.dgvECO.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvECO_CellDoubleClick);
+            // 
+            // labelNote1
+            // 
+            this.labelNote1.AutoSize = true;
+            this.labelNote1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNote1.ForeColor = System.Drawing.Color.Blue;
+            this.labelNote1.Location = new System.Drawing.Point(13, 178);
+            this.labelNote1.Name = "labelNote1";
+            this.labelNote1.Size = new System.Drawing.Size(372, 46);
+            this.labelNote1.TabIndex = 2;
+            this.labelNote1.Text = "1. Có thể kéo thả vào vùng upload file\r\n2. Chọn 1 dòng thì mới nhấn được \"Delete " +
+    "File\"";
+            // 
+            // labelPartNewListFile
+            // 
+            this.labelPartNewListFile.AutoSize = true;
+            this.labelPartNewListFile.Location = new System.Drawing.Point(13, 231);
+            this.labelPartNewListFile.Name = "labelPartNewListFile";
+            this.labelPartNewListFile.Size = new System.Drawing.Size(298, 23);
+            this.labelPartNewListFile.TabIndex = 2;
+            this.labelPartNewListFile.Text = "Danh sách file updaload lên DataBase";
+            // 
             // btnAddNewFile
             // 
             this.btnAddNewFile.Image = ((System.Drawing.Image)(resources.GetObject("btnAddNewFile.Image")));
             this.btnAddNewFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddNewFile.Location = new System.Drawing.Point(262, 193);
+            this.btnAddNewFile.Location = new System.Drawing.Point(382, 227);
             this.btnAddNewFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddNewFile.Name = "btnAddNewFile";
-            this.btnAddNewFile.Size = new System.Drawing.Size(94, 30);
+            this.btnAddNewFile.Size = new System.Drawing.Size(112, 30);
             this.btnAddNewFile.TabIndex = 1;
             this.btnAddNewFile.Text = "&Add File";
             this.btnAddNewFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -433,11 +429,11 @@
             this.dgvListUpload.AllowDrop = true;
             this.dgvListUpload.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListUpload.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvListUpload.Location = new System.Drawing.Point(0, 231);
+            this.dgvListUpload.Location = new System.Drawing.Point(0, 265);
             this.dgvListUpload.Margin = new System.Windows.Forms.Padding(4);
             this.dgvListUpload.Name = "dgvListUpload";
             this.dgvListUpload.RowHeadersWidth = 51;
-            this.dgvListUpload.Size = new System.Drawing.Size(484, 210);
+            this.dgvListUpload.Size = new System.Drawing.Size(509, 176);
             this.dgvListUpload.TabIndex = 0;
             this.dgvListUpload.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvListUpload_DragDrop);
             this.dgvListUpload.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvListUpload_DragEnter);
@@ -447,10 +443,10 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(167, 10);
+            this.btnExit.Location = new System.Drawing.Point(290, 12);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(66, 30);
+            this.btnExit.Size = new System.Drawing.Size(66, 40);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "Exit";
             this.btnExit.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -462,12 +458,12 @@
             this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnUpload.Image = ((System.Drawing.Image)(resources.GetObject("btnUpload.Image")));
             this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpload.Location = new System.Drawing.Point(43, 10);
+            this.btnUpload.Location = new System.Drawing.Point(27, 12);
             this.btnUpload.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpload.Name = "btnUpload";
-            this.btnUpload.Size = new System.Drawing.Size(100, 30);
+            this.btnUpload.Size = new System.Drawing.Size(198, 40);
             this.btnUpload.TabIndex = 0;
-            this.btnUpload.Text = "Upload to DataBase";
+            this.btnUpload.Text = "Make a ECO request";
             this.btnUpload.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnUpload.UseVisualStyleBackColor = true;
             this.btnUpload.Click += new System.EventHandler(this.btnUpload_Click);
@@ -477,7 +473,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(999, 524);
+            this.ClientSize = new System.Drawing.Size(1049, 524);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -496,6 +492,7 @@
             this.splitContainer2.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
             this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvECO)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListUpload)).EndInit();
             this.ResumeLayout(false);
 
@@ -505,12 +502,12 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dgvListFile;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelPartCode;
+        private System.Windows.Forms.Label labelTitle;
+        private System.Windows.Forms.Label labelPartNewStage;
+        private System.Windows.Forms.Label labelPartStage;
+        private System.Windows.Forms.Label labelPartDescript;
+        private System.Windows.Forms.Label labelPartName;
         private System.Windows.Forms.ComboBox cboNewStage;
         private System.Windows.Forms.TextBox txtPartStage;
         private System.Windows.Forms.TextBox txtPartDescript;
@@ -522,18 +519,17 @@
         private System.Windows.Forms.DataGridView dgvListUpload;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnUpload;
-        private System.Windows.Forms.TextBox txtPartLog;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelPartListFile;
+        private System.Windows.Forms.Label labelNote1;
         private System.Windows.Forms.TextBox txtListFileStatus;
         private System.Windows.Forms.TextBox txtNoteMore;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label labelPartNote;
+        private System.Windows.Forms.Label labelPartNewMaterial;
+        private System.Windows.Forms.Label labelPartMaterial;
         private System.Windows.Forms.TextBox txtNewMaterial;
         private System.Windows.Forms.TextBox txtPartMaterial;
         private System.Windows.Forms.ComboBox cboMaterialLib;
+        private Zuby.ADGV.AdvancedDataGridView dgvECO;
+        private System.Windows.Forms.Label labelPartNewListFile;
     }
 }

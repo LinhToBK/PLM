@@ -30,8 +30,8 @@
         {
             this.dgvListNearPart = new System.Windows.Forms.DataGridView();
             this.cboChooseNoRow = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblChooseQuantity = new System.Windows.Forms.Label();
+            this.lblEscape = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListNearPart)).BeginInit();
             this.SuspendLayout();
             // 
@@ -52,40 +52,40 @@
             // 
             this.cboChooseNoRow.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboChooseNoRow.FormattingEnabled = true;
-            this.cboChooseNoRow.Location = new System.Drawing.Point(203, 63);
+            this.cboChooseNoRow.Location = new System.Drawing.Point(251, 60);
             this.cboChooseNoRow.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.cboChooseNoRow.Name = "cboChooseNoRow";
             this.cboChooseNoRow.Size = new System.Drawing.Size(276, 29);
             this.cboChooseNoRow.TabIndex = 1;
             this.cboChooseNoRow.SelectedIndexChanged += new System.EventHandler(this.cboChooseNoRow_SelectedIndexChanged);
             // 
-            // label1
+            // lblChooseQuantity
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 68);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(216, 23);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Chọn số đối tượng hiển thị";
+            this.lblChooseQuantity.AutoSize = true;
+            this.lblChooseQuantity.Location = new System.Drawing.Point(12, 66);
+            this.lblChooseQuantity.Name = "lblChooseQuantity";
+            this.lblChooseQuantity.Size = new System.Drawing.Size(216, 23);
+            this.lblChooseQuantity.TabIndex = 2;
+            this.lblChooseQuantity.Text = "Chọn số đối tượng hiển thị";
             // 
-            // label2
+            // lblEscape
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label2.Location = new System.Drawing.Point(589, 68);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(216, 19);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Phím tắt cửa sổ Form : Escape";
+            this.lblEscape.AutoSize = true;
+            this.lblEscape.Font = new System.Drawing.Font("Times New Roman", 9.75F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblEscape.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.lblEscape.Location = new System.Drawing.Point(556, 65);
+            this.lblEscape.Name = "lblEscape";
+            this.lblEscape.Size = new System.Drawing.Size(216, 19);
+            this.lblEscape.TabIndex = 2;
+            this.lblEscape.Text = "Phím tắt cửa sổ Form : Escape";
             // 
             // frmListNear
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 637);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblEscape);
+            this.Controls.Add(this.lblChooseQuantity);
             this.Controls.Add(this.cboChooseNoRow);
             this.Controls.Add(this.dgvListNearPart);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -105,7 +105,7 @@
 
         private System.Windows.Forms.DataGridView dgvListNearPart;
         private System.Windows.Forms.ComboBox cboChooseNoRow;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblChooseQuantity;
+        private System.Windows.Forms.Label lblEscape;
     }
 }

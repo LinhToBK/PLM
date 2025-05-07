@@ -13,6 +13,7 @@ using PLM_Lynx._03_GUI_User_Interface;
 using PLM_Lynx._03_GUI_User_Interface._3_3_ECO;
 using PLM_Lynx._03_GUI_User_Interface._3_5_Purchase;
 using PLM_Lynx._03_GUI_User_Interface._3_6_Help;
+using PLM_Lynx._03_GUI_User_Interface._3_4_FindPart;
 
 namespace PLM_Lynx
 {
@@ -32,34 +33,78 @@ namespace PLM_Lynx
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            tstripUser.Text = "User : " + tennguoidung + @"|| Đã kết nói với Database ";
+            tstripUser.Text = "User : " + tennguoidung ;
 
-            // Kiểm tra xem có phải là admin không ?
-            if (Nguoidung.IsAdminBLL(tennguoidung) == false)
+            switch (UserLevel)
             {
-                mnuManagerUser.Enabled = false;
-                mnuECO.Enabled = false;
-                mnuManageFamily.Enabled = false;
-                mnuRelationPart.Enabled = false;
-                mnuManagePrice.Enabled = false;
-                mnuMakeNewPO.Enabled = false;
-                mnuManageSupplier.Enabled = false;
+                case 2: // Kỹ sư
+                    mnuManagerUser.Enabled = false;
+                    mnuECO.Enabled = false;
+                    // mnuManageFamily.Enabled = false;
+                    mnuRelationPart.Enabled = false;
+                    mnuManagePrice.Enabled = false;
+                    mnuMakeNewPO.Enabled = false;
+                    mnuManageSupplier.Enabled = false;
+
+                    // Mở form tìm Part
+                    frmFindPart frmPart = new frmFindPart();
+                    frmPart.MdiParent = this;
+                    frmPart.WindowState = FormWindowState.Maximized;
+                    frmPart.Show();
+                    break;
+
+                case 3: // Mua hàng
+                    // Chặn các menu system3
+                    mnuMakeNewPart.Enabled = false;
+                    mnuECO.Enabled = false;
+                    mnuManagerUser.Enabled = false;
+                    // mnuManageFamily.Enabled = false;
+                    mnuRelationPart.Enabled = false;
+
+                    // Mở form tìm PO
+                    frmFindPO frmPO = new frmFindPO();
+                    frmPO.MdiParent = this;
+                    frmPO.WindowState = FormWindowState.Maximized;
+                    frmPO.Show();
+                    break;
+
+                case 4: // NPI và QC
+                    // Chặn các menu system
+                    mnuMakeNewPart.Enabled = false;
+                    mnuECO.Enabled = false;
+                    mnuManagerUser.Enabled = false;
+                    // mnuManageFamily.Enabled = false;
+                    mnuRelationPart.Enabled = false;
+                    viewListUpdateToolStripMenuItem.Enabled = false;
+                    mnuListMaterial.Enabled = false;
+                    solidworkToolStripMenuItem.Enabled = false;
+                    siemenNXToolStripMenuItem.Enabled = false;
+
+                    // Chặn menu Purchase
+                    mnuManagePrice.Enabled = false;
+                    mnuMakeNewPO.Enabled = false;
+                    mnuManageSupplier.Enabled = false;
+                    mnuFindPO.Enabled = false;
+
+
+                    // Mở form tìm Part
+                    frmFindPart frmPart2 = new frmFindPart();
+                    frmPart2.MdiParent = this;
+                    frmPart2.WindowState = FormWindowState.Maximized;
+                    frmPart2.Show();
+                    break;
+                   
+
+                default: // Đối với admin
+                    frmFindPart defaultFrm = new frmFindPart();
+                    defaultFrm.MdiParent = this;
+                    defaultFrm.WindowState = FormWindowState.Maximized;
+                    defaultFrm.Show();
+                    break;
             }
 
-            // Kiểm tra xem có phải là purchase không
-            if (Nguoidung.IsPurchase_BLL(tennguoidung) == true)
-            {
-                mnuManagePrice.Enabled = true;
-                mnuManageSupplier.Enabled = true;
-                mnuMakeNewPO.Enabled = true;
-                mnuMakeNewPart.Enabled = false;
-            }
 
-            frmFindPart frm = new frmFindPart();
 
-            frm.MdiParent = this;
-            frm.WindowState = FormWindowState.Maximized;
-            frm.Show();
         }
 
         private void mnuManagerUser_Click(object sender, EventArgs e)
@@ -101,6 +146,7 @@ namespace PLM_Lynx
         private void mnuManageFamily_Click(object sender, EventArgs e)
         {
             frmManageFamilyCode frm = new frmManageFamilyCode();
+            frm.userlevel = UserLevel;
             frm.ShowDialog();
         }
 
@@ -142,13 +188,31 @@ namespace PLM_Lynx
 
         private void mnuFindPO_Click(object sender, EventArgs e)
         {
-            frmFindPO frm = new frmFindPO();
-            frm.ShowDialog();
+            //frmFindPO frm = new frmFindPO();
+            //frm.ShowDialog();
+
+
+            foreach (Form frm in Application.OpenForms)
+            {
+                if (frm is frmFindPO)
+                {
+                    // Nếu đang mở thì phải đóng  lại
+                    frm.Close();
+                    break;
+                }
+            }
+
+            // Mở lại from mới
+            frmFindPO newfrm = new frmFindPO();
+            newfrm.ShowDialog();
         }
 
         private void mnuAboutMe_Click(object sender, EventArgs e)
         {
             frmAboutMe frm = new frmAboutMe();
+            frm.iduser = idnguoidung;
+            frm.username = tennguoidung;
+            frm.userlevel = UserLevel;
             frm.ShowDialog();
 
 
@@ -167,6 +231,37 @@ namespace PLM_Lynx
             frm.userlevel = UserLevel;
             frm.username = tennguoidung;
             frm.ShowDialog();
+        }
+
+        private void solidworkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSolidwork   frm = new frmSolidwork();
+            frm.ShowDialog();
+        }
+
+        private void siemenNXToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmSiemenNX frm = new frmSiemenNX();
+            frm.ShowDialog();
+        }
+
+        private void mnuListMaterial_Click(object sender, EventArgs e)
+        {
+            frmListmaterial frm = new frmListmaterial();
+            frm.ShowDialog();
+        }
+
+        private void mnuRestart_Click(object sender, EventArgs e)
+        {
+            DialogResult kq = MessageBox.Show("Do you want to restart apps?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (kq == DialogResult.Yes)
+            {
+                Application.Restart();
+            }
+            else
+            {
+                return;
+            }    
         }
     }
 }

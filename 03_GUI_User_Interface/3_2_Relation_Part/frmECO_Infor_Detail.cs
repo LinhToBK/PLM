@@ -10,6 +10,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Security.AccessControl;
+using PLM_Lynx._03_GUI_User_Interface._3_1_Login;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
 {
@@ -32,9 +36,47 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
         private DataTable _ECO = new DataTable();
         private DataTable _tblContent = new DataTable();
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+           
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part.Lang.Lang_ECO_Infor_Detail", typeof(frmECO_Infor_Detail).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            labelECONo.Text = rm.GetString("lb1");
+            labelECODate.Text = rm.GetString("lb8");
+            labelStatus.Text = rm.GetString("lb6");
+            labelType.Text = rm.GetString("lb7");
+            labelLog.Text = rm.GetString("lb5");
+            labelRequester.Text = rm.GetString("lb3");
+            labelApprover.Text = rm.GetString("lb2");
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+
+        }
+
+
+
+
+
+
+        // =========== Language =========================
         public frmECO_Infor_Detail()
         {
             InitializeComponent();
+            LoadLanguage();
 
             this.KeyDown += new KeyEventHandler(frmECO_Infor_Detail_KeyDown);
             this.KeyPreview = true; // Cần bật Key Preview để Form bắt được phím
@@ -100,7 +142,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
             }
             else
             {
-                MessageBox.Show("Không tìm thấy thông tin cho số ECO này.");
+                //MessageBox.Show("Không tìm thấy thông tin cho số ECO này.");
+                MessageBox.Show(rm.GetString("t1"));
             }
         }
 
@@ -144,7 +187,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
             {
                 if (filesize > 10000)
                 {
-                    DialogResult kq = MessageBox.Show("Kích thước file lớn hơn 10MB \n Bạn có muốn mở không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    DialogResult kq = MessageBox.Show(rm.GetString("t2"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (kq == DialogResult.Yes)
                     {
                         _commonBLL.PreviewFile(filename);
@@ -161,7 +204,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi phát sinh khi  mở file : " + ex.Message);
+                MessageBox.Show(rm.GetString("t3") + ex.Message);
             }
         }
 

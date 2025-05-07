@@ -5,7 +5,10 @@ using PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
+using System.Threading;
 using System.Web;
 using System.Windows.Forms;
 
@@ -27,17 +30,53 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         private int this_ECOType { get; set; }
         private int this_ECOStatus { get; set; } // Trạng thái ECO (1: Đã duyệt, 2: Chưa duyệt)
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_3_ECO.Lang.Lang_ListECO", typeof(frmListECO).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+
+            labelNo.Text = rm.GetString("lb1");
+            labelDate.Text = rm.GetString("lb2");
+            labelName.Text = rm.GetString("lb3");
+            labelStatus.Text = rm.GetString("lb4");
+            labelType.Text = rm.GetString("lb5");
+            
+
+
+
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
         public frmListECO()
         {
             InitializeComponent();
+            // Load ngôn ngữ
+            LoadLanguage();
 
             // Tạo danh sách
             List<ListNearECO> Chonsoluong = new List<ListNearECO>
             {
-                new ListNearECO { NoListNearECO = 5, MeanListNearECO = "Chọn 5 cập nhật gần nhất" },
-                new ListNearECO { NoListNearECO = 10, MeanListNearECO = "Chọn 10 cập nhật gần nhất" },
-                new ListNearECO { NoListNearECO = 20, MeanListNearECO = "Chọn 20 cập nhật gần nhất" },
-                new ListNearECO { NoListNearECO = 50, MeanListNearECO = "Chọn 50 cập nhật gần nhất" }
+                new ListNearECO { NoListNearECO = 5, MeanListNearECO = rm.GetString("t1") },
+                new ListNearECO { NoListNearECO = 10, MeanListNearECO =  rm.GetString("t2") },
+                new ListNearECO { NoListNearECO = 20, MeanListNearECO =  rm.GetString("t3") },
+                new ListNearECO { NoListNearECO = 50, MeanListNearECO =  rm.GetString("t4") }
             };
 
             // Gán danh sách từ DataSource lên Combox
@@ -102,7 +141,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Xuất hiện lỗi : " + ex.Message);
+                MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"),MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -115,7 +154,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         {
             if (dgvListECO.Rows.Count == 0)
             {
-                MessageBox.Show("Không có dữ liệu để chọn");
+                MessageBox.Show(rm.GetString("t5"));             //"Không có dữ liệu để chọn"
                 return;
             }
             else
@@ -154,7 +193,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         dgvECOContent.Columns[0].HeaderText = "Part Code";
                         dgvECOContent.Columns[1].HeaderText = "Content";
                         dgvECOContent.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-                        ecoContent = "Tạo mới Part ";
+                        ecoContent = "Create New Part : ";
                         ecoContent = ecoContent + "\n Part code : " + dgvECOContent.Rows[0].Cells[0].Value.ToString();
                         txtECOContent.Text = ecoContent;
                         break;
@@ -163,7 +202,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 case 2:
                     {
                         // Cập nhật thông tin Part
-                        ecoContent = " +) Cập nhật Part :  ";
+                        ecoContent = " +) Update information of Part:  ";
                         string partcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
                         ecoContent = ecoContent + partcode;
                         string stagestatus = dgvECOContent.Rows[0].Cells[1].Value.ToString();
@@ -187,7 +226,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         }
                         if (stagestatus == "1")
                         {
-                            ecoContent = ecoContent + "\r\n +) Cập nhật Stage : " + old_stage + " => " + new_stage;
+                            ecoContent = ecoContent + "\r\n +) Update Stage : " + old_stage + " => " + new_stage;
                         }
                         string notestatus = dgvECOContent.Rows[0].Cells[4].Value.ToString();
                         if (notestatus == "1")
@@ -197,13 +236,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         string materialstatus = dgvECOContent.Rows[0].Cells[6].Value.ToString();
                         if (materialstatus == "1")
                         {
-                            ecoContent = ecoContent + "\r\n +) Cập nhật vật liệu : " + dgvECOContent.Rows[0].Cells[7].Value.ToString();
+                            ecoContent = ecoContent + "\r\n +) Update Material : " + dgvECOContent.Rows[0].Cells[7].Value.ToString();
                             ecoContent = ecoContent + " => " + dgvECOContent.Rows[0].Cells[8].Value.ToString();
                         }
                         string drawingstatus = dgvECOContent.Rows[0].Cells[9].Value.ToString();
                         if (drawingstatus == "1")
                         {
-                            ecoContent = ecoContent + "\r\n +) Có cập nhật bản vẽ : ";
+                            ecoContent = ecoContent + "\r\n +) Have new drawing : ";
                         }
                         txtECOContent.Text = ecoContent;
 
@@ -212,7 +251,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 case 3:
                     {
                         // Tạo ràng buộc mới
-                        ecoContent = "Tạo ràng buộc mới cho Part : ";
+                        ecoContent = "Make relation of parts :  ";
                         string partcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
                         ecoContent = ecoContent + partcode;
                         txtECOContent.Text = ecoContent;
@@ -220,7 +259,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     }
                 case 4:
                     { // Cập nhật số lượng
-                        ecoContent = "Cập nhật số lượng cho Part : ";
+                        ecoContent = " Update quantity of child in parent part : ";
                         string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
                         string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
                         string quantity = dgvECOContent.Rows[0].Cells[2].Value.ToString();
@@ -233,7 +272,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 case 5:
                     {
                         // Xóa ràng buộc
-                        ecoContent = "Xóa ràng buộc giữa các part : ";
+                        ecoContent = "Delete relation of 2 parts : ";
                         string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
                         string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
                         ecoContent = ecoContent + "\r\n Parent code : " + parentcode;
@@ -251,7 +290,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 // Case 1 : Tạo Part Mới
                 if (this_ECOType == 1)
                 {
-                    MessageBox.Show("Tạo Part mới thì không  cần phải Approved");
+                    MessageBox.Show(rm.GetString("t6"));
                     return;
                 }
                 // Case 2 : Cập nhật thông tin Part
@@ -281,14 +320,15 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
             if (this_ECOStatus == 2)
             {
-                MessageBox.Show("ECO đã được duyệt rồi");
+                MessageBox.Show(rm.GetString("t7"));    // ECO đã được duyệt rồi
                 return;
             }
 
             if (this_ECOStatus == 3)
             {
                 // Cancel ECO
-                MessageBox.Show("ECO đã bị hủy rồi \n Cần tạo request mới để phê duyệt");
+                //MessageBox.Show("ECO đã bị hủy rồi \n Cần tạo request mới để phê duyệt");
+                MessageBox.Show(rm.GetString("t8"));    // ECO đã bị hủy rồi
                 return;
             }
         }
@@ -297,8 +337,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         private void Approved_Case2()
         {
             string partcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
-            string tb = "Bạn có muốn phê duyệt cập nhật thông tin của Part : " + partcode + " không ?";
-            DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //string tb = "Bạn có muốn phê duyệt cập nhật thông tin của Part : " + partcode + " không ?";
+            string tb = rm.GetString("t9") + partcode ;
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.No)
             {
                 return;
@@ -333,33 +374,37 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                             // Nếu copy xong thì xóa thư mục trong ECOTEMP
                             if (_ecoBLL.Delete_Folder_ECO(ECONo))
                             {
-                                MessageBox.Show("Đã copy thành công vào datapart và xóa file trong  thư mục ECONo");
+                                //MessageBox.Show("Đã copy thành công vào datapart và xóa file trong  thư mục ECONo");
+                                MessageBox.Show(rm.GetString("t10"));
                             }
                             else
                             {
-                                MessageBox.Show("Lỗi , không xóa được file trong thư mục ECONo File");
+                                //MessageBox.Show("Lỗi , không xóa được file trong thư mục ECONo File");
+                                MessageBox.Show(rm.GetString("t11"));
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Lỗi không copy được file vào thư mục DataPart");
+                            // MessageBox.Show("Lỗi không copy được file vào thư mục DataPart");
+                            MessageBox.Show(rm.GetString("t12"));
                         }
                     } // Hết trường hợp 1 :
 
                     // Trường hợp 2 : Thay đổi Stage nhưng không có bản vẽ đính kèm
                     else if (stagestatus == "1" && drawingstatus == "0")
                     {
-                        MessageBox.Show("TH2 : Thay đổi Stage nhưng không có bản vẽ đính kèm");
+                        // MessageBox.Show("TH2 : Thay đổi Stage nhưng không có bản vẽ đính kèm");
                         Version = dgvECOContent.Rows[0].Cells[3].Value.ToString() + ".0";     // 2.0,, 3.0
                         _content.Rows[0]["nd"] = Version;
                         // Copy file từ DataPart version mới nhất của stage cũ
                         if (_ecoBLL.CopyFile_to_DataPart_If_UpStage(partcode, newstage, oldstage))
                         {
-                            MessageBox.Show("Đã copy bản mới nhất của stage cũ sang stage mới");
+                            // MessageBox.Show("Đã copy bản mới nhất của stage cũ sang stage mới");
                         }
                         else
                         {
-                            MessageBox.Show("Lỗi khi không copy lên bản mới nhât của stage cũ lên stage mới ");
+                            //MessageBox.Show("Lỗi khi không copy lên bản mới nhât của stage cũ lên stage mới ");
+                            MessageBox.Show( rm.GetString("t13"));
                         }
                     } // Hết trường hợp 2 :
 
@@ -368,23 +413,23 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     {
                         Version = oldstage.ToString() + "." + _ecoBLL.lastestVersion(Folder_Part_Path, oldstage).ToString();
                         _content.Rows[0]["nd"] = Version;
-                        MessageBox.Show("Chỉ cập nhật bản vẽ, không cập nhật Stage");
+                        // MessageBox.Show("Chỉ cập nhật bản vẽ, không cập nhật Stage");
                         // Copy file từ ECOTEMP sang DataPart
                         if (_ecoBLL.CopyFile_to_DataPart(partcode, Version, ECONo))
                         {
                             // Nếu copy xong thì xóa thư mục trong ECOTEMP
                             if (_ecoBLL.Delete_Folder_ECO(ECONo))
                             {
-                                MessageBox.Show("Đã copy thành công vào datapart và xóa file trong  thư mục ECONo");
+                                // MessageBox.Show("Đã copy thành công vào datapart và xóa file trong  thư mục ECONo");
                             }
                             else
                             {
-                                MessageBox.Show("Lỗi , không xóa được file trong thư mục ECONo File");
+                                MessageBox.Show(rm.GetString("t11"));
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Lỗi không copy được file vào thư mục DataPart");
+                            MessageBox.Show(rm.GetString("t10"));  // "Lỗi không copy được file vào thư mục DataPart"
                         }
                     }  // Hết trường hợp 3
 
@@ -398,12 +443,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     }
                     else
                     {
-                        MessageBox.Show("Lỗi không cập nhật được thông tin tblECO");
+                        MessageBox.Show(rm.GetString("t14")); // "Lỗi không cập nhật được thông tin tblECO"
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Lỗi không cập nhật được thông tin Part");
+                    MessageBox.Show(rm.GetString("t15"));  // Lỗi không cập nhật được thông tin Part
                 }
             }
         }
@@ -413,8 +458,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private void Approved_Case3()
         {
-            string tb = "Bạn có muốn tạo ràng buộc mới cho những Part trong danh sách không ?";
-            DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            // string tb = "Bạn có muốn tạo ràng buộc mới cho những Part trong danh sách không ?";
+            string tb = rm.GetString("t16");
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 // Chấp nhận cập nhật
@@ -424,12 +470,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
                     if (_ecoBLL.Write_ECONo_to_tblPart_BLL(parentcode, txtECONo.Text) && _ecoBLL.Update_tblECO_Approved_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                     {
-                        MessageBox.Show("Đã phê duyệt ECO [ Thêm ràng buộc mới ] thành công");
+                        //MessageBox.Show("Đã phê duyệt ECO [ Thêm ràng buộc mới ] thành công");
+                        MessageBox.Show(rm.GetString("t17"));
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                     }
                     else
                     {
-                        MessageBox.Show("Lỗi phê duyệt ");
+                        MessageBox.Show("Error : Can not Approve [ Make new relation of parts ]");
                     }
                 }
             }
@@ -450,22 +497,22 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         string childCode = dr.Cells[0].Value.ToString();
                         int quantity = int.Parse(dr.Cells[1].Value.ToString());
 
-                        MessageBox.Show("Cập nhật ràng buộc Parent code : " + parentcode + " Child code : " + childCode + " Quantity : " + quantity);
+                        MessageBox.Show("Update relation: \r\n Parent Code :  " + parentcode + " \r\n Child code : " + childCode + " Quantity : " + quantity);
 
-                        if (relationBLL.InsertNewRelationBLL(parentcode, childCode, quantity) && _ecoBLL.Delete_tblRelationTemp_BLL(parentcode, childCode) && _ecoBLL.Write_ECONo_to_tblPart_BLL(childCode, txtECONo.Text))
+                        if (relationBLL.InsertNewRelationBLL(parentcode, childCode, quantity) && _ecoBLL.Delete_tblRelationTemp_BLL(parentcode, childCode))
                         {
-                            thongbao2 = thongbao2 + "(+) Đã upload --" + parentcode + "---" + childCode + " -- thành công \n";
+                            thongbao2 = thongbao2 + "(+) Update relation  --" + parentcode + "---" + childCode + " -- successfully \n";
                         }
                         else
                         {
-                            thongbao2 = thongbao2 + "(!) Lỗi không thể upload --" + parentcode + "---" + childCode + " -- \n";
+                            thongbao2 = thongbao2 + "(!) Error : Can not update relation :  --" + parentcode + "---" + childCode + " -- \n";
                             insertstatus++;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    thongbao2 += $"(!) Lỗi ngoại lệ: {ex.Message} \n";
+                    thongbao2 += $"(!) Error : {ex.Message} \n";
                     insertstatus++;
                 }
             }
@@ -482,29 +529,32 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
         }
 
+
+        // Case 4 : Cập nhật số lượng
         private void Approved_Case4()
         {
             string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
             string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
             string quantity = dgvECOContent.Rows[0].Cells[2].Value.ToString();
 
-            string tb = "Bạn có muốn phê duyệt cập nhật số lương của Part  : " + parentcode + " không ?";
+            //string tb = "Bạn có muốn phê duyệt cập nhật số lương của Part  : " + parentcode + " không ?";
+            string tb = rm.GetString("t18") + ": \r\n Parent code : " + parentcode ;
             tb = tb + "\r\n Child code : " + childcode;
-            tb = tb + "\r\n Số lượng : " + quantity;
+            tb = tb + "\r\n Quantity : " + quantity;
 
-            DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
-                if (_ecoBLL.CapnhatQuantityBLL(parentcode, childcode, Convert.ToInt32(quantity), txtECONo.Text))
+                if (_ecoBLL.CapnhatQuantityBLL(parentcode, childcode, Convert.ToInt32(quantity), txtECONo.Text) )
                 {
                     if (_ecoBLL.Update_tblECO_Approved_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                     {
-                        MessageBox.Show("Đã phê duyệt ECO [ Cập nhật số lương của Part ] thành công");
+                        MessageBox.Show(rm.GetString("t19"));
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                     }
                     else
                     {
-                        MessageBox.Show("Xuất hiện lỗi khi cập nhật \n Kiểm tra lại dữ liệu");
+                        MessageBox.Show(rm.GetString("t20"));
                         return;
                     }
                 }
@@ -515,18 +565,21 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         {
             string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
             string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
-            string tb = "Bạn có muốn phê duyệt xóa ràng buộc giữa 2 Part : " + parentcode + " và " + childcode + " không ?";
+            //string tb = "Bạn có muốn phê duyệt xóa ràng buộc giữa 2 Part : " + parentcode + " và " + childcode + " không ?";
+            string tb = rm.GetString("t21") + parentcode + " & " + childcode ;
             DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 if (_ecoBLL.XoaRelationBLL(parentcode, childcode, txtECONo.Text) && _ecoBLL.Update_tblECO_Approved_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                 {
-                    MessageBox.Show("Đã phê duyệt ECO [ Xóa ràng buộc giữa 2 Part ] thành công");
+                    //MessageBox.Show("Đã phê duyệt ECO [ Xóa ràng buộc giữa 2 Part ] thành công");
+                    MessageBox.Show(rm.GetString("t22"));
                     LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                 }
                 else
                 {
-                    MessageBox.Show("Xuất hiện lỗi khi cập nhật \n Kiểm tra lại dữ liệu");
+                    //MessageBox.Show("Xuất hiện lỗi khi cập nhật \n Kiểm tra lại dữ liệu");
+                    MessageBox.Show(rm.GetString("t23"));
                     return;
                 }
             }
@@ -539,7 +592,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 // Case 1 : Tạo Part Mới
                 if (this_ECOType == 1)
                 {
-                    MessageBox.Show("Tạo Part mới thì không  cần phải Approved hay Canceled");
+                    //MessageBox.Show("Tạo Part mới thì không  cần phải Approved /*hay*/ Canceled");
+                    MessageBox.Show(rm.GetString("t24"));
                     return;
                 }
                 // Case 2 : Cập nhật thông tin Part
@@ -556,18 +610,18 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 // Case 4 : Cập nhật số lượng
                 if (this_ECOType == 4)
                 {
-                    string tb = "Bạn có muốn hủy việc cập nhật số lượng không ? ";
-                    DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string tb = rm.GetString("t25"); //  "Bạn có muốn hủy việc cập nhật số lượng không ? ";
+                    DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (kq == DialogResult.Yes)
                     {
                         if (_ecoBLL.Update_tblECO_Canceled_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                         {
-                            MessageBox.Show("Đã đưa request về trạng thái hủy ");
+                            MessageBox.Show(rm.GetString("t30"));
                             LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                         }
                         else
                         {
-                            MessageBox.Show("Phát sinh lỗi trong quá trình cập nhật ");
+                            MessageBox.Show(rm.GetString("t31"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -580,18 +634,18 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 if (this_ECOType == 5)
                 {
                     //Approved_Case5();
-                    string tb = "Bạn có muốn hủy việc xóa ràng buộc không ? ";
-                    DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    string tb = rm.GetString("t26");// "Bạn có muốn hủy việc xóa ràng buộc không ? ";
+                    DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                     if (kq == DialogResult.Yes)
                     {
                         if (_ecoBLL.Update_tblECO_Canceled_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                         {
-                            MessageBox.Show("Đã đưa request về trạng thái hủy ");
+                            MessageBox.Show(rm.GetString("t30"));
                             LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                         }
                         else
                         {
-                            MessageBox.Show("Phát sinh lỗi trong quá trình cập nhật ");
+                            MessageBox.Show(rm.GetString("t31"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
@@ -603,14 +657,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
             if (this_ECOStatus == 2)
             {
-                MessageBox.Show("ECO đã được duyệt rồi. Không thể hủy bỏ");
+                //MessageBox.Show("ECO đã được duyệt rồi. Không thể hủy bỏ");
+                MessageBox.Show(rm.GetString("t27"));
                 return;
             }
 
             if (this_ECOStatus == 3)
             {
                 // Cancel ECO
-                MessageBox.Show("ECO đã hủy rồi, cần gì hủy lại lần nữa đâu ");
+                // MessageBox.Show("ECO đã hủy rồi, cần gì hủy lại lần nữa đâu ");
+                MessageBox.Show(rm.GetString("t28"));
                 return;
             }
         }
@@ -623,8 +679,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             int ECONo = Convert.ToInt32(txtECONo.Text);
             string partcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
             string drawingstatus = dgvECOContent.Rows[0].Cells[9].Value.ToString();
-            string tb = "Bạn có muốn hủy phê duyệt cập nhật thông tin của " + partcode + " không ?";
-            DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //string tb = "Bạn có muốn hủy phê duyệt cập nhật thông tin của " + partcode + " không ?";
+            string tb = rm.GetString("t29") + partcode ;
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 // Chấp nhận cập nhật
@@ -634,24 +691,24 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     // Có bản vẽ đính kèm
                     if (_ecoBLL.Delete_Folder_ECO(ECONo) && _ecoBLL.Update_tblECO_Canceled_BLL(userid, username, ECONo))
                     {
-                        MessageBox.Show("Đã đưa request về trạng thái hủy ");
+                        MessageBox.Show(rm.GetString("t30"));
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                     }
                     else
                     {
-                        MessageBox.Show("Phát sinh lỗi trong quá trình cập nhật ");
+                        MessageBox.Show(rm.GetString("t31"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
                     if (_ecoBLL.Update_tblECO_Canceled_BLL(userid, username, ECONo))
                     {
-                        MessageBox.Show("Đã đưa request về trạng thái hủy ");
+                        MessageBox.Show(rm.GetString("t30"));
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                     }
                     else
                     {
-                        MessageBox.Show("Phát sinh lỗi trong quá trình cập nhật ");
+                        MessageBox.Show(rm.GetString("t31"), "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -663,7 +720,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn có muốn thoát view ECO không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult kq = MessageBox.Show(rm.GetString("t32"), "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 this.Close();
@@ -680,18 +737,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             // Bước 1 : update việc là canceled lên tblECO
             // Bước 2 : Xóa các ràng buộc trong tblRelationTemp
 
-            string tb = "Bạn có muốn hủy việc tạo ràng buộc mới không ?";
-            DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string tb = rm.GetString("t33"); //  "Bạn có muốn hủy việc tạo ràng buộc mới không ?";
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 if (Delete_Relation_in_tblRelationTemp() && _ecoBLL.Update_tblECO_Canceled_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                 {
-                    MessageBox.Show("Đã đưa request về trạng thái hủy ");
+                    MessageBox.Show(rm.GetString("t30"));
                     LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                 }
                 else
                 {
-                    MessageBox.Show("Phát sinh lỗi trong quá trình xóa các ràng buộc tạm thời trong tblRelationTemp ");
+                    //MessageBox.Show("Phát sinh lỗi trong quá trình xóa các ràng buộc tạm thời trong tblRelationTemp ");
+                    MessageBox.Show(rm.GetString("t34"));
                 }
             }
             else
@@ -715,22 +773,22 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         string childCode = dr.Cells[0].Value.ToString();
                         int quantity = int.Parse(dr.Cells[1].Value.ToString());
 
-                        MessageBox.Show("Cập nhật ràng buộc Parent code : " + parentcode + " Child code : " + childCode + " Quantity : " + quantity);
+                        MessageBox.Show("Update relation --  Parent code : " + parentcode + " Child code : " + childCode + " Quantity : " + quantity);
 
                         if (_ecoBLL.Delete_tblRelationTemp_BLL(parentcode, childCode))
                         {
-                            thongbao2 = thongbao2 + "(+) Đã xóa --" + parentcode + "---" + childCode + " -- thành công \n";
+                            thongbao2 = thongbao2 + "(+) Deleted --" + parentcode + "---" + childCode + " -- successfully. \n";
                         }
                         else
                         {
-                            thongbao2 = thongbao2 + "(!) Lỗi không thể xóa --" + parentcode + "---" + childCode + " -- \n";
+                            thongbao2 = thongbao2 + "(!) Fail : Can not delete --" + parentcode + "---" + childCode + " -- \n";
                             insertstatus++;
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    thongbao2 += $"(!) Lỗi ngoại lệ: {ex.Message} \n";
+                    thongbao2 += $"(!) Error : {ex.Message} \n";
                     insertstatus++;
                 }
             }

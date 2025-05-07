@@ -1,0 +1,381 @@
+﻿'############################SHORT DESCRIPTION ###################################
+' CREATOR : TO VAN LINH 
+' PHONE : +8433 356 8236
+' INPUT : File Excel with BOM list
+' Generates a screenshot image of each part and adds it to the BoM.
+'################################################################################
+' Version History:
+' Version | Date       | Changed by    | Description of change
+' --------|------------|---------------|-------------------------------------------------------------------------
+' 1.0     | 27/06/2024 | To Van Linh   | Initial release
+
+'################################################################################################################
+Option Strict Off
+
+Imports System
+Imports System.IO
+Imports System.Windows.Forms
+Imports System.Drawing
+Imports System.Drawing.Imaging
+Imports System.Runtime.InteropServices
+Imports System.Collections.Generic
+Imports NXOpen
+Imports NXOpen.UF
+Imports NXOpen.Assemblies
+Imports NXOpenUI
+Imports PLMComponents.Parasolid.PK_.Unsafe
+
+Module BOMToExcel_A
+    '------------------------------------
+    ' Creat Global Variable
+    '------------------------------------
+
+    Public L_theSession As Session = Session.GetSession()
+    Public L_ufs As UFSession = UFSession.GetUFSession()
+    Public L_theUISession As UI = UI.GetUI
+    Public lw As ListingWindow = L_theSession.ListingWindow
+
+    ' creat Excel Data
+    Const xlCenter As Long = -4108
+    Const xlDown As Long = -4121
+    Const xlFormulas As Long = -4123
+    Const xlLeft As Long = -4131
+    Const xlAbove As Long = 0 ' Hàng đầu tiên là 0
+    Const xlWhole As Long = 1
+    Const xlByRows As Long = 1
+    Const xlNext As Long = 1 ' Biến vòng lặp tăng dần khi chạy chương trình
+    Const msoTrue As Long = -1  ' Dùng để tắt tính năng căn lại hình trong file excel
+
+    '=================================================================================
+    ' Creat save image file path                                                    ||
+    Dim strPicFilesPath As String = "C:\Temp\"
+    '                                                                               ||
+    ' Creat Worksheet Data                                                          ||
+    Dim lngLevelStart(20) As Long                                                  '||
+    Dim colLevel As Integer = 1          ' Cột Level là cột số 1                    ||
+    Dim colImage As Integer = 4          ' Cột Image là cột số 4                    ||
+    Dim colPartName As Integer = 2       ' Cột PartName là cột số 3                 ||
+    Dim colDescription As Integer = 4    ' Cột Description là cột số 4              ||
+    Dim colQuantity As Integer = 3       ' Cột Quantity là cột số 3                 ||
+    Dim colParentChild As Integer = 6    ' Cột Parent Child là cột số 6             ||
+    Dim colParent As Integer = 7          '                                         ||
+    Dim colBranchTop As Integer = 8        '                                        ||
+    Dim colBranchCreated As Integer = 9     '                                       ||
+    '=================================================================================
+
+    ' Creat other status
+    Private IsTcEng As Boolean = False
+    Dim lg As LogFile = L_theSession.LogFile
+    Private _notLoaded As New List(Of String)
+
+
+    ' ----------------------------------------------
+    ' Sub main
+    ' ----------------------------------------------
+    Sub Main()
+
+        ' Creat local variable
+        Dim disPart As Part = L_theSession.Parts.Display
+        Dim workPart As Part = L_theSession.Parts.Work
+        Dim objExcel As Object ' Tạo đối tượng Excel
+        Dim objWorkBook As Object
+        Dim objWorkSheet As Object
+
+
+        ' ----------------------------------------------
+        ' Determine : if we are running under TC or native
+        ' ----------------------------------------------
+        L_ufs.UF.IsUgmanagerActive(IsTcEng)
+        'MessageBox.Show("TC running?" & IsTcEng)
+
+        Dim markId1 As Session.UndoMarkId
+        markId1 = L_theSession.SetUndoMark(Session.MarkVisibility.Visible, "Welcome To Van Linh ")
+
+        Dim Excel_File_Name As String
+        Dim Excel_File_Exists_Status As Boolean = False
+        Dim row As Long = 1
+        Dim column As Long = 1
+
+        ' ----------------------------------------------
+        ' CHECK EXCEL : Exist Yes/ No ?
+        ' Allow the user to create a new excel file or add to an existing one
+        ' Cho phép người dùng tạo tệp excel mới hoặc thêm vào tệp hiện có
+        ' ----------------------------------------------
+
+        ' ----------------------------------------------
+        ' FILE : Open Dialog Box
+        ' ----------------------------------------------
+        Excel_File_Name = "C:\Temp"
+        Try
+            MessageBox.Show("Chọn nơi lưu file Excel trước nhé ! ")
+            Dim Save_File_Dialog1 As New SaveFileDialog
+            With Save_File_Dialog1
+                .Title = "Save BOM to Excel File"
+                .InitialDirectory = "C:\Temp"
+                .Filter = "Excel files (*.xlsx)|*.xlsx|Macro enabled Excel files (*.xlsm)|*.xlsm|All files (*.*)|*.*"
+                .FilterIndex = 1
+                .RestoreDirectory = True
+                .OverwritePrompt = False
+                .FileName = disPart.ComponentAssembly.RootComponent.DisplayName
+                If .ShowDialog() = DialogResult.OK Then
+                    Excel_File_Name = .FileName
+                Else
+                    MessageBox.Show("Không làm nữa à ???")
+                    Exit Sub
+                End If
+
+            End With
+
+            ' ----------------------------------------------
+            '' This function will not complain if the directory already exists
+            'Dim strPicFilesPath As String
+            'strPicFilesPath = Left(Excel_File_Name, InStrRev(Excel_File_Name, "\", -1))
+            'System.IO.Directory.CreateDirectory(strPicFilesPath)
+            'MessageBox.Show("Đường dẫn Save StriPicPart là : " & strPicFilesPath)
+
+            ' ----------------------------------------------
+
+            ' ----------------------------------------------
+            ' Menu : Creat New Excel File 
+            ' ----------------------------------------------
+            objExcel = CreateObject("Excel.Application")
+            ' Nếu Excel lỗi -> thoát
+            If objExcel Is Nothing Then
+                L_theUISession.NXMessageBox.Show("Error", NXMessageBox.DialogType.Error, "Không thể mở Excel, kiểm tra lại phần mềm Excel")
+                L_theSession.UndoToMark(markId1, "journal")
+                Exit Sub
+            End If
+            ' Nếu File Excel : Exist -> Mở lại file đó
+            If File.Exists(Excel_File_Name) Then
+                'Open the Excel file
+                'MessageBox.Show("Mở File Excel cũ và ghi thêm vào")
+                L_theUISession.NXMessageBox.Show("Lưu ý", NXMessageBox.DialogType.Warning, "Mở Fiel Excel cũ và ghi thêm đó nhé !")
+                Excel_File_Exists_Status = True
+                objWorkBook = objExcel.Workbooks.Open(Excel_File_Name)
+            Else
+                ' Creat the Excel File
+                'MessageBox.Show("Tạo Workbook mới ")
+                L_theUISession.NXMessageBox.Show("Lưu ý", NXMessageBox.DialogType.Warning, "Tạo File Excel mới !")
+                objWorkBook = objExcel.WorkBooks.Add
+                objWorkBook.SaveAs(Excel_File_Name)
+            End If
+
+            If objWorkBook Is Nothing Then
+                L_theUISession.NXMessageBox.Show("Error", NXMessageBox.DialogType.Error, "Could not open Excel file:" & Excel_File_Name & ControlChars.NewLine & "journal exiting")
+                L_theSession.UndoToMark(markId1, "journal")
+                MessageBox.Show("Workbook không tồn tại !!!")
+                Exit Sub
+            End If
+
+            ' ----------------------------------------------
+            ' Add a new sheet so that previously exported BOMs are not affected
+            objWorkSheet = objWorkBook.Worksheets.Add()
+
+            ' Add Column Titles
+            objWorkSheet.Cells(1, colLevel).Value = "Level"
+            objWorkSheet.Cells(1, colImage).EntireColumn.ColumnWidth = 10
+            objWorkSheet.Cells(1, colImage).Value = "Images"
+            objWorkSheet.Cells(1, colPartName).Value = "Part Name"
+            'objWorkSheet.Cells(1, colDescription).Value = "Description"
+            objWorkSheet.Cells(1, colQuantity).Value = "Quantity"
+            objWorkSheet.Cells(1, colParentChild).Value = "Parent| --> |Child"
+            objWorkSheet.Cells(1, colParent).Value = "Parent"
+            objWorkSheet.Cells.VerticalAlignment = xlCenter
+
+        Catch ex As Exception
+            MessageBox.Show("Lỗi khi tạo, hoặc mở hoặc thêm dữ liệu vào Excel File")
+
+        End Try
+
+
+
+        ' ----------------------------------------------
+        ' Write data of NX to excel
+        ' ----------------------------------------------
+        ' This function will not complain if the directory already exists
+        strPicFilesPath = Left(Excel_File_Name, InStrRev(Excel_File_Name, "\", -1))
+        System.IO.Directory.CreateDirectory(strPicFilesPath)
+        MessageBox.Show("Đường dẫn Save StriPicPart là : " & strPicFilesPath)
+
+        Try
+            Dim c As ComponentAssembly = disPart.ComponentAssembly
+            If Not IsNothing(c.RootComponent) Then
+                ' Process 'root component' (assembly file)
+                objWorkSheet.Cells(2, colLevel).Value = 1 ' Ghi là Level đầu tiền là 1
+                ' Show name of root component
+                objWorkSheet.Cells(2, colPartName).Value = c.RootComponent.DisplayName
+                ' Phần này, cần phải xem lại, có nên ghi hay là không ?
+                'objWorkSheet.Cells(2, colDescription).Value = c.RootComponent.GetStringAttribute("DB_PART_NAME")
+                lngLevelStart(0) = 3 'Bắt đầu thao tác từ dòng thứ 3
+
+                ' Create a screenshot only if one does not already exist
+                Dim Test As String = c.RootComponent.DisplayName
+                If Not File.Exists(strPicFilesPath & c.RootComponent.DisplayName & ".jpg") Then
+                    F_CreatCroppedNXScreenshot(Test)
+                    'MessageBox.Show("Vừa chụp ảnh với tên file :" & Test)
+                End If
+                'MessageBox.Show("Bắt đầu chạy hàm  báo lấy Part Children")
+                F_report_Component_Children(c.RootComponent, 2, objWorkSheet)
+
+                Dim partLoadStatus1 As PartLoadStatus
+                Dim Status_1 As PartCollection.SdpsStatus
+                Status_1 = L_theSession.Parts.SetDisplay(disPart, False, False, partLoadStatus1)
+                partLoadStatus1.Dispose()
+
+            End If
+        Catch ex As Exception
+            L_theSession.ListingWindow.WriteLine("Failed : " & ex.ToString)
+            MessageBox.Show("Đã phát sinh lỗi khi ghi dữ liệu NX vào file Excel")
+
+        End Try
+
+        objWorkSheet.Cells.EntireColumn.Autofit()
+
+
+        objWorkBook.Save()
+        objWorkBook.Close()
+        objExcel.Quit()
+        objWorkSheet = Nothing
+        objWorkBook = Nothing
+        objExcel = Nothing
+
+        MessageBox.Show("Kết thúc")
+
+    End Sub
+
+    '**************************************************************************
+    ' || F_report_Component_Children                                         ||
+    ' || Explain : Hàm dùng để thực thi tìm Part-child của 1 Part truyền vào ||
+    '**************************************************************************
+    Sub F_report_Component_Children(ByVal comp As Component, ByVal indent As Integer, ByRef xlsWorksheet As Object)
+        'ByVal: Sử dụng để truyền giá trị của biến gọi vào tham số của hàm hoặc thủ tục. Thay đổi tham số không ảnh hưởng đến giá trị của biến gọi.
+        'ByRef Sử dụng để tham chiếu trực tiếp đến biến gọi. Thay đổi tham số ảnh hưởng trực tiếp đến giá trị của biến gọi.
+
+        ' Indent : Chỉ giá trị của level mà Component đang đứng 
+        Dim lng_Found_In_Row As Long
+        Dim str_Find_String As String
+        Dim int_Write_Row As Integer
+
+        ' 
+        If GetLngLevelStart(indent) = 1 Then
+            '  
+            lngLevelStart(indent) = xlsWorksheet.Cells(1, 1).End(xlDown).Offset(1, 0).Row
+            ' Tính từ ô cells(1,1) di chuyển xuống dưới đến ô cuối cùng có dữ liệu. -> Offset xuống dưới 1 ô -> Row : Trả về số hàng của ô sau khi di chuyển
+        End If
+
+        For Each child As Component In comp.GetChildren()
+            ' Search for Parent| Child to see if it already exists
+            ' tìm kiếm bố / con  nếu nó tồn tại
+            str_Find_String = comp.DisplayName & "| --> |" & child.DisplayName
+            On Error Resume Next 'Bỏ qua lỗi và tiếp tục thực hiện chương trình
+            lng_Found_In_Row = 1 ' bắt đầu bằng 0, về sau có thể sửa lại , để bắt đầu bằng 1
+            lng_Found_In_Row = xlsWorksheet.Range(xlsWorksheet.Cells(lngLevelStart(indent), colParentChild),
+                                                  xlsWorksheet.Cells(lngLevelStart(indent), colParentChild).end(xlDown)).Find(What:=str_Find_String, LookIn:=xlFormulas, SearchOrder:=xlByRows,
+                                                    SearchDirectionHint:=xlNext, MatchCase:=False).Row
+
+            'MessageBox.Show("Found In Row  =  " & lng_Found_In_Row)
+            'MessageBox.Show("Indent = " & indent)
+            ' Nếu không phải là level đầu tiên
+            If Not lng_Found_In_Row = 1 Then
+                xlsWorksheet.Cells(lng_Found_In_Row, colQuantity).Value = xlsWorksheet.Cells(lng_Found_In_Row, colQuantity).Value + 1
+            Else
+                ' Add new component or subAssembly
+                int_Write_Row = xlsWorksheet.Cells(1, 1).end(xlDown).offset(1, 0).Row
+                xlsWorksheet.Cells(int_Write_Row, colLevel).Value = indent
+                xlsWorksheet.Cells(int_Write_Row, colPartName).Value = child.DisplayName
+                'xlsWorksheet.Cells(int_Write_Row, colPartName).IndentLevel = indent ' Thiết lập lùi lề 1 tương ứng với level của Excel
+                'xlsWorksheet.Cells(int_Write_Row, colDescription).Value = child.GetStringAttribute("DB_PART_NAME")
+                xlsWorksheet.Cells(int_Write_Row, colQuantity).Value = child.GetIntegerQuantity
+                xlsWorksheet.Cells(int_Write_Row, colParentChild).Value = str_Find_String
+                'xlsWorksheet.Cells(int_Write_Row, colParent).Value = comp.DisplayName
+                'xlsWorksheet.Cells(int_Write_Row, colBranchTop).Value = lngLevelStart(indent)
+
+                ' create a screenshot only if one does not already exist
+                If Not File.Exists(str_Find_String & child.DisplayName & ".jpg") Then
+                    Dim Part_1 As Part = CType(L_theSession.Parts.FindObject(child.DisplayName), Part)
+                    Dim part_Load_status1 As PartLoadStatus
+                    Dim Status_1 As PartCollection.SdpsStatus
+                    Status_1 = L_theSession.Parts.SetDisplay(Part_1, True, True, part_Load_status1)
+                    L_theSession.Preferences.ScreenVisualization.FitPercentage = 100
+
+                    ' turn triad off
+                    L_theSession.Preferences.ScreenVisualization.TriadVisibility = 0
+                    ' turn WCS off
+                    Part_1.WCS.Visibility = False
+                    ' turn off view/model name display and borders
+                    Part_1.Preferences.NamesBorderVisualization.ShowModelViewNames = False
+                    Part_1.Preferences.NamesBorderVisualization.ShowModelViewBorders = False
+
+                    'Isometric View
+                    Part_1.ModelingViews.WorkView.Orient(NXOpen.View.Canned.Isometric, NXOpen.View.ScaleAdjustment.Fit)
+                    ' Set the filename
+                    Dim Part_JPG As String = strPicFilesPath & child.DisplayName & ".jpg"
+                    'MessageBox.Show("Chụp ảnh với Part Child ! " & Part_JPG)
+
+                    L_ufs.Disp.CreateImage(Part_JPG, UFDisp.ImageFormat.Jpeg, UFDisp.BackgroundColor.White)
+
+                    'F_CreatCroppedNXScreenshot(child.DisplayName)  ' Chạy hàm để lấy ảnh
+                    part_Load_status1.Dispose()
+
+                End If
+
+                F_report_Component_Children(child, indent + 1, xlsWorksheet)
+                On Error GoTo 0
+            End If
+        Next
+        lngLevelStart(indent) = 0
+        'Throw New NotImplementedException()
+    End Sub
+
+    Private Function GetLngLevelStart() As Long()
+        Return lngLevelStart
+    End Function
+
+
+
+    '***************************************************************
+    ' || F_CreatCroppedNXScreenshot(str_Part_Name As String)      ||
+    ' || Explain : Hàm dùng để lưu 1 file ảnh                     ||
+    '***************************************************************
+
+    Sub F_CreatCroppedNXScreenshot(str_Part_Name As String)
+        '--------------------
+        ' Create a JPG Screenshot 
+        '--------------------
+        Dim workPart As Part = L_theSession.Parts.Work
+        Dim display_Part As Part = L_theSession.Parts.Display
+
+
+        L_theSession.Preferences.ScreenVisualization.FitPercentage = 100
+
+        ' turn triad off
+        L_theSession.Preferences.ScreenVisualization.TriadVisibility = 0
+        ' turn WCS off
+        display_Part.WCS.Visibility = False
+        ' turn off view/model name display and borders
+        display_Part.Preferences.NamesBorderVisualization.ShowModelViewNames = False
+        display_Part.Preferences.NamesBorderVisualization.ShowModelViewBorders = False
+
+        'Isometric View
+        display_Part.ModelingViews.WorkView.Orient(NXOpen.View.Canned.Isometric, NXOpen.View.ScaleAdjustment.Fit)
+        'Hide datums and sketches
+        'Dim number_Hidden As Integer
+        'number_Hidden = L_theSession.DisplayManager.HideByType(DisplayManager.ShowHideType.Datums, DisplayManager.ShowHideScope.AnyInAssembly = 0)
+        'number_Hidden = L_theSession.DisplayManager.HideByType(DisplayManager.ShowHideType.Sketches, DisplayManager.ShowHideScope.AnyInAssembly = 0)
+        ' Set the filename
+        Dim Part_JPG As String = strPicFilesPath & str_Part_Name & ".jpg"
+        ' Chỗ này cần phải kiểm tra lại 
+        'MessageBox.Show("Dường dẫn là : " & Part_JPG)
+        ' Create the image
+        L_ufs.Disp.CreateImage(Part_JPG, UFDisp.ImageFormat.Jpeg, UFDisp.BackgroundColor.White)
+
+
+    End Sub
+
+    '**********************************************************
+    Public Function GetUnloadOption(ByVal dummy As String) As Integer
+        Return Session.LibraryUnloadOption.Immediately
+    End Function
+    '**********************************************************
+
+End Module

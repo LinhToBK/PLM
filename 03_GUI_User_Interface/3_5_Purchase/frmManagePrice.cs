@@ -1,6 +1,9 @@
 ﻿using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using System;
 using System.Data;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
@@ -10,9 +13,56 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private PurchaseBLL purchaseBLL = new PurchaseBLL();
         public string tennguoidung;
 
+        private bool allowmodify = false; // Cho phép sửa đổi giá không 
+
+
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_5_Purchase.Lang.Lang_frmManagePrice", typeof(frmManagePrice).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            groupBoxSearchPart.Text = rm.GetString("lb1");
+            btnSearch.Text = rm.GetString("lb2");
+            btnMakeNewPO.Text = rm.GetString("lb3");
+            btnTraCuuPO.Text = rm.GetString("lb4");
+            groupBoxPartInformation.Text = rm.GetString("lb5");
+            labelPartCode.Text = rm.GetString("lb6");
+            labelPartName.Text = rm.GetString("lb8");
+            labelPartStage.Text = rm.GetString("lb7");
+            labelPrecision.Text = rm.GetString("lb9");
+            labelDescription.Text = rm.GetString("lb10");
+            groupBoxCurrentPrice.Text = rm.GetString("lb11");
+            labelImportPrice.Text = rm.GetString("lb12");
+            labelExportPrice.Text = rm.GetString("lb13");
+            ckcAllowModifyRate.Text = rm.GetString("lb14");
+            groupBoxLog.Text = rm.GetString("lb15");
+            btnModify.Text = rm.GetString("lb16");
+            btnSaveNewPrice.Text = rm.GetString("lb17");
+            btnExit.Text = rm.GetString("lb18");
+
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
         public frmManagePrice()
         {
             InitializeComponent();
+            LoadLanguage();
 
             // Gán sự kiện CheckedBox Rate : Cho phép sửa đổi tỷ giá
             ckcAllowModifyRate.CheckedChanged += ckcAllowModifyRate_CheckedChanged;
@@ -77,13 +127,35 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
         }
 
+        private void convertusd2vnd()
+        {
+            string usdprice = txtUSDPrice.Text;
+            string usdexportprice = txtExportPriceUSD.Text;
+            if (usdprice.Length > 0)
+            {
+                try
+                {
+                    float vndprice = (float)Convert.ToInt32(usdprice) * Convert.ToInt32(txtRate.Text);
+                    txtPartPrice.Text = vndprice.ToString(cboPrecision.SelectedItem.ToString());
+                    float vndexportprice = (float)Convert.ToInt32(usdexportprice) * Convert.ToInt32(txtRate.Text);
+                    txtExportPrice.Text = vndexportprice.ToString(cboPrecision.SelectedItem.ToString());
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
         // =================================================================
         //               FINISH :     HÀM TỰ TẠO
         // =================================================================
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn muốn thoát việc quản lý giá phải không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            string tb = rm.GetString("t1"); // Bạn có muốn thoát tab [ Quản lý giá ] không ?
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 this.Close();
@@ -102,7 +174,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
             else
             {
-                MessageBox.Show("Bạn cần nhập ô tìm kiếm");
+                MessageBox.Show(rm.GetString("t2"));    // Bạn cần nhập ô tìm kiếm
             }
         }
 
@@ -138,13 +210,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void cboPrecision_SelectedIndexChanged(object sender, EventArgs e)
         {
             convertvnd2usd();
+           // convertusd2vnd();
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn muốn sửa giá của Part không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string tb = rm.GetString("t3"); // Bạn có muốn sửa giá của Part không ?
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
+                allowmodify = true;
                 if (rdioVND.Checked == true)
                 {
                     txtPartPrice.Enabled = true;
@@ -190,7 +265,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             {
                 // Tính giá sang USD
                 float vndprice = usdprice * float.Parse(txtRate.Text);
-                txtPartPrice.Text = vndprice.ToString();
+                txtPartPrice.Text = vndprice.ToString("N0");
             }
             else
             {
@@ -201,30 +276,30 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void btnSaveNewPrice_Click(object sender, EventArgs e)
         {
             // Kiểm tra giá trị  vndPrice có phải là số nguyên dương hay không ?
-            if (int.TryParse(txtPartPrice.Text.Trim(), out int vndprice) && int.TryParse(txtExportPrice.Text.Trim(), out int vndexportprice))
+            if (int.TryParse(txtPartPrice.Text.Trim().Replace(",",""), out int vndprice) && int.TryParse(txtExportPrice.Text.Trim().Replace(",", ""), out int vndexportprice))
             {
                 string tb;
-                tb = "Bạn có muốn update giá của Part Code:  [ " + txtPartCode.Text + "]";
-                tb += " \r\n +)  Giá nhập :  " + dgvListTimKiem.CurrentRow.Cells[4].Value.ToString() + " (VND) --- => --- " + txtPartPrice.Text + " --- (VND) ";
-                tb += " \r\n +)  Giá xuất : " + dgvListTimKiem.CurrentRow.Cells[7].Value.ToString() + " (VND) --- => --- " + txtExportPrice.Text + " (VND)  không ?";
+                tb = rm.GetString("t5") + txtPartCode.Text + "]";     // Bạn có muốn update giá của Part Code:  [ 
+                tb += " \r\n " + rm.GetString("t6")  + " : " + dgvListTimKiem.CurrentRow.Cells[5].Value.ToString() + " (VND) --- => --- " + txtPartPrice.Text + " --- (VND) ";   // +)  Giá nhập :  
+                tb += " \r\n " + rm.GetString("t7") + " : " +  dgvListTimKiem.CurrentRow.Cells[7].Value.ToString() + " (VND) --- => --- " + txtExportPrice.Text + " (VND)   ?"; // +)  Giá xuất : 
 
                 DialogResult kq = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
                 {
-                    if (purchaseBLL.CapnhatPriceBLL(txtPartCode.Text, txtPartPrice.Text, txtExportPrice.Text))
+                    if (purchaseBLL.CapnhatPriceBLL(txtPartCode.Text, txtPartPrice.Text.Trim().Replace(",", ""), txtExportPrice.Text.Trim().Replace(",", ""), tennguoidung))
                     {
-                        MessageBox.Show("Đã cập nhật thành công giá ");
+                        MessageBox.Show(rm.GetString("t8")); // Đã cập nhật thành công giá 
                         LoadDataFindPart(txtPartCode.Text);
                     }
                     else
                     {
-                        MessageBox.Show("Cập<< nhật thất bại");
+                        MessageBox.Show(rm.GetString("t9")); // Cập nhật thất bại
                     }
                 }
             }
             else
             {
-                MessageBox.Show("Price đang không hơp lệ ");
+                MessageBox.Show(rm.GetString("t10"));    // Price đang không hơp lệ 
                 txtPartPrice.Focus();
                 return;
             }
@@ -306,11 +381,38 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             {
                 // Tính giá sang USD
                 float vndexportprice = usdexportprice * float.Parse(txtRate.Text);
-                txtExportPrice.Text = vndexportprice.ToString();
+                txtExportPrice.Text = vndexportprice.ToString("N0");
             }
             else
             {
                 txtExportPrice.Text = string.Empty; // Nếu nhập sai định dạng số thì sẽ trả về giá trị = 0
+            }
+        }
+
+        private void rdioUSD_CheckedChanged(object sender, EventArgs e)
+        {
+            if(allowmodify == true)
+            {
+                txtUSDPrice.Enabled = true;
+                txtUSDPrice.ReadOnly = false;
+                txtExportPriceUSD.Enabled = true;
+                txtExportPriceUSD.ReadOnly = false;
+                txtUSDPrice.Focus();
+            }    
+
+
+                
+        }
+
+        private void rdioVND_CheckedChanged(object sender, EventArgs e)
+        {
+            if (allowmodify== true)
+            {
+                txtPartPrice.Enabled = true;
+                txtPartPrice.ReadOnly = false;
+                txtExportPrice.Enabled = true;
+                txtExportPrice.ReadOnly = false;
+                txtPartPrice.Focus();
             }
         }
     }

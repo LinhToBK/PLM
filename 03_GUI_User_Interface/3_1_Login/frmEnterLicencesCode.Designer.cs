@@ -32,11 +32,15 @@
             this.btnCancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCode = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.txtbegindate = new System.Windows.Forms.TextBox();
+            this.txtServer = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnOK
             // 
-            this.btnOK.Location = new System.Drawing.Point(35, 105);
+            this.btnOK.Location = new System.Drawing.Point(357, 105);
             this.btnOK.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnOK.Name = "btnOK";
             this.btnOK.Size = new System.Drawing.Size(84, 33);
@@ -47,7 +51,7 @@
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(217, 105);
+            this.btnCancel.Location = new System.Drawing.Point(482, 105);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(84, 33);
@@ -69,14 +73,52 @@
             // 
             this.txtCode.Location = new System.Drawing.Point(112, 44);
             this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(189, 30);
+            this.txtCode.Size = new System.Drawing.Size(454, 30);
             this.txtCode.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(35, 164);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Exprired in :";
+            // 
+            // txtbegindate
+            // 
+            this.txtbegindate.Location = new System.Drawing.Point(143, 160);
+            this.txtbegindate.Name = "txtbegindate";
+            this.txtbegindate.ReadOnly = true;
+            this.txtbegindate.Size = new System.Drawing.Size(165, 30);
+            this.txtbegindate.TabIndex = 5;
+            // 
+            // txtServer
+            // 
+            this.txtServer.Location = new System.Drawing.Point(381, 160);
+            this.txtServer.Name = "txtServer";
+            this.txtServer.ReadOnly = true;
+            this.txtServer.Size = new System.Drawing.Size(185, 30);
+            this.txtServer.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(316, 164);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(57, 23);
+            this.label3.TabIndex = 7;
+            this.label3.Text = "Server";
             // 
             // frmEnterLicencesCode
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 179);
+            this.ClientSize = new System.Drawing.Size(598, 211);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.txtServer);
+            this.Controls.Add(this.txtbegindate);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtCode);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btnCancel);
@@ -85,7 +127,8 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "frmEnterLicencesCode";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-            this.Text = "Nhập Code";
+            this.Text = "Enter Code";
+            this.Load += new System.EventHandler(this.frmEnterLicencesCode_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,5 +140,9 @@
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtbegindate;
+        private System.Windows.Forms.TextBox txtServer;
+        private System.Windows.Forms.Label label3;
     }
 }

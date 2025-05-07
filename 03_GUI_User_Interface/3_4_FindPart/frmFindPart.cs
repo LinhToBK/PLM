@@ -3,52 +3,108 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PLM_Lynx._01_DAL_Data_Access_Layer;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using PLM_Lynx._03_GUI_User_Interface;
 using PLM_Lynx._03_GUI_User_Interface._3_4_FindPart;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PLM_Lynx._03_GUI_User_Interface
 {
     public partial class frmFindPart : Form
     {
-
         private FindPartBLL PartBLL = new FindPartBLL();
         private CommonBLL CommonBLL = new CommonBLL();
         private DataTable DulieuTimKiem = new DataTable();
-        DataTransfer data = new DataTransfer();
+        private DataTransfer data = new DataTransfer();
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
 
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_4_FindPart.Lang.Lang_FindPart", typeof(frmFindPart).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            groupBoxSearch.Text = rm.GetString("lb1");
+            ckcSearchAll.Text = rm.GetString("lb2");
+            btnThemGanDay.Text = rm.GetString("lb3" );
+            groupBoxResult.Text = rm.GetString("lb4");
+            groupBoxPartInfor.Text = rm.GetString("lb5");
+            groupBoxListParent.Text = rm.GetString("lb6");
+            groupBoxListChild.Text = rm.GetString("lb7");
+            btnExportOnly.Text = rm.GetString("lb8");
+            btnExportFile.Text = rm.GetString("lb9");
+            ckcWithImage.Text = rm.GetString("lb10");
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
 
         public frmFindPart()
         {
             InitializeComponent();
+            // Load ngôn ngữ
+            LoadLanguage();
             // Đăng ký sự kiện
             txtHighLight.TextChanged += txtHighLight_TextChanged;
             dgvSearch.CellPainting += dgvSearch_CellPainting;
-            
+
             ckcWithImage.Checked = false;
-
         }
-
 
         public void LoadDataFindPart(string keysearch)
         {
-            DulieuTimKiem = PartBLL.FindWithWordBLL(keysearch);
+            if(ckcSearchAll.Checked == true)
+            {
+                DulieuTimKiem = PartBLL.FindWithWordBLL(keysearch);
+            }
+            else
+            {
+                string input = txtViewRow.Text;
 
-            //p.PartCode,  0
-            //p.PartName,     1
-            //p.PartDescript,       2
-            //s.Stage as PartStage,   3
-            //p.PartID,      4
-            //p.PartPrice,     5
-            //p.PartMaterial 6
+                if (int.TryParse(input, out int number) && number >= 0)
+                {
+                    DulieuTimKiem = PartBLL.FindWithWordBLL(keysearch, input);
+                }
+                else
+                {
+                    MessageBox.Show(rm.GetString("t1")); // Bạn cần nhập số dòng lớn hơn 0
+                }// Kiểm tra số dòng
+
+
+            }
+
+
+            //0p.PartCode,
+            //1p.PartName,
+            //2p.PartDescript,
+            //3s.Stage as PartStage,
+            //4p.PartID,
+            //5p.PartPrice,
+            //6p.PartMaterial,
+            //7p.PartPriceSale,
+            //8p.PartPriceLog
             dgvSearch.DataSource = DulieuTimKiem;
             dgvSearch.Columns[0].Width = 80; // PartCode
             dgvSearch.Columns[1].Width = 200; // PartName
@@ -64,11 +120,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //dgvSearch.Columns[4].HeaderText = "Price";
             //dgvSearch.Columns[5].HeaderText = "Log";
             //dgvSearch.Columns[6].HeaderText = "LinkFile";
+            // Các cột còn lại đều bị ẩn 
+            dgvSearch.Columns[4].Visible = false; // IDPart
+            dgvSearch.Columns[5].Visible = false; // PartPrice
+            dgvSearch.Columns[6].Visible = false; // PartMaterial
+            dgvSearch.Columns[7].Visible = false; // PartPriceSale
+            dgvSearch.Columns[8].Visible = false; // PartPriceLog
 
 
             dgvSearch.AllowUserToAddRows = false;
             dgvSearch.EditMode = DataGridViewEditMode.EditProgrammatically;
-
         }
 
         public void LoadDataChild(string idpart)
@@ -86,43 +147,29 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         public void LoadDataParent(string idpart)
         {
+
+            //  p.PartCode, p.PartName, p.PartDescript, p.PartMaterial
             dgvParent.DataSource = PartBLL.GetParentBLL(idpart);
-            dgvParent.Columns[0].Visible = false; // Ẩn cộtID
-            dgvParent.Columns[1].Visible = false; // Ẩn cột Family
-            dgvParent.Columns[2].Visible = false; // Ẩn cột PartNo
-            dgvParent.Columns[7].Visible = false; // Ẩn cột PartFile
-            dgvParent.Columns[8].Visible = false; // Ẩn cột PartPrice
-            dgvParent.Columns[9].Visible = false; // Ẩn cột PartLog
-
-            // Hiệu chỉnh độ rộng của các cột
-            //dgvParent.Columns[3].Width = 200; // Cột ParentName
-            //dgvParent.Columns[4].Width = 80;  // Cột ParentCode
-            dgvParent.Columns[5].Width = 100; // Cột ParentDescript
-            dgvParent.Columns[6].Width = 40;  // Cột ParentStage
-
+            
 
             dgvParent.AllowUserToAddRows = false;
             dgvParent.EditMode = DataGridViewEditMode.EditProgrammatically;
-
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
             if (txtKeySearch.Text != "")
             {
-                LoadDataFindPart(txtKeySearch.Text);
+                LoadDataFindPart(txtKeySearch.Text.Trim());
             }
             else
             {
-                MessageBox.Show("Bạn cần nhập ô tìm kiếm");
+                MessageBox.Show(rm.GetString("t2")); // Bạn cần nhập ô tìm kiếm
             }
-
         }
 
         private void dgvSearch_Click(object sender, EventArgs e)
         {
-
-
             if (dgvSearch.Rows.Count == 0) { txtKeySearch.Focus(); return; }
             txtCode.Text = dgvSearch.CurrentRow.Cells[0].Value.ToString(); // Code
             txtName.Text = dgvSearch.CurrentRow.Cells[1].Value.ToString(); // Name
@@ -134,17 +181,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // -- Hiển thị ảnh
             if (CommonBLL.UploadImagebyPartCode(txtCode.Text, picPart) == true)
             {
-                groupboxImagePart.Text = "";
+                groupboxImagePart.Text = "Image";
             }
             else
             {
-                groupboxImagePart.Text = "No find Image";
+                groupboxImagePart.Text = "Not found Image";
             }
 
             // Load các file trong partcode lên dgvListFile
             CommonBLL.GetAllFileinFolder(txtCode.Text, dgvListFile);
             //-----
-           
 
             // Hiển thị danh sách các PartParent và PartChild
             string idpart = dgvSearch.CurrentRow.Cells[4].Value.ToString();
@@ -152,10 +198,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
             LoadDataParent(idpart);
 
             // Hiển thị danh sách các file có trong folder Partcode
-
-
-
-
         }
 
         private void GetAllFileinFolder(string filepath)
@@ -174,18 +216,15 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 {
                     FileInfo fileInfor = new FileInfo(file);
 
-                    // Thêm 1 dòng vào DataGritView 
+                    // Thêm 1 dòng vào DataGritView
                     dgvListFile.Rows.Add(fileInfor.Name, fileInfor.Length / 1024 + "KB", fileInfor.Extension, fileInfor.CreationTime);
                     // Tên - Kích thước file - Đôi file - Ngày khởi tạo
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show("Có lỗi xảy ra : " + ex.Message);
             }
-
-
         }
 
         private void txtKeySearch_KeyDown(object sender, KeyEventArgs e)
@@ -257,27 +296,26 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             if (dgvParent.Rows.Count == 0)
             {
+                MessageBox.Show(rm.GetString("t4"));  // Dữ liệu đang trống
                 txtKeySearch.Focus();
                 return;
             }
             picParent.Refresh();
 
-            txtParentCode.Text = dgvParent.CurrentRow.Cells[4].Value.ToString();
-            txtParentName.Text = dgvParent.CurrentRow.Cells[3].Value.ToString();
-            txtParentLog.Text = dgvParent.CurrentRow.Cells[9].Value.ToString();
-
+            txtParentCode.Text = dgvParent.CurrentRow.Cells[0].Value.ToString();
+            txtParentName.Text = dgvParent.CurrentRow.Cells[1].Value.ToString();
+            txtParentDescript.Text = dgvParent.CurrentRow.Cells[2].Value.ToString();
+            txtParentMaterial.Text = dgvParent.CurrentRow.Cells[3].Value.ToString();
 
             // Hiển thị ảnh
             if (CommonBLL.UploadImagebyPartCode(txtParentCode.Text, picParent) == true)
             {
-
-                groupboxParentImage.Text = "Have Image";
+                groupboxParentImage.Text = "Parent Image";
             }
+            else
             {
-                groupboxParentImage.Text = "No Image";
+                groupboxParentImage.Text = "Not found image";
             }
-
-
         }
 
         private void dgvChild_Click(object sender, EventArgs e)
@@ -290,17 +328,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
             picChild.Refresh();
             txtChildCode.Text = dgvChild.CurrentRow.Cells[1].Value.ToString();
             txtChildName.Text = dgvChild.CurrentRow.Cells[2].Value.ToString();
-            
+
             //// -- Hiển thị ảnh
             if (CommonBLL.UploadImagebyPartCode(txtChildCode.Text, picChild) == true)
             {
-                groupboxChildImage.Text = "Have Image";
+                groupboxChildImage.Text = "Child Image";
             }
+            else
             {
-                groupboxChildImage.Text = "No Find Image";
+                groupboxChildImage.Text = "Not found image";
             }
-
-
         }
 
         private void frmFindPart_Load(object sender, EventArgs e)
@@ -311,53 +348,65 @@ namespace PLM_Lynx._03_GUI_User_Interface
             dgvListFile.Columns[1].Name = "Size";
             dgvListFile.Columns[2].Name = "Type";
             dgvListFile.Columns[3].Name = "Created";
-
-
         }
 
         private void dgvSearch_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Khi double click vào cell, hiển thị Part
             // Mở form
-            frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
-            string partcode = dgvSearch.CurrentRow.Cells[0].Value.ToString();
-            frm.ShowDetailInfor(partcode);
-            frm.ShowDialog();
+            if (dgvSearch.Rows.Count > 0)
+            {
+
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvSearch.CurrentRow.Cells[0].Value.ToString();
+                frm.ShowDetailInfor(partcode);
+                frm.ShowDialog();
+            }
         }
 
         private void dgvParent_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
-            string partcode = dgvParent.CurrentRow.Cells[4].Value.ToString();
-            frm.ShowDetailInfor(partcode);
-            frm.ShowDialog();
+            if(dgvParent.Rows.Count >0)
+            {
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvParent.CurrentRow.Cells[0].Value.ToString();
+                frm.ShowDetailInfor(partcode);
+                frm.ShowDialog();
+            }    
+            
         }
 
         private void dgvChild_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
-            string partcode = dgvChild.CurrentRow.Cells[1].Value.ToString();
-            frm.ShowDetailInfor(partcode);
-            frm.ShowDialog();
+            if (dgvChild.Rows.Count == 0)
+            {
+                txtKeySearch.Focus();
+                return;
+            }
+            else
+            {
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvChild.CurrentRow.Cells[1].Value.ToString();
+                frm.ShowDetailInfor(partcode);
+                frm.ShowDialog();
+            }
         }
 
         private void btnThemGanDay_Click(object sender, EventArgs e)
         {
             frmListNear frm = new frmListNear();
             frm.ShowDialog();
-
         }
 
         // private System.Timers.Timer debounceTimer;
         private void txtHighLight_TextChanged(object sender, EventArgs e)
         {
             dgvSearch.Refresh(); // Khi từ khóa thay đổi thì sẽ cập nhật giá trị của datagridview
-
         }
 
         private void dgvSearch_CellPainting(object sender, DataGridViewCellPaintingEventArgs e)
         {
-            // Highlight những từ khóa 
+            // Highlight những từ khóa
             if (e.RowIndex >= 0 && e.ColumnIndex >= 0) // Kiểm tra ô hợp lệ
             {
                 string searchKeyword = txtHighLight.Text; // Lấy từ khóa từ TextBox
@@ -405,7 +454,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void btnFilter_Click(object sender, EventArgs e)
         {
-
         }
 
         private void txtKeySearch_TextChanged(object sender, EventArgs e)
@@ -417,12 +465,12 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             if (dgvChild.Rows.Count == 0)
             {
-                MessageBox.Show("Dữ liệu đang trống");
+                MessageBox.Show(rm.GetString("t3"));  // Dữ liệu đang trống
                 return;
             }
 
-
-            DialogResult kq = MessageBox.Show("Bạn muốn xuất dữ liệu dạng Excel không", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string tb = rm.GetString("t4"); // Bạn có muốn xuất dữ liệu không ? 
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 // Hiển thị SaveFileDialog
@@ -450,35 +498,38 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     // Khi xong thì trả về giá trị cho dgvChild
                     LoadDataChild(idpart);
                 }
-
             }
             else
             {
                 return;
             }
-
         }
 
         //private void btnExportAll_Click(object sender, EventArgs e)
         //{
-            
         //}
 
         private void btnExportFile_Click(object sender, EventArgs e)
         {
-            
-            data._currentPartCode = dgvSearch.CurrentRow.Cells[0].Value.ToString();
-            data._currentPartName = dgvSearch.CurrentRow.Cells[1].Value.ToString();
-            data.listchild = dgvChild.DataSource as DataTable;
-            frmDownloadFile frm = new frmDownloadFile();
+            if (dgvSearch.Rows.Count == 0)
+            {
+                MessageBox.Show(rm.GetString("t3")); // Dữ liệu đang trống
+                txtKeySearch.Focus();
+                return;
+            }
+            else
+            {
+                data._currentPartCode = dgvSearch.CurrentRow.Cells[0].Value.ToString();
+                data._currentPartName = dgvSearch.CurrentRow.Cells[1].Value.ToString();
+                data.listchild = dgvChild.DataSource as DataTable;
+                frmDownloadFile frm = new frmDownloadFile();
 
+                // Lấy dữ liệu partcode hiện tại
 
-            // Lấy dữ liệu partcode hiện tại
-            
-            
-            frm.inputData = data; // Do lưu  giá trị của currentpartcode rồi,, nên lát sẽ lấy lại
-            
-            frm.ShowDialog();
+                frm.inputData = data; // Do lưu  giá trị của currentpartcode rồi,, nên lát sẽ lấy lại
+
+                frm.ShowDialog();
+            }
         }
     }
 }

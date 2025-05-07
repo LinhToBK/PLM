@@ -10,6 +10,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
+using PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 {
@@ -22,12 +26,54 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         private string _oldPartMaterial;
         private string _newPartMaterial;
         private DataTable _tblPartStage = new DataTable();
+
         public int IDProposal;
         public string NameProposal;
+        private RelationPartBLL _relationPartBLL = new RelationPartBLL();
+
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_3_ECO.Lang.Lang_UpdateInforPart", typeof(frmUpdateInforPart).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            labelTitle.Text = rm.GetString("lb1");
+            labelPartCode.Text = rm.GetString("lb2");
+            labelPartName.Text = rm.GetString("lb3");
+            labelPartStage.Text = rm.GetString("lb4");
+            labelPartNewStage.Text = rm.GetString("lb5");
+            labelPartNote.Text = rm.GetString("lb6");
+            labelPartListFile.Text = rm.GetString("lb7");
+            labelNote1.Text = rm.GetString("lb8");
+            labelPartNewListFile.Text = rm.GetString("lb9");
+            btnDeleteFile.Text = rm.GetString("lb10");
+            btnAddNewFile.Text = rm.GetString("lb11");
+            btnUpload.Text = rm.GetString("lb12");
+
+            labelPartMaterial.Text = rm.GetString("lb13");
+            labelPartNewMaterial.Text = rm.GetString("lb14");
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
 
         public frmUpdateInforPart()
         {
             InitializeComponent();
+            LoadLanguage();
         }
 
         //==========================================================================
@@ -43,7 +89,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             using (OpenFileDialog open = new OpenFileDialog())
             {
                 // Giới hạn các định dạng file được chọn
-                open.Title = "Vui lòng chọn file ";
+                open.Title = "Chooose file ";
                 string filternote = @"PDF Files (*.pdf)|*.pdf|";
                 filternote = filternote + @"STP Files (*.stp)|*.stp|";
                 filternote = filternote + @"JPG Files (*.jpg)|*.jpg|";
@@ -79,7 +125,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     }
                     else
                     {
-                        MessageBox.Show("Đã có tệp có phần Entension trùng ");
+                        MessageBox.Show(rm.GetString("t1")); // Đã có tệp có phần Entension trùng 
                         return;
                     }
                 }
@@ -95,6 +141,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             txtPartCode.Text = partcode;
 
             DataTable dt = ecoBLL.GetInforPartBLL(partcode);
+
             // Kiểm tra xem Datatable có dữ liệu không
             if (dt.Rows.Count > 0)
             {
@@ -109,25 +156,28 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 //                p.PartStageID   7
                 txtPartName.Text = dt.Rows[0][1].ToString();
                 txtPartDescript.Text = dt.Rows[0][2].ToString();
-                txtPartLog.Text = dt.Rows[0][4].ToString();
+
                 txtPartStage.Text = dt.Rows[0][3].ToString();
                 txtPartMaterial.Text = dt.Rows[0][6].ToString();
                 _oldPartStage = Convert.ToInt16(dt.Rows[0][7].ToString());
                 _oldPartMaterial = dt.Rows[0][6].ToString();
 
+                LoadListECO(dt.Rows[0][4].ToString());
+                // Cập nhật lên bảng log
+
                 // Cập nhật lên danh sách file
                 if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == false)
                 {
-                    MessageBox.Show("Không thể load folder chứa dữ liệu ");
+                    MessageBox.Show(rm.GetString("t2"));  // Không thể load folder chứa dữ liệu
                 }
                 else
                 {
-                    txtListFileStatus.Text = "Kết nối được với dữ liệu của Part";
+                    txtListFileStatus.Text = rm.GetString("t3"); // "Kết nối được với dữ liệu của Part"
                 }
             }
             else
             {
-                MessageBox.Show("Không lấy được dữ liệu từ Database");
+                MessageBox.Show(rm.GetString("t3"));
                 this.Close();
             }
         }
@@ -137,6 +187,44 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf", ".step", ".prt" };
             string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
             return allowedExtensions.Contains(fileExtension);
+        }
+
+        private void LoadListECO(string PartLog)
+        {
+
+            
+            string[] ecoNo = PartLog.Split('|');
+
+            DataTable dt = new DataTable();
+            // Tạo các cột
+            dt.Columns.Add("ECONo", typeof(int));
+            dt.Columns.Add("ECO Date", typeof(DateTime));
+            dt.Columns.Add("ECO Type", typeof(string));
+
+            // Ghi từng phần tử vào DataTable
+            foreach (string eco in ecoNo)
+            {
+                if (!string.IsNullOrWhiteSpace(eco)) // tránh dòng rỗng
+                {
+                    DataTable ecoinfor = _relationPartBLL.Get_tblECO_BLL(Convert.ToInt32(eco));
+                    if (ecoinfor.Rows.Count > 0)
+                    {
+                        // Tạo một hàng mới
+                        DataRow row = dt.NewRow();
+                        DataRow rowinfor = ecoinfor.Rows[0];
+                        row["ECONo"] = rowinfor[0];
+                        row["ECO Date"] = rowinfor[1];
+                        row["ECO Type"] = rowinfor[2];
+                        dt.Rows.Add(row);
+                    }
+                }
+            }
+
+            dgvECO.DataSource = dt;
+            dgvECO.AllowUserToAddRows = false; // Không cho phép thêm dòng mới
+            dgvECO.Columns[0].Width = 100;
+            dgvECO.Columns[1].Width = 100;
+            dgvECO.Columns[2].Width = 200;
         }
 
         //==========================================================================
@@ -156,13 +244,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi phát sinh khi  mở file : " + ex.Message);
+                MessageBox.Show(rm.GetString("t4") + ex.Message);    // Lỗi phát sinh khi  mở file : 
             }
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn có muốn thoát việc cập nhật không ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string tb = rm.GetString("t5"); // "Bạn có muốn thoát việc cập nhật không ?"
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 this.Close();
@@ -190,13 +279,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Phát sinh lỗi" + ex.Message);
+                    MessageBox.Show("Error : "+ ex.Message);
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn 1 hàng để xóa");
+                MessageBox.Show(rm.GetString("t6"));     // Vui lòng chọn 1 hàng để xóa
             }
         }
 
@@ -234,7 +323,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 }
                 else
                 {
-                    MessageBox.Show($"Tệp không hợp lệ: {file}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Invalid file: {file}", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -263,7 +352,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
             else
             {
-                // MessageBox.Show("Đã có tệp có phần Entension trùng  thì phải ");
+                
                 return;
             }
         }
@@ -279,7 +368,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
             else
             {
-                MessageBox.Show("Không load được danh sách vật liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(rm.GetString("t7"), rm.GetString("t0") , MessageBoxButtons.OK, MessageBoxIcon.Error); // Không load được danh sách vật liệu
             }
 
             // Load giá trị của Stage lên ComboBox
@@ -287,7 +376,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             cboNewStage.Items.Clear();
             if (_tblPartStage.Rows.Count == 0)
             {
-                MessageBox.Show("Không load được danh sách Stage", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(rm.GetString("t8"),rm.GetString("t0") , MessageBoxButtons.OK, MessageBoxIcon.Error);      // Không load được danh sách Stage
             }
             else
             {
@@ -314,14 +403,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         {
             // Bước 1 : Đặt tên các giá trị của ECO
             string p = txtPartCode.Text;
-            if(txtNewMaterial.Text.Length > 20) { MessageBox.Show("Vật liệu mới không được quá 20 ký tự"); return; }
+            if (txtNewMaterial.Text.Length > 20) { MessageBox.Show(rm.GetString("t9")); return; }  // Vật liệu mới không được quá 20 ký tự
             string thongbao;
 
-            thongbao = "Kiểm tra lại các thông tin sau trước khi cập nhật dữ liệu ";
-            thongbao += "\n +) PartName : " + txtPartName.Text;
-            thongbao += "\n +) Part Descript :" + txtPartDescript.Text;
+            thongbao = rm.GetString("t10"); // Kiểm tra lại các thông tin sau trước khi cập nhật dữ liệu
+            thongbao += "\r\n" + rm.GetString("t11") + txtPartName.Text;
+            thongbao += "\r\n" + rm.GetString("t12") + txtPartDescript.Text;
 
-           
             // 1.1  Status cho việc update stage kay không ?
             int s;
             int os = _oldPartStage;
@@ -332,7 +420,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             {
                 s = 1;  // Nếu lớn hơn chứng tỏ sẽ cập nhật stage mới
                 ns = _newPartStage;
-                thongbao += "\n +) Có cập nhật Stage mới : " + cboNewStage.SelectedItem.ToString();
+                thongbao += "\r\n" + rm.GetString("t13") + cboNewStage.SelectedItem.ToString();
             }
             else
             {
@@ -346,7 +434,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             {
                 i = 1;
                 ic = txtNoteMore.Text;
-                thongbao += "\n +) Có cập nhật thêm nội dung " + txtNoteMore.Text;
+                thongbao += "\r\n" + rm.GetString("t14") + txtNoteMore.Text;
             }
             else
             {
@@ -359,7 +447,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             if (om != nm && nm != "")
             {
                 m = 1;
-                thongbao += "\n +) Có cập nhật Vật liệu mới : " + txtNewMaterial.Text;
+                thongbao += "\r\n" +  rm.GetString("t15") + txtNewMaterial.Text;
             }
             else
             {
@@ -371,7 +459,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             if (dgvListUpload.Rows.Count > 1)
             {
                 d = 1;
-                thongbao += "\n +) Có cập nhật bản vẽ mới : ";
+                thongbao += "\r\n" + rm.GetString("t16") ;
             }
             else
             {
@@ -395,7 +483,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     new Tuple<string, object>("d", d),
                     new Tuple<string, object>("od", ""),
                     new Tuple<string, object>("nd", ""),
-
                 };
             Dictionary<string, object> jsonData = new Dictionary<string, object>();
             foreach (var row in tableData)
@@ -416,43 +503,50 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             DialogResult kq = MessageBox.Show(thongbao, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
-                // Bước 3.1 Ghi ECO vào tblECO 
+                // Bước 3.1 Ghi ECO vào tblECO
                 if (ecoBLL.InsertNewECO_BLL(NewECONo, IDProposal, NameProposal, ECOTypeID, ECOContent) == true)
                 {
-                   if(d == 1)
+                    if (d == 1)
                     {
                         // MessageBox.Show("Tiến hàng copy vào thư mục tạm thời");
                         // Nếu cập nhật bản vẽ   => Copy file vào thư mục ECOTEMP
-                        if(ecoBLL.CopyFile_to_ECOTEMP_BLL(NewECONo.ToString(),dgvListUpload) == true )
+                        if (ecoBLL.CopyFile_to_ECOTEMP_BLL(NewECONo.ToString(), dgvListUpload) == true)
                         {
-                            MessageBox.Show("Đã copy thành công vào thư mục ECOTEMP \n Tạo request [ Cập nhật Part ] thành công ");
+                            //MessageBox.Show("Đã copy thành công vào thư mục ECOTEMP \n Tạo request [ Cập nhật Part ] thành công ");
+                            MessageBox.Show(rm.GetString("t17"));
                         }
                         else
                         {
-                            MessageBox.Show("Không thể copy file vào thư mục ECOTEMP");
-                            //Xóa ECO vừa tạo 
+                            MessageBox.Show(rm.GetString("t18"));  // Không thể copy file vào thư mục ECOTEMP
+                            //Xóa ECO vừa tạo
                             ecoBLL.DeleteECO_BLL(NewECONo);
                             return;
                         }
-
                     }
-                   else
+                    else
                     {
-                        MessageBox.Show("Tạo request [ Cập nhật Part ] thành công");
-                    }    
+                        MessageBox.Show(rm.GetString("t19"));  // Tạo request [ Cập nhật Part ] thành công
+                    }
                 }
-
             }
             else
             {
                 return;
             }
-
         }
 
         private void cboMaterialLib_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtNewMaterial.Text = cboMaterialLib.SelectedItem.ToString();
+        }
+
+        private void dgvECO_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Lấy thong tin ECONo của dòng được chọn
+            int ECONo = Convert.ToInt32(dgvECO.CurrentRow.Cells[0].Value.ToString());
+            frmECO_Infor_Detail frm = new frmECO_Infor_Detail();
+            frm.ECONo = ECONo;
+            frm.ShowDialog();
         }
     }
 }

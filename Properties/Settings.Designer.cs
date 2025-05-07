@@ -23,27 +23,14 @@ namespace PLM_Lynx.Properties {
             }
         }
         
-        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_DRAWING\\DATA\\")]
-        public string LinkDataPart {
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=61.14.233.166;Initial Catalog=SAMPLE_0;User ID=sa;;Password=\"yourStro" +
+            "ngPass@123003\";Trust Server Certificate=True; Connect Timeout=60;")]
+        public string Datacon {
             get {
-                return ((string)(this["LinkDataPart"]));
-            }
-            set {
-                this["LinkDataPart"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_DRAWING\\TRASH\\")]
-        public string TrashDataPart {
-            get {
-                return ((string)(this["TrashDataPart"]));
-            }
-            set {
-                this["TrashDataPart"] = value;
+                return ((string)(this["Datacon"]));
             }
         }
         
@@ -74,14 +61,51 @@ namespace PLM_Lynx.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=61.14.233.166;Initial Catalog=SAMPLE_0;User ID=sa;;Password=\"yourStro" +
-            "ngPass@123003\";Trust Server Certificate=True; Connect Timeout=60;")]
-        public string Datacon {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_0\\DATA\\")]
+        public string LinkDataPart {
             get {
-                return ((string)(this["Datacon"]));
+                return ((string)(this["LinkDataPart"]));
+            }
+            set {
+                this["LinkDataPart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_0\\TRASH\\")]
+        public string TrashDataPart {
+            get {
+                return ((string)(this["TrashDataPart"]));
+            }
+            set {
+                this["TrashDataPart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("en")]
+        public string Language {
+            get {
+                return ((string)(this["Language"]));
+            }
+            set {
+                this["Language"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_0\\PODATA\\")]
+        public string POData {
+            get {
+                return ((string)(this["POData"]));
+            }
+            set {
+                this["POData"] = value;
             }
         }
     }

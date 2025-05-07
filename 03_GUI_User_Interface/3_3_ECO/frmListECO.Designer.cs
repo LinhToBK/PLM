@@ -36,21 +36,21 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.txtECOContent = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelType = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelDate = new System.Windows.Forms.Label();
+            this.labelNo = new System.Windows.Forms.Label();
             this.txtECOType = new System.Windows.Forms.TextBox();
             this.txtECOStatus = new System.Windows.Forms.TextBox();
             this.txtECOProposal = new System.Windows.Forms.TextBox();
             this.txtECODate = new System.Windows.Forms.TextBox();
             this.txtECONo = new System.Windows.Forms.TextBox();
             this.dgvECOContent = new System.Windows.Forms.DataGridView();
-            this.panel2 = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnApprove = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -60,7 +60,7 @@
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvECOContent)).BeginInit();
-            this.panel2.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -130,11 +130,11 @@
             this.tableLayoutPanel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 55F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 32.5F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 12.5F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.dgvECOContent, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.panel2, 2, 0);
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel1, 2, 0);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -148,11 +148,11 @@
             this.panel1.AutoScroll = true;
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(224)))), ((int)(((byte)(224)))), ((int)(((byte)(224)))));
             this.panel1.Controls.Add(this.txtECOContent);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label1);
+            this.panel1.Controls.Add(this.labelType);
+            this.panel1.Controls.Add(this.labelStatus);
+            this.panel1.Controls.Add(this.labelName);
+            this.panel1.Controls.Add(this.labelDate);
+            this.panel1.Controls.Add(this.labelNo);
             this.panel1.Controls.Add(this.txtECOType);
             this.panel1.Controls.Add(this.txtECOStatus);
             this.panel1.Controls.Add(this.txtECOProposal);
@@ -173,50 +173,50 @@
             this.txtECOContent.Size = new System.Drawing.Size(264, 132);
             this.txtECOContent.TabIndex = 2;
             // 
-            // label5
+            // labelType
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(289, 12);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(41, 23);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Loại";
+            this.labelType.AutoSize = true;
+            this.labelType.Location = new System.Drawing.Point(289, 12);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(41, 23);
+            this.labelType.TabIndex = 1;
+            this.labelType.Text = "Loại";
             // 
-            // label4
+            // labelStatus
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 165);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(87, 23);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Trạng thái";
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(9, 165);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(87, 23);
+            this.labelStatus.TabIndex = 1;
+            this.labelStatus.Text = "Trạng thái";
             // 
-            // label3
+            // labelName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(9, 114);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(87, 23);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Người tạo";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(9, 114);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(87, 23);
+            this.labelName.TabIndex = 1;
+            this.labelName.Text = "Người tạo";
             // 
-            // label2
+            // labelDate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(9, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(79, 23);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "ECODate";
+            this.labelDate.AutoSize = true;
+            this.labelDate.Location = new System.Drawing.Point(9, 63);
+            this.labelDate.Name = "labelDate";
+            this.labelDate.Size = new System.Drawing.Size(79, 23);
+            this.labelDate.TabIndex = 1;
+            this.labelDate.Text = "ECODate";
             // 
-            // label1
+            // labelNo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(9, 12);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 23);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "ECO No";
+            this.labelNo.AutoSize = true;
+            this.labelNo.Location = new System.Drawing.Point(9, 12);
+            this.labelNo.Name = "labelNo";
+            this.labelNo.Size = new System.Drawing.Size(71, 23);
+            this.labelNo.TabIndex = 1;
+            this.labelNo.Text = "ECO No";
             // 
             // txtECOType
             // 
@@ -267,26 +267,14 @@
             this.dgvECOContent.Name = "dgvECOContent";
             this.dgvECOContent.RowHeadersWidth = 51;
             this.dgvECOContent.RowTemplate.Height = 24;
-            this.dgvECOContent.Size = new System.Drawing.Size(316, 211);
+            this.dgvECOContent.Size = new System.Drawing.Size(343, 211);
             this.dgvECOContent.TabIndex = 1;
-            // 
-            // panel2
-            // 
-            this.panel2.AutoScroll = true;
-            this.panel2.Controls.Add(this.btnExit);
-            this.panel2.Controls.Add(this.btnCancel);
-            this.panel2.Controls.Add(this.btnApprove);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(916, 3);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(156, 211);
-            this.panel2.TabIndex = 2;
             // 
             // btnExit
             // 
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(23, 148);
+            this.btnExit.Location = new System.Drawing.Point(3, 101);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(108, 43);
             this.btnExit.TabIndex = 0;
@@ -299,7 +287,7 @@
             this.btnCancel.Enabled = false;
             this.btnCancel.Image = ((System.Drawing.Image)(resources.GetObject("btnCancel.Image")));
             this.btnCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCancel.Location = new System.Drawing.Point(23, 80);
+            this.btnCancel.Location = new System.Drawing.Point(3, 52);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(108, 43);
             this.btnCancel.TabIndex = 0;
@@ -313,7 +301,7 @@
             this.btnApprove.Enabled = false;
             this.btnApprove.Image = ((System.Drawing.Image)(resources.GetObject("btnApprove.Image")));
             this.btnApprove.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnApprove.Location = new System.Drawing.Point(23, 12);
+            this.btnApprove.Location = new System.Drawing.Point(3, 3);
             this.btnApprove.Name = "btnApprove";
             this.btnApprove.Size = new System.Drawing.Size(108, 43);
             this.btnApprove.TabIndex = 0;
@@ -321,6 +309,18 @@
             this.btnApprove.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnApprove.UseVisualStyleBackColor = true;
             this.btnApprove.Click += new System.EventHandler(this.btnApprove_Click);
+            // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.AutoScroll = true;
+            this.flowLayoutPanel1.Controls.Add(this.btnApprove);
+            this.flowLayoutPanel1.Controls.Add(this.btnCancel);
+            this.flowLayoutPanel1.Controls.Add(this.btnExit);
+            this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(943, 3);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(129, 211);
+            this.flowLayoutPanel1.TabIndex = 2;
             // 
             // frmListECO
             // 
@@ -344,7 +344,7 @@
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvECOContent)).EndInit();
-            this.panel2.ResumeLayout(false);
+            this.flowLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -356,22 +356,22 @@
         private System.Windows.Forms.ComboBox cboListNear;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelType;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelDate;
+        private System.Windows.Forms.Label labelNo;
         private System.Windows.Forms.TextBox txtECOType;
         private System.Windows.Forms.TextBox txtECOStatus;
         private System.Windows.Forms.TextBox txtECOProposal;
         private System.Windows.Forms.TextBox txtECODate;
         private System.Windows.Forms.TextBox txtECONo;
         private System.Windows.Forms.DataGridView dgvECOContent;
-        private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnApprove;
         private System.Windows.Forms.TextBox txtECOContent;
         private Zuby.ADGV.AdvancedDataGridView dgvListECO;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
     }
 }

@@ -12,6 +12,9 @@ using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using PLM_Lynx._03_GUI_User_Interface._3_5_Purchase;
 using System.IO;
 using PLM_Lynx._03_GUI_User_Interface._3_6_Help;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
 {
@@ -19,7 +22,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
     {
         // Kế thừa lớp DangNhapBLL.cs
         private DangNhapBLL userBLL = new DangNhapBLL();
-        
 
         private string LicencePath = @"C:\ProgramData\window.lic";
 
@@ -29,6 +31,32 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
         public frmLogin()
         {
             InitializeComponent();
+            LoadLanguage(); // Load ngôn ngữ từ ResourceManager
+        }
+
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+            rm = new ResourceManager("PLM_Lynx.Strings", typeof(frmLogin).Assembly);
+            this.Text = rm.GetString("1.2.6");
+            groupBoxInfor.Text = rm.GetString("1.2.7");
+            labelUser.Text = rm.GetString("1.2.8");
+            labelPass.Text = rm.GetString("1.2.9");
+            btnDangNhap.Text = rm.GetString("1.2.10");
+            btnThoat.Text = rm.GetString("1.2.11");
+
+            // Lưu lại lựa chọn ngôn ngữ
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
         }
 
         // ===========================================================
@@ -38,7 +66,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        /// 
+        ///
         // Đầu tiền kiểm tra xem có tồn tại file license không ?
         // Nếu chưa tồn tại thì tạo mới và ghi ngày hiện tại vào file
         // Nếu đã tồn tại thì kiểm tra xem ngày hiện tại có
@@ -54,7 +82,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             else
             {
                 string savedDate = File.ReadLines(LicencePath).FirstOrDefault();
-                
+
                 string kichhoatdate = File.ReadLines(LicencePath).Skip(1).FirstOrDefault();
 
                 if (kichhoatdate == savedDate)
@@ -68,7 +96,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
                     if ((DateTime.Now - activationDate).TotalDays > 365)
                     {
                         DateTime expireddate = activationDate.AddDays(365);
-                        string tb1 = "Hạn sử dụng miễn phí đã hết sau ngày " + expireddate.ToString("MM-dd-yyyy");
+                        BeginDate = expireddate.ToString("MM-dd-yyyy");
+                        string tb1 = rm.GetString("1.2.1") + expireddate.ToString("MM-dd-yyyy");
                         //MessageBox.Show(tb, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         MessageBox.Show(tb1);
                         licstatus = false;
@@ -82,9 +111,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             }
         }
 
-
-
-
         // ===========================================================
         // ===========================================================
         private void btnDangNhap_Click(object sender, EventArgs e)
@@ -96,7 +122,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             bool IsStaff = userBLL.CheckDangnhapBLL(username, password);
             if (IsStaff)
             {
-                MessageBox.Show("Đăng nhập thành công ");
+                MessageBox.Show(rm.GetString("1.2.2"));
 
                 frmMain frm = new frmMain();
                 frm.tennguoidung = username;
@@ -111,13 +137,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             }
             else
             {
-                MessageBox.Show("Tên đăng nhập hoặc mất khẩu không đúng");
+                MessageBox.Show(rm.GetString("1.2.12"));
             }
         }
 
         private void btnThoat_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Không mở ứng dụng nữa à ? ", "Thông báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(rm.GetString("1.2.3"), rm.GetString("1.2.4"), MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
             if (result == DialogResult.OK)
             {
                 Application.Exit();
@@ -148,7 +174,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
 
         private void GetImageLogo()
         {
-
             string ImageCompanyPath = Environment.CurrentDirectory;
             ImageCompanyPath = ImageCompanyPath + @"\04_CommonDoc\companylogo.jpg";
             if (File.Exists(ImageCompanyPath))
@@ -158,8 +183,39 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             }
             else
             {
-                MessageBox.Show("Không tìm thấy file Logo.png trong thư mục Resources");
+                MessageBox.Show(rm.GetString("1.2.5"));
             }
+        }
+
+        private void btnSetting_Click(object sender, EventArgs e)
+        {
+            // Mở nơi lưu file cài đặt
+            string path = Environment.CurrentDirectory;
+            string tb = "Do you want to open the setting folder ? \r\n If opening the config file, application will be closed. ";
+            DialogResult kq = MessageBox.Show(tb, "Open folder ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(kq == DialogResult.Yes)
+            {
+                // System.Diagnostics.Process.Start("explorer.exe", path);
+                // Lọc chỉ hiển thị file .config
+                string[] files = Directory.GetFiles(path, "*.config");
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+                    if (fileName == "PLM_Lynx.exe.config")
+                    {
+                        System.Diagnostics.Process.Start("explorer.exe", file);
+                        break;
+                    }
+                }
+                // Đóng ứng dụng
+                Application.Exit();
+
+            }
+        }
+
+        private void btnTest_Click(object sender, EventArgs e)
+        {
+         
         }
     }
 }

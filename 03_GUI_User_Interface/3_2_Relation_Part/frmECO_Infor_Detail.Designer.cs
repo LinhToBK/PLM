@@ -28,92 +28,92 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelECONo = new System.Windows.Forms.Label();
+            this.labelECODate = new System.Windows.Forms.Label();
+            this.labelLog = new System.Windows.Forms.Label();
+            this.labelRequester = new System.Windows.Forms.Label();
+            this.labelApprover = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelType = new System.Windows.Forms.Label();
             this.dgvECOContent = new Zuby.ADGV.AdvancedDataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.dgvECOListFile = new Zuby.ADGV.AdvancedDataGridView();
-            this.txtECONo = new System.Windows.Forms.TextBox();
-            this.txtECODate = new System.Windows.Forms.TextBox();
-            this.txtRequester = new System.Windows.Forms.TextBox();
             this.txtApprover = new System.Windows.Forms.TextBox();
-            this.txtECOLog = new System.Windows.Forms.TextBox();
-            this.txtECOStatus = new System.Windows.Forms.TextBox();
             this.txtECOType = new System.Windows.Forms.TextBox();
+            this.txtECOStatus = new System.Windows.Forms.TextBox();
+            this.txtRequester = new System.Windows.Forms.TextBox();
+            this.txtECOLog = new System.Windows.Forms.TextBox();
+            this.txtECODate = new System.Windows.Forms.TextBox();
+            this.txtECONo = new System.Windows.Forms.TextBox();
+            this.dgvECOListFile = new Zuby.ADGV.AdvancedDataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvECOContent)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvECOListFile)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelECONo
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 18);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(71, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "ECO No";
+            this.labelECONo.AutoSize = true;
+            this.labelECONo.Location = new System.Drawing.Point(16, 18);
+            this.labelECONo.Name = "labelECONo";
+            this.labelECONo.Size = new System.Drawing.Size(71, 23);
+            this.labelECONo.TabIndex = 0;
+            this.labelECONo.Text = "ECO No";
             // 
-            // label2
+            // labelECODate
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 74);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 23);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "ECO Date";
+            this.labelECODate.AutoSize = true;
+            this.labelECODate.Location = new System.Drawing.Point(16, 74);
+            this.labelECODate.Name = "labelECODate";
+            this.labelECODate.Size = new System.Drawing.Size(84, 23);
+            this.labelECODate.TabIndex = 0;
+            this.labelECODate.Text = "ECO Date";
             // 
-            // label3
+            // labelLog
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(307, 18);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(76, 23);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "ECO Log";
+            this.labelLog.AutoSize = true;
+            this.labelLog.Location = new System.Drawing.Point(307, 18);
+            this.labelLog.Name = "labelLog";
+            this.labelLog.Size = new System.Drawing.Size(76, 23);
+            this.labelLog.TabIndex = 0;
+            this.labelLog.Text = "ECO Log";
             // 
-            // label4
+            // labelRequester
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 130);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 23);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Requester";
+            this.labelRequester.AutoSize = true;
+            this.labelRequester.Location = new System.Drawing.Point(16, 130);
+            this.labelRequester.Name = "labelRequester";
+            this.labelRequester.Size = new System.Drawing.Size(86, 23);
+            this.labelRequester.TabIndex = 0;
+            this.labelRequester.Text = "Requester";
             // 
-            // label5
+            // labelApprover
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(16, 186);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(80, 23);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Approver";
+            this.labelApprover.AutoSize = true;
+            this.labelApprover.Location = new System.Drawing.Point(16, 186);
+            this.labelApprover.Name = "labelApprover";
+            this.labelApprover.Size = new System.Drawing.Size(80, 23);
+            this.labelApprover.TabIndex = 0;
+            this.labelApprover.Text = "Approver";
             // 
-            // label6
+            // labelStatus
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(307, 130);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(94, 23);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "ECO Status";
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(307, 130);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(94, 23);
+            this.labelStatus.TabIndex = 0;
+            this.labelStatus.Text = "ECO Status";
             // 
-            // label7
+            // labelType
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(307, 186);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(83, 23);
-            this.label7.TabIndex = 0;
-            this.label7.Text = "ECO Type";
+            this.labelType.AutoSize = true;
+            this.labelType.Location = new System.Drawing.Point(307, 186);
+            this.labelType.Name = "labelType";
+            this.labelType.Size = new System.Drawing.Size(83, 23);
+            this.labelType.TabIndex = 0;
+            this.labelType.Text = "ECO Type";
             // 
             // dgvECOContent
             // 
@@ -159,18 +159,68 @@
             this.panel1.Controls.Add(this.txtECOLog);
             this.panel1.Controls.Add(this.txtECODate);
             this.panel1.Controls.Add(this.txtECONo);
-            this.panel1.Controls.Add(this.label5);
-            this.panel1.Controls.Add(this.label1);
-            this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.label6);
-            this.panel1.Controls.Add(this.label7);
-            this.panel1.Controls.Add(this.label4);
+            this.panel1.Controls.Add(this.labelApprover);
+            this.panel1.Controls.Add(this.labelECONo);
+            this.panel1.Controls.Add(this.labelECODate);
+            this.panel1.Controls.Add(this.labelLog);
+            this.panel1.Controls.Add(this.labelStatus);
+            this.panel1.Controls.Add(this.labelType);
+            this.panel1.Controls.Add(this.labelRequester);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(668, 235);
             this.panel1.TabIndex = 2;
+            // 
+            // txtApprover
+            // 
+            this.txtApprover.Location = new System.Drawing.Point(107, 182);
+            this.txtApprover.Name = "txtApprover";
+            this.txtApprover.Size = new System.Drawing.Size(190, 30);
+            this.txtApprover.TabIndex = 2;
+            // 
+            // txtECOType
+            // 
+            this.txtECOType.Location = new System.Drawing.Point(407, 182);
+            this.txtECOType.Name = "txtECOType";
+            this.txtECOType.Size = new System.Drawing.Size(252, 30);
+            this.txtECOType.TabIndex = 2;
+            // 
+            // txtECOStatus
+            // 
+            this.txtECOStatus.Location = new System.Drawing.Point(407, 126);
+            this.txtECOStatus.Name = "txtECOStatus";
+            this.txtECOStatus.Size = new System.Drawing.Size(252, 30);
+            this.txtECOStatus.TabIndex = 2;
+            // 
+            // txtRequester
+            // 
+            this.txtRequester.Location = new System.Drawing.Point(107, 126);
+            this.txtRequester.Name = "txtRequester";
+            this.txtRequester.Size = new System.Drawing.Size(190, 30);
+            this.txtRequester.TabIndex = 2;
+            // 
+            // txtECOLog
+            // 
+            this.txtECOLog.Location = new System.Drawing.Point(407, 14);
+            this.txtECOLog.Multiline = true;
+            this.txtECOLog.Name = "txtECOLog";
+            this.txtECOLog.Size = new System.Drawing.Size(252, 86);
+            this.txtECOLog.TabIndex = 2;
+            // 
+            // txtECODate
+            // 
+            this.txtECODate.Location = new System.Drawing.Point(107, 70);
+            this.txtECODate.Name = "txtECODate";
+            this.txtECODate.Size = new System.Drawing.Size(190, 30);
+            this.txtECODate.TabIndex = 2;
+            // 
+            // txtECONo
+            // 
+            this.txtECONo.Location = new System.Drawing.Point(107, 14);
+            this.txtECONo.Name = "txtECONo";
+            this.txtECONo.Size = new System.Drawing.Size(190, 30);
+            this.txtECONo.TabIndex = 2;
             // 
             // dgvECOListFile
             // 
@@ -191,56 +241,6 @@
             this.dgvECOListFile.TabIndex = 3;
             this.dgvECOListFile.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvECOListFile_CellClick);
             this.dgvECOListFile.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvECOListFile_CellDoubleClick);
-            // 
-            // txtECONo
-            // 
-            this.txtECONo.Location = new System.Drawing.Point(107, 14);
-            this.txtECONo.Name = "txtECONo";
-            this.txtECONo.Size = new System.Drawing.Size(190, 30);
-            this.txtECONo.TabIndex = 2;
-            // 
-            // txtECODate
-            // 
-            this.txtECODate.Location = new System.Drawing.Point(107, 70);
-            this.txtECODate.Name = "txtECODate";
-            this.txtECODate.Size = new System.Drawing.Size(190, 30);
-            this.txtECODate.TabIndex = 2;
-            // 
-            // txtRequester
-            // 
-            this.txtRequester.Location = new System.Drawing.Point(107, 126);
-            this.txtRequester.Name = "txtRequester";
-            this.txtRequester.Size = new System.Drawing.Size(190, 30);
-            this.txtRequester.TabIndex = 2;
-            // 
-            // txtApprover
-            // 
-            this.txtApprover.Location = new System.Drawing.Point(107, 182);
-            this.txtApprover.Name = "txtApprover";
-            this.txtApprover.Size = new System.Drawing.Size(190, 30);
-            this.txtApprover.TabIndex = 2;
-            // 
-            // txtECOLog
-            // 
-            this.txtECOLog.Location = new System.Drawing.Point(407, 14);
-            this.txtECOLog.Multiline = true;
-            this.txtECOLog.Name = "txtECOLog";
-            this.txtECOLog.Size = new System.Drawing.Size(252, 86);
-            this.txtECOLog.TabIndex = 2;
-            // 
-            // txtECOStatus
-            // 
-            this.txtECOStatus.Location = new System.Drawing.Point(407, 126);
-            this.txtECOStatus.Name = "txtECOStatus";
-            this.txtECOStatus.Size = new System.Drawing.Size(252, 30);
-            this.txtECOStatus.TabIndex = 2;
-            // 
-            // txtECOType
-            // 
-            this.txtECOType.Location = new System.Drawing.Point(407, 182);
-            this.txtECOType.Name = "txtECOType";
-            this.txtECOType.Size = new System.Drawing.Size(252, 30);
-            this.txtECOType.TabIndex = 2;
             // 
             // frmECO_Infor_Detail
             // 
@@ -266,13 +266,13 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelECONo;
+        private System.Windows.Forms.Label labelECODate;
+        private System.Windows.Forms.Label labelLog;
+        private System.Windows.Forms.Label labelRequester;
+        private System.Windows.Forms.Label labelApprover;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Label labelType;
         private Zuby.ADGV.AdvancedDataGridView dgvECOContent;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Panel panel1;

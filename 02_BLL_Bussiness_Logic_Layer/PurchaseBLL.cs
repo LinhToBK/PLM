@@ -15,9 +15,9 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         private PurchaseDAL purchaseDAL = new PurchaseDAL();
         private MakeNewPO_DAL makeNewPODAL_  = new MakeNewPO_DAL();
 
-        public bool CapnhatPriceBLL(string PartCode, string PartPrice, string ExportPrice)
+        public bool CapnhatPriceBLL(string PartCode, string PartPrice, string ExportPrice, string username)
         {
-            return purchaseDAL.CapnhatPriceDAL(PartCode, PartPrice, ExportPrice);
+            return purchaseDAL.CapnhatPriceDAL(PartCode, PartPrice, ExportPrice, username);
         }
 
         public tblUsers GetUserInfor(string staffname)
@@ -98,6 +98,105 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         public bool UpdateStatusPO_BLL(string POCode, string NewStatus)
         {
             return purchaseDAL.UpdateStatusPO_DAL(POCode, NewStatus);
+        }
+
+        public bool CheckFolderExist(string POCode)
+        {
+            bool status = false;
+            // MessageBox.Show("CheckExist: " + POCode);
+            POCode = POCode.Replace("/", "_");
+            string[] devide = POCode.Split('-');
+            string POYear = devide[0];
+            string POMonth = devide[1];
+            string POPath = Properties.Settings.Default.POData;
+
+            // Kiểm tra đường dẫn, nếu không có thì tạo mới
+            if (!System.IO.Directory.Exists(POPath))
+            {
+                //System.IO.Directory.CreateDirectory(POPath);
+                // Kiểm tra điều kiện FolderData phải chung với đường dẫn của file config
+                status = false;
+            }
+            else
+            {
+                // Kiểm tra đường dẫn năm, nếu không có thì tạo mới
+                if (!System.IO.Directory.Exists(POPath + "\\" + POYear))
+                {
+                    System.IO.Directory.CreateDirectory(POPath + "\\" + POYear);
+                    status = false;
+                }
+                // Kiểm tra đường dẫn tháng, nếu không có thì tạo mới
+                if (!System.IO.Directory.Exists(POPath + "\\" + POYear + "\\" + POMonth))
+                {
+                    System.IO.Directory.CreateDirectory(POPath + "\\" + POYear + "\\" + POMonth);
+                    status = false;
+                }
+                // Kiểm tra đường dẫn PO, nếu không có thì tạo mới
+                if (!System.IO.Directory.Exists(POPath + "\\" + POYear + "\\" + POMonth + "\\" + POCode))
+                {
+                    System.IO.Directory.CreateDirectory(POPath + "\\" + POYear + "\\" + POMonth + "\\" + POCode);
+                    status = false;
+                }
+                else
+                {
+                    status = true;
+                }
+            }
+
+            return status;
+
+        }
+
+        public DataTable GetFileList(string POCode)
+        {
+            POCode = POCode.Replace("/", "_");
+            string[] devide = POCode.Split('-');
+            string POYear = devide[0];
+            string POMonth = devide[1];
+            string POPath = Properties.Settings.Default.POData;
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Name");
+            dt.Columns.Add("Exension");
+            dt.Columns.Add("Path");
+            dt.Columns.Add("Size");
+            dt.Columns.Add("Date");
+
+            if (System.IO.Directory.Exists(POPath + "\\" + POYear + "\\" + POMonth + "\\" + POCode))
+            {
+                System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(POPath + "\\" + POYear + "\\" + POMonth + "\\" + POCode);
+                foreach (var file in dir.GetFiles())
+                {
+                    DataRow dr = dt.NewRow();
+                    
+                    dr["Name"] = System.IO.Path.GetFileNameWithoutExtension(file.Name);
+                    dr["Path"] = file.FullName;
+                    dr["Size"] = file.Length / 1024;
+                    dr["Date"] = file.LastWriteTime.ToString();
+                    dr["Exension"] = file.Extension;
+                    dt.Rows.Add(dr);
+                }
+            }
+            return dt;
+        }
+
+        public string GetFolderPONO(string POCode)
+        {
+            POCode = POCode.Replace("/", "_");
+            string[] devide = POCode.Split('-');
+            string POYear = devide[0];
+            string POMonth = devide[1];
+            string POPath = Properties.Settings.Default.POData;
+            string path = "";
+            if (System.IO.Directory.Exists(POPath + "\\" + POYear + "\\" + POMonth + "\\" + POCode))
+            {
+                path = POPath + "\\" + POYear + "\\" + POMonth + "\\" + POCode;
+            }
+            return path;
+        }
+
+        public DataTable GetChildPartBLL (int IDPart)
+        {
+            return purchaseDAL.GetChildPartDAL(IDPart);
         }
 
     }

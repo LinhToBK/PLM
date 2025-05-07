@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmUserGuide));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,6 +39,9 @@
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBox6 = new System.Windows.Forms.TextBox();
+            this.cboLanguage = new System.Windows.Forms.ComboBox();
+            this.buttonApply = new System.Windows.Forms.Button();
+            this.btnOpenPDF = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -79,10 +83,10 @@
             // textBox1
             // 
             this.textBox1.Enabled = false;
-            this.textBox1.Location = new System.Drawing.Point(25, 259);
+            this.textBox1.Location = new System.Drawing.Point(25, 245);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(441, 65);
+            this.textBox1.Size = new System.Drawing.Size(313, 95);
             this.textBox1.TabIndex = 1;
             this.textBox1.Text = "+) Cách dùng em đã ghi lại và up lên youtube, mọi người truy cập vào đường link y" +
     "outube để xem.";
@@ -90,12 +94,13 @@
             // textBox2
             // 
             this.textBox2.Enabled = false;
-            this.textBox2.Location = new System.Drawing.Point(25, 360);
+            this.textBox2.Location = new System.Drawing.Point(25, 359);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(441, 65);
+            this.textBox2.Size = new System.Drawing.Size(441, 87);
             this.textBox2.TabIndex = 1;
-            this.textBox2.Text = "@ Copyright belongs to the design.\r\nAll rights reserved.";
+            this.textBox2.Text = "@ Copyright belongs to the designer.\r\nAll icons from website: https://icons8.com/" +
+    "\r\nAll rights reserved.";
             // 
             // textBox3
             // 
@@ -129,12 +134,54 @@
             this.textBox6.TabIndex = 2;
             this.textBox6.Text = "Tô Văn Linh";
             // 
+            // cboLanguage
+            // 
+            this.cboLanguage.FormattingEnabled = true;
+            this.cboLanguage.Items.AddRange(new object[] {
+            "English",
+            "Vietnamese",
+            "Korean"});
+            this.cboLanguage.Location = new System.Drawing.Point(345, 18);
+            this.cboLanguage.Name = "cboLanguage";
+            this.cboLanguage.Size = new System.Drawing.Size(121, 31);
+            this.cboLanguage.TabIndex = 3;
+            // 
+            // buttonApply
+            // 
+            this.buttonApply.AutoSize = true;
+            this.buttonApply.Image = ((System.Drawing.Image)(resources.GetObject("buttonApply.Image")));
+            this.buttonApply.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonApply.Location = new System.Drawing.Point(360, 75);
+            this.buttonApply.Name = "buttonApply";
+            this.buttonApply.Size = new System.Drawing.Size(90, 37);
+            this.buttonApply.TabIndex = 4;
+            this.buttonApply.Text = "Apply";
+            this.buttonApply.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.buttonApply.UseVisualStyleBackColor = true;
+            this.buttonApply.Click += new System.EventHandler(this.buttonApply_Click);
+            // 
+            // btnOpenPDF
+            // 
+            this.btnOpenPDF.Image = ((System.Drawing.Image)(resources.GetObject("btnOpenPDF.Image")));
+            this.btnOpenPDF.ImageAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.btnOpenPDF.Location = new System.Drawing.Point(360, 245);
+            this.btnOpenPDF.Name = "btnOpenPDF";
+            this.btnOpenPDF.Size = new System.Drawing.Size(106, 95);
+            this.btnOpenPDF.TabIndex = 5;
+            this.btnOpenPDF.Text = "Open PDF User Guide";
+            this.btnOpenPDF.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnOpenPDF.UseVisualStyleBackColor = true;
+            this.btnOpenPDF.Click += new System.EventHandler(this.btnOpenPDF_Click);
+            // 
             // frmUserGuide
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(486, 458);
+            this.Controls.Add(this.btnOpenPDF);
+            this.Controls.Add(this.buttonApply);
+            this.Controls.Add(this.cboLanguage);
             this.Controls.Add(this.textBox6);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBox4);
@@ -150,6 +197,7 @@
             this.Name = "frmUserGuide";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "User Guide";
+            this.Load += new System.EventHandler(this.frmUserGuide_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -167,5 +215,8 @@
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox5;
         private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.ComboBox cboLanguage;
+        private System.Windows.Forms.Button buttonApply;
+        private System.Windows.Forms.Button btnOpenPDF;
     }
 }

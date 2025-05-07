@@ -33,6 +33,7 @@ namespace PLM_Lynx
                 if (kq == DialogResult.Yes)
                 {
                     frmEnterLicencesCode frmlic = new frmEnterLicencesCode();
+                    frmlic.begindate = frm.BeginDate;
                     frmlic.ShowDialog();
                 }
                 else

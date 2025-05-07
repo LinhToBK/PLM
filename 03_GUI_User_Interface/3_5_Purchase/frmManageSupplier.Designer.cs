@@ -28,12 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManageSupplier));
+            this.labelName = new System.Windows.Forms.Label();
+            this.labelPhone = new System.Windows.Forms.Label();
+            this.labelTax = new System.Windows.Forms.Label();
+            this.labelRepresentative = new System.Windows.Forms.Label();
+            this.labelLocation = new System.Windows.Forms.Label();
+            this.labelNote = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnSaveChange = new System.Windows.Forms.Button();
@@ -56,59 +57,59 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvSupplier)).BeginInit();
             this.SuspendLayout();
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(22, 20);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 23);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Supplier Name";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(22, 20);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(123, 23);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Supplier Name";
             // 
-            // label2
+            // labelPhone
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(22, 70);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(126, 23);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Supplier Phone";
+            this.labelPhone.AutoSize = true;
+            this.labelPhone.Location = new System.Drawing.Point(22, 70);
+            this.labelPhone.Name = "labelPhone";
+            this.labelPhone.Size = new System.Drawing.Size(126, 23);
+            this.labelPhone.TabIndex = 0;
+            this.labelPhone.Text = "Supplier Phone";
             // 
-            // label3
+            // labelTax
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(413, 70);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(101, 23);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Supplier Tax";
+            this.labelTax.AutoSize = true;
+            this.labelTax.Location = new System.Drawing.Point(413, 70);
+            this.labelTax.Name = "labelTax";
+            this.labelTax.Size = new System.Drawing.Size(101, 23);
+            this.labelTax.TabIndex = 0;
+            this.labelTax.Text = "Supplier Tax";
             // 
-            // label4
+            // labelRepresentative
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(413, 20);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(189, 23);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Supplier Representative";
+            this.labelRepresentative.AutoSize = true;
+            this.labelRepresentative.Location = new System.Drawing.Point(413, 20);
+            this.labelRepresentative.Name = "labelRepresentative";
+            this.labelRepresentative.Size = new System.Drawing.Size(189, 23);
+            this.labelRepresentative.TabIndex = 0;
+            this.labelRepresentative.Text = "Supplier Representative";
             // 
-            // label5
+            // labelLocation
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(22, 120);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(142, 23);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Supplier Location";
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Location = new System.Drawing.Point(22, 120);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(142, 23);
+            this.labelLocation.TabIndex = 0;
+            this.labelLocation.Text = "Supplier Location";
             // 
-            // label6
+            // labelNote
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(22, 188);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(115, 23);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "Supplier Note";
+            this.labelNote.AutoSize = true;
+            this.labelNote.Location = new System.Drawing.Point(22, 188);
+            this.labelNote.Name = "labelNote";
+            this.labelNote.Size = new System.Drawing.Size(115, 23);
+            this.labelNote.TabIndex = 0;
+            this.labelNote.Text = "Supplier Note";
             // 
             // splitContainer1
             // 
@@ -133,13 +134,13 @@
             this.splitContainer1.Panel1.Controls.Add(this.txtTax);
             this.splitContainer1.Panel1.Controls.Add(this.txtRepresentative);
             this.splitContainer1.Panel1.Controls.Add(this.txtName);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
-            this.splitContainer1.Panel1.Controls.Add(this.label6);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
-            this.splitContainer1.Panel1.Controls.Add(this.label5);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.labelPhone);
+            this.splitContainer1.Panel1.Controls.Add(this.labelNote);
+            this.splitContainer1.Panel1.Controls.Add(this.labelRepresentative);
+            this.splitContainer1.Panel1.Controls.Add(this.labelLocation);
+            this.splitContainer1.Panel1.Controls.Add(this.labelName);
             this.splitContainer1.Panel1.Controls.Add(this.label7);
-            this.splitContainer1.Panel1.Controls.Add(this.label3);
+            this.splitContainer1.Panel1.Controls.Add(this.labelTax);
             // 
             // splitContainer1.Panel2
             // 
@@ -150,9 +151,9 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(683, 259);
+            this.btnExit.Location = new System.Drawing.Point(740, 259);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(126, 43);
+            this.btnExit.Size = new System.Drawing.Size(67, 43);
             this.btnExit.TabIndex = 10;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -160,42 +161,54 @@
             // 
             // btnSaveChange
             // 
-            this.btnSaveChange.Location = new System.Drawing.Point(527, 259);
+            this.btnSaveChange.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveChange.Image")));
+            this.btnSaveChange.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveChange.Location = new System.Drawing.Point(572, 259);
             this.btnSaveChange.Name = "btnSaveChange";
-            this.btnSaveChange.Size = new System.Drawing.Size(126, 43);
+            this.btnSaveChange.Size = new System.Drawing.Size(142, 43);
             this.btnSaveChange.TabIndex = 9;
             this.btnSaveChange.Text = "Save Change";
+            this.btnSaveChange.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveChange.UseVisualStyleBackColor = true;
             this.btnSaveChange.Click += new System.EventHandler(this.btnSaveChange_Click);
             // 
             // btnDeleteSupplier
             // 
             this.btnDeleteSupplier.Enabled = false;
-            this.btnDeleteSupplier.Location = new System.Drawing.Point(355, 259);
+            this.btnDeleteSupplier.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteSupplier.Image")));
+            this.btnDeleteSupplier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteSupplier.Location = new System.Drawing.Point(384, 259);
             this.btnDeleteSupplier.Name = "btnDeleteSupplier";
-            this.btnDeleteSupplier.Size = new System.Drawing.Size(142, 43);
+            this.btnDeleteSupplier.Size = new System.Drawing.Size(162, 43);
             this.btnDeleteSupplier.TabIndex = 8;
             this.btnDeleteSupplier.Text = "Delete Supplier";
+            this.btnDeleteSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDeleteSupplier.UseVisualStyleBackColor = true;
             this.btnDeleteSupplier.Click += new System.EventHandler(this.btnDeleteSupplier_Click);
             // 
             // btnModifySupplier
             // 
-            this.btnModifySupplier.Location = new System.Drawing.Point(182, 259);
+            this.btnModifySupplier.Image = ((System.Drawing.Image)(resources.GetObject("btnModifySupplier.Image")));
+            this.btnModifySupplier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModifySupplier.Location = new System.Drawing.Point(194, 259);
             this.btnModifySupplier.Name = "btnModifySupplier";
-            this.btnModifySupplier.Size = new System.Drawing.Size(143, 43);
+            this.btnModifySupplier.Size = new System.Drawing.Size(164, 43);
             this.btnModifySupplier.TabIndex = 7;
             this.btnModifySupplier.Text = "Modify Supplier";
+            this.btnModifySupplier.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModifySupplier.UseVisualStyleBackColor = true;
             this.btnModifySupplier.Click += new System.EventHandler(this.btnModifySupplier_Click);
             // 
             // btnAddSupplier
             // 
+            this.btnAddSupplier.Image = ((System.Drawing.Image)(resources.GetObject("btnAddSupplier.Image")));
+            this.btnAddSupplier.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnAddSupplier.Location = new System.Drawing.Point(26, 259);
             this.btnAddSupplier.Name = "btnAddSupplier";
-            this.btnAddSupplier.Size = new System.Drawing.Size(126, 43);
+            this.btnAddSupplier.Size = new System.Drawing.Size(142, 43);
             this.btnAddSupplier.TabIndex = 6;
             this.btnAddSupplier.Text = "Add Supplier";
+            this.btnAddSupplier.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddSupplier.UseVisualStyleBackColor = true;
             this.btnAddSupplier.Click += new System.EventHandler(this.btnAddSupplier_Click);
             // 
@@ -299,12 +312,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelName;
+        private System.Windows.Forms.Label labelPhone;
+        private System.Windows.Forms.Label labelTax;
+        private System.Windows.Forms.Label labelRepresentative;
+        private System.Windows.Forms.Label labelLocation;
+        private System.Windows.Forms.Label labelNote;
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.TextBox txtLocation;

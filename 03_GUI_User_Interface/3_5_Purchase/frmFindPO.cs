@@ -11,6 +11,9 @@ using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Security.AccessControl;
 using PLM_Lynx._01_DAL_Data_Access_Layer;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 
 //using Microsoft.Office.Interop.Excel;
 
@@ -43,14 +46,49 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         // Lấy thông tin của công ty
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_5_Purchase.Lang.Lang_frmFindPO", typeof(frmFindPO).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            labelSearch.Text = rm.GetString("lb1");
+            BtnKeySearch.Text = rm.GetString("lb2");
+            btnFilter.Text = rm.GetString("lb3");
+            labelCode.Text = rm.GetString("lb4");
+            labelAmount.Text = rm.GetString("lb5");
+            labelSupplier.Text = rm.GetString("lb6");
+            labelCreator.Text = rm.GetString("lb7");
+            labelStatus.Text = rm.GetString("lb8");
+            btnExportExcel.Text = rm.GetString("lb9");
+            btnUpdateStatus.Text = rm.GetString("lb10");
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
         public frmFindPO()
         {
             InitializeComponent();
+            LoadLanguage();
         }
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn có muốn thoát không ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult kq = MessageBox.Show(rm.GetString("t1"), rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 this.Close();
@@ -127,6 +165,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
             dgvPartlist.DataSource = InforPartlist;
             dgvPartlist.AllowUserToAddRows = false;
+            dgvPartlist.AllowUserToDeleteRows = false;
+       
             dgvPartlist.EditMode = DataGridViewEditMode.EditProgrammatically;
             dgvPartlist.Columns[1].Width = 250; // PartName
             dgvPartlist.Columns[2].Width = 80; // Quantity
@@ -150,11 +190,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         {
             if (txtKeySearch.Text != "")
             {
-                LoadDataFindtblPO(txtKeySearch.Text);
+                LoadDataFindtblPO(txtKeySearch.Text.Trim());
             }
             else
             {
-                MessageBox.Show("Bạn cần nhập thông tin vào ô tìm kiếm");
+                MessageBox.Show(rm.GetString("t2"));  // Bạn cần nhập thông tin vào ô tìm kiếm
             }
         }
 
@@ -180,64 +220,78 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dtpFilter.CustomFormat = "yyyy-MM-dd";
             radioPO.Checked = true;
             txtKeySearch.Focus();
+            cboTemplate.SelectedIndex = 0; // Chọn template đầu tiên
         }
 
         private void btnExportExcel_Click(object sender, EventArgs e)
         {
             if (InforPartlist.Rows.Count == 0)
             {
-                MessageBox.Show("PO hiện tại đang trống ! \n Vui lòng điền các chi tiết để mua ");
+                MessageBox.Show(rm.GetString("t3")); // PO hiện tại đang trống ! \n Vui lòng điền các chi tiết để mua 
                 return;
             }
             else
             {
-                string tb = "Bạn có muốn xuất file Excel không ?";
+                string tb = rm.GetString("t4"); // 
 
-                DialogResult dialogResult = MessageBox.Show(tb, "Xác nhận", MessageBoxButtons.YesNo);
+                DialogResult dialogResult = MessageBox.Show(tb, rm.GetString("t5"), MessageBoxButtons.YesNo);
                 if (dialogResult == DialogResult.No)
                 {
                     return;
                 }
                 else
                 {
-                    ExcelRunning _exportTemplate = new ExcelRunning();
-                    _exportTemplate._orderPOno = txtPOCode.Text.Replace("/", "_");
-                    _exportTemplate._orderDate = PODate;
-                    //// Company Information
-                    tblCommonInfor companyname = _commonbll.GetCommonInforValue("CompanyName");
-                    tblCommonInfor companyphone = _commonbll.GetCommonInforValue("CompanyPhoneNumber");
-                    tblCommonInfor companylocation = _commonbll.GetCommonInforValue("CompanyLocation");
-                    tblCommonInfor companytaxcode = _commonbll.GetCommonInforValue("CompanyTaxCode");
-
-                    _exportTemplate._companyName = companyname.InforValue.ToString();
-                    _exportTemplate._companyLocation = companylocation.InforValue.ToString();
-                    _exportTemplate._companyTelephone = companyphone.InforValue.ToString();
-                    _exportTemplate._companyTaxcode = companytaxcode.InforValue.ToString();
-                    //// Supplier Information
-                    _exportTemplate._supplierName = SupplierName;
-                    _exportTemplate._supplierLocation = SupplierLocation;
-                    _exportTemplate._supplierTelephone = SupplierPhone;
-                    _exportTemplate._supplierTaxcode = SupplierTax;
-
-                    //// Remark
-                    _exportTemplate._paymentterms = PONote;
-                    _exportTemplate._remark = "";
-                    _exportTemplate._purchasePerson = PONhanVien;
-                    _exportTemplate._totalVND = txtPOAmount.Text;
-
-                    //// Partlist
-                    _exportTemplate.Partlist = InforPartlist;
-
-                    _exportTemplate.PurchaseTemplate_A();
+                    if(cboTemplate.SelectedIndex == 0 )
+                    {
+                        RunTemplate_0();
+                    }    
+                    else
+                    {
+                        MessageBox.Show("Have not creat new template");
+                    }    
                 }
             }
+        }
+
+
+        private void RunTemplate_0()
+        {
+            ExcelRunning _exportTemplate = new ExcelRunning();
+            _exportTemplate._orderPOno = txtPOCode.Text.Replace("/", "_");
+            _exportTemplate._orderDate = PODate;
+            //// Company Information
+            tblCommonInfor companyname = _commonbll.GetCommonInforValue("CompanyName");
+            tblCommonInfor companyphone = _commonbll.GetCommonInforValue("CompanyPhoneNumber");
+            tblCommonInfor companylocation = _commonbll.GetCommonInforValue("CompanyLocation");
+            tblCommonInfor companytaxcode = _commonbll.GetCommonInforValue("CompanyTaxCode");
+
+            _exportTemplate._companyName = companyname.InforValue.ToString();
+            _exportTemplate._companyLocation = companylocation.InforValue.ToString();
+            _exportTemplate._companyTelephone = companyphone.InforValue.ToString();
+            _exportTemplate._companyTaxcode = companytaxcode.InforValue.ToString();
+            //// Supplier Information
+            _exportTemplate._supplierName = SupplierName;
+            _exportTemplate._supplierLocation = SupplierLocation;
+            _exportTemplate._supplierTelephone = SupplierPhone;
+            _exportTemplate._supplierTaxcode = SupplierTax;
+
+            //// Remark
+            _exportTemplate._paymentterms = PONote;
+            _exportTemplate._remark = "";
+            _exportTemplate._purchasePerson = PONhanVien;
+            _exportTemplate._totalVND = txtPOAmount.Text;
+
+            //// Partlist
+            _exportTemplate.Partlist = InforPartlist;
+
+            _exportTemplate.PurchaseTemplate_A();
         }
 
         private void btnUpdateStatus_Click(object sender, EventArgs e)
         {
             if (InforPartlist.Rows.Count == 0)
             {
-                MessageBox.Show("PO hiện tại đang trống ! \n Vui lòng chọn PO để cập nhật ");
+                MessageBox.Show(rm.GetString("t6"));      // PO hiện tại đang trống ! \n Vui lòng chọn PO để cập nhật
                 return;
             }
             {
@@ -275,6 +329,35 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             {
                 LoadPartlist();
             }
+        }
+
+        private void dgvSearchAD_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            if (dgvSearchAD.Rows.Count == 0)
+            {
+                //MessageBox.Show("Không có dữ liệu để chọn");
+                return;
+            }
+            else
+            {
+                string code = dgvSearchAD.CurrentRow.Cells[0].Value.ToString();
+                string date; 
+                string status = dgvSearchAD.CurrentRow.Cells[4].Value.ToString();
+
+                InforthisPO = purchaseBLL.GetInfor1PObyPOCodeBLL(dgvSearchAD.CurrentRow.Cells[0].Value.ToString());
+                date = InforthisPO.Rows[0]["PODate"].ToString();
+
+                frmUpdateStatus frm = new frmUpdateStatus();
+                frm.POCode = code;
+                frm.PODate = date;
+                frm.POStatus = status;
+
+                // thêm sự kiện frmStatus_FormClosed vào sự kiện UpdateStatus của frm
+                frm.UpdateStatus += frmStatus_FormClosed;   // Nếu đóng thì load lại partlist
+                frm.ShowDialog();
+            }
+
         }
     }
 }

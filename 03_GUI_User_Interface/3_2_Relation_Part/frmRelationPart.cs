@@ -12,6 +12,10 @@ using System.Xml.Linq;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using System.Diagnostics;
 using PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 
 namespace PLM_Lynx._03_GUI_User_Interface
 {
@@ -22,13 +26,53 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private DataTable danhcon = new DataTable();
 
-        public int idProposal { get; set; } // ID của Proposal để truyền vào BLL    
+        public int idProposal { get; set; } // ID của Proposal để truyền vào BLL
         public string nameProposal { get; set; }  // Tên của Proposal để truyền vào BLL
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
 
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part.Lang.Lang_RelationPart", typeof(frmRelationPart).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            label1.Text = rm.GetString("lb1");
+            btnUpload.Text = rm.GetString("btnUpload");
+            btnFindPart.Text = rm.GetString("btnHistory");
+            btnSearch.Text = rm.GetString("btnSearch");
+            btnAdd2Parent.Text = rm.GetString("btnAddParent");
+            btnClearParent.Text = rm.GetString("btnDeleteParent");
+            labelPartCode.Text = rm.GetString("lb2");
+            labelPartName.Text = rm.GetString("lb3");
+            labelPartDescript.Text = rm.GetString("lb4");
+            labelFileStatus.Text = rm.GetString("lb5");
+            labelNote.Text = rm.GetString("lb6");
+
+            //
+            btnAddChild.Text = rm.GetString("btnAddChild");
+            btnDeleteChild.Text = rm.GetString("btnDelChild");
+            btnClearChild.Text = rm.GetString("btnClearChild");
+            btnCheckBefore.Text = rm.GetString("btnCheck");
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
         public frmRelationPart()
         {
             InitializeComponent();
+            LoadLanguage();
         }
 
         // ===============================================
@@ -70,7 +114,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // --- Kiểm tra các điều kiện ban đầu
             if (txtTimKiem.Text == "")
             {
-                MessageBox.Show("Bạn chưa nhập từ khóa vào ô tìm kiếm ");
+                //MessageBox.Show("Bạn chưa nhập từ khóa vào ô tìm kiếm ");
+                MessageBox.Show(rm.GetString("t1"));
                 txtTimKiem.Focus();
             }
             else
@@ -82,7 +127,9 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn muốn thoát việc tạo liên kết giữa các Part phải không ?", "Xác nhận thoát", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string tb = rm.GetString("t2");  // Bạn muốn thoát việc tạo liên kết giữa các Part phải không ?
+
+            DialogResult result = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             { this.Close(); } // Đóng cửa sổ hiện tại
             else
@@ -96,34 +143,24 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // - Nếu dgvListTimKiem trống thì thông báo và quay lại ô tìm kiếm
             if (dgvListTimKiem.Rows.Count == 0)
             {
-                MessageBox.Show("Không tìm thấy dữ liệu phù hợp ");
+                //MessageBox.Show("Không tìm thấy dữ liệu phù hợp ");
+                MessageBox.Show(rm.GetString("t3"));
                 txtTimKiem.Focus();
                 return;
             }
 
-            // Nếu tìm thấy - Tìm kiếm hình ảnh
-            string imagefilepath = Properties.Settings.Default.LinkDataPart;
-            string Partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY
-            //string Partcode = txtCode.Text;
-            string[] input = Partcode.Split('-');
-            string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
-            imagefilepath = imagefilepath + "\\" + input[0] + "\\" + input[1] + "\\" + Partcode + ".jpg";
+            
+            string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString(); // Code
+          
 
-            // Kiểm tra file có tồn tại
-            if (System.IO.File.Exists(imagefilepath))
+            // -- Hiển thị ảnh
+            if (commonBLL.UploadImagebyPartCode(partcode, picTimKiem) == true)
             {
-                picTimKiem.SizeMode = PictureBoxSizeMode.StretchImage;
-                using (Image newimage = Image.FromFile(imagefilepath))
-                {
-                    // Nếu có thì copy và hiển thị lên trên Picturebox
-                    picTimKiem.Image = (Image)newimage.Clone();
-                    txtStatusImagePart.Text = "Image is : ";
-                }
+                txtStatusImagePart.Text = "Image";
             }
             else
             {
-                txtStatusImagePart.Text = "Not found image";
-                picTimKiem.Image = null;
+                txtStatusImagePart.Text = "Not found Image";
             }
         }
 
@@ -136,10 +173,12 @@ namespace PLM_Lynx._03_GUI_User_Interface
             {
                 // Lấy PartCode
                 string PartCode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString(); // Code : XXX-000YY
-                MessageBox.Show("Đây là Partcode trước khi nhập vào : " + PartCode);
+                //MessageBox.Show("Đây là Partcode trước khi nhập vào : " + PartCode);
 
                 // Mở Form Detail
                 frmRelationPart_Detail_Info detailinfo = new frmRelationPart_Detail_Info();
+                detailinfo.ShowDetailInfor(PartCode);
+
 
                 //detailinfo.partcode = PartCode;
                 detailinfo.ShowDialog();
@@ -151,7 +190,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Lấy dữ liệu của dgvListTimKiem để đẩy lên các ô textbox của vùng Parrent
             if (dgvListTimKiem.Rows.Count == 0)
             {
-                MessageBox.Show("Không có giá trị để thêm vào "); ;
+                //MessageBox.Show("Không có giá trị để thêm vào "); ;
+                MessageBox.Show(rm.GetString("t4")); ;
                 txtTimKiem.Focus();
                 return;
             }
@@ -176,7 +216,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Nếu không trùng thì mới thêm vào
             if (isDuplicate == true)
             {
-                MessageBox.Show("Giá trị này đã có trong danh sách con ");
+                //MessageBox.Show("Giá trị này đã có trong danh sách con ");
+                MessageBox.Show(rm.GetString("t5"));
                 return;
             }
             else
@@ -187,16 +228,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 // Đẩy danh sách file
                 if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == true)
                 {
-                    txtListFileStatus.Text = "Danh sách file ở bên dưới ";
+                    txtListFileStatus.Text = rm.GetString("t6"); // Tìm thấy files trong server.
                 }
                 else
                 {
-                    txtListFileStatus.Text = "Có vẻ không load được danh sách file";
+                    txtListFileStatus.Text = rm.GetString("t7"); // "Có vẻ không load được danh sách file";
                 }
                 // Load ảnh
                 if (commonBLL.UploadImagebyPartCode(partcode, picParent) == false)
                 {
-                    MessageBox.Show("Không load được ảnh ");
+                    MessageBox.Show(rm.GetString("t8"));                 //Không load được ảnh 
                 }
             }
         }
@@ -233,7 +274,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi phát sinh khi  mở file : " + ex.Message);
+                MessageBox.Show("Error : " + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -242,7 +283,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Thêm vào dgvChild
             if (dgvListTimKiem.Rows.Count == 0)
             {
-                MessageBox.Show("Không có đối tượng part trong danh sách tìm kiếm \n Hãy nhập từ khóa tìm kiếm");
+                //MessageBox.Show("Không có đối tượng part trong danh sách tìm kiếm \n Hãy nhập từ khóa tìm kiếm");
+                MessageBox.Show(rm.GetString("t9"));
                 txtTimKiem.Focus();
                 return;
             }
@@ -251,7 +293,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             string partname = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();
             if (partcode == txtPartCode.Text)
             {
-                MessageBox.Show("Lỗi : Trùng với Part Cha ");
+                MessageBox.Show(rm.GetString("t10"));    // Lỗi : Trùng với Part Cha 
                 return;
             }
             else
@@ -272,13 +314,14 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 // Nếu trùng thì thông báo
                 if (isDuplicate == true)
                 {
-                    MessageBox.Show("Giá trị này đã thêm vào danh sách con rồi ");
+                    MessageBox.Show(rm.GetString("t11"));        // Giá trị này đã thêm vào danh sách con rồi 
                     return;
                 }
                 else
                 {
                     // Nếu không trùng thì mới thêm vào
-                    MessageBox.Show("Sẽ thêm : || " + partcode + " || vào danh sách Part Child");
+                    //MessageBox.Show("Sẽ thêm : || " + partcode + " || vào danh sách Part Child");
+                    MessageBox.Show(rm.GetString("t12") + partcode + " || " + rm.GetString("t13"));
                     danhcon.Rows.Add(partcode, partname, 1);
                     dgvChild.DataSource = danhcon;
 
@@ -295,7 +338,9 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Kiểm tra xem có hàng nào được chọn không
             if (dgvChild.SelectedRows.Count > 0)
             {
-                DialogResult result = MessageBox.Show("Bạn muốn xóa dòng này phải không", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                string tb = rm.GetString("t14"); // Bạn có muốn xóa dòng này không ?
+
+                DialogResult result = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
                 {
                     foreach (DataGridViewRow rw in dgvChild.SelectedRows)
@@ -308,14 +353,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 }
                 else
                 {
-                    MessageBox.Show("Đang chưa chọn dòng nào để xóa");
+                    MessageBox.Show(rm.GetString("t15"));   //Đang chưa chọn dòng nào để xóa
                 }
             }
         }
 
         private void btnClearChild_Click(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("Bạn muốn xóa toàn bộ dữ liệu của List Child phải không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string tb = rm.GetString("t16"); // Bạn có muốn xóa toàn bộ dữ liệu của List Child phải không ?
+
+            DialogResult result = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 if (dgvChild.DataSource is DataTable dt)
@@ -368,8 +415,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            string tb = "Cần kiểm tra thông tin trước khi gửi yêu cầu tạo ràng buộc giữa các part";
-            DialogResult kq = MessageBox.Show(tb, "Chú ý ", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string tb = rm.GetString("t17"); // Cần kiểm tra thông tin trước khi gửi yêu cầu tạo ràng buộc giữa các part
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.No)
             {
                 return;

@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Admin\Desktop\Build\Setup\</PublishUrl>
+    <PublishUrl>C:\Users\Admin\Desktop\Set up\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -25,9 +25,13 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>3</ApplicationRevision>
+    <ProductName>PLM_LYNX</ProductName>
+    <PublisherName>Linh To</PublisherName>
+    <SuiteName>PLM_LYNX</SuiteName>
+    <ApplicationRevision>16</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
@@ -114,6 +118,17 @@
     </Reference>
     <Reference Include="Office, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
       <HintPath>packages\MicrosoftOfficeCore.15.0.0\lib\net35\Office.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SKGL, Version=2.0.4.1, Culture=neutral, PublicKeyToken=6506df92444891d9, processorArchitecture=MSIL">
+      <HintPath>packages\SoftwareProtector.1.0.5.1\lib\SKGL.dll</HintPath>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.sldworks">
+      <HintPath>..\..\..\..\..\..\Program Files\SOLIDWORKS Corp\SOLIDWORKS\SolidWorks.Interop.sldworks.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="SolidWorks.Interop.swconst">
+      <HintPath>..\..\..\..\..\..\Program Files\SOLIDWORKS Corp\SOLIDWORKS\SolidWorks.Interop.swconst.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
     <Reference Include="System" />
@@ -235,6 +250,11 @@
     <Compile Include="03_GUI_User_Interface\3_1_Login\frmManageUser.Designer.cs">
       <DependentUpon>frmManageUser.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_1_Login\Language_Login.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Language_Login.resx</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\frmECO_Infor_Detail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -246,6 +266,36 @@
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\frmUploadRelationtoDataBase.Designer.cs">
       <DependentUpon>frmUploadRelationtoDataBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ECO_Infor_Detail.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_ECO_Infor_Detail.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_MakeNewPart.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_MakeNewPart.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ManageFamilyCode.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_ManageFamilyCode.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_RelationPart.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart_Detail_Info.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_RelationPart_Detail_Info.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_UploadRelationtoDataBase.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_UploadRelationtoDataBase.resx</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_3_ECO\frmECO.cs">
       <SubType>Form</SubType>
@@ -271,17 +321,44 @@
     <Compile Include="03_GUI_User_Interface\3_3_ECO\frmUpdateInforPart.Designer.cs">
       <DependentUpon>frmUpdateInforPart.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\Lang\Lange_ModifyQuantity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lange_ModifyQuantity.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_frmECO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_frmECO.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_ListECO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_ListECO.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_UpdateInforPart.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_UpdateInforPart.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmListmaterial.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmListmaterial.Designer.cs">
+      <DependentUpon>frmListmaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmSiemenNX.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmSiemenNX.Designer.cs">
+      <DependentUpon>frmSiemenNX.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\SolidworkFileInfo.cs" />
     <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmDownloadFile.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmDownloadFile.Designer.cs">
       <DependentUpon>frmDownloadFile.cs</DependentUpon>
-    </Compile>
-    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmFilterSearch.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmFilterSearch.Designer.cs">
-      <DependentUpon>frmFilterSearch.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmFindPart.cs">
       <SubType>Form</SubType>
@@ -319,6 +396,22 @@
     <Compile Include="03_GUI_User_Interface\3_2_Relation_Part\RelationPart_Detail_Info.Designer.cs">
       <DependentUpon>RelationPart_Detail_Info.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmSolidwork.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\frmSolidwork.Designer.cs">
+      <DependentUpon>frmSolidwork.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_DownloadFile.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_DownloadFile.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_FindPart.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_FindPart.resx</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\ExcelRunning.cs" />
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.cs">
       <SubType>Form</SubType>
@@ -350,23 +443,62 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.Designer.cs">
       <DependentUpon>frmUpdateStatus.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmFindPO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_frmFindPO.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmMakePO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_frmMakePO.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManagePrice.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_frmManagePrice.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManageSupplier.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_frmManageSupplier.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmUpdateStatus.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_frmUpdateStatus.resx</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_6_Help\frmAboutMe.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_6_Help\frmAboutMe.Designer.cs">
       <DependentUpon>frmAboutMe.cs</DependentUpon>
     </Compile>
-    <Compile Include="03_GUI_User_Interface\3_6_Help\frmLicenceCheck.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="03_GUI_User_Interface\3_6_Help\frmLicenceCheck.Designer.cs">
-      <DependentUpon>frmLicenceCheck.cs</DependentUpon>
-    </Compile>
     <Compile Include="03_GUI_User_Interface\3_6_Help\frmUserGuide.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_6_Help\frmUserGuide.Designer.cs">
       <DependentUpon>frmUserGuide.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\Lang\Lang_frmAboutMe.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Lang_frmAboutMe.resx</DependentUpon>
+    </Compile>
+    <Content Include="04_CommonDoc\Export DWG.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="04_CommonDoc\Export PDF.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="04_CommonDoc\Save As Step File.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\Test_Check_Box.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_6_Help\Test_Check_Box.Designer.cs">
+      <DependentUpon>Test_Check_Box.cs</DependentUpon>
     </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -376,6 +508,28 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Strings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Strings.kr.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.kr.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Strings.vi.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Strings.vi.resx</DependentUpon>
+    </Compile>
+    <Content Include="LINCENSE.txt" />
+    <Content Include="Software Protector.exe" />
     <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\frmEnterLicencesCode.resx">
       <DependentUpon>frmEnterLicencesCode.cs</DependentUpon>
     </EmbeddedResource>
@@ -385,12 +539,54 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\frmManageUser.resx">
       <DependentUpon>frmManageUser.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\Language_Login.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\Language_Login.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Language_Login.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\Language_Login.vi.resx" />
     <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\frmECO_Infor_Detail.resx">
       <DependentUpon>frmECO_Infor_Detail.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\frmUploadRelationtoDataBase.resx">
       <DependentUpon>frmUploadRelationtoDataBase.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ECO_Infor_Detail.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ECO_Infor_Detail.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_ECO_Infor_Detail.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ECO_Infor_Detail.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_MakeNewPart.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_MakeNewPart.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_MakeNewPart.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_MakeNewPart.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ManageFamilyCode.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ManageFamilyCode.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_ManageFamilyCode.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_ManageFamilyCode.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_RelationPart.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart_Detail_Info.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart_Detail_Info.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_RelationPart_Detail_Info.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_RelationPart_Detail_Info.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_UploadRelationtoDataBase.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_UploadRelationtoDataBase.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_UploadRelationtoDataBase.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_UploadRelationtoDataBase.vi.resx" />
     <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmECO.resx">
       <DependentUpon>frmECO.cs</DependentUpon>
     </EmbeddedResource>
@@ -403,11 +599,32 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmUpdateInforPart.resx">
       <DependentUpon>frmUpdateInforPart.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lange_ModifyQuantity.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lange_ModifyQuantity.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lange_ModifyQuantity.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lange_ModifyQuantity.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_frmECO.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_frmECO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_frmECO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_frmECO.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_ListECO.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_ListECO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_ListECO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_ListECO.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_UpdateInforPart.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_UpdateInforPart.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_UpdateInforPart.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\Lang\Lang_UpdateInforPart.vi.resx" />
     <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmDownloadFile.resx">
       <DependentUpon>frmDownloadFile.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmFilterSearch.resx">
-      <DependentUpon>frmFilterSearch.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmFindPart.resx">
       <DependentUpon>frmFindPart.cs</DependentUpon>
@@ -427,6 +644,27 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\RelationPart_Detail_Info.resx">
       <DependentUpon>RelationPart_Detail_Info.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmListmaterial.resx">
+      <DependentUpon>frmListmaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmSiemenNX.resx">
+      <DependentUpon>frmSiemenNX.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\frmSolidwork.resx">
+      <DependentUpon>frmSolidwork.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_DownloadFile.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_DownloadFile.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_DownloadFile.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_DownloadFile.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_FindPart.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_FindPart.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_FindPart.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_4_FindPart\Lang\Lang_FindPart.vi.resx" />
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.resx">
       <DependentUpon>frmFindPO.cs</DependentUpon>
     </EmbeddedResource>
@@ -442,14 +680,50 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.resx">
       <DependentUpon>frmUpdateStatus.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmFindPO.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmFindPO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_frmFindPO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmFindPO.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmMakePO.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmMakePO.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_frmMakePO.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmMakePO.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManagePrice.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManagePrice.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_frmManagePrice.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManagePrice.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManageSupplier.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManageSupplier.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_frmManageSupplier.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmManageSupplier.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmUpdateStatus.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmUpdateStatus.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_frmUpdateStatus.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\Lang\Lang_frmUpdateStatus.vi.resx" />
     <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\frmAboutMe.resx">
       <DependentUpon>frmAboutMe.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\frmLicenceCheck.resx">
-      <DependentUpon>frmLicenceCheck.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\frmUserGuide.resx">
       <DependentUpon>frmUserGuide.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\Lang\Lang_frmAboutMe.kr.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\Lang\Lang_frmAboutMe.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Lang_frmAboutMe.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\Lang\Lang_frmAboutMe.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\Test_Check_Box.resx">
+      <DependentUpon>Test_Check_Box.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>
@@ -463,17 +737,33 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Strings.kr.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.kr.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Strings.vi.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.vi.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="04_CommonDoc\BOM_to_Partlist.frm">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="04_CommonDoc\BOM_to_Partlist.frx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Content Include="04_CommonDoc\User Guide.pdf">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <None Include="PLM_Lynx_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -498,7 +788,14 @@
     <Content Include="04_CommonDoc\BandoVN.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="04_CommonDoc\Excel_Handle.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="04_CommonDoc\Export_Drawing_NX10.txt" />
     <Content Include="04_CommonDoc\ListMaterial.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="04_CommonDoc\NX_Export_Image_And_Excel.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="PLMLYNX.ico" />

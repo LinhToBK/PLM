@@ -30,36 +30,36 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMakeNewPart));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.label6 = new System.Windows.Forms.Label();
+            this.txtPartMaterial = new System.Windows.Forms.TextBox();
+            this.cboMaterial = new System.Windows.Forms.ComboBox();
+            this.labelTemplate = new System.Windows.Forms.Label();
             this.btnApplyTemplate = new System.Windows.Forms.Button();
             this.txtApplyTemPlate = new System.Windows.Forms.TextBox();
             this.txtFamilyDescription = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
+            this.labelNote1 = new System.Windows.Forms.Label();
+            this.labelNote3 = new System.Windows.Forms.Label();
+            this.labelNote2 = new System.Windows.Forms.Label();
             this.cboPartFamily = new System.Windows.Forms.ComboBox();
             this.txtPartDescript = new System.Windows.Forms.TextBox();
             this.txtPartName = new System.Windows.Forms.TextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBoxFile = new System.Windows.Forms.GroupBox();
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.btnListNear = new System.Windows.Forms.Button();
             this.btnAddFileAttachment = new System.Windows.Forms.Button();
             this.dgvFileAttachment = new System.Windows.Forms.DataGridView();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelFamily = new System.Windows.Forms.Label();
+            this.labelMaterial = new System.Windows.Forms.Label();
+            this.labelDescript = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.dgvFamily = new System.Windows.Forms.DataGridView();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnAddPart = new System.Windows.Forms.Button();
-            this.label8 = new System.Windows.Forms.Label();
-            this.cboMaterial = new System.Windows.Forms.ComboBox();
-            this.txtPartMaterial = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            this.groupBoxFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileAttachment)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -78,21 +78,21 @@
             // 
             this.splitContainer1.Panel1.Controls.Add(this.txtPartMaterial);
             this.splitContainer1.Panel1.Controls.Add(this.cboMaterial);
-            this.splitContainer1.Panel1.Controls.Add(this.label6);
+            this.splitContainer1.Panel1.Controls.Add(this.labelTemplate);
             this.splitContainer1.Panel1.Controls.Add(this.btnApplyTemplate);
             this.splitContainer1.Panel1.Controls.Add(this.txtApplyTemPlate);
             this.splitContainer1.Panel1.Controls.Add(this.txtFamilyDescription);
-            this.splitContainer1.Panel1.Controls.Add(this.label5);
-            this.splitContainer1.Panel1.Controls.Add(this.label7);
-            this.splitContainer1.Panel1.Controls.Add(this.label4);
+            this.splitContainer1.Panel1.Controls.Add(this.labelNote1);
+            this.splitContainer1.Panel1.Controls.Add(this.labelNote3);
+            this.splitContainer1.Panel1.Controls.Add(this.labelNote2);
             this.splitContainer1.Panel1.Controls.Add(this.cboPartFamily);
             this.splitContainer1.Panel1.Controls.Add(this.txtPartDescript);
             this.splitContainer1.Panel1.Controls.Add(this.txtPartName);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBox2);
-            this.splitContainer1.Panel1.Controls.Add(this.label3);
-            this.splitContainer1.Panel1.Controls.Add(this.label8);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
-            this.splitContainer1.Panel1.Controls.Add(this.label2);
+            this.splitContainer1.Panel1.Controls.Add(this.groupBoxFile);
+            this.splitContainer1.Panel1.Controls.Add(this.labelFamily);
+            this.splitContainer1.Panel1.Controls.Add(this.labelMaterial);
+            this.splitContainer1.Panel1.Controls.Add(this.labelDescript);
+            this.splitContainer1.Panel1.Controls.Add(this.labelName);
             // 
             // splitContainer1.Panel2
             // 
@@ -101,14 +101,30 @@
             this.splitContainer1.SplitterDistance = 546;
             this.splitContainer1.TabIndex = 1;
             // 
-            // label6
+            // txtPartMaterial
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(356, 180);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(102, 15);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "Template Descript";
+            this.txtPartMaterial.Location = new System.Drawing.Point(204, 151);
+            this.txtPartMaterial.Name = "txtPartMaterial";
+            this.txtPartMaterial.Size = new System.Drawing.Size(126, 27);
+            this.txtPartMaterial.TabIndex = 12;
+            // 
+            // cboMaterial
+            // 
+            this.cboMaterial.FormattingEnabled = true;
+            this.cboMaterial.Location = new System.Drawing.Point(92, 151);
+            this.cboMaterial.Name = "cboMaterial";
+            this.cboMaterial.Size = new System.Drawing.Size(100, 28);
+            this.cboMaterial.TabIndex = 11;
+            this.cboMaterial.SelectedIndexChanged += new System.EventHandler(this.cboMaterial_SelectedIndexChanged);
+            // 
+            // labelTemplate
+            // 
+            this.labelTemplate.AutoSize = true;
+            this.labelTemplate.Location = new System.Drawing.Point(356, 180);
+            this.labelTemplate.Name = "labelTemplate";
+            this.labelTemplate.Size = new System.Drawing.Size(130, 20);
+            this.labelTemplate.TabIndex = 10;
+            this.labelTemplate.Text = "Template Descript";
             // 
             // btnApplyTemplate
             // 
@@ -134,49 +150,49 @@
             this.txtFamilyDescription.Location = new System.Drawing.Point(229, 12);
             this.txtFamilyDescription.Name = "txtFamilyDescription";
             this.txtFamilyDescription.ReadOnly = true;
-            this.txtFamilyDescription.Size = new System.Drawing.Size(289, 23);
+            this.txtFamilyDescription.Size = new System.Drawing.Size(289, 27);
             this.txtFamilyDescription.TabIndex = 7;
             // 
-            // label5
+            // labelNote1
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label5.Location = new System.Drawing.Point(9, 181);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(285, 30);
-            this.label5.TabIndex = 5;
-            this.label5.Text = "Gợi ý :  PartName nên ghi rõ tên model và tính năng \r\nDescription :nên ghi kích t" +
+            this.labelNote1.AutoSize = true;
+            this.labelNote1.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNote1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.labelNote1.Location = new System.Drawing.Point(9, 181);
+            this.labelNote1.Name = "labelNote1";
+            this.labelNote1.Size = new System.Drawing.Size(347, 40);
+            this.labelNote1.TabIndex = 5;
+            this.labelNote1.Text = "Gợi ý :  PartName nên ghi rõ tên model và tính năng \r\nDescription :nên ghi kích t" +
     "hước bao";
             // 
-            // label7
+            // labelNote3
             // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label7.Location = new System.Drawing.Point(7, 237);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(330, 15);
-            this.label7.TabIndex = 5;
-            this.label7.Text = "Có thể kéo thả file vào vùng Part File Attachment để thêm file\r\n";
+            this.labelNote3.AutoSize = true;
+            this.labelNote3.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNote3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.labelNote3.Location = new System.Drawing.Point(7, 237);
+            this.labelNote3.Name = "labelNote3";
+            this.labelNote3.Size = new System.Drawing.Size(402, 20);
+            this.labelNote3.TabIndex = 5;
+            this.labelNote3.Text = "Có thể kéo thả file vào vùng Part File Attachment để thêm file\r\n";
             // 
-            // label4
+            // labelNote2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(9, 218);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(311, 15);
-            this.label4.TabIndex = 5;
-            this.label4.Text = "File đính kèm có đuôi : .jpg .PDF, .dwg, .dwf, .stp, iegs, .prt";
+            this.labelNote2.AutoSize = true;
+            this.labelNote2.Font = new System.Drawing.Font("Segoe UI", 9F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Italic | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNote2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
+            this.labelNote2.Location = new System.Drawing.Point(9, 218);
+            this.labelNote2.Name = "labelNote2";
+            this.labelNote2.Size = new System.Drawing.Size(372, 20);
+            this.labelNote2.TabIndex = 5;
+            this.labelNote2.Text = "File đính kèm có đuôi : .jpg .PDF, .dwg, .dwf, .stp, iegs, .prt";
             // 
             // cboPartFamily
             // 
             this.cboPartFamily.FormattingEnabled = true;
             this.cboPartFamily.Location = new System.Drawing.Point(92, 11);
             this.cboPartFamily.Name = "cboPartFamily";
-            this.cboPartFamily.Size = new System.Drawing.Size(120, 23);
+            this.cboPartFamily.Size = new System.Drawing.Size(120, 28);
             this.cboPartFamily.TabIndex = 4;
             this.cboPartFamily.SelectionChangeCommitted += new System.EventHandler(this.cboPartFamily_SelectionChangeCommitted);
             // 
@@ -193,23 +209,23 @@
             // 
             this.txtPartName.Location = new System.Drawing.Point(92, 43);
             this.txtPartName.Name = "txtPartName";
-            this.txtPartName.Size = new System.Drawing.Size(426, 23);
+            this.txtPartName.Size = new System.Drawing.Size(426, 27);
             this.txtPartName.TabIndex = 1;
             // 
-            // groupBox2
+            // groupBoxFile
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.groupBoxFile.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox2.Controls.Add(this.btnDeleteFile);
-            this.groupBox2.Controls.Add(this.btnListNear);
-            this.groupBox2.Controls.Add(this.btnAddFileAttachment);
-            this.groupBox2.Controls.Add(this.dgvFileAttachment);
-            this.groupBox2.Location = new System.Drawing.Point(0, 270);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(546, 257);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Part File Attachment";
+            this.groupBoxFile.Controls.Add(this.btnDeleteFile);
+            this.groupBoxFile.Controls.Add(this.btnListNear);
+            this.groupBoxFile.Controls.Add(this.btnAddFileAttachment);
+            this.groupBoxFile.Controls.Add(this.dgvFileAttachment);
+            this.groupBoxFile.Location = new System.Drawing.Point(0, 270);
+            this.groupBoxFile.Name = "groupBoxFile";
+            this.groupBoxFile.Size = new System.Drawing.Size(546, 257);
+            this.groupBoxFile.TabIndex = 2;
+            this.groupBoxFile.TabStop = false;
+            this.groupBoxFile.Text = "Part File Attachment";
             // 
             // btnDeleteFile
             // 
@@ -256,6 +272,7 @@
             this.dgvFileAttachment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvFileAttachment.Location = new System.Drawing.Point(6, 21);
             this.dgvFileAttachment.Name = "dgvFileAttachment";
+            this.dgvFileAttachment.RowHeadersWidth = 51;
             this.dgvFileAttachment.RowTemplate.Height = 23;
             this.dgvFileAttachment.Size = new System.Drawing.Size(473, 222);
             this.dgvFileAttachment.TabIndex = 1;
@@ -263,32 +280,41 @@
             this.dgvFileAttachment.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvFileAttachment_DragEnter);
             this.dgvFileAttachment.DoubleClick += new System.EventHandler(this.dgvFileAttachment_DoubleClick);
             // 
-            // label3
+            // labelFamily
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 15);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(66, 15);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Part Family";
+            this.labelFamily.AutoSize = true;
+            this.labelFamily.Location = new System.Drawing.Point(16, 15);
+            this.labelFamily.Name = "labelFamily";
+            this.labelFamily.Size = new System.Drawing.Size(80, 20);
+            this.labelFamily.TabIndex = 0;
+            this.labelFamily.Text = "Part Family";
             // 
-            // label1
+            // labelMaterial
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 99);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(74, 15);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Part Descript";
+            this.labelMaterial.AutoSize = true;
+            this.labelMaterial.Location = new System.Drawing.Point(16, 155);
+            this.labelMaterial.Name = "labelMaterial";
+            this.labelMaterial.Size = new System.Drawing.Size(93, 20);
+            this.labelMaterial.TabIndex = 0;
+            this.labelMaterial.Text = "Part Material";
             // 
-            // label2
+            // labelDescript
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 47);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(63, 15);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Part Name";
+            this.labelDescript.AutoSize = true;
+            this.labelDescript.Location = new System.Drawing.Point(16, 99);
+            this.labelDescript.Name = "labelDescript";
+            this.labelDescript.Size = new System.Drawing.Size(93, 20);
+            this.labelDescript.TabIndex = 0;
+            this.labelDescript.Text = "Part Descript";
+            // 
+            // labelName
+            // 
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(16, 47);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(78, 20);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "Part Name";
             // 
             // splitContainer2
             // 
@@ -316,6 +342,7 @@
             this.dgvFamily.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvFamily.Location = new System.Drawing.Point(0, 0);
             this.dgvFamily.Name = "dgvFamily";
+            this.dgvFamily.RowHeadersWidth = 51;
             this.dgvFamily.RowTemplate.Height = 23;
             this.dgvFamily.Size = new System.Drawing.Size(428, 426);
             this.dgvFamily.TabIndex = 1;
@@ -343,34 +370,9 @@
             this.btnAddPart.UseVisualStyleBackColor = true;
             this.btnAddPart.Click += new System.EventHandler(this.btnAddPart_Click);
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(16, 155);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(74, 15);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Part Material";
-            // 
-            // cboMaterial
-            // 
-            this.cboMaterial.FormattingEnabled = true;
-            this.cboMaterial.Location = new System.Drawing.Point(92, 151);
-            this.cboMaterial.Name = "cboMaterial";
-            this.cboMaterial.Size = new System.Drawing.Size(100, 23);
-            this.cboMaterial.TabIndex = 11;
-            this.cboMaterial.SelectedIndexChanged += new System.EventHandler(this.cboMaterial_SelectedIndexChanged);
-            // 
-            // txtPartMaterial
-            // 
-            this.txtPartMaterial.Location = new System.Drawing.Point(204, 151);
-            this.txtPartMaterial.Name = "txtPartMaterial";
-            this.txtPartMaterial.Size = new System.Drawing.Size(126, 23);
-            this.txtPartMaterial.TabIndex = 12;
-            // 
             // frmMakeNewPart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 527);
             this.Controls.Add(this.splitContainer1);
@@ -388,7 +390,7 @@
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
+            this.groupBoxFile.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvFileAttachment)).EndInit();
             this.splitContainer2.Panel1.ResumeLayout(false);
             this.splitContainer2.Panel2.ResumeLayout(false);
@@ -404,27 +406,27 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.DataGridView dgvFamily;
         private System.Windows.Forms.Button btnAddPart;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.DataGridView dgvFileAttachment;
         private System.Windows.Forms.TextBox txtPartDescript;
         private System.Windows.Forms.TextBox txtPartName;
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox groupBoxFile;
         private System.Windows.Forms.Button btnDeleteFile;
         private System.Windows.Forms.Button btnAddFileAttachment;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label labelNote2;
         private System.Windows.Forms.ComboBox cboPartFamily;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelNote1;
+        private System.Windows.Forms.Label labelFamily;
+        private System.Windows.Forms.Label labelDescript;
         private System.Windows.Forms.Button btnListNear;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelNote3;
         private System.Windows.Forms.TextBox txtFamilyDescription;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.Button btnApplyTemplate;
         private System.Windows.Forms.TextBox txtApplyTemPlate;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label labelTemplate;
+        private System.Windows.Forms.Label labelMaterial;
         private System.Windows.Forms.ComboBox cboMaterial;
         private System.Windows.Forms.TextBox txtPartMaterial;
     }

@@ -26,14 +26,15 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
+                DateTime PartDate = DateTime.Now.Date;
                 // Mở kết nối
                 con.Open();
 
                 // Tạo một giao dịch (Transaction) C#
                 using (SqlTransaction transaction = con.BeginTransaction())
                 {
-                    string sql_query = @"INSERT INTO tblPart (PartFamily, PartName, PartDescript, PartMaterial)
-                             VALUES (@PartFamily, @PartName, @PartDescript, @PartMaterial);";
+                    string sql_query = @"INSERT INTO tblPart (PartFamily, PartName, PartDescript, PartMaterial , PartDate)
+                             VALUES (@PartFamily, @PartName, @PartDescript, @PartMaterial, @PartDate);";
 
                     SqlCommand cmd = new SqlCommand(sql_query, con, transaction);
 
@@ -42,6 +43,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     cmd.Parameters.Add("@PartName", SqlDbType.NVarChar).Value = PartName;
                     cmd.Parameters.Add("@PartDescript", SqlDbType.NVarChar).Value = PartDescript;
                     cmd.Parameters.Add("@PartMaterial", SqlDbType.NVarChar).Value = PartMaterial;
+                    cmd.Parameters.Add("@PartDate", SqlDbType.Date).Value = PartDate;
 
                     try
                     {

@@ -13,6 +13,11 @@ using System.Data;
 using PLM_Lynx._01_DAL_Data_Access_Layer;
 using Excel = Microsoft.Office.Interop.Excel;
 using Microsoft.Office.Core;
+using System.Security.Cryptography;
+using PLM_Lynx._03_GUI_User_Interface._3_6_Help;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 
 namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 {
@@ -21,6 +26,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         private FindPartDAL PartDAL = new FindPartDAL();
         private CommonInforDAL _commoninforDAL = new CommonInforDAL();
         private ECO_BLL _eco_BLL = new ECO_BLL();
+
+        // =========== Language =========================
+        // private ResourceManager rm  = new ResourceManager("PLM_Lynx._02_BLL_Bussiness_Logic_Layer.Lang_BLL", typeof(CommonBLL).Assembly);
+
+        // =========== Language =========================
 
         /// <summary>
         /// 01. UPLOAD - Tải ảnh của 1 PartCode lên trên PictureBox
@@ -32,69 +42,95 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             // -- Hiển thị ảnh
 
-            // -- Lấy version lớn nhất của ảnh 
+            // -- Lấy version lớn nhất của ảnh
 
             //string imagefilepath = Properties.Settings.Default.LinkDataPart;
             //string[] input = partCode.Split('-');
             //string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
             //imagefilepath = imagefilepath + "\\" + input[0] + "\\" + input[1] + "\\" + partCode + "_DV-0" + ".jpg";
+            bool result = false;
 
             string imagefilepath = GetFilePath(partCode) + "\\" + GetImagePath_Lastest(partCode);
-
-            // Kiểm tra file có tồn tại
-            if (System.IO.File.Exists(imagefilepath))
+            try
             {
-                //picPart.Image = Image.FromFile(imagefilepath);
-                pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
-                using (System.Drawing.Image newimage = System.Drawing.Image.FromFile(imagefilepath))
+                // Kiểm tra file có tồn tại
+                if (System.IO.File.Exists(imagefilepath))
                 {
-                    pictureBox.Image = (System.Drawing.Image)newimage.Clone();
-                    return true;
+                    //picPart.Image = Image.FromFile(imagefilepath);
+                    pictureBox.SizeMode = PictureBoxSizeMode.StretchImage;
+                    using (System.Drawing.Image newimage = System.Drawing.Image.FromFile(imagefilepath))
+                    {
+                        result = true;
+                        pictureBox.Image = (System.Drawing.Image)newimage.Clone();
+
+                    }
+                }
+                else
+                {
+                    
+                    pictureBox.Image = null;
+                    return false;
+
                 }
             }
-            else
+            catch (System.Exception ex)
             {
-                pictureBox.Image = null;
-                return false;
+                MessageBox.Show( ex.Message, "Error");
+                result = false;
             }
+            return result;
         }
 
         private string GetImagePath_Lastest(string partCode)
         {
+            // CLP-00001
             string imagefilepath = Properties.Settings.Default.LinkDataPart;
             string[] input = partCode.Split('-');
             string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
 
-            string[] files = Directory.GetFiles(filepath, "*.jpg");
+            string[] files = Directory.GetFiles(filepath,  "*.jpg");
             //double maxversion = 1.0;
+            // Nếu chỉ có 1 file thì sao 
 
-            int stage = 1;
-            int version = 0;
-
-            // Duyệt qua từng file và lấy số phiên bản từ tên file
-            foreach (string file in files)
+            if(files.Length == 0)
             {
-                // Lấy tên file mà không có đường dẫn
-                string fileName = Path.GetFileNameWithoutExtension(file);
-                int checkstage =  _eco_BLL.getstage(fileName);
-                if(checkstage >= stage)
-                {
-                    stage = checkstage;
-                    int checkversion = _eco_BLL.getversion(fileName);
-                    if(checkversion > version)
-                    {
-                        version = checkversion;
-                        
-                    }
-                }    
+                return null;
+            };
+            if(files.Length == 1)
+            {
+                //MessageBox.Show("Chỉ có 1 file .jpg");
+                return Path.GetFileName(files[0]);
             }
+            else
+            {
+                //MessageBox.Show(files.Length.ToString() + " file .jpg");
+                int stage = 1;
+                int version = 0;
 
+                // Duyệt qua từng file và lấy số phiên bản từ tên file
+                foreach (string file in files)
+                {
+                    // Lấy tên file mà không có đường dẫn
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    int checkstage = _eco_BLL.getstage(fileName);
+                    if (checkstage >= stage)
+                    {
+                        stage = checkstage;
+                        int checkversion = _eco_BLL.getversion(fileName);
+                        if (checkversion > version)
+                        {
+                            version = checkversion;
+                        }
+                    }
+                }
 
-            string result = partCode + "_V" + stage.ToString() + "." + version.ToString() + ".jpg";
-            //MessageBox.Show(result);
-            return result;
+                string result = partCode + "_V" + stage.ToString() + "." + version.ToString() + ".jpg";
+                //MessageBox.Show(result);
+                return result;
+            } 
+                
 
-
+            
         }
 
         /// <summary>
@@ -121,6 +157,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 dgvListFile.Columns[1].Name = "Size";
                 dgvListFile.Columns[2].Name = "Type";
                 dgvListFile.Columns[3].Name = "Created";
+                dgvListFile.Columns[0].HeaderText = "Name";
+                dgvListFile.Columns[1].HeaderText = "Size";
+                dgvListFile.Columns[2].HeaderText = "Type";
+                dgvListFile.Columns[3].HeaderText = "Date modified";
+
                 dgvListFile.Columns[0].Width = 200;
                 dgvListFile.Columns[1].Width = 80;
                 dgvListFile.Columns[2].Width = 80;
@@ -190,12 +231,12 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show($"Không thể mở tệp: {ex.Message}");
+                                MessageBox.Show($" Can not open this file : {ex.Message}");
                             }
                         }
                         catch (System.Exception ex)
                         {
-                            MessageBox.Show("Lỗi phát sinh khi mở file autocad :" + ex.Message, "Error");
+                            MessageBox.Show("Error when open autocad file :" + ex.Message, "Error");
                         }
 
                         //Process.Start("dwgviewr.exe", $"\"{docfile}\"");
@@ -213,7 +254,13 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     }
 
                     // Nếu là file.stp hoặc .step thì mở bằng eDrawing Solidwork
-                    if (Path.GetExtension(docfile).ToLower() == ".stp" || Path.GetExtension(docfile).ToLower() == ".step" || Path.GetExtension(docfile).ToLower() == ".prt")
+                    if (Path.GetExtension(docfile).ToLower() == ".stp" 
+                        || Path.GetExtension(docfile).ToLower() == ".step" 
+                        || Path.GetExtension(docfile).ToLower() == ".prt"
+                        || Path.GetExtension(docfile).ToLower() == ".sldprt"
+                        || Path.GetExtension(docfile).ToLower() == ".sldasm"
+                        || Path.GetExtension(docfile).ToLower() == ".slddrw")
+
                     {
                         try
                         {
@@ -238,24 +285,54 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                             }
                             catch (Exception ex)
                             {
-                                MessageBox.Show($"Không thể mở tệp: {ex.Message}");
+                                MessageBox.Show($"Can not open file : {ex.Message}");
                             }
                         }
                         catch (System.Exception ex)
                         {
-                            MessageBox.Show("Lỗi phát sinh khi mở file .step, .stp bằng eDrawing :" + ex.Message);
+                            MessageBox.Show("Error when open file .stp / /step by Edrawing :" + ex.Message);
                         }
                     }
                 }
                 catch (System.Exception ex)
                 {
-                    MessageBox.Show("Lỗi xảy ra khi mở file :" + ex.Message, "Error");
+                    MessageBox.Show("Can not open file :" + ex.Message, "Error");
                 }
             }
             else
             {
-                MessageBox.Show("Không thể mở tệp này \n có thể file không tồn tại. ");
+                MessageBox.Show("Cannot open this file \n maybe the file does not exist. ");
             }
+        }
+
+        /// <summary>
+        /// Hàm để thông báo là có file đang mở
+        /// </summary>
+        /// <param name="delaytime"></param>
+        public async void popup(int delaytime)
+        {
+            // Đang mở file 
+            Label lbl = new Label
+            {
+                Text = "Opening File ....",
+                AutoSize = true,
+                //Font = new Font("Segoe UI", 12),
+                //TextAlign = ContentAlignment.MiddleCenter
+            };
+            Form thongbao = new Form
+            {
+                //Size = new Size(200, 100),
+                StartPosition = FormStartPosition.CenterScreen,
+                ControlBox = false,
+                TopMost = true
+            };
+            thongbao.Controls.Add(lbl);
+            lbl.Dock = DockStyle.Fill;
+
+            thongbao.Show();
+            await Task.Delay(delaytime); // Đợi form hiển thị
+            thongbao.Close();
+
         }
 
         private bool IsFileLocked(string filePath)
@@ -498,204 +575,200 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         /// <param name="jpg"></param>
         ///
         // Overloading - Download All File
-        public void CopyFileByExtension(string partcode, string partname, string DestinationFolder, bool stp, bool dwg, bool pdf, bool jpg, bool prt, bool DV, bool PV, bool MP)
+        public bool CopyFileByExtension(string partcode, string partname, string DestinationFolder, List<string> ListExtension)
         {
             string SourceFolder = GetFilePath(partcode);
 
-            // Lấy danh sách các file có đuôi tương ứng trong SourceFolder
-            bool allowstatus = false;
-            List<string> allowedExtensions = new List<string>();
-            if (stp == true)
-            {
-                allowedExtensions.Add(".stp");
-                allowedExtensions.Add(".step");
-                allowstatus = true;
-            }
-            if (dwg == true)
-            {
-                allowedExtensions.Add(".dwg");
-                allowedExtensions.Add(".dxf");
-                allowstatus = true;
-            }
-            if (jpg == true)
-            {
-                allowedExtensions.Add(".jpg");
-                allowstatus = true;
-            }
-            if (pdf == true)
-            {
-                allowedExtensions.Add(".pdf");
-                allowstatus = true;
-            }
-            if (prt == true)
-            {
-                allowedExtensions.Add(".prt");
-                allowstatus = true;
-            }
+            bool result = false;
+            string downloadlog = DestinationFolder + "\\" + "Log.txt";
+            string content = "";
 
-            if (allowstatus == true)
+            try
             {
-                var filesToCopy = Directory.GetFiles(SourceFolder)
-                        .Where(file => allowedExtensions.Contains(Path.GetExtension(file).ToLower()))
-                        .ToList();
+                string imagefilepath = Properties.Settings.Default.LinkDataPart;
+                string[] input = partcode.Split('-');
+                string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
 
-                if (filesToCopy.Count == 0)
+                string[] files = Directory.GetFiles(filepath);
+
+                int dem = 0;
+
+                foreach (string file in files)
                 {
-                    MessageBox.Show("Chú ý : Part [ " + partcode + " ] - Không có file hợp lệ để sao chép trong thư mục nguồn.", "", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return;
-                }
-                // Sao chép từng file sang thư mục đích
-                // List string : F:\02. OnedriveFolder\05_DataBase\DSGLDataPart\MOL\00011\MOL-00011-PV01-15-2025 14-39.pdf
-                // filename :  MOL-00011-PV01-15-2025 14-39.pdf
-
-                foreach (var file in filesToCopy)
-                {
-                    string fileName = Path.GetFileName(file);
-                    string destinationPath = Path.Combine(DestinationFolder, partname + " - " + fileName);
-                    // --- Old version
-                    // File.Copy(file, destinationPath, overwrite: true);
-
-                    // --- New Version
-
-                    // Copy 'DV'
-                    if (DV == true && fileName.Contains("DV") == true)
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    string[] namecut = fileName.Split('_');
+                    string extension = Path.GetExtension(file);
+                    if (ListExtension.Contains(extension) == true)
                     {
+                        string destinationPath = Path.Combine(DestinationFolder, partcode + "-" + partname + namecut[1] + extension);
                         File.Copy(file, destinationPath, overwrite: true);
-                    }
-                    // Copy 'PV'
-
-                    if (PV == true && fileName.Contains("PV") == true)
-                    {
-                        File.Copy(file, destinationPath, overwrite: true);
-                    }
-                    // Copy 'MP'
-
-                    if (MP == true && fileName.Contains("MP") == true)
-                    {
-                        File.Copy(file, destinationPath, overwrite: true);
+                        dem = dem + 1;
                     }
                 }
+                if (dem == 0)
+                {
+                    result = true;    // Nếu không có file nào
+                    content = DateTime.Now.ToString() + " || " + partcode + " || " + partname + " || There is no file with the same extension. \r\n";
+                    File.AppendAllText(downloadlog, content);
+                }
+                else
+                {
+                    result = true; // Nếu có file nào được tải về
+                    content = DateTime.Now.ToString() + " || " + partcode + " || " + partname + " || Download successfully. \r\n";
+                    File.AppendAllText(downloadlog, content);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                MessageBox.Show("Trong DataBase không tồn tại file nào cả");
-                return;
+                // MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}");
+                content = "Error: " + ex.Message;
+                File.AppendAllText(downloadlog, content);
+                result = false;
             }
+            return result;
         }
 
-        // - Overloading - Download Nearest File
-        public void CopyFileByExtension(string partcode, string partname, string DestinationFolder, bool stp, bool dwg, bool pdf, bool jpg, bool prt)
+        public string GetLastestVersion(string partcode)
+        {
+            string imagefilepath = Properties.Settings.Default.LinkDataPart;
+            string[] input = partcode.Split('-');
+            string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
+
+            string[] files = Directory.GetFiles(filepath);
+
+            // Xác định version mới nhất
+            int stage = 1;
+            int version = 0;
+
+
+            // Duyệt qua từng file và lấy số phiên bản từ tên file
+            foreach (string file in files)
+            {
+                // Lấy tên file mà không có đường dẫn
+                string fileName = Path.GetFileNameWithoutExtension(file);
+                int checkstage = _eco_BLL.getstage(fileName);
+                if (checkstage >= stage)
+                {
+                    stage = checkstage;
+                    int checkversion = _eco_BLL.getversion(fileName);
+                    if (checkversion > version)
+                    {
+                        version = checkversion;
+                    }
+                }
+            }
+
+            string lastesversion = "_V" + stage.ToString() + "." + version.ToString();
+            return lastesversion;
+        }
+
+        /// <summary>
+        /// Download Version mới nhất
+        /// </summary>
+        /// <param name="partcode"></param>
+        /// <param name="partname"></param>
+        /// <param name="DestinationFolder"></param>
+        /// <param name="allowedExtensions"></param>
+        /// <param name="Version"></param>
+        public bool CopyFileByExtension_LastestVersion(string partcode, string partname, string DestinationFolder, List<string> ListExtension)
         {
             string SourceFolder = GetFilePath(partcode);
-            // Lấy danh sách các file có đuôi tương ứng trong SourceFolder
-            bool allowstatus = false;
-            List<string> allowedExtensions = new List<string>();
-            if (stp == true)
-            {
-                allowedExtensions.Add(".stp");
-                allowedExtensions.Add(".step");
-                allowstatus = true;
-            }
-            if (dwg == true)
-            {
-                allowedExtensions.Add(".dwg");
-                allowedExtensions.Add(".dxf");
-                allowstatus = true;
-            }
-            if (jpg == true)
-            {
-                allowedExtensions.Add(".jpg");
-                allowstatus = true;
-            }
-            if (pdf == true)
-            {
-                allowedExtensions.Add(".pdf");
-                allowstatus = true;
-            }
-            if (prt == true)
-            {
-                allowedExtensions.Add(".prt");
-                allowstatus = true;
-            }
+            bool result = false;
+            string downloadlog = DestinationFolder + "\\" + "Log.txt";
+            string content = "";
 
-            if (allowstatus == true)
+            try
             {
-                try
+                string imagefilepath = Properties.Settings.Default.LinkDataPart;
+                string[] input = partcode.Split('-');
+                string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
+
+                string[] files = Directory.GetFiles(filepath);
+                
+                // Xác định version mới nhất
+                int stage = 1;
+                int version = 0;
+
+                // Duyệt qua từng file và lấy số phiên bản từ tên file
+                foreach (string file in files)
                 {
-                    // Lấy danh sách tất cả các file .pdf, .jpg, .stp trong thư mục A
-                    //var files = Directory.GetFiles(SourceFolder, "*.*")
-                    //                     .Where(file => file.EndsWith(".pdf", StringComparison.OrdinalIgnoreCase) ||
-                    //                                    file.EndsWith(".jpg", StringComparison.OrdinalIgnoreCase) ||
-                    //                                    file.EndsWith(".dwg", StringComparison.OrdinalIgnoreCase) ||
-                    //                                    file.EndsWith(".dxf", StringComparison.OrdinalIgnoreCase) ||
-                    //                                    file.EndsWith(".prt", StringComparison.OrdinalIgnoreCase) ||
-                    //                                    file.EndsWith(".step", StringComparison.OrdinalIgnoreCase) ||
-                    //                                    file.EndsWith(".stp", StringComparison.OrdinalIgnoreCase))
-                    //                     .Select(file => new FileInfo(file))
-                    //                     .ToList();
-
-                    // Lấy tất cả các file trong thư mục
-                    var files = Directory.GetFiles(SourceFolder, "*.*") // Tìm tất cả các file
-                                         .Where(file => allowedExtensions
-                                                        .Any(ext => file.EndsWith(ext, StringComparison.OrdinalIgnoreCase))) // Lọc theo đuôi mở rộng
-                                         .Select(file => new FileInfo(file))
-                                         .ToList();
-
-                    if (!files.Any())
+                    // Lấy tên file mà không có đường dẫn
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    int checkstage = _eco_BLL.getstage(fileName);
+                    if (checkstage >= stage)
                     {
-                        // MessageBox.Show("Không tìm thấy file nào phù hợp trong thư mục nguồn.");
-                        return;
+                        stage = checkstage;
+                        int checkversion = _eco_BLL.getversion(fileName);
+                        if (checkversion > version)
+                        {
+                            version = checkversion;
+                        }
                     }
-
-                    // Tìm file mới nhất
-                    var latestFile = files.OrderByDescending(file => file.CreationTime).FirstOrDefault();
-                    if (latestFile == null)
-                    {
-                        MessageBox.Show("Không tìm thấy file nào để sao chép.");
-                        return;
-                    }
-
-                    // Lọc các file được tạo cùng ngày với file mới nhất
-                    var sameDayFiles = files.Where(file => file.CreationTime.Date == latestFile.CreationTime.Date).ToList();
-
-                    // Sao chép các file thỏa mãn điều kiện sang thư mục B
-                    foreach (var file in sameDayFiles)
-                    {
-                        string destinationPath = Path.Combine(DestinationFolder, partname + " - " + file.Name);
-                        File.Copy(file.FullName, destinationPath, overwrite: true); // Ghi đè nếu file đã tồn tại
-                    }
-
-                    //MessageBox.Show($"Đã sao chép {sameDayFiles.Count} file vào thư mục đích.");
                 }
-                catch (Exception ex)
+
+                string lastesversion = "_V" + stage.ToString() + "." + version.ToString();
+                int dem = 0;
+                foreach (string file in files)
                 {
-                    MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}");
+                    string fileName = Path.GetFileNameWithoutExtension(file);
+                    string extension = Path.GetExtension(file);
+                    if (ListExtension.Contains(extension) == true)
+                    {
+                        if (fileName.Contains(partcode + lastesversion) == true)
+                        {
+                            string destinationPath = Path.Combine(DestinationFolder, partcode + "-" + partname + lastesversion + extension);
+                            File.Copy(file, destinationPath, overwrite: true);
+                            dem = dem + 1; 
+                        }
+                    }
+                }
+
+                if (dem == 0)
+                {
+                    result = true;    // Nếu không có file nào
+                    content = DateTime.Now.ToString() + " || " + partcode + " || " + partname + " || There is no file with the same extension. \r\n";
+                    File.AppendAllText(downloadlog, content);
+                }
+                else
+                {
+                    result = true; // Nếu có file nào được tải về
+                    content = DateTime.Now.ToString() + " || " + partcode + " || " + partname + " || Download successfully. \r\n";
+                    File.AppendAllText(downloadlog, content);
                 }
             }
+               
+        
+
+            catch (Exception ex)
+            {
+                content = DateTime.Now.ToString() + " || " + partcode + " || " + partname + " || " + ex.Message + " \r\n";
+                File.AppendAllText(downloadlog, content);
+                result = false;
+            }
+
+            return result;
         }
 
-        private CommonInforDAL _commonInforDAL = new CommonInforDAL();
+private CommonInforDAL _commonInforDAL = new CommonInforDAL();
 
-        public tblCommonInfor GetCommonInforValue(string inforname)
-        {
-            return _commonInforDAL.GetCommonInforValue_DAL(inforname);
-        }
+public tblCommonInfor GetCommonInforValue(string inforname)
+{
+    return _commonInforDAL.GetCommonInforValue_DAL(inforname);
+}
 
+public DataTable GetAllVersionInfor_BLL()
+{
+    return _commoninforDAL.GetAllVersionInfor_DAL();
+}
 
-        public DataTable GetAllVersionInfor_BLL()
-        {
-            return _commoninforDAL.GetAllVersionInfor_DAL();
-        }
+public bool UpdateCompanyInfor_BLL(string name, string location, string phone, string tax)
+{
+    return _commonInforDAL.UpdateCompanyInfor_DAL(name, location, phone, tax);
+}
 
-        public bool UpdateCompanyInfor_BLL(string name, string location, string phone, string tax)
-        {
-            return _commonInforDAL.UpdateCompanyInfor_DAL(name, location, phone, tax);
-        }
-
-        public bool InsertNewVersion_BLL(string ID, string content)
-        {
-            return _commoninforDAL.InsertNewVersion_DAL(ID, content);
-        }
-
+public bool InsertNewVersion_BLL(string ID, string content)
+{
+    return _commoninforDAL.InsertNewVersion_DAL(ID, content);
+}
     } // End Class CommonBLL
 } // End NameSpace

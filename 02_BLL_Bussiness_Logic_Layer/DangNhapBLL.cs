@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,6 +22,8 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             // Có thể bổ sung các xử lý khác , ví dụ mã hóa mật khẩu trước khi gọi đến DAL
             return userDAL.CheckDangnhapDAL(username, password);
         }
+
+       
 
 
 

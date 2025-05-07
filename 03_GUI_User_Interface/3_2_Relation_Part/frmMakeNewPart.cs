@@ -3,14 +3,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Security.AccessControl;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using PLM_Lynx._01_DAL_Data_Access_Layer;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace PLM_Lynx._03_GUI_User_Interface
@@ -24,9 +28,52 @@ namespace PLM_Lynx._03_GUI_User_Interface
         public string NameProposal { get; set; }
         private ECO_BLL _ecoBLL = new ECO_BLL();
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part.Lang.Lang_MakeNewPart", typeof(frmMakeNewPart).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            labelFamily.Text = rm.GetString("lb1");
+            labelName.Text = rm.GetString("lb2");
+            labelDescript.Text = rm.GetString("lb10");
+            labelMaterial.Text = rm.GetString("lb9");
+            labelTemplate.Text = rm.GetString("lb7");
+            groupBoxFile.Text = rm.GetString("lb8");
+
+            labelNote1.Text = rm.GetString("note1");
+            labelNote2.Text = rm.GetString("note2");
+            labelNote3.Text = rm.GetString("note3");
+
+            btnAddPart.Text = rm.GetString("btn.NewPart");
+            btnAddFileAttachment.Text = rm.GetString("btn.Add");
+            btnApplyTemplate.Text = rm.GetString("btn.Apply");
+            btnDeleteFile.Text = rm.GetString("btn.Delete");
+            btnListNear.Text = rm.GetString("btn.Show");
+
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
+
         public frmMakeNewPart()
         {
             InitializeComponent();
+            LoadLanguage();
             this.KeyPreview = true; // Cho phép Form nhận sự kiện nhấn phím trước
             this.KeyDown += new KeyEventHandler(frmMakeNewPart_KeyDown);
 
@@ -61,7 +108,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             }
             else
             {
-                MessageBox.Show("Không load được danh sách vật liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("Không load được danh sách vật liệu", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(rm.GetString("t1"), rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -98,8 +146,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Đóng Form khi nhấn Escape
             if (e.KeyCode == Keys.Escape)
             {
-                // this.Close();
-                DialogResult kq = MessageBox.Show("Bạn muốn thoát việc tạo Part mới không ? ", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                string tb = rm.GetString("t2");
+                DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (kq == DialogResult.Yes)
                 {
                     this.Close();
@@ -178,7 +226,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             using (OpenFileDialog open = new OpenFileDialog())
             {
                 // Giới hạn các định dạng file được chọn
-                open.Title = "Vui lòng chọn file ";
+                open.Title = "Choose file ";
                 string filternote = @"PDF Files (*.pdf)|*.pdf|";
                 filternote = filternote + @"STP Files (*.stp)|*.stp|";
                 filternote = filternote + @"JPG Files (*.jpg)|*.jpg|";
@@ -217,7 +265,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     }
                     else
                     {
-                        MessageBox.Show("Đã có tệp có phần Entension trùng ");
+                        MessageBox.Show(rm.GetString("t3"));  // Đã có tệp có phần Entension trùng 
                         return;
                     }
                 }
@@ -230,24 +278,24 @@ namespace PLM_Lynx._03_GUI_User_Interface
             string PartDescript = txtPartDescript.Text;
             string PartFamily = cboPartFamily.Text;
             string PartMaterial = txtPartMaterial.Text;
-            string ThongBao = "Bạn muốn thêm Part : \n " + "+) PartName : " + PartName + "\n +) PartFamily : " + PartFamily + "\n +) Part Description : " + PartDescript;
+            string ThongBao = rm.GetString("t5");
+            ThongBao += "\r\n " + "+) PartName : " + PartName + "\n +) PartFamily : " + PartFamily + "\n +) Part Description : " + PartDescript;
             ThongBao = ThongBao + "\n +) Part Material : " + PartMaterial;
             if (PartMaterial.Length > 20)
             {
-                MessageBox.Show("Vật liệu không được quá 20 ký tự");
+                //MessageBox.Show("Vật liệu không được quá 20 ký tự");
+                MessageBox.Show(rm.GetString("t4"), rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
             int NewECONo = _ecoBLL.LoadECONo();
 
-            DialogResult result = MessageBox.Show(ThongBao, "Thông báo ", MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+            DialogResult result = MessageBox.Show(ThongBao, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Information);
             if (result == DialogResult.Yes)
             {
                 // Nếu Yes thì thực hiện việc Insert
                 if (partBLL.InsertNewPartBLL(PartFamily, PartName, PartDescript, PartMaterial))
                 {
-                    
-
                     //--------------------------------------
                     //--  Lấy PartCode từ PartName vừa tạo
                     //--------------------------------------
@@ -279,7 +327,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Đã xảy ra lỗi " + ex.Message);
+                            MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                         //------------------------------------------------------------
                         // --- Đổi tên  và save as copy các file vào folder vừa tạo
@@ -308,7 +356,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                         }
                         catch (Exception ex)
                         {
-                            MessageBox.Show("Xuất hiện lỗi: \n - " + ex.Message);
+                            MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
 
                         //------------------------------------------------------------
@@ -319,26 +367,26 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
                         //------------------------------------------------------------
                         string PartLogAdd = NewECONo.ToString(); ;
-                        if (_ecoBLL.Write_ECONo_to_tblPart_BLL(newestpartcode, PartLogAdd) == true )
+                        if (_ecoBLL.Write_ECONo_to_tblPart_BLL(newestpartcode, PartLogAdd) == true)
                         {
                             //MessageBox.Show("Tạo thành công Part mới");
-                            
+
                             string ECOContent = "[{ \"p\": \"" + newestpartcode + "\", \"c\": \"created new part\" }]";
                             int ECOTypeID = 1; // 1 - Tạo mới Part
-                            if ( _ecoBLL.InsertNewECO_BLL(NewECONo, IDProposal, NameProposal, ECOTypeID, ECOContent) ==true )
+                            if (_ecoBLL.InsertNewECO_BLL(NewECONo, IDProposal, NameProposal, ECOTypeID, ECOContent) == true)
                             {
-                                MessageBox.Show("Tạo thành công Part mới");
+                                MessageBox.Show(rm.GetString("t6"));    // MessageBox.Show("Tạo thành công Part mới");
                             }
                             else
                             {
-                                MessageBox.Show("Ghi ECO Thất Bại");
+                                MessageBox.Show(rm.GetString("t7"));   //MessageBox.Show("Ghi ECO Thất Bại");
                             }
                             //frmListNear frm = new frmListNear();
                             //frm.ShowDialog();
                         }
                         else
                         {
-                            MessageBox.Show("Ghi File Log Thất Bại");
+                            MessageBox.Show(rm.GetString("t8"));//MessageBox.Show("Ghi File Log Thất Bại");
                         }
                         // xóa dữ liệu của các ô textbox
                         cboPartFamily.SelectedIndex = -1;
@@ -349,14 +397,14 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     }
                     else
                     {
-                        MessageBox.Show("Không tạo được PartCode mới");
+                        MessageBox.Show(rm.GetString("t9"));//MessageBox.Show("Không tạo được PartCode mới");
                         txtPartName.Focus();
                         return;
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Phát sinh lỗi \n Kiểm tra lại PartName");
+                    MessageBox.Show(rm.GetString("t10"));//MessageBox.Show("Phát sinh lỗi \n Kiểm tra lại PartName");
                 }
             }
             else
@@ -385,13 +433,13 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Phát sinh lỗi" + ex.Message);
+                    MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn 1 hàng để xóa");
+                MessageBox.Show(rm.GetString("t11"));//MessageBox.Show("Vui lòng chọn 1 hàng để xóa");
             }
         }
 
@@ -429,7 +477,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 }
                 else
                 {
-                    MessageBox.Show($"Tệp không hợp lệ: {file}", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show($"Tệp không hợp lệ ( File not allow ): {file}", rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
         }
@@ -499,9 +547,5 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             txtPartMaterial.Text = cboMaterial.SelectedItem.ToString();
         }
-
-        
-
-        
     }
 }

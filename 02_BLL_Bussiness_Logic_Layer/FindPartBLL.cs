@@ -22,7 +22,13 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
              return(PartDAL.FindwithwordDAL(word));
         }
 
-        
+        public DataTable FindWithWordBLL(string word, string viewrow)
+        {
+            return (PartDAL.FindwithwordDAL(word, viewrow));
+        }
+
+
+
         /// 02. Lấy danh sách ChildPart
         /// <param name="idpart"></param>
         /// <returns></returns>

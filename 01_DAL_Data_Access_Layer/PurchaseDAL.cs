@@ -21,19 +21,19 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="position"></param>
         /// <param name="dept"></param>
         /// <returns></returns>
-        public bool CapnhatPriceDAL(string PartCode, string PartPrice, string ExportPrice)
+        public bool CapnhatPriceDAL(string PartCode, string PartPrice, string ExportPrice, string UserName)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
                 string PartPriceLog;
                 string Date = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                PartPriceLog = Date + " : Import -" + PartPrice + " - " + "Export-" + ExportPrice + " - " +  "|";
+                PartPriceLog = Date + " : Import -" + PartPrice + " - " + "Export-" + ExportPrice +  "- User: " + UserName +  "|";
 
                 string sql_query;
                 sql_query = @"update tblPart
                 set PartPriceSale = @ExportPrice ,
                 PartPrice = @PartPrice,
-                PartPriceLog = CONCAT(PartPriceLog, @PartPriceLog )  
+                PartPriceLog = CONCAT(PartPriceLog, CHAR(13), CHAR(10), @PartPriceLog )  
                 where PartCode = @PartCode ;";
                 SqlCommand cmd = new SqlCommand(sql_query, con);
                 cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
@@ -221,7 +221,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                     )
                                     SELECT p.POCode, p.PONhanVien, p.POSupplierID , p.POAmount ,p.POStatus, MONTH(p.PODate) AS pMonth, DAY(p.PODate) AS pDate
                                     FROM tblPO AS p
-                                    WHERE p.POPartCode LIKE '%' + CAST((SELECT PartID FROM ID) AS NVARCHAR) + '%';";
+                                    WHERE p.POPartCode LIKE '%' + CAST((SELECT PartID FROM ID) AS NVARCHAR) + '%' 
+                                    order by p.PODate desc";
 
                     SqlCommand cmd = new SqlCommand(sql_query, conn);
                     cmd.Parameters.Add("@keysearch", SqlDbType.NVarChar).Value = keysearch;
@@ -232,7 +233,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 }
                 else
                 {
-                    sql_query = @"select p.POCode,p.PONhanVien, p.POSupplierID, p.POAmount, p.POStatus, MONTH(p.PODate) AS pMonth, DAY(p.PODate) AS pDate from tblPO as p where p.POCode LIKE '%' + @keysearch + '%';";
+                    sql_query = @"select p.POCode,p.PONhanVien, p.POSupplierID, p.POAmount, p.POStatus, MONTH(p.PODate) AS pMonth, DAY(p.PODate) AS pDate from tblPO as p where p.POCode LIKE '%' + @keysearch + '%' order by p.PODate desc ;";
                     SqlCommand cmd = new SqlCommand(sql_query, conn);
                     cmd.Parameters.Add("@keysearch", SqlDbType.NVarChar).Value = keysearch;
                     SqlDataAdapter adap = new SqlDataAdapter(cmd);
@@ -357,6 +358,23 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     return false;
                 }
             }
+        }
+
+        public DataTable GetChildPartDAL(int IDPart)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @" exec GetPartChild_Purchase @PartID = @ID ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@ID", IDPart);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
         }
 
     }

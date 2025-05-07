@@ -43,7 +43,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.dgvListTimKiem = new System.Windows.Forms.DataGridView();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelFileStatus = new System.Windows.Forms.Label();
             this.txtListFileStatus = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
             this.picParent = new System.Windows.Forms.PictureBox();
@@ -51,10 +51,10 @@
             this.txtPartDescripts = new System.Windows.Forms.TextBox();
             this.txtPartName = new System.Windows.Forms.TextBox();
             this.txtPartCode = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.labelNote = new System.Windows.Forms.Label();
+            this.labelPartDescript = new System.Windows.Forms.Label();
+            this.labelPartName = new System.Windows.Forms.Label();
+            this.labelPartCode = new System.Windows.Forms.Label();
             this.btnClearParent = new System.Windows.Forms.Button();
             this.btnAdd2Parent = new System.Windows.Forms.Button();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
@@ -115,7 +115,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.splitContainer2);
-            this.splitContainer1.Size = new System.Drawing.Size(1056, 717);
+            this.splitContainer1.Size = new System.Drawing.Size(1077, 717);
             this.splitContainer1.SplitterDistance = 165;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -141,8 +141,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.dgvListTimKiem);
-            this.splitContainer3.Size = new System.Drawing.Size(1056, 165);
-            this.splitContainer3.SplitterDistance = 370;
+            this.splitContainer3.Size = new System.Drawing.Size(1077, 165);
+            this.splitContainer3.SplitterDistance = 377;
             this.splitContainer3.TabIndex = 8;
             // 
             // label1
@@ -241,7 +241,7 @@
             this.dgvListTimKiem.Name = "dgvListTimKiem";
             this.dgvListTimKiem.RowHeadersWidth = 51;
             this.dgvListTimKiem.RowTemplate.Height = 23;
-            this.dgvListTimKiem.Size = new System.Drawing.Size(682, 165);
+            this.dgvListTimKiem.Size = new System.Drawing.Size(696, 165);
             this.dgvListTimKiem.TabIndex = 3;
             this.dgvListTimKiem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellDoubleClick);
             this.dgvListTimKiem.Click += new System.EventHandler(this.dgvListTimKiem_Click);
@@ -256,7 +256,7 @@
             // 
             this.splitContainer2.Panel1.AutoScroll = true;
             this.splitContainer2.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.splitContainer2.Panel1.Controls.Add(this.label7);
+            this.splitContainer2.Panel1.Controls.Add(this.labelFileStatus);
             this.splitContainer2.Panel1.Controls.Add(this.txtListFileStatus);
             this.splitContainer2.Panel1.Controls.Add(this.label11);
             this.splitContainer2.Panel1.Controls.Add(this.picParent);
@@ -264,10 +264,10 @@
             this.splitContainer2.Panel1.Controls.Add(this.txtPartDescripts);
             this.splitContainer2.Panel1.Controls.Add(this.txtPartName);
             this.splitContainer2.Panel1.Controls.Add(this.txtPartCode);
-            this.splitContainer2.Panel1.Controls.Add(this.label5);
-            this.splitContainer2.Panel1.Controls.Add(this.label4);
-            this.splitContainer2.Panel1.Controls.Add(this.label3);
-            this.splitContainer2.Panel1.Controls.Add(this.label2);
+            this.splitContainer2.Panel1.Controls.Add(this.labelNote);
+            this.splitContainer2.Panel1.Controls.Add(this.labelPartDescript);
+            this.splitContainer2.Panel1.Controls.Add(this.labelPartName);
+            this.splitContainer2.Panel1.Controls.Add(this.labelPartCode);
             this.splitContainer2.Panel1.Controls.Add(this.btnClearParent);
             this.splitContainer2.Panel1.Controls.Add(this.btnAdd2Parent);
             // 
@@ -275,18 +275,18 @@
             // 
             this.splitContainer2.Panel2.BackColor = System.Drawing.Color.Cyan;
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer4);
-            this.splitContainer2.Size = new System.Drawing.Size(1056, 548);
-            this.splitContainer2.SplitterDistance = 370;
+            this.splitContainer2.Size = new System.Drawing.Size(1077, 548);
+            this.splitContainer2.SplitterDistance = 377;
             this.splitContainer2.TabIndex = 0;
             // 
-            // label7
+            // labelFileStatus
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(13, 219);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(82, 20);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Files Status";
+            this.labelFileStatus.AutoSize = true;
+            this.labelFileStatus.Location = new System.Drawing.Point(13, 219);
+            this.labelFileStatus.Name = "labelFileStatus";
+            this.labelFileStatus.Size = new System.Drawing.Size(82, 20);
+            this.labelFileStatus.TabIndex = 6;
+            this.labelFileStatus.Text = "Files Status";
             // 
             // txtListFileStatus
             // 
@@ -325,7 +325,7 @@
             this.dgvListFile.Name = "dgvListFile";
             this.dgvListFile.RowHeadersWidth = 51;
             this.dgvListFile.RowTemplate.Height = 23;
-            this.dgvListFile.Size = new System.Drawing.Size(370, 254);
+            this.dgvListFile.Size = new System.Drawing.Size(377, 254);
             this.dgvListFile.TabIndex = 3;
             this.dgvListFile.DoubleClick += new System.EventHandler(this.dgvListFile_DoubleClick);
             // 
@@ -356,43 +356,43 @@
             this.txtPartCode.TabIndex = 2;
             this.txtPartCode.TextChanged += new System.EventHandler(this.txtPartCode_TextChanged);
             // 
-            // label5
+            // labelNote
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.ForeColor = System.Drawing.Color.Blue;
-            this.label5.Location = new System.Drawing.Point(10, 254);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(148, 20);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Click đúp để xem file";
+            this.labelNote.AutoSize = true;
+            this.labelNote.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelNote.ForeColor = System.Drawing.Color.Blue;
+            this.labelNote.Location = new System.Drawing.Point(10, 254);
+            this.labelNote.Name = "labelNote";
+            this.labelNote.Size = new System.Drawing.Size(148, 20);
+            this.labelNote.TabIndex = 1;
+            this.labelNote.Text = "Click đúp để xem file";
             // 
-            // label4
+            // labelPartDescript
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 167);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 20);
-            this.label4.TabIndex = 1;
-            this.label4.Text = "Decriptions";
+            this.labelPartDescript.AutoSize = true;
+            this.labelPartDescript.Location = new System.Drawing.Point(12, 167);
+            this.labelPartDescript.Name = "labelPartDescript";
+            this.labelPartDescript.Size = new System.Drawing.Size(85, 20);
+            this.labelPartDescript.TabIndex = 1;
+            this.labelPartDescript.Text = "Decriptions";
             // 
-            // label3
+            // labelPartName
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(10, 98);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(78, 20);
-            this.label3.TabIndex = 1;
-            this.label3.Text = "Part Name";
+            this.labelPartName.AutoSize = true;
+            this.labelPartName.Location = new System.Drawing.Point(10, 98);
+            this.labelPartName.Name = "labelPartName";
+            this.labelPartName.Size = new System.Drawing.Size(78, 20);
+            this.labelPartName.TabIndex = 1;
+            this.labelPartName.Text = "Part Name";
             // 
-            // label2
+            // labelPartCode
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(12, 63);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 20);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Part Code";
+            this.labelPartCode.AutoSize = true;
+            this.labelPartCode.Location = new System.Drawing.Point(12, 63);
+            this.labelPartCode.Name = "labelPartCode";
+            this.labelPartCode.Size = new System.Drawing.Size(73, 20);
+            this.labelPartCode.TabIndex = 1;
+            this.labelPartCode.Text = "Part Code";
             // 
             // btnClearParent
             // 
@@ -438,7 +438,7 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.dgvChild);
-            this.splitContainer4.Size = new System.Drawing.Size(682, 548);
+            this.splitContainer4.Size = new System.Drawing.Size(696, 548);
             this.splitContainer4.SplitterDistance = 97;
             this.splitContainer4.TabIndex = 4;
             // 
@@ -447,7 +447,7 @@
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.ForeColor = System.Drawing.Color.Blue;
-            this.label9.Location = new System.Drawing.Point(367, 52);
+            this.label9.Location = new System.Drawing.Point(560, 52);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(57, 16);
             this.label9.TabIndex = 4;
@@ -458,7 +458,7 @@
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Times New Roman", 8F, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.Blue;
-            this.label8.Location = new System.Drawing.Point(169, 52);
+            this.label8.Location = new System.Drawing.Point(234, 52);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 16);
             this.label8.TabIndex = 4;
@@ -490,7 +490,7 @@
             // 
             // btnCheckBefore
             // 
-            this.btnCheckBefore.Location = new System.Drawing.Point(342, 12);
+            this.btnCheckBefore.Location = new System.Drawing.Point(537, 12);
             this.btnCheckBefore.Name = "btnCheckBefore";
             this.btnCheckBefore.Size = new System.Drawing.Size(99, 37);
             this.btnCheckBefore.TabIndex = 0;
@@ -500,7 +500,7 @@
             // 
             // btnClearChild
             // 
-            this.btnClearChild.Location = new System.Drawing.Point(261, 12);
+            this.btnClearChild.Location = new System.Drawing.Point(391, 12);
             this.btnClearChild.Name = "btnClearChild";
             this.btnClearChild.Size = new System.Drawing.Size(75, 37);
             this.btnClearChild.TabIndex = 3;
@@ -510,7 +510,7 @@
             // 
             // btnDeleteChild
             // 
-            this.btnDeleteChild.Location = new System.Drawing.Point(141, 12);
+            this.btnDeleteChild.Location = new System.Drawing.Point(206, 12);
             this.btnDeleteChild.Name = "btnDeleteChild";
             this.btnDeleteChild.Size = new System.Drawing.Size(114, 37);
             this.btnDeleteChild.TabIndex = 0;
@@ -526,7 +526,7 @@
             this.dgvChild.Name = "dgvChild";
             this.dgvChild.RowHeadersWidth = 51;
             this.dgvChild.RowTemplate.Height = 23;
-            this.dgvChild.Size = new System.Drawing.Size(682, 447);
+            this.dgvChild.Size = new System.Drawing.Size(696, 447);
             this.dgvChild.TabIndex = 1;
             this.dgvChild.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChild_CellDoubleClick);
             // 
@@ -535,7 +535,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1077, 597);
+            this.ClientSize = new System.Drawing.Size(1098, 597);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.button1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -584,10 +584,10 @@
         private System.Windows.Forms.Button btnUpload;
         private System.Windows.Forms.Button btnClearParent;
         private System.Windows.Forms.Button btnAdd2Parent;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelNote;
+        private System.Windows.Forms.Label labelPartDescript;
+        private System.Windows.Forms.Label labelPartName;
+        private System.Windows.Forms.Label labelPartCode;
         private System.Windows.Forms.DataGridView dgvListFile;
         private System.Windows.Forms.TextBox txtPartDescripts;
         private System.Windows.Forms.TextBox txtPartName;
@@ -602,7 +602,7 @@
         private System.Windows.Forms.TextBox txtStatusImagePart;
         private System.Windows.Forms.TextBox txtListFileStatus;
         private System.Windows.Forms.Button btnClearChild;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelFileStatus;
         private System.Windows.Forms.Button btnFindPart;
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;

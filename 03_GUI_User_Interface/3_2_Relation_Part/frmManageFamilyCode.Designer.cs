@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManageFamilyCode));
             this.dgvFamilyCode = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -54,8 +55,9 @@
             this.dgvFamilyCode.Location = new System.Drawing.Point(0, 0);
             this.dgvFamilyCode.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.dgvFamilyCode.Name = "dgvFamilyCode";
+            this.dgvFamilyCode.RowHeadersWidth = 51;
             this.dgvFamilyCode.RowTemplate.Height = 23;
-            this.dgvFamilyCode.Size = new System.Drawing.Size(493, 278);
+            this.dgvFamilyCode.Size = new System.Drawing.Size(615, 251);
             this.dgvFamilyCode.TabIndex = 0;
             this.dgvFamilyCode.Click += new System.EventHandler(this.dgvFamilyCode_Click);
             // 
@@ -74,11 +76,11 @@
             this.groupBox1.Controls.Add(this.btnModify);
             this.groupBox1.Controls.Add(this.btnAdd);
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBox1.Location = new System.Drawing.Point(0, 278);
+            this.groupBox1.Location = new System.Drawing.Point(0, 251);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.groupBox1.Size = new System.Drawing.Size(493, 214);
+            this.groupBox1.Size = new System.Drawing.Size(615, 293);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Các tùy chỉnh";
@@ -88,9 +90,9 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.label4.Location = new System.Drawing.Point(12, 51);
+            this.label4.Location = new System.Drawing.Point(12, 77);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(414, 45);
+            this.label4.Size = new System.Drawing.Size(516, 60);
             this.label4.TabIndex = 4;
             this.label4.Text = "Nút \"Save New\"  dùng để lưu khi thêm Click Add ( Thêm 1 Family Code mới )\r\nNút \"M" +
     "odify => Save\" dùng để khi sửa dữ liệu ô Type  hoặc ô Description\r\n thì sẽ lưu l" +
@@ -99,70 +101,75 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(103, 23);
+            this.btnSave.AutoSize = true;
+            this.btnSave.Image = ((System.Drawing.Image)(resources.GetObject("btnSave.Image")));
+            this.btnSave.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSave.Location = new System.Drawing.Point(102, 30);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(75, 26);
+            this.btnSave.Size = new System.Drawing.Size(121, 39);
             this.btnSave.TabIndex = 1;
             this.btnSave.Text = "Save New";
+            this.btnSave.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // txtFamilyDescript
             // 
-            this.txtFamilyDescript.Location = new System.Drawing.Point(85, 146);
+            this.txtFamilyDescript.Location = new System.Drawing.Point(114, 195);
             this.txtFamilyDescript.Multiline = true;
             this.txtFamilyDescript.Name = "txtFamilyDescript";
-            this.txtFamilyDescript.Size = new System.Drawing.Size(383, 56);
+            this.txtFamilyDescript.Size = new System.Drawing.Size(489, 56);
             this.txtFamilyDescript.TabIndex = 7;
             this.txtFamilyDescript.TextChanged += new System.EventHandler(this.txtFamilyDescript_TextChanged);
             // 
             // txtFamilyType
             // 
-            this.txtFamilyType.Location = new System.Drawing.Point(265, 108);
+            this.txtFamilyType.Location = new System.Drawing.Point(283, 157);
             this.txtFamilyType.Name = "txtFamilyType";
-            this.txtFamilyType.Size = new System.Drawing.Size(203, 25);
+            this.txtFamilyType.Size = new System.Drawing.Size(317, 29);
             this.txtFamilyType.TabIndex = 6;
             // 
             // txtFamilyCode
             // 
-            this.txtFamilyCode.Location = new System.Drawing.Point(85, 108);
+            this.txtFamilyCode.Location = new System.Drawing.Point(114, 157);
             this.txtFamilyCode.Name = "txtFamilyCode";
-            this.txtFamilyCode.Size = new System.Drawing.Size(100, 25);
+            this.txtFamilyCode.Size = new System.Drawing.Size(89, 29);
             this.txtFamilyCode.TabIndex = 5;
             this.txtFamilyCode.TextChanged += new System.EventHandler(this.txtFamilyCode_TextChanged);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(12, 167);
+            this.label3.Location = new System.Drawing.Point(12, 216);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(74, 17);
+            this.label3.Size = new System.Drawing.Size(96, 23);
             this.label3.TabIndex = 1;
             this.label3.Text = "Decriptions";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(208, 112);
+            this.label2.Location = new System.Drawing.Point(216, 161);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 17);
+            this.label2.Size = new System.Drawing.Size(45, 23);
             this.label2.TabIndex = 1;
             this.label2.Text = "Type";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 112);
+            this.label1.Location = new System.Drawing.Point(35, 161);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 17);
+            this.label1.Size = new System.Drawing.Size(50, 23);
             this.label1.TabIndex = 1;
             this.label1.Text = "Code";
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(411, 23);
+            this.btnExit.AutoSize = true;
+            this.btnExit.Location = new System.Drawing.Point(525, 30);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 26);
+            this.btnExit.Size = new System.Drawing.Size(75, 39);
             this.btnExit.TabIndex = 4;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -170,40 +177,52 @@
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(320, 23);
+            this.btnDelete.AutoSize = true;
+            this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
+            this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDelete.Location = new System.Drawing.Point(420, 30);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(75, 26);
+            this.btnDelete.Size = new System.Drawing.Size(91, 39);
             this.btnDelete.TabIndex = 3;
             this.btnDelete.Text = "Delete";
+            this.btnDelete.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnModify
             // 
-            this.btnModify.Location = new System.Drawing.Point(194, 23);
+            this.btnModify.AutoSize = true;
+            this.btnModify.Image = ((System.Drawing.Image)(resources.GetObject("btnModify.Image")));
+            this.btnModify.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModify.Location = new System.Drawing.Point(237, 30);
             this.btnModify.Name = "btnModify";
-            this.btnModify.Size = new System.Drawing.Size(110, 26);
+            this.btnModify.Size = new System.Drawing.Size(169, 39);
             this.btnModify.TabIndex = 2;
             this.btnModify.Text = "Modify => Save";
+            this.btnModify.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModify.UseVisualStyleBackColor = true;
             this.btnModify.Click += new System.EventHandler(this.btnModify_Click);
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(12, 23);
+            this.btnAdd.AutoSize = true;
+            this.btnAdd.Image = ((System.Drawing.Image)(resources.GetObject("btnAdd.Image")));
+            this.btnAdd.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAdd.Location = new System.Drawing.Point(12, 30);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(75, 26);
+            this.btnAdd.Size = new System.Drawing.Size(76, 39);
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Add";
+            this.btnAdd.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // frmManageFamilyCode
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 21F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(493, 492);
+            this.ClientSize = new System.Drawing.Size(615, 544);
             this.Controls.Add(this.dgvFamilyCode);
             this.Controls.Add(this.groupBox1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

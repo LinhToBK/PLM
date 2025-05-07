@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFindPO));
             this.btnExit = new System.Windows.Forms.Button();
             this.BtnKeySearch = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
@@ -35,10 +36,11 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.radioPart = new System.Windows.Forms.RadioButton();
             this.radioPO = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelSearch = new System.Windows.Forms.Label();
             this.dtpFilter = new System.Windows.Forms.DateTimePicker();
             this.txtKeySearch = new System.Windows.Forms.TextBox();
             this.btnFilter = new System.Windows.Forms.Button();
+            this.cboTemplate = new System.Windows.Forms.ComboBox();
             this.dgvPartlist = new System.Windows.Forms.DataGridView();
             this.txtPOSupplier = new System.Windows.Forms.TextBox();
             this.txtPOAmount = new System.Windows.Forms.TextBox();
@@ -47,12 +49,13 @@
             this.txtPOCode = new System.Windows.Forms.TextBox();
             this.btnUpdateStatus = new System.Windows.Forms.Button();
             this.btnExportExcel = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelCreator = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.labelStatus = new System.Windows.Forms.Label();
+            this.labelSupplier = new System.Windows.Forms.Label();
+            this.labelAmount = new System.Windows.Forms.Label();
+            this.labelCode = new System.Windows.Forms.Label();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -97,7 +100,7 @@
             this.splitContainer1.Panel1.AutoScroll = true;
             this.splitContainer1.Panel1.Controls.Add(this.dgvSearchAD);
             this.splitContainer1.Panel1.Controls.Add(this.groupBox1);
-            this.splitContainer1.Panel1.Controls.Add(this.label1);
+            this.splitContainer1.Panel1.Controls.Add(this.labelSearch);
             this.splitContainer1.Panel1.Controls.Add(this.dtpFilter);
             this.splitContainer1.Panel1.Controls.Add(this.txtKeySearch);
             this.splitContainer1.Panel1.Controls.Add(this.btnFilter);
@@ -107,6 +110,7 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
+            this.splitContainer1.Panel2.Controls.Add(this.cboTemplate);
             this.splitContainer1.Panel2.Controls.Add(this.dgvPartlist);
             this.splitContainer1.Panel2.Controls.Add(this.txtPOSupplier);
             this.splitContainer1.Panel2.Controls.Add(this.txtPOAmount);
@@ -115,12 +119,13 @@
             this.splitContainer1.Panel2.Controls.Add(this.txtPOCode);
             this.splitContainer1.Panel2.Controls.Add(this.btnUpdateStatus);
             this.splitContainer1.Panel2.Controls.Add(this.btnExportExcel);
-            this.splitContainer1.Panel2.Controls.Add(this.label5);
+            this.splitContainer1.Panel2.Controls.Add(this.labelCreator);
             this.splitContainer1.Panel2.Controls.Add(this.label7);
-            this.splitContainer1.Panel2.Controls.Add(this.label4);
-            this.splitContainer1.Panel2.Controls.Add(this.label6);
-            this.splitContainer1.Panel2.Controls.Add(this.label3);
-            this.splitContainer1.Panel2.Controls.Add(this.label2);
+            this.splitContainer1.Panel2.Controls.Add(this.label1);
+            this.splitContainer1.Panel2.Controls.Add(this.labelStatus);
+            this.splitContainer1.Panel2.Controls.Add(this.labelSupplier);
+            this.splitContainer1.Panel2.Controls.Add(this.labelAmount);
+            this.splitContainer1.Panel2.Controls.Add(this.labelCode);
             this.splitContainer1.Size = new System.Drawing.Size(1085, 620);
             this.splitContainer1.SplitterDistance = 448;
             this.splitContainer1.TabIndex = 0;
@@ -141,6 +146,7 @@
             this.dgvSearchAD.Size = new System.Drawing.Size(448, 475);
             this.dgvSearchAD.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvSearchAD.TabIndex = 10;
+            this.dgvSearchAD.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearchAD_CellDoubleClick);
             this.dgvSearchAD.Click += new System.EventHandler(this.dgvSearchAD_Click);
             // 
             // groupBox1
@@ -176,14 +182,14 @@
             this.radioPO.Text = "by PO";
             this.radioPO.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // labelSearch
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(247, 23);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Nhập PO Code hoặc Part Code";
+            this.labelSearch.AutoSize = true;
+            this.labelSearch.Location = new System.Drawing.Point(21, 9);
+            this.labelSearch.Name = "labelSearch";
+            this.labelSearch.Size = new System.Drawing.Size(290, 23);
+            this.labelSearch.TabIndex = 4;
+            this.labelSearch.Text = "Enter PO Code / Part Code to search";
             // 
             // dtpFilter
             // 
@@ -214,6 +220,17 @@
             this.btnFilter.UseVisualStyleBackColor = true;
             this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
+            // cboTemplate
+            // 
+            this.cboTemplate.FormattingEnabled = true;
+            this.cboTemplate.Items.AddRange(new object[] {
+            "Template 0",
+            "Template 1"});
+            this.cboTemplate.Location = new System.Drawing.Point(485, 100);
+            this.cboTemplate.Name = "cboTemplate";
+            this.cboTemplate.Size = new System.Drawing.Size(121, 31);
+            this.cboTemplate.TabIndex = 4;
+            // 
             // dgvPartlist
             // 
             this.dgvPartlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
@@ -229,7 +246,7 @@
             // txtPOSupplier
             // 
             this.txtPOSupplier.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtPOSupplier.Location = new System.Drawing.Point(127, 100);
+            this.txtPOSupplier.Location = new System.Drawing.Point(127, 59);
             this.txtPOSupplier.Name = "txtPOSupplier";
             this.txtPOSupplier.ReadOnly = true;
             this.txtPOSupplier.Size = new System.Drawing.Size(168, 30);
@@ -238,7 +255,7 @@
             // txtPOAmount
             // 
             this.txtPOAmount.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtPOAmount.Location = new System.Drawing.Point(127, 59);
+            this.txtPOAmount.Location = new System.Drawing.Point(127, 100);
             this.txtPOAmount.Name = "txtPOAmount";
             this.txtPOAmount.ReadOnly = true;
             this.txtPOAmount.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
@@ -248,16 +265,16 @@
             // txtStatus
             // 
             this.txtStatus.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtStatus.Location = new System.Drawing.Point(445, 59);
+            this.txtStatus.Location = new System.Drawing.Point(439, 59);
             this.txtStatus.Name = "txtStatus";
             this.txtStatus.ReadOnly = true;
-            this.txtStatus.Size = new System.Drawing.Size(103, 30);
+            this.txtStatus.Size = new System.Drawing.Size(168, 30);
             this.txtStatus.TabIndex = 2;
             // 
             // txtNhanvien
             // 
             this.txtNhanvien.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.txtNhanvien.Location = new System.Drawing.Point(380, 18);
+            this.txtNhanvien.Location = new System.Drawing.Point(440, 18);
             this.txtNhanvien.Name = "txtNhanvien";
             this.txtNhanvien.ReadOnly = true;
             this.txtNhanvien.Size = new System.Drawing.Size(168, 30);
@@ -274,77 +291,96 @@
             // 
             // btnUpdateStatus
             // 
-            this.btnUpdateStatus.Location = new System.Drawing.Point(239, 145);
+            this.btnUpdateStatus.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdateStatus.Image")));
+            this.btnUpdateStatus.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUpdateStatus.Location = new System.Drawing.Point(303, 145);
             this.btnUpdateStatus.Name = "btnUpdateStatus";
-            this.btnUpdateStatus.Size = new System.Drawing.Size(144, 32);
+            this.btnUpdateStatus.Size = new System.Drawing.Size(153, 32);
             this.btnUpdateStatus.TabIndex = 1;
             this.btnUpdateStatus.Text = "Update Status";
+            this.btnUpdateStatus.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnUpdateStatus.UseVisualStyleBackColor = true;
             this.btnUpdateStatus.Click += new System.EventHandler(this.btnUpdateStatus_Click);
             // 
             // btnExportExcel
             // 
+            this.btnExportExcel.AutoSize = true;
+            this.btnExportExcel.Image = ((System.Drawing.Image)(resources.GetObject("btnExportExcel.Image")));
+            this.btnExportExcel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.btnExportExcel.Location = new System.Drawing.Point(21, 145);
             this.btnExportExcel.Name = "btnExportExcel";
-            this.btnExportExcel.Size = new System.Drawing.Size(189, 32);
+            this.btnExportExcel.Size = new System.Drawing.Size(194, 33);
             this.btnExportExcel.TabIndex = 1;
             this.btnExportExcel.Text = "Export PO to Excel";
+            this.btnExportExcel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnExportExcel.UseVisualStyleBackColor = true;
             this.btnExportExcel.Click += new System.EventHandler(this.btnExportExcel_Click);
             // 
-            // label5
+            // labelCreator
             // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(299, 22);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(67, 23);
-            this.label5.TabIndex = 0;
-            this.label5.Text = "Creator";
+            this.labelCreator.AutoSize = true;
+            this.labelCreator.Location = new System.Drawing.Point(334, 22);
+            this.labelCreator.Name = "labelCreator";
+            this.labelCreator.Size = new System.Drawing.Size(67, 23);
+            this.labelCreator.TabIndex = 0;
+            this.labelCreator.Text = "Creator";
+            this.labelCreator.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(301, 63);
+            this.label7.Location = new System.Drawing.Point(301, 104);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(56, 23);
             this.label7.TabIndex = 0;
             this.label7.Text = "(VND)";
             // 
-            // label4
+            // label1
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(371, 63);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(56, 23);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Status";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(393, 104);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(79, 23);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Template";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label6
+            // labelStatus
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(21, 104);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(100, 23);
-            this.label6.TabIndex = 0;
-            this.label6.Text = "PO Supplier";
+            this.labelStatus.AutoSize = true;
+            this.labelStatus.Location = new System.Drawing.Point(339, 63);
+            this.labelStatus.Name = "labelStatus";
+            this.labelStatus.Size = new System.Drawing.Size(56, 23);
+            this.labelStatus.TabIndex = 0;
+            this.labelStatus.Text = "Status";
+            this.labelStatus.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label3
+            // labelSupplier
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 63);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(100, 23);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "PO Amount";
+            this.labelSupplier.AutoSize = true;
+            this.labelSupplier.Location = new System.Drawing.Point(21, 63);
+            this.labelSupplier.Name = "labelSupplier";
+            this.labelSupplier.Size = new System.Drawing.Size(100, 23);
+            this.labelSupplier.TabIndex = 0;
+            this.labelSupplier.Text = "PO Supplier";
             // 
-            // label2
+            // labelAmount
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 22);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 23);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "PO Code";
+            this.labelAmount.AutoSize = true;
+            this.labelAmount.Location = new System.Drawing.Point(21, 104);
+            this.labelAmount.Name = "labelAmount";
+            this.labelAmount.Size = new System.Drawing.Size(100, 23);
+            this.labelAmount.TabIndex = 0;
+            this.labelAmount.Text = "PO Amount";
+            // 
+            // labelCode
+            // 
+            this.labelCode.AutoSize = true;
+            this.labelCode.Location = new System.Drawing.Point(21, 22);
+            this.labelCode.Name = "labelCode";
+            this.labelCode.Size = new System.Drawing.Size(78, 23);
+            this.labelCode.TabIndex = 0;
+            this.labelCode.Text = "PO Code";
             // 
             // frmFindPO
             // 
@@ -382,12 +418,12 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.RadioButton radioPart;
         private System.Windows.Forms.RadioButton radioPO;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelSearch;
         private System.Windows.Forms.DateTimePicker dtpFilter;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label labelCreator;
+        private System.Windows.Forms.Label labelStatus;
+        private System.Windows.Forms.Label labelAmount;
+        private System.Windows.Forms.Label labelCode;
         private System.Windows.Forms.TextBox txtPOSupplier;
         private System.Windows.Forms.TextBox txtPOAmount;
         private System.Windows.Forms.TextBox txtStatus;
@@ -395,10 +431,12 @@
         private System.Windows.Forms.TextBox txtPOCode;
         private System.Windows.Forms.Button btnUpdateStatus;
         private System.Windows.Forms.Button btnExportExcel;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label labelSupplier;
         private System.Windows.Forms.DataGridView dgvPartlist;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ColorDialog colorDialog1;
         private Zuby.ADGV.AdvancedDataGridView dgvSearchAD;
+        private System.Windows.Forms.ComboBox cboTemplate;
+        private System.Windows.Forms.Label label1;
     }
 }

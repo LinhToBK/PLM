@@ -1,0 +1,436 @@
+﻿Sub Check()
+    Dim Level_Need_Check As Integer
+    Dim Col_Level As Integer
+    Dim Col_Partname As Integer
+    Dim Col_Quantity As Integer
+    Dim Col_Note As Integer
+    Col_Level = 1
+    Col_Partname = 2
+    Col_Quantity = 3
+    Col_Note = 4
+    
+    Dim Last_Row As Integer
+    Dim Sheet_Current As Worksheet
+    Set Sheet_Current = ActiveSheet
+    Last_Row = Sheet_Current.UsedRange.Rows(Sheet_Current.UsedRange.Rows.count).Row
+    Dim Sheet_Current_Name As String
+    Sheet_Current_Name = ActiveSheet.Name
+    
+    Dim Fd As FileDialog
+    MsgBox ("Chon Folder chua file Image truoc nhe !!!")
+
+    Dim Dir_Image As String
+    Set Fd = Application.FileDialog(msoFileDialogFolderPicker)
+    If Fd.Show = -1 Then
+        Dir_Image = Fd.SelectedItems(1) & "\"
+        MsgBox ("Duong dan Image la :" & Dir_Image)
+    Else
+        MsgBox (" Chua chon duong dan file anh => Error !!!!")
+    End If
+    Set Fd = Nothing
+    'MsgBox (" Duong dan la : " & Dir_Image)
+    'Dir_Image = "C:\Users\DSGL\Desktop\Save file Image\"
+    
+    '-----------------------------------
+    ' ------- COPY BACK UP File -------
+    '-----------------------------------
+    Dim BOM_sheet As Worksheet
+    ThisWorkbook.Sheets(ActiveSheet.Name).Copy after:=ThisWorkbook.Sheets(ThisWorkbook.Sheets.count)
+    ActiveSheet.Name = "BOM of " & Sheet_Current_Name
+    Dim Back_up_sheet_Name As String
+    Name_Sheet = ActiveSheet.Name
+    Set BOM_sheet = ActiveSheet
+    '-------------------------------------------
+    ' ------- FINISH - COPY BACK UP File -------
+    '-------------------------------------------
+    
+ '   ----------------------------
+ '    ------- BEGIN CHECK -------
+ '  ----------------------------
+
+    Dim i As Integer
+    Dim j As Integer
+
+    
+
+    For i = 3 To Last_Row
+        If Cells(i, Col_Note) <> "Xoa" Then
+            For j = i + 1 To Last_Row
+                If Check_Part(i, j, Col_Level, Col_Partname) = True Then
+                    If Compare_Father2(i, j, Col_Level, Col_Partname) = True Then
+                        If j = Last_Row Then
+                            ' Neu la dong cuoi thi thoi
+                          Cells(j, Col_Note) = "Xoa"
+                        Else
+                            ' ------- Begin to compare child -------
+                        Dim Child_i() As String
+                        Dim Child_j() As String
+                        ReDim Child_i(1 To Last_Row)
+                        ReDim Child_j(1 To Last_Row)
+
+                        Dim count As Integer
+                        For count = i + 1 To Last_Row
+                            If Cells(count, Col_Level) > Cells(i, Col_Level) Then
+                                Child_i(count) = CStr(Cells(count, Col_Level)) & CStr(Cells(count, Col_Partname)) & CStr(Cells(count, Col_Quantity))
+                            Else
+                                Child_i(count) = "" ' dong trong
+                                Exit For
+                            End If
+                        Next count
+
+                        For count = j + 1 To Last_Row
+                            If Cells(count, Col_Level) > Cells(j, Col_Level) Then
+                                Child_j(count) = CStr(Cells(count, Col_Level)) & CStr(Cells(count, Col_Partname)) & CStr(Cells(count, Col_Quantity))
+                            Else
+                                ' Have no child
+                                Child_j(count) = ""
+                                Exit For
+                            End If
+                        Next count
+
+                        '
+                        Child_i = RemoveEmptyElements(Child_i)
+                        Child_j = RemoveEmptyElements(Child_j)
+
+                        '
+                        If CompareArrays(Child_i, Child_j) = True Then
+                            Cells(j, Col_Note) = "Xoa"
+                        End If
+                        ' ------- End to compare child -------
+
+                        End If 'j = Last_Row . Yes/No
+
+                    End If ' Finish Compare_Father
+                End If
+            Next j ' Finish vong lap kiem tra
+            
+        Else
+            'MsgBox (" Bo qua  hang thu: " & i)
+        End If
+        
+        ' Dien so luong vao cot col_Quantity_Add
+        
+    Next i
+
+    '----------------------------
+    ' ------- END CHECK -------
+    '----------------------------
+    
+    '-----------------------------------
+    ' ------- Tinh toan so luong -------
+    '-----------------------------------
+    Dim col_Quantity_Add As Integer
+    col_Quantity_Add = 5
+    Dim Quantity_Part As Integer
+    Quantity_Part = 1
+    Dim k  As Integer
+    
+    For i = 2 To Last_Row - 1
+        ' Kiem tra co phai co xoa hay khong
+        If Cells(i, Col_Note) <> "Xoa" Then
+            ' Kiem tra hang phan tu con
+            Dim Row_End_Child As Integer
+            Row_End_Child = i
+            For j = i + 1 To Last_Row
+                If Cells(j, Col_Level) <= Cells(i, Col_Level) Then
+                    ' Neu lon hon thi thoat for
+                    Exit For
+                Else
+                    Row_End_Child = j
+                    
+                End If
+            Next j
+            ' MsgBox (" Xet dong" & i & "- Level " & Cells(i, Col_Level) & "-" & Cells(i, Col_Partname) & "Row_End_Child la : " & Row_End_Child)
+            ' Ket thuc xac dinh Row_End_Child
+        
+            Dim Quantity_Child As Integer
+        
+                ' Have child
+                ' Duyet tu phan tu j+1 den het de kiem tra cac phan tu con
+            For j = i + 1 To Row_End_Child
+                If Cells(j, Col_Note) <> "Xoa" Then
+                    
+                    ' neu la phan tu co the kiem tra
+                    If Cells(j, Col_Level) = Cells(i, Col_Level) + 1 Then
+                        'MsgBox ("Row_End_Child luc nay la " & Row_End_Child)
+                        Dim Check_PartName As String
+                        Check_PartName = Cells(j, Col_Partname)
+                        Quantity_Child = 1
+                        'MsgBox ("Kiem tra phan tu child : " & Check_PartName)
+                    ' Neu la phan tu con -> Dem phan tu con
+                        For k = j + 1 To Row_End_Child
+                            If Cells(k, Col_Partname) = Check_PartName And Cells(k, Col_Level) = Cells(j, Col_Level) Then
+                                Quantity_Child = Quantity_Child + 1
+                            End If
+                        Next k
+                    Cells(j, col_Quantity_Add) = Quantity_Child
+                    End If ' kiem tra co phan la phan tu con khong
+                End If
+                
+                
+            Next j
+        End If ' "Xoa" = YES/NO
+        
+    Next i
+    '----------------------------------------
+    ' --- FINISH : Tinh toan so luong -------
+    '----------------------------------------
+
+    '----------------------------------------
+    ' ---Xoa hang khong su dung  --------
+    '----------------------------------------
+    For i = Last_Row To 2 Step -1
+        If Cells(i, Col_Note) = "Xoa" Then
+            Rows(i).Delete
+        End If
+    Next i
+    '----------------------------------------
+    ' ---Finish : Xoa hang khong su dung  --------
+    '----------------------------------------
+    '----------------------------------------
+    ' --- Insert anh -----------------------
+    '----------------------------------------
+    Dim New_Last_Row As Integer
+    New_Last_Row = BOM_sheet.Rows(BOM_sheet.UsedRange.Rows.count).Row
+    
+    Dim Image_Sheet As Worksheet
+    Set Image_Sheet = ActiveSheet
+    Dim Image_Cell As Range
+    Dim File_Path_Image As String
+    Dim Pic As Shape
+    
+    For i = 2 To New_Last_Row
+
+        File_Path_Image = Dir_Image & Cells(i, Col_Partname) & ".jpg"
+        If Dir(File_Path_Image) = "" Then
+            Cells(i, Col_Note) = "Khong tim thay"
+        Else
+            Set Image_Cell = Image_Sheet.Cells(i, Col_Note)
+            
+            ' Case 1 : Use with Office 365
+'            Image_Cell.Select
+'            Selection.InsertPictureInCell (File_Path_Image)
+            ' Case 2 : Use with Office Standard
+            Set Pic = Image_Sheet.Shapes.AddPicture(Filename:=File_Path_Image, _
+                                                LinktoFile:=msoFalse, _
+                                                SavewithDocument:=msoCTrue, _
+                                                Left:=Image_Cell.Left, _
+                                                Top:=Image_Cell.Top, _
+                                                Width:=-1, _
+                                                Height:=-1)
+
+            With Pic
+                    .LockAspectRatio = msoFalse
+                    .Width = Image_Cell.Width
+                    .Height = Image_Cell.Height
+            End With
+        End If
+    Next i
+
+    
+    Cells(1, col_Quantity_Add) = "Quantity Linh Modify"
+    Cells(1, Col_Note) = "Image"
+
+
+    MsgBox ("Ket thuc")
+
+End Sub
+
+
+' ====================================
+' Function : Check 2 level same of not
+'=====================================
+Function Check_Part(i As Integer, j As Integer, colLevel As Integer, colPartName As Integer) As Boolean
+    If Cells(i, colLevel) = Cells(j, colLevel) And Cells(i, colPartName) = Cells(j, colPartName) Then
+        Check_Part = True
+    Else
+        Check_Part = False
+    End If
+    
+End Function
+
+' ==================================
+' Function :Compare Father
+' ==================================
+Function Compare_Father(i As Integer, j As Integer, colLevel As Integer, colPartName As Integer) As Boolean
+    Dim Row_Father_i As Integer
+    Dim Row_Father_j As Integer
+    Dim cnt As Integer
+    For cnt = i To 2 Step -1
+        If Cells(i, colLevel) - Cells(cnt, colLevel) = 1 Then
+            ' Da tim thay cha
+             Row_Father_i = cnt
+            Exit For
+        End If
+    Next cnt
+    
+    For cnt = j To 2 Step -1
+        If Cells(j, colLevel) - Cells(cnt, colLevel) = 1 Then
+            ' Da tim thay cha
+            Row_Father_j = cnt
+            Exit For
+        End If
+        
+    Next cnt
+    
+    ' ---- Compare 2 Father ----
+    If Cells(Row_Father_i, colPartName) = Cells(Row_Father_j, colPartName) Then
+    Compare_Father = True
+    Else
+    Compare_Father = False
+    End If
+
+End Function
+
+' ==================================
+' Function :Compare Father 2
+' ==================================
+Function Compare_Father2(i As Integer, j As Integer, colLevel As Integer, colPartName As Integer) As Boolean
+    Dim Row_Father_i As Integer
+    Dim Row_Father_j As Integer
+    Dim Level_Value As Integer
+    Dim Check_level As Integer
+    Dim cnt_back As Integer
+    Compare_Father2 = False
+    
+    Level_Value = Cells(i, colLevel)
+    'MsgBox ("Level need check : " & Level_Value)
+    For Check_level = Level_Value - 1 To 1 Step -1
+        For cnt_back = i To 2 Step -1
+            If Cells(cnt_back, colLevel) = Check_level Then
+                Row_Father_i = cnt_back
+                Exit For
+            End If
+        Next cnt_back ' Check row father of i
+        'MsgBox ("Levelfather = " & Check_level & "thi row father i: = " & Row_Father_i)
+        
+        For cnt_back = j To 2 Step -1
+            If Cells(cnt_back, colLevel) = Check_level Then
+                Row_Father_j = cnt_back
+                Exit For
+            End If
+        Next cnt_back ' Check row father of j
+        'MsgBox ("Levelfather = " & Check_level & "thi row father j: = " & Row_Father_j)
+        
+        
+        ' Compare 2 father
+        If Cells(Row_Father_i, colPartName) = Cells(Row_Father_j, colPartName) Then
+            Compare_Father2 = True
+        Else
+            Compare_Father2 = False
+            Exit For ' End loop : Escape Loop check Level
+        End If
+    Next Check_level ' End loop : Check Level
+
+End Function
+  
+
+' ==================================
+' Function : Xoa cac phan tu "" trong mang
+' ==================================
+
+
+Function RemoveEmptyElements(arr As Variant) As Variant
+    Dim newArray() As String
+    Dim i As Integer
+    Dim j As Integer
+    Dim count As Integer
+    
+    'Dem so phan tu rong
+    count = 0
+    ' Kiem tra mang co la mang rong khong
+    
+    For i = LBound(arr) To UBound(arr)
+        If arr(i) <> "" Then
+            count = count + 1
+        End If
+    Next i
+
+    
+    
+    If count = 0 Then
+        'MsgBox ("Mang rong")
+        ReDim newArray(1 To 1)
+        'newArray(0) = "0"
+        newArray(1) = "0"
+        'newArray(2) = "0"
+    Else
+        'MsgBox ("Mang co phan tu")
+        'MsgBox (" Gia tri count hien tai :" & count)
+        ' Khoi tao mang moi voi phan tu tuong ung
+        ReDim newArray(1 To count)
+        
+        ' Sao chep cac phan tu khong rong vao mang moi
+        j = 1
+        For i = LBound(arr) To UBound(arr)
+            If arr(i) <> "" Then
+                newArray(j) = arr(i)
+                j = j + 1
+            End If
+        Next i
+        ' Ket thuc sao chep
+        'MsgBox ("Ket thuc sao chep")
+     End If
+
+    
+    ' Tra ve mang moi
+    RemoveEmptyElements = newArray
+End Function
+
+' ==================================
+' Function : So sanh 2 mang 1 chieu
+' ==================================
+
+
+Function CompareArrays(arr1 As Variant, arr2 As Variant) As Boolean
+    Dim i As Integer
+    Dim j As Integer
+    
+    SortArray arr1
+    SortArray arr2
+    
+    ' Kiem tra kich thuoc cua mang
+    If UBound(arr1) - LBound(arr1) <> UBound(arr2) - LBound(arr2) Then
+        CompareArrays = False
+        Exit Function
+    End If
+    
+    
+    ' So sanh tung phan tu cua 2 mang
+    For i = LBound(arr1) To UBound(arr1)
+        If arr1(i) <> arr2(i) Then
+            CompareArrays = False
+            Exit Function
+        End If
+    Next i
+    ' Neu tat ca cac phan tu deu bang nhau
+    CompareArrays = True
+End Function
+
+' ==================================
+' Function : Sap xep cac phan tu trong mang
+' ==================================
+
+Sub SortArray(arr As Variant)
+    Dim i As Integer, j As Integer
+    Dim temp As String
+    
+    ' Kiem tra xem mang co rong khong
+    If IsEmpty(arr) Then Exit Sub
+
+    ' Sap xep mang theo thu tu tang dan
+    For i = LBound(arr) To UBound(arr) - 1
+        For j = i + 1 To UBound(arr)
+            If arr(i) > arr(j) Then
+                ' Ho? d?i c? ph?n t?
+                temp = arr(i)
+                arr(i) = arr(j)
+                arr(j) = temp
+            End If
+        Next j
+    Next i
+End Sub
+
+
+
+

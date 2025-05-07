@@ -67,7 +67,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                             s.Stage,
                             p.PartLog, 
                             p.PartPrice, 
-                            p.PartMaterial  
+                            p.PartMaterial,
+                            p.PartID
                         FROM tblPart AS p  
                         JOIN tblPartStage AS s ON p.PartStageID = s.IDStage  
                         WHERE p.PartCode = @PartCode ;";

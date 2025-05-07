@@ -10,6 +10,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
+using System.Globalization;
+using System.Resources;
+using System.Threading;
 
 //using Microsoft.Office.Interop.Excel;
 
@@ -22,9 +25,37 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
         public int idProposal { get; set; } // ID của Proposal để truyền vào BLL
         public string nameProposal { get; set; }  // Tên của Proposal để truyền vào BLL
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part.Lang.Lang_UploadRelationtoDataBase", typeof(frmUploadRelationtoDataBase).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            labelListChild.Text = rm.GetString("lb3");
+            labelParentCode.Text = rm.GetString("lb1");
+            labelParentName.Text = rm.GetString("lb2");
+            btnUpload.Text = rm.GetString("lb4");
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
         public frmUploadRelationtoDataBase()
         {
             InitializeComponent();
+            LoadLanguage();
             btnUpload.Enabled = false; // Ban đầu khi khởi động thì phải khóa  Upload dữ liệu
         }
 
@@ -64,7 +95,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
                 bool statusNguyenDuong = true;
                 if ((IsNguyenDuong(dr[2].ToString()) == false))
                 {
-                    tb = "Quantity đang không phải là số nguyên dương";
+                    tb = rm.GetString("t1");  // Giá trị số lượng ( Quantity ) đang không phải là số nguyên dương
                     statusNguyenDuong = false;
                     UpdateStatus = UpdateStatus + 1;
                 }
@@ -73,22 +104,22 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
                     // Check trùng lặp trong tblRelation
                     if (relationBLL.CheckPartChild(parentcode, dr[0].ToString()))
                     {
-                        tb = "Đã trùng với 1 Part Con trong DataBase";
+                        tb = rm.GetString("t2"); // "Đã trùng với 1 Part Con trong DataBase";
                         UpdateStatus = UpdateStatus + 1;
                     }
                     if (relationBLL.CheckPartParent(parentcode, dr[0].ToString()))
                     {
-                        tb = "Đã trùng với 1 Part Parent trong DataBase";
+                        tb = rm.GetString("t3");   //"Đã trùng với 1 Part Parent trong DataBase";
                         UpdateStatus = UpdateStatus + 1;
                     }
                     if (relationBLL.CheckPartChild_in_tblRelationTemp_BLL(parentcode, dr[0].ToString()))
                     {
-                        tb = "Đã trùng với 1 Part Con trong danh sách chờ phê duyệt ECO ";
+                        tb = rm.GetString("t4");// "Đã trùng với 1 Part Con trong danh sách chờ phê duyệt ECO ";
                         UpdateStatus = UpdateStatus + 1;
                     }
                     if (relationBLL.CheckPartParent_in_tblRelationTemp_BLL(parentcode, dr[0].ToString()))
                     {
-                        tb = "Đã trùng với 1 Part Parent trong danh sách chờ phê duyệt ECO";
+                        tb = rm.GetString("t5"); //"Đã trùng với 1 Part Parent trong danh sách chờ phê duyệt ECO";
                         UpdateStatus = UpdateStatus + 1;
                     }
                 }
@@ -162,7 +193,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
 
         private void btnUpload_Click(object sender, EventArgs e)
         {
-            string thongbao = @"Bạn có muốn tạo ràng buộc giữa các Part này hay không ? ";
+            string thongbao = rm.GetString("t6"); // "Bạn có muốn tạo ràng buộc giữa các Part này hay không ? ";
 
             DialogResult kq = MessageBox.Show(thongbao, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
@@ -173,7 +204,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
                 int ECONo = _ecoBLL.LoadECONo();
                 if (_ecoBLL.InsertNewECO_BLL(ECONo, idProposal, nameProposal, 3, jsonfile) == true && InsertRequest_to_tblRelationTemp())
                 {
-                    MessageBox.Show("Tạo request : [Thêm ràng buộc thành công ] \n Hãy thông báo cho quản lý để phê duyệt ");
+                    //MessageBox.Show("Tạo request : [Thêm ràng buộc thành công ] \n Hãy thông báo cho quản lý để phê duyệt ");
+                    MessageBox.Show(rm.GetString("t7"));
                     this.Close(); // Nếu thành công thì tắt luôn form
 
                 }

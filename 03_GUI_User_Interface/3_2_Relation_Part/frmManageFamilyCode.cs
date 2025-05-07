@@ -1,25 +1,57 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
+﻿using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using System;
+using System.Globalization;
 using System.IO;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+using System.Resources;
+using System.Threading;
 using System.Windows.Forms;
-using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 
 namespace PLM_Lynx._03_GUI_User_Interface
 {
     public partial class frmManageFamilyCode : Form
     {
         private ManageFamilyCodeBLL FamilyCodeBLL = new ManageFamilyCodeBLL();
+        public int userlevel { get; set; } // Để kiểm tra quyền của User đang đăng nhập vào hệ thống
+
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part.Lang.Lang_ManageFamilyCode", typeof(frmManageFamilyCode).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+
+            btnAdd.Text = rm.GetString("btnAdd");
+            btnDelete.Text = rm.GetString("btnDelete");
+            btnModify.Text = rm.GetString("btnModify");
+            btnSave.Text = rm.GetString("btnSave");
+
+            label1.Text = rm.GetString("lb1");
+            label2.Text = rm.GetString("lb2");
+            label3.Text = rm.GetString("lb3");
+            label4.Text = rm.GetString("lb4");
+            groupBox1.Text = rm.GetString("lb5");
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
 
         public frmManageFamilyCode()
         {
             InitializeComponent();
+            LoadLanguage();
             // Gán sự kiện TexChanged cho textbox  txtFamilyCode
             txtFamilyCode.TextChanged += txtFamilyCode_TextChanged;
             btnSave.Enabled = false;
@@ -36,6 +68,18 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
             // - Đặt mode cho button
             txtFamilyCode.Enabled = false;
+
+            // Nếu là quản trị viên mới cho phép thêm sửa xóa
+            if (userlevel != 1)
+            {
+                btnAdd.Enabled = false;
+                btnDelete.Enabled = false;
+                btnModify.Enabled = false;
+                btnSave.Enabled = false;
+                txtFamilyCode.Enabled = false; // Không cho sửa FamilyCode
+                txtFamilyDescript.Enabled = false; // Không cho sửa FamilyDescript
+                txtFamilyType.Enabled = false; // Không cho sửa FamilyType
+            }
         }
 
         /// <summary>
@@ -88,11 +132,11 @@ namespace PLM_Lynx._03_GUI_User_Interface
             {
                 return;
             }
-            string Thongbao = " Bạn muốn thêm dữ liệu : \n " + FamilyCode + "]";
+            string Thongbao = rm.GetString("t01") + " \n " + FamilyCode + "]";   //  Bạn muốn thêm dữ liệu :
             Thongbao = Thongbao + "\n [ " + FamilyType + "] ";
             Thongbao = Thongbao + "\n [ " + FamilyDescript + "]";
 
-            DialogResult result = MessageBox.Show(Thongbao, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult result = MessageBox.Show(Thongbao, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 // --- Gọi phương thức thêm dữ liệu ThemFamilyBLL
@@ -105,24 +149,25 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     {
                         string NewFolderPath = Path.Combine(Properties.Settings.Default.LinkDataPart, FamilyCode);
                         Directory.CreateDirectory(NewFolderPath);
-                        MessageBox.Show("Đã thêm Family code mới thành công");
+                        MessageBox.Show(rm.GetString("t16")); // Đã thêm Family code mới thành công
                         ResetallTextbox();
                         btnDelete.Enabled = true;
                         btnModify.Enabled = true;
-                        btnSave.Enabled = true;
+
                         btnSave.Enabled = false; // Vừa cập nhật xong thì cần tắt nút Save
                         txtFamilyCode.Enabled = false; // Tắt để không thể sửa được dữ liệu
                         LoadFamilyCode();
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Xuất hiện lỗi : " + ex.Message);
+                        MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
                 else
                 {
                     // Nếu NG
-                    MessageBox.Show("Không thể thêm User mới. \n Kiểm tra lại các thông tin nhập vào ");
+                    // MessageBox.Show("Không thể thêm User mới. \n Kiểm tra lại các thông tin nhập vào ");
+                    MessageBox.Show(rm.GetString("t02"));
                     txtFamilyCode.Focus();
                     txtFamilyCode.Enabled = true; // Nếu lỗi thì quay trở lại sửa dữ liệu
                 }
@@ -135,15 +180,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
             txtFamilyCode.Enabled = false;
             if (dgvFamilyCode.Rows.Count == 0)
             {
-                MessageBox.Show("Đang không có dữ liệu, cần kiểm tra lại ");
+                //MessageBox.Show("Đang không có dữ liệu, cần kiểm tra lại ");
+                MessageBox.Show(rm.GetString("t03"));
                 return;
             }
-
-            //if(btnAdd.Enabled ==false)
-            //{
-            //    // Nếu button Add FamilyCode đang bị khóa
-            //    return;
-            //}
 
             // Lấy thông tin từ DataGrid View để show lên Textbox
             txtFamilyCode.Text = dgvFamilyCode.CurrentRow.Cells[0].Value.ToString();
@@ -151,16 +191,24 @@ namespace PLM_Lynx._03_GUI_User_Interface
             txtFamilyDescript.Text = dgvFamilyCode.CurrentRow.Cells[2].Value.ToString();
 
             // --- Mode Button
-            btnModify.Enabled = true;
-            btnDelete.Enabled = true;
-            btnAdd.Enabled = true;
+            if (userlevel == 1)
+            {
+                btnModify.Enabled = true;
+                btnDelete.Enabled = true;
+                btnAdd.Enabled = true;
+                btnSave.Enabled = true;
+                txtFamilyType.Enabled = true; // Cho phép sửa FamilyType
+                txtFamilyDescript.Enabled = true; // Cho phép sửa FamilyDescript
+            }
         }
 
         private void btnModify_Click(object sender, EventArgs e)
         {
             if (txtFamilyCode.Text.Trim() != "")
             {
-                DialogResult result = MessageBox.Show("Bạn định sửa code :  " + txtFamilyCode.Text + " phải không ?", "Thông báo", MessageBoxButtons.OKCancel);
+                string tb = rm.GetString("t04") + " \n [ " + txtFamilyCode.Text.Trim() + " ]"; // Bạn có muốn sửa dữ liệu :
+
+                DialogResult result = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.OKCancel);
                 if (result == DialogResult.OK)
                 {
                     // Tạo hàm để cập nhật
@@ -174,12 +222,14 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     }
                     if (FamilyCodeBLL.CapNhatFamilyCodeBLL(familycode, familytype, familydescript) == true)
                     {
-                        MessageBox.Show("Đã cập nhật dữ liệu thành công");
+                        //MessageBox.Show("Đã cập nhật dữ liệu thành công");
+                        MessageBox.Show(rm.GetString("t05"));
                         LoadFamilyCode();
                     }
                     else
                     {
-                        MessageBox.Show("Xuất hiện lỗi, Cần kiểm tra lại thông tin");
+                        //MessageBox.Show("Xuất hiện lỗi, Cần kiểm tra lại thông tin");
+                        MessageBox.Show(rm.GetString("t06"));
                     }
                 }
                 else
@@ -189,17 +239,17 @@ namespace PLM_Lynx._03_GUI_User_Interface
             }
             else
             {
-                MessageBox.Show("Bạn chưa nhập tên phòng mới ");
+                MessageBox.Show(rm.GetString("t07"));    // Bạn chưa nhập tên Family Code mới
                 txtFamilyCode.Focus();
             }
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            string Thongbao = "Bạn có muốn xóa Family code : " + txtFamilyCode.Text + " không ?";
-            Thongbao = Thongbao + "\n Khi xóa , thì toàn bộ dữ liệu của family code sẽ bị mất.";
-            Thongbao = Thongbao + "\n Không thể khôi phục lại được.";
-            DialogResult result = MessageBox.Show(Thongbao, "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string Thongbao = rm.GetString("t08") + txtFamilyCode.Text;    // "Bạn có muốn xóa Family code : "
+            Thongbao = Thongbao + rm.GetString("t09");
+
+            DialogResult result = MessageBox.Show(Thongbao, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 // Nếu vẫn chấp nhận xóa
@@ -208,19 +258,20 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     // 1.--- Xóa dữ liệu ở trên DataBase
                     if (FamilyCodeBLL.XoaFamilyCodeBLL(txtFamilyCode.Text))
                     {
-                        MessageBox.Show("Đã xóa thành công trong Database " + txtFamilyCode.Text);
+                        MessageBox.Show(rm.GetString("t10") + txtFamilyCode.Text);
                         LoadFamilyCode();
                     }
                     else
                     {
-                        MessageBox.Show("Đã xuất hiện lỗi, không xóa được trong Database");
+                        //MessageBox.Show("Đã xuất hiện lỗi, không xóa được trong Database");
+                        MessageBox.Show(rm.GetString("t11"));
                     }
                     // 2. --- Xóa Folder trong DataBaseFolder
 
                     string DeleteFolder = Path.Combine(Properties.Settings.Default.LinkDataPart, txtFamilyCode.Text.Trim());
-                    //MessageBox.Show("Sẽ xóa thư mục : " + DeleteFolder);
+
                     string DestinationFolder = Properties.Settings.Default.TrashDataPart;
-                    //MessageBox.Show("Thư mục đích : " +  DestinationFolder);
+
                     string DestinationFolderWithName = Path.Combine(DestinationFolder, new DirectoryInfo(DeleteFolder).Name);
 
                     // Kiểm  tra thư mục gốc PartCode có khoong
@@ -242,7 +293,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Xuất hiện lỗi : " + ex.Message);
+                    MessageBox.Show("Error : " + ex.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -254,16 +305,43 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private void txtFamilyCode_TextChanged(object sender, EventArgs e)
         {
             // Nếu dữ liệu được thay đổi thì button Save New được bật
-            btnSave.Enabled = !string.IsNullOrWhiteSpace(txtFamilyCode.Text);
+            // btnSave.Enabled = !string.IsNullOrWhiteSpace(txtFamilyCode.Text);
         }
 
         private bool CheckFamilyCode(string FamilyCode, string FamilyType, string FamilyDescript)
         {
-            bool result = true;
-            if (FamilyCode.Length == 3 ) { MessageBox.Show("Code cần để dạng 3 kí tự"); result = false; }
-            if (FamilyType.Length > 28) { MessageBox.Show("Family Type quá dài"); result = false; }
-            if (FamilyDescript.Length > 48) { MessageBox.Show("Family Descript quá dài"); result = false; }
-            return result;
+            bool _checkcode = false;
+            bool _checktype = false;
+            bool _checkdescript = false;
+            if (FamilyCode.Length == 3)
+            { _checkcode = true; }
+            else
+            {
+                MessageBox.Show(rm.GetString("t13"));
+            }
+
+            if (FamilyType.Length < 30)
+            { _checktype = true; }
+            else
+            {
+                MessageBox.Show(rm.GetString("t14"));
+            }
+
+            if (FamilyDescript.Length < 50)
+            { _checkdescript = true; }
+            else
+            {
+                MessageBox.Show(rm.GetString("t15"));
+            }
+
+            if (_checkcode && _checktype && _checkdescript)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

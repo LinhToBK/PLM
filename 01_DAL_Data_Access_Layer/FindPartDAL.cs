@@ -56,6 +56,45 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
+        public DataTable FindwithwordDAL(string KeySearch, string viewrow)
+        {
+            //  select p.PartCode, p.PartName, p.PartDescript, p.PartStage, p.PartPrice, p.PartLog, p.PartFile from tblPart as p  where PartName like '%BA%'
+            //  Or PartCode like '%BA%' or PartDescript like '%BA%'
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"
+                        SELECT TOP " + viewrow + @"
+                            p.PartCode,
+                            p.PartName,
+                            p.PartDescript,
+                            s.Stage as PartStage,
+                            p.PartID,
+                            p.PartPrice,
+                            p.PartMaterial,
+                            p.PartPriceSale,
+                            p.PartPriceLog
+                            
+
+                        FROM
+                            tblPart AS p
+                        JOIN tblPartStage AS s ON p.PartStageID = s.IDStage
+                        WHERE
+                            p.PartName LIKE '%' + @KeySearch + '%'
+                            OR p.PartCode LIKE '%' + @KeySearch + '%'
+                            OR p.PartDescript LIKE '%' + @KeySearch + '%'
+                        order by p.PartDate desc ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@KeySearch", KeySearch);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
         /// 02. SELECT - Lấy danh sách chi tiết con
         /// <param name="IDPart"></param>
         /// <returns></returns>
@@ -86,7 +125,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 //select * from tblPart where tblPart.PartID in (select tblRelation.ParentID from tblRelation where ChildID = 35 )
                 //
-                string sql_query = @"select * from tblPart where tblPart.PartID in (select tblRelation.ParentID from tblRelation where ChildID = @ID )";
+                string sql_query = @"select p.PartCode, p.PartName, p.PartDescript, p.PartMaterial from tblPart as p 
+                                    where p.PartID in (select tblRelation.ParentID from tblRelation where ChildID = @ID  ) ;";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.AddWithValue("@ID", IDPart);

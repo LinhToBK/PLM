@@ -258,12 +258,14 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
+                DateTime PartDate = DateTime.Now.Date;
                 string sql_query = @"
                                     UPDATE tblPart
                                     SET
                                         PartLog = CONCAT( @ECONo,  CHAR(13), CHAR(10), '|', PartLog),
                                         PartMaterial = @PartMaterial,
-                                        PartStageID = @PartStageID
+                                        PartStageID = @PartStageID,
+                                        PartDate = @PartDate    
                                     WHERE PartCode = @PartCode";
 
                 con.Open();
@@ -277,6 +279,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         cmd.Parameters.Add("@PartMaterial", SqlDbType.NVarChar).Value = PartMaterial;
                         cmd.Parameters.Add("@PartStageID", SqlDbType.Int).Value = PartStageID;
                         cmd.Parameters.Add("@ECONo", SqlDbType.NVarChar).Value = ECONo.ToString();
+                        cmd.Parameters.Add("@ECONo", SqlDbType.Date).Value = PartDate;
 
                         int result = cmd.ExecuteNonQuery();
 
@@ -474,10 +477,11 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
                 
-
+                DateTime PartDate = DateTime.Now.Date;
                 string sql_query = @"
                                     UPDATE tblPart
-                                    SET PartLog = CONCAT( @ECONo ,  CHAR(13), CHAR(10), '|', PartLog)
+                                    SET PartLog = CONCAT( @ECONo ,  CHAR(13), CHAR(10), '|', PartLog) , 
+                                        PartDate = @PartDate
                                     WHERE PartCode = @PartCode";
 
                 con.Open();
@@ -489,6 +493,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     {
                         cmd.Parameters.Add("@ECONo", SqlDbType.NVarChar).Value = ECONo;
                         cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
+                        cmd.Parameters.Add("@PartCode", SqlDbType.Date).Value = PartDate;
 
                         int result = cmd.ExecuteNonQuery();
 

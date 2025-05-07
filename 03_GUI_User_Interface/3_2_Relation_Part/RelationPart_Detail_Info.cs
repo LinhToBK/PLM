@@ -1,10 +1,15 @@
 ﻿//using Microsoft.Office.Interop.Excel;
 using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Resources;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PLM_Lynx._03_GUI_User_Interface
@@ -13,12 +18,51 @@ namespace PLM_Lynx._03_GUI_User_Interface
     {
         private RelationPartBLL RelationPartBLL = new RelationPartBLL();
         private CommonBLL commonBLL = new CommonBLL();
+        private FindPartBLL _findPartBLL = new FindPartBLL();
+        private string idpart ;
 
         public DataTable tb_ListFileinFolder { get; set; }
+
+        private DataTable _tblChild = new DataTable();
+
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part.Lang.Lang_RelationPart_Detail_Info", typeof(frmRelationPart_Detail_Info).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+
+            labelPartCode.Text = rm.GetString("lb1");
+            labelPartName.Text = rm.GetString("lb2");
+            labelPartStage.Text = rm.GetString("lb3");
+            labelPartDescription.Text = rm.GetString("lb5");
+            labelPartMaterial.Text = rm.GetString("lb4");
+            labelPartPrice.Text = rm.GetString("lb8");
+            labelNote1.Text = rm.GetString("lb6");
+            labelNote2.Text = rm.GetString("lb7");
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
 
         public frmRelationPart_Detail_Info()
         {
             InitializeComponent();
+            LoadLanguage(); // Load ngôn ngữ từ ResourceManager
 
             // Kích hoạt sự kiện KeyDown
             this.KeyDown += new KeyEventHandler(frmRelationPart_Detail_Info_KeyDown);
@@ -26,10 +70,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
             // Đặt mặc định checkbox = true
             // Đặt tất cả các mục là Checked mặc định = true
-            for (int i = 0; i < checklistStage.Items.Count; i++)
-            {
-                checklistStage.SetItemChecked(i, true);
-            }
+            
         }
 
         // ==============================================================
@@ -65,71 +106,45 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 {
                     partprice = Convert.ToDecimal(row0[5].ToString());
                 }
+                idpart = row0[7].ToString();
+                LoadChild();
 
                 txtPartPrice.Text = partprice.ToString("N0");
 
                 // Hiển thị ảnh
                 if (commonBLL.UploadImagebyPartCode(partcode, PicPart) == true)
                 {
-                    txtPicStatus.Text = "Image is ";
+                    txtPicStatus.Text = rm.GetString("t1");
                 }
                 else
                 {
-                    txtPicStatus.Text = "No FindImage";
+                    txtPicStatus.Text = rm.GetString("t2");
                 }
                 // Hiển thị danh sách file
-                if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == true)
+                if (commonBLL.GetAllFileinFolder(partcode, dgvListFile) == false)
                 {
-                    txtListFileStatus.Text = "Danh sách file hiển thị ở bên dưới ";
-                    // Lấy danh sách loại file
-                    var categories = dgvListFile.Rows
-                                          .Cast<DataGridViewRow>()
-                                          .Where(row => !row.IsNewRow) // Loại bỏ hàng trống
-                                          .Select(row => row.Cells[2].Value?.ToString())
-                                          .Distinct()
-                                          .OrderBy(x => x)
-                                          .ToList();
-                    foreach (var category in categories)
-                    {
-                        checklistTypeFile.Items.Add(category, true); // Mặc định tất cả các mục được chọn
-                    }
-
-                    // Lấy danh sách Stage    - cắt tên file, chỉ lấy 4 phần tử cuối cùng
-                    var filenamelist = dgvListFile.Rows
-                                          .Cast<DataGridViewRow>()
-                                          .Where(row => !row.IsNewRow) // Loại bỏ hàng trống
-                                          .Select(row => row.Cells[0].Value?.ToString())
-                                          .Distinct()
-                                          .OrderBy(x => x)
-                                          .ToList();
-                    List<string> listStage = new List<string>();
-                    foreach (var stage in filenamelist)
-                    {
-                        string cutting = stage.Substring(10, 4);  // CLP-00001_DV-0.jpg => DV-0
-                        if (listStage.Contains(cutting) == false)
-                        {
-                            listStage.Add(cutting);
-                        }
-                    }
-
-                    foreach (var stage in listStage)
-                    {
-                        checklistStage.Items.Add(stage, true); // Mặc định tất cả các mục được chọn
-                    }
+                    //MessageBox.Show("Không tìm thấy file nào trong thư mục này ! \n Vui lòng kiểm tra lại đường dẫn hoặc tên PartCode");
+                    MessageBox.Show(rm.GetString("t3"));
                 }
-                else
-                {
-                    txtListFileStatus.Text = "Part đang trống dữ liệu, cần kiểm tra lại ";
-                }
+
+                dgvListFile.AllowUserToAddRows = false; // Không cho phép thêm dòng mới
+                // dgvListFile.AutoResizeColumns();
+                dgvListFile.AllowUserToDeleteRows = false; // Không cho phép xóa dòng
+                //dgvListFile.CellClick -= dgvListFile_CellClick;
+                //dgvListFile.Click -= dgvListFile_Click;
             }
             else
             {
-                MessageBox.Show("Lỗi, không tìm thấy dữ liệu ");
+                //MessageBox.Show("Lỗi, không tìm thấy dữ liệu ");
+                MessageBox.Show(rm.GetString("t4"));
             }
         }
 
         private void frmRelationPart_Detail_Info_Load(object sender, EventArgs e)
         {
+            //dgvListFile.CellClick -= dgvListFile_CellClick;
+            //dgvListFile.Click -= dgvListFile_Click;
+            splitContainer1.FixedPanel = FixedPanel.Panel1;
         }
 
         private void frmRelationPart_Detail_Info_KeyDown(object sender, KeyEventArgs e)
@@ -139,6 +154,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 this.Close();
             }
         }
+
+        
 
         private void dgvListFile_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -157,9 +174,12 @@ namespace PLM_Lynx._03_GUI_User_Interface
             {
                 if (filesize > 10000)
                 {
-                    DialogResult kq = MessageBox.Show("Kích thước file lớn hơn 10MB \n Bạn có muốn mở không ?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    string tb = rm.GetString("t5"); // "File lớn hơn 10MB, bạn có muốn mở không ?"
+                    DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                     if (kq == DialogResult.Yes)
                     {
+                        // Hiện popup
+                        commonBLL.popup(5000);
                         commonBLL.PreviewFile(filename);
                     }
                     else
@@ -169,12 +189,14 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 }
                 else
                 {
+                    // Hiện popup
+                    commonBLL.popup(2000);
                     commonBLL.PreviewFile(filename);
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Lỗi phát sinh khi  mở file : " + ex.Message);
+                MessageBox.Show(rm.GetString("t6") + ex.Message);
             }
         }
 
@@ -185,14 +207,15 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 // Kiểm tra xem có dòng nào được chọn không
                 if (dgvListFile.SelectedRows.Count == 0)
                 {
-                    MessageBox.Show("Hãy chọn ít nhất một dòng trong DataGridView!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //MessageBox.Show("Hãy chọn ít nhất một dòng trong DataGridView!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show(rm.GetString("t7"), rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
                 // Mở Folder Browser Dialog để chọn thư mục đích
                 using (FolderBrowserDialog folderDialog = new FolderBrowserDialog())
                 {
-                    folderDialog.Description = "Chọn thư mục đích để copy các file";
+                    folderDialog.Description = "Chọn thư mục để lưu file";
                     if (folderDialog.ShowDialog() == DialogResult.OK)
                     {
                         string destinationFolder = folderDialog.SelectedPath;
@@ -226,80 +249,20 @@ namespace PLM_Lynx._03_GUI_User_Interface
                             }
                         }
 
-                        MessageBox.Show("Download file hoàn tất!");
+                        MessageBox.Show(rm.GetString("t8"));      // Download file hoàn tất!
                     }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Đã xảy ra lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
-            var selectedStage = checklistStage.CheckedItems.Cast<string>().ToList();
-
-            if (selectedStage.Count == 0)
-            {
-                MessageBox.Show("Chưa chọn Stage, vui lòng chọn lại ");
-                return;
-            }
-            var selectedTypeFile = checklistTypeFile.CheckedItems.Cast<string>().ToList();
-            if (selectedTypeFile.Count == 0)
-            {
-                MessageBox.Show("Chưa chọn Type File, vui lòng chọn lại ");
-                return;
-            }
-
-            foreach (DataGridViewRow row in dgvListFile.Rows)
-            {
-                if (!row.IsNewRow) // Loại bỏ hàng mới  và hàng đang ẩn
-                {
-                    string Namefile = row.Cells[0].Value?.ToString();
-                    string TypeFileValue = row.Cells[2].Value?.ToString();
-                    bool checkTypeFile = false;
-                    bool checkStage = false;
-                    foreach (string stage in selectedStage)
-                    {
-                        if (Namefile.Contains(stage) == true)
-                        {
-                            checkStage = true; break;
-                        }
-                    }
-                    foreach (string stage in selectedTypeFile)
-                    {
-                        if (TypeFileValue.Contains(stage) == true)
-                        {
-                            checkTypeFile = true; break;
-                        }
-                    }
-                    if (checkStage == true && checkTypeFile == true)
-                    {
-                        row.Visible = true;
-                    }
-                    else
-                    {
-                        row.Visible = false;
-                    }
-                }
-            }
-
-            //foreach (DataGridViewRow row in dgvListFile.Rows)
-            //{
-            //    if (!row.IsNewRow || row.Visible == false) // Loại bỏ hàng mới  và hàng đang ẩn
-            //    {
-            //        string TypeFileValue = row.Cells[2].Value?.ToString();
-            //        row.Visible = false;
-            //        foreach (string stage in selectedTypeFile)
-            //        {
-            //            if (TypeFileValue.Contains(stage) == true)
-            //            {
-            //                row.Visible = true; break;
-            //            }
-            //        }
-            //    }
-            //}
+            
+           
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -340,6 +303,89 @@ namespace PLM_Lynx._03_GUI_User_Interface
             dgvListECO.Columns[0].Width = 100;
             dgvListECO.Columns[1].Width = 100;
             dgvListECO.Columns[2].Width = 200;
+            dgvListECO.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Tự động điều chỉnh kích thước cột
+        }
+
+        private void dgvListECO_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Lấy thong tin ECONo của dòng được chọn
+            int ECONo = Convert.ToInt32(dgvListECO.CurrentRow.Cells[0].Value.ToString());
+            frmECO_Infor_Detail frm = new frmECO_Infor_Detail();
+            frm.ECONo = ECONo;
+            frm.ShowDialog();
+        }
+
+        private void dgvListFile_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+         
+
+        }
+
+        private void dgvListFile_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private int formwidth { get; set; }
+
+        private void LoadChild ()
+        {
+            // hiển thị child
+            _tblChild = _findPartBLL.GetChildBLL(idpart);
+            dgvChild.DataSource = _tblChild;
+            dgvChild.Columns[4].Visible = false; // Ẩn cột Dir
+            dgvChild.Columns[0].Width = 80;
+            dgvChild.Columns[1].Width = 80;
+            dgvChild.Columns[2].Width = 200;
+            dgvChild.Columns[3].Width = 50;
+
+            dgvChild.AllowUserToAddRows = false;
+            dgvChild.EditMode = DataGridViewEditMode.EditProgrammatically;
+            foreach (DataGridViewColumn column in dgvChild.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.NotSortable; // Không cho phép sort lại danh sách
+            }
+        }
+        private void btnExpand_Click(object sender, EventArgs e)
+        {
+            btnCollapse.Enabled = true;
+            splitContainer1.Panel2Collapsed = false;
+            formwidth = this.Width;
+
+            this.Width = (int)(formwidth * 1.7) ;
+            splitContainer1.SplitterDistance = (int)(splitContainer1.Width * 0.6);
+
+            
+            
+
+
+            
+            btnExpand.Enabled = false;
+        }
+
+        private void btnCollapse_Click(object sender, EventArgs e)
+        {
+            btnExpand.Enabled = true;
+            this.Width = formwidth;
+            
+            splitContainer1.Panel2Collapsed = true;
+
+
+            btnCollapse.Enabled = false;
+            
+        }
+
+        private void dgvChild_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            // Chỉ định cột "Tên" để thực hiện việc tạo phân cấp
+            dgvChild.Columns[0].AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+            if (e.ColumnIndex == dgvChild.Columns[0].Index && e.RowIndex >= 0)
+            {
+                int level = Convert.ToInt32(dgvChild.Rows[e.RowIndex].Cells[0].Value);
+
+                // Thêm khoảng trắng hoặc dấu gạch ngang để biểu thị cấp độ
+                e.Value = new string('-', level * 3) + e.Value.ToString();
+            }
         }
     }
 }

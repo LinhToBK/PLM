@@ -28,9 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmAboutMe));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.panelCongty = new System.Windows.Forms.Panel();
-            this.btnVPS = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.btnPO = new System.Windows.Forms.Button();
+            this.btnTrashPart = new System.Windows.Forms.Button();
+            this.btnDataPart = new System.Windows.Forms.Button();
+            this.btnActive = new System.Windows.Forms.Button();
+            this.txtDataPO = new System.Windows.Forms.TextBox();
             this.txtDataTrash = new System.Windows.Forms.TextBox();
             this.txtDataPart = new System.Windows.Forms.TextBox();
             this.txtVPS = new System.Windows.Forms.TextBox();
@@ -40,25 +46,24 @@
             this.txtCompanyTaxCode = new System.Windows.Forms.TextBox();
             this.txtCompanyLocation = new System.Windows.Forms.TextBox();
             this.txtCompanyPhone = new System.Windows.Forms.TextBox();
+            this.labelPO = new System.Windows.Forms.Label();
             this.txtCompanyName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.Server = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelTrash = new System.Windows.Forms.Label();
+            this.labelTax = new System.Windows.Forms.Label();
+            this.labelData = new System.Windows.Forms.Label();
+            this.labelServer = new System.Windows.Forms.Label();
+            this.labelLocation = new System.Windows.Forms.Label();
+            this.labelPhone = new System.Windows.Forms.Label();
+            this.labelName = new System.Windows.Forms.Label();
             this.panelVersion = new System.Windows.Forms.Panel();
             this.btnSaveVersion = new System.Windows.Forms.Button();
             this.btnAddVersion = new System.Windows.Forms.Button();
             this.txtVersionContent = new System.Windows.Forms.TextBox();
             this.txtVersionID = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
+            this.labelContent = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
+            this.labelLog = new System.Windows.Forms.Label();
             this.dgvVersion = new System.Windows.Forms.DataGridView();
-            this.btnDataPart = new System.Windows.Forms.Button();
-            this.btnTrashPart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -84,16 +89,20 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.panelVersion);
             this.splitContainer1.Size = new System.Drawing.Size(917, 562);
-            this.splitContainer1.SplitterDistance = 193;
+            this.splitContainer1.SplitterDistance = 332;
             this.splitContainer1.SplitterWidth = 5;
             this.splitContainer1.TabIndex = 0;
             // 
             // panelCongty
             // 
+            this.panelCongty.AutoScroll = true;
             this.panelCongty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panelCongty.Controls.Add(this.label1);
+            this.panelCongty.Controls.Add(this.btnPO);
             this.panelCongty.Controls.Add(this.btnTrashPart);
             this.panelCongty.Controls.Add(this.btnDataPart);
-            this.panelCongty.Controls.Add(this.btnVPS);
+            this.panelCongty.Controls.Add(this.btnActive);
+            this.panelCongty.Controls.Add(this.txtDataPO);
             this.panelCongty.Controls.Add(this.txtDataTrash);
             this.panelCongty.Controls.Add(this.txtDataPart);
             this.panelCongty.Controls.Add(this.txtVPS);
@@ -103,48 +112,105 @@
             this.panelCongty.Controls.Add(this.txtCompanyTaxCode);
             this.panelCongty.Controls.Add(this.txtCompanyLocation);
             this.panelCongty.Controls.Add(this.txtCompanyPhone);
+            this.panelCongty.Controls.Add(this.labelPO);
             this.panelCongty.Controls.Add(this.txtCompanyName);
-            this.panelCongty.Controls.Add(this.label9);
-            this.panelCongty.Controls.Add(this.label4);
-            this.panelCongty.Controls.Add(this.label8);
-            this.panelCongty.Controls.Add(this.Server);
-            this.panelCongty.Controls.Add(this.label3);
-            this.panelCongty.Controls.Add(this.label2);
-            this.panelCongty.Controls.Add(this.label1);
+            this.panelCongty.Controls.Add(this.labelTrash);
+            this.panelCongty.Controls.Add(this.labelTax);
+            this.panelCongty.Controls.Add(this.labelData);
+            this.panelCongty.Controls.Add(this.labelServer);
+            this.panelCongty.Controls.Add(this.labelLocation);
+            this.panelCongty.Controls.Add(this.labelPhone);
+            this.panelCongty.Controls.Add(this.labelName);
             this.panelCongty.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelCongty.Location = new System.Drawing.Point(0, 0);
             this.panelCongty.Name = "panelCongty";
-            this.panelCongty.Size = new System.Drawing.Size(917, 193);
+            this.panelCongty.Size = new System.Drawing.Size(917, 332);
             this.panelCongty.TabIndex = 0;
             // 
-            // btnVPS
+            // label1
             // 
-            this.btnVPS.Location = new System.Drawing.Point(21, 139);
-            this.btnVPS.Name = "btnVPS";
-            this.btnVPS.Size = new System.Drawing.Size(79, 34);
-            this.btnVPS.TabIndex = 4;
-            this.btnVPS.Text = "VPS Net";
-            this.btnVPS.UseVisualStyleBackColor = true;
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(29, 146);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(34, 20);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "VPS";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // btnPO
+            // 
+            this.btnPO.Location = new System.Drawing.Point(859, 270);
+            this.btnPO.Name = "btnPO";
+            this.btnPO.Size = new System.Drawing.Size(35, 27);
+            this.btnPO.TabIndex = 5;
+            this.btnPO.Text = "...";
+            this.btnPO.UseVisualStyleBackColor = true;
+            this.btnPO.Click += new System.EventHandler(this.btnPO_Click);
+            // 
+            // btnTrashPart
+            // 
+            this.btnTrashPart.Location = new System.Drawing.Point(859, 189);
+            this.btnTrashPart.Name = "btnTrashPart";
+            this.btnTrashPart.Size = new System.Drawing.Size(35, 27);
+            this.btnTrashPart.TabIndex = 5;
+            this.btnTrashPart.Text = "...";
+            this.btnTrashPart.UseVisualStyleBackColor = true;
+            this.btnTrashPart.Click += new System.EventHandler(this.btnTrashPart_Click);
+            // 
+            // btnDataPart
+            // 
+            this.btnDataPart.Location = new System.Drawing.Point(859, 108);
+            this.btnDataPart.Name = "btnDataPart";
+            this.btnDataPart.Size = new System.Drawing.Size(35, 27);
+            this.btnDataPart.TabIndex = 5;
+            this.btnDataPart.Text = "...";
+            this.btnDataPart.UseVisualStyleBackColor = true;
+            this.btnDataPart.Click += new System.EventHandler(this.btnDataPart_Click);
+            // 
+            // btnActive
+            // 
+            this.btnActive.Image = ((System.Drawing.Image)(resources.GetObject("btnActive.Image")));
+            this.btnActive.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnActive.Location = new System.Drawing.Point(21, 182);
+            this.btnActive.Name = "btnActive";
+            this.btnActive.Size = new System.Drawing.Size(79, 34);
+            this.btnActive.TabIndex = 4;
+            this.btnActive.Text = "Active";
+            this.btnActive.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnActive.UseVisualStyleBackColor = true;
+            this.btnActive.Click += new System.EventHandler(this.btnActive_Click);
+            // 
+            // txtDataPO
+            // 
+            this.txtDataPO.Location = new System.Drawing.Point(291, 258);
+            this.txtDataPO.Multiline = true;
+            this.txtDataPO.Name = "txtDataPO";
+            this.txtDataPO.Size = new System.Drawing.Size(562, 51);
+            this.txtDataPO.TabIndex = 3;
+            this.txtDataPO.TextChanged += new System.EventHandler(this.txtDataPO_TextChanged);
             // 
             // txtDataTrash
             // 
-            this.txtDataTrash.Location = new System.Drawing.Point(291, 143);
+            this.txtDataTrash.Location = new System.Drawing.Point(291, 177);
+            this.txtDataTrash.Multiline = true;
             this.txtDataTrash.Name = "txtDataTrash";
-            this.txtDataTrash.Size = new System.Drawing.Size(427, 27);
+            this.txtDataTrash.Size = new System.Drawing.Size(562, 51);
             this.txtDataTrash.TabIndex = 3;
+            this.txtDataTrash.TextChanged += new System.EventHandler(this.txtDataTrash_TextChanged);
             // 
             // txtDataPart
             // 
             this.txtDataPart.Location = new System.Drawing.Point(291, 96);
+            this.txtDataPart.Multiline = true;
             this.txtDataPart.Name = "txtDataPart";
-            this.txtDataPart.Size = new System.Drawing.Size(427, 27);
+            this.txtDataPart.Size = new System.Drawing.Size(562, 51);
             this.txtDataPart.TabIndex = 3;
+            this.txtDataPart.TextChanged += new System.EventHandler(this.txtDataPart_TextChanged);
             // 
             // txtVPS
             // 
             this.txtVPS.Location = new System.Drawing.Point(110, 143);
             this.txtVPS.Name = "txtVPS";
-            this.txtVPS.PasswordChar = '*';
             this.txtVPS.Size = new System.Drawing.Size(124, 27);
             this.txtVPS.TabIndex = 3;
             // 
@@ -157,21 +223,29 @@
             // 
             // btnSaveInfor
             // 
-            this.btnSaveInfor.Location = new System.Drawing.Point(765, 139);
+            this.btnSaveInfor.AutoSize = true;
+            this.btnSaveInfor.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveInfor.Image")));
+            this.btnSaveInfor.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveInfor.Location = new System.Drawing.Point(21, 274);
             this.btnSaveInfor.Name = "btnSaveInfor";
-            this.btnSaveInfor.Size = new System.Drawing.Size(129, 34);
+            this.btnSaveInfor.Size = new System.Drawing.Size(176, 34);
             this.btnSaveInfor.TabIndex = 2;
             this.btnSaveInfor.Text = "Lưu cập nhật";
+            this.btnSaveInfor.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveInfor.UseVisualStyleBackColor = true;
             this.btnSaveInfor.Click += new System.EventHandler(this.btnSaveInfor_Click);
             // 
             // btnModifyCompany
             // 
-            this.btnModifyCompany.Location = new System.Drawing.Point(765, 92);
+            this.btnModifyCompany.AutoSize = true;
+            this.btnModifyCompany.Image = ((System.Drawing.Image)(resources.GetObject("btnModifyCompany.Image")));
+            this.btnModifyCompany.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnModifyCompany.Location = new System.Drawing.Point(21, 228);
             this.btnModifyCompany.Name = "btnModifyCompany";
-            this.btnModifyCompany.Size = new System.Drawing.Size(129, 34);
+            this.btnModifyCompany.Size = new System.Drawing.Size(176, 34);
             this.btnModifyCompany.TabIndex = 0;
             this.btnModifyCompany.Text = "Sửa thông tin";
+            this.btnModifyCompany.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnModifyCompany.UseVisualStyleBackColor = true;
             this.btnModifyCompany.Click += new System.EventHandler(this.btnModifyCompany_Click);
             // 
@@ -193,82 +267,96 @@
             // 
             // txtCompanyPhone
             // 
-            this.txtCompanyPhone.Location = new System.Drawing.Point(420, 12);
+            this.txtCompanyPhone.Location = new System.Drawing.Point(477, 12);
             this.txtCompanyPhone.Name = "txtCompanyPhone";
-            this.txtCompanyPhone.Size = new System.Drawing.Size(210, 27);
+            this.txtCompanyPhone.Size = new System.Drawing.Size(153, 27);
             this.txtCompanyPhone.TabIndex = 1;
             this.txtCompanyPhone.TextChanged += new System.EventHandler(this.txtCompanyPhone_TextChanged);
             // 
+            // labelPO
+            // 
+            this.labelPO.AutoSize = true;
+            this.labelPO.Location = new System.Drawing.Point(242, 273);
+            this.labelPO.Name = "labelPO";
+            this.labelPO.Size = new System.Drawing.Size(28, 20);
+            this.labelPO.TabIndex = 0;
+            this.labelPO.Text = "PO";
+            // 
             // txtCompanyName
             // 
-            this.txtCompanyName.Location = new System.Drawing.Point(110, 12);
+            this.txtCompanyName.Location = new System.Drawing.Point(137, 12);
             this.txtCompanyName.Name = "txtCompanyName";
-            this.txtCompanyName.Size = new System.Drawing.Size(262, 27);
+            this.txtCompanyName.Size = new System.Drawing.Size(279, 27);
             this.txtCompanyName.TabIndex = 1;
             this.txtCompanyName.TextChanged += new System.EventHandler(this.txtCompanyName_TextChanged);
             // 
-            // label9
+            // labelTrash
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(242, 146);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 20);
-            this.label9.TabIndex = 0;
-            this.label9.Text = "Trash";
+            this.labelTrash.AutoSize = true;
+            this.labelTrash.Location = new System.Drawing.Point(242, 192);
+            this.labelTrash.Name = "labelTrash";
+            this.labelTrash.Size = new System.Drawing.Size(43, 20);
+            this.labelTrash.TabIndex = 0;
+            this.labelTrash.Text = "Trash";
             // 
-            // label4
+            // labelTax
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(636, 15);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(82, 20);
-            this.label4.TabIndex = 0;
-            this.label4.Text = "Mã số thuế";
+            this.labelTax.AutoSize = true;
+            this.labelTax.Location = new System.Drawing.Point(636, 15);
+            this.labelTax.Name = "labelTax";
+            this.labelTax.Size = new System.Drawing.Size(82, 20);
+            this.labelTax.TabIndex = 0;
+            this.labelTax.Text = "Mã số thuế";
+            this.labelTax.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label8
+            // labelData
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(244, 99);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(41, 20);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "Data";
+            this.labelData.AutoSize = true;
+            this.labelData.Location = new System.Drawing.Point(244, 111);
+            this.labelData.Name = "labelData";
+            this.labelData.Size = new System.Drawing.Size(41, 20);
+            this.labelData.TabIndex = 0;
+            this.labelData.Text = "Data";
             // 
-            // Server
+            // labelServer
             // 
-            this.Server.AutoSize = true;
-            this.Server.Location = new System.Drawing.Point(21, 99);
-            this.Server.Name = "Server";
-            this.Server.Size = new System.Drawing.Size(50, 20);
-            this.Server.TabIndex = 0;
-            this.Server.Text = "Server";
+            this.labelServer.AutoSize = true;
+            this.labelServer.Location = new System.Drawing.Point(21, 99);
+            this.labelServer.Name = "labelServer";
+            this.labelServer.Size = new System.Drawing.Size(50, 20);
+            this.labelServer.TabIndex = 0;
+            this.labelServer.Text = "Server";
+            this.labelServer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label3
+            // labelLocation
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 58);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(55, 20);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Địa chỉ";
+            this.labelLocation.AutoSize = true;
+            this.labelLocation.Location = new System.Drawing.Point(19, 58);
+            this.labelLocation.Name = "labelLocation";
+            this.labelLocation.Size = new System.Drawing.Size(55, 20);
+            this.labelLocation.TabIndex = 0;
+            this.labelLocation.Text = "Địa chỉ";
+            this.labelLocation.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label2
+            // labelPhone
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(378, 15);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(36, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "SĐT";
+            this.labelPhone.AutoSize = true;
+            this.labelPhone.Location = new System.Drawing.Point(425, 15);
+            this.labelPhone.Name = "labelPhone";
+            this.labelPhone.Size = new System.Drawing.Size(36, 20);
+            this.labelPhone.TabIndex = 0;
+            this.labelPhone.Text = "SĐT";
+            this.labelPhone.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // label1
+            // labelName
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 15);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(85, 20);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Tên công ty";
+            this.labelName.AutoSize = true;
+            this.labelName.Location = new System.Drawing.Point(19, 15);
+            this.labelName.Name = "labelName";
+            this.labelName.Size = new System.Drawing.Size(112, 20);
+            this.labelName.TabIndex = 0;
+            this.labelName.Text = "CompanyName";
+            this.labelName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // panelVersion
             // 
@@ -278,42 +366,50 @@
             this.panelVersion.Controls.Add(this.btnAddVersion);
             this.panelVersion.Controls.Add(this.txtVersionContent);
             this.panelVersion.Controls.Add(this.txtVersionID);
-            this.panelVersion.Controls.Add(this.label7);
+            this.panelVersion.Controls.Add(this.labelContent);
             this.panelVersion.Controls.Add(this.label6);
-            this.panelVersion.Controls.Add(this.label5);
+            this.panelVersion.Controls.Add(this.labelLog);
             this.panelVersion.Controls.Add(this.dgvVersion);
             this.panelVersion.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelVersion.Location = new System.Drawing.Point(0, 0);
             this.panelVersion.Name = "panelVersion";
-            this.panelVersion.Size = new System.Drawing.Size(917, 364);
+            this.panelVersion.Size = new System.Drawing.Size(917, 225);
             this.panelVersion.TabIndex = 0;
             // 
             // btnSaveVersion
             // 
-            this.btnSaveVersion.Location = new System.Drawing.Point(237, 58);
+            this.btnSaveVersion.AutoSize = true;
+            this.btnSaveVersion.Image = ((System.Drawing.Image)(resources.GetObject("btnSaveVersion.Image")));
+            this.btnSaveVersion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSaveVersion.Location = new System.Drawing.Point(213, 58);
             this.btnSaveVersion.Name = "btnSaveVersion";
-            this.btnSaveVersion.Size = new System.Drawing.Size(118, 28);
+            this.btnSaveVersion.Size = new System.Drawing.Size(176, 34);
             this.btnSaveVersion.TabIndex = 3;
             this.btnSaveVersion.Text = "Lưu cập nhật";
+            this.btnSaveVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnSaveVersion.UseVisualStyleBackColor = true;
             this.btnSaveVersion.Click += new System.EventHandler(this.btnSaveVersion_Click);
             // 
             // btnAddVersion
             // 
-            this.btnAddVersion.Location = new System.Drawing.Point(95, 58);
+            this.btnAddVersion.AutoSize = true;
+            this.btnAddVersion.Image = ((System.Drawing.Image)(resources.GetObject("btnAddVersion.Image")));
+            this.btnAddVersion.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddVersion.Location = new System.Drawing.Point(21, 58);
             this.btnAddVersion.Name = "btnAddVersion";
-            this.btnAddVersion.Size = new System.Drawing.Size(112, 28);
+            this.btnAddVersion.Size = new System.Drawing.Size(176, 34);
             this.btnAddVersion.TabIndex = 3;
             this.btnAddVersion.Text = "Thêm Version";
+            this.btnAddVersion.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAddVersion.UseVisualStyleBackColor = true;
             this.btnAddVersion.Click += new System.EventHandler(this.btnAddVersion_Click);
             // 
             // txtVersionContent
             // 
-            this.txtVersionContent.Location = new System.Drawing.Point(378, 17);
+            this.txtVersionContent.Location = new System.Drawing.Point(413, 17);
             this.txtVersionContent.Multiline = true;
             this.txtVersionContent.Name = "txtVersionContent";
-            this.txtVersionContent.Size = new System.Drawing.Size(516, 69);
+            this.txtVersionContent.Size = new System.Drawing.Size(481, 69);
             this.txtVersionContent.TabIndex = 2;
             this.txtVersionContent.TextChanged += new System.EventHandler(this.txtVersionContent_TextChanged);
             // 
@@ -325,14 +421,14 @@
             this.txtVersionID.TabIndex = 2;
             this.txtVersionID.TextChanged += new System.EventHandler(this.txtVersionID_TextChanged);
             // 
-            // label7
+            // labelContent
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(296, 17);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(71, 20);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Nội dung";
+            this.labelContent.AutoSize = true;
+            this.labelContent.Location = new System.Drawing.Point(315, 20);
+            this.labelContent.Name = "labelContent";
+            this.labelContent.Size = new System.Drawing.Size(61, 20);
+            this.labelContent.TabIndex = 1;
+            this.labelContent.Text = "Content";
             // 
             // label6
             // 
@@ -343,46 +439,26 @@
             this.label6.TabIndex = 1;
             this.label6.Text = "ID";
             // 
-            // label5
+            // labelLog
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(21, 20);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(139, 20);
-            this.label5.TabIndex = 1;
-            this.label5.Text = "Lịch sử các version";
+            this.labelLog.AutoSize = true;
+            this.labelLog.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelLog.Location = new System.Drawing.Point(21, 20);
+            this.labelLog.Name = "labelLog";
+            this.labelLog.Size = new System.Drawing.Size(35, 20);
+            this.labelLog.TabIndex = 1;
+            this.labelLog.Text = "Log";
             // 
             // dgvVersion
             // 
             this.dgvVersion.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvVersion.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvVersion.Location = new System.Drawing.Point(0, 112);
+            this.dgvVersion.Location = new System.Drawing.Point(0, 122);
             this.dgvVersion.Name = "dgvVersion";
             this.dgvVersion.RowHeadersWidth = 51;
             this.dgvVersion.RowTemplate.Height = 24;
-            this.dgvVersion.Size = new System.Drawing.Size(917, 252);
+            this.dgvVersion.Size = new System.Drawing.Size(917, 103);
             this.dgvVersion.TabIndex = 0;
-            // 
-            // btnDataPart
-            // 
-            this.btnDataPart.Location = new System.Drawing.Point(724, 96);
-            this.btnDataPart.Name = "btnDataPart";
-            this.btnDataPart.Size = new System.Drawing.Size(35, 27);
-            this.btnDataPart.TabIndex = 5;
-            this.btnDataPart.Text = "...";
-            this.btnDataPart.UseVisualStyleBackColor = true;
-            this.btnDataPart.Click += new System.EventHandler(this.btnDataPart_Click);
-            // 
-            // btnTrashPart
-            // 
-            this.btnTrashPart.Location = new System.Drawing.Point(724, 143);
-            this.btnTrashPart.Name = "btnTrashPart";
-            this.btnTrashPart.Size = new System.Drawing.Size(35, 27);
-            this.btnTrashPart.TabIndex = 5;
-            this.btnTrashPart.Text = "...";
-            this.btnTrashPart.UseVisualStyleBackColor = true;
-            this.btnTrashPart.Click += new System.EventHandler(this.btnTrashPart_Click);
             // 
             // frmAboutMe
             // 
@@ -413,10 +489,10 @@
 
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.Panel panelCongty;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelTax;
+        private System.Windows.Forms.Label labelLocation;
+        private System.Windows.Forms.Label labelPhone;
+        private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Panel panelVersion;
         private System.Windows.Forms.TextBox txtCompanyTaxCode;
         private System.Windows.Forms.TextBox txtCompanyLocation;
@@ -424,23 +500,27 @@
         private System.Windows.Forms.TextBox txtCompanyName;
         private System.Windows.Forms.Button btnSaveInfor;
         private System.Windows.Forms.Button btnModifyCompany;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label labelContent;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label labelLog;
         private System.Windows.Forms.DataGridView dgvVersion;
         private System.Windows.Forms.TextBox txtVersionContent;
         private System.Windows.Forms.TextBox txtVersionID;
         private System.Windows.Forms.Button btnSaveVersion;
         private System.Windows.Forms.Button btnAddVersion;
         private System.Windows.Forms.TextBox txtServer;
-        private System.Windows.Forms.Label Server;
+        private System.Windows.Forms.Label labelServer;
         private System.Windows.Forms.TextBox txtDataTrash;
         private System.Windows.Forms.TextBox txtDataPart;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Button btnVPS;
+        private System.Windows.Forms.Label labelTrash;
+        private System.Windows.Forms.Label labelData;
+        private System.Windows.Forms.Button btnActive;
         private System.Windows.Forms.TextBox txtVPS;
         private System.Windows.Forms.Button btnTrashPart;
         private System.Windows.Forms.Button btnDataPart;
+        private System.Windows.Forms.Button btnPO;
+        private System.Windows.Forms.TextBox txtDataPO;
+        private System.Windows.Forms.Label labelPO;
+        private System.Windows.Forms.Label label1;
     }
 }

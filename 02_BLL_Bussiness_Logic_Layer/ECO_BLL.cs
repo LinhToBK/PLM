@@ -11,6 +11,7 @@ using System.IO;
 using System.Windows.Forms.VisualStyles;
 using System.Globalization;
 using System.Text.RegularExpressions;
+using System.Resources;
 
 namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 {
@@ -19,6 +20,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         private FindPartDAL findpartDAL = new FindPartDAL();
         private ECO_DAL ecoDAL = new ECO_DAL();
         private CommonInforDAL commonInforDAL = new CommonInforDAL();
+
+        // =========== Language =========================
+        // private ResourceManager rm = new ResourceManager("PLM_Lynx._02_BLL_Bussiness_Logic_Layer.Lang_BLL", typeof(ECO_BLL).Assembly);
+
+        // =========== Language =========================
 
         public DataTable GetListChildBLL(string ParentCode)
         {
@@ -152,7 +158,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     }
                     catch (Exception deleteEx)
                     {
-                        MessageBox.Show("Lỗi khi xóa thư mục: " + deleteEx.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error when delete folder " + deleteEx.Message,  "", MessageBoxButtons.OK, MessageBoxIcon.Error);  // Lỗi khi xóa thư mục: 
                     }
                 }
                 status = false;
@@ -272,11 +278,17 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 
         public int getstage(string filename)
         {
-            string[] parts = filename.Split('_');
-            string version = parts[1]; // "V1.10"
+            // Ví dụ: CLP-00001_V1.0
+            string[] parts = filename.Trim().Split('_');
+            if (parts.Length < 2)
+                throw new FormatException("Tên file không đúng định dạng. Cần có dấu gạch dưới (_) và phần version.");
 
+            string version = parts[1]; // "V1.0"
             string[] versionParts = version.Split('.');
-            return Convert.ToInt16(versionParts[0].Substring(1));
+            if (versionParts.Length < 1 || !versionParts[0].StartsWith("V"))
+                throw new FormatException("Version is not in correct format. Must start with V, for example: V1.0");
+
+            return Convert.ToInt16(versionParts[0].Substring(1)); // Lấy số sau chữ V
         }
 
         public bool Delete_Folder_ECO (int ECONo)
@@ -297,7 +309,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 }
                 catch (Exception deleteEx)
                 {
-                    MessageBox.Show("Lỗi khi xóa thư mục: " + deleteEx.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error when delete folder " + deleteEx.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     status = false;
                 }
             }
@@ -480,7 +492,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show("Có lỗi xảy ra : " + ex.Message);
+                MessageBox.Show(" Error : " + ex.Message);
                 return false;
             }
         }

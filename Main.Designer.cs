@@ -32,12 +32,16 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.mnuEngineer = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuFindPart = new System.Windows.Forms.ToolStripMenuItem();
+            this.solidworkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.siemenNXToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuListMaterial = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSystem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMakeNewPart = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuECO = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuManagerUser = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuManageFamily = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuRelationPart = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewListUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuPurchase = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuManagePrice = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMakeNewPO = new System.Windows.Forms.ToolStripMenuItem();
@@ -46,9 +50,9 @@
             this.mnuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuAboutMe = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuUserGuide = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuRestart = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.tstripUser = new System.Windows.Forms.ToolStripStatusLabel();
-            this.viewListUpdateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -71,7 +75,10 @@
             // mnuEngineer
             // 
             this.mnuEngineer.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.mnuFindPart});
+            this.mnuFindPart,
+            this.solidworkToolStripMenuItem,
+            this.siemenNXToolStripMenuItem,
+            this.mnuListMaterial});
             this.mnuEngineer.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mnuEngineer.Image = ((System.Drawing.Image)(resources.GetObject("mnuEngineer.Image")));
             this.mnuEngineer.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -84,9 +91,30 @@
             this.mnuFindPart.Image = ((System.Drawing.Image)(resources.GetObject("mnuFindPart.Image")));
             this.mnuFindPart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.mnuFindPart.Name = "mnuFindPart";
-            this.mnuFindPart.Size = new System.Drawing.Size(224, 32);
+            this.mnuFindPart.Size = new System.Drawing.Size(204, 32);
             this.mnuFindPart.Text = "Find Part";
             this.mnuFindPart.Click += new System.EventHandler(this.mnuFindPart_Click);
+            // 
+            // solidworkToolStripMenuItem
+            // 
+            this.solidworkToolStripMenuItem.Name = "solidworkToolStripMenuItem";
+            this.solidworkToolStripMenuItem.Size = new System.Drawing.Size(204, 32);
+            this.solidworkToolStripMenuItem.Text = "Solidwork";
+            this.solidworkToolStripMenuItem.Click += new System.EventHandler(this.solidworkToolStripMenuItem_Click);
+            // 
+            // siemenNXToolStripMenuItem
+            // 
+            this.siemenNXToolStripMenuItem.Name = "siemenNXToolStripMenuItem";
+            this.siemenNXToolStripMenuItem.Size = new System.Drawing.Size(204, 32);
+            this.siemenNXToolStripMenuItem.Text = "Siemen NX";
+            this.siemenNXToolStripMenuItem.Click += new System.EventHandler(this.siemenNXToolStripMenuItem_Click);
+            // 
+            // mnuListMaterial
+            // 
+            this.mnuListMaterial.Name = "mnuListMaterial";
+            this.mnuListMaterial.Size = new System.Drawing.Size(204, 32);
+            this.mnuListMaterial.Text = "List Material";
+            this.mnuListMaterial.Click += new System.EventHandler(this.mnuListMaterial_Click);
             // 
             // mnuSystem
             // 
@@ -150,6 +178,16 @@
             this.mnuRelationPart.Text = "Manage Relation Part";
             this.mnuRelationPart.Click += new System.EventHandler(this.mnuRelationPart_Click);
             // 
+            // viewListUpdateToolStripMenuItem
+            // 
+            this.viewListUpdateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewListUpdateToolStripMenuItem.Image")));
+            this.viewListUpdateToolStripMenuItem.Name = "viewListUpdateToolStripMenuItem";
+            this.viewListUpdateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
+            | System.Windows.Forms.Keys.U)));
+            this.viewListUpdateToolStripMenuItem.Size = new System.Drawing.Size(446, 32);
+            this.viewListUpdateToolStripMenuItem.Text = "View List Update";
+            this.viewListUpdateToolStripMenuItem.Click += new System.EventHandler(this.viewListUpdateToolStripMenuItem_Click);
+            // 
             // mnuPurchase
             // 
             this.mnuPurchase.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -206,7 +244,8 @@
             // 
             this.mnuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuAboutMe,
-            this.mnuUserGuide});
+            this.mnuUserGuide,
+            this.mnuRestart});
             this.mnuHelp.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.mnuHelp.Image = ((System.Drawing.Image)(resources.GetObject("mnuHelp.Image")));
             this.mnuHelp.Name = "mnuHelp";
@@ -217,17 +256,25 @@
             // 
             this.mnuAboutMe.Image = ((System.Drawing.Image)(resources.GetObject("mnuAboutMe.Image")));
             this.mnuAboutMe.Name = "mnuAboutMe";
-            this.mnuAboutMe.Size = new System.Drawing.Size(194, 32);
-            this.mnuAboutMe.Text = "About me";
+            this.mnuAboutMe.Size = new System.Drawing.Size(287, 32);
+            this.mnuAboutMe.Text = "Common Information";
             this.mnuAboutMe.Click += new System.EventHandler(this.mnuAboutMe_Click);
             // 
             // mnuUserGuide
             // 
             this.mnuUserGuide.Image = ((System.Drawing.Image)(resources.GetObject("mnuUserGuide.Image")));
             this.mnuUserGuide.Name = "mnuUserGuide";
-            this.mnuUserGuide.Size = new System.Drawing.Size(194, 32);
+            this.mnuUserGuide.Size = new System.Drawing.Size(287, 32);
             this.mnuUserGuide.Text = "User Guide";
             this.mnuUserGuide.Click += new System.EventHandler(this.mnuUserGuide_Click);
+            // 
+            // mnuRestart
+            // 
+            this.mnuRestart.Image = ((System.Drawing.Image)(resources.GetObject("mnuRestart.Image")));
+            this.mnuRestart.Name = "mnuRestart";
+            this.mnuRestart.Size = new System.Drawing.Size(287, 32);
+            this.mnuRestart.Text = "Restart App";
+            this.mnuRestart.Click += new System.EventHandler(this.mnuRestart_Click);
             // 
             // statusStrip1
             // 
@@ -246,16 +293,6 @@
             this.tstripUser.Name = "tstripUser";
             this.tstripUser.Size = new System.Drawing.Size(38, 20);
             this.tstripUser.Text = "User";
-            // 
-            // viewListUpdateToolStripMenuItem
-            // 
-            this.viewListUpdateToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewListUpdateToolStripMenuItem.Image")));
-            this.viewListUpdateToolStripMenuItem.Name = "viewListUpdateToolStripMenuItem";
-            this.viewListUpdateToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
-            | System.Windows.Forms.Keys.U)));
-            this.viewListUpdateToolStripMenuItem.Size = new System.Drawing.Size(446, 32);
-            this.viewListUpdateToolStripMenuItem.Text = "View List Update";
-            this.viewListUpdateToolStripMenuItem.Click += new System.EventHandler(this.viewListUpdateToolStripMenuItem_Click);
             // 
             // frmMain
             // 
@@ -304,6 +341,10 @@
         private System.Windows.Forms.ToolStripMenuItem mnuManagePrice;
         private System.Windows.Forms.ToolStripMenuItem mnuManageSupplier;
         private System.Windows.Forms.ToolStripMenuItem viewListUpdateToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem solidworkToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem siemenNXToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mnuListMaterial;
+        private System.Windows.Forms.ToolStripMenuItem mnuRestart;
     }
 }
 

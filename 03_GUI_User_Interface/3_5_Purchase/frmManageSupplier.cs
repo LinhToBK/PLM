@@ -5,9 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,9 +20,48 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
     {
         private PurchaseBLL purchaseBLL = new PurchaseBLL();
 
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_5_Purchase.Lang.Lang_frmManageSupplier", typeof(frmManageSupplier).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            labelName.Text = rm.GetString("lb1");
+            labelPhone.Text = rm.GetString("lb2");
+            labelLocation.Text = rm.GetString("lb3");
+            labelTax.Text = rm.GetString("lb6");
+            labelNote.Text = rm.GetString("lb4");
+            labelRepresentative.Text = rm.GetString("lb5");
+            btnAddSupplier.Text = rm.GetString("lb7");
+            btnModifySupplier.Text = rm.GetString("lb8");
+            btnDeleteSupplier.Text = rm.GetString("lb9");
+            btnSaveChange.Text = rm.GetString("lb10");
+            btnExit.Text = rm.GetString("lb11");
+
+
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
         public frmManageSupplier()
         {
             InitializeComponent();
+            // -- Load ngôn ngữ
+            LoadLanguage();
         }
 
         private void frmManageSupplier_Load(object sender, EventArgs e)
@@ -54,7 +96,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             if (dgvSupplier.Rows.Count == 0)
             {
                 // Nếu Dữ liệu trống
-                MessageBox.Show("Đang không có dữ liệu, cần kiểm tra lại ");
+                MessageBox.Show(rm.GetString("t1"));   // Đang không có dữ liệu, cần kiểm tra lại 
                 txtName.Focus();
                 return;
             }
@@ -106,8 +148,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void btnModifySupplier_Click(object sender, EventArgs e)
         {
-            string notice = "Bạn có muốn lưu thay đổi thông tin nhà cung cấp không ?";
-            DialogResult result = MessageBox.Show(notice, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            string notice = rm.GetString("t2");  // Bạn có muốn lưu thay đổi thông tin nhà cung cấp không ?
+            DialogResult result = MessageBox.Show(notice, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
                 string Name = txtName.Text.Trim();
@@ -119,13 +161,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 int ID = int.Parse(txtID.Text.Trim());
                 if(purchaseBLL.UpdateOneSupplierBLL(Name, Phone, Tax, Location, Representative, Note, ID) == true)
                 {
-                    MessageBox.Show("Đã cập nhật thông tin nhà cung cấp thành công ");
-                    
+                    MessageBox.Show(rm.GetString("t3"));   // Đã cập nhật thông tin nhà cung cấp thành công 
+
                     LoadAllInforSupplier();
                 }
                 else
                 {
-                    MessageBox.Show("Đã phát sinh lỗi khi cập nhật dữ liệu. \n Kiểm tra lại các thông tin. ");
+                    MessageBox.Show(rm.GetString("t4"));  // Đã phát sinh lỗi khi cập nhật dữ liệu. \n Kiểm tra lại các thông tin.
                 }
 
             }
@@ -145,13 +187,18 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             string Note = txtNote.Text.Trim();
             if(Name == "" || Phone == "" || Tax == "" || Location == "" || Representative == "" || Note == "")
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                MessageBox.Show(rm.GetString("t5")); // Vui lòng nhập đầy đủ thông tin
                 return;
             }
 
-            string tb = "Bạn có muốn lưu thay đổi thông tin nhà cung cấp không ?";
-            tb = "Tên : " + Name + "\n" + "Phone : " + Phone + "\n" + "Tax : " + Tax + "\n"
-                + "Location : " + Location + "\n" + "Representative : " + Representative + "\n" + "Note : " + Note;
+            string tb = rm.GetString("t6"); // Bạn có muốn lưu thay đổi thông tin nhà cung cấp không ?
+            tb = rm.GetString("t7") + Name + "\n";   // Tên : 
+            tb = tb + rm.GetString("t8")+ Phone + "\n";   // Phone : 
+            tb = tb + rm.GetString("t9") + Tax + "\n";     // Tax : 
+            tb = tb + rm.GetString("10") + Location + "\n";   // Location : 
+            tb = tb + rm.GetString("t11") + Representative + "\n";  // Representative : 
+            tb = tb + rm.GetString("t12") + Note + "\n";   // Note : 
+
 
             DialogResult result = MessageBox.Show(tb, "Thông báo !", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
@@ -160,14 +207,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 if (purchaseBLL.InsertNewSupplierBLL(Name, Phone, Tax, Location, Representative, Note) == true)
                 {
                     // Nếu OK
-                    MessageBox.Show("Đã thêm Supplier mới thành công ");
+                    MessageBox.Show(rm.GetString("t13")); // Đã thêm Supplier mới thành công 
                     ClearAllTextbox();
                     LoadAllInforSupplier();
                 }
                 else
                 {
                     // Nếu NG
-                    MessageBox.Show("Kiểm tra lại dữ liệu \n Chú ý Tên nhà cung cấp đã tồn tại trong danh sách chưa ? ");
+                    MessageBox.Show(rm.GetString("t14"));  // Kiểm tra lại dữ liệu \n Chú ý Tên nhà cung cấp đã tồn tại trong danh sách chưa ? 
                 }
             }
         }
@@ -201,7 +248,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void btnExit_Click(object sender, EventArgs e)
         {
-            DialogResult kq = MessageBox.Show("Bạn có muốn thoát không ?", "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult kq = MessageBox.Show(rm.GetString("t15"), rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
                 this.Close();

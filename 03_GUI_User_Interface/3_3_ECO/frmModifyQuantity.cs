@@ -5,8 +5,11 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,9 +18,44 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
     public partial class frmModifyQuantity : Form
     {
         private ECO_BLL ecoBLL = new ECO_BLL();
+
+        // =========== Language =========================
+        private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
+
+        private void LoadLanguage()
+        {
+            // Lấy ngôn ngữ đã lưu ( mặc định là en)
+            string lang = Properties.Settings.Default.Language;
+            SetLanguage(lang);
+        }
+
+        private void SetLanguage(string lang)
+        {
+            Thread.CurrentThread.CurrentUICulture = new CultureInfo(lang);
+
+            rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_3_ECO.Lang.Lange_ModifyQuantity", typeof(frmModifyQuantity).Assembly);
+            // Hiển thị ngôn ngữ lên các điều khiển trong form
+            this.Text = rm.GetString("i.form");
+            labelTilte.Text = rm.GetString("lb1");
+            labelParent.Text = rm.GetString("lb2");
+            labelChild.Text = rm.GetString("lb3");
+            labelOldQuantity.Text = rm.GetString("lb4");
+            labelNewQuantity.Text = rm.GetString("lb5");
+            btnUpdate.Text = rm.GetString("lb6");
+
+
+
+
+
+            Properties.Settings.Default.Language = lang;
+            Properties.Settings.Default.Save();
+        }
+
+        // =========== Language =========================
         public frmModifyQuantity()
         {
             InitializeComponent();
+            LoadLanguage();
         }
 
         public string parentcode { get; set; }
@@ -64,12 +102,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             ECOContent = "[" + ECOContent + "]";
             int ECOTypeID = 4 ; // 4 là ECO cho sửa số lượng Part
 
-            string tb = "Bạn có muốn tạo request cập nhật số lương không ?";
-            tb = tb + "\nParentCode : " + parentcode;
-            tb = tb + "\nChildCode : " + childcode;
-            tb = tb + "\n Từ : " + oldquantity + " => " + newquantity;
+            string tb = rm.GetString("t1");
+            tb = tb + "\r\n ParentCode : " + parentcode;
+            tb = tb + "\r\n ChildCode : " + childcode;
+            tb = tb + "\r\n Old Quantity : " + oldquantity + " => New Quantity " + newquantity;
 
-            DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.No)
             {
                 return;
@@ -79,12 +117,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                 // Bước 2 : Thực hiện cập nhật ECO
                 if (ecoBLL.InsertNewECO_BLL(ECONo, idnguoiyeucau, tennguoiyc, ECOTypeID, ECOContent))
                 {
-                    MessageBox.Show("Tạo ECO thành công");
+                    MessageBox.Show(rm.GetString("t2"));      // Tạo ECO thành công
                     this.Close();
                 }
                 else
                 {
-                    MessageBox.Show("Xuất hiện lỗi khi tạo ECO \n Kiểm tra lại dữ liệu");
+                    MessageBox.Show(rm.GetString("t3"));  // Xuất hiện lỗi khi tạo ECO \n Kiểm tra lại dữ liệu
                     return;
                 }
             }    
@@ -115,6 +153,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         private void btnCancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void txtOldQuantity_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

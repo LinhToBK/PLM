@@ -339,7 +339,6 @@
             this.dgvListFile.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvListFile.Location = new System.Drawing.Point(0, 0);
             this.dgvListFile.MaxFilterButtonImageHeight = 23;
-            this.dgvListFile.MultiSelect = false;
             this.dgvListFile.Name = "dgvListFile";
             this.dgvListFile.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvListFile.RowHeadersWidth = 51;

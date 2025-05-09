@@ -162,7 +162,6 @@
     <value>Short key :
 +) Alt + T =&gt; Add Part to update information 
 +) Alt + P =&gt; Add Parent to update relation
-+) Alt + C =&gt; Add Child to update relation
 +) Alt + L =&gt; Check List Child
 </value>
   </data>
@@ -203,7 +202,13 @@
     <value>You need to choose the part to update information</value>
   </data>
   <data name="t13" xml:space="preserve">
-    <value />
+    <value>Do you want to modify relation part code : </value>
+  </data>
+  <data name="t14" xml:space="preserve">
+    <value>Please choose a object</value>
+  </data>
+  <data name="t15" xml:space="preserve">
+    <value>Do you want to make request update quantity ?</value>
   </data>
   <data name="t2" xml:space="preserve">
     <value>You need to enter the keysearch</value>

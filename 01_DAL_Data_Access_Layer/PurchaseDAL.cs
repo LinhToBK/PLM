@@ -251,7 +251,16 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 string sql_query;
 
-                sql_query = @"select Top 1 * from tblPO where POCode = @Pocode";
+                sql_query = @"select Top 1 p.POCode, 
+                                p.PODate,
+                                p.PONhanVien,
+                                p.POAmount,
+                                p.PONote,
+                                p.POStatus,
+                                p.POLog,
+                                p.POSupplierID,
+                                p.POPartCode
+                                from tblPO as p where POCode = @Pocode";
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.Add("@Pocode", SqlDbType.NVarChar).Value = POCode;
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);

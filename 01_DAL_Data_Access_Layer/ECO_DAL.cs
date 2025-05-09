@@ -81,6 +81,43 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
+
+        public bool CapnhatQuantityDAL(DataTable updateTable)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                using (SqlTransaction tran = con.BeginTransaction())
+                {
+                    try
+                    {
+                        
+                        using (SqlCommand cmd = new SqlCommand("dbo.UpdateQuantities", con, tran))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+                          
+                            SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Updates", updateTable);
+                            tvpParam.SqlDbType = SqlDbType.Structured;
+                            tvpParam.TypeName = "dbo.tblUpdateQuantity";
+
+                            
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                        tran.Rollback();
+                        // Ghi log nếu cần
+                        return false;
+                    }
+                }
+            }
+        }
+
         /// <summary>
         /// 03. UPDATE - Update Log File của Part ParentCode về việc sửa số lượng
         /// </summary>
@@ -123,29 +160,39 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// </summary>
         /// <param name="username"></param>
         /// <returns></returns>
-        public bool XoaRelationDAL(string parentcode, string childcode)
+        public bool XoaRelationDAL(DataTable deleteTable)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
-                string sql_query;
-                sql_query = @"delete tblRelation
-                            where ParentID = (select top 1 PartID from tblPart where PartCode = @ParentCode )
-                            and ChildID = (select top 1 PartID from tblPart where PartCode = @ChildCode )";
-                SqlCommand cmd = new SqlCommand(sql_query, con);
-                cmd.Parameters.Add("@ParentCode", SqlDbType.NVarChar).Value = parentcode;
-                cmd.Parameters.Add("@ChildCode", SqlDbType.NVarChar).Value = childcode;
-                //--------------------------
                 con.Open();
-                int result;
-                try
+                using (SqlTransaction tran = con.BeginTransaction())
                 {
-                    result = cmd.ExecuteNonQuery();
+                    try
+                    {
+
+                        using (SqlCommand cmd = new SqlCommand("dbo.DeleteRelation", con, tran))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Deletes", deleteTable);
+                            tvpParam.SqlDbType = SqlDbType.Structured;
+                            tvpParam.TypeName = "dbo.tblDeleteRelation";
+
+
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                        tran.Rollback();
+                        // Ghi log nếu cần
+                        return false;
+                    }
                 }
-                catch
-                {
-                    return false;
-                }
-                return result == 1;  // Trả về giá trị true nếu thêm thành công
             }
         }
 
@@ -179,6 +226,42 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     return false;
                 }
                 return result == 1;  // Trả về giá trị true nếu thêm thành công
+            }
+        }
+
+        public bool Delete_tblRelationTemp_DAL(DataTable delete_table)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                using (SqlTransaction tran = con.BeginTransaction())
+                {
+                    try
+                    {
+
+                        using (SqlCommand cmd = new SqlCommand("dbo.DeleteRelationTemp", con, tran))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            SqlParameter tvpParam = cmd.Parameters.AddWithValue("@DeletesTemp", delete_table);
+                            tvpParam.SqlDbType = SqlDbType.Structured;
+                            tvpParam.TypeName = "dbo.tblInsertRelation";
+
+
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                        tran.Rollback();
+                        // Ghi log nếu cần
+                        return false;
+                    }
+                }
             }
         }
 
@@ -279,7 +362,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         cmd.Parameters.Add("@PartMaterial", SqlDbType.NVarChar).Value = PartMaterial;
                         cmd.Parameters.Add("@PartStageID", SqlDbType.Int).Value = PartStageID;
                         cmd.Parameters.Add("@ECONo", SqlDbType.NVarChar).Value = ECONo.ToString();
-                        cmd.Parameters.Add("@ECONo", SqlDbType.Date).Value = PartDate;
+                        cmd.Parameters.Add("@PartDate", SqlDbType.Date).Value = PartDate;
 
                         int result = cmd.ExecuteNonQuery();
 
@@ -493,7 +576,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     {
                         cmd.Parameters.Add("@ECONo", SqlDbType.NVarChar).Value = ECONo;
                         cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
-                        cmd.Parameters.Add("@PartCode", SqlDbType.Date).Value = PartDate;
+                        cmd.Parameters.Add("@PartDate", SqlDbType.Date).Value = PartDate;
 
                         int result = cmd.ExecuteNonQuery();
 

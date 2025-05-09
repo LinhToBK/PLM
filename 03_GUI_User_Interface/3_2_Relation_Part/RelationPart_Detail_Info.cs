@@ -19,7 +19,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private RelationPartBLL RelationPartBLL = new RelationPartBLL();
         private CommonBLL commonBLL = new CommonBLL();
         private FindPartBLL _findPartBLL = new FindPartBLL();
-        private string idpart ;
+        private string idpart;
 
         public DataTable tb_ListFileinFolder { get; set; }
 
@@ -52,7 +52,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
             labelNote1.Text = rm.GetString("lb6");
             labelNote2.Text = rm.GetString("lb7");
 
-
             Properties.Settings.Default.Language = lang;
             Properties.Settings.Default.Save();
         }
@@ -70,7 +69,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
             // Đặt mặc định checkbox = true
             // Đặt tất cả các mục là Checked mặc định = true
-            
         }
 
         // ==============================================================
@@ -128,10 +126,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 }
 
                 dgvListFile.AllowUserToAddRows = false; // Không cho phép thêm dòng mới
-                // dgvListFile.AutoResizeColumns();
+                
                 dgvListFile.AllowUserToDeleteRows = false; // Không cho phép xóa dòng
-                //dgvListFile.CellClick -= dgvListFile_CellClick;
-                //dgvListFile.Click -= dgvListFile_Click;
+                dgvListFile.EditMode = DataGridViewEditMode.EditProgrammatically; // Không cho phép chỉnh sửa
+
             }
             else
             {
@@ -154,8 +152,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 this.Close();
             }
         }
-
-        
 
         private void dgvListFile_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -261,8 +257,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void btnApplyFilter_Click(object sender, EventArgs e)
         {
-            
-           
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -300,10 +294,15 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
             dgvListECO.DataSource = dt;
             dgvListECO.AllowUserToAddRows = false; // Không cho phép thêm dòng mới
+            dgvListECO.AllowUserToDeleteRows = false; // Không cho phép xóa dòng
+
+            
             dgvListECO.Columns[0].Width = 100;
             dgvListECO.Columns[1].Width = 100;
-            dgvListECO.Columns[2].Width = 200;
             dgvListECO.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Tự động điều chỉnh kích thước cột
+            dgvListECO.Columns[0].ReadOnly = true; // Không cho phép chỉnh sửa
+            dgvListECO.Columns[1].ReadOnly = true; // Không cho phép chỉnh sửa
+            dgvListECO.Columns[2].ReadOnly = true; // Không cho phép chỉnh sửa
         }
 
         private void dgvListECO_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -317,18 +316,15 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void dgvListFile_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-         
-
         }
 
         private void dgvListFile_Click(object sender, EventArgs e)
         {
-            
         }
 
         private int formwidth { get; set; }
 
-        private void LoadChild ()
+        private void LoadChild()
         {
             // hiển thị child
             _tblChild = _findPartBLL.GetChildBLL(idpart);
@@ -346,20 +342,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 column.SortMode = DataGridViewColumnSortMode.NotSortable; // Không cho phép sort lại danh sách
             }
         }
+
         private void btnExpand_Click(object sender, EventArgs e)
         {
             btnCollapse.Enabled = true;
             splitContainer1.Panel2Collapsed = false;
             formwidth = this.Width;
 
-            this.Width = (int)(formwidth * 1.7) ;
+            this.Width = (int)(formwidth * 1.7);
             splitContainer1.SplitterDistance = (int)(splitContainer1.Width * 0.6);
 
-            
-            
-
-
-            
             btnExpand.Enabled = false;
         }
 
@@ -367,12 +359,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             btnExpand.Enabled = true;
             this.Width = formwidth;
-            
+
             splitContainer1.Panel2Collapsed = true;
 
-
             btnCollapse.Enabled = false;
-            
         }
 
         private void dgvChild_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)

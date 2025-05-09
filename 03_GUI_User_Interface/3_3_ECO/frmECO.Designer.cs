@@ -49,19 +49,18 @@
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.btnModifyQuantity = new System.Windows.Forms.Button();
             this.labelParent = new System.Windows.Forms.Label();
-            this.labelChild = new System.Windows.Forms.Label();
-            this.txtChildCode = new System.Windows.Forms.TextBox();
-            this.txtChildName = new System.Windows.Forms.TextBox();
-            this.txtQuantity = new System.Windows.Forms.TextBox();
-            this.btnAddChild = new System.Windows.Forms.Button();
             this.labelNote5 = new System.Windows.Forms.Label();
             this.btnCheckListChild = new System.Windows.Forms.Button();
             this.btnAddParent = new System.Windows.Forms.Button();
-            this.labelQuantity = new System.Windows.Forms.Label();
             this.txtParentName = new System.Windows.Forms.TextBox();
             this.txtParentCode = new System.Windows.Forms.TextBox();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.dgvListChild = new System.Windows.Forms.DataGridView();
+            this.dgvListChild = new Zuby.ADGV.AdvancedDataGridView();
+            this.ckcApply = new System.Windows.Forms.DataGridViewCheckBoxColumn();
+            this.PartCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PartName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PartQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btnExit = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -112,6 +111,7 @@
             // 
             this.splitContainer3.Panel1.AutoScroll = true;
             this.splitContainer3.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.splitContainer3.Panel1.Controls.Add(this.btnExit);
             this.splitContainer3.Panel1.Controls.Add(this.labelNote1);
             this.splitContainer3.Panel1.Controls.Add(this.btnOpenRelationManage);
             this.splitContainer3.Panel1.Controls.Add(this.labelNote2);
@@ -143,9 +143,9 @@
             // btnOpenRelationManage
             // 
             this.btnOpenRelationManage.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
-            this.btnOpenRelationManage.Location = new System.Drawing.Point(147, 99);
+            this.btnOpenRelationManage.Location = new System.Drawing.Point(159, 99);
             this.btnOpenRelationManage.Name = "btnOpenRelationManage";
-            this.btnOpenRelationManage.Size = new System.Drawing.Size(123, 39);
+            this.btnOpenRelationManage.Size = new System.Drawing.Size(180, 39);
             this.btnOpenRelationManage.TabIndex = 5;
             this.btnOpenRelationManage.Text = "Tạo ràng buộc mới";
             this.btnOpenRelationManage.UseVisualStyleBackColor = false;
@@ -156,18 +156,18 @@
             this.labelNote2.AutoSize = true;
             this.labelNote2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNote2.ForeColor = System.Drawing.Color.Blue;
-            this.labelNote2.Location = new System.Drawing.Point(291, 18);
+            this.labelNote2.Location = new System.Drawing.Point(342, 18);
             this.labelNote2.Name = "labelNote2";
-            this.labelNote2.Size = new System.Drawing.Size(203, 120);
+            this.labelNote2.Size = new System.Drawing.Size(203, 100);
             this.labelNote2.TabIndex = 2;
-            this.labelNote2.Text = "Phím tắt : \r\n+) Alt + T => Thêm Part \r\n+) Alt + P => Thêm Parent\r\n+) Alt + C => T" +
-    "hêm Child\r\n+) Nhấn Enter = Search\r\n+) Alt + L => Check List Child";
+            this.labelNote2.Text = "Phím tắt : \r\n+) Alt + T => Thêm Part \r\n+) Alt + P => Thêm Parent\r\n+) Nhấn Enter =" +
+    " Search\r\n+) Alt + L => Check List Child";
             // 
             // btnSearchDetail
             // 
             this.btnSearchDetail.Location = new System.Drawing.Point(12, 99);
             this.btnSearchDetail.Name = "btnSearchDetail";
-            this.btnSearchDetail.Size = new System.Drawing.Size(123, 39);
+            this.btnSearchDetail.Size = new System.Drawing.Size(141, 39);
             this.btnSearchDetail.TabIndex = 4;
             this.btnSearchDetail.Text = "Tra cứu chi tiết";
             this.btnSearchDetail.UseVisualStyleBackColor = true;
@@ -177,7 +177,7 @@
             // 
             this.btnTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("btnTimKiem.Image")));
             this.btnTimKiem.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnTimKiem.Location = new System.Drawing.Point(399, 149);
+            this.btnTimKiem.Location = new System.Drawing.Point(394, 149);
             this.btnTimKiem.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(92, 33);
@@ -320,15 +320,9 @@
             this.splitContainer4.Panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.splitContainer4.Panel1.Controls.Add(this.btnModifyQuantity);
             this.splitContainer4.Panel1.Controls.Add(this.labelParent);
-            this.splitContainer4.Panel1.Controls.Add(this.labelChild);
-            this.splitContainer4.Panel1.Controls.Add(this.txtChildCode);
-            this.splitContainer4.Panel1.Controls.Add(this.txtChildName);
-            this.splitContainer4.Panel1.Controls.Add(this.txtQuantity);
-            this.splitContainer4.Panel1.Controls.Add(this.btnAddChild);
             this.splitContainer4.Panel1.Controls.Add(this.labelNote5);
             this.splitContainer4.Panel1.Controls.Add(this.btnCheckListChild);
             this.splitContainer4.Panel1.Controls.Add(this.btnAddParent);
-            this.splitContainer4.Panel1.Controls.Add(this.labelQuantity);
             this.splitContainer4.Panel1.Controls.Add(this.txtParentName);
             this.splitContainer4.Panel1.Controls.Add(this.txtParentCode);
             this.splitContainer4.Panel1.Controls.Add(this.btnDelete);
@@ -337,17 +331,16 @@
             // 
             this.splitContainer4.Panel2.Controls.Add(this.dgvListChild);
             this.splitContainer4.Size = new System.Drawing.Size(572, 475);
-            this.splitContainer4.SplitterDistance = 246;
+            this.splitContainer4.SplitterDistance = 187;
             this.splitContainer4.SplitterWidth = 5;
             this.splitContainer4.TabIndex = 8;
             // 
             // btnModifyQuantity
             // 
             this.btnModifyQuantity.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(128)))));
-            this.btnModifyQuantity.Enabled = false;
             this.btnModifyQuantity.Image = ((System.Drawing.Image)(resources.GetObject("btnModifyQuantity.Image")));
             this.btnModifyQuantity.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModifyQuantity.Location = new System.Drawing.Point(371, 158);
+            this.btnModifyQuantity.Location = new System.Drawing.Point(394, 92);
             this.btnModifyQuantity.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnModifyQuantity.Name = "btnModifyQuantity";
             this.btnModifyQuantity.Size = new System.Drawing.Size(166, 33);
@@ -360,65 +353,18 @@
             // labelParent
             // 
             this.labelParent.AutoSize = true;
-            this.labelParent.Location = new System.Drawing.Point(14, 12);
+            this.labelParent.Location = new System.Drawing.Point(14, 60);
             this.labelParent.Name = "labelParent";
             this.labelParent.Size = new System.Drawing.Size(100, 23);
             this.labelParent.TabIndex = 7;
             this.labelParent.Text = "Parent Infor";
-            // 
-            // labelChild
-            // 
-            this.labelChild.AutoSize = true;
-            this.labelChild.Location = new System.Drawing.Point(264, 12);
-            this.labelChild.Name = "labelChild";
-            this.labelChild.Size = new System.Drawing.Size(90, 23);
-            this.labelChild.TabIndex = 2;
-            this.labelChild.Text = "Child Infor";
-            // 
-            // txtChildCode
-            // 
-            this.txtChildCode.Location = new System.Drawing.Point(405, 43);
-            this.txtChildCode.Name = "txtChildCode";
-            this.txtChildCode.ReadOnly = true;
-            this.txtChildCode.Size = new System.Drawing.Size(129, 29);
-            this.txtChildCode.TabIndex = 3;
-            // 
-            // txtChildName
-            // 
-            this.txtChildName.Location = new System.Drawing.Point(268, 80);
-            this.txtChildName.Name = "txtChildName";
-            this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(266, 29);
-            this.txtChildName.TabIndex = 3;
-            // 
-            // txtQuantity
-            // 
-            this.txtQuantity.Location = new System.Drawing.Point(482, 115);
-            this.txtQuantity.Name = "txtQuantity";
-            this.txtQuantity.Size = new System.Drawing.Size(52, 29);
-            this.txtQuantity.TabIndex = 4;
-            // 
-            // btnAddChild
-            // 
-            this.btnAddChild.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.btnAddChild.Image = ((System.Drawing.Image)(resources.GetObject("btnAddChild.Image")));
-            this.btnAddChild.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddChild.Location = new System.Drawing.Point(264, 41);
-            this.btnAddChild.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.btnAddChild.Name = "btnAddChild";
-            this.btnAddChild.Size = new System.Drawing.Size(117, 33);
-            this.btnAddChild.TabIndex = 1;
-            this.btnAddChild.Text = "Add &Child";
-            this.btnAddChild.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnAddChild.UseVisualStyleBackColor = false;
-            this.btnAddChild.Click += new System.EventHandler(this.btnAddChild_Click);
             // 
             // labelNote5
             // 
             this.labelNote5.AutoSize = true;
             this.labelNote5.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelNote5.ForeColor = System.Drawing.Color.Blue;
-            this.labelNote5.Location = new System.Drawing.Point(14, 159);
+            this.labelNote5.Location = new System.Drawing.Point(14, 92);
             this.labelNote5.Name = "labelNote5";
             this.labelNote5.Size = new System.Drawing.Size(339, 80);
             this.labelNote5.TabIndex = 5;
@@ -430,11 +376,11 @@
             this.btnCheckListChild.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
             this.btnCheckListChild.Image = ((System.Drawing.Image)(resources.GetObject("btnCheckListChild.Image")));
             this.btnCheckListChild.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCheckListChild.Location = new System.Drawing.Point(139, 41);
+            this.btnCheckListChild.Location = new System.Drawing.Point(297, 15);
             this.btnCheckListChild.Name = "btnCheckListChild";
-            this.btnCheckListChild.Size = new System.Drawing.Size(124, 68);
+            this.btnCheckListChild.Size = new System.Drawing.Size(169, 33);
             this.btnCheckListChild.TabIndex = 6;
-            this.btnCheckListChild.Text = "Check \r\n&List Child";
+            this.btnCheckListChild.Text = "Check List Child";
             this.btnCheckListChild.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCheckListChild.UseVisualStyleBackColor = false;
             this.btnCheckListChild.Click += new System.EventHandler(this.btnCheckListChild_Click);
@@ -444,7 +390,7 @@
             this.btnAddParent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.btnAddParent.Image = ((System.Drawing.Image)(resources.GetObject("btnAddParent.Image")));
             this.btnAddParent.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddParent.Location = new System.Drawing.Point(14, 41);
+            this.btnAddParent.Location = new System.Drawing.Point(10, 15);
             this.btnAddParent.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnAddParent.Name = "btnAddParent";
             this.btnAddParent.Size = new System.Drawing.Size(119, 33);
@@ -454,26 +400,17 @@
             this.btnAddParent.UseVisualStyleBackColor = false;
             this.btnAddParent.Click += new System.EventHandler(this.btnAddParent_Click);
             // 
-            // labelQuantity
-            // 
-            this.labelQuantity.AutoSize = true;
-            this.labelQuantity.Location = new System.Drawing.Point(371, 118);
-            this.labelQuantity.Name = "labelQuantity";
-            this.labelQuantity.Size = new System.Drawing.Size(76, 23);
-            this.labelQuantity.TabIndex = 2;
-            this.labelQuantity.Text = "Quantity";
-            // 
             // txtParentName
             // 
-            this.txtParentName.Location = new System.Drawing.Point(14, 115);
+            this.txtParentName.Location = new System.Drawing.Point(152, 57);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(247, 29);
+            this.txtParentName.Size = new System.Drawing.Size(408, 29);
             this.txtParentName.TabIndex = 3;
             // 
             // txtParentCode
             // 
-            this.txtParentCode.Location = new System.Drawing.Point(14, 80);
+            this.txtParentCode.Location = new System.Drawing.Point(152, 17);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
             this.txtParentCode.Size = new System.Drawing.Size(119, 29);
@@ -483,11 +420,10 @@
             // 
             this.btnDelete.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnDelete.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnDelete.Enabled = false;
             this.btnDelete.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnDelete.Image = ((System.Drawing.Image)(resources.GetObject("btnDelete.Image")));
             this.btnDelete.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnDelete.Location = new System.Drawing.Point(371, 205);
+            this.btnDelete.Location = new System.Drawing.Point(394, 139);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(166, 33);
@@ -500,15 +436,68 @@
             // dgvListChild
             // 
             this.dgvListChild.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListChild.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ckcApply,
+            this.PartCode,
+            this.PartName,
+            this.PartQuantity});
             this.dgvListChild.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvListChild.FilterAndSortEnabled = true;
+            this.dgvListChild.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvListChild.Location = new System.Drawing.Point(0, 0);
-            this.dgvListChild.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.dgvListChild.MaxFilterButtonImageHeight = 23;
             this.dgvListChild.Name = "dgvListChild";
+            this.dgvListChild.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvListChild.RowHeadersWidth = 51;
-            this.dgvListChild.RowTemplate.Height = 23;
-            this.dgvListChild.Size = new System.Drawing.Size(572, 224);
+            this.dgvListChild.RowTemplate.Height = 24;
+            this.dgvListChild.Size = new System.Drawing.Size(572, 283);
+            this.dgvListChild.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvListChild.TabIndex = 0;
             this.dgvListChild.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListChild_CellDoubleClick);
+            this.dgvListChild.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListChild_CellValueChanged);
+            this.dgvListChild.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgvListChild_CurrentCellDirtyStateChanged);
+            // 
+            // ckcApply
+            // 
+            this.ckcApply.HeaderText = "";
+            this.ckcApply.MinimumWidth = 24;
+            this.ckcApply.Name = "ckcApply";
+            this.ckcApply.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.ckcApply.Width = 125;
+            // 
+            // PartCode
+            // 
+            this.PartCode.HeaderText = "Part Code";
+            this.PartCode.MinimumWidth = 24;
+            this.PartCode.Name = "PartCode";
+            this.PartCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.PartCode.Width = 125;
+            // 
+            // PartName
+            // 
+            this.PartName.HeaderText = "Part Name";
+            this.PartName.MinimumWidth = 24;
+            this.PartName.Name = "PartName";
+            this.PartName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.PartName.Width = 125;
+            // 
+            // PartQuantity
+            // 
+            this.PartQuantity.HeaderText = "Qty";
+            this.PartQuantity.MinimumWidth = 24;
+            this.PartQuantity.Name = "PartQuantity";
+            this.PartQuantity.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.PartQuantity.Width = 125;
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(497, 149);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(54, 33);
+            this.btnExit.TabIndex = 6;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // frmECO
             // 
@@ -518,11 +507,14 @@
             this.ClientSize = new System.Drawing.Size(1154, 576);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "frmECO";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "ECO";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmECO_FormClosing);
+            this.Load += new System.EventHandler(this.frmECO_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmECO_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
@@ -570,19 +562,18 @@
         private System.Windows.Forms.SplitContainer splitContainer3;
         private System.Windows.Forms.SplitContainer splitContainer4;
         private System.Windows.Forms.Label labelParent;
-        private System.Windows.Forms.Label labelChild;
-        private System.Windows.Forms.TextBox txtChildCode;
-        private System.Windows.Forms.TextBox txtChildName;
-        private System.Windows.Forms.TextBox txtQuantity;
-        private System.Windows.Forms.Button btnAddChild;
         private System.Windows.Forms.Label labelNote5;
         private System.Windows.Forms.Button btnCheckListChild;
         private System.Windows.Forms.Button btnAddParent;
-        private System.Windows.Forms.Label labelQuantity;
         private System.Windows.Forms.TextBox txtParentName;
         private System.Windows.Forms.TextBox txtParentCode;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnModifyQuantity;
-        private System.Windows.Forms.DataGridView dgvListChild;
+        private Zuby.ADGV.AdvancedDataGridView dgvListChild;
+        private System.Windows.Forms.DataGridViewCheckBoxColumn ckcApply;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartQuantity;
+        private System.Windows.Forms.Button btnExit;
     }
 }

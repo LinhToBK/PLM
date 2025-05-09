@@ -163,7 +163,6 @@
     <value>Phím tắt : 
 +) Alt + T =&gt; Thêm Part từ danh sách vào Infor 
 +) Alt + P =&gt; Thêm Parent
-+) Alt + C =&gt; Thêm Child
 +) Nhập ô tìm kiếm =&gt; Nhấn Enter để tra cứu
 +) Alt + L =&gt; Kiểm tra danh sách part con</value>
   </data>
@@ -204,7 +203,13 @@
     <value>Bạn chưa chọn Part để cập nhật dữ liệu. \n Vui lòng chọn trước</value>
   </data>
   <data name="t13" xml:space="preserve">
-    <value />
+    <value>Bạn muốn sửa ràng buộc của partcode : </value>
+  </data>
+  <data name="t14" xml:space="preserve">
+    <value>Bạn chưa chọn part con. \r\n Vui lòng chọn ít nhất 1 đối dượng</value>
+  </data>
+  <data name="t15" xml:space="preserve">
+    <value>Bạn có muốn cập nhật số lượng cho partcode này không ? </value>
   </data>
   <data name="t2" xml:space="preserve">
     <value>Cần nhập từ khóa tìm kiếm </value>

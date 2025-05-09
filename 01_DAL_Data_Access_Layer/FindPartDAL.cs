@@ -168,25 +168,26 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 sql_query = @"   -- Tạo bảng tạm
                                 CREATE TABLE #TempTable (
                                     Levels INT,
-                                    PartCode NVARCHAR(10),
+                                    PartCode NVARCHAR(16),
                                     PartName NVARCHAR(100),
                                     Quantity INT,
                                     PartDescript NVARCHAR(MAX),
-                                    PartStage NChar(2)  ,
+                                    PartStage nvarchar(20)  ,
                                     Dir  NVARCHAR(MAX)
                                 );
                                 -- Chèn Dữ liệu PartID vào trước
                                 INSERT INTO #TempTable (Levels, PartCode, PartName, Quantity, PartDescript, PartStage, Dir)
                                 SELECT
                                     1 ,
-                                    PartCode,
-                                    PartName,
+                                    p.PartCode,
+                                    p.PartName,
                                     1 AS Quantity, -- Gán NULL nếu không có sẵn dữ liệu Quantity
-                                    PartDescript,
-                                    PartStage ,
+                                    p.PartDescript,
+                                    s.Stage ,
                                     '0' as dir
-                                FROM tblPart
-                                WHERE PartID = @ID;
+                                FROM tblPart as p 
+                                JOIN tblPartStage as s on p.PartStageID = s.IDStage
+                                WHERE p.PartID = 4;
 
                                 INSERT INTO #TempTable
                                 EXEC BOMInfor @PartID = @ID;

@@ -186,7 +186,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_4_FindPart
 
             foreach (string sheetName in sheetNames)
             {
-                //MessageBox.Show("bắt đầu đổi tên : " + sheetName);
                 swDrawing.ActivateSheet(sheetName);
                 var myDrawingSheet = swDrawing.GetCurrentSheet();
 
@@ -206,12 +205,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_4_FindPart
                             string fileName = System.IO.Path.GetFileNameWithoutExtension(modelPath);
                             string newSheetName = fileName;
 
-                            // Tránh trùng tên
-                            if (Array.Exists(sheetNames, name => name.Equals(newSheetName, StringComparison.OrdinalIgnoreCase)))
-                                newSheetName += "_copy";
-
-                            //swDrawing.RenameSheet(sheetName, newSheetName);
-                            myDrawingSheet.SetName(newSheetName);
+                            // Nếu tên sheet mới đã tồn tại thì bỏ qua
+                            if (!Array.Exists(sheetNames, name => name.Equals(newSheetName, StringComparison.OrdinalIgnoreCase)))
+                            {
+                                myDrawingSheet.SetName(newSheetName);
+                            }
                         }
                     }
                 }

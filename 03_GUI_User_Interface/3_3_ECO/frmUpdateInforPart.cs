@@ -548,5 +548,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             frm.ECONo = ECONo;
             frm.ShowDialog();
         }
+
+        private void dgvListUpload_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
     }
 }

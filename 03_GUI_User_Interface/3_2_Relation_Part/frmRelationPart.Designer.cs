@@ -544,6 +544,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Tạo liên kết mới giữa các Part";
             this.Load += new System.EventHandler(this.frmRelationPart_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmRelationPart_KeyDown);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();

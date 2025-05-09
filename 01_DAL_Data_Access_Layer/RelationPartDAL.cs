@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace PLM_Lynx._01_DAL_Data_Access_Layer
 {
@@ -184,6 +185,42 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         // Khôi phục lại giao dịch khi có lỗi
                         transaction.Rollback();
                         Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public bool InsertNewRelationDAL(DataTable insert_table)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                using (SqlTransaction tran = con.BeginTransaction())
+                {
+                    try
+                    {
+
+                        using (SqlCommand cmd = new SqlCommand("dbo.InsertRelation", con, tran))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Inserts", insert_table);
+                            tvpParam.SqlDbType = SqlDbType.Structured;
+                            tvpParam.TypeName = "dbo.tblInsertRelation";
+
+
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                        tran.Rollback();
+                        // Ghi log nếu cần
                         return false;
                     }
                 }

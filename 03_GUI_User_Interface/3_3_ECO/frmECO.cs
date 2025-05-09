@@ -23,6 +23,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         public int IDNguoidung;
         public string Username;
 
+        private DataTable tbllistchild = new DataTable();
+        private DataTable tbl_Selected_Item = new DataTable();
+        private DataTable tbl_Delete_Item = new DataTable();
+
         // =========== Language =========================
         private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
 
@@ -56,14 +60,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
             // --
             labelParent.Text = rm.GetString("lb11");
-            labelChild.Text = rm.GetString("lb12");
+            //labelChild.Text = rm.GetString("lb12");
             btnCheckListChild.Text = rm.GetString("lb13");
             btnModifyQuantity.Text = rm.GetString("lb14");
             btnDelete.Text = rm.GetString("lb15");
-            labelQuantity.Text = rm.GetString("lb16");
+            //labelQuantity.Text = rm.GetString("lb16");
             labelNote5.Text = rm.GetString("lb17");
             btnAddParent.Text = rm.GetString("lb18");
-            btnAddChild.Text = rm.GetString("lb19");
+            //btnAddChild.Text = rm.GetString("lb19");
 
             Properties.Settings.Default.Language = lang;
             Properties.Settings.Default.Save();
@@ -93,11 +97,40 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         // - Hàm Load dữ liệu từ DataBase lên dgvListChild
         public void LoadListChild(string parentcode)
         {
-            dgvListChild.DataSource = ecoBLL.GetListChildBLL(parentcode);
-            dgvListChild.EditMode = DataGridViewEditMode.EditProgrammatically;
-            dgvListChild.AllowUserToAddRows = false;
-            dgvListChild.Columns[0].Width = 80;
-            dgvListChild.Columns[1].Width = 300;
+            //
+            //dgvListChild.DataSource = ecoBLL.GetListChildBLL(parentcode);
+            //dgvListChild.EditMode = DataGridViewEditMode.EditProgrammatically;
+            //dgvListChild.AllowUserToAddRows = false;
+            //dgvListChild.Columns[0].Width = 80;
+            //dgvListChild.Columns[1].Width = 300;
+            tbllistchild = ecoBLL.GetListChildBLL(parentcode);
+            // tblPart.PartCode, tblPart.PartName, tblRelation.Quantity
+            // Thêm giá trị vào từng dòng của datagridview dgvListChild từ datatable tbllistchild
+
+            if (tbllistchild.Rows.Count > 0)
+            {
+                dgvListChild.Rows.Clear(); // Xóa dữ liệu cũ trong dgvListChild
+                foreach (DataRow row in tbllistchild.Rows)
+                {
+                    dgvListChild.Rows.Add(false, row[0].ToString(), row[1].ToString(), row[2].ToString());
+                }
+                dgvListChild.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                dgvListChild.Columns[0].Width = 20; // CheckBox
+                dgvListChild.Columns[1].Width = 80; // PartCode
+                dgvListChild.Columns[3].Width = 60; // Quantity
+                dgvListChild.AllowUserToAddRows = false;
+                dgvListChild.AllowUserToDeleteRows = false;
+                // Khóa không cho sửa dữ liệu 1 số cột
+                dgvListChild.Columns[1].ReadOnly = false; // PartCode
+                dgvListChild.Columns[2].ReadOnly = true; // PartName
+                dgvListChild.Columns[3].ReadOnly = false; // Quantity
+            }
+            else
+            {
+                MessageBox.Show(rm.GetString("PartCode : " + parentcode + "không phải là part cha"));
+                txtTimKiem.Focus();
+                return;
+            }
         }
 
         // -- Hàm kiểm tra 1 số có phải là số nguyên dương hay không
@@ -137,7 +170,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         {
             if (txtTimKiem.Text == "")
             {
-                MessageBox.Show(rm.GetString("t2"));      // Cần nhập từ khóa tìm kiếm 
+                MessageBox.Show(rm.GetString("t2"));      // Cần nhập từ khóa tìm kiếm
                 txtTimKiem.Focus();
                 return;
             }
@@ -196,13 +229,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private void btnAddParent_Click(object sender, EventArgs e)
         {
-            // Xóa dữ liệu của các ô textbox trong danh sách child
-            txtChildCode.Text = "";
-            txtChildName.Text = "";
-            dgvListChild.DataSource = null;
-            txtQuantity.Text = string.Empty;
-
-            // Cập nhật lên các ô textbox
+            string parentcode;
             if (dgvListTimKiem.Rows.Count == 0)
             {
                 MessageBox.Show(rm.GetString("t4"));    // "Không có dữ liệu nào để thêm cả "
@@ -211,7 +238,23 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
             else
             {
-                txtParentCode.Text = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
+                parentcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
+            }
+
+            string tb = rm.GetString("t13") + parentcode + " ? "; // Bạn muốn sửa ràng buộc của partcode :
+            DialogResult kq = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.No)
+            {
+                return;
+            }
+            else
+            {
+                // Xóa dữ liệu của các ô textbox trong danh sách child
+
+                dgvListChild.Rows.Clear(); // Cần xóa d/sách child này trước
+
+                // Cập nhật lên các ô textbox
+                txtParentCode.Text = parentcode;
                 txtParentName.Text = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();
             }
         }
@@ -233,11 +276,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         private void btnAddChild_Click(object sender, EventArgs e)
         {
             // Thêm dữ liệu từ DataGridView vào textbox
-            txtChildCode.Text = dgvListChild.CurrentRow.Cells[0].Value.ToString();
-            txtChildName.Text = dgvListChild.CurrentRow.Cells[1].Value.ToString();
-            txtQuantity.Text = dgvListChild.CurrentRow.Cells[2].Value.ToString();
-            btnModifyQuantity.Enabled = true;
-            btnDelete.Enabled = true;
+
+            /* / Version single
+            //txtChildCode.Text = dgvListChild.CurrentRow.Cells[0].Value.ToString();
+            //txtChildName.Text = dgvListChild.CurrentRow.Cells[1].Value.ToString();
+            //txtQuantity.Text = dgvListChild.CurrentRow.Cells[2].Value.ToString();
+            //btnModifyQuantity.Enabled = true;
+            //btnDelete.Enabled = true;
+            */
         }
 
         private void btnSearchDetail_Click(object sender, EventArgs e)
@@ -252,6 +298,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private void btnModifyQuantity_Click(object sender, EventArgs e)
         {
+            /* Version cũ
             // Kiểm tra số lượng, nếu là số nguyên thì mới thực hiện bước tiếp theo
             int quantity;
             if (int.TryParse(txtQuantity.Text, out quantity))
@@ -290,51 +337,119 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             txtChildCode.Text = "";
             txtChildName.Text = "";
             txtQuantity.Text = "";
+
+            */
+
+            // Kiểm tra số lượng
+            Get_Selected_ChildCode();
+            if (tbl_Selected_Item.Rows.Count == 0)
+            {
+                MessageBox.Show(rm.GetString("t14")); // Bạn chưa chọn part con. \r\n Vui lòng chọn ít nhất 1 đối dượng
+                return;
+            }
+
+            string tb = rm.GetString("t15"); // Bạn có muốn cập nhật số lượng cho partcode này không ?
+            DialogResult kq = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.Yes)
+            {
+                frmModifyQuantity frm = new frmModifyQuantity();
+                frm.parentcode = txtParentCode.Text;
+                frm.parentname = txtParentName.Text;
+                frm.idnguoiyeucau = IDNguoidung;
+                frm.tennguoiyc = Username;
+                frm.tblListChildSelected = tbl_Selected_Item; // Truyền DataTable đã chọn vào frmModifyQuantity
+                frm.ShowDialog();
+            }
+        }
+
+        private void Get_Selected_ChildCode()
+        {
+            // Clear tblSelected_Item
+            tbl_Selected_Item.Rows.Clear();
+            DataTable selectedTable = new DataTable();
+            if (dgvListChild.Rows.Count == 0)
+            {
+                MessageBox.Show("Table is empty");
+                txtTimKiem.Focus();
+                return;
+            }
+
+            // Tạo cấu trúc cột giống như dgvListChild (bỏ cột checkbox)
+            for (int i = 1; i < dgvListChild.Columns.Count; i++) // bắt đầu từ 1 để bỏ checkbox
+            {
+                //selectedTable.Columns.Add(dgvListChild.Columns[i].Name, dgvListChild.Columns[i].ValueType);
+                selectedTable.Columns.Add(dgvListChild.Columns[i].Name, typeof(string));
+            }
+
+            // Lặp qua các dòng
+            foreach (DataGridViewRow row in dgvListChild.Rows)
+            {
+                // Bỏ qua dòng mới nếu AllowUserToAddRows = true
+                if (row.IsNewRow) continue;
+
+                bool isChecked = Convert.ToBoolean(row.Cells[0].Value);
+                if (isChecked)
+                {
+                    // Tạo dòng mới và sao chép dữ liệu từ các cột (bỏ checkbox)
+                    DataRow newRow = selectedTable.NewRow();
+                    for (int i = 1; i < dgvListChild.Columns.Count; i++)
+                    {
+                        newRow[i - 1] = row.Cells[i].Value;
+                    }
+                    selectedTable.Rows.Add(newRow);
+                }
+            }
+
+            // Gán DataTable đã chọn vào biến toàn cục
+            tbl_Selected_Item = selectedTable;
         }
 
         private void btnDelete_Click_1(object sender, EventArgs e)
         {
+            Get_Delete_Selected_ChildCode();
+            if (tbl_Delete_Item.Rows.Count == 0)
+            {
+                MessageBox.Show(rm.GetString("t14")); //
+                return;
+            }
             // Cần thông báo để tránh nhấn nhầm.
+
             string tb;
-            tb = rm.GetString("t8") + txtParentCode.Text + " && " + txtChildCode.Text ;
+            tb = rm.GetString("t8") + txtParentCode.Text;
             tb += "\n" + rm.GetString("t9");
 
             DialogResult kq = MessageBox.Show(tb, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
             if (kq == DialogResult.Yes)
             {
-                
+                // Mở form frmDeleteRelation
+                frmDeleteRelation frm = new frmDeleteRelation();
+                frm.parentcode = txtParentCode.Text;
+                frm.parentname = txtParentName.Text;
+                frm.tblListChildSelected = tbl_Delete_Item; // Truyền DataTable đã chọn vào frmDeleteRelation
+                frm.idnguoiyeucau = IDNguoidung;
+                frm.tennguoiyc = Username;
+                frm.ShowDialog();
 
-                int ECONo = ecoBLL.LoadECONo();
+                //int ECONo = ecoBLL.LoadECONo();
 
-                List<Tuple<string, object>> tableData = new List<Tuple<string, object>>
-                {
-                    new Tuple<string, object>("ParentCode", txtParentCode.Text),
-                    new Tuple<string, object>("ChildCode", txtChildCode.Text)
-                };
-                Dictionary<string, object> jsonData = new Dictionary<string, object>();
-                foreach (var row in tableData)
-                {
-                    jsonData[row.Item1] = row.Item2;
-                }
+                //// Chuyển thành chuỗi JSON
+                //string ECOContent = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
+                //ECOContent = "[" + ECOContent + "]";
+                //int ECOTypeID = 5; // 4 là ECO cho sửa số lượng Part
 
-                // Chuyển thành chuỗi JSON
-                string ECOContent = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
-                ECOContent = "[" + ECOContent + "]";
-                int ECOTypeID = 5; // 4 là ECO cho sửa số lượng Part
-
-                if (ecoBLL.InsertNewECO_BLL(ECONo, IDNguoidung, Username, ECOTypeID, ECOContent))
-                {
-                    //MessageBox.Show("Tạo ECO : Xóa ràng buộc  thành công");
-                    MessageBox.Show(rm.GetString("t10"));
-                    //this.Close();
-                }
-                else
-                {
-                    //MessageBox.Show("Xuất hiện lỗi khi tạo ECO \n Kiểm tra lại dữ liệu");
-                    MessageBox.Show(rm.GetString("t11"));
-                    return;
-                }
+                //if (ecoBLL.InsertNewECO_BLL(ECONo, IDNguoidung, Username, ECOTypeID, ECOContent))
+                //{
+                //    //MessageBox.Show("Tạo ECO : Xóa ràng buộc  thành công");
+                //    MessageBox.Show(rm.GetString("t10"));
+                //    //this.Close();
+                //}
+                //else
+                //{
+                //    //MessageBox.Show("Xuất hiện lỗi khi tạo ECO \n Kiểm tra lại dữ liệu");
+                //    MessageBox.Show(rm.GetString("t11"));
+                //    return;
+                //}
             }
             else
             {
@@ -352,7 +467,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         {
             // Lấy dữ liệu code của ô đang trỏ đến
             frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
-            string partcode = dgvListChild.CurrentRow.Cells[0].Value.ToString();
+            string partcode = dgvListChild.CurrentRow.Cells[1].Value.ToString();
             frm.ShowDetailInfor(partcode);
             frm.ShowDialog();
         }
@@ -372,6 +487,112 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             {
                 //MessageBox.Show("Bạn chưa chọn Part để cập nhật dữ liệu. \n Vui lòng chọn trước ");
                 MessageBox.Show(rm.GetString("t12"), rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void dgvListChild_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            // Kiểm tra nếu là cột checkbox (giả sử nó ở cột 0)
+            if (e.ColumnIndex == 0 && e.RowIndex >= 0)
+            {
+                DataGridViewCheckBoxCell chk = (DataGridViewCheckBoxCell)dgvListChild.Rows[e.RowIndex].Cells[0];
+                bool isChecked = Convert.ToBoolean(chk.Value);
+
+                if (isChecked)
+                {
+                    dgvListChild.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
+                }
+                else
+                {
+                    dgvListChild.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.White;
+                }
+            }
+        }
+
+        private void dgvListChild_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        {
+            if (dgvListChild.IsCurrentCellDirty)
+            {
+                dgvListChild.CommitEdit(DataGridViewDataErrorContexts.Commit);
+            }
+        }
+
+        private void frmECO_Load(object sender, EventArgs e)
+        {
+            dgvListChild.CellValueChanged += dgvListChild_CellValueChanged;
+            dgvListChild.CurrentCellDirtyStateChanged += dgvListChild_CurrentCellDirtyStateChanged;
+        }
+
+        private void Get_Delete_Selected_ChildCode()
+        {
+            // Clear tblSelected_Item
+            tbl_Delete_Item.Rows.Clear();
+            DataTable selectedTable = new DataTable();
+            if (dgvListChild.Rows.Count == 0)
+            {
+                MessageBox.Show("Table is empty");
+                txtTimKiem.Focus();
+                return;
+            }
+
+            selectedTable.Columns.Add("ChildCode", typeof(string));
+            selectedTable.Columns.Add("ChildName", typeof(string));
+
+            // Lặp qua các dòng
+            foreach (DataGridViewRow row in dgvListChild.Rows)
+            {
+                // Bỏ qua dòng mới nếu AllowUserToAddRows = true
+                if (row.IsNewRow) continue;
+
+                bool isChecked = Convert.ToBoolean(row.Cells[0].Value);
+                if (isChecked)
+                {
+                    // Tạo dòng mới và sao chép dữ liệu từ các cột (bỏ checkbox)
+                    DataRow newRow = selectedTable.NewRow();
+
+                    selectedTable.Rows.Add(row.Cells[1].Value.ToString(), row.Cells[2].Value.ToString());
+                }
+            }
+
+            // Gán DataTable đã chọn vào biến toàn cục
+            tbl_Delete_Item = selectedTable;
+        }
+
+        /// <summary>
+        /// Tạo các phím tắt trong form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void frmECO_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt && e.KeyCode == Keys.F4)
+            {
+                this.Close();
+            }
+            if (e.Alt && e.KeyCode == Keys.L)
+            {
+                btnCheckListChild.PerformClick();
+            }
+            if (e.Alt && e.KeyCode == Keys.P)
+            {
+                btnAddParent.PerformClick();
+            }
+            if (e.Alt && e.KeyCode == Keys.T)
+            {
+                btnAddPart.PerformClick();
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            DialogResult kq = MessageBox.Show("Do you want to close this tab", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (kq == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            else
+            {
                 return;
             }
         }

@@ -508,8 +508,10 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 
                     // Đính kèm ảnh
                     string partcode = dgv.Rows[i].Cells[1].Value.ToString();
+
+                    string imagepart = GetFilePath(partcode) + "\\" + GetImagePath_Lastest(partcode);
                     //MessageBox.Show("PartCode Load : " + partcode);
-                    string imagepart = GetFilePath(partcode) + "/" + partcode + "_DV-0.jpg";
+                    // string imagepart = GetFilePath(partcode) + "/" + partcode + "_DV-0.jpg";
                     // MessageBox.Show("Đường dẫn file" + imagepart);
 
                     // Xác định ô cần chèn ảnh

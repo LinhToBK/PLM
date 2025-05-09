@@ -21,8 +21,9 @@ namespace PLM_Lynx
     {
         // Thuộc tính lưu tên người dùng
         public string tennguoidung { get; set; }
+
         public int idnguoidung { get; set; }
-        public int UserLevel { get; set; }  
+        public int UserLevel { get; set; }
 
         private QuanlyUserBLL Nguoidung = new QuanlyUserBLL();
 
@@ -33,17 +34,19 @@ namespace PLM_Lynx
 
         private void frmMain_Load(object sender, EventArgs e)
         {
-            tstripUser.Text = "User : " + tennguoidung ;
+            tstripUser.Text = "User : " + tennguoidung;
 
             switch (UserLevel)
             {
                 case 2: // Kỹ sư
+                    // Chặn các menu system
                     mnuManagerUser.Enabled = false;
-                    mnuECO.Enabled = false;
-                    // mnuManageFamily.Enabled = false;
-                    mnuRelationPart.Enabled = false;
+                    mnuManageFamily.Enabled = false;
+
+                    // Chặn các menu Purchase
                     mnuManagePrice.Enabled = false;
                     mnuMakeNewPO.Enabled = false;
+                    mnuFindPO.Enabled = false;
                     mnuManageSupplier.Enabled = false;
 
                     // Mở form tìm Part
@@ -54,11 +57,10 @@ namespace PLM_Lynx
                     break;
 
                 case 3: // Mua hàng
-                    // Chặn các menu system3
+                    // Chặn các menu system
                     mnuMakeNewPart.Enabled = false;
                     mnuECO.Enabled = false;
                     mnuManagerUser.Enabled = false;
-                    // mnuManageFamily.Enabled = false;
                     mnuRelationPart.Enabled = false;
 
                     // Mở form tìm PO
@@ -73,9 +75,8 @@ namespace PLM_Lynx
                     mnuMakeNewPart.Enabled = false;
                     mnuECO.Enabled = false;
                     mnuManagerUser.Enabled = false;
-                    // mnuManageFamily.Enabled = false;
                     mnuRelationPart.Enabled = false;
-                    viewListUpdateToolStripMenuItem.Enabled = false;
+
                     mnuListMaterial.Enabled = false;
                     solidworkToolStripMenuItem.Enabled = false;
                     siemenNXToolStripMenuItem.Enabled = false;
@@ -86,14 +87,12 @@ namespace PLM_Lynx
                     mnuManageSupplier.Enabled = false;
                     mnuFindPO.Enabled = false;
 
-
                     // Mở form tìm Part
                     frmFindPart frmPart2 = new frmFindPart();
                     frmPart2.MdiParent = this;
                     frmPart2.WindowState = FormWindowState.Maximized;
                     frmPart2.Show();
                     break;
-                   
 
                 default: // Đối với admin
                     frmFindPart defaultFrm = new frmFindPart();
@@ -102,9 +101,6 @@ namespace PLM_Lynx
                     defaultFrm.Show();
                     break;
             }
-
-
-
         }
 
         private void mnuManagerUser_Click(object sender, EventArgs e)
@@ -120,6 +116,7 @@ namespace PLM_Lynx
         private void mnuFindPart_Click(object sender, EventArgs e)
         {
             // Nếu đang có menu thì tắt đi.
+
             foreach (Form frm in Application.OpenForms)
             {
                 if (frm is frmFindPart)
@@ -132,6 +129,7 @@ namespace PLM_Lynx
 
             // Mở lại from mới
             frmFindPart newfrm = new frmFindPart();
+
             newfrm.ShowDialog();
         }
 
@@ -188,23 +186,22 @@ namespace PLM_Lynx
 
         private void mnuFindPO_Click(object sender, EventArgs e)
         {
-            //frmFindPO frm = new frmFindPO();
-            //frm.ShowDialog();
-
-
-            foreach (Form frm in Application.OpenForms)
-            {
-                if (frm is frmFindPO)
-                {
-                    // Nếu đang mở thì phải đóng  lại
-                    frm.Close();
-                    break;
-                }
-            }
-
             // Mở lại from mới
-            frmFindPO newfrm = new frmFindPO();
-            newfrm.ShowDialog();
+
+            if (UserLevel == 3)
+            {
+                foreach (Form frm in Application.OpenForms)
+                {
+                    if (frm is frmFindPO)
+                    {
+                        // Nếu đang mở thì phải đóng  lại
+                        frm.Close();
+                        break;
+                    }
+                }
+                frmFindPO newfrm = new frmFindPO();
+                newfrm.ShowDialog();
+            }
         }
 
         private void mnuAboutMe_Click(object sender, EventArgs e)
@@ -214,8 +211,6 @@ namespace PLM_Lynx
             frm.username = tennguoidung;
             frm.userlevel = UserLevel;
             frm.ShowDialog();
-
-
         }
 
         private void mnuUserGuide_Click(object sender, EventArgs e)
@@ -235,7 +230,7 @@ namespace PLM_Lynx
 
         private void solidworkToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmSolidwork   frm = new frmSolidwork();
+            frmSolidwork frm = new frmSolidwork();
             frm.ShowDialog();
         }
 
@@ -261,7 +256,7 @@ namespace PLM_Lynx
             else
             {
                 return;
-            }    
+            }
         }
     }
 }

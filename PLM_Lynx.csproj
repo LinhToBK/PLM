@@ -15,7 +15,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Admin\Desktop\Set up\</PublishUrl>
+    <PublishUrl>C:\Users\Admin\Desktop\Setup\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -28,7 +28,7 @@
     <ProductName>PLM_LYNX</ProductName>
     <PublisherName>Linh To</PublisherName>
     <SuiteName>PLM_LYNX</SuiteName>
-    <ApplicationRevision>16</ApplicationRevision>
+    <ApplicationRevision>24</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -296,6 +296,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Lang_UploadRelationtoDataBase.resx</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\frmDeleteRelation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_3_ECO\frmDeleteRelation.Designer.cs">
+      <DependentUpon>frmDeleteRelation.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_3_ECO\frmECO.cs">
       <SubType>Form</SubType>
@@ -587,6 +593,9 @@
       <LastGenOutput>Lang_UploadRelationtoDataBase.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_2_Relation_Part\Lang\Lang_UploadRelationtoDataBase.vi.resx" />
+    <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmDeleteRelation.resx">
+      <DependentUpon>frmDeleteRelation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_3_ECO\frmECO.resx">
       <DependentUpon>frmECO.cs</DependentUpon>
     </EmbeddedResource>

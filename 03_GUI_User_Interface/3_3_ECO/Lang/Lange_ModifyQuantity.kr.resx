@@ -150,4 +150,13 @@
   <data name="t3" xml:space="preserve">
     <value>실패 : 요청을 할 수 없습니다.</value>
   </data>
+  <data name="t4" xml:space="preserve">
+    <value>오류가 있습니다. 입력 데이터를 다시 확인하십시오.</value>
+  </data>
+  <data name="t5" xml:space="preserve">
+    <value>가치는 변경되지 않습니다</value>
+  </data>
+  <data name="t6" xml:space="preserve">
+    <value>가치가 옳지 않습니다</value>
+  </data>
 </root>

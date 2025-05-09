@@ -329,6 +329,11 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     dgvChild.Columns[0].ReadOnly = true;
                     dgvChild.Columns[1].ReadOnly = true;
                     dgvChild.Columns[2].ReadOnly = false; // chỉ cột quantity mới được phép sửa
+                    // Đặt chiều rộng cho các cột
+                    dgvChild.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dgvChild.Columns[0].Width = 80; // PartCode
+                    // dgvChild.Columns[1].Width = 200; // Part Name
+                    dgvChild.Columns[2].Width = 80; // Quantity
                 }
             }
         }
@@ -436,6 +441,17 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 frm.ShowDialog();
                 // Nếu OK hết thì button Upload DataBase mới được bật
             }
+        }
+
+        private void frmRelationPart_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Alt && e.KeyCode == Keys.L)
+            {
+                btnCheckBefore.PerformClick();
+            }
+            if(e.Alt && e.KeyCode == Keys.F4) { this.Close(); }
+
+
         }
     }
 }

@@ -346,12 +346,25 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 string status = dgvSearchAD.CurrentRow.Cells[4].Value.ToString();
 
                 InforthisPO = purchaseBLL.GetInfor1PObyPOCodeBLL(dgvSearchAD.CurrentRow.Cells[0].Value.ToString());
+                //select Top 1
+                //                p.POCode, 
+                //                p.PODate,
+                //                p.PONhanVien,
+                //                p.POAmount,
+                //                p.PONote,
+                //                p.POStatus,
+                //                p.POLog,
+                //                p.POSupplierID,
+                //                p.POPartCode
+                //                from tblPO as p where POCode = @Pocode";
                 date = InforthisPO.Rows[0]["PODate"].ToString();
+
+
 
                 frmUpdateStatus frm = new frmUpdateStatus();
                 frm.POCode = code;
-                frm.PODate = date;
-                frm.POStatus = status;
+                frm.PODate = InforthisPO.Rows[0]["PODate"].ToString();
+                frm.POStatus = InforthisPO.Rows[0]["POStatus"].ToString();
 
                 // thêm sự kiện frmStatus_FormClosed vào sự kiện UpdateStatus của frm
                 frm.UpdateStatus += frmStatus_FormClosed;   // Nếu đóng thì load lại partlist

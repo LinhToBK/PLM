@@ -197,16 +197,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_1_Login
             {
                 // System.Diagnostics.Process.Start("explorer.exe", path);
                 // Lọc chỉ hiển thị file .config
-                string[] files = Directory.GetFiles(path, "*.config");
-                foreach (string file in files)
-                {
-                    string fileName = Path.GetFileName(file);
-                    if (fileName == "PLM_Lynx.exe.config")
-                    {
-                        System.Diagnostics.Process.Start("explorer.exe", file);
-                        break;
-                    }
-                }
+                //string[] files = Directory.GetFiles(path, "*.config");
+                //foreach (string file in files)
+                //{
+                //    string fileName = Path.GetFileName(file);
+                //    if (fileName == "PLM_Lynx.exe.config")
+                //    {
+                //        System.Diagnostics.Process.Start("explorer.exe", file);
+                //        break;
+                //    }
+                //}
+                // Mở thư mục chứa file config (chính là path)
+                System.Diagnostics.Process.Start("explorer.exe", path);
+
                 // Đóng ứng dụng
                 Application.Exit();
 

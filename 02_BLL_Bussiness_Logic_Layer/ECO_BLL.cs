@@ -31,8 +31,20 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.GetListChildDAL(ParentCode);
         }
 
+
+        /// <summary>
+        ///  Method : CapnhatQuantityBLL : Cập nhật số lượng của Part Child trong Parent Part
+        ///  
+        /// </summary>
+        /// <param name="parentcode"></param>
+        /// <param name="childcode"></param>
+        /// <param name="quantity"></param>
+        /// <param name="ECONo"></param>
+        /// <returns></returns>
         public bool CapnhatQuantityBLL(string parentcode, string childcode, int quantity , string ECONo)
         {
+
+
             bool check = false;
 
             if (ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) && ecoDAL.CapnhatQuantityDAL(parentcode, childcode, quantity) )
@@ -43,10 +55,34 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return check;
         }
 
-        public bool XoaRelationBLL(string parentcode, string childcode , string ECONo)
+        public bool CapnhatQuantityBLL(DataTable updatetbl , string ECONo , string parentcode)
+        {
+
+            bool check = false;
+
+            if (ecoDAL.CapnhatQuantityDAL(updatetbl) && ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo))
+            {
+                check = true;
+            }
+
+            return check;
+        }
+
+
+
+
+
+        /// <summary>
+        /// XoaRelationBLL : Xóa quan hệ giữa ParentCode và ChildCode
+        /// </summary>
+        /// <param name="parentcode"></param>
+        /// <param name="childcode"></param>
+        /// <param name="ECONo"></param>
+        /// <returns></returns>
+        public bool XoaRelationBLL(string parentcode, string ECONo , DataTable delete_table)
         {
             bool check = false;
-            if ( ecoDAL.XoaRelationDAL(parentcode, childcode) && ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) )
+            if ( ecoDAL.XoaRelationDAL(delete_table) && ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) )
             {
                 check = true;
             }
@@ -386,6 +422,10 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         public bool Delete_tblRelationTemp_BLL(string parentcode, string childcode)
         {
             return ecoDAL.Delete_tblRelationTemp_DAL(parentcode, childcode);
+        }
+        public bool Delete_tblRelationTemp_BLL(DataTable delete_table)
+        {
+            return ecoDAL.Delete_tblRelationTemp_DAL(delete_table);
         }
 
         public bool Write_ECONo_to_tblPart_BLL(string PartCode, string ECONo)

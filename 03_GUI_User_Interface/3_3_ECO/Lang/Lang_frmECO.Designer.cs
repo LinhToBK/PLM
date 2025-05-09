@@ -177,7 +177,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO.Lang {
         ///   Looks up a localized string similar to Short key :
         ///+) Alt + T =&gt; Add Part to update information 
         ///+) Alt + P =&gt; Add Parent to update relation
-        ///+) Alt + C =&gt; Add Child to update relation
         ///+) Alt + L =&gt; Check List Child
         ///.
         /// </summary>
@@ -296,11 +295,29 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to Do you want to modify relation part code : .
         /// </summary>
         internal static string t13 {
             get {
                 return ResourceManager.GetString("t13", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please choose a object.
+        /// </summary>
+        internal static string t14 {
+            get {
+                return ResourceManager.GetString("t14", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to make request update quantity ?.
+        /// </summary>
+        internal static string t15 {
+            get {
+                return ResourceManager.GetString("t15", resourceCulture);
             }
         }
         

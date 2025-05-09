@@ -158,5 +158,32 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO.Lang {
                 return ResourceManager.GetString("t3", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Have Error. Please check input data again..
+        /// </summary>
+        internal static string t4 {
+            get {
+                return ResourceManager.GetString("t4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value is not changed.
+        /// </summary>
+        internal static string t5 {
+            get {
+                return ResourceManager.GetString("t5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Value is not right.
+        /// </summary>
+        internal static string t6 {
+            get {
+                return ResourceManager.GetString("t6", resourceCulture);
+            }
+        }
     }
 }

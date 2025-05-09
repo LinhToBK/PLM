@@ -53,11 +53,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             labelName.Text = rm.GetString("lb3");
             labelStatus.Text = rm.GetString("lb4");
             labelType.Text = rm.GetString("lb5");
-            
-
-
-
-
 
             Properties.Settings.Default.Language = lang;
             Properties.Settings.Default.Save();
@@ -124,8 +119,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             dgvListECO.Columns[3].HeaderText = "Requester";
             dgvListECO.Columns[4].HeaderText = "Approver";
             dgvListECO.Columns[5].HeaderText = "Status";
-
-
         }
 
         private void cboListNear_SelectedIndexChanged(object sender, EventArgs e)
@@ -141,7 +134,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"),MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error : " + ex.Message, rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -261,22 +254,22 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     { // Cập nhật số lượng
                         ecoContent = " Update quantity of child in parent part : ";
                         string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
-                        string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
-                        string quantity = dgvECOContent.Rows[0].Cells[2].Value.ToString();
+                        //string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
+                        //string quantity = dgvECOContent.Rows[0].Cells[2].Value.ToString();
                         ecoContent = ecoContent + "\r\n Parent code : " + parentcode;
-                        ecoContent = ecoContent + "\r\n Child code : " + childcode;
-                        ecoContent = ecoContent + "\r\n Số lượng : " + quantity;
+                        //ecoContent = ecoContent + "\r\n Child code : " + childcode;
+                        //ecoContent = ecoContent + "\r\n Số lượng : " + quantity;
                         txtECOContent.Text = ecoContent;
                         break;
                     }
                 case 5:
                     {
                         // Xóa ràng buộc
-                        ecoContent = "Delete relation of 2 parts : ";
+                        ecoContent = "Delete relation request : ";
                         string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
-                        string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
+                        
                         ecoContent = ecoContent + "\r\n Parent code : " + parentcode;
-                        ecoContent = ecoContent + "\r\n Child code : " + childcode;
+                 
                         txtECOContent.Text = ecoContent;
                         break;
                     }
@@ -304,8 +297,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                     Approved_Case3();
                 }
 
-                // Case 4 : Cập nhật số lư
-                // ợng
+                // Case 4 : Cập nhật số lượng
                 if (this_ECOType == 4)
                 {
                     Approved_Case4();
@@ -338,7 +330,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
         {
             string partcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
             //string tb = "Bạn có muốn phê duyệt cập nhật thông tin của Part : " + partcode + " không ?";
-            string tb = rm.GetString("t9") + partcode ;
+            string tb = rm.GetString("t9") + partcode;
             DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.No)
             {
@@ -366,7 +358,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         Version = dgvECOContent.Rows[0].Cells[3].Value.ToString() + ".0";     // 2.0,, 3.0
                         // Thêm thuộc tính version vào tblContent
                         _content.Rows[0]["nd"] = Version;
-
 
                         // Copy file từ ECOTEMP sang DataPart
                         if (_ecoBLL.CopyFile_to_DataPart(partcode, Version, ECONo))
@@ -404,12 +395,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
                         else
                         {
                             //MessageBox.Show("Lỗi khi không copy lên bản mới nhât của stage cũ lên stage mới ");
-                            MessageBox.Show( rm.GetString("t13"));
+                            MessageBox.Show(rm.GetString("t13"));
                         }
                     } // Hết trường hợp 2 :
 
                     // Trường hợp 3 : Chỉ cập nhật bản vẽ và không cập nhật Stage
-                    else if (stagestatus == "" && drawingstatus == "1")
+                    else if (stagestatus == "0" && drawingstatus == "1")
                     {
                         Version = oldstage.ToString() + "." + _ecoBLL.lastestVersion(Folder_Part_Path, oldstage).ToString();
                         _content.Rows[0]["nd"] = Version;
@@ -484,93 +475,175 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private bool Insert_Relation()
         {
-            int insertstatus = 0;
+            
             string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
-            string thongbao2 = "";
-            foreach (DataGridViewRow dr in dgvECOContent.Rows)
+           
+
+            // Cần kiểm tra lại hàm content
+            DataTable updateTable = new DataTable();
+            updateTable.Columns.Add("ParentCode", typeof(string));
+            updateTable.Columns.Add("ChildCode", typeof(string));
+            updateTable.Columns.Add("Quantity", typeof(int));
+
+            foreach (DataGridViewRow row in dgvECOContent.Rows)
             {
-                try
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[0].Value.ToString() != parentcode)
                 {
-                    // Kiểm tra giá trị và xử lý trước khi truyền vào BLL
-                    if (dr.Cells[0].Value != null && dr.Cells[1].Value != null && dr.Cells[0].Value.ToString() != parentcode)
-                    {
-                        string childCode = dr.Cells[0].Value.ToString();
-                        int quantity = int.Parse(dr.Cells[1].Value.ToString());
-
-                        MessageBox.Show("Update relation: \r\n Parent Code :  " + parentcode + " \r\n Child code : " + childCode + " Quantity : " + quantity);
-
-                        if (relationBLL.InsertNewRelationBLL(parentcode, childCode, quantity) && _ecoBLL.Delete_tblRelationTemp_BLL(parentcode, childCode))
-                        {
-                            thongbao2 = thongbao2 + "(+) Update relation  --" + parentcode + "---" + childCode + " -- successfully \n";
-                        }
-                        else
-                        {
-                            thongbao2 = thongbao2 + "(!) Error : Can not update relation :  --" + parentcode + "---" + childCode + " -- \n";
-                            insertstatus++;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    thongbao2 += $"(!) Error : {ex.Message} \n";
-                    insertstatus++;
+                    string childCode = row.Cells[0].Value.ToString();
+                    int quantity = int.Parse(row.Cells[1].Value.ToString()); // Lấy dữ liệu của new quantity
+                    updateTable.Rows.Add(parentcode, childCode, quantity);
                 }
             }
 
-            if (insertstatus == 0)
+            // Tiến hành vừa insert vào tblRelation vừa xóa tblRelationTemp
+            if(relationBLL.InsertNewRelationBLL(updateTable) && _ecoBLL.Delete_tblRelationTemp_BLL(updateTable))
             {
-                MessageBox.Show(thongbao2);
+                MessageBox.Show("Updated to tblPart and tblRelation successfully.");
                 return true;
             }
             else
             {
-                MessageBox.Show(thongbao2);
+                MessageBox.Show("tblPart and tblRelation are not updated yet.");
                 return false;
             }
-        }
 
+
+            //foreach (DataGridViewRow dr in dgvECOContent.Rows)
+            //{
+            //    try
+            //    {
+            //        // Kiểm tra giá trị và xử lý trước khi truyền vào BLL
+            //        if (dr.Cells[0].Value != null && dr.Cells[1].Value != null && dr.Cells[0].Value.ToString() != parentcode)
+            //        {
+            //            string childCode = dr.Cells[0].Value.ToString();
+            //            int quantity = int.Parse(dr.Cells[1].Value.ToString());
+
+            //            //MessageBox.Show("Update relation: \r\n Parent Code :  " + parentcode + " \r\n Child code : " + childCode + " Quantity : " + quantity);
+
+            //            if (relationBLL.InsertNewRelationBLL(parentcode, childCode, quantity) && _ecoBLL.Delete_tblRelationTemp_BLL(parentcode, childCode))
+            //            {
+            //                thongbao2 = thongbao2 + "(+) Update relation  --" + parentcode + "---" + childCode + " -- successfully \n";
+            //            }
+            //            else
+            //            {
+            //                thongbao2 = thongbao2 + "(!) Error : Can not update relation :  --" + parentcode + "---" + childCode + " -- \n";
+            //                insertstatus++;
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        thongbao2 += $"(!) Error : {ex.Message} \n";
+            //        insertstatus++;
+            //    }
+            //}
+
+            //if (insertstatus == 0)
+            //{
+            //    MessageBox.Show(thongbao2);
+            //    return true;
+            //}
+            //else
+            //{
+            //    MessageBox.Show(thongbao2);
+            //    return false;
+            //}
+        }
 
         // Case 4 : Cập nhật số lượng
         private void Approved_Case4()
         {
             string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
-            string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
-            string quantity = dgvECOContent.Rows[0].Cells[2].Value.ToString();
 
-            //string tb = "Bạn có muốn phê duyệt cập nhật số lương của Part  : " + parentcode + " không ?";
-            string tb = rm.GetString("t18") + ": \r\n Parent code : " + parentcode ;
-            tb = tb + "\r\n Child code : " + childcode;
-            tb = tb + "\r\n Quantity : " + quantity;
+            //string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
+            //string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
+            //string quantity = dgvECOContent.Rows[0].Cells[2].Value.ToString();
+
+            ////string tb = "Bạn có muốn phê duyệt cập nhật số lương của Part  : " + parentcode + " không ?";
+            string tb = rm.GetString("t18") + ": \r\n Parent code : " + parentcode;
 
             DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
-                if (_ecoBLL.CapnhatQuantityBLL(parentcode, childcode, Convert.ToInt32(quantity), txtECONo.Text) )
+                //if (_ecoBLL.CapnhatQuantityBLL(parentcode, childcode, Convert.ToInt32(quantity), txtECONo.Text))
+                //{
+                //    if (_ecoBLL.Update_tblECO_Approved_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
+                //    {
+                //        MessageBox.Show(rm.GetString("t19"));
+                //        LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
+                //    }
+                //    else
+                //    {
+                //        MessageBox.Show(rm.GetString("t20"));
+                //        return;
+                //    }
+                //}
+
+                // Bước 1 : Cập nhật hết số lượng vào tblRelation
+                // Chuyển đổi DataTable _ecocontent sang mẫu khác
+
+                DataTable updateTable = new DataTable();
+                updateTable.Columns.Add("ParentCode", typeof(string));
+                updateTable.Columns.Add("ChildCode", typeof(string));
+                updateTable.Columns.Add("Quantity", typeof(int));
+
+                foreach (DataGridViewRow row in dgvECOContent.Rows)
                 {
+                    if (row.Cells[0].Value != null && row.Cells[1].Value != null && row.Cells[0].Value.ToString() != parentcode)
+                    {
+                        string childCode = row.Cells[0].Value.ToString();
+                        int newquantity = int.Parse(row.Cells[2].Value.ToString()); // Lấy dữ liệu của new quantity
+                        updateTable.Rows.Add(parentcode, childCode, newquantity);
+                    }
+                }
+
+                // MessageBox.Show("Hoàn thành việc tạo DataTable để cập nhật số lượng");
+                if (_ecoBLL.CapnhatQuantityBLL(updateTable, txtECONo.Text, parentcode))
+                {
+                    MessageBox.Show("Successfully updated tblPart and tblRelation");
                     if (_ecoBLL.Update_tblECO_Approved_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                     {
-                        MessageBox.Show(rm.GetString("t19"));
+                        MessageBox.Show(rm.GetString("t19")); // Approved [ Update quantity of Part ] successfully.
                         LoadDatatodgvListNearECO(Convert.ToInt32(cboListNear.SelectedValue));
                     }
                     else
                     {
-                        MessageBox.Show(rm.GetString("t20"));
+                        MessageBox.Show(rm.GetString("t20"));    // Fail : Can not update quantity of part
                         return;
                     }
                 }
+                else
+                {
+                    MessageBox.Show("tblPart and tblRelation are not updated yet.");
+                    return;
+                }    
             }
         }
 
         public void Approved_Case5()
         {
             string parentcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
-            string childcode = dgvECOContent.Rows[0].Cells[1].Value.ToString();
+
             //string tb = "Bạn có muốn phê duyệt xóa ràng buộc giữa 2 Part : " + parentcode + " và " + childcode + " không ?";
-            string tb = rm.GetString("t21") + parentcode + " & " + childcode ;
+            string tb = rm.GetString("t21") + parentcode;
+            // Tạo bảng datatable
+            DataTable delete_table = new DataTable();
+            delete_table.Columns.Add("ParentCode", typeof(string));
+            delete_table.Columns.Add("ChildCode", typeof(string));
+           
+
+            foreach (DataGridViewRow row in dgvECOContent.Rows)
+            {
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+                {
+                    delete_table.Rows.Add(row.Cells[0].Value.ToString(), row.Cells[1].Value.ToString());
+                }
+            }
+
             DialogResult kq = MessageBox.Show(tb, "Thông báo", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
-                if (_ecoBLL.XoaRelationBLL(parentcode, childcode, txtECONo.Text) && _ecoBLL.Update_tblECO_Approved_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
+                if (_ecoBLL.XoaRelationBLL(parentcode, txtECONo.Text , delete_table ) && _ecoBLL.Update_tblECO_Approved_BLL(userid, username, Convert.ToInt32(txtECONo.Text)))
                 {
                     //MessageBox.Show("Đã phê duyệt ECO [ Xóa ràng buộc giữa 2 Part ] thành công");
                     MessageBox.Show(rm.GetString("t22"));
@@ -680,7 +753,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             string partcode = dgvECOContent.Rows[0].Cells[0].Value.ToString();
             string drawingstatus = dgvECOContent.Rows[0].Cells[9].Value.ToString();
             //string tb = "Bạn có muốn hủy phê duyệt cập nhật thông tin của " + partcode + " không ?";
-            string tb = rm.GetString("t29") + partcode ;
+            string tb = rm.GetString("t29") + partcode;
             DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
@@ -807,7 +880,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
 
         private void dgvListECO_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
         }
 
         private void dgvListECO_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -817,7 +889,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_3_ECO
             frmECO_Infor_Detail frm = new frmECO_Infor_Detail();
             frm.ECONo = ECONo;
             frm.ShowDialog();
-
         }
     }
 }

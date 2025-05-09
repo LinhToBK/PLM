@@ -150,4 +150,13 @@
   <data name="t3" xml:space="preserve">
     <value>Xuất hiện lỗi khi tạo ECO \n Kiểm tra lại dữ liệu</value>
   </data>
+  <data name="t4" xml:space="preserve">
+    <value>Có lỗi xảy ra trong quá trình kiểm tra dữ liệu nhập vào. \r\n Vui lòng kiểm tra lại.</value>
+  </data>
+  <data name="t5" xml:space="preserve">
+    <value>Giá trị nhập vào không thay đổi</value>
+  </data>
+  <data name="t6" xml:space="preserve">
+    <value>Giá trị nhập vào không hợp lệ</value>
+  </data>
 </root>

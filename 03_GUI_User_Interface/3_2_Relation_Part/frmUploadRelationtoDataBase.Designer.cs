@@ -104,6 +104,7 @@
             this.dgvListChild.RowTemplate.Height = 23;
             this.dgvListChild.Size = new System.Drawing.Size(576, 357);
             this.dgvListChild.TabIndex = 2;
+            this.dgvListChild.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListChild_CellContentClick);
             // 
             // txtParentCode
             // 
@@ -141,6 +142,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.Name = "frmUploadRelationtoDataBase";
             this.Text = "Upload Relation to DataBase";
+            this.Load += new System.EventHandler(this.frmUploadRelationtoDataBase_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvListChild)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

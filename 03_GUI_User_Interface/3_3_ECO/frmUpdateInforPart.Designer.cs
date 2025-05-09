@@ -435,6 +435,7 @@
             this.dgvListUpload.RowHeadersWidth = 51;
             this.dgvListUpload.Size = new System.Drawing.Size(509, 176);
             this.dgvListUpload.TabIndex = 0;
+            this.dgvListUpload.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListUpload_CellDoubleClick);
             this.dgvListUpload.DragDrop += new System.Windows.Forms.DragEventHandler(this.dgvListUpload_DragDrop);
             this.dgvListUpload.DragEnter += new System.Windows.Forms.DragEventHandler(this.dgvListUpload_DragEnter);
             // 
@@ -443,7 +444,7 @@
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
             this.btnExit.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExit.Location = new System.Drawing.Point(290, 12);
+            this.btnExit.Location = new System.Drawing.Point(290, 11);
             this.btnExit.Margin = new System.Windows.Forms.Padding(4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(66, 40);
@@ -458,7 +459,7 @@
             this.btnUpload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnUpload.Image = ((System.Drawing.Image)(resources.GetObject("btnUpload.Image")));
             this.btnUpload.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnUpload.Location = new System.Drawing.Point(27, 12);
+            this.btnUpload.Location = new System.Drawing.Point(27, 11);
             this.btnUpload.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpload.Name = "btnUpload";
             this.btnUpload.Size = new System.Drawing.Size(198, 40);

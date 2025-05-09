@@ -78,6 +78,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
             txtParentName.Text = parentname;
             //dgvListChild.DataSource = ListChild;
             dgvListChild.AllowUserToAddRows = false;
+            dgvListChild.AllowUserToDeleteRows = false;
             dgvListChild.EditMode = DataGridViewEditMode.EditProgrammatically;
             int UpdateStatus = 0;
 
@@ -161,6 +162,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
                 //}
             }
             dgvListChild.DataSource = ListChild;
+            dgvListChild.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill; // Tự động điều chỉnh kích thước cột
+           
+
 
             if (UpdateStatus == 0)
             {
@@ -211,7 +215,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
                 }
                 else
                 {
-                    MessageBox.Show("Phát sinh lỗi khi tạo ràng buộc mới giữa các part ");
+                    MessageBox.Show("Error occurred when creating new relation between parts ");
                 }
 
                 // Bước 2 : Nếu OK thì sẽ insert các giá trị vào tblRelationTemp
@@ -257,7 +261,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
 
         private void GetECOContent(DataTable DataListChild, string parentcode)
         {
-            // Copy các cột từ originalTable, trừ cột "Tuổi"
+            
             DataTable newTable = new DataTable();
             foreach (DataColumn col in DataListChild.Columns)
             {
@@ -267,7 +271,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
                 }
             }
 
-            // Copy dữ liệu từng dòng, trừ cột "Tuổi"
+            
             foreach (DataRow row in DataListChild.Rows)
             {
                 DataRow newRow = newTable.NewRow();
@@ -318,6 +322,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_2_Relation_Part
             }
 
             return insertstatus;
+        }
+
+        private void dgvListChild_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void frmUploadRelationtoDataBase_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

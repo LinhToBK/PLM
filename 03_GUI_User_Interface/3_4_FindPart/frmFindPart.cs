@@ -44,7 +44,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             rm = new ResourceManager("PLM_Lynx._03_GUI_User_Interface._3_4_FindPart.Lang.Lang_FindPart", typeof(frmFindPart).Assembly);
             // Hiển thị ngôn ngữ lên các điều khiển trong form
             this.Text = rm.GetString("i.form");
-            groupBoxSearch.Text = rm.GetString("lb1");
+            //groupBoxSearch.Text = rm.GetString("lb1");
             ckcSearchAll.Text = rm.GetString("lb2");
             btnThemGanDay.Text = rm.GetString("lb3" );
             groupBoxResult.Text = rm.GetString("lb4");
@@ -106,9 +106,11 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //7p.PartPriceSale,
             //8p.PartPriceLog
             dgvSearch.DataSource = DulieuTimKiem;
+
+            dgvSearch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvSearch.Columns[0].Width = 80; // PartCode
             dgvSearch.Columns[1].Width = 200; // PartName
-            dgvSearch.Columns[2].Width = 250; // PartDescript
+            // dgvSearch.Columns[2].Width = 250; // PartDescript
             dgvSearch.Columns[3].Width = 100; // PartStage
             //dgvSearch.Columns[4].Width = 50; // PartPrice
             //dgvSearch.Columns[5].Width = 100; // PartLog
@@ -129,6 +131,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
 
             dgvSearch.AllowUserToAddRows = false;
+            dgvSearch.AllowUserToDeleteRows = false;
             dgvSearch.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
 

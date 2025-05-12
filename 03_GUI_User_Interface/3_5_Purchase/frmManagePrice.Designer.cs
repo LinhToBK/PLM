@@ -378,7 +378,7 @@
             // labelPartName
             // 
             this.labelPartName.AutoSize = true;
-            this.labelPartName.Location = new System.Drawing.Point(10, 91);
+            this.labelPartName.Location = new System.Drawing.Point(9, 91);
             this.labelPartName.Name = "labelPartName";
             this.labelPartName.Size = new System.Drawing.Size(91, 23);
             this.labelPartName.TabIndex = 0;
@@ -387,7 +387,7 @@
             // labelPartStage
             // 
             this.labelPartStage.AutoSize = true;
-            this.labelPartStage.Location = new System.Drawing.Point(12, 58);
+            this.labelPartStage.Location = new System.Drawing.Point(9, 58);
             this.labelPartStage.Name = "labelPartStage";
             this.labelPartStage.Size = new System.Drawing.Size(87, 23);
             this.labelPartStage.TabIndex = 0;

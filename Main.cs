@@ -188,7 +188,7 @@ namespace PLM_Lynx
         {
             // Mở lại from mới
 
-            if (UserLevel == 3)
+            if (UserLevel == 3 || UserLevel == 1)
             {
                 foreach (Form frm in Application.OpenForms)
                 {

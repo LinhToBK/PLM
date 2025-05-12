@@ -30,35 +30,41 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFindPart));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.groupBoxResult = new System.Windows.Forms.GroupBox();
-            this.dgvSearch = new Zuby.ADGV.AdvancedDataGridView();
+            this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
             this.groupBoxPartInfor = new System.Windows.Forms.GroupBox();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.tableLayoutPanel6 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel7 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtCode = new System.Windows.Forms.TextBox();
             this.txtStage = new System.Windows.Forms.TextBox();
             this.txtMaterial = new System.Windows.Forms.TextBox();
+            this.txtName = new System.Windows.Forms.TextBox();
+            this.txtDescript = new System.Windows.Forms.TextBox();
             this.dgvListFile = new System.Windows.Forms.DataGridView();
             this.groupboxImagePart = new System.Windows.Forms.GroupBox();
             this.picPart = new System.Windows.Forms.PictureBox();
-            this.txtDescript = new System.Windows.Forms.TextBox();
-            this.txtName = new System.Windows.Forms.TextBox();
-            this.txtCode = new System.Windows.Forms.TextBox();
-            this.groupBoxSearch = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
+            this.txtKeySearch = new System.Windows.Forms.TextBox();
             this.txtViewRow = new System.Windows.Forms.TextBox();
             this.ckcSearchAll = new System.Windows.Forms.CheckBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
+            this.btnThemGanDay = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txtHighLight = new System.Windows.Forms.TextBox();
-            this.btnThemGanDay = new System.Windows.Forms.Button();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.txtKeySearch = new System.Windows.Forms.TextBox();
+            this.groupBoxResult = new System.Windows.Forms.GroupBox();
+            this.dgvSearch = new Zuby.ADGV.AdvancedDataGridView();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxListParent = new System.Windows.Forms.GroupBox();
             this.dgvParent = new System.Windows.Forms.DataGridView();
             this.Panel_Infor_Parent = new System.Windows.Forms.Panel();
-            this.txtParentDescript = new System.Windows.Forms.TextBox();
             this.groupboxParentImage = new System.Windows.Forms.GroupBox();
             this.picParent = new System.Windows.Forms.PictureBox();
-            this.txtParentMaterial = new System.Windows.Forms.TextBox();
+            this.txtParentDescript = new System.Windows.Forms.TextBox();
             this.txtParentName = new System.Windows.Forms.TextBox();
+            this.txtParentMaterial = new System.Windows.Forms.TextBox();
             this.txtParentCode = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBoxListChild = new System.Windows.Forms.GroupBox();
@@ -75,13 +81,22 @@
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            this.groupBoxResult.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
+            this.tableLayoutPanel5.SuspendLayout();
             this.groupBoxPartInfor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            this.tableLayoutPanel6.SuspendLayout();
+            this.tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListFile)).BeginInit();
             this.groupboxImagePart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPart)).BeginInit();
-            this.groupBoxSearch.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel4.SuspendLayout();
+            this.groupBoxResult.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxListParent.SuspendLayout();
@@ -106,29 +121,339 @@
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.AutoScroll = true;
-            this.splitContainer1.Panel1.Controls.Add(this.groupBoxResult);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBoxPartInfor);
-            this.splitContainer1.Panel1.Controls.Add(this.groupBoxSearch);
+            this.splitContainer1.Panel1.Controls.Add(this.tableLayoutPanel5);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(1128, 822);
             this.splitContainer1.SplitterDistance = 566;
             this.splitContainer1.TabIndex = 0;
+            // 
+            // tableLayoutPanel5
+            // 
+            this.tableLayoutPanel5.AutoScroll = true;
+            this.tableLayoutPanel5.ColumnCount = 1;
+            this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel5.Controls.Add(this.groupBoxPartInfor, 0, 2);
+            this.tableLayoutPanel5.Controls.Add(this.tableLayoutPanel2, 0, 0);
+            this.tableLayoutPanel5.Controls.Add(this.groupBoxResult, 0, 1);
+            this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel5.Name = "tableLayoutPanel5";
+            this.tableLayoutPanel5.RowCount = 3;
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 400F));
+            this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(566, 822);
+            this.tableLayoutPanel5.TabIndex = 0;
+            // 
+            // groupBoxPartInfor
+            // 
+            this.groupBoxPartInfor.Controls.Add(this.splitContainer2);
+            this.groupBoxPartInfor.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupBoxPartInfor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBoxPartInfor.Location = new System.Drawing.Point(4, 504);
+            this.groupBoxPartInfor.Margin = new System.Windows.Forms.Padding(4);
+            this.groupBoxPartInfor.Name = "groupBoxPartInfor";
+            this.groupBoxPartInfor.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBoxPartInfor.Size = new System.Drawing.Size(558, 314);
+            this.groupBoxPartInfor.TabIndex = 2;
+            this.groupBoxPartInfor.TabStop = false;
+            this.groupBoxPartInfor.Text = "Information of the clicked part";
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(4, 26);
+            this.splitContainer2.Name = "splitContainer2";
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.tableLayoutPanel6);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.groupboxImagePart);
+            this.splitContainer2.Size = new System.Drawing.Size(550, 284);
+            this.splitContainer2.SplitterDistance = 386;
+            this.splitContainer2.TabIndex = 7;
+            // 
+            // tableLayoutPanel6
+            // 
+            this.tableLayoutPanel6.ColumnCount = 1;
+            this.tableLayoutPanel6.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel6.Controls.Add(this.tableLayoutPanel7, 0, 0);
+            this.tableLayoutPanel6.Controls.Add(this.txtName, 0, 1);
+            this.tableLayoutPanel6.Controls.Add(this.txtDescript, 0, 2);
+            this.tableLayoutPanel6.Controls.Add(this.dgvListFile, 0, 3);
+            this.tableLayoutPanel6.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel6.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel6.Name = "tableLayoutPanel6";
+            this.tableLayoutPanel6.RowCount = 4;
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
+            this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(386, 284);
+            this.tableLayoutPanel6.TabIndex = 6;
+            // 
+            // tableLayoutPanel7
+            // 
+            this.tableLayoutPanel7.ColumnCount = 3;
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 94F));
+            this.tableLayoutPanel7.Controls.Add(this.txtCode, 0, 0);
+            this.tableLayoutPanel7.Controls.Add(this.txtStage, 2, 0);
+            this.tableLayoutPanel7.Controls.Add(this.txtMaterial, 1, 0);
+            this.tableLayoutPanel7.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel7.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel7.Name = "tableLayoutPanel7";
+            this.tableLayoutPanel7.RowCount = 1;
+            this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(380, 34);
+            this.tableLayoutPanel7.TabIndex = 0;
+            // 
+            // txtCode
+            // 
+            this.txtCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtCode.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtCode.Location = new System.Drawing.Point(4, 4);
+            this.txtCode.Margin = new System.Windows.Forms.Padding(4);
+            this.txtCode.Multiline = true;
+            this.txtCode.Name = "txtCode";
+            this.txtCode.ReadOnly = true;
+            this.txtCode.Size = new System.Drawing.Size(135, 26);
+            this.txtCode.TabIndex = 1;
+            // 
+            // txtStage
+            // 
+            this.txtStage.Location = new System.Drawing.Point(289, 3);
+            this.txtStage.Name = "txtStage";
+            this.txtStage.ReadOnly = true;
+            this.txtStage.Size = new System.Drawing.Size(88, 29);
+            this.txtStage.TabIndex = 5;
+            // 
+            // txtMaterial
+            // 
+            this.txtMaterial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtMaterial.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtMaterial.Location = new System.Drawing.Point(146, 3);
+            this.txtMaterial.Multiline = true;
+            this.txtMaterial.Name = "txtMaterial";
+            this.txtMaterial.ReadOnly = true;
+            this.txtMaterial.Size = new System.Drawing.Size(137, 28);
+            this.txtMaterial.TabIndex = 5;
+            // 
+            // txtName
+            // 
+            this.txtName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtName.Location = new System.Drawing.Point(4, 44);
+            this.txtName.Margin = new System.Windows.Forms.Padding(4);
+            this.txtName.Multiline = true;
+            this.txtName.Name = "txtName";
+            this.txtName.ReadOnly = true;
+            this.txtName.Size = new System.Drawing.Size(378, 32);
+            this.txtName.TabIndex = 1;
+            // 
+            // txtDescript
+            // 
+            this.txtDescript.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.txtDescript.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtDescript.Location = new System.Drawing.Point(4, 84);
+            this.txtDescript.Margin = new System.Windows.Forms.Padding(4);
+            this.txtDescript.Multiline = true;
+            this.txtDescript.Name = "txtDescript";
+            this.txtDescript.ReadOnly = true;
+            this.txtDescript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtDescript.Size = new System.Drawing.Size(378, 52);
+            this.txtDescript.TabIndex = 1;
+            // 
+            // dgvListFile
+            // 
+            this.dgvListFile.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvListFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListFile.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvListFile.GridColor = System.Drawing.Color.White;
+            this.dgvListFile.Location = new System.Drawing.Point(4, 144);
+            this.dgvListFile.Margin = new System.Windows.Forms.Padding(4);
+            this.dgvListFile.Name = "dgvListFile";
+            this.dgvListFile.RowHeadersWidth = 51;
+            this.dgvListFile.Size = new System.Drawing.Size(378, 136);
+            this.dgvListFile.TabIndex = 4;
+            // 
+            // groupboxImagePart
+            // 
+            this.groupboxImagePart.Controls.Add(this.picPart);
+            this.groupboxImagePart.Dock = System.Windows.Forms.DockStyle.Top;
+            this.groupboxImagePart.Location = new System.Drawing.Point(0, 0);
+            this.groupboxImagePart.Margin = new System.Windows.Forms.Padding(4);
+            this.groupboxImagePart.Name = "groupboxImagePart";
+            this.groupboxImagePart.Padding = new System.Windows.Forms.Padding(4);
+            this.groupboxImagePart.Size = new System.Drawing.Size(160, 151);
+            this.groupboxImagePart.TabIndex = 3;
+            this.groupboxImagePart.TabStop = false;
+            this.groupboxImagePart.Text = "Image";
+            // 
+            // picPart
+            // 
+            this.picPart.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.picPart.Location = new System.Drawing.Point(4, 26);
+            this.picPart.Margin = new System.Windows.Forms.Padding(4);
+            this.picPart.Name = "picPart";
+            this.picPart.Size = new System.Drawing.Size(152, 121);
+            this.picPart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picPart.TabIndex = 2;
+            this.picPart.TabStop = false;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 1;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.tableLayoutPanel4, 0, 1);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 2;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(560, 94);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // tableLayoutPanel3
+            // 
+            this.tableLayoutPanel3.AutoSize = true;
+            this.tableLayoutPanel3.ColumnCount = 4;
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 50F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel3.Controls.Add(this.txtKeySearch, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.txtViewRow, 3, 0);
+            this.tableLayoutPanel3.Controls.Add(this.ckcSearchAll, 2, 0);
+            this.tableLayoutPanel3.Controls.Add(this.btnSearch, 1, 0);
+            this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel3.Name = "tableLayoutPanel3";
+            this.tableLayoutPanel3.RowCount = 1;
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(554, 39);
+            this.tableLayoutPanel3.TabIndex = 0;
+            // 
+            // txtKeySearch
+            // 
+            this.txtKeySearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtKeySearch.Location = new System.Drawing.Point(4, 4);
+            this.txtKeySearch.Margin = new System.Windows.Forms.Padding(4);
+            this.txtKeySearch.Multiline = true;
+            this.txtKeySearch.Name = "txtKeySearch";
+            this.txtKeySearch.Size = new System.Drawing.Size(142, 31);
+            this.txtKeySearch.TabIndex = 1;
+            this.txtKeySearch.TextChanged += new System.EventHandler(this.txtKeySearch_TextChanged);
+            this.txtKeySearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyDown);
+            // 
+            // txtViewRow
+            // 
+            this.txtViewRow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+            this.txtViewRow.Location = new System.Drawing.Point(353, 3);
+            this.txtViewRow.Name = "txtViewRow";
+            this.txtViewRow.Size = new System.Drawing.Size(48, 27);
+            this.txtViewRow.TabIndex = 8;
+            this.txtViewRow.Text = "100";
+            // 
+            // ckcSearchAll
+            // 
+            this.ckcSearchAll.AutoSize = true;
+            this.ckcSearchAll.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.ckcSearchAll.Location = new System.Drawing.Point(203, 3);
+            this.ckcSearchAll.Name = "ckcSearchAll";
+            this.ckcSearchAll.Size = new System.Drawing.Size(144, 33);
+            this.ckcSearchAll.TabIndex = 7;
+            this.ckcSearchAll.Text = "Search All Data";
+            this.ckcSearchAll.UseVisualStyleBackColor = true;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSearch.Location = new System.Drawing.Point(154, 4);
+            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(42, 31);
+            this.btnSearch.TabIndex = 2;
+            this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // tableLayoutPanel4
+            // 
+            this.tableLayoutPanel4.AutoSize = true;
+            this.tableLayoutPanel4.ColumnCount = 3;
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 200F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
+            this.tableLayoutPanel4.Controls.Add(this.btnThemGanDay, 0, 0);
+            this.tableLayoutPanel4.Controls.Add(this.label1, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.txtHighLight, 2, 0);
+            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 48);
+            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
+            this.tableLayoutPanel4.RowCount = 1;
+            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(544, 35);
+            this.tableLayoutPanel4.TabIndex = 1;
+            // 
+            // btnThemGanDay
+            // 
+            this.btnThemGanDay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.btnThemGanDay.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnThemGanDay.Location = new System.Drawing.Point(4, 4);
+            this.btnThemGanDay.Margin = new System.Windows.Forms.Padding(4);
+            this.btnThemGanDay.Name = "btnThemGanDay";
+            this.btnThemGanDay.Size = new System.Drawing.Size(192, 27);
+            this.btnThemGanDay.TabIndex = 3;
+            this.btnThemGanDay.Text = "List new parts recently";
+            this.btnThemGanDay.UseVisualStyleBackColor = false;
+            this.btnThemGanDay.Click += new System.EventHandler(this.btnThemGanDay_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label1.Location = new System.Drawing.Point(204, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(142, 35);
+            this.label1.TabIndex = 6;
+            this.label1.Text = "Highlight View";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // txtHighLight
+            // 
+            this.txtHighLight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.txtHighLight.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.txtHighLight.Location = new System.Drawing.Point(354, 4);
+            this.txtHighLight.Margin = new System.Windows.Forms.Padding(4);
+            this.txtHighLight.Name = "txtHighLight";
+            this.txtHighLight.Size = new System.Drawing.Size(186, 27);
+            this.txtHighLight.TabIndex = 5;
+            this.txtHighLight.TextChanged += new System.EventHandler(this.txtHighLight_TextChanged);
             // 
             // groupBoxResult
             // 
             this.groupBoxResult.Controls.Add(this.dgvSearch);
             this.groupBoxResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxResult.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxResult.Location = new System.Drawing.Point(0, 120);
+            this.groupBoxResult.Location = new System.Drawing.Point(4, 104);
             this.groupBoxResult.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxResult.Name = "groupBoxResult";
             this.groupBoxResult.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxResult.Size = new System.Drawing.Size(566, 387);
+            this.groupBoxResult.Size = new System.Drawing.Size(558, 392);
             this.groupBoxResult.TabIndex = 1;
             this.groupBoxResult.TabStop = false;
             this.groupBoxResult.Text = "Search results";
@@ -145,211 +470,15 @@
             this.dgvSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvSearch.RowHeadersWidth = 51;
             this.dgvSearch.RowTemplate.Height = 24;
-            this.dgvSearch.Size = new System.Drawing.Size(558, 357);
+            this.dgvSearch.Size = new System.Drawing.Size(550, 362);
             this.dgvSearch.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvSearch.TabIndex = 0;
             this.dgvSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearch_CellDoubleClick);
             this.dgvSearch.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvSearch_CellPainting);
             this.dgvSearch.Click += new System.EventHandler(this.dgvSearch_Click);
             // 
-            // groupBoxPartInfor
-            // 
-            this.groupBoxPartInfor.AutoSize = true;
-            this.groupBoxPartInfor.Controls.Add(this.txtStage);
-            this.groupBoxPartInfor.Controls.Add(this.txtMaterial);
-            this.groupBoxPartInfor.Controls.Add(this.dgvListFile);
-            this.groupBoxPartInfor.Controls.Add(this.groupboxImagePart);
-            this.groupBoxPartInfor.Controls.Add(this.txtDescript);
-            this.groupBoxPartInfor.Controls.Add(this.txtName);
-            this.groupBoxPartInfor.Controls.Add(this.txtCode);
-            this.groupBoxPartInfor.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.groupBoxPartInfor.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxPartInfor.Location = new System.Drawing.Point(0, 507);
-            this.groupBoxPartInfor.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBoxPartInfor.Name = "groupBoxPartInfor";
-            this.groupBoxPartInfor.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxPartInfor.Size = new System.Drawing.Size(566, 315);
-            this.groupBoxPartInfor.TabIndex = 2;
-            this.groupBoxPartInfor.TabStop = false;
-            this.groupBoxPartInfor.Text = "Information of the clicked part";
-            // 
-            // txtStage
-            // 
-            this.txtStage.Location = new System.Drawing.Point(15, 120);
-            this.txtStage.Name = "txtStage";
-            this.txtStage.ReadOnly = true;
-            this.txtStage.Size = new System.Drawing.Size(130, 29);
-            this.txtStage.TabIndex = 5;
-            // 
-            // txtMaterial
-            // 
-            this.txtMaterial.Location = new System.Drawing.Point(219, 120);
-            this.txtMaterial.Name = "txtMaterial";
-            this.txtMaterial.ReadOnly = true;
-            this.txtMaterial.Size = new System.Drawing.Size(130, 29);
-            this.txtMaterial.TabIndex = 5;
-            // 
-            // dgvListFile
-            // 
-            this.dgvListFile.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvListFile.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvListFile.GridColor = System.Drawing.Color.White;
-            this.dgvListFile.Location = new System.Drawing.Point(15, 196);
-            this.dgvListFile.Margin = new System.Windows.Forms.Padding(4);
-            this.dgvListFile.Name = "dgvListFile";
-            this.dgvListFile.RowHeadersWidth = 51;
-            this.dgvListFile.Size = new System.Drawing.Size(493, 89);
-            this.dgvListFile.TabIndex = 4;
-            // 
-            // groupboxImagePart
-            // 
-            this.groupboxImagePart.Controls.Add(this.picPart);
-            this.groupboxImagePart.Location = new System.Drawing.Point(360, 24);
-            this.groupboxImagePart.Margin = new System.Windows.Forms.Padding(4);
-            this.groupboxImagePart.Name = "groupboxImagePart";
-            this.groupboxImagePart.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxImagePart.Size = new System.Drawing.Size(152, 164);
-            this.groupboxImagePart.TabIndex = 3;
-            this.groupboxImagePart.TabStop = false;
-            this.groupboxImagePart.Text = "Image";
-            // 
-            // picPart
-            // 
-            this.picPart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picPart.Location = new System.Drawing.Point(4, 26);
-            this.picPart.Margin = new System.Windows.Forms.Padding(4);
-            this.picPart.Name = "picPart";
-            this.picPart.Size = new System.Drawing.Size(144, 134);
-            this.picPart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picPart.TabIndex = 2;
-            this.picPart.TabStop = false;
-            // 
-            // txtDescript
-            // 
-            this.txtDescript.Location = new System.Drawing.Point(15, 58);
-            this.txtDescript.Margin = new System.Windows.Forms.Padding(4);
-            this.txtDescript.Multiline = true;
-            this.txtDescript.Name = "txtDescript";
-            this.txtDescript.ReadOnly = true;
-            this.txtDescript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDescript.Size = new System.Drawing.Size(341, 47);
-            this.txtDescript.TabIndex = 1;
-            // 
-            // txtName
-            // 
-            this.txtName.Location = new System.Drawing.Point(93, 25);
-            this.txtName.Margin = new System.Windows.Forms.Padding(4);
-            this.txtName.Name = "txtName";
-            this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(263, 29);
-            this.txtName.TabIndex = 1;
-            // 
-            // txtCode
-            // 
-            this.txtCode.Location = new System.Drawing.Point(15, 25);
-            this.txtCode.Margin = new System.Windows.Forms.Padding(4);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(70, 29);
-            this.txtCode.TabIndex = 1;
-            // 
-            // groupBoxSearch
-            // 
-            this.groupBoxSearch.Controls.Add(this.txtViewRow);
-            this.groupBoxSearch.Controls.Add(this.ckcSearchAll);
-            this.groupBoxSearch.Controls.Add(this.label1);
-            this.groupBoxSearch.Controls.Add(this.txtHighLight);
-            this.groupBoxSearch.Controls.Add(this.btnThemGanDay);
-            this.groupBoxSearch.Controls.Add(this.btnSearch);
-            this.groupBoxSearch.Controls.Add(this.txtKeySearch);
-            this.groupBoxSearch.Dock = System.Windows.Forms.DockStyle.Top;
-            this.groupBoxSearch.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBoxSearch.Location = new System.Drawing.Point(0, 0);
-            this.groupBoxSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.groupBoxSearch.Name = "groupBoxSearch";
-            this.groupBoxSearch.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxSearch.Size = new System.Drawing.Size(566, 120);
-            this.groupBoxSearch.TabIndex = 0;
-            this.groupBoxSearch.TabStop = false;
-            this.groupBoxSearch.Text = "Search information of Part";
-            // 
-            // txtViewRow
-            // 
-            this.txtViewRow.Location = new System.Drawing.Point(479, 35);
-            this.txtViewRow.Name = "txtViewRow";
-            this.txtViewRow.Size = new System.Drawing.Size(51, 29);
-            this.txtViewRow.TabIndex = 8;
-            this.txtViewRow.Text = "100";
-            // 
-            // ckcSearchAll
-            // 
-            this.ckcSearchAll.AutoSize = true;
-            this.ckcSearchAll.Location = new System.Drawing.Point(272, 36);
-            this.ckcSearchAll.Name = "ckcSearchAll";
-            this.ckcSearchAll.Size = new System.Drawing.Size(148, 27);
-            this.ckcSearchAll.TabIndex = 7;
-            this.ckcSearchAll.Text = "Search All Data";
-            this.ckcSearchAll.UseVisualStyleBackColor = true;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.label1.Location = new System.Drawing.Point(272, 73);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(121, 23);
-            this.label1.TabIndex = 6;
-            this.label1.Text = "Highlight View";
-            // 
-            // txtHighLight
-            // 
-            this.txtHighLight.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
-            this.txtHighLight.Location = new System.Drawing.Point(408, 70);
-            this.txtHighLight.Margin = new System.Windows.Forms.Padding(4);
-            this.txtHighLight.Name = "txtHighLight";
-            this.txtHighLight.Size = new System.Drawing.Size(122, 29);
-            this.txtHighLight.TabIndex = 5;
-            this.txtHighLight.TextChanged += new System.EventHandler(this.txtHighLight_TextChanged);
-            // 
-            // btnThemGanDay
-            // 
-            this.btnThemGanDay.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.btnThemGanDay.Location = new System.Drawing.Point(8, 68);
-            this.btnThemGanDay.Margin = new System.Windows.Forms.Padding(4);
-            this.btnThemGanDay.Name = "btnThemGanDay";
-            this.btnThemGanDay.Size = new System.Drawing.Size(249, 32);
-            this.btnThemGanDay.TabIndex = 3;
-            this.btnThemGanDay.Text = "List new parts recently";
-            this.btnThemGanDay.UseVisualStyleBackColor = false;
-            this.btnThemGanDay.Click += new System.EventHandler(this.btnThemGanDay_Click);
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
-            this.btnSearch.ImageAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.btnSearch.Location = new System.Drawing.Point(219, 32);
-            this.btnSearch.Margin = new System.Windows.Forms.Padding(4);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(38, 35);
-            this.btnSearch.TabIndex = 2;
-            this.btnSearch.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // txtKeySearch
-            // 
-            this.txtKeySearch.Location = new System.Drawing.Point(8, 35);
-            this.txtKeySearch.Margin = new System.Windows.Forms.Padding(4);
-            this.txtKeySearch.Name = "txtKeySearch";
-            this.txtKeySearch.Size = new System.Drawing.Size(206, 29);
-            this.txtKeySearch.TabIndex = 1;
-            this.txtKeySearch.TextChanged += new System.EventHandler(this.txtKeySearch_TextChanged);
-            this.txtKeySearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtKeySearch_KeyDown);
-            // 
             // tableLayoutPanel1
             // 
-            this.tableLayoutPanel1.AutoScroll = true;
             this.tableLayoutPanel1.ColumnCount = 1;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel1.Controls.Add(this.panel1, 0, 0);
@@ -362,15 +491,15 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 4;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(558, 822);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
             // 
-            this.panel1.AutoScroll = true;
+            this.panel1.AutoSize = true;
             this.panel1.Controls.Add(this.groupBoxListParent);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
@@ -408,37 +537,26 @@
             // Panel_Infor_Parent
             // 
             this.Panel_Infor_Parent.AutoScroll = true;
-            this.Panel_Infor_Parent.Controls.Add(this.txtParentDescript);
             this.Panel_Infor_Parent.Controls.Add(this.groupboxParentImage);
-            this.Panel_Infor_Parent.Controls.Add(this.txtParentMaterial);
+            this.Panel_Infor_Parent.Controls.Add(this.txtParentDescript);
             this.Panel_Infor_Parent.Controls.Add(this.txtParentName);
+            this.Panel_Infor_Parent.Controls.Add(this.txtParentMaterial);
             this.Panel_Infor_Parent.Controls.Add(this.txtParentCode);
             this.Panel_Infor_Parent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Infor_Parent.Location = new System.Drawing.Point(3, 167);
             this.Panel_Infor_Parent.Name = "Panel_Infor_Parent";
-            this.Panel_Infor_Parent.Size = new System.Drawing.Size(552, 158);
+            this.Panel_Infor_Parent.Size = new System.Drawing.Size(552, 117);
             this.Panel_Infor_Parent.TabIndex = 4;
-            // 
-            // txtParentDescript
-            // 
-            this.txtParentDescript.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.txtParentDescript.Location = new System.Drawing.Point(12, 78);
-            this.txtParentDescript.Margin = new System.Windows.Forms.Padding(4);
-            this.txtParentDescript.Multiline = true;
-            this.txtParentDescript.Name = "txtParentDescript";
-            this.txtParentDescript.ReadOnly = true;
-            this.txtParentDescript.Size = new System.Drawing.Size(388, 36);
-            this.txtParentDescript.TabIndex = 1;
             // 
             // groupboxParentImage
             // 
             this.groupboxParentImage.Controls.Add(this.picParent);
             this.groupboxParentImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupboxParentImage.Location = new System.Drawing.Point(408, 0);
+            this.groupboxParentImage.Location = new System.Drawing.Point(431, 0);
             this.groupboxParentImage.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxParentImage.Name = "groupboxParentImage";
             this.groupboxParentImage.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxParentImage.Size = new System.Drawing.Size(144, 158);
+            this.groupboxParentImage.Size = new System.Drawing.Size(121, 117);
             this.groupboxParentImage.TabIndex = 2;
             this.groupboxParentImage.TabStop = false;
             this.groupboxParentImage.Text = "Image Part Cha Mẹ";
@@ -449,49 +567,63 @@
             this.picParent.Location = new System.Drawing.Point(4, 24);
             this.picParent.Margin = new System.Windows.Forms.Padding(4);
             this.picParent.Name = "picParent";
-            this.picParent.Size = new System.Drawing.Size(136, 130);
+            this.picParent.Size = new System.Drawing.Size(113, 89);
             this.picParent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picParent.TabIndex = 0;
             this.picParent.TabStop = false;
             // 
-            // txtParentMaterial
+            // txtParentDescript
             // 
-            this.txtParentMaterial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.txtParentMaterial.Location = new System.Drawing.Point(229, 8);
-            this.txtParentMaterial.Margin = new System.Windows.Forms.Padding(4);
-            this.txtParentMaterial.Name = "txtParentMaterial";
-            this.txtParentMaterial.ReadOnly = true;
-            this.txtParentMaterial.Size = new System.Drawing.Size(171, 27);
-            this.txtParentMaterial.TabIndex = 1;
+            this.txtParentDescript.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.txtParentDescript.Location = new System.Drawing.Point(16, 69);
+            this.txtParentDescript.Margin = new System.Windows.Forms.Padding(4);
+            this.txtParentDescript.Multiline = true;
+            this.txtParentDescript.Name = "txtParentDescript";
+            this.txtParentDescript.ReadOnly = true;
+            this.txtParentDescript.Size = new System.Drawing.Size(388, 36);
+            this.txtParentDescript.TabIndex = 1;
             // 
             // txtParentName
             // 
             this.txtParentName.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.txtParentName.Location = new System.Drawing.Point(12, 43);
+            this.txtParentName.Location = new System.Drawing.Point(16, 38);
             this.txtParentName.Margin = new System.Windows.Forms.Padding(4);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
             this.txtParentName.Size = new System.Drawing.Size(388, 27);
             this.txtParentName.TabIndex = 1;
             // 
+            // txtParentMaterial
+            // 
+            this.txtParentMaterial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.txtParentMaterial.Location = new System.Drawing.Point(171, 7);
+            this.txtParentMaterial.Margin = new System.Windows.Forms.Padding(4);
+            this.txtParentMaterial.Name = "txtParentMaterial";
+            this.txtParentMaterial.ReadOnly = true;
+            this.txtParentMaterial.Size = new System.Drawing.Size(124, 27);
+            this.txtParentMaterial.TabIndex = 1;
+            this.txtParentMaterial.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // txtParentCode
             // 
             this.txtParentCode.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.txtParentCode.Location = new System.Drawing.Point(12, 8);
+            this.txtParentCode.Location = new System.Drawing.Point(16, 7);
             this.txtParentCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(78, 27);
+            this.txtParentCode.Size = new System.Drawing.Size(115, 27);
             this.txtParentCode.TabIndex = 1;
+            this.txtParentCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // panel2
             // 
             this.panel2.AutoScroll = true;
+            this.panel2.AutoSize = true;
             this.panel2.Controls.Add(this.groupBoxListChild);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 331);
+            this.panel2.Location = new System.Drawing.Point(3, 290);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(552, 240);
+            this.panel2.Size = new System.Drawing.Size(552, 405);
             this.panel2.TabIndex = 5;
             // 
             // groupBoxListChild
@@ -500,7 +632,7 @@
             this.groupBoxListChild.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxListChild.Location = new System.Drawing.Point(0, 0);
             this.groupBoxListChild.Name = "groupBoxListChild";
-            this.groupBoxListChild.Size = new System.Drawing.Size(552, 240);
+            this.groupBoxListChild.Size = new System.Drawing.Size(552, 405);
             this.groupBoxListChild.TabIndex = 1;
             this.groupBoxListChild.TabStop = false;
             this.groupBoxListChild.Text = "List Child Part";
@@ -516,7 +648,7 @@
             this.dgvChild.Name = "dgvChild";
             this.dgvChild.RowHeadersWidth = 51;
             this.dgvChild.RowTemplate.Height = 23;
-            this.dgvChild.Size = new System.Drawing.Size(546, 214);
+            this.dgvChild.Size = new System.Drawing.Size(546, 379);
             this.dgvChild.TabIndex = 0;
             this.dgvChild.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChild_CellDoubleClick);
             this.dgvChild.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvChild_CellFormatting);
@@ -534,9 +666,9 @@
             this.Panel_Child_Infor.Controls.Add(this.ckcWithImage);
             this.Panel_Child_Infor.Controls.Add(this.groupboxChildImage);
             this.Panel_Child_Infor.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.Panel_Child_Infor.Location = new System.Drawing.Point(3, 577);
+            this.Panel_Child_Infor.Location = new System.Drawing.Point(3, 701);
             this.Panel_Child_Infor.Name = "Panel_Child_Infor";
-            this.Panel_Child_Infor.Size = new System.Drawing.Size(552, 242);
+            this.Panel_Child_Infor.Size = new System.Drawing.Size(552, 118);
             this.Panel_Child_Infor.TabIndex = 6;
             // 
             // txtChildCode
@@ -556,7 +688,7 @@
             this.txtChildName.Margin = new System.Windows.Forms.Padding(4);
             this.txtChildName.Name = "txtChildName";
             this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(269, 27);
+            this.txtChildName.Size = new System.Drawing.Size(302, 27);
             this.txtChildName.TabIndex = 1;
             // 
             // btnExportOnly
@@ -564,10 +696,10 @@
             this.btnExportOnly.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.btnExportOnly.Image = ((System.Drawing.Image)(resources.GetObject("btnExportOnly.Image")));
             this.btnExportOnly.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExportOnly.Location = new System.Drawing.Point(16, 76);
+            this.btnExportOnly.Location = new System.Drawing.Point(16, 49);
             this.btnExportOnly.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportOnly.Name = "btnExportOnly";
-            this.btnExportOnly.Size = new System.Drawing.Size(115, 45);
+            this.btnExportOnly.Size = new System.Drawing.Size(115, 35);
             this.btnExportOnly.TabIndex = 4;
             this.btnExportOnly.Text = "Export BOM";
             this.btnExportOnly.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -579,10 +711,10 @@
             this.btnExportFile.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btnExportFile.Image = ((System.Drawing.Image)(resources.GetObject("btnExportFile.Image")));
             this.btnExportFile.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnExportFile.Location = new System.Drawing.Point(229, 76);
+            this.btnExportFile.Location = new System.Drawing.Point(261, 49);
             this.btnExportFile.Margin = new System.Windows.Forms.Padding(4);
             this.btnExportFile.Name = "btnExportFile";
-            this.btnExportFile.Size = new System.Drawing.Size(142, 45);
+            this.btnExportFile.Size = new System.Drawing.Size(142, 35);
             this.btnExportFile.TabIndex = 4;
             this.btnExportFile.Text = "Export Drawing";
             this.btnExportFile.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -592,7 +724,7 @@
             // ckcWithImage
             // 
             this.ckcWithImage.AutoSize = true;
-            this.ckcWithImage.Location = new System.Drawing.Point(16, 138);
+            this.ckcWithImage.Location = new System.Drawing.Point(142, 54);
             this.ckcWithImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ckcWithImage.Name = "ckcWithImage";
             this.ckcWithImage.Size = new System.Drawing.Size(108, 24);
@@ -604,11 +736,11 @@
             // 
             this.groupboxChildImage.Controls.Add(this.picChild);
             this.groupboxChildImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupboxChildImage.Location = new System.Drawing.Point(404, 0);
+            this.groupboxChildImage.Location = new System.Drawing.Point(431, 0);
             this.groupboxChildImage.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxChildImage.Name = "groupboxChildImage";
             this.groupboxChildImage.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxChildImage.Size = new System.Drawing.Size(148, 242);
+            this.groupboxChildImage.Size = new System.Drawing.Size(121, 118);
             this.groupboxChildImage.TabIndex = 3;
             this.groupboxChildImage.TabStop = false;
             this.groupboxChildImage.Text = "Image Part Con";
@@ -619,7 +751,7 @@
             this.picChild.Location = new System.Drawing.Point(4, 24);
             this.picChild.Margin = new System.Windows.Forms.Padding(4);
             this.picChild.Name = "picChild";
-            this.picChild.Size = new System.Drawing.Size(140, 214);
+            this.picChild.Size = new System.Drawing.Size(113, 90);
             this.picChild.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picChild.TabIndex = 2;
             this.picChild.TabStop = false;
@@ -638,20 +770,32 @@
             this.Text = "Tra cứu ";
             this.Load += new System.EventHandler(this.frmFindPart_Load);
             this.splitContainer1.Panel1.ResumeLayout(false);
-            this.splitContainer1.Panel1.PerformLayout();
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            this.groupBoxResult.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).EndInit();
+            this.tableLayoutPanel5.ResumeLayout(false);
             this.groupBoxPartInfor.ResumeLayout(false);
-            this.groupBoxPartInfor.PerformLayout();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            this.tableLayoutPanel6.ResumeLayout(false);
+            this.tableLayoutPanel6.PerformLayout();
+            this.tableLayoutPanel7.ResumeLayout(false);
+            this.tableLayoutPanel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvListFile)).EndInit();
             this.groupboxImagePart.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPart)).EndInit();
-            this.groupBoxSearch.ResumeLayout(false);
-            this.groupBoxSearch.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
+            this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel3.PerformLayout();
+            this.tableLayoutPanel4.ResumeLayout(false);
+            this.tableLayoutPanel4.PerformLayout();
+            this.groupBoxResult.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).EndInit();
             this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.groupBoxListParent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvParent)).EndInit();
@@ -675,7 +819,6 @@
         private System.Windows.Forms.SplitContainer splitContainer1;
         private System.Windows.Forms.GroupBox groupBoxResult;
         private System.Windows.Forms.GroupBox groupBoxPartInfor;
-        private System.Windows.Forms.GroupBox groupBoxSearch;
         private System.Windows.Forms.GroupBox groupboxImagePart;
         private System.Windows.Forms.PictureBox picPart;
         private System.Windows.Forms.TextBox txtCode;
@@ -714,5 +857,12 @@
         private System.Windows.Forms.TextBox txtParentMaterial;
         private System.Windows.Forms.CheckBox ckcSearchAll;
         private System.Windows.Forms.TextBox txtViewRow;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel6;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
+        private System.Windows.Forms.SplitContainer splitContainer2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
     }
 }

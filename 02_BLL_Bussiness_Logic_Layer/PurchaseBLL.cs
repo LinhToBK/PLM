@@ -13,11 +13,16 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
     public class PurchaseBLL
     {
         private PurchaseDAL purchaseDAL = new PurchaseDAL();
-        private MakeNewPO_DAL makeNewPODAL_  = new MakeNewPO_DAL();
+        private MakeNewPO_DAL makeNewPODAL_ = new MakeNewPO_DAL();
 
         public bool CapnhatPriceBLL(string PartCode, string PartPrice, string ExportPrice, string username)
         {
             return purchaseDAL.CapnhatPriceDAL(PartCode, PartPrice, ExportPrice, username);
+        }
+
+        public bool CapnhatPriceBLL(DataTable ListItem_Update_Price)
+        {
+            return purchaseDAL.CapnhatPriceDAL(ListItem_Update_Price);
         }
 
         public tblUsers GetUserInfor(string staffname)
@@ -35,7 +40,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return makeNewPODAL_.GetListSupplier_DAL();
         }
 
-
         public tblSupplier GetInforSupplier(string SupplierName)
         {
             return makeNewPODAL_.GetInforSupplier_DAL(SupplierName);
@@ -43,18 +47,18 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 
         public DataTable FindwithwordBLL(string KeySearch)
         {
-            return makeNewPODAL_.FindwithwordDAL(KeySearch); 
+            return makeNewPODAL_.FindwithwordDAL(KeySearch);
         }
+
         public bool InsertNewPOBLL(string POCode, string PODate, string PONhanVien, string POPartlist, decimal POAmount, string PONote, int POSupplierID)
         {
             //MessageBox.Show("POCode: " + POCode + "\nPODate: " + PODate + "\nPONhanVien: " + PONhanVien + "\nPOPartlist: " + POPartlist + "\nPOAmount: " + POAmount + "\nPONote: " + PONote + "\nPOSupplierID: " + POSupplierID);
             return makeNewPODAL_.InsertNewPODAL(POCode, PODate, PONhanVien, POPartlist, POAmount, PONote, POSupplierID);
         }
 
-
         public DataTable GetAllInforSupplierBLL()
         {
-           return purchaseDAL.GetAllInforSupplierDAL();
+            return purchaseDAL.GetAllInforSupplierDAL();
         }
 
         public bool InsertNewSupplierBLL(string Name, string Phone, string Tax, string Location, string Rep, string Note)
@@ -66,6 +70,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return purchaseDAL.UpdateOneSupplierDAL(Name, Phone, TaxID, Location, Representative, Note, ID);
         }
+
         public bool DeleteOneSupplierBLL(string Name)
         {
             return purchaseDAL.DeleteOneSupplierDAL(Name);
@@ -90,6 +95,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return purchaseDAL.GetPartCode_DAL(IDPart);
         }
+
         public string GetPartName_BLL(int IDPart)
         {
             return purchaseDAL.GetPartName_DAL(IDPart);
@@ -144,7 +150,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
 
             return status;
-
         }
 
         public DataTable GetFileList(string POCode)
@@ -167,7 +172,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 foreach (var file in dir.GetFiles())
                 {
                     DataRow dr = dt.NewRow();
-                    
+
                     dr["Name"] = System.IO.Path.GetFileNameWithoutExtension(file.Name);
                     dr["Path"] = file.FullName;
                     dr["Size"] = file.Length / 1024;
@@ -194,10 +199,32 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return path;
         }
 
-        public DataTable GetChildPartBLL (int IDPart)
+        public DataTable GetChildPartBLL(int IDPart)
         {
             return purchaseDAL.GetChildPartDAL(IDPart);
         }
 
+        // =========================================================
+        // ========= CHANGE FORMAT PURCHASE ================
+        // =========================================================
+
+        /// <summary>
+        ///  01. Lấy bảng danh sách đơn vị tiền tệ
+        /// </summary>
+        /// <returns></returns>
+        public DataTable Get_tblMoneytype_BLL()
+        {
+            return purchaseDAL.Get_tblMoneyType_DAL();
+        }
+
+        /// <summary>
+        /// 02. Lấy bảng thông tin chi tiết của Part từ danh sách PartCode
+        /// </summary>
+        /// <param name="ListPartCode"></param>
+        /// <returns></returns>
+        public DataTable QueryInforItemPO_BLL(DataTable ListPartCode)
+        {
+            return purchaseDAL.QueryInforItemPO_DAL(ListPartCode);
+        }
     }
 }

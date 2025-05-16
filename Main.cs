@@ -166,8 +166,12 @@ namespace PLM_Lynx
 
         private void mnuManagePrice_Click(object sender, EventArgs e)
         {
-            frmManagePrice frm = new frmManagePrice();
-            frm.tennguoidung = tennguoidung;
+            //frmManagePrice frm = new frmManagePrice();
+            //frm.tennguoidung = tennguoidung;
+            //frm.ShowDialog();
+
+            frmManagePrice_Update frm = new frmManagePrice_Update();
+            frm.username = tennguoidung;
             frm.ShowDialog();
         }
 
@@ -181,6 +185,7 @@ namespace PLM_Lynx
         private void mnuManageSupplier_Click(object sender, EventArgs e)
         {
             frmManageSupplier frm = new frmManageSupplier();
+
             frm.ShowDialog();
         }
 

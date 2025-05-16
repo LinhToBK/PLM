@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using Azure.Core;
+using Microsoft.Data.SqlClient;
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
@@ -53,6 +54,43 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     return false;
                 }
                 return result == 1;  // Trả về giá trị true nếu thêm thành công
+            }
+        }
+
+
+        public bool CapnhatPriceDAL(DataTable ListItem_Update_Price)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                using (SqlTransaction tran = con.BeginTransaction())
+                {
+                    try
+                    {
+
+                        using (SqlCommand cmd = new SqlCommand("dbo.[UpdatePrice_in_tblPart]", con, tran))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            SqlParameter tvpParam = cmd.Parameters.AddWithValue("@ListItemUpdate", ListItem_Update_Price);
+                            tvpParam.SqlDbType = SqlDbType.Structured;
+                            tvpParam.TypeName = "dbo.[tblListItemPrice]";
+
+
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                        tran.Rollback();
+                        // Ghi log nếu cần
+                        return false;
+                    }
+                }
             }
         }
 
@@ -386,6 +424,53 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
+
+        /// <summary>
+        /// 09. SELECT - Lấy bảng danh sách các loại tiền tệ
+        /// </summary>
+        /// <returns></returns>
+        public DataTable Get_tblMoneyType_DAL()
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"select c.CurrentID as CurrencyID, c.CurrentName as CurrencyName from tblCurrent as c";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        /// <summary>
+        /// 10. SELECT - Lấy bảng thông tin của những PartCode cần cập nhật
+        /// </summary>
+        /// <param name="ListPartCode"></param>
+        /// <returns></returns>
+        public DataTable  QueryInforItemPO_DAL(DataTable ListPartCode)
+        {
+
+            DataTable result = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+
+                SqlCommand cmd = new SqlCommand("QueryInforItemPO", conn); // Tên của stored procedure
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter tvpParam = cmd.Parameters.AddWithValue("@InforItemPO", ListPartCode);  // Tên bảng truyền vào
+                tvpParam.SqlDbType = SqlDbType.Structured;
+                tvpParam.TypeName = "dbo.tblListPartCode"; // Tên kiểu bảng bạn đã tạo trong SQL      // Tên bảng người dùng định nghĩa
+
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                adapter.Fill(result);
+            }
+
+            return result;
+        }
+
     }
 
     // end  Class : PurchaseDAL
@@ -548,10 +633,12 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 string sql_query = @"
                         SELECT
-                            p.PartCode,
-                            p.PartName,
-                            p.PartPriceSale,
-                            p.PartID
+                            p.PartCode as PartCode,
+                            p.PartName as PartName,
+                            p.PartPriceSale as PartPriceSale,
+                            p.PartID as PartID,
+	                        p.PartPrice as PartPrice,
+	                        p.PartCurrentID as PartCurrentID
 
                         FROM
                             tblPart AS p

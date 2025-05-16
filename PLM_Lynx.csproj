@@ -131,9 +131,6 @@
     <Reference Include="QRCoder, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
       <HintPath>packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath>
     </Reference>
-    <Reference Include="Siticone.Desktop.UI, Version=2.1.1.0, Culture=neutral, PublicKeyToken=9683591576b7f0b4, processorArchitecture=MSIL">
-      <HintPath>packages\Siticone.Desktop.UI.2.1.1\lib\net40\Siticone.Desktop.UI.dll</HintPath>
-    </Reference>
     <Reference Include="SKGL, Version=2.0.4.1, Culture=neutral, PublicKeyToken=6506df92444891d9, processorArchitecture=MSIL">
       <HintPath>packages\SoftwareProtector.1.0.5.1\lib\SKGL.dll</HintPath>
     </Reference>
@@ -445,6 +442,12 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.Designer.cs">
       <DependentUpon>frmFindPO.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.Designer.cs">
+      <DependentUpon>frmImportListItems.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMakePO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -457,11 +460,23 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice.Designer.cs">
       <DependentUpon>frmManagePrice.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice_Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice_Update.Designer.cs">
+      <DependentUpon>frmManagePrice_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.Designer.cs">
       <DependentUpon>frmManageSupplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMoneyType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMoneyType.Designer.cs">
+      <DependentUpon>frmMoneyType.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.cs">
       <SubType>Form</SubType>
@@ -697,14 +712,23 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.resx">
       <DependentUpon>frmFindPO.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.resx">
+      <DependentUpon>frmImportListItems.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmMakePO.resx">
       <DependentUpon>frmMakePO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice.resx">
       <DependentUpon>frmManagePrice.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice_Update.resx">
+      <DependentUpon>frmManagePrice_Update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.resx">
       <DependentUpon>frmManageSupplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmMoneyType.resx">
+      <DependentUpon>frmMoneyType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.resx">
       <DependentUpon>frmUpdateStatus.cs</DependentUpon>

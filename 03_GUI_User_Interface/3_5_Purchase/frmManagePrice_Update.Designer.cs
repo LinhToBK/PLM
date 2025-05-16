@@ -1,0 +1,494 @@
+﻿namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
+{
+    partial class frmManagePrice_Update
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmManagePrice_Update));
+            this.table_layout = new System.Windows.Forms.TableLayoutPanel();
+            this.Panel_TimKiem = new System.Windows.Forms.Panel();
+            this.dgvListSearch = new Zuby.ADGV.AdvancedDataGridView();
+            this.cmsOption = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.addItemsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.btnMakeNewPO = new System.Windows.Forms.Button();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.btnAddItems = new System.Windows.Forms.Button();
+            this.btnSearchPO = new System.Windows.Forms.Button();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.flowtable_Feature = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnImport = new System.Windows.Forms.Button();
+            this.btnDeleteRow = new System.Windows.Forms.Button();
+            this.btnClearList = new System.Windows.Forms.Button();
+            this.btnCheck = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
+            this.dgvListItems = new Zuby.ADGV.AdvancedDataGridView();
+            this.PartCode = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PartName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OldImportPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewImportPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.OldExportPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NewExportPrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Currency = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Status = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cms_dgvListItems = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cms_Delete = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_ChangeMoney_Type = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_Clear = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_Item_ViewFeature = new System.Windows.Forms.ToolStripMenuItem();
+            this.table_layout.SuspendLayout();
+            this.Panel_TimKiem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListSearch)).BeginInit();
+            this.cmsOption.SuspendLayout();
+            this.flowtable_Feature.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListItems)).BeginInit();
+            this.cms_dgvListItems.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // table_layout
+            // 
+            this.table_layout.AutoSize = true;
+            this.table_layout.ColumnCount = 3;
+            this.table_layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 30F));
+            this.table_layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.table_layout.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 70F));
+            this.table_layout.Controls.Add(this.Panel_TimKiem, 0, 0);
+            this.table_layout.Controls.Add(this.flowtable_Feature, 1, 0);
+            this.table_layout.Controls.Add(this.dgvListItems, 2, 0);
+            this.table_layout.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.table_layout.Location = new System.Drawing.Point(0, 0);
+            this.table_layout.Name = "table_layout";
+            this.table_layout.RowCount = 1;
+            this.table_layout.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.table_layout.Size = new System.Drawing.Size(1391, 714);
+            this.table_layout.TabIndex = 0;
+            // 
+            // Panel_TimKiem
+            // 
+            this.Panel_TimKiem.AutoScroll = true;
+            this.Panel_TimKiem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.Panel_TimKiem.Controls.Add(this.dgvListSearch);
+            this.Panel_TimKiem.Controls.Add(this.btnMakeNewPO);
+            this.Panel_TimKiem.Controls.Add(this.btnExit);
+            this.Panel_TimKiem.Controls.Add(this.btnAddItems);
+            this.Panel_TimKiem.Controls.Add(this.btnSearchPO);
+            this.Panel_TimKiem.Controls.Add(this.btnSearch);
+            this.Panel_TimKiem.Controls.Add(this.txtSearch);
+            this.Panel_TimKiem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.Panel_TimKiem.Location = new System.Drawing.Point(3, 3);
+            this.Panel_TimKiem.Name = "Panel_TimKiem";
+            this.Panel_TimKiem.Size = new System.Drawing.Size(366, 708);
+            this.Panel_TimKiem.TabIndex = 0;
+            // 
+            // dgvListSearch
+            // 
+            this.dgvListSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListSearch.ContextMenuStrip = this.cmsOption;
+            this.dgvListSearch.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.dgvListSearch.FilterAndSortEnabled = true;
+            this.dgvListSearch.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListSearch.Location = new System.Drawing.Point(0, 190);
+            this.dgvListSearch.MaxFilterButtonImageHeight = 23;
+            this.dgvListSearch.Name = "dgvListSearch";
+            this.dgvListSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvListSearch.RowHeadersWidth = 51;
+            this.dgvListSearch.RowTemplate.Height = 24;
+            this.dgvListSearch.Size = new System.Drawing.Size(366, 518);
+            this.dgvListSearch.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListSearch.TabIndex = 2;
+            this.dgvListSearch.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvListSearch_MouseDown);
+            // 
+            // cmsOption
+            // 
+            this.cmsOption.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cmsOption.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addItemsToolStripMenuItem,
+            this.viewFeatureToolStripMenuItem});
+            this.cmsOption.Name = "cmsOption";
+            this.cmsOption.Size = new System.Drawing.Size(151, 56);
+            // 
+            // addItemsToolStripMenuItem
+            // 
+            this.addItemsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addItemsToolStripMenuItem.Image")));
+            this.addItemsToolStripMenuItem.Name = "addItemsToolStripMenuItem";
+            this.addItemsToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.addItemsToolStripMenuItem.Text = "Add Items";
+            this.addItemsToolStripMenuItem.Click += new System.EventHandler(this.addItemsToolStripMenuItem_Click);
+            // 
+            // viewFeatureToolStripMenuItem
+            // 
+            this.viewFeatureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewFeatureToolStripMenuItem.Image")));
+            this.viewFeatureToolStripMenuItem.Name = "viewFeatureToolStripMenuItem";
+            this.viewFeatureToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
+            this.viewFeatureToolStripMenuItem.Text = "Open Part";
+            this.viewFeatureToolStripMenuItem.Click += new System.EventHandler(this.viewFeatureToolStripMenuItem_Click);
+            // 
+            // btnMakeNewPO
+            // 
+            this.btnMakeNewPO.AutoSize = true;
+            this.btnMakeNewPO.Image = ((System.Drawing.Image)(resources.GetObject("btnMakeNewPO.Image")));
+            this.btnMakeNewPO.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMakeNewPO.Location = new System.Drawing.Point(20, 101);
+            this.btnMakeNewPO.Name = "btnMakeNewPO";
+            this.btnMakeNewPO.Size = new System.Drawing.Size(157, 35);
+            this.btnMakeNewPO.TabIndex = 1;
+            this.btnMakeNewPO.Text = "Make New PO";
+            this.btnMakeNewPO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMakeNewPO.UseVisualStyleBackColor = true;
+            // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(191, 55);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(55, 35);
+            this.btnExit.TabIndex = 1;
+            this.btnExit.Text = "Exit";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // btnAddItems
+            // 
+            this.btnAddItems.Image = ((System.Drawing.Image)(resources.GetObject("btnAddItems.Image")));
+            this.btnAddItems.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnAddItems.Location = new System.Drawing.Point(20, 147);
+            this.btnAddItems.Name = "btnAddItems";
+            this.btnAddItems.Size = new System.Drawing.Size(159, 35);
+            this.btnAddItems.TabIndex = 1;
+            this.btnAddItems.Text = "Add Items";
+            this.btnAddItems.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAddItems.UseVisualStyleBackColor = true;
+            this.btnAddItems.Click += new System.EventHandler(this.btnAddItems_Click);
+            // 
+            // btnSearchPO
+            // 
+            this.btnSearchPO.AutoSize = true;
+            this.btnSearchPO.Image = ((System.Drawing.Image)(resources.GetObject("btnSearchPO.Image")));
+            this.btnSearchPO.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnSearchPO.Location = new System.Drawing.Point(20, 55);
+            this.btnSearchPO.Name = "btnSearchPO";
+            this.btnSearchPO.Size = new System.Drawing.Size(159, 35);
+            this.btnSearchPO.TabIndex = 1;
+            this.btnSearchPO.Text = "Search Old PO";
+            this.btnSearchPO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnSearchPO.UseVisualStyleBackColor = true;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Image = ((System.Drawing.Image)(resources.GetObject("btnSearch.Image")));
+            this.btnSearch.Location = new System.Drawing.Point(202, 12);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(44, 35);
+            this.btnSearch.TabIndex = 1;
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // txtSearch
+            // 
+            this.txtSearch.Location = new System.Drawing.Point(20, 14);
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(159, 30);
+            this.txtSearch.TabIndex = 0;
+            this.txtSearch.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtSearch_KeyDown);
+            // 
+            // flowtable_Feature
+            // 
+            this.flowtable_Feature.Controls.Add(this.btnImport);
+            this.flowtable_Feature.Controls.Add(this.btnDeleteRow);
+            this.flowtable_Feature.Controls.Add(this.btnClearList);
+            this.flowtable_Feature.Controls.Add(this.btnCheck);
+            this.flowtable_Feature.Controls.Add(this.btnUpdate);
+            this.flowtable_Feature.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowtable_Feature.Location = new System.Drawing.Point(375, 3);
+            this.flowtable_Feature.Name = "flowtable_Feature";
+            this.flowtable_Feature.Size = new System.Drawing.Size(144, 708);
+            this.flowtable_Feature.TabIndex = 1;
+            // 
+            // btnImport
+            // 
+            this.btnImport.Image = ((System.Drawing.Image)(resources.GetObject("btnImport.Image")));
+            this.btnImport.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnImport.Location = new System.Drawing.Point(3, 3);
+            this.btnImport.Name = "btnImport";
+            this.btnImport.Size = new System.Drawing.Size(132, 36);
+            this.btnImport.TabIndex = 1;
+            this.btnImport.Text = "Import";
+            this.btnImport.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnImport.UseVisualStyleBackColor = true;
+            this.btnImport.Click += new System.EventHandler(this.btnImport_Click);
+            // 
+            // btnDeleteRow
+            // 
+            this.btnDeleteRow.AutoSize = true;
+            this.btnDeleteRow.Image = ((System.Drawing.Image)(resources.GetObject("btnDeleteRow.Image")));
+            this.btnDeleteRow.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnDeleteRow.Location = new System.Drawing.Point(3, 45);
+            this.btnDeleteRow.Name = "btnDeleteRow";
+            this.btnDeleteRow.Size = new System.Drawing.Size(132, 36);
+            this.btnDeleteRow.TabIndex = 1;
+            this.btnDeleteRow.Text = "Delete Row";
+            this.btnDeleteRow.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnDeleteRow.UseVisualStyleBackColor = true;
+            this.btnDeleteRow.Click += new System.EventHandler(this.btnDeleteRow_Click);
+            // 
+            // btnClearList
+            // 
+            this.btnClearList.Image = ((System.Drawing.Image)(resources.GetObject("btnClearList.Image")));
+            this.btnClearList.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnClearList.Location = new System.Drawing.Point(3, 87);
+            this.btnClearList.Name = "btnClearList";
+            this.btnClearList.Size = new System.Drawing.Size(132, 36);
+            this.btnClearList.TabIndex = 1;
+            this.btnClearList.Text = "Clear List";
+            this.btnClearList.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnClearList.UseVisualStyleBackColor = true;
+            this.btnClearList.Click += new System.EventHandler(this.btnClearList_Click);
+            // 
+            // btnCheck
+            // 
+            this.btnCheck.Image = ((System.Drawing.Image)(resources.GetObject("btnCheck.Image")));
+            this.btnCheck.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnCheck.Location = new System.Drawing.Point(3, 129);
+            this.btnCheck.Name = "btnCheck";
+            this.btnCheck.Size = new System.Drawing.Size(132, 36);
+            this.btnCheck.TabIndex = 1;
+            this.btnCheck.Text = "Check";
+            this.btnCheck.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnCheck.UseVisualStyleBackColor = true;
+            this.btnCheck.Click += new System.EventHandler(this.btnCheck_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate.Image")));
+            this.btnUpdate.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUpdate.Location = new System.Drawing.Point(3, 171);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(132, 36);
+            this.btnUpdate.TabIndex = 1;
+            this.btnUpdate.Text = "Update";
+            this.btnUpdate.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
+            // 
+            // dgvListItems
+            // 
+            this.dgvListItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvListItems.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.PartCode,
+            this.PartName,
+            this.OldImportPrice,
+            this.NewImportPrice,
+            this.OldExportPrice,
+            this.NewExportPrice,
+            this.Currency,
+            this.Status});
+            this.dgvListItems.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvListItems.FilterAndSortEnabled = true;
+            this.dgvListItems.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListItems.Location = new System.Drawing.Point(525, 3);
+            this.dgvListItems.MaxFilterButtonImageHeight = 23;
+            this.dgvListItems.Name = "dgvListItems";
+            this.dgvListItems.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgvListItems.RowHeadersWidth = 51;
+            this.dgvListItems.RowTemplate.Height = 24;
+            this.dgvListItems.Size = new System.Drawing.Size(863, 708);
+            this.dgvListItems.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListItems.TabIndex = 2;
+            this.dgvListItems.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dgvListItems_MouseDown);
+            // 
+            // PartCode
+            // 
+            this.PartCode.HeaderText = "Code";
+            this.PartCode.MinimumWidth = 24;
+            this.PartCode.Name = "PartCode";
+            this.PartCode.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.PartCode.Width = 125;
+            // 
+            // PartName
+            // 
+            this.PartName.HeaderText = "Name";
+            this.PartName.MinimumWidth = 24;
+            this.PartName.Name = "PartName";
+            this.PartName.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.PartName.Width = 125;
+            // 
+            // OldImportPrice
+            // 
+            this.OldImportPrice.HeaderText = "Old Import";
+            this.OldImportPrice.MinimumWidth = 24;
+            this.OldImportPrice.Name = "OldImportPrice";
+            this.OldImportPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.OldImportPrice.Width = 125;
+            // 
+            // NewImportPrice
+            // 
+            this.NewImportPrice.HeaderText = "New Import";
+            this.NewImportPrice.MinimumWidth = 24;
+            this.NewImportPrice.Name = "NewImportPrice";
+            this.NewImportPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.NewImportPrice.Width = 125;
+            // 
+            // OldExportPrice
+            // 
+            this.OldExportPrice.HeaderText = "Old Export";
+            this.OldExportPrice.MinimumWidth = 24;
+            this.OldExportPrice.Name = "OldExportPrice";
+            this.OldExportPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.OldExportPrice.Width = 125;
+            // 
+            // NewExportPrice
+            // 
+            this.NewExportPrice.HeaderText = "New Export";
+            this.NewExportPrice.MinimumWidth = 24;
+            this.NewExportPrice.Name = "NewExportPrice";
+            this.NewExportPrice.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.NewExportPrice.Width = 125;
+            // 
+            // Currency
+            // 
+            this.Currency.HeaderText = "Currency";
+            this.Currency.MinimumWidth = 24;
+            this.Currency.Name = "Currency";
+            this.Currency.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.Currency.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Currency.Width = 125;
+            // 
+            // Status
+            // 
+            this.Status.HeaderText = "Status";
+            this.Status.MinimumWidth = 24;
+            this.Status.Name = "Status";
+            this.Status.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Programmatic;
+            this.Status.Width = 125;
+            // 
+            // cms_dgvListItems
+            // 
+            this.cms_dgvListItems.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cms_dgvListItems.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cms_Delete,
+            this.cms_ChangeMoney_Type,
+            this.cms_Clear,
+            this.cms_Item_ViewFeature});
+            this.cms_dgvListItems.Name = "cms_dgvListItems";
+            this.cms_dgvListItems.Size = new System.Drawing.Size(217, 136);
+            // 
+            // cms_Delete
+            // 
+            this.cms_Delete.Image = ((System.Drawing.Image)(resources.GetObject("cms_Delete.Image")));
+            this.cms_Delete.Name = "cms_Delete";
+            this.cms_Delete.Size = new System.Drawing.Size(216, 26);
+            this.cms_Delete.Text = "Delete";
+            this.cms_Delete.Click += new System.EventHandler(this.cms_Delete_Click);
+            // 
+            // cms_ChangeMoney_Type
+            // 
+            this.cms_ChangeMoney_Type.Image = ((System.Drawing.Image)(resources.GetObject("cms_ChangeMoney_Type.Image")));
+            this.cms_ChangeMoney_Type.Name = "cms_ChangeMoney_Type";
+            this.cms_ChangeMoney_Type.Size = new System.Drawing.Size(216, 26);
+            this.cms_ChangeMoney_Type.Text = "Change Money Type";
+            this.cms_ChangeMoney_Type.Click += new System.EventHandler(this.cms_ChangeMoney_Type_Click);
+            // 
+            // cms_Clear
+            // 
+            this.cms_Clear.Image = ((System.Drawing.Image)(resources.GetObject("cms_Clear.Image")));
+            this.cms_Clear.Name = "cms_Clear";
+            this.cms_Clear.Size = new System.Drawing.Size(216, 26);
+            this.cms_Clear.Text = "Clear";
+            this.cms_Clear.Click += new System.EventHandler(this.cms_Clear_Click);
+            // 
+            // cms_Item_ViewFeature
+            // 
+            this.cms_Item_ViewFeature.Image = ((System.Drawing.Image)(resources.GetObject("cms_Item_ViewFeature.Image")));
+            this.cms_Item_ViewFeature.Name = "cms_Item_ViewFeature";
+            this.cms_Item_ViewFeature.Size = new System.Drawing.Size(216, 26);
+            this.cms_Item_ViewFeature.Text = "Open Part";
+            this.cms_Item_ViewFeature.Click += new System.EventHandler(this.cms_Item_ViewFeature_Click);
+            // 
+            // frmManagePrice_Update
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1391, 714);
+            this.Controls.Add(this.table_layout);
+            this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyPreview = true;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "frmManagePrice_Update";
+            this.Text = "frmManagePrice_Update";
+            this.Load += new System.EventHandler(this.frmManagePrice_Update_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmManagePrice_Update_KeyDown);
+            this.table_layout.ResumeLayout(false);
+            this.Panel_TimKiem.ResumeLayout(false);
+            this.Panel_TimKiem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListSearch)).EndInit();
+            this.cmsOption.ResumeLayout(false);
+            this.flowtable_Feature.ResumeLayout(false);
+            this.flowtable_Feature.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvListItems)).EndInit();
+            this.cms_dgvListItems.ResumeLayout(false);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TableLayoutPanel table_layout;
+        private System.Windows.Forms.Panel Panel_TimKiem;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox txtSearch;
+        private System.Windows.Forms.Button btnSearchPO;
+        private System.Windows.Forms.Button btnMakeNewPO;
+        private System.Windows.Forms.FlowLayoutPanel flowtable_Feature;
+        private System.Windows.Forms.Button btnAddItems;
+        private System.Windows.Forms.Button btnImport;
+        private System.Windows.Forms.Button btnDeleteRow;
+        private System.Windows.Forms.Button btnClearList;
+        private System.Windows.Forms.Button btnCheck;
+        private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.Button btnExit;
+        private Zuby.ADGV.AdvancedDataGridView dgvListSearch;
+        private Zuby.ADGV.AdvancedDataGridView dgvListItems;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartCode;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PartName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OldImportPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewImportPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn OldExportPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NewExportPrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Currency;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Status;
+        private System.Windows.Forms.ContextMenuStrip cmsOption;
+        private System.Windows.Forms.ToolStripMenuItem addItemsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem viewFeatureToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip cms_dgvListItems;
+        private System.Windows.Forms.ToolStripMenuItem cms_Delete;
+        private System.Windows.Forms.ToolStripMenuItem cms_ChangeMoney_Type;
+        private System.Windows.Forms.ToolStripMenuItem cms_Clear;
+        private System.Windows.Forms.ToolStripMenuItem cms_Item_ViewFeature;
+    }
+}

@@ -1,12 +1,6 @@
-﻿using Azure.Core;
-using PLM_Lynx._01_DAL_Data_Access_Layer;
+﻿using PLM_Lynx._01_DAL_Data_Access_Layer;
 using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 {
@@ -30,9 +24,9 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return makeNewPODAL_.GetUserInfor_DAL(staffname);
         }
 
-        public tblPO GetInforPO()
+        public int Get_PONumber_BLL()
         {
-            return makeNewPODAL_.GetInforPO_DAL();
+            return makeNewPODAL_.Get_PONumber_DAL();
         }
 
         public DataTable GetListSupplier()
@@ -50,10 +44,14 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return makeNewPODAL_.FindwithwordDAL(KeySearch);
         }
 
-        public bool InsertNewPOBLL(string POCode, string PODate, string PONhanVien, string POPartlist, decimal POAmount, string PONote, int POSupplierID)
+        public bool InsertNewPO_BLL(int PONumber, int POSupplierID, DateTime PODateCreate, int POCurrencyID, int POStatusID, string POUser, string POPaymentTerm, string PORemark, decimal TotalAmount)
         {
-            //MessageBox.Show("POCode: " + POCode + "\nPODate: " + PODate + "\nPONhanVien: " + PONhanVien + "\nPOPartlist: " + POPartlist + "\nPOAmount: " + POAmount + "\nPONote: " + PONote + "\nPOSupplierID: " + POSupplierID);
-            return makeNewPODAL_.InsertNewPODAL(POCode, PODate, PONhanVien, POPartlist, POAmount, PONote, POSupplierID);
+            return makeNewPODAL_.InsertNewPO_DAL(PONumber, POSupplierID, PODateCreate, POCurrencyID, POStatusID, POUser, POPaymentTerm, PORemark, TotalAmount);
+        }
+
+        public bool InsertListItems_to_tblPOItems_BLL(DataTable data_ListItems)
+        {
+            return makeNewPODAL_.InsertListItems_to_tblPOItems_DAL(data_ListItems);
         }
 
         public DataTable GetAllInforSupplierBLL()
@@ -225,6 +223,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         public DataTable QueryInforItemPO_BLL(DataTable ListPartCode)
         {
             return purchaseDAL.QueryInforItemPO_DAL(ListPartCode);
+        }
+
+        public DataTable Get_tblUnitType_BLL()
+        {
+            return purchaseDAL.Get_tblUnitType_DAL();
         }
     }
 }

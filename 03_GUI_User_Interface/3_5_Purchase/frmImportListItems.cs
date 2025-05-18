@@ -142,10 +142,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                         row.DefaultCellStyle.BackColor = Color.BlueViolet;
                         row.Cells["Status"].Value = "This partcode does not exist in the database.";
                     }
-                    else
-                    {
-                        row.Cells["Status"].Value = "OK";
-                    }    
+                      
                 }
 
                 // Xóa những dòng trắng nếu có

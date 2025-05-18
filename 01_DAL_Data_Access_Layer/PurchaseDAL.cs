@@ -1,9 +1,13 @@
 ﻿using Azure.Core;
 using Microsoft.Data.SqlClient;
 using Microsoft.Office.Interop.Excel;
+using SolidWorks.Interop.sldworks;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Runtime.InteropServices;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
 using DataTable = System.Data.DataTable;
 
@@ -28,13 +32,13 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 string PartPriceLog;
                 string Date = DateTime.Now.Date.ToString("yyyy-MM-dd");
-                PartPriceLog = Date + " : Import -" + PartPrice + " - " + "Export-" + ExportPrice +  "- User: " + UserName +  "|";
+                PartPriceLog = Date + " : Import -" + PartPrice + " - " + "Export-" + ExportPrice + "- User: " + UserName + "|";
 
                 string sql_query;
                 sql_query = @"update tblPart
                 set PartPriceSale = @ExportPrice ,
                 PartPrice = @PartPrice,
-                PartPriceLog = CONCAT(PartPriceLog, CHAR(13), CHAR(10), @PartPriceLog )  
+                PartPriceLog = CONCAT(PartPriceLog, CHAR(13), CHAR(10), @PartPriceLog )
                 where PartCode = @PartCode ;";
                 SqlCommand cmd = new SqlCommand(sql_query, con);
                 cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
@@ -57,7 +61,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
         public bool CapnhatPriceDAL(DataTable ListItem_Update_Price)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -67,7 +70,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 {
                     try
                     {
-
                         using (SqlCommand cmd = new SqlCommand("dbo.[UpdatePrice_in_tblPart]", con, tran))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -75,7 +77,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                             SqlParameter tvpParam = cmd.Parameters.AddWithValue("@ListItemUpdate", ListItem_Update_Price);
                             tvpParam.SqlDbType = SqlDbType.Structured;
                             tvpParam.TypeName = "dbo.[tblListItemPrice]";
-
 
                             cmd.ExecuteNonQuery();
                         }
@@ -259,7 +260,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                     )
                                     SELECT p.POCode, p.PONhanVien, p.POSupplierID , p.POAmount ,p.POStatus, MONTH(p.PODate) AS pMonth, DAY(p.PODate) AS pDate
                                     FROM tblPO AS p
-                                    WHERE p.POPartCode LIKE '%' + CAST((SELECT PartID FROM ID) AS NVARCHAR) + '%' 
+                                    WHERE p.POPartCode LIKE '%' + CAST((SELECT PartID FROM ID) AS NVARCHAR) + '%'
                                     order by p.PODate desc";
 
                     SqlCommand cmd = new SqlCommand(sql_query, conn);
@@ -289,7 +290,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 string sql_query;
 
-                sql_query = @"select Top 1 p.POCode, 
+                sql_query = @"select Top 1 p.POCode,
                                 p.PODate,
                                 p.PONhanVien,
                                 p.POAmount,
@@ -330,7 +331,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
         /// <summary>
         /// 07. SELECT - Get PartCode by PartID
         /// </summary>
@@ -349,6 +349,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
             return PartCode;
         }
+
         /// <summary>
         /// 08. SELECT - Get PartCode by PartID
         /// </summary>
@@ -368,7 +369,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return PartCode;
         }
 
-
         public bool UpdateStatusPO_DAL(string POCode, string Status)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -379,18 +379,16 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 try
                 {
                     string sql_query;
-                    sql_query = @"  UPDATE tblPO 
-                                    SET 
+                    sql_query = @"  UPDATE tblPO
+                                    SET
                                         POStatus = @Status ,
                                         POLog = CONCAT(POLog, CHAR(13), CHAR(10), @Status , CONVERT(VARCHAR, GETDATE(), 120))
                                     WHERE POCode = @POCode ";
 
-                    
                     using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
                     {
                         cmd.Parameters.Add("@POCode", SqlDbType.NVarChar).Value = POCode;
                         cmd.Parameters.Add("@Status", SqlDbType.NVarChar).Value = Status;
-
 
                         cmd.ExecuteNonQuery(); // Thực thi lệnh UPDATE
                     }
@@ -424,7 +422,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
-
         /// <summary>
         /// 09. SELECT - Lấy bảng danh sách các loại tiền tệ
         /// </summary>
@@ -437,7 +434,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string sql_query;
                 sql_query = @"select c.CurrentID as CurrencyID, c.CurrentName as CurrencyName from tblCurrent as c";
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
-                
+
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
                 conn.Open();
                 adap.Fill(BangDuLieu);
@@ -450,13 +447,13 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// </summary>
         /// <param name="ListPartCode"></param>
         /// <returns></returns>
-        public DataTable  QueryInforItemPO_DAL(DataTable ListPartCode)
+        /// 
+        // Result : PartCode || PartName || PartPrice  || PartPriceSale ||PartCurrentID
+        public DataTable QueryInforItemPO_DAL(DataTable ListPartCode)
         {
-
             DataTable result = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-
                 SqlCommand cmd = new SqlCommand("QueryInforItemPO", conn); // Tên của stored procedure
                 cmd.CommandType = CommandType.StoredProcedure;
 
@@ -471,6 +468,22 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return result;
         }
 
+
+        public DataTable Get_tblUnitType_DAL()
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"select u.UnitID, u.UnitName from tblPOUnit as u";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
     }
 
     // end  Class : PurchaseDAL
@@ -533,33 +546,42 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// </summary>
         /// <param name="staffname"></param>
         /// <returns></returns>
-        public tblPO GetInforPO_DAL()
+        public int Get_PONumber_DAL()
         {
-            tblPO _tblpo = null;
-
+            DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"
-                       select top 1 tblPO.PODate, tblPO.POCode  from tblPO order by PODate desc , POCode desc ";
+                string sql_query = @"  SELECT TOP 1 PONumber
+                        FROM tblPO
+                        WHERE CAST(PODateCreate AS DATE) = CAST(GETDATE() AS DATE)
+                        ORDER BY PODateCreate DESC, PONumber DESC;";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
 
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
                 conn.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
+                adap.Fill(BangDuLieu);
+            }
+            // PONUMBER =  yymmdd + 001
+            string date = DateTime.Now.ToString("yy-MM-dd");
+            date = date.Replace("-", "");
 
-                if (reader.Read()) // Nếu đọc được giá trị thì :
-                {
-                    _tblpo = new tblPO
-                    {
-                        PODate = Convert.ToDateTime(reader[0]),
-                        POCode = reader[1].ToString()
-                    };
-                }
-
-                conn.Close();
+            int PONumber;
+            if (BangDuLieu.Rows.Count > 0)
+            {
+                // Nếu có dữ liệu thì lấy số PONumber từ bảng tblPO
+                string PONumberString = BangDuLieu.Rows[0][0].ToString();
+                PONumber = Convert.ToInt32(PONumberString);
+                PONumber += 1; // Tăng thêm 1 đơn hàng mới
+            }
+            else
+            {
+                // Nếu không có dữ liệu thì khởi tạo PONumber là 1
+                string PONumberString = date + "001";
+                PONumber = Convert.ToInt32(PONumberString);
             }
 
-            return _tblpo;
+            return PONumber;
         }
 
         /// <summary>
@@ -571,7 +593,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"  select tblSupplier.SupName from tblSupplier";
+                string sql_query = @" select tblSupplier.SupplierName from tblSupplier";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
 
@@ -594,8 +616,15 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string sql_query = @"
-                            select Top 1 s.SupName, s.SupPhoneNumber, s.SupTaxID, s.SupLocation,s.SupRepresentative, s.SupID
-                            from tblSupplier as s where SupName = @SupName  ;
+                            select Top 1 
+                                s.SupplierName, 
+                                s.SupplierPhone, 
+                                s.SupplierTaxNumber, 
+                                s.SupplierLocation,
+                                s.SupplierRepresentative, 
+                                s.SupplierID
+                            from tblSupplier as s 
+                            where SupplierName = @SupName  ;
                         ";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
@@ -662,33 +691,32 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="PartName"></param>
         /// <param name="PartDescript"></param>
         /// <returns></returns>
-        public bool InsertNewPODAL(string POCode, string PODate, string PONhanVien, string POPartlist, decimal POAmount, string PONote, int POSupplierID)
+        public bool InsertNewPO_DAL(int PONumber, int POSupplierID, DateTime PODateCreate, int POCurrencyID, int POStatusID, string POUser, string POPaymentTerm, string PORemark, decimal TotalAmount )
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
                 // Mở kết nối
                 con.Open();
-                string POStatus = "Created";
-                string POLog = POStatus + " " + PODate;
-
+              
                 // Tạo một giao dịch (Transaction) C#
                 using (SqlTransaction transaction = con.BeginTransaction())
                 {
-                    string sql_query = @"insert tblPO(POCode, PODate, PONhanVien, POPartlist, POAmount, PONote, POStatus, POLog, POSupplierID )
-                             VALUES (@POCode, @PODate, @PONhanvien, @POPartlist, @POAmount, @PONote , @POStatus, @POLog, @POSupplierID );";
+                    string sql_query = @"insert into tblPO 
+                        ( PONumber, POSupplierID, PODateCreate, POCurrentID, POStatusID, POUser, POPaymentTerm, PORemark, TotalAmount)
+                        Values ( @PONumber , @POSupplierID, @PODateCreate, @POCurrentID , @POStatusID, @POUser, @POPaymentTerm, @PORemark, @TotalAmount )  ";
 
                     SqlCommand cmd = new SqlCommand(sql_query, con, transaction);
 
                     // Sử dụng Add với kiểu dữ liệu cụ thể thay vì AddWithValue
-                    cmd.Parameters.Add("@POCode", SqlDbType.NVarChar).Value = POCode;
-                    cmd.Parameters.Add("@PODate", SqlDbType.NVarChar).Value = PODate;
-                    cmd.Parameters.Add("@PONhanvien", SqlDbType.NVarChar).Value = PONhanVien;
-                    cmd.Parameters.Add("@POPartlist", SqlDbType.NVarChar).Value = POPartlist;
-                    cmd.Parameters.Add("@POAmount", SqlDbType.Decimal).Value = POAmount;
-                    cmd.Parameters.Add("@PONote", SqlDbType.NVarChar).Value = PONote;
-                    cmd.Parameters.Add("@POStatus", SqlDbType.NVarChar).Value = POStatus;
-                    cmd.Parameters.Add("@POLog", SqlDbType.NVarChar).Value = POLog;
+                    cmd.Parameters.Add("@PONumber", SqlDbType.Int).Value = PONumber;
                     cmd.Parameters.Add("@POSupplierID", SqlDbType.Int).Value = POSupplierID;
+                    cmd.Parameters.Add("@PODateCreate", SqlDbType.Date).Value = PODateCreate;
+                    cmd.Parameters.Add("@POCurrentID", SqlDbType.Int).Value = POCurrencyID;
+                    cmd.Parameters.Add("@POStatusID", SqlDbType.Int).Value = POStatusID;
+                    cmd.Parameters.Add("@POUser", SqlDbType.NVarChar).Value = POUser;
+                    cmd.Parameters.Add("@POPaymentTerm", SqlDbType.NVarChar).Value = POPaymentTerm;
+                    cmd.Parameters.Add("@PORemark", SqlDbType.NVarChar).Value = PORemark;
+                    cmd.Parameters.Add("@TotalAmount", SqlDbType.Decimal).Value = TotalAmount;
 
                     try
                     {
@@ -704,6 +732,43 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                         // Khôi phục lại giao dịch khi có lỗi
                         transaction.Rollback();
                         Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        public bool InsertListItems_to_tblPOItems_DAL(DataTable data_ListItems)
+        {
+
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                using (SqlTransaction tran = con.BeginTransaction())
+                {
+                    try
+                    {
+
+                        using (SqlCommand cmd = new SqlCommand("dbo.Insert_in_tblPOItems", con, tran))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            SqlParameter tvpParam = cmd.Parameters.AddWithValue("@ListItemInsert", data_ListItems);
+                            tvpParam.SqlDbType = SqlDbType.Structured;
+                            tvpParam.TypeName = "dbo.tblInserItems_tblPOItems";
+
+
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        tran.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Lỗi: " + ex.Message);
+                        tran.Rollback();
+                        // Ghi log nếu cần
                         return false;
                     }
                 }

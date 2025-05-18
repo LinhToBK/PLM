@@ -4,7 +4,9 @@ using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Drawing;
 using System.Globalization;
+using System.IO.Ports;
 using System.Linq;
 using System.Resources;
 using System.Threading;
@@ -19,13 +21,81 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         public string _usercurrent { get; set; }
         private DataTable table_ListTimKiem;
 
-        //private DataTable table_ListItem {  get; set; }
         public DataTable table_ListItem = new DataTable();
 
-        /// <summary>
-        /// ********** REGION - [1]  : => Common Method
-        /// </summary>
-        #region
+        private DataTable tblMoneyType = new DataTable();
+
+        private void GetMoneyType()
+        {
+            tblMoneyType = _purchasebll.Get_tblMoneytype_BLL();// Lấy danh sách các loại tiền tệ và lưu lại vào DataTable
+
+            cboCurrency.DataSource = tblMoneyType;
+            cboCurrency.DisplayMember = "CurrencyName";
+            cboCurrency.ValueMember = "CurrencyID";
+        }
+
+        private int GetMoneyID(string MoneyName)
+        {
+            int MoneyTypeID = 0;
+            foreach (DataRow rw in tblMoneyType.Rows)
+            {
+                if (rw["CurrencyName"].ToString() == MoneyName)
+                {
+                    MoneyTypeID = Convert.ToInt32(rw["CurrencyID"]);
+                    break;
+                }
+            }
+            return MoneyTypeID;
+        }
+
+        private string GetMoneyName(int MoneyTypeID)
+        {
+            string MoneyTypeName = string.Empty;
+            foreach (DataRow rw in tblMoneyType.Rows)
+            {
+                if (Convert.ToInt32(rw["CurrencyID"]) == MoneyTypeID)
+                {
+                    MoneyTypeName = rw["CurrencyName"].ToString();
+                    break;
+                }
+            }
+            return MoneyTypeName;
+        }
+
+        private DataTable tblUnitType = new DataTable();
+
+        private int GetUnitID(string UnitName)
+        {
+            int UnitTypeID = 0;
+            foreach (DataRow rw in tblUnitType.Rows)
+            {
+                if (rw["UnitName"].ToString() == UnitName)
+                {
+                    UnitTypeID = Convert.ToInt32(rw["UnitID"]);
+                    break;
+                }
+            }
+            return UnitTypeID;
+        }
+
+        private string GetUnitName(int UnitTypeID)
+        {
+            string UnitTypeName = string.Empty;
+            foreach (DataRow rw in tblUnitType.Rows)
+            {
+                if (Convert.ToInt32(rw["UnitID"]) == UnitTypeID)
+                {
+                    UnitTypeName = rw["UnitName"].ToString();
+                    break;
+                }
+            }
+            return UnitTypeName;
+        }
+
+        private void GetUnitType()
+        {
+            tblUnitType = _purchasebll.Get_tblUnitType_BLL();// Lấy danh sách các loại tiền tệ và lưu lại vào DataTable
+        }
 
         /// <summary>
         /// List Method
@@ -83,13 +153,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 txtCompanyTaxCode.Text = " Error !!! \n Cannot access the data";
             }
         }
-
-        #endregion
-
-        /// <summary>
-        /// ********** REGION - [2]  : => List Event  Load
-        /// </summary>
-        #region
 
         // =========== Language =========================
         private ResourceManager rm { get; set; } // Để lấy ngôn ngữ từ ResourceManager
@@ -151,7 +214,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
             // Tạo sự kiện liên quan đến phím tắt
             this.KeyPreview = true;
-            
         }
 
         private void DgvListItem_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -159,46 +221,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             throw new NotImplementedException();
         }
 
-        private void frmMakePO_Load(object sender, EventArgs e)
+        /// <summary>
+        /// Lấy số PONo và điền vào txtPONo
+        /// </summary>
+        private void Load_PONumber()
         {
-            // ---> Load  information of users
-            txtKeySearch.Focus();
-            txtStaffName.Text = _usercurrent;
-            tblUsers _user_data = _purchasebll.GetUserInfor(_usercurrent);
-            txtStaffDept.Text = _user_data.DepartmentName;
-            txtStaffPosition.Text = _user_data.Position;
+            txtPONumber.Text = _purchasebll.Get_PONumber_BLL().ToString();
+            txtOrderDate.Text = DateTime.Now.ToString("yyyy-MM-dd");
+        }
 
-            cboTemplate.SelectedIndex = 0; // Choose the first
+        private string Unit_default = "EA"; // Đơn vị mặc định là EA
 
-            // ---> Load information of PO No
-            DateTime today = DateTime.Now.Date;
-            tblPO _po_data = _purchasebll.GetInforPO();
-            DateTime thelastestdate = DateTime.Now.Date;
-            string thelastestPO = today.Date.ToString("yyyy-MM-dd") + "/000";
-            if (_po_data != null)
-            {
-                thelastestdate = _po_data.PODate;
-                thelastestPO = _po_data.POCode;
-                //MessageBox.Show(thelastestPO);
-            }
-
-            string PO_no;
-
-            if (thelastestdate.Date == today)
-            {
-                // If the lastest day match with today
-                // Cut string  "yyyy-MM-dd/001"
-                PO_no = thelastestPO.Substring(11);
-                PO_no = today.Date.ToString("yyyy-MM-dd") + "/" + (Convert.ToInt32(PO_no) + 1).ToString("D3");
-            }
-            else
-            {
-                // If the lastest day is old   => get today
-                PO_no = today.Date.ToString("yyyy-MM-dd") + "/001";
-            }
-            txtPONo.Text = PO_no;
-            txtOrderDate.Text = today.Date.ToString("yyyy-MM-dd");
-
+        private void Load_Supplier()
+        {
             // ---> Load information of Supplier
             DataTable ListSupplier = _purchasebll.GetListSupplier();
             if (ListSupplier != null && ListSupplier.Rows.Count > 0)
@@ -215,25 +250,75 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 MessageBox.Show("Error !!! \n Can not find the list Supplier Name");
                 this.Close();
             }
+        }
+
+        private void frmMakePO_Load(object sender, EventArgs e)
+        {
+            // ---> Load  information of users
+            txtKeySearch.Focus();
+            txtStaffName.Text = _usercurrent;
+            tblUsers _user_data = _purchasebll.GetUserInfor(_usercurrent);
+            txtStaffDept.Text = _user_data.DepartmentName;
+            txtStaffPosition.Text = _user_data.Position;
+
+            cboTemplate.SelectedIndex = 0; // Choose the first
+
+            // Load PONo
+            Load_PONumber();
+            // Load MoneyType
+            GetMoneyType();
+            GetUnitType();
+            Unit_default = tblUnitType.Rows[0]["UnitName"].ToString(); // Đơn vị mặc định là EA
+
+            // Load Supplier
+            Load_Supplier();
 
             // ---> Load Common information
             LoadCommonInfor();
 
-            //// ---> Create DataTable ListItem
+            // ---> Create DataTable ListItem
+            // PartCode || PartName || Quantity || Unit || UnitPrice || Discount ||  Amount || Currency ||
+            // BOL-0001 || Bolt M3x10|| 30      || EA   ||   200     || 5        ||  5700   ||    VND   ||
+
             table_ListItem.Columns.Add("PartCode", typeof(string));
             table_ListItem.Columns.Add("PartName", typeof(string));
             table_ListItem.Columns.Add("Quantity", typeof(int));
-            table_ListItem.Columns.Add("UnitPrice", typeof(int));
+            table_ListItem.Columns.Add("Unit", typeof(string));
+            table_ListItem.Columns.Add("UnitPrice", typeof(decimal));
             table_ListItem.Columns.Add("Discount", typeof(double));
             table_ListItem.Columns.Add("Amount", typeof(decimal));
-            table_ListItem.Columns.Add("ID", typeof(int));
+            table_ListItem.Columns.Add("Currency", typeof(string));
+
+            dgvListItem.DataSource = table_ListItem;
+            dgvListItem.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             dgvListItem.AllowUserToAddRows = false;
-
-            // ---> Load Tolerance VND/USD : 0.0/0.00/0.00
-            CboTolerance.SelectedIndex = 1; //  Precision : 0.00
+            dgvListItem.AllowUserToDeleteRows = false;
+            dgvListItem_ViewFit();
 
             txtKeySearch.Focus();
+        }
+
+        private void dgvListItem_ViewFit()
+        {
+            dgvListItem.Columns[3].DefaultCellStyle.Format = "D";   // Formate : Current
+            // Chỉnh lại kích thước cột cho đẹp
+            dgvListItem.Columns[0].Width = 100; // PartCode
+            dgvListItem.Columns[1].Width = 200; // PartName
+            dgvListItem.Columns[2].Width = 60; // Quantity
+            dgvListItem.Columns[3].Width = 60; // Unit
+            dgvListItem.Columns[4].Width = 100; // UnitPrice
+            dgvListItem.Columns[5].Width = 60; // Discount
+            dgvListItem.Columns[6].Width = 150; // Amount
+
+            // Đặt chế độ chỉnh sửa cho từng cột
+            dgvListItem.Columns[0].ReadOnly = true; // PartCode
+            dgvListItem.Columns[1].ReadOnly = true; // PartName
+            dgvListItem.Columns[2].ReadOnly = false; // Quantity
+            dgvListItem.Columns[3].ReadOnly = true; // Unit
+            dgvListItem.Columns[4].ReadOnly = false; // UnitPrice
+            dgvListItem.Columns[5].ReadOnly = false; // Discount
+            dgvListItem.Columns[6].ReadOnly = true; // Amount
         }
 
         private void cboSupplierName_SelectedIndexChanged(object sender, EventArgs e)
@@ -241,8 +326,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             string selectitem = cboSupplierName.SelectedItem.ToString();
             LoadInforSupplier(selectitem);
         }
-
-        #endregion
 
         /// <summary>
         /// ********** REGION - [3]  : =>  LIST EVENT HANDLE SEARCH PART
@@ -254,15 +337,18 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         ///Load database to view search
         public void LoadDataFindPart(string keysearch)
         {
+            //   p.PartCode as PartCode,
+            //   p.PartName as PartName,
+            //   p.PartPriceSale as PartPriceSale,
+            //   p.PartID as PartID,
+            //p.PartPrice as PartPrice,
+            //p.PartCurrentID as PartCurrentID
             table_ListTimKiem = _purchasebll.FindwithwordBLL(keysearch);
             dgvListTimKiem.DataSource = table_ListTimKiem;
             dgvListTimKiem.Columns[0].Width = 70; // PartCode
             dgvListTimKiem.Columns[1].Width = 200; // PartName
             dgvListTimKiem.Columns[2].Width = 60; // PartPrice
             dgvListTimKiem.Columns[3].Width = 10; // PartID
-
-            //dgvListTimKiem.Columns[0].HeaderText = "Code";
-            //dgvListTimKiem.Columns[1].HeaderText = "Name";
 
             dgvListTimKiem.AllowUserToAddRows = false;
             dgvListTimKiem.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -293,15 +379,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void dgvListTimKiem_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             // Open Detail of Part
-            if(dgvListTimKiem.Rows.Count > 0)
+            if (dgvListTimKiem.Rows.Count > 0)
             {
                 frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
                 string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
                 frm.ShowDetailInfor(partcode);
                 frm.ShowDialog();
             }
-
-           
         }
 
         private void btnAddItems_Click(object sender, EventArgs e)
@@ -314,19 +398,28 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 return;
             }
 
-            string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
-            string partname = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();
-            int partid = Convert.ToInt32(dgvListTimKiem.CurrentRow.Cells[3].Value.ToString());
+            string partcode = dgvListTimKiem.CurrentRow.Cells["PartCode"].Value.ToString();
+            string partname = dgvListTimKiem.CurrentRow.Cells["PartName"].Value.ToString();
+            int partid = Convert.ToInt32(dgvListTimKiem.CurrentRow.Cells["PartID"].Value.ToString());
+            int partcurrentid;
+            if (dgvListTimKiem.CurrentRow.Cells["PartCurrentID"].Value.ToString() == null || dgvListTimKiem.CurrentRow.Cells["PartCurrentID"].Value.ToString() == "")
+            {
+                partcurrentid = 1;
+            }
+            else
+            {
+                partcurrentid = Convert.ToInt32(dgvListTimKiem.CurrentRow.Cells["PartCurrentID"].Value.ToString());
+            }
 
             //decimal partprice = Convert.ToDecimal(dgvListTimKiem.CurrentRow.Cells[2].Value);
             decimal partprice;
-            if (dgvListTimKiem.CurrentRow.Cells[2].Value.ToString() == "" || dgvListTimKiem.CurrentRow.Cells[2].Value.ToString() == "0")
+            if (dgvListTimKiem.CurrentRow.Cells["PartPrice"].Value.ToString() == "" || dgvListTimKiem.CurrentRow.Cells["PartPrice"].Value.ToString() == "0")
             {
                 partprice = 0;
             }
             else
             {
-                partprice = Convert.ToDecimal(dgvListTimKiem.CurrentRow.Cells[2].Value);
+                partprice = Convert.ToDecimal(dgvListTimKiem.CurrentRow.Cells["PartPrice"].Value);
             }
 
             // Kiểm tra giá trị này với giá trị của dgvListItem hiện tại
@@ -351,25 +444,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             else
             {
                 // Nếu không trùng thì mới thêm vào
-                string supplier = cboSupplierName.Items.ToString();
+                DataRow newrow = table_ListItem.NewRow();
+                newrow["PartCode"] = partcode;
+                newrow["PartName"] = partname;
+                newrow["Quantity"] = 1; // Giá trị mặc định là 1
+                newrow["Unit"] = Unit_default; // Đơn vị mặc định là EA
+                newrow["UnitPrice"] = partprice; // Giá trị mặc định là 0
+                newrow["Discount"] = 0; // Giá trị mặc định là 0
+                newrow["Amount"] = partprice; // Giá trị mặc định là 0
+                newrow["Currency"] = GetMoneyName(partcurrentid); // Giá trị mặc định là VND
 
-                table_ListItem.Rows.Add(partcode, partname, 1, partprice, 0, 0, partid);
-                dgvListItem.DataSource = table_ListItem;
-
-                // Set up formart for Column
-                dgvListItem.Columns[3].DefaultCellStyle.Format = "D";   // Formate : Current
-
-                // Đặt các cột không được chỉnh sửa
-                dgvListItem.Columns[0].ReadOnly = true;   // PartCode can not modify
-                dgvListItem.Columns[1].ReadOnly = true;   // PartName can not modify
-                dgvListItem.Columns[2].ReadOnly = false;  // Quantity can modify
-                dgvListItem.Columns[3].ReadOnly = false;  // Unit Price can modify
-                dgvListItem.Columns[4].ReadOnly = false;  // Discount can modify
-                dgvListItem.Columns[5].ReadOnly = false;  // Amount can modify
-                dgvListItem.Columns[6].ReadOnly = true;  // ID can not  modify
+                table_ListItem.Rows.Add(newrow);
+                CalculateTotal();
             }
-
-            CalculateTotal();
         }
 
         private void btnDeletePart_Click(object sender, EventArgs e)
@@ -378,7 +465,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             if (dgvListItem.SelectedRows.Count > 0)
             {
                 string notice = dgvListItem.CurrentRow.Cells[1].Value.ToString();
-                notice = rm.GetString("t4") + notice + "? ";    // Do you want to delete item :
+                notice = rm.GetString("t4") + "? ";    // Do you want to delete item :
 
                 DialogResult result = MessageBox.Show(notice, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (result == DialogResult.Yes)
@@ -434,7 +521,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         }
 
         /// <summary>
-        /// [ External Method ] : Calculate and show in textbox "Total"
+        /// [ External Method ] : Tính toán tổng tiền và hiển thị vào txtTotalVND
         /// </summary>
         private void CalculateTotal()
         {
@@ -477,43 +564,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
         }
 
-        private void convertvnd2usd()
-        {
-            if (float.TryParse(txtTotalVND.Text, out float vndprice) && float.TryParse(txtRate.Text, out float rate) && rate != 0)
-            {
-                // Tính giá sang USD
-                float usdprice = vndprice / rate;
-
-                // Kiểm tra SelectedIndex trước khi sử dụng
-                if (CboTolerance.SelectedIndex >= 0)
-                {
-                    string tolerance = @"N" + (CboTolerance.SelectedIndex + 1).ToString();
-                    txtTotalUSD.Text = usdprice.ToString(tolerance);
-                }
-                else
-                {
-                    txtTotalUSD.Text = usdprice.ToString("N2"); // Mặc định làm tròn 2 chữ số thập phân nếu chưa chọn độ chính xác
-                }
-            }
-            else
-            {
-                txtTotalUSD.Text = "0"; // Hoặc để trống tùy theo yêu cầu
-            }
-        }
-
         private void CboTolerance_SelectedIndexChanged(object sender, EventArgs e)
         {
-            convertvnd2usd();
         }
 
         private void txtTotalVND_TextChanged(object sender, EventArgs e)
         {
-            convertvnd2usd();
         }
 
         private void txtRate_TextChanged(object sender, EventArgs e)
         {
-            convertvnd2usd();
         }
 
         /// <summary>
@@ -554,50 +614,84 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void btnSavePO_Click(object sender, EventArgs e)
         {
-            //  Check : Do "dgvListItem" have data ?
-            if (dgvListItem.Rows.Count == 0) { return; }
-
-            // Check : Are "txtTotalVN" is number ?
-            if (decimal.TryParse(txtTotalVND.Text, out decimal number) == false) { return; }
-
-            // Nếu OK mới có JsonFile
-
-            DialogResult savedlg = MessageBox.Show("Do you want to save new PO", "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (savedlg == DialogResult.Yes)
+            if (Check_dgvListItem() == false)
             {
-                string jsonfile = ConvertDataGridViewToJson(dgvListItem);
-                string POPartlist = jsonfile.Replace("\r", "").Replace("\n  ", "");
-                POPartlist = POPartlist.Replace("  ", " ");
-                //string POPartlist = Regex.Replace(jsonfile, @"\s+", " ");
-                string POnote = "+)" + txtPaymentTerms.Text + "\n" + "+)" + txtRemark.Text;
+                MessageBox.Show("Please check input data again !", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string tb = "Do you want to save this PO";
+            DialogResult kq = MessageBox.Show("" + tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
-                //MessageBox.Show(POPartlist);
+            if (kq == DialogResult.Yes)
+            {
+                // =>  Tạo bảng dữ liệu DataTable để lưu trữ thông tin tblPOItems
 
-                if (_purchasebll.InsertNewPOBLL(txtPONo.Text, txtOrderDate.Text, txtStaffName.Text, POPartlist, decimal.Parse(txtTotalVND.Text), POnote, Convert.ToInt32(txtSupplierID.Text)) == true)
+                // PONumber || PartCode || Quantity || UnitID || UnitPrice || Discount || Amount
+                // int || string || int || int || decimal || decimal || decimal
+                DataTable data_InserttblPOItems = new DataTable();
+                data_InserttblPOItems.Columns.Add("PONumber", typeof(int));
+                data_InserttblPOItems.Columns.Add("PartCode", typeof(string));
+                data_InserttblPOItems.Columns.Add("Quantity", typeof(int));
+                data_InserttblPOItems.Columns.Add("UnitID", typeof(int));
+                data_InserttblPOItems.Columns.Add("UnitPrice", typeof(decimal));
+                data_InserttblPOItems.Columns.Add("Discount", typeof(decimal));
+                data_InserttblPOItems.Columns.Add("Amount", typeof(decimal));
+
+                // => Lấy dữ liệu từ daGridView và thêm vào DataTable
+                foreach (DataGridViewRow row in dgvListItem.Rows)
                 {
-                    string notice = rm.GetString("t8");    // Đã lưu PO này vào database
-                    MessageBox.Show(notice);
-                    IdentityPONO();
+                    DataRow newRow = data_InserttblPOItems.NewRow();
+                    newRow["PONumber"] = Convert.ToInt32(txtPONumber.Text);
+                    newRow["PartCode"] = row.Cells["PartCode"].Value.ToString();
+                    newRow["Quantity"] = Convert.ToInt32(row.Cells["Quantity"].Value.ToString());
+                    newRow["UnitID"] = GetUnitID(row.Cells["Unit"].Value.ToString());
+                    newRow["UnitPrice"] = Convert.ToDecimal(row.Cells["UnitPrice"].Value.ToString());
+                    newRow["Discount"] = Convert.ToDecimal(row.Cells["Discount"].Value.ToString());
+                    newRow["Amount"] = Convert.ToDecimal(row.Cells["Amount"].Value.ToString());
+                    data_InserttblPOItems.Rows.Add(newRow);
+                }
+
+                // Lấy các dữ liệu cần thiết
+                // int PONumber, int POSupplierID, DateTime PODateCreate, int POCurrencyID, int POStatusID,
+                // string POUser, string POPaymentTerm, string PORemark, decimal TotalAmount)
+                int PONumber = Convert.ToInt32(txtPONumber.Text);
+                int SupplierID = Convert.ToInt32(txtSupplierID.Text);
+                DateTime PODateCreate = DateTime.Now.Date;
+                int POCurrencyID = cboCurrency.SelectedIndex + 1;// Lấy chỉ số của loại tiền tệ
+                int POStatusID = 1; // Đặt trạng thái mặc định là 1 (Mới tạo)
+                string POUser = txtStaffName.Text;
+                string POPaymentTerm = txtPaymentTerms.Text;
+                string PORemark = txtRemark.Text;
+                decimal TotalAmount = Convert.ToDecimal(txtTotalVND.Text); // Tổng tiền
+
+                // Lưu vào database
+                if (_purchasebll.InsertNewPO_BLL(PONumber, SupplierID, PODateCreate, POCurrencyID, POStatusID, POUser, POPaymentTerm, PORemark, TotalAmount))
+                {
+                    MessageBox.Show("Save PO successfully !", rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // Ghi dữ liệu vào tblPOItem
+                    if(_purchasebll.InsertListItems_to_tblPOItems_BLL(data_InserttblPOItems) == true)
+                    {
+                        MessageBox.Show("Save PO Items successfully !", rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Identity PONo
+                        Load_PONumber();
+                        // Clear DataGridView
+                        dgvListItem.DataSource = null;
+                        table_ListItem.Clear();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error when save PO Items !", rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
                 else
                 {
-                    string notice = rm.GetString("t9"); // Lỗi!!! \n Vui lòng kiểm tra lại dữ liệu.
-                    MessageBox.Show(notice, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Error when save PO !", rm.GetString("t0"), MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                ;
             }
-            else { return; }
         }
 
-        private void IdentityPONO()
-        {
-            string PO_no;
-            DateTime today = DateTime.Now.Date;
-            PO_no = txtPONo.Text.Substring(11);
-            PO_no = today.Date.ToString("yyyy-MM-dd") + "/" + (Convert.ToInt32(PO_no) + 1).ToString("D3");
-            txtPONo.Text = PO_no;
-        }
 
+  
         private void btnPreview_Click(object sender, EventArgs e)
         {
         }
@@ -620,11 +714,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 }
                 else
                 {
-                    if(cboTemplate.SelectedIndex == 0 )
+                    if (cboTemplate.SelectedIndex == 0)
                     {
                         // Chạy template 0
                         ExcelRunning _exportTemplate = new ExcelRunning();
-                        _exportTemplate._orderPOno = txtPONo.Text.Replace("/", "_");
+                        _exportTemplate._orderPOno = txtPONumber.Text.Replace("/", "_");
                         _exportTemplate._orderDate = txtOrderDate.Text;
                         // Company Information
                         _exportTemplate._companyName = txtCompanyName.Text;
@@ -647,13 +741,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                         _exportTemplate.Partlist = table_ListItem;
 
                         _exportTemplate.PurchaseTemplate_A();
-                    }    
-                    if(cboTemplate.SelectedIndex == 1)
+                    }
+                    if (cboTemplate.SelectedIndex == 1)
                     {
                         MessageBox.Show("Template 1 is not ready yet");
-                    }    
-
-                    
+                    }
                 }
             }
         }
@@ -666,8 +758,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
         private void BtnManageSupplier_Click(object sender, EventArgs e)
         {
-            frmManageSupplier frm = new frmManageSupplier();
-            frm.ShowDialog();
+            using (frmManageSupplier frm = new frmManageSupplier())
+            {
+                var result = frm.ShowDialog();
+                if (result == DialogResult.OK || result == DialogResult.Cancel)
+                {
+                    Load_Supplier(); // Load lại danh sách nhà cung cấp
+                }
+            }
         }
 
         private void btnViewNearPO_Click(object sender, EventArgs e)
@@ -678,10 +776,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         {
             if (dgvListTimKiem.Rows.Count > 0)
             {
-                txtPartCode.Text = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
-                txtPartName.Text = dgvListTimKiem.CurrentRow.Cells[1].Value.ToString();
-                txtPartPrice.Text = dgvListTimKiem.CurrentRow.Cells[2].Value.ToString();
-                int PartID = Convert.ToInt32(dgvListTimKiem.CurrentRow.Cells[3].Value.ToString());
+                txtPartCode.Text = dgvListTimKiem.CurrentRow.Cells["PartCode"].Value.ToString();
+                txtPartName.Text = dgvListTimKiem.CurrentRow.Cells["PartName"].Value.ToString();
+                txtPartPrice.Text = dgvListTimKiem.CurrentRow.Cells["PartPrice"].Value.ToString();
+                int PartID = Convert.ToInt32(dgvListTimKiem.CurrentRow.Cells["PartID"].Value.ToString());
                 if (ckcViewChild.Checked == true)
                 {
                     dgvListChild.DataSource = _purchasebll.GetChildPartBLL(PartID);
@@ -710,8 +808,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 return;
             }
 
-            string partcode = dgvListChild.CurrentRow.Cells[1].Value.ToString();
-            string partname = dgvListChild.CurrentRow.Cells[2].Value.ToString();
+            string partcode = dgvListChild.CurrentRow.Cells["PartCode"].Value.ToString();
+            string partname = dgvListChild.CurrentRow.Cells["PartName"].Value.ToString();
             int partid = Convert.ToInt32(dgvListChild.CurrentRow.Cells[6].Value.ToString());
 
             //decimal partprice = Convert.ToDecimal(dgvListTimKiem.CurrentRow.Cells[2].Value);
@@ -748,25 +846,35 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             else
             {
                 // Nếu không trùng thì mới thêm vào
-                string supplier = cboSupplierName.Items.ToString();
+                DataTable add1code = new DataTable();
+                add1code.Columns.Add("PartCode", typeof(string));
+                DataRow dtr = add1code.NewRow();
+                dtr["PartCode"] = partcode;
+                add1code.Rows.Add(dtr);
+                DataTable inforcode = _purchasebll.QueryInforItemPO_BLL(add1code);
 
-                table_ListItem.Rows.Add(partcode, partname, 1, partprice, 0, 0, partid);
-                dgvListItem.DataSource = table_ListItem;
+                DataRow row = inforcode.Rows[0];
 
-                // Set up formart for Column
-                dgvListItem.Columns[3].DefaultCellStyle.Format = "D";   // Formate : Current
+                DataRow newrow = table_ListItem.NewRow();
+                newrow["PartCode"] = row["PartCode"];
+                newrow["PartName"] = row["PartName"];
+                newrow["Quantity"] = 1;
+                newrow["Unit"] = Unit_default;
+                newrow["UnitPrice"] = row["PartPrice"];
+                newrow["Discount"] = 0;
+                newrow["Amount"] = row["PartPrice"];
 
-                // Đặt các cột không được chỉnh sửa
-                dgvListItem.Columns[0].ReadOnly = true;   // PartCode can not modify
-                dgvListItem.Columns[1].ReadOnly = true;   // PartName can not modify
-                dgvListItem.Columns[2].ReadOnly = false;  // Quantity can modify
-                dgvListItem.Columns[3].ReadOnly = false;  // Unit Price can modify
-                dgvListItem.Columns[4].ReadOnly = false;  // Discount can modify
-                dgvListItem.Columns[5].ReadOnly = false;  // Amount can modify
-                dgvListItem.Columns[6].ReadOnly = true;  // ID can not  modify
+                if (row["PartCurrentID"].ToString() == null || row["PartCurrentID"].ToString() == "")
+                {
+                    newrow["Currency"] = GetMoneyName(1);
+                }
+                else
+                {
+                    newrow["Currency"] = GetMoneyName(Convert.ToInt32(row["PartCurrentID"].ToString()));
+                }
+                table_ListItem.Rows.Add(newrow);
+                CalculateTotal();
             }
-
-            CalculateTotal();
         }
 
         private void ckcViewChild_CheckedChanged(object sender, EventArgs e)
@@ -794,7 +902,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 frm.ShowDetailInfor(partcode);
                 frm.ShowDialog();
             }
-
         }
 
         private void frmMakePO_KeyDown(object sender, KeyEventArgs e)
@@ -815,9 +922,194 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 e.SuppressKeyPress = true; // Ngăn không cho tiếng Bíp kêu khi nhấn enter
                 btnAddchild.PerformClick();
             }
+        }
 
-      
-          
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            using (frmImportListItems formA = new frmImportListItems())
+            {
+                // Lấy cột PartCode trong table_ListItem
+                DataTable List_Items_Now = new DataTable();
+                List_Items_Now.Columns.Add("PartCode", typeof(string));
+                foreach (DataRow row in table_ListItem.Rows)
+                {
+                    List_Items_Now.Rows.Add(row["PartCode"]);
+                }
+
+                formA.ListItem_Now = List_Items_Now; // Truyền danh sách Item hiện tại vào Form A
+
+                var result = formA.ShowDialog();  // Dùng ShowDialog để chờ form A đóng
+                if (result == DialogResult.OK || result == DialogResult.Cancel) // hoặc chỉ cần kiểm tra nếu != null
+                {
+                    DataTable ListItemImportOK = formA.ListItem_OK;
+                    if (ListItemImportOK == null)
+                    {
+                        MessageBox.Show("No data imported!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    //Lấy danh sách từ datatabeLisstItemImportOK điền thêm  vào dgvListItems
+                    if (ListItemImportOK.Rows.Count > 0 && ListItemImportOK != null)
+                    {
+                        foreach (DataRow row in ListItemImportOK.Rows)
+                        {
+                            // Thêm dữ liệu cho table_ListItem
+                            DataRow newrow = table_ListItem.NewRow();
+                            newrow["PartCode"] = row["PartCode"];
+                            newrow["PartName"] = row["PartName"];
+                            newrow["Quantity"] = 1;
+                            newrow["Unit"] = Unit_default;
+                            newrow["UnitPrice"] = row["PartPrice"];
+                            newrow["Discount"] = 0;
+                            newrow["Amount"] = row["PartPrice"];
+
+                            if (row["PartCurrentID"].ToString() == null || row["PartCurrentID"].ToString() == "")
+                            {
+                                newrow["Currency"] = GetMoneyName(1);
+                            }
+                            else
+                            {
+                                newrow["Currency"] = GetMoneyName(Convert.ToInt32(row["PartCurrentID"].ToString()));
+                            }
+                            table_ListItem.Rows.Add(newrow);
+                        }
+
+                        dgvListItem.DataSource = table_ListItem;
+
+                        dgvListItem_ViewFit(); // Gọi hàm để điều chỉnh kích thước cột
+
+                        MessageBox.Show("Import successful!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        CalculateTotal(); // Tính toán lại tổng tiền
+                    }
+                }
+            }
+        }
+
+        private void addItemToPOToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddchild.PerformClick();
+        }
+
+        private void openPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // Open Detail of Part
+            if (dgvListChild.Rows.Count > 0)
+            {
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvListChild.CurrentRow.Cells[1].Value.ToString();
+                frm.ShowDetailInfor(partcode);
+                frm.ShowDialog();
+            }
+        }
+
+        private void addItemToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnAddItems.PerformClick();
+        }
+
+        private void openPartToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dgvListTimKiem.Rows.Count > 0)
+            {
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvListTimKiem.CurrentRow.Cells[0].Value.ToString();
+                frm.ShowDetailInfor(partcode);
+                frm.ShowDialog();
+            }
+        }
+
+        private void changeMoneyTypeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (frmMoneyType formA = new frmMoneyType())
+            {
+                formA.ListMoneyType = tblMoneyType; // Truyền danh sách loại tiền tệ vào Form A
+                formA.OldMoneyType = dgvListItem.CurrentRow.Cells["Currency"].Value.ToString();
+
+                var result = formA.ShowDialog();  // Dùng ShowDialog để chờ form A đóng
+                if (result == DialogResult.OK || result == DialogResult.Cancel) // hoặc chỉ cần kiểm tra nếu != null
+                {
+                    string receivedText = formA.NewMoneyType; // Lấy dữ liệu từ Form A
+                    // Thay đổi loại tiền tệ cho các hàng đã chọn
+                    dgvListItem.CurrentRow.Cells["Currency"].Value = receivedText;
+                }
+            }
+        }
+
+        private void changeUnitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (frmUnitType frm = new frmUnitType())
+            {
+                frm.ListUnitType = tblUnitType; // Truyền danh sách loại tiền tệ vào Form A
+                frm.OldUnitType = dgvListItem.CurrentRow.Cells["Unit"].Value.ToString();
+
+                var result = frm.ShowDialog();  // Dùng ShowDialog để chờ form A đóng
+                if (result == DialogResult.OK || result == DialogResult.Cancel) // hoặc chỉ cần kiểm tra nếu != null
+                {
+                    string receivedText = frm.NewUnitType; // Lấy dữ liệu từ Form A
+                    // Thay đổi loại tiền tệ cho các hàng đã chọn
+                    dgvListItem.CurrentRow.Cells["Unit"].Value = receivedText;
+                }
+            }
+        }
+
+        private bool Check_dgvListItem()
+        {
+            // Kiểm tra cột quantity có là số nguyên không ?
+            // Kiểm tra cột UnitPrice có là số không ?
+            // Kiểm tra cột Discount có là số không ?
+            // Kiểm tra cột Amount có là số không ?
+            bool status = true;
+
+            // Xóa những hàng trắng trong dgvListItem
+            foreach (DataGridViewRow row in dgvListItem.Rows)
+            {
+                if (row.IsNewRow) continue; // Bỏ qua hàng mới
+                if (row.Cells["PartCode"].Value == null || string.IsNullOrWhiteSpace(row.Cells["PartCode"].Value.ToString()))
+                {
+                    dgvListItem.Rows.Remove(row);
+                }
+            }
+
+            if (dgvListItem.Rows.Count == 0)
+            {
+                MessageBox.Show(rm.GetString("t10")); // PO hiện tại đang trống ! \n Vui lòng điền các chi tiết để mua
+                status = false;
+            }
+            else
+            {
+                foreach (DataGridViewRow row in dgvListItem.Rows)
+                {
+                    if (row.Cells["Quantity"].Value != null && row.Cells["UnitPrice"].Value != null && row.Cells["Discount"].Value != null && row.Cells["Amount"].Value != null)
+                    {
+                        bool isValidQuantity = int.TryParse(row.Cells["Quantity"].Value?.ToString(), out int quantity);
+                        bool isValidPrice = decimal.TryParse(row.Cells["UnitPrice"].Value?.ToString(), out decimal priceUnit);
+                        bool isValidDiscount = double.TryParse(row.Cells["Discount"]?.Value?.ToString(), out double discount);
+                        bool isValidAmount = decimal.TryParse(row.Cells["Amount"]?.Value?.ToString(), out decimal amount);
+                        if (!isValidQuantity || !isValidPrice || !isValidDiscount || !isValidAmount)
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Red; // Đánh dấu hàng có lỗi bằng màu đỏ
+
+                            status = false;
+                        }
+                        if (quantity == 0 || priceUnit == 0 || amount == 0)
+                        {
+                            row.DefaultCellStyle.BackColor = Color.Cyan; // Đánh dấu hàng có lỗi bằng màu đỏ
+                            status = false;
+                        }
+                    }
+                }
+            }
+            return status;
+        }
+
+        private void deleteItemsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnDeletePart.PerformClick();
+
+        }
+
+        private void clearListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnClearList.PerformClick();
         }
     }
 }

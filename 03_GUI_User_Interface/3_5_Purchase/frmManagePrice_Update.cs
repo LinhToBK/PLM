@@ -71,10 +71,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void GetMoneyType()
         {
             tblMoneyType = _purchaseBLL.Get_tblMoneytype_BLL();// Lấy danh sách các loại tiền tệ và lưu lại vào DataTable
-            // Đẩy danh sách vào combobox
-            //cboMoneyType.DataSource = tblMoneyType;
-            //cboMoneyType.DisplayMember = "CurrencyName"; // Tên hiển thị
-            //cboMoneyType.ValueMember = "CurrencyID"; // Giá trị thực tế
+            
         }
 
         private void View_Fit_dgvListItems()

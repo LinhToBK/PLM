@@ -478,6 +478,12 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMoneyType.Designer.cs">
       <DependentUpon>frmMoneyType.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUnitType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUnitType.Designer.cs">
+      <DependentUpon>frmUnitType.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -729,6 +735,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmMoneyType.resx">
       <DependentUpon>frmMoneyType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmUnitType.resx">
+      <DependentUpon>frmUnitType.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmUpdateStatus.resx">
       <DependentUpon>frmUpdateStatus.cs</DependentUpon>

@@ -267,7 +267,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
                     //  *****  Fill Partlist   *****
 
-                    //   STT |  Part Number  | Part Name | Quantity | Unit Price | Discount | Unit | Amount
+                    //   STT |  Part Code  | Part Name | Quantity | Unit Price | Discount | Unit | Amount
 
                     // Edit size of Cell
                     // => 01. STT

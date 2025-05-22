@@ -9,6 +9,7 @@ using System.Globalization;
 using System.IO.Ports;
 using System.Linq;
 using System.Resources;
+using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -277,8 +278,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             LoadCommonInfor();
 
             // ---> Create DataTable ListItem
-            // PartCode || PartName || Quantity || Unit || UnitPrice || Discount ||  Amount || Currency ||
-            // BOL-0001 || Bolt M3x10|| 30      || EA   ||   200     || 5        ||  5700   ||    VND   ||
+            // PartCode || PartName || Quantity || Unit || UnitPrice || Discount ||  Amount || Currency ||  Tax || TaxCode
+            // BOL-0001 || Bolt M3x10|| 30      || EA   ||   200     || 5        ||  5700   ||    VND   ||  1.5 ||  
 
             table_ListItem.Columns.Add("PartCode", typeof(string));
             table_ListItem.Columns.Add("PartName", typeof(string));
@@ -288,6 +289,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             table_ListItem.Columns.Add("Discount", typeof(double));
             table_ListItem.Columns.Add("Amount", typeof(decimal));
             table_ListItem.Columns.Add("Currency", typeof(string));
+            table_ListItem.Columns.Add("Tax", typeof(decimal));   
+            table_ListItem.Columns.Add("TaxCode", typeof(string));
 
             dgvListItem.DataSource = table_ListItem;
             dgvListItem.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -309,7 +312,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dgvListItem.Columns[3].Width = 60; // Unit
             dgvListItem.Columns[4].Width = 100; // UnitPrice
             dgvListItem.Columns[5].Width = 60; // Discount
-            dgvListItem.Columns[6].Width = 150; // Amount
+            dgvListItem.Columns[6].Width = 100; // Amount
+            dgvListItem.Columns[7].Width = 60; // Currency
+            dgvListItem.Columns[8].Width = 50; // Tax
+            // dgvListItem.Columns[9].Width = 100; // TaxCode
+
 
             // Đặt chế độ chỉnh sửa cho từng cột
             dgvListItem.Columns[0].ReadOnly = true; // PartCode
@@ -319,6 +326,22 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             dgvListItem.Columns[4].ReadOnly = false; // UnitPrice
             dgvListItem.Columns[5].ReadOnly = false; // Discount
             dgvListItem.Columns[6].ReadOnly = true; // Amount
+            dgvListItem.Columns[7].ReadOnly = true; // Currency
+            dgvListItem.Columns[8].ReadOnly = false; // Tax
+            dgvListItem.Columns[9].ReadOnly = false; // TaxCode
+
+            // Đặt Align lai cho các cột
+            dgvListItem.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // PartCode
+            dgvListItem.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft; // PartName
+            dgvListItem.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Quantity
+            dgvListItem.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Unit
+            dgvListItem.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight; // UnitPrice
+            dgvListItem.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight; // Discount
+            dgvListItem.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight; // Amount
+            dgvListItem.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Currency
+            dgvListItem.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // Tax
+            dgvListItem.Columns[9].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter; // TaxCode
+
         }
 
         private void cboSupplierName_SelectedIndexChanged(object sender, EventArgs e)
@@ -453,6 +476,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 newrow["Discount"] = 0; // Giá trị mặc định là 0
                 newrow["Amount"] = partprice; // Giá trị mặc định là 0
                 newrow["Currency"] = GetMoneyName(partcurrentid); // Giá trị mặc định là VND
+                newrow["Tax"] = 0; // Giá trị mặc định là 0
+                newrow["TaxCode"] = ""; // Giá trị mặc định là 0
 
                 table_ListItem.Rows.Add(newrow);
                 CalculateTotal();
@@ -537,11 +562,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                         bool isValidPrice = decimal.TryParse(row.Cells["UnitPrice"].Value?.ToString(), out decimal priceUnit);
                         bool isValidQuantity = decimal.TryParse(row.Cells["Quantity"].Value?.ToString(), out decimal quantity);
                         bool isValidDiscount = decimal.TryParse(row.Cells["Discount"]?.Value?.ToString(), out decimal discount);
+                        bool isValidTax = decimal.TryParse(row.Cells["Tax"]?.Value?.ToString(), out decimal tax);
 
                         if (isValidPrice && isValidQuantity)
                         {
                             discount = isValidDiscount ? discount : 0; // Nếu discount không hợp lệ, đặt mặc định là 0
-                            amount = priceUnit * quantity * (1 - discount * 0.01m);
+                            amount = priceUnit * quantity * (1 - discount * 0.01m + tax*0.01m);
                             row.Cells["Amount"].Value = amount;
                             total += amount;
                         }
@@ -636,6 +662,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 data_InserttblPOItems.Columns.Add("UnitPrice", typeof(decimal));
                 data_InserttblPOItems.Columns.Add("Discount", typeof(decimal));
                 data_InserttblPOItems.Columns.Add("Amount", typeof(decimal));
+                
+                data_InserttblPOItems.Columns.Add("Tax", typeof(decimal)); // Thêm cột Tax nếu cần thiết
+                data_InserttblPOItems.Columns.Add("TaxCode", typeof(string)); // Thêm cột TaxCode nếu cần thiết
 
                 // => Lấy dữ liệu từ daGridView và thêm vào DataTable
                 foreach (DataGridViewRow row in dgvListItem.Rows)
@@ -648,6 +677,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     newRow["UnitPrice"] = Convert.ToDecimal(row.Cells["UnitPrice"].Value.ToString());
                     newRow["Discount"] = Convert.ToDecimal(row.Cells["Discount"].Value.ToString());
                     newRow["Amount"] = Convert.ToDecimal(row.Cells["Amount"].Value.ToString());
+                    newRow["Tax"] = Convert.ToDecimal(row.Cells["Tax"].Value.ToString()); // Thêm giá trị thuế nếu cần thiết
+                    newRow["TaxCode"] = row.Cells["TaxCode"].Value.ToString(); // Thêm giá trị mã thuế nếu cần thiết
                     data_InserttblPOItems.Rows.Add(newRow);
                 }
 
@@ -863,6 +894,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 newrow["UnitPrice"] = row["PartPrice"];
                 newrow["Discount"] = 0;
                 newrow["Amount"] = row["PartPrice"];
+                newrow["Tax"] = 0; // Giá trị mặc định là 0
+                newrow["TaxCode"] = ""; // Giá trị mặc định là 0
 
                 if (row["PartCurrentID"].ToString() == null || row["PartCurrentID"].ToString() == "")
                 {
@@ -961,6 +994,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                             newrow["UnitPrice"] = row["PartPrice"];
                             newrow["Discount"] = 0;
                             newrow["Amount"] = row["PartPrice"];
+                            newrow["Tax"] = 0; // Giá trị mặc định là 0
+                            newrow["TaxCode"] = ""; // Giá trị mặc định là 0
 
                             if (row["PartCurrentID"].ToString() == null || row["PartCurrentID"].ToString() == "")
                             {

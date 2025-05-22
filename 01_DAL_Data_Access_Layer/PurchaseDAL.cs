@@ -99,12 +99,19 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// 02. SELECT - Get All information of Supplier
         /// </summary>
         /// <returns></returns>
-        public DataTable GetAllInforSupplierDAL()
+        public DataTable GetAllInforSupplier_DAL()
         {
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @" select * from tblSupplier";
+                string sql_query = @" select s.SupplierID,
+	                                s.SupplierName,
+	                                s.SupplierPhone,
+	                                s.SupplierLocation,
+	                                s.SupplierTaxNumber ,
+	                                s.SupplierRepresentative,
+	                                s.SupplierNote
+                                from tblSupplier as s";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
 
@@ -321,7 +328,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             {
                 string sql_query;
 
-                sql_query = @"select Top 1 * from tblSupplier where SupID = @ID";
+                sql_query = @"select Top 1 * from tblSupplier where SupplierID = @ID";
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.Add("@ID", SqlDbType.NVarChar).Value = ID;
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
@@ -447,7 +454,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// </summary>
         /// <param name="ListPartCode"></param>
         /// <returns></returns>
-        /// 
+        ///
         // Result : PartCode || PartName || PartPrice  || PartPriceSale ||PartCurrentID
         public DataTable QueryInforItemPO_DAL(DataTable ListPartCode)
         {
@@ -468,7 +475,10 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return result;
         }
 
-
+        /// <summary>
+        /// SELECT - Lấy bảng danh sách các loại đơn vị tính
+        /// </summary>
+        /// <returns></returns>
         public DataTable Get_tblUnitType_DAL()
         {
             DataTable BangDuLieu = new DataTable();
@@ -477,6 +487,210 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string sql_query;
                 sql_query = @"select u.UnitID, u.UnitName from tblPOUnit as u";
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        /// <summary>
+        /// SELECT - Lấy bảng danh sách thông tin PO
+        /// Có 3 loại
+        /// Theo ngày từ đến ngày
+        /// Chỉ duy nhất 1 ngày
+        /// Theo PartCode
+        /// </summary>
+        /// <param name="startdate"></param>
+        /// <param name="endate"></param>
+        /// <returns></returns>
+        public DataTable Get_POInformation_DAL(DateTime startdate, DateTime endate)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"SELECT
+                                p.PODateCreate,
+                                p.PONumber,
+                                t.POStatusName,
+                                c.CurrentName,
+                                s.SupplierName  ,
+	                            p.POUser,
+	                            p.TotalAmount
+                            FROM
+                                tblPO AS p
+                            JOIN
+                                tblPOStatus AS t  ON p.POStatusID = t.POStatusID
+                            JOIN
+                                tblCurrent AS c   ON p.POCurrentID = c.CurrentID
+                            JOIN
+                                tblSupplier AS s  ON p.POSupplierID = s.SupplierID
+                            WHERE
+                                p.PODateCreate >= @startdate
+                                AND p.PODateCreate < @endate ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@startdate", startdate);
+                cmd.Parameters.AddWithValue("@endate", endate);
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        public DataTable Get_POInformation_DAL(DateTime startdate)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"SELECT
+                                p.PODateCreate,
+                                p.PONumber,
+                                t.POStatusName,
+                                c.CurrentName,
+                                s.SupplierName  ,
+	                            p.POUser,
+	                            p.TotalAmount
+                            FROM
+                                tblPO AS p
+                            JOIN
+                                tblPOStatus AS t  ON p.POStatusID = t.POStatusID
+                            JOIN
+                                tblCurrent AS c   ON p.POCurrentID = c.CurrentID
+                            JOIN
+                                tblSupplier AS s  ON p.POSupplierID = s.SupplierID
+                            WHERE
+                                p.PODateCreate = @startdate ; ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@startdate", startdate);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        public DataTable Get_POInformation_DAL(string PartCode)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"WITH ListPONumber AS (
+                                    SELECT i.PONumber
+                                    FROM tblPOItems as i
+	                                join tblPart as p on p.PartID = i.PartID
+                                    WHERE i.PartID = (select PartID from tblPart where tblPart.PartCode =  @partcode )
+                                )
+                                SELECT
+		                                p.PODateCreate,
+		                                p.PONumber,
+		                                t.POStatusName,
+		                                c.CurrentName,
+		                                s.SupplierName  ,
+		                                p.POUser,
+		                                p.TotalAmount
+	                                FROM
+		                                tblPO AS p
+	                                JOIN
+		                                tblPOStatus AS t  ON p.POStatusID = t.POStatusID
+	                                JOIN
+		                                tblCurrent AS c   ON p.POCurrentID = c.CurrentID
+	                                JOIN
+		                                tblSupplier AS s  ON p.POSupplierID = s.SupplierID
+	                                JOIN ListPONumber as l on l.PONumber = p.PONumber ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@partcode", PartCode);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        public DataTable Get_tblPOItems_DAL(int PONumber)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"select
+	                            p.PartID as PartID,
+                                t.PartCode as PartCode,
+	                            t.PartName as PartName,
+	                            p.Quantity as Quantity,
+	                            u.UnitName as Unit,
+	                            p.UnitPrice as Price,
+	                            p.Discount as Discount,
+	                            p.Amount as Amount,
+	                            p.ItemsTax as Tax
+
+                            from tblPOItems as p
+                            join tblPart as t on t.PartID = p.PartID
+                            join tblPOUnit as u on u.UnitID = p.UnitID
+                            where p.PONumber = @PONumber ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@PONumber", PONumber);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        public DataTable Get_tblPOInformation_DAL(int PONumber)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"select 
+	                            p.POSupplierID , 
+	                            p.PODateCreate,
+	                            p.POCurrentID,
+	                            p.POStatusID, 
+	                            p.POUser , 
+	                            p.POPaymentTerm, 
+	                            p.PORemark, 
+	                            p.TotalAmount,
+	                            c.CurrentName,
+	                            s.POStatusName
+
+                            from tblPO as p
+                            join tblCurrent as c on c.CurrentID = p.POCurrentID
+                            join tblPOStatus as s on s.POStatusID = p.POStatusID
+                            where p.PONumber = @PONumber ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.AddWithValue("@PONumber", PONumber);
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+                return BangDuLieu;
+            }
+        }
+
+        public DataTable Get_tblPOStatus_DAL()
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query;
+                sql_query = @"select s.POStatusID, s.POStatusName from tblPOStatus as s ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+              
 
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
                 conn.Open();
@@ -616,14 +830,14 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string sql_query = @"
-                            select Top 1 
-                                s.SupplierName, 
-                                s.SupplierPhone, 
-                                s.SupplierTaxNumber, 
+                            select Top 1
+                                s.SupplierName,
+                                s.SupplierPhone,
+                                s.SupplierTaxNumber,
                                 s.SupplierLocation,
-                                s.SupplierRepresentative, 
+                                s.SupplierRepresentative,
                                 s.SupplierID
-                            from tblSupplier as s 
+                            from tblSupplier as s
                             where SupplierName = @SupName  ;
                         ";
 
@@ -691,17 +905,17 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="PartName"></param>
         /// <param name="PartDescript"></param>
         /// <returns></returns>
-        public bool InsertNewPO_DAL(int PONumber, int POSupplierID, DateTime PODateCreate, int POCurrencyID, int POStatusID, string POUser, string POPaymentTerm, string PORemark, decimal TotalAmount )
+        public bool InsertNewPO_DAL(int PONumber, int POSupplierID, DateTime PODateCreate, int POCurrencyID, int POStatusID, string POUser, string POPaymentTerm, string PORemark, decimal TotalAmount)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
                 // Mở kết nối
                 con.Open();
-              
+
                 // Tạo một giao dịch (Transaction) C#
                 using (SqlTransaction transaction = con.BeginTransaction())
                 {
-                    string sql_query = @"insert into tblPO 
+                    string sql_query = @"insert into tblPO
                         ( PONumber, POSupplierID, PODateCreate, POCurrentID, POStatusID, POUser, POPaymentTerm, PORemark, TotalAmount)
                         Values ( @PONumber , @POSupplierID, @PODateCreate, @POCurrentID , @POStatusID, @POUser, @POPaymentTerm, @PORemark, @TotalAmount )  ";
 
@@ -740,7 +954,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
 
         public bool InsertListItems_to_tblPOItems_DAL(DataTable data_ListItems)
         {
-
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
                 con.Open();
@@ -748,15 +961,13 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 {
                     try
                     {
-
                         using (SqlCommand cmd = new SqlCommand("dbo.Insert_in_tblPOItems", con, tran))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
 
                             SqlParameter tvpParam = cmd.Parameters.AddWithValue("@ListItemInsert", data_ListItems);
                             tvpParam.SqlDbType = SqlDbType.Structured;
-                            tvpParam.TypeName = "dbo.tblInserItems_tblPOItems";
-
+                            tvpParam.TypeName = "dbo.tblInsertItems_tblPOItems";
 
                             cmd.ExecuteNonQuery();
                         }

@@ -51,7 +51,7 @@
             this.cboTemplate = new System.Windows.Forms.ComboBox();
             this.btnAddItems = new System.Windows.Forms.Button();
             this.btnImport = new System.Windows.Forms.Button();
-            this.dgvListTimKiem = new System.Windows.Forms.DataGridView();
+            this.dgvListTimKiem = new Zuby.ADGV.AdvancedDataGridView();
             this.cms_dgvListTimKiem = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openPartToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
@@ -116,7 +116,7 @@
             this.tableLayoutPanel12 = new System.Windows.Forms.TableLayoutPanel();
             this.labelRemark = new System.Windows.Forms.Label();
             this.txtRemark = new System.Windows.Forms.TextBox();
-            this.dgvListItem = new System.Windows.Forms.DataGridView();
+            this.dgvListItem = new Zuby.ADGV.AdvancedDataGridView();
             this.cms_dgvListItems = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.changeUnitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.changeMoneyTypeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -454,16 +454,21 @@
             // 
             // dgvListTimKiem
             // 
-            this.dgvListTimKiem.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
+            this.dgvListTimKiem.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.dgvListTimKiem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListTimKiem.ContextMenuStrip = this.cms_dgvListTimKiem;
             this.dgvListTimKiem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvListTimKiem.FilterAndSortEnabled = true;
+            this.dgvListTimKiem.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvListTimKiem.Location = new System.Drawing.Point(0, 0);
+            this.dgvListTimKiem.MaxFilterButtonImageHeight = 23;
             this.dgvListTimKiem.Name = "dgvListTimKiem";
+            this.dgvListTimKiem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvListTimKiem.RowHeadersWidth = 51;
-            this.dgvListTimKiem.RowTemplate.Height = 23;
+            this.dgvListTimKiem.RowTemplate.Height = 24;
             this.dgvListTimKiem.Size = new System.Drawing.Size(374, 426);
-            this.dgvListTimKiem.TabIndex = 2;
+            this.dgvListTimKiem.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgvListTimKiem.TabIndex = 0;
             this.dgvListTimKiem.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellClick);
             this.dgvListTimKiem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListTimKiem_CellDoubleClick);
             // 
@@ -1271,11 +1276,16 @@
             this.dgvListItem.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvListItem.ContextMenuStrip = this.cms_dgvListItems;
             this.dgvListItem.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvListItem.FilterAndSortEnabled = true;
+            this.dgvListItem.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvListItem.Location = new System.Drawing.Point(0, 0);
+            this.dgvListItem.MaxFilterButtonImageHeight = 23;
             this.dgvListItem.Name = "dgvListItem";
+            this.dgvListItem.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvListItem.RowHeadersWidth = 51;
-            this.dgvListItem.RowTemplate.Height = 23;
+            this.dgvListItem.RowTemplate.Height = 24;
             this.dgvListItem.Size = new System.Drawing.Size(911, 356);
+            this.dgvListItem.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvListItem.TabIndex = 0;
             this.dgvListItem.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListItem_CellDoubleClick);
             this.dgvListItem.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvListItem_CellValueChanged);
@@ -1436,10 +1446,8 @@
         private System.Windows.Forms.Label labelStaffName;
         private System.Windows.Forms.Button btnOldPO;
         private System.Windows.Forms.Button btnAddItems;
-        private System.Windows.Forms.DataGridView dgvListTimKiem;
         private System.Windows.Forms.Button btnExportPO;
         private System.Windows.Forms.Button btnSavePO;
-        private System.Windows.Forms.DataGridView dgvListItem;
         private System.Windows.Forms.TextBox txtTotalVND;
         private System.Windows.Forms.TextBox txtRemark;
         private System.Windows.Forms.Label labelRemark;
@@ -1497,5 +1505,7 @@
         private System.Windows.Forms.ComboBox cboCurrency;
         private System.Windows.Forms.ToolStripMenuItem deleteItemsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem clearListToolStripMenuItem;
+        private Zuby.ADGV.AdvancedDataGridView dgvListItem;
+        private Zuby.ADGV.AdvancedDataGridView dgvListTimKiem;
     }
 }

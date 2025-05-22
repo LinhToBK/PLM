@@ -126,7 +126,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.labelSupplier);
             this.splitContainer1.Panel2.Controls.Add(this.labelAmount);
             this.splitContainer1.Panel2.Controls.Add(this.labelCode);
-            this.splitContainer1.Size = new System.Drawing.Size(1085, 620);
+            this.splitContainer1.Size = new System.Drawing.Size(1085, 568);
             this.splitContainer1.SplitterDistance = 448;
             this.splitContainer1.TabIndex = 0;
             // 
@@ -137,13 +137,13 @@
             this.dgvSearchAD.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvSearchAD.FilterAndSortEnabled = true;
             this.dgvSearchAD.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.dgvSearchAD.Location = new System.Drawing.Point(0, 145);
+            this.dgvSearchAD.Location = new System.Drawing.Point(0, 126);
             this.dgvSearchAD.MaxFilterButtonImageHeight = 23;
             this.dgvSearchAD.Name = "dgvSearchAD";
             this.dgvSearchAD.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvSearchAD.RowHeadersWidth = 51;
             this.dgvSearchAD.RowTemplate.Height = 24;
-            this.dgvSearchAD.Size = new System.Drawing.Size(448, 475);
+            this.dgvSearchAD.Size = new System.Drawing.Size(436, 475);
             this.dgvSearchAD.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvSearchAD.TabIndex = 10;
             this.dgvSearchAD.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearchAD_CellDoubleClick);
@@ -195,9 +195,9 @@
             // 
             this.dtpFilter.AllowDrop = true;
             this.dtpFilter.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpFilter.Location = new System.Drawing.Point(25, 94);
+            this.dtpFilter.Location = new System.Drawing.Point(111, 94);
             this.dtpFilter.Name = "dtpFilter";
-            this.dtpFilter.Size = new System.Drawing.Size(202, 30);
+            this.dtpFilter.Size = new System.Drawing.Size(116, 30);
             this.dtpFilter.TabIndex = 3;
             this.dtpFilter.ValueChanged += new System.EventHandler(this.dtpFilter_ValueChanged);
             // 
@@ -236,11 +236,11 @@
             this.dgvPartlist.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.dgvPartlist.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvPartlist.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvPartlist.Location = new System.Drawing.Point(0, 214);
+            this.dgvPartlist.Location = new System.Drawing.Point(0, 178);
             this.dgvPartlist.Name = "dgvPartlist";
             this.dgvPartlist.RowHeadersWidth = 51;
             this.dgvPartlist.RowTemplate.Height = 24;
-            this.dgvPartlist.Size = new System.Drawing.Size(633, 406);
+            this.dgvPartlist.Size = new System.Drawing.Size(612, 406);
             this.dgvPartlist.TabIndex = 3;
             // 
             // txtPOSupplier
@@ -386,7 +386,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1085, 620);
+            this.ClientSize = new System.Drawing.Size(1085, 568);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Segoe UI", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 6, 3, 6);

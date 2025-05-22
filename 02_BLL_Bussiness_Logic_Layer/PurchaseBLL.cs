@@ -34,6 +34,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return makeNewPODAL_.GetListSupplier_DAL();
         }
 
+        public DataTable GetAllInforSupplier_BLL()
+        {
+            return purchaseDAL.GetAllInforSupplier_DAL();
+        }
+
         public tblSupplier GetInforSupplier(string SupplierName)
         {
             return makeNewPODAL_.GetInforSupplier_DAL(SupplierName);
@@ -52,11 +57,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         public bool InsertListItems_to_tblPOItems_BLL(DataTable data_ListItems)
         {
             return makeNewPODAL_.InsertListItems_to_tblPOItems_DAL(data_ListItems);
-        }
-
-        public DataTable GetAllInforSupplierBLL()
-        {
-            return purchaseDAL.GetAllInforSupplierDAL();
         }
 
         public bool InsertNewSupplierBLL(string Name, string Phone, string Tax, string Location, string Rep, string Note)
@@ -228,6 +228,36 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         public DataTable Get_tblUnitType_BLL()
         {
             return purchaseDAL.Get_tblUnitType_DAL();
+        }
+
+        public DataTable Get_POInformation_BLL(DateTime startdate, DateTime endate)
+        {
+            return purchaseDAL.Get_POInformation_DAL(startdate, endate);
+        }
+
+        public DataTable Get_POInformation_BLL(DateTime startdate)
+        {
+            return purchaseDAL.Get_POInformation_DAL(startdate);
+        }
+
+        public DataTable Get_POInformation_BLL(string PartCode)
+        {
+            return purchaseDAL.Get_POInformation_DAL(PartCode);
+        }
+
+        public DataTable Get_tblPOItems_BLL(int PONumber)
+        {
+            return purchaseDAL.Get_tblPOItems_DAL(PONumber);
+        }
+
+        public DataTable Get_tblPOInformation_BLL(int PONumber)
+        {
+            return purchaseDAL.Get_tblPOInformation_DAL(PONumber);
+        }
+
+        public DataTable Get_tblPOStatus_BLL()
+        {
+            return purchaseDAL.Get_tblPOStatus_DAL();
         }
     }
 }

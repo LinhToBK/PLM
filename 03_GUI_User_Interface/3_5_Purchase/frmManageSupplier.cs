@@ -82,7 +82,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private void LoadAllInforSupplier()
         {
             //throw new NotImplementedException();
-            dgvSupplier.DataSource = purchaseBLL.GetAllInforSupplierBLL();
+            dgvSupplier.DataSource = purchaseBLL.GetAllInforSupplier_BLL();
             //dgvListDepartment.Columns[0].HeaderText = "STT";
             //dgvListDepartment.Columns[1].HeaderText = "Tên Phòng";
             //dgvListDepartment.Columns[0].Width = 30;

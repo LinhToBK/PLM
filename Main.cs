@@ -193,20 +193,24 @@ namespace PLM_Lynx
         {
             // Mở lại from mới
 
-            if (UserLevel == 3 || UserLevel == 1)
-            {
-                foreach (Form frm in Application.OpenForms)
-                {
-                    if (frm is frmFindPO)
-                    {
-                        // Nếu đang mở thì phải đóng  lại
-                        frm.Close();
-                        break;
-                    }
-                }
-                frmFindPO newfrm = new frmFindPO();
-                newfrm.ShowDialog();
-            }
+            //if (UserLevel == 3 || UserLevel == 1)
+            //{
+            //    foreach (Form frm in Application.OpenForms)
+            //    {
+            //        if (frm is frmFindPO_Update)
+            //        {
+            //            // Nếu đang mở thì phải đóng  lại
+            //            frm.Close();
+            //            break;
+            //        }
+            //    }
+            //    frmFindPO_Update newfrm = new frmFindPO_Update();
+            //    newfrm.UserName = tennguoidung;
+            //    newfrm.ShowDialog();
+            //}
+
+            frmTesting frm = new frmTesting();
+            frm.ShowDialog();
         }
 
         private void mnuAboutMe_Click(object sender, EventArgs e)

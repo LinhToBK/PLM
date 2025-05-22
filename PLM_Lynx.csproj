@@ -79,6 +79,12 @@
     <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
+    <Reference Include="GemBox.Spreadsheet, Version=47.0.0.1398, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
+      <HintPath>packages\GemBox.Spreadsheet.47.0.1398\lib\net35\GemBox.Spreadsheet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.Cryptography.Internal.9.0.0\lib\net462\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
     </Reference>
@@ -131,6 +137,7 @@
     <Reference Include="QRCoder, Version=1.6.0.0, Culture=neutral, PublicKeyToken=c4ed5b9ae8358a28, processorArchitecture=MSIL">
       <HintPath>packages\QRCoder.1.6.0\lib\net40\QRCoder.dll</HintPath>
     </Reference>
+    <Reference Include="ReachFramework" />
     <Reference Include="SKGL, Version=2.0.4.1, Culture=neutral, PublicKeyToken=6506df92444891d9, processorArchitecture=MSIL">
       <HintPath>packages\SoftwareProtector.1.0.5.1\lib\SKGL.dll</HintPath>
     </Reference>
@@ -161,6 +168,7 @@
     <Reference Include="System.Diagnostics.DiagnosticSource, Version=6.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>packages\System.Diagnostics.DiagnosticSource.6.0.1\lib\net461\System.Diagnostics.DiagnosticSource.dll</HintPath>
     </Reference>
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.IdentityModel" />
     <Reference Include="System.IdentityModel.Tokens.Jwt, Version=6.35.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>packages\System.IdentityModel.Tokens.Jwt.6.35.0\lib\net472\System.IdentityModel.Tokens.Jwt.dll</HintPath>
@@ -182,6 +190,7 @@
     <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
+    <Reference Include="System.Printing" />
     <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
       <HintPath>packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
@@ -442,6 +451,12 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.Designer.cs">
       <DependentUpon>frmFindPO.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO_Update.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO_Update.Designer.cs">
+      <DependentUpon>frmFindPO_Update.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -477,6 +492,18 @@
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMoneyType.Designer.cs">
       <DependentUpon>frmMoneyType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmPOInformation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmPOInformation.Designer.cs">
+      <DependentUpon>frmPOInformation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmTesting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmTesting.Designer.cs">
+      <DependentUpon>frmTesting.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmUnitType.cs">
       <SubType>Form</SubType>
@@ -718,6 +745,9 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO.resx">
       <DependentUpon>frmFindPO.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO_Update.resx">
+      <DependentUpon>frmFindPO_Update.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.resx">
       <DependentUpon>frmImportListItems.cs</DependentUpon>
     </EmbeddedResource>
@@ -735,6 +765,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmMoneyType.resx">
       <DependentUpon>frmMoneyType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmPOInformation.resx">
+      <DependentUpon>frmPOInformation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmTesting.resx">
+      <DependentUpon>frmTesting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmUnitType.resx">
       <DependentUpon>frmUnitType.cs</DependentUpon>

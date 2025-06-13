@@ -48,7 +48,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             labelPartStage.Text = rm.GetString("lb3");
             labelPartDescription.Text = rm.GetString("lb5");
             labelPartMaterial.Text = rm.GetString("lb4");
-            labelPartPrice.Text = rm.GetString("lb8");
+            //labelPartPrice.Text = rm.GetString("lb8");
             labelNote1.Text = rm.GetString("lb6");
             labelNote2.Text = rm.GetString("lb7");
 
@@ -86,28 +86,36 @@ namespace PLM_Lynx._03_GUI_User_Interface
             if (DetailInfor.Rows.Count > 0)
             {
                 // Hiển thị dữ liệu lên các ô textbox. sẽ lấy hàng đầu tiên
+                //p.PartCode, 
+                //p.PartName, 
+                //p.PartDescript, 
+                //s.Stage as PartStage,
+                //p.PartLog, 
+                //p.PartPrice, 
+                //p.PartMaterial,
+                //p.PartID
                 DataRow row0 = DetailInfor.Rows[0];
-                txtPartCode.Text = row0[0].ToString();
-                txtPartName.Text = row0[1].ToString();
-                txtPartStage.Text = row0[3].ToString();
-                txtPartDescription.Text = row0[2].ToString();
+                txtPartCode.Text = row0["PartCode"].ToString();
+                txtPartName.Text = row0["PartName"].ToString();
+                txtPartStage.Text = row0["PartStage"].ToString();
+                txtPartDescription.Text = row0["PartDescript"].ToString();
 
                 //txtPartLog.Text = row0[4].ToString();
-                LoadListECO(row0[4].ToString()); // Load danh sách ECO lên DataGridView
-                txtPartMaterial.Text = row0[6].ToString();
-                decimal partprice;
-                if (row0[5].ToString() == "" || row0[5].ToString() == "0")
-                {
-                    partprice = 0;
-                }
-                else
-                {
-                    partprice = Convert.ToDecimal(row0[5].ToString());
-                }
-                idpart = row0[7].ToString();
+                LoadListECO(row0["PartLog"].ToString()); // Load danh sách ECO lên DataGridView
+                txtPartMaterial.Text = row0["PartMaterial"].ToString();
+                //decimal partprice;
+                //if (row0[5].ToString() == "" || row0[5].ToString() == "0")
+                //{
+                //    partprice = 0;
+                //}
+                //else
+                //{
+                //    partprice = Convert.ToDecimal(row0[5].ToString());
+                //}
+                idpart = row0["PartID"].ToString();
                 LoadChild();
 
-                txtPartPrice.Text = partprice.ToString("N0");
+               // txtPartPrice.Text = partprice.ToString("N0");
 
                 // Hiển thị ảnh
                 if (commonBLL.UploadImagebyPartCode(partcode, PicPart) == true)
@@ -165,7 +173,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
             string DataPath = Properties.Settings.Default.LinkDataPart;
             string[] input = txtPartCode.Text.Split('-');  // Chia XXX-YYYYY thành 2 phần : XXX và YYYYY
-            filename = DataPath + input[0] + "\\" + input[1] + "\\" + filename;
+            //filename = DataPath + input[0] + "\\" + input[1] + "\\" + filename;
+            filename = Path.Combine(DataPath, input[0], input[1], filename);
             try
             {
                 if (filesize > 10000)
@@ -327,13 +336,14 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private void LoadChild()
         {
             // hiển thị child
+            // tblListChild : || Levels || PartCode || PartName || Quantity || Dir 
             _tblChild = _findPartBLL.GetChildBLL(idpart);
             dgvChild.DataSource = _tblChild;
-            dgvChild.Columns[4].Visible = false; // Ẩn cột Dir
-            dgvChild.Columns[0].Width = 80;
-            dgvChild.Columns[1].Width = 80;
-            dgvChild.Columns[2].Width = 200;
-            dgvChild.Columns[3].Width = 50;
+            dgvChild.Columns["Dir"].Visible = false; // Ẩn cột Dir
+            dgvChild.Columns["Levels"].Width = 80;
+            dgvChild.Columns["PartCode"].Width = 80;
+            dgvChild.Columns["PartName"].Width = 200;
+            dgvChild.Columns["Quantity"].Width = 50;
 
             dgvChild.AllowUserToAddRows = false;
             dgvChild.EditMode = DataGridViewEditMode.EditProgrammatically;

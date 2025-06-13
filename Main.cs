@@ -14,6 +14,7 @@ using PLM_Lynx._03_GUI_User_Interface._3_3_ECO;
 using PLM_Lynx._03_GUI_User_Interface._3_5_Purchase;
 using PLM_Lynx._03_GUI_User_Interface._3_6_Help;
 using PLM_Lynx._03_GUI_User_Interface._3_4_FindPart;
+using PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue;
 
 namespace PLM_Lynx
 {
@@ -63,12 +64,12 @@ namespace PLM_Lynx
                     mnuManagerUser.Enabled = false;
                     mnuRelationPart.Enabled = false;
 
-                    // Mở form tìm PO
-                    frmFindPO frmPO = new frmFindPO();
-                    frmPO.MdiParent = this;
-                    frmPO.WindowState = FormWindowState.Maximized;
-                    frmPO.Show();
+                    frmManage_Purchasing frm = new frmManage_Purchasing();
+                    frm.MdiParent = this;
+                    frm.WindowState = FormWindowState.Maximized;
+                    frm.Show();
                     break;
+
 
                 case 4: // NPI và QC
                     // Chặn các menu system
@@ -95,11 +96,20 @@ namespace PLM_Lynx
                     break;
 
                 default: // Đối với admin
-                    frmFindPart defaultFrm = new frmFindPart();
-                    defaultFrm.MdiParent = this;
-                    defaultFrm.WindowState = FormWindowState.Maximized;
-                    defaultFrm.Show();
+                         //frmFindPart defaultFrm = new frmFindPart();
+                         //defaultFrm.MdiParent = this;
+                         //defaultFrm.WindowState = FormWindowState.Maximized;
+                         //defaultFrm.Show();
+                         //break;
+
+                    //Mở form Make New PO V2
+                    frmManage_Purchasing frmA = new frmManage_Purchasing();
+                    frmA.MdiParent = this;
+                    frmA.WindowState = FormWindowState.Maximized;
+                    frmA.Show();
                     break;
+                  
+
             }
         }
 
@@ -177,15 +187,14 @@ namespace PLM_Lynx
 
         private void mnuMakeNewPO_Click(object sender, EventArgs e)
         {
-            frmMakePO frm = new frmMakePO();
-            frm._usercurrent = tennguoidung;
-            frm.ShowDialog();
+           frmMake_New_PO_V2 frm = new frmMake_New_PO_V2();
+            frm._UserName = tennguoidung;
+            frm.Show();
         }
 
         private void mnuManageSupplier_Click(object sender, EventArgs e)
         {
-            frmManageSupplier frm = new frmManageSupplier();
-
+            frmPurchase_Common_Information frm = new frmPurchase_Common_Information();
             frm.ShowDialog();
         }
 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmFindPart));
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.tableLayoutPanel5 = new System.Windows.Forms.TableLayoutPanel();
@@ -55,10 +56,14 @@
             this.txtHighLight = new System.Windows.Forms.TextBox();
             this.groupBoxResult = new System.Windows.Forms.GroupBox();
             this.dgvSearch = new Zuby.ADGV.AdvancedDataGridView();
+            this.cms_dgvSearch = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel1 = new System.Windows.Forms.Panel();
             this.groupBoxListParent = new System.Windows.Forms.GroupBox();
             this.dgvParent = new System.Windows.Forms.DataGridView();
+            this.cms_dgvListParent = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openPartToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.Panel_Infor_Parent = new System.Windows.Forms.Panel();
             this.groupboxParentImage = new System.Windows.Forms.GroupBox();
             this.picParent = new System.Windows.Forms.PictureBox();
@@ -69,6 +74,8 @@
             this.panel2 = new System.Windows.Forms.Panel();
             this.groupBoxListChild = new System.Windows.Forms.GroupBox();
             this.dgvChild = new System.Windows.Forms.DataGridView();
+            this.cms_dgvListChild = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openPartToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
             this.Panel_Child_Infor = new System.Windows.Forms.Panel();
             this.txtChildCode = new System.Windows.Forms.TextBox();
             this.txtChildName = new System.Windows.Forms.TextBox();
@@ -97,16 +104,19 @@
             this.tableLayoutPanel4.SuspendLayout();
             this.groupBoxResult.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).BeginInit();
+            this.cms_dgvSearch.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.groupBoxListParent.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvParent)).BeginInit();
+            this.cms_dgvListParent.SuspendLayout();
             this.Panel_Infor_Parent.SuspendLayout();
             this.groupboxParentImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picParent)).BeginInit();
             this.panel2.SuspendLayout();
             this.groupBoxListChild.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvChild)).BeginInit();
+            this.cms_dgvListChild.SuspendLayout();
             this.Panel_Child_Infor.SuspendLayout();
             this.groupboxChildImage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picChild)).BeginInit();
@@ -126,8 +136,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1128, 822);
-            this.splitContainer1.SplitterDistance = 566;
+            this.splitContainer1.Size = new System.Drawing.Size(1356, 822);
+            this.splitContainer1.SplitterDistance = 680;
             this.splitContainer1.TabIndex = 0;
             // 
             // tableLayoutPanel5
@@ -145,7 +155,7 @@
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 400F));
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.tableLayoutPanel5.Size = new System.Drawing.Size(566, 822);
+            this.tableLayoutPanel5.Size = new System.Drawing.Size(680, 822);
             this.tableLayoutPanel5.TabIndex = 0;
             // 
             // groupBoxPartInfor
@@ -157,7 +167,7 @@
             this.groupBoxPartInfor.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxPartInfor.Name = "groupBoxPartInfor";
             this.groupBoxPartInfor.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxPartInfor.Size = new System.Drawing.Size(558, 314);
+            this.groupBoxPartInfor.Size = new System.Drawing.Size(672, 314);
             this.groupBoxPartInfor.TabIndex = 2;
             this.groupBoxPartInfor.TabStop = false;
             this.groupBoxPartInfor.Text = "Information of the clicked part";
@@ -165,7 +175,7 @@
             // splitContainer2
             // 
             this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(4, 26);
+            this.splitContainer2.Location = new System.Drawing.Point(4, 22);
             this.splitContainer2.Name = "splitContainer2";
             // 
             // splitContainer2.Panel1
@@ -175,8 +185,8 @@
             // splitContainer2.Panel2
             // 
             this.splitContainer2.Panel2.Controls.Add(this.groupboxImagePart);
-            this.splitContainer2.Size = new System.Drawing.Size(550, 284);
-            this.splitContainer2.SplitterDistance = 386;
+            this.splitContainer2.Size = new System.Drawing.Size(664, 288);
+            this.splitContainer2.SplitterDistance = 466;
             this.splitContainer2.TabIndex = 7;
             // 
             // tableLayoutPanel6
@@ -195,7 +205,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 60F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 100F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(386, 284);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(466, 288);
             this.tableLayoutPanel6.TabIndex = 6;
             // 
             // tableLayoutPanel7
@@ -212,7 +222,7 @@
             this.tableLayoutPanel7.Name = "tableLayoutPanel7";
             this.tableLayoutPanel7.RowCount = 1;
             this.tableLayoutPanel7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel7.Size = new System.Drawing.Size(380, 34);
+            this.tableLayoutPanel7.Size = new System.Drawing.Size(460, 34);
             this.tableLayoutPanel7.TabIndex = 0;
             // 
             // txtCode
@@ -224,26 +234,26 @@
             this.txtCode.Multiline = true;
             this.txtCode.Name = "txtCode";
             this.txtCode.ReadOnly = true;
-            this.txtCode.Size = new System.Drawing.Size(135, 26);
+            this.txtCode.Size = new System.Drawing.Size(175, 26);
             this.txtCode.TabIndex = 1;
             // 
             // txtStage
             // 
-            this.txtStage.Location = new System.Drawing.Point(289, 3);
+            this.txtStage.Location = new System.Drawing.Point(369, 3);
             this.txtStage.Name = "txtStage";
             this.txtStage.ReadOnly = true;
-            this.txtStage.Size = new System.Drawing.Size(88, 29);
+            this.txtStage.Size = new System.Drawing.Size(88, 25);
             this.txtStage.TabIndex = 5;
             // 
             // txtMaterial
             // 
             this.txtMaterial.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.txtMaterial.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.txtMaterial.Location = new System.Drawing.Point(146, 3);
+            this.txtMaterial.Location = new System.Drawing.Point(186, 3);
             this.txtMaterial.Multiline = true;
             this.txtMaterial.Name = "txtMaterial";
             this.txtMaterial.ReadOnly = true;
-            this.txtMaterial.Size = new System.Drawing.Size(137, 28);
+            this.txtMaterial.Size = new System.Drawing.Size(177, 28);
             this.txtMaterial.TabIndex = 5;
             // 
             // txtName
@@ -255,7 +265,7 @@
             this.txtName.Multiline = true;
             this.txtName.Name = "txtName";
             this.txtName.ReadOnly = true;
-            this.txtName.Size = new System.Drawing.Size(378, 32);
+            this.txtName.Size = new System.Drawing.Size(458, 32);
             this.txtName.TabIndex = 1;
             // 
             // txtDescript
@@ -268,7 +278,7 @@
             this.txtDescript.Name = "txtDescript";
             this.txtDescript.ReadOnly = true;
             this.txtDescript.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtDescript.Size = new System.Drawing.Size(378, 52);
+            this.txtDescript.Size = new System.Drawing.Size(458, 52);
             this.txtDescript.TabIndex = 1;
             // 
             // dgvListFile
@@ -281,7 +291,7 @@
             this.dgvListFile.Margin = new System.Windows.Forms.Padding(4);
             this.dgvListFile.Name = "dgvListFile";
             this.dgvListFile.RowHeadersWidth = 51;
-            this.dgvListFile.Size = new System.Drawing.Size(378, 136);
+            this.dgvListFile.Size = new System.Drawing.Size(458, 140);
             this.dgvListFile.TabIndex = 4;
             // 
             // groupboxImagePart
@@ -292,7 +302,7 @@
             this.groupboxImagePart.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxImagePart.Name = "groupboxImagePart";
             this.groupboxImagePart.Padding = new System.Windows.Forms.Padding(4);
-            this.groupboxImagePart.Size = new System.Drawing.Size(160, 151);
+            this.groupboxImagePart.Size = new System.Drawing.Size(194, 151);
             this.groupboxImagePart.TabIndex = 3;
             this.groupboxImagePart.TabStop = false;
             this.groupboxImagePart.Text = "Image";
@@ -300,10 +310,10 @@
             // picPart
             // 
             this.picPart.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picPart.Location = new System.Drawing.Point(4, 26);
+            this.picPart.Location = new System.Drawing.Point(4, 22);
             this.picPart.Margin = new System.Windows.Forms.Padding(4);
             this.picPart.Name = "picPart";
-            this.picPart.Size = new System.Drawing.Size(152, 121);
+            this.picPart.Size = new System.Drawing.Size(186, 125);
             this.picPart.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picPart.TabIndex = 2;
             this.picPart.TabStop = false;
@@ -320,7 +330,7 @@
             this.tableLayoutPanel2.RowCount = 2;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 45F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(560, 94);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(674, 94);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // tableLayoutPanel3
@@ -340,7 +350,7 @@
             this.tableLayoutPanel3.Name = "tableLayoutPanel3";
             this.tableLayoutPanel3.RowCount = 1;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel3.Size = new System.Drawing.Size(554, 39);
+            this.tableLayoutPanel3.Size = new System.Drawing.Size(668, 39);
             this.tableLayoutPanel3.TabIndex = 0;
             // 
             // txtKeySearch
@@ -361,7 +371,7 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.txtViewRow.Location = new System.Drawing.Point(353, 3);
             this.txtViewRow.Name = "txtViewRow";
-            this.txtViewRow.Size = new System.Drawing.Size(48, 27);
+            this.txtViewRow.Size = new System.Drawing.Size(48, 23);
             this.txtViewRow.TabIndex = 8;
             this.txtViewRow.Text = "100";
             // 
@@ -440,7 +450,7 @@
             this.txtHighLight.Location = new System.Drawing.Point(354, 4);
             this.txtHighLight.Margin = new System.Windows.Forms.Padding(4);
             this.txtHighLight.Name = "txtHighLight";
-            this.txtHighLight.Size = new System.Drawing.Size(186, 27);
+            this.txtHighLight.Size = new System.Drawing.Size(186, 23);
             this.txtHighLight.TabIndex = 5;
             this.txtHighLight.TextChanged += new System.EventHandler(this.txtHighLight_TextChanged);
             // 
@@ -453,7 +463,7 @@
             this.groupBoxResult.Margin = new System.Windows.Forms.Padding(4);
             this.groupBoxResult.Name = "groupBoxResult";
             this.groupBoxResult.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBoxResult.Size = new System.Drawing.Size(558, 392);
+            this.groupBoxResult.Size = new System.Drawing.Size(672, 392);
             this.groupBoxResult.TabIndex = 1;
             this.groupBoxResult.TabStop = false;
             this.groupBoxResult.Text = "Search results";
@@ -461,21 +471,37 @@
             // dgvSearch
             // 
             this.dgvSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSearch.ContextMenuStrip = this.cms_dgvSearch;
             this.dgvSearch.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvSearch.FilterAndSortEnabled = true;
             this.dgvSearch.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.dgvSearch.Location = new System.Drawing.Point(4, 26);
+            this.dgvSearch.Location = new System.Drawing.Point(4, 22);
             this.dgvSearch.MaxFilterButtonImageHeight = 23;
             this.dgvSearch.Name = "dgvSearch";
             this.dgvSearch.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgvSearch.RowHeadersWidth = 51;
             this.dgvSearch.RowTemplate.Height = 24;
-            this.dgvSearch.Size = new System.Drawing.Size(550, 362);
+            this.dgvSearch.Size = new System.Drawing.Size(664, 366);
             this.dgvSearch.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgvSearch.TabIndex = 0;
             this.dgvSearch.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSearch_CellDoubleClick);
             this.dgvSearch.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvSearch_CellPainting);
             this.dgvSearch.Click += new System.EventHandler(this.dgvSearch_Click);
+            // 
+            // cms_dgvSearch
+            // 
+            this.cms_dgvSearch.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openPartToolStripMenuItem});
+            this.cms_dgvSearch.Name = "cms_dgvSearch";
+            this.cms_dgvSearch.Size = new System.Drawing.Size(128, 26);
+            // 
+            // openPartToolStripMenuItem
+            // 
+            this.openPartToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openPartToolStripMenuItem.Image")));
+            this.openPartToolStripMenuItem.Name = "openPartToolStripMenuItem";
+            this.openPartToolStripMenuItem.Size = new System.Drawing.Size(127, 22);
+            this.openPartToolStripMenuItem.Text = "Open Part";
+            this.openPartToolStripMenuItem.Click += new System.EventHandler(this.openPartToolStripMenuItem_Click);
             // 
             // tableLayoutPanel1
             // 
@@ -494,7 +520,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(558, 822);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(672, 822);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // panel1
@@ -504,7 +530,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(3, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(552, 158);
+            this.panel1.Size = new System.Drawing.Size(666, 158);
             this.panel1.TabIndex = 3;
             // 
             // groupBoxListParent
@@ -513,7 +539,7 @@
             this.groupBoxListParent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxListParent.Location = new System.Drawing.Point(0, 0);
             this.groupBoxListParent.Name = "groupBoxListParent";
-            this.groupBoxListParent.Size = new System.Drawing.Size(552, 158);
+            this.groupBoxListParent.Size = new System.Drawing.Size(666, 158);
             this.groupBoxListParent.TabIndex = 1;
             this.groupBoxListParent.TabStop = false;
             this.groupBoxListParent.Text = "List Parent Part";
@@ -523,16 +549,33 @@
             this.dgvParent.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvParent.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
             this.dgvParent.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvParent.ContextMenuStrip = this.cms_dgvListParent;
             this.dgvParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvParent.Location = new System.Drawing.Point(3, 23);
+            this.dgvParent.Location = new System.Drawing.Point(3, 19);
             this.dgvParent.Margin = new System.Windows.Forms.Padding(4);
             this.dgvParent.Name = "dgvParent";
             this.dgvParent.RowHeadersWidth = 51;
             this.dgvParent.RowTemplate.Height = 23;
-            this.dgvParent.Size = new System.Drawing.Size(546, 132);
+            this.dgvParent.Size = new System.Drawing.Size(660, 136);
             this.dgvParent.TabIndex = 0;
             this.dgvParent.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvParent_CellDoubleClick);
             this.dgvParent.Click += new System.EventHandler(this.dgvParent_Click);
+            // 
+            // cms_dgvListParent
+            // 
+            this.cms_dgvListParent.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cms_dgvListParent.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openPartToolStripMenuItem1});
+            this.cms_dgvListParent.Name = "cms_dgvListParent";
+            this.cms_dgvListParent.Size = new System.Drawing.Size(132, 30);
+            // 
+            // openPartToolStripMenuItem1
+            // 
+            this.openPartToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("openPartToolStripMenuItem1.Image")));
+            this.openPartToolStripMenuItem1.Name = "openPartToolStripMenuItem1";
+            this.openPartToolStripMenuItem1.Size = new System.Drawing.Size(131, 26);
+            this.openPartToolStripMenuItem1.Text = "Open Part";
+            this.openPartToolStripMenuItem1.Click += new System.EventHandler(this.openPartToolStripMenuItem1_Click);
             // 
             // Panel_Infor_Parent
             // 
@@ -545,14 +588,14 @@
             this.Panel_Infor_Parent.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Infor_Parent.Location = new System.Drawing.Point(3, 167);
             this.Panel_Infor_Parent.Name = "Panel_Infor_Parent";
-            this.Panel_Infor_Parent.Size = new System.Drawing.Size(552, 117);
+            this.Panel_Infor_Parent.Size = new System.Drawing.Size(666, 117);
             this.Panel_Infor_Parent.TabIndex = 4;
             // 
             // groupboxParentImage
             // 
             this.groupboxParentImage.Controls.Add(this.picParent);
             this.groupboxParentImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupboxParentImage.Location = new System.Drawing.Point(431, 0);
+            this.groupboxParentImage.Location = new System.Drawing.Point(545, 0);
             this.groupboxParentImage.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxParentImage.Name = "groupboxParentImage";
             this.groupboxParentImage.Padding = new System.Windows.Forms.Padding(4);
@@ -564,10 +607,10 @@
             // picParent
             // 
             this.picParent.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picParent.Location = new System.Drawing.Point(4, 24);
+            this.picParent.Location = new System.Drawing.Point(4, 20);
             this.picParent.Margin = new System.Windows.Forms.Padding(4);
             this.picParent.Name = "picParent";
-            this.picParent.Size = new System.Drawing.Size(113, 89);
+            this.picParent.Size = new System.Drawing.Size(113, 93);
             this.picParent.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picParent.TabIndex = 0;
             this.picParent.TabStop = false;
@@ -590,7 +633,7 @@
             this.txtParentName.Margin = new System.Windows.Forms.Padding(4);
             this.txtParentName.Name = "txtParentName";
             this.txtParentName.ReadOnly = true;
-            this.txtParentName.Size = new System.Drawing.Size(388, 27);
+            this.txtParentName.Size = new System.Drawing.Size(388, 23);
             this.txtParentName.TabIndex = 1;
             // 
             // txtParentMaterial
@@ -600,7 +643,7 @@
             this.txtParentMaterial.Margin = new System.Windows.Forms.Padding(4);
             this.txtParentMaterial.Name = "txtParentMaterial";
             this.txtParentMaterial.ReadOnly = true;
-            this.txtParentMaterial.Size = new System.Drawing.Size(124, 27);
+            this.txtParentMaterial.Size = new System.Drawing.Size(124, 23);
             this.txtParentMaterial.TabIndex = 1;
             this.txtParentMaterial.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -611,7 +654,7 @@
             this.txtParentCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtParentCode.Name = "txtParentCode";
             this.txtParentCode.ReadOnly = true;
-            this.txtParentCode.Size = new System.Drawing.Size(115, 27);
+            this.txtParentCode.Size = new System.Drawing.Size(115, 23);
             this.txtParentCode.TabIndex = 1;
             this.txtParentCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -623,7 +666,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(3, 290);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(552, 405);
+            this.panel2.Size = new System.Drawing.Size(666, 405);
             this.panel2.TabIndex = 5;
             // 
             // groupBoxListChild
@@ -632,7 +675,7 @@
             this.groupBoxListChild.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBoxListChild.Location = new System.Drawing.Point(0, 0);
             this.groupBoxListChild.Name = "groupBoxListChild";
-            this.groupBoxListChild.Size = new System.Drawing.Size(552, 405);
+            this.groupBoxListChild.Size = new System.Drawing.Size(666, 405);
             this.groupBoxListChild.TabIndex = 1;
             this.groupBoxListChild.TabStop = false;
             this.groupBoxListChild.Text = "List Child Part";
@@ -642,18 +685,35 @@
             this.dgvChild.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvChild.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dgvChild.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvChild.ContextMenuStrip = this.cms_dgvListChild;
             this.dgvChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvChild.Location = new System.Drawing.Point(3, 23);
+            this.dgvChild.Location = new System.Drawing.Point(3, 19);
             this.dgvChild.Margin = new System.Windows.Forms.Padding(4);
             this.dgvChild.Name = "dgvChild";
             this.dgvChild.RowHeadersWidth = 51;
             this.dgvChild.RowTemplate.Height = 23;
-            this.dgvChild.Size = new System.Drawing.Size(546, 379);
+            this.dgvChild.Size = new System.Drawing.Size(660, 383);
             this.dgvChild.TabIndex = 0;
             this.dgvChild.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvChild_CellDoubleClick);
             this.dgvChild.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dgvChild_CellFormatting);
             this.dgvChild.CellPainting += new System.Windows.Forms.DataGridViewCellPaintingEventHandler(this.dgvChild_CellPainting);
             this.dgvChild.Click += new System.EventHandler(this.dgvChild_Click);
+            // 
+            // cms_dgvListChild
+            // 
+            this.cms_dgvListChild.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.cms_dgvListChild.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openPartToolStripMenuItem2});
+            this.cms_dgvListChild.Name = "cms_dgvListChild";
+            this.cms_dgvListChild.Size = new System.Drawing.Size(132, 30);
+            // 
+            // openPartToolStripMenuItem2
+            // 
+            this.openPartToolStripMenuItem2.Image = ((System.Drawing.Image)(resources.GetObject("openPartToolStripMenuItem2.Image")));
+            this.openPartToolStripMenuItem2.Name = "openPartToolStripMenuItem2";
+            this.openPartToolStripMenuItem2.Size = new System.Drawing.Size(131, 26);
+            this.openPartToolStripMenuItem2.Text = "Open Part";
+            this.openPartToolStripMenuItem2.Click += new System.EventHandler(this.openPartToolStripMenuItem2_Click);
             // 
             // Panel_Child_Infor
             // 
@@ -668,7 +728,7 @@
             this.Panel_Child_Infor.Dock = System.Windows.Forms.DockStyle.Fill;
             this.Panel_Child_Infor.Location = new System.Drawing.Point(3, 701);
             this.Panel_Child_Infor.Name = "Panel_Child_Infor";
-            this.Panel_Child_Infor.Size = new System.Drawing.Size(552, 118);
+            this.Panel_Child_Infor.Size = new System.Drawing.Size(666, 118);
             this.Panel_Child_Infor.TabIndex = 6;
             // 
             // txtChildCode
@@ -678,7 +738,7 @@
             this.txtChildCode.Margin = new System.Windows.Forms.Padding(4);
             this.txtChildCode.Name = "txtChildCode";
             this.txtChildCode.ReadOnly = true;
-            this.txtChildCode.Size = new System.Drawing.Size(74, 27);
+            this.txtChildCode.Size = new System.Drawing.Size(74, 23);
             this.txtChildCode.TabIndex = 1;
             // 
             // txtChildName
@@ -688,7 +748,7 @@
             this.txtChildName.Margin = new System.Windows.Forms.Padding(4);
             this.txtChildName.Name = "txtChildName";
             this.txtChildName.ReadOnly = true;
-            this.txtChildName.Size = new System.Drawing.Size(302, 27);
+            this.txtChildName.Size = new System.Drawing.Size(302, 23);
             this.txtChildName.TabIndex = 1;
             // 
             // btnExportOnly
@@ -727,7 +787,7 @@
             this.ckcWithImage.Location = new System.Drawing.Point(142, 54);
             this.ckcWithImage.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.ckcWithImage.Name = "ckcWithImage";
-            this.ckcWithImage.Size = new System.Drawing.Size(108, 24);
+            this.ckcWithImage.Size = new System.Drawing.Size(87, 19);
             this.ckcWithImage.TabIndex = 5;
             this.ckcWithImage.Text = "With Image";
             this.ckcWithImage.UseVisualStyleBackColor = true;
@@ -736,7 +796,7 @@
             // 
             this.groupboxChildImage.Controls.Add(this.picChild);
             this.groupboxChildImage.Dock = System.Windows.Forms.DockStyle.Right;
-            this.groupboxChildImage.Location = new System.Drawing.Point(431, 0);
+            this.groupboxChildImage.Location = new System.Drawing.Point(545, 0);
             this.groupboxChildImage.Margin = new System.Windows.Forms.Padding(4);
             this.groupboxChildImage.Name = "groupboxChildImage";
             this.groupboxChildImage.Padding = new System.Windows.Forms.Padding(4);
@@ -748,20 +808,20 @@
             // picChild
             // 
             this.picChild.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.picChild.Location = new System.Drawing.Point(4, 24);
+            this.picChild.Location = new System.Drawing.Point(4, 20);
             this.picChild.Margin = new System.Windows.Forms.Padding(4);
             this.picChild.Name = "picChild";
-            this.picChild.Size = new System.Drawing.Size(113, 90);
+            this.picChild.Size = new System.Drawing.Size(113, 94);
             this.picChild.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.picChild.TabIndex = 2;
             this.picChild.TabStop = false;
             // 
             // frmFindPart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1128, 822);
+            this.ClientSize = new System.Drawing.Size(1356, 822);
             this.Controls.Add(this.splitContainer1);
             this.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -794,11 +854,13 @@
             this.tableLayoutPanel4.PerformLayout();
             this.groupBoxResult.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvSearch)).EndInit();
+            this.cms_dgvSearch.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.groupBoxListParent.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvParent)).EndInit();
+            this.cms_dgvListParent.ResumeLayout(false);
             this.Panel_Infor_Parent.ResumeLayout(false);
             this.Panel_Infor_Parent.PerformLayout();
             this.groupboxParentImage.ResumeLayout(false);
@@ -806,6 +868,7 @@
             this.panel2.ResumeLayout(false);
             this.groupBoxListChild.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvChild)).EndInit();
+            this.cms_dgvListChild.ResumeLayout(false);
             this.Panel_Child_Infor.ResumeLayout(false);
             this.Panel_Child_Infor.PerformLayout();
             this.groupboxChildImage.ResumeLayout(false);
@@ -864,5 +927,11 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel7;
         private System.Windows.Forms.SplitContainer splitContainer2;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel5;
+        private System.Windows.Forms.ContextMenuStrip cms_dgvSearch;
+        private System.Windows.Forms.ToolStripMenuItem openPartToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip cms_dgvListParent;
+        private System.Windows.Forms.ContextMenuStrip cms_dgvListChild;
+        private System.Windows.Forms.ToolStripMenuItem openPartToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem openPartToolStripMenuItem2;
     }
 }

@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Azure.Core;
+using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using PLM_Lynx._03_GUI_User_Interface._00_Common;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,33 +11,58 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Documents;
 using System.Windows.Forms;
-using Azure.Core;
-using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 {
     public partial class frmImportListItems : Form
     {
-        private PurchaseBLL _purchaseBLL = new PurchaseBLL();
+        /// <summary>
+        /// 00 - INITIALIZATION Variables
+        /// </summary>
+        // -------------------------
+        // -- 01 - Static variables
+        // -------------------------
+        // Part Code ||
+        public DataTable tbl_Items_Now { get; set; }
 
+        // Check || PartCode ||  PartName || Status
+        public DataTable tbl_Items_OK_for_Import { get; set; }
+
+        public DataTable tbl_Items_OK { get; set; }
+
+        private List<String> Lstr_Items_Now = new List<string>();
+
+        // -------------------------
+        // -- 02. Class variables
+        // -------------------------
+        private PurchaseBLL _purchaseBLL = new PurchaseBLL();
+        private CommonBLL _commonBLL = new CommonBLL();
+        private Purchase_V2_BLL _purchase_V2_BLL = new Purchase_V2_BLL();
+
+        /// <summary>
+        /// 01 - METHODS
+        /// </summary>
         public frmImportListItems()
         {
+            
             InitializeComponent();
+
+            tbl_Items_OK_for_Import = new DataTable();
+            tbl_Items_OK_for_Import.Columns.Add("Check", typeof(bool));
+            tbl_Items_OK_for_Import.Columns.Add("PartCode", typeof(string));
+            tbl_Items_OK_for_Import.Columns.Add("PartName", typeof(string));
+            tbl_Items_OK_for_Import.Columns.Add("Status", typeof(string));
+
+
         }
-
-        public DataTable ListItem_Now { get; set; }
-
-        public DataTable ListItem_OK { get; set; }
 
         private void frmImportListItems_Load(object sender, EventArgs e)
         {
-            AutoFill_dgvListitems();
-            GetList_ItemNow();
+            Convert_tbl_Items_Now_to_Lstr_Items_Now();
+            dgvListItem.DataSource = tbl_Items_OK_for_Import;
         }
 
-        private List<String> d_sach_ItemNow = new List<string>();
-
-        private DataTable Convert_d_sach_ItemNow_to_datatable(List<String> d_sach)
+        private DataTable Convert_Lstr_Items_Now_to_tbl_Items_Now(List<String> d_sach)
         {
             // Kiểm tra trước, nếu d_sach rỗng thì không cần làm gì cả
             if (d_sach == null || d_sach.Count == 0)
@@ -52,17 +80,27 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             return dt;
         }
 
-        private void GetList_ItemNow()
+        private void Convert_tbl_Items_Now_to_Lstr_Items_Now()
         {
             // Lấy danh sách Item hiện tại từ datatable    ListItem_Now
-            d_sach_ItemNow.Clear();
-            if (ListItem_Now != null && ListItem_Now.Rows.Count > 0)
+            Lstr_Items_Now.Clear();
+            if (tbl_Items_Now != null && tbl_Items_Now.Rows.Count > 0)
             {
-                foreach (DataRow row in ListItem_Now.Rows)
+                foreach (DataRow row in tbl_Items_Now.Rows)
                 {
-                    string partCode = row["PartCode"].ToString();
-                    d_sach_ItemNow.Add(partCode);
+                    string partCode = row[0].ToString();
+                    Lstr_Items_Now.Add(partCode);
                 }
+            }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            string tb = "Do you want to close this tab ? ";
+            DialogResult result = MessageBox.Show(tb, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
+            {
+                this.Close();
             }
         }
 
@@ -95,7 +133,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     else
                     {
                         // Kiểm tra có trong danh sách code đang có hay khônng
-                        if (d_sach_ItemNow.Contains(partCode))
+                        if (Lstr_Items_Now.Contains(partCode))
                         {
                             // Tô màu vàng cho dòng trùng
                             row.DefaultCellStyle.BackColor = Color.Yellow;
@@ -111,12 +149,13 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
 
                 // Lấy danh sách PartCode này đi kiểm tra trong database
 
-                DataTable GetPartCode_database = _purchaseBLL.QueryInforItemPO_BLL(Convert_d_sach_ItemNow_to_datatable(dsach_PartCode));
-
+                //DataTable GetPartCode_database = _purchaseBLL.QueryInforItemPO_BLL(Convert_Lstr_Items_Now_to_tbl_Items_Now(dsach_PartCode));
+                DataTable Get_PartCode_from_Database = _purchase_V2_BLL.Select_tblPur_Part_BLL(Convert_Lstr_Items_Now_to_tbl_Items_Now(dsach_PartCode));
+                // PartCode, PartName, PartPurchasePrice, PartSalePrice, Eable_Purchase, Eable_Inventory, Eable_Sale, TaxCode, SupplierIDPrefer, TaxIDPrefer
                 List<string> d_sach_PartCode_NG = new List<string>();
-                if (GetPartCode_database != null && GetPartCode_database.Rows.Count > 0)
+                if (Get_PartCode_from_Database != null && Get_PartCode_from_Database.Rows.Count > 0)
                 {
-                    foreach (DataRow row in GetPartCode_database.Rows)
+                    foreach (DataRow row in Get_PartCode_from_Database.Rows)
                     {
                         string partCode = row["PartCode"].ToString();
                         string partName = row["PartName"].ToString();
@@ -142,7 +181,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                         row.DefaultCellStyle.BackColor = Color.BlueViolet;
                         row.Cells["Status"].Value = "This partcode does not exist in the database.";
                     }
-                      
                 }
 
                 // Xóa những dòng trắng nếu có
@@ -155,7 +193,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     }
                 }
 
-                if(CheckOK() == true)
+                if (CheckOK() == true)
                 {
                     MessageBox.Show("All items are OK.", "OK", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -170,18 +208,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
         }
 
-        private void AutoFill_dgvListitems()
-        {
-            // Hiệu chỉnh lại dgvListItems
-            dgvListItem.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvListItem.Columns["Check"].Width = 50;
-            dgvListItem.Columns["PartCode"].Width = 100;
-            dgvListItem.Columns["PartName"].Width = 200;
-            //dgvListItem.Columns["Status"].Width = 200;
-        }
-
         private void dgvListItem_KeyDown(object sender, KeyEventArgs e)
-
         {
             if (e.Control && e.KeyCode == Keys.V)
             {
@@ -204,37 +231,31 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                 // Tách từng dòng (Excel thường phân tách bằng \r\n)
                 string[] lines = clipboardText.Split(new[] { "\r\n", "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
 
-                // Vị trí dòng đang chọn trong DataGridView
-                int startRowIndex = dgvListItem.CurrentCell?.RowIndex ?? 0;
-
-                // Thêm dòng nếu chưa đủ
-                while (dgvListItem.Rows.Count < startRowIndex + lines.Length)
-                {
-                    dgvListItem.Rows.Add();
-                }
-
-                // Gán từng dòng vào cột được chọn
+                
                 for (int i = 0; i < lines.Length; i++)
                 {
-                    DataGridViewRow row = dgvListItem.Rows[startRowIndex + i];
-                    row.Cells["PartCode"].Value = lines[i].Trim();
-                }
+                    if (string.IsNullOrWhiteSpace(lines[i]))
+                    {
+                        continue; // Bỏ qua dòng trống
+                    }
+                    else
+                    {
 
-                AutoFill_dgvListitems();
+                        DataRow newrow = tbl_Items_OK_for_Import.NewRow();
+                        newrow["Check"] = false; // Mặc định là chưa chọn
+                        newrow["PartCode"] = lines[i].Trim();
+                        newrow["PartName"] = ""; 
+                        newrow["Status"] = ""; 
+                        tbl_Items_OK_for_Import.Rows.Add(newrow);
+                    }
+
+                }
+                dgvListItem.Refresh();
+                    
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi dán dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            string tb = "Do you want to close this tab ? ";
-            DialogResult result = MessageBox.Show(tb, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (result == DialogResult.Yes)
-            {
-                this.Close();
             }
         }
 
@@ -257,7 +278,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             DialogResult result = MessageBox.Show(tb, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (result == DialogResult.Yes)
             {
-                dgvListItem.Rows.Clear();
+                tbl_Items_OK_for_Import.Clear(); 
             }
         }
 
@@ -300,10 +321,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     // Lấy danh sách code từ dgvListItem
                     DataTable dt_OK = new DataTable();
                     dt_OK.Columns.Add("PartCode", typeof(string));
-                    foreach(DataGridViewRow row in dgvListItem.Rows)
+                    foreach (DataGridViewRow row in dgvListItem.Rows)
                     {
                         // Bỏ qua dòng "new row" của DataGridView nếu nó có
-                        
+
                         object cellValue = row.Cells["PartCode"].Value;
                         // Kiểm tra nếu PartCode bị null hoặc rỗng thì bỏ qua
                         if (cellValue == null || string.IsNullOrWhiteSpace(cellValue.ToString().Trim()))
@@ -313,7 +334,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     }
 
                     // Gán danh sách này cho ListItem_OK
-                    ListItem_OK = _purchaseBLL.QueryInforItemPO_BLL(dt_OK);
+                    // tbl_Items_OK_for_Import = _purchase_V2_BLL.Select_tblPur_Part_BLL(dt_OK);
+                    tbl_Items_OK = _purchase_V2_BLL.Select_tblPur_Part_BLL(dt_OK);
                     this.Close();
                 }
                 else
@@ -326,10 +348,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
         private bool CheckOK()
         {
             // Thực hiện việc click Check trước
-            
 
-            bool status = true ;
-            
+            bool status = true;
+
             if (dgvListItem.Rows.Count > 0)
             {
                 foreach (DataGridViewRow row in dgvListItem.Rows)
@@ -349,7 +370,39 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
             }
 
             return status;
+        }
 
+        private void deleteRowToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+           
+
+            DataGridViewRow row = dgvListItem.CurrentRow;
+            if (row != null && !row.IsNewRow) // Bỏ qua dòng mới (chưa nhập dữ liệu)
+            {
+                dgvListItem.Rows.Remove(row);
+            }
+
+
+        }
+
+        private void editViewTableToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string colmode = dgvListItem.AutoSizeColumnsMode.ToString();
+            frmDataGridView_Modify frm = new frmDataGridView_Modify(_commonBLL.Get_Attribute_from_DatagridView(dgvListItem), colmode);
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _commonBLL.Set_Attribute_to_DatagridView(dgvListItem, frm.table_Updated_Att, frm.Col_ModeID);
+            }
+        }
+
+        private void clearAllDataToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnClearAllData.PerformClick();
+        }
+
+        private void checkToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            btnCheck.PerformClick();
         }
     }
 }

@@ -247,6 +247,7 @@
     <Compile Include="01_DAL_Data_Access_Layer\MakeNewPartDAL.cs" />
     <Compile Include="01_DAL_Data_Access_Layer\ManageFamilyCodeDAL.cs" />
     <Compile Include="01_DAL_Data_Access_Layer\PurchaseDAL.cs" />
+    <Compile Include="01_DAL_Data_Access_Layer\Purchase_V2_DAL.cs" />
     <Compile Include="01_DAL_Data_Access_Layer\QuanlyUserDAL.cs" />
     <Compile Include="01_DAL_Data_Access_Layer\RelationPartDAL.cs" />
     <Compile Include="02_BLL_Bussiness_Logic_Layer\CommonBLL.cs" />
@@ -256,8 +257,15 @@
     <Compile Include="02_BLL_Bussiness_Logic_Layer\MakeNewPartBLL.cs" />
     <Compile Include="02_BLL_Bussiness_Logic_Layer\ManageFamilyCodeBLL.cs" />
     <Compile Include="02_BLL_Bussiness_Logic_Layer\PurchaseBLL.cs" />
+    <Compile Include="02_BLL_Bussiness_Logic_Layer\Purchase_V2_BLL.cs" />
     <Compile Include="02_BLL_Bussiness_Logic_Layer\QuanlyUserBLL.cs" />
     <Compile Include="02_BLL_Bussiness_Logic_Layer\RelationPartBLL.cs" />
+    <Compile Include="03_GUI_User_Interface\00_Common\frmDataGridView_Modify.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\00_Common\frmDataGridView_Modify.Designer.cs">
+      <DependentUpon>frmDataGridView_Modify.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_1_Login\frmEnterLicencesCode.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -457,10 +465,10 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO_Update.Designer.cs">
       <DependentUpon>frmFindPO_Update.cs</DependentUpon>
     </Compile>
-    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.cs">
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmImportListItems.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.Designer.cs">
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmImportListItems.Designer.cs">
       <DependentUpon>frmImportListItems.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmMakePO.cs">
@@ -475,10 +483,10 @@
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice.Designer.cs">
       <DependentUpon>frmManagePrice.cs</DependentUpon>
     </Compile>
-    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice_Update.cs">
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmManagePrice_Update.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice_Update.Designer.cs">
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmManagePrice_Update.Designer.cs">
       <DependentUpon>frmManagePrice_Update.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.cs">
@@ -574,6 +582,54 @@
     <Compile Include="03_GUI_User_Interface\3_6_Help\Test_Check_Box.Designer.cs">
       <DependentUpon>Test_Check_Box.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmMake_New_PO_V2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmMake_New_PO_V2.Designer.cs">
+      <DependentUpon>frmMake_New_PO_V2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmManage_Purchasing.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmManage_Purchasing.Designer.cs">
+      <DependentUpon>frmManage_Purchasing.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmModify_PO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmModify_PO.Designer.cs">
+      <DependentUpon>frmModify_PO.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmPurchase_Common_Information.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmPurchase_Common_Information.Designer.cs">
+      <DependentUpon>frmPurchase_Common_Information.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Supplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Supplier.Designer.cs">
+      <DependentUpon>frm_Choose_Supplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_TaxType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_TaxType.Designer.cs">
+      <DependentUpon>frm_Choose_TaxType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Unit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Unit.Designer.cs">
+      <DependentUpon>frm_Choose_Unit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Pur_Supplier_Infor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Pur_Supplier_Infor.Designer.cs">
+      <DependentUpon>frm_Pur_Supplier_Infor.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -604,6 +660,9 @@
     </Compile>
     <Content Include="LINCENSE.txt" />
     <Content Include="Software Protector.exe" />
+    <EmbeddedResource Include="03_GUI_User_Interface\00_Common\frmDataGridView_Modify.resx">
+      <DependentUpon>frmDataGridView_Modify.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_1_Login\frmEnterLicencesCode.resx">
       <DependentUpon>frmEnterLicencesCode.cs</DependentUpon>
     </EmbeddedResource>
@@ -748,7 +807,7 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmFindPO_Update.resx">
       <DependentUpon>frmFindPO_Update.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmImportListItems.resx">
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmImportListItems.resx">
       <DependentUpon>frmImportListItems.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmMakePO.resx">
@@ -757,7 +816,7 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice.resx">
       <DependentUpon>frmManagePrice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManagePrice_Update.resx">
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmManagePrice_Update.resx">
       <DependentUpon>frmManagePrice_Update.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_5_Purchase\frmManageSupplier.resx">
@@ -822,6 +881,30 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\Lang\Lang_frmAboutMe.vi.resx" />
     <EmbeddedResource Include="03_GUI_User_Interface\3_6_Help\Test_Check_Box.resx">
       <DependentUpon>Test_Check_Box.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmMake_New_PO_V2.resx">
+      <DependentUpon>frmMake_New_PO_V2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmManage_Purchasing.resx">
+      <DependentUpon>frmManage_Purchasing.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmModify_PO.resx">
+      <DependentUpon>frmModify_PO.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmPurchase_Common_Information.resx">
+      <DependentUpon>frmPurchase_Common_Information.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Supplier.resx">
+      <DependentUpon>frm_Choose_Supplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_TaxType.resx">
+      <DependentUpon>frm_Choose_TaxType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Unit.resx">
+      <DependentUpon>frm_Choose_Unit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Pur_Supplier_Infor.resx">
+      <DependentUpon>frm_Pur_Supplier_Infor.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <DependentUpon>Main.cs</DependentUpon>

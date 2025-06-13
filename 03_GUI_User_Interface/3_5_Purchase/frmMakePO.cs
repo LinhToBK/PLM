@@ -969,12 +969,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_5_Purchase
                     List_Items_Now.Rows.Add(row["PartCode"]);
                 }
 
-                formA.ListItem_Now = List_Items_Now; // Truyền danh sách Item hiện tại vào Form A
+                formA.tbl_Items_Now = List_Items_Now; // Truyền danh sách Item hiện tại vào Form A
 
                 var result = formA.ShowDialog();  // Dùng ShowDialog để chờ form A đóng
                 if (result == DialogResult.OK || result == DialogResult.Cancel) // hoặc chỉ cần kiểm tra nếu != null
                 {
-                    DataTable ListItemImportOK = formA.ListItem_OK;
+                    DataTable ListItemImportOK = formA.tbl_Items_OK_for_Import;
                     if (ListItemImportOK == null)
                     {
                         MessageBox.Show("No data imported!", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);

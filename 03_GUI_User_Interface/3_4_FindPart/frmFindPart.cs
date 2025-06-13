@@ -46,7 +46,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             this.Text = rm.GetString("i.form");
             //groupBoxSearch.Text = rm.GetString("lb1");
             ckcSearchAll.Text = rm.GetString("lb2");
-            btnThemGanDay.Text = rm.GetString("lb3" );
+            btnThemGanDay.Text = rm.GetString("lb3");
             groupBoxResult.Text = rm.GetString("lb4");
             groupBoxPartInfor.Text = rm.GetString("lb5");
             groupBoxListParent.Text = rm.GetString("lb6");
@@ -75,7 +75,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         public void LoadDataFindPart(string keysearch)
         {
-            if(ckcSearchAll.Checked == true)
+            if (ckcSearchAll.Checked == true)
             {
                 DulieuTimKiem = PartBLL.FindWithWordBLL(keysearch);
             }
@@ -91,27 +91,22 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 {
                     MessageBox.Show(rm.GetString("t1")); // Bạn cần nhập số dòng lớn hơn 0
                 }// Kiểm tra số dòng
-
-
             }
-
 
             //0p.PartCode,
             //1p.PartName,
             //2p.PartDescript,
             //3s.Stage as PartStage,
             //4p.PartID,
-            //5p.PartPrice,
-            //6p.PartMaterial,
-            //7p.PartPriceSale,
-            //8p.PartPriceLog
+            //5p.PartMaterial,
+
             dgvSearch.DataSource = DulieuTimKiem;
 
             dgvSearch.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvSearch.Columns[0].Width = 80; // PartCode
-            dgvSearch.Columns[1].Width = 200; // PartName
+            dgvSearch.Columns["PartCode"].Width = 80; // PartCode
+            dgvSearch.Columns["PartName"].Width = 200; // PartName
             // dgvSearch.Columns[2].Width = 250; // PartDescript
-            dgvSearch.Columns[3].Width = 100; // PartStage
+            dgvSearch.Columns["PartStage"].Width = 100; // PartStage
             //dgvSearch.Columns[4].Width = 50; // PartPrice
             //dgvSearch.Columns[5].Width = 100; // PartLog
             //dgvSearch.Columns[6].Width = 100; // Partfile
@@ -122,13 +117,9 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //dgvSearch.Columns[4].HeaderText = "Price";
             //dgvSearch.Columns[5].HeaderText = "Log";
             //dgvSearch.Columns[6].HeaderText = "LinkFile";
-            // Các cột còn lại đều bị ẩn 
-            dgvSearch.Columns[4].Visible = false; // IDPart
-            dgvSearch.Columns[5].Visible = false; // PartPrice
-            dgvSearch.Columns[6].Visible = false; // PartMaterial
-            dgvSearch.Columns[7].Visible = false; // PartPriceSale
-            dgvSearch.Columns[8].Visible = false; // PartPriceLog
-
+            // Các cột còn lại đều bị ẩn
+            dgvSearch.Columns["PartID"].Visible = false; // IDPart
+            dgvSearch.Columns["PartMaterial"].Visible = false; // PartMaterial
 
             dgvSearch.AllowUserToAddRows = false;
             dgvSearch.AllowUserToDeleteRows = false;
@@ -137,8 +128,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         public void LoadDataChild(string idpart)
         {
+
+            // tblChild :  Levels , PartCode, PartName, Quantity, Dir
             dgvChild.DataSource = PartBLL.GetChildBLL(idpart);
-            dgvChild.Columns[4].Visible = false; // Ẩn cột Dir
+            dgvChild.Columns["Dir"].Visible = false; // Ẩn cột Dir
 
             dgvChild.AllowUserToAddRows = false;
             dgvChild.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -150,10 +143,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         public void LoadDataParent(string idpart)
         {
-
             //  p.PartCode, p.PartName, p.PartDescript, p.PartMaterial
             dgvParent.DataSource = PartBLL.GetParentBLL(idpart);
-            
 
             dgvParent.AllowUserToAddRows = false;
             dgvParent.EditMode = DataGridViewEditMode.EditProgrammatically;
@@ -174,11 +165,11 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private void dgvSearch_Click(object sender, EventArgs e)
         {
             if (dgvSearch.Rows.Count == 0) { txtKeySearch.Focus(); return; }
-            txtCode.Text = dgvSearch.CurrentRow.Cells[0].Value.ToString(); // Code
-            txtName.Text = dgvSearch.CurrentRow.Cells[1].Value.ToString(); // Name
-            txtDescript.Text = dgvSearch.CurrentRow.Cells[2].Value.ToString(); // Description
-            txtStage.Text = dgvSearch.CurrentRow.Cells[3].Value.ToString(); // Stage
-            txtMaterial.Text = dgvSearch.CurrentRow.Cells[6].Value.ToString(); // Material
+            txtCode.Text = dgvSearch.CurrentRow.Cells["PartCode"].Value.ToString(); // Code
+            txtName.Text = dgvSearch.CurrentRow.Cells["PartName"].Value.ToString(); // Name
+            txtDescript.Text = dgvSearch.CurrentRow.Cells["PartDescript"].Value.ToString(); // Description
+            txtStage.Text = dgvSearch.CurrentRow.Cells["PartStage"].Value.ToString(); // Stage
+            txtMaterial.Text = dgvSearch.CurrentRow.Cells["PartMaterial"].Value.ToString(); // Material
             //txtLog.Text = dgvSearch.CurrentRow.Cells[5].Value.ToString(); // Log
 
             // -- Hiển thị ảnh
@@ -196,7 +187,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
             //-----
 
             // Hiển thị danh sách các PartParent và PartChild
-            string idpart = dgvSearch.CurrentRow.Cells[4].Value.ToString();
+            string idpart = dgvSearch.CurrentRow.Cells["PartID"].Value.ToString();
             LoadDataChild(idpart);
             LoadDataParent(idpart);
 
@@ -299,16 +290,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
         {
             if (dgvParent.Rows.Count == 0)
             {
-                MessageBox.Show(rm.GetString("t4"));  // Dữ liệu đang trống
+                MessageBox.Show(rm.GetString("t3"));  // Dữ liệu đang trống
                 txtKeySearch.Focus();
                 return;
             }
             picParent.Refresh();
-
-            txtParentCode.Text = dgvParent.CurrentRow.Cells[0].Value.ToString();
-            txtParentName.Text = dgvParent.CurrentRow.Cells[1].Value.ToString();
-            txtParentDescript.Text = dgvParent.CurrentRow.Cells[2].Value.ToString();
-            txtParentMaterial.Text = dgvParent.CurrentRow.Cells[3].Value.ToString();
+            // tblParent :   p.PartCode, p.PartName, p.PartDescript, p.PartMaterial
+            txtParentCode.Text = dgvParent.CurrentRow.Cells["PartCode"].Value.ToString();
+            txtParentName.Text = dgvParent.CurrentRow.Cells["PartName"].Value.ToString();
+            txtParentDescript.Text = dgvParent.CurrentRow.Cells["PartDescript"].Value.ToString();
+            txtParentMaterial.Text = dgvParent.CurrentRow.Cells["PartMaterial"].Value.ToString();
 
             // Hiển thị ảnh
             if (CommonBLL.UploadImagebyPartCode(txtParentCode.Text, picParent) == true)
@@ -329,8 +320,9 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 return;
             }
             picChild.Refresh();
-            txtChildCode.Text = dgvChild.CurrentRow.Cells[1].Value.ToString();
-            txtChildName.Text = dgvChild.CurrentRow.Cells[2].Value.ToString();
+            // tblChild :  Levels , PartCode, PartName, Quantity, Dir
+            txtChildCode.Text = dgvChild.CurrentRow.Cells["PartCode"].Value.ToString();
+            txtChildName.Text = dgvChild.CurrentRow.Cells["PartName"].Value.ToString();
 
             //// -- Hiển thị ảnh
             if (CommonBLL.UploadImagebyPartCode(txtChildCode.Text, picChild) == true)
@@ -359,7 +351,6 @@ namespace PLM_Lynx._03_GUI_User_Interface
             // Mở form
             if (dgvSearch.Rows.Count > 0)
             {
-
                 frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
                 string partcode = dgvSearch.CurrentRow.Cells[0].Value.ToString();
                 frm.ShowDetailInfor(partcode);
@@ -369,14 +360,13 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void dgvParent_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(dgvParent.Rows.Count >0)
+            if (dgvParent.Rows.Count > 0)
             {
                 frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
                 string partcode = dgvParent.CurrentRow.Cells[0].Value.ToString();
                 frm.ShowDetailInfor(partcode);
                 frm.ShowDialog();
-            }    
-            
+            }
         }
 
         private void dgvChild_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -472,7 +462,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 return;
             }
 
-            string tb = rm.GetString("t4"); // Bạn có muốn xuất dữ liệu không ? 
+            string tb = rm.GetString("t4"); // Bạn có muốn xuất dữ liệu không ?
             DialogResult kq = MessageBox.Show(tb, rm.GetString("t0"), MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (kq == DialogResult.Yes)
             {
@@ -486,7 +476,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 if (sv.ShowDialog() == DialogResult.OK)
                 {
                     // Gọi hàm xuất dữ liệu
-                    string idpart = dgvSearch.CurrentRow.Cells[4].Value.ToString();
+                    string idpart = dgvSearch.CurrentRow.Cells["PartID"].Value.ToString();
                     dgvChild.DataSource = PartBLL.GetBOMBLL(idpart);
 
                     if (ckcWithImage.Checked == true)
@@ -522,8 +512,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
             }
             else
             {
-                data._currentPartCode = dgvSearch.CurrentRow.Cells[0].Value.ToString();
-                data._currentPartName = dgvSearch.CurrentRow.Cells[1].Value.ToString();
+                data._currentPartCode = dgvSearch.CurrentRow.Cells["PartCode"].Value.ToString();
+                data._currentPartName = dgvSearch.CurrentRow.Cells["PartName"].Value.ToString();
                 data.listchild = dgvChild.DataSource as DataTable;
                 frmDownloadFile frm = new frmDownloadFile();
 
@@ -531,6 +521,44 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
                 frm.inputData = data; // Do lưu  giá trị của currentpartcode rồi,, nên lát sẽ lấy lại
 
+                frm.ShowDialog();
+            }
+        }
+
+        private void openPartToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (dgvSearch.Rows.Count > 0)
+            {
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvSearch.CurrentRow.Cells["PartCode"].Value.ToString();
+                frm.ShowDetailInfor(partcode);
+                frm.ShowDialog();
+            }
+        }
+
+        private void openPartToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (dgvParent.Rows.Count > 0)
+            {
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvParent.CurrentRow.Cells["PartCode"].Value.ToString();
+                frm.ShowDetailInfor(partcode);
+                frm.ShowDialog();
+            }
+        }
+
+        private void openPartToolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            if (dgvChild.Rows.Count == 0)
+            {
+                txtKeySearch.Focus();
+                return;
+            }
+            else
+            {
+                frmRelationPart_Detail_Info frm = new frmRelationPart_Detail_Info();
+                string partcode = dgvChild.CurrentRow.Cells["PartCode"].Value.ToString();
+                frm.ShowDetailInfor(partcode);
                 frm.ShowDialog();
             }
         }

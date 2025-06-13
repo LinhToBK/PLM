@@ -81,7 +81,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
         public bool CapnhatQuantityDAL(DataTable updateTable)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -91,16 +90,14 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 {
                     try
                     {
-                        
                         using (SqlCommand cmd = new SqlCommand("dbo.UpdateQuantities", con, tran))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
-                          
+
                             SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Updates", updateTable);
                             tvpParam.SqlDbType = SqlDbType.Structured;
                             tvpParam.TypeName = "dbo.tblUpdateQuantity";
 
-                            
                             cmd.ExecuteNonQuery();
                         }
 
@@ -169,7 +166,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 {
                     try
                     {
-
                         using (SqlCommand cmd = new SqlCommand("dbo.DeleteRelation", con, tran))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -177,7 +173,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                             SqlParameter tvpParam = cmd.Parameters.AddWithValue("@Deletes", deleteTable);
                             tvpParam.SqlDbType = SqlDbType.Structured;
                             tvpParam.TypeName = "dbo.tblDeleteRelation";
-
 
                             cmd.ExecuteNonQuery();
                         }
@@ -195,7 +190,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 }
             }
         }
-
 
         /// <summary>
         /// 05. Xóa 1 ràng buộc của 2 Part bảng tblRelationTemp
@@ -238,7 +232,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 {
                     try
                     {
-
                         using (SqlCommand cmd = new SqlCommand("dbo.DeleteRelationTemp", con, tran))
                         {
                             cmd.CommandType = CommandType.StoredProcedure;
@@ -246,7 +239,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                             SqlParameter tvpParam = cmd.Parameters.AddWithValue("@DeletesTemp", delete_table);
                             tvpParam.SqlDbType = SqlDbType.Structured;
                             tvpParam.TypeName = "dbo.tblInsertRelation";
-
 
                             cmd.ExecuteNonQuery();
                         }
@@ -348,7 +340,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                         PartLog = CONCAT( @ECONo,  CHAR(13), CHAR(10), '|', PartLog),
                                         PartMaterial = @PartMaterial,
                                         PartStageID = @PartStageID,
-                                        PartDate = @PartDate    
+                                        PartDate = @PartDate
                                     WHERE PartCode = @PartCode";
 
                 con.Open();
@@ -387,7 +379,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
         /// <summary>
         /// 07. UPDATE - Cập nhật thông tin của tblECO  : Theo Dạng Aprroved
         /// </summary>
@@ -395,7 +386,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="NameApproved"></param>
         /// <param name="ECONo"></param>
         /// <returns></returns>
-        public bool Update_tblECO_Approved_DAL(int IDApproved, string NameApproved , int ECONo)
+        public bool Update_tblECO_Approved_DAL(int IDApproved, string NameApproved, int ECONo)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
@@ -403,12 +394,12 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string Log = "Approved " + dt.ToString("yyyy/MM/dd") + " || ";
 
                 string sql_query = @"
-                                    
+
                                     UPDATE tblECO
-                                    SET ECOStatusID = 2  , 
+                                    SET ECOStatusID = 2  ,
                                     ECOLog = CONCAT( @Log ,  CHAR(13), CHAR(10), '|', ECOLog)  ,
                                     ECOIDApproved = @IDApproved ,
-                                    ECONameApproved = @NameApproved 
+                                    ECONameApproved = @NameApproved
 
                                     WHERE ECONo = @ECONo";
 
@@ -447,7 +438,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
         public bool Update_tblECO_Approved_DAL(int IDApproved, string NameApproved, int ECONo, string ECOContent)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -456,13 +446,13 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string Log = "Approved " + dt.ToString("yyyy/MM/dd") + " || ";
 
                 string sql_query = @"
-                                    
+
                                     UPDATE tblECO
-                                    SET ECOStatusID = 2  , 
+                                    SET ECOStatusID = 2  ,
                                     ECOLog = CONCAT( @Log ,  CHAR(13), CHAR(10), '|', ECOLog)  ,
                                     ECOIDApproved = @IDApproved ,
-                                    ECOContent = @ECOContent,       
-                                    ECONameApproved = @NameApproved 
+                                    ECOContent = @ECOContent,
+                                    ECONameApproved = @NameApproved
 
                                     WHERE ECONo = @ECONo";
 
@@ -502,7 +492,6 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
-
         public bool Update_tblECO_Canceled_DAL(int IDApproved, string NameApproved, int ECONo)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
@@ -511,12 +500,12 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string Log = "Canceled " + dt.ToString("yyyy/MM/dd") + " || ";
 
                 string sql_query = @"
-                                    
+
                                     UPDATE tblECO
-                                    SET ECOStatusID = 3  , 
+                                    SET ECOStatusID = 3  ,
                                     ECOLog = CONCAT( @Log ,  CHAR(13), CHAR(10), '|', ECOLog)  ,
                                     ECOIDApproved = @IDApproved ,
-                                    ECONameApproved = @NameApproved 
+                                    ECONameApproved = @NameApproved
 
                                     WHERE ECONo = @ECONo";
 
@@ -559,11 +548,10 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
-                
                 DateTime PartDate = DateTime.Now.Date;
                 string sql_query = @"
                                     UPDATE tblPart
-                                    SET PartLog = CONCAT( @ECONo ,  CHAR(13), CHAR(10), '|', PartLog) , 
+                                    SET PartLog = CONCAT( @ECONo ,  CHAR(13), CHAR(10), '|', PartLog) ,
                                         PartDate = @PartDate
                                     WHERE PartCode = @PartCode";
 
@@ -601,8 +589,47 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
+        public bool Insert_NewPartID_to_tblPur_Part_DAL(string PartCode)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"
+                              INSERT INTO tblPur_Part (PartID)
+                                SELECT TOP 1 PartID
+                                FROM tblPart
+                                WHERE PartCode = @PartCode ";
 
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();  // Bắt đầu Transaction
 
+                try
+                {
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@PartCode", SqlDbType.NVarChar).Value = PartCode;
+
+                        int result = cmd.ExecuteNonQuery();
+
+                        if (result == 1)
+                        {
+                            transaction.Commit();  // Commit nếu thành công
+                            return true;
+                        }
+                        else
+                        {
+                            transaction.Rollback();  // Rollback nếu không cập nhật được dòng nào
+                            return false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback();  // Rollback nếu có lỗi xảy ra
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
 
         /// <summary>
         /// 07. Lấy thông tin về ECO mới nhất hiện tại
@@ -615,8 +642,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
                 string sql_query = @"
-                       SELECT TOP 1 tblECO.ECONo, tblECO.ECODate 
-                        FROM tblECO 
+                       SELECT TOP 1 tblECO.ECONo, tblECO.ECODate
+                        FROM tblECO
                         WHERE CAST(tblECO.ECODate AS DATE) = CAST(GETDATE() AS DATE)
                         ORDER BY ECODate DESC, ECONo DESC ";
 

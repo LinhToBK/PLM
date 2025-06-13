@@ -70,12 +70,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                             p.PartDescript,
                             s.Stage as PartStage,
                             p.PartID,
-                            p.PartPrice,
-                            p.PartMaterial,
-                            p.PartPriceSale,
-                            p.PartPriceLog
-                            
-
+                            p.PartMaterial
                         FROM
                             tblPart AS p
                         JOIN tblPartStage AS s ON p.PartStageID = s.IDStage
@@ -100,6 +95,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <returns></returns>
         public DataTable GetChildDAL(int IDPart)
         {
+
+            // tblListChild : || Levels || PartCode || PartName || Quantity || Dir 
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {

@@ -31,23 +31,20 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.GetListChildDAL(ParentCode);
         }
 
-
         /// <summary>
         ///  Method : CapnhatQuantityBLL : Cập nhật số lượng của Part Child trong Parent Part
-        ///  
+        ///
         /// </summary>
         /// <param name="parentcode"></param>
         /// <param name="childcode"></param>
         /// <param name="quantity"></param>
         /// <param name="ECONo"></param>
         /// <returns></returns>
-        public bool CapnhatQuantityBLL(string parentcode, string childcode, int quantity , string ECONo)
+        public bool CapnhatQuantityBLL(string parentcode, string childcode, int quantity, string ECONo)
         {
-
-
             bool check = false;
 
-            if (ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) && ecoDAL.CapnhatQuantityDAL(parentcode, childcode, quantity) )
+            if (ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) && ecoDAL.CapnhatQuantityDAL(parentcode, childcode, quantity))
             {
                 check = true;
             }
@@ -55,9 +52,8 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return check;
         }
 
-        public bool CapnhatQuantityBLL(DataTable updatetbl , string ECONo , string parentcode)
+        public bool CapnhatQuantityBLL(DataTable updatetbl, string ECONo, string parentcode)
         {
-
             bool check = false;
 
             if (ecoDAL.CapnhatQuantityDAL(updatetbl) && ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo))
@@ -68,10 +64,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return check;
         }
 
-
-
-
-
         /// <summary>
         /// XoaRelationBLL : Xóa quan hệ giữa ParentCode và ChildCode
         /// </summary>
@@ -79,10 +71,10 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         /// <param name="childcode"></param>
         /// <param name="ECONo"></param>
         /// <returns></returns>
-        public bool XoaRelationBLL(string parentcode, string ECONo , DataTable delete_table)
+        public bool XoaRelationBLL(string parentcode, string ECONo, DataTable delete_table)
         {
             bool check = false;
-            if ( ecoDAL.XoaRelationDAL(delete_table) && ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo) )
+            if (ecoDAL.XoaRelationDAL(delete_table) && ecoDAL.Write_ECONo_to_tblPart_DAL(parentcode, ECONo))
             {
                 check = true;
             }
@@ -108,7 +100,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.GetLastest_ECO_DAL();
         }
 
-        public bool InsertNewECO_BLL(int ECONo, int IDProposal, string NameProposal, int TypeID, string     ECOContent)
+        public bool InsertNewECO_BLL(int ECONo, int IDProposal, string NameProposal, int TypeID, string ECOContent)
         {
             // Trường hợp 1 : Make New Part
             return ecoDAL.InsertNewECO_DAL(ECONo, IDProposal, NameProposal, TypeID, ECOContent);
@@ -194,7 +186,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     }
                     catch (Exception deleteEx)
                     {
-                        MessageBox.Show("Error when delete folder " + deleteEx.Message,  "", MessageBoxButtons.OK, MessageBoxIcon.Error);  // Lỗi khi xóa thư mục: 
+                        MessageBox.Show("Error when delete folder " + deleteEx.Message, "", MessageBoxButtons.OK, MessageBoxIcon.Error);  // Lỗi khi xóa thư mục:
                     }
                 }
                 status = false;
@@ -211,6 +203,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return ecoDAL.Update_tblECO_Approved_DAL(IDApproved, NameApproved, ECONo);
         }
+
         public bool Update_tblECO_Approved_BLL(int IDApproved, string NameApproved, int ECONo, string ECOContent)
         {
             return ecoDAL.Update_tblECO_Approved_DAL(IDApproved, NameApproved, ECONo, ECOContent);
@@ -221,9 +214,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.Update_tblECO_Canceled_DAL(IDApproved, NameApproved, ECONo);
         }
 
-
-
-
         public bool CopyFile_to_DataPart(string partcode, string version, int ECONo)
         {
             bool status;
@@ -231,7 +221,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             // ===        Bước 1 : Lấy các đường dẫn
             // -------------------------------------------------
             // Lấy đường dẫn thư mục ECOTEMP :
-            string sourceDir = Properties.Settings.Default.LinkDataPart + "\\ECOTEMP\\" + ECONo.ToString() ;
+            string sourceDir = Properties.Settings.Default.LinkDataPart + "\\ECOTEMP\\" + ECONo.ToString();
             // Lấy đường dẫn thư mục chứa PartCode
             string[] FolderName = partcode.Split('-');
             // FolderName[0] : XXX : PartFamily
@@ -239,7 +229,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             // -- Tạo Folder  bằng PartCode mới
             string targetDir = Properties.Settings.Default.LinkDataPart + "//" + FolderName[0] + "//" + FolderName[1];
 
-            // Tên file 
+            // Tên file
             string newBaseName = partcode + "_V" + version;
             string[] files = Directory.GetFiles(sourceDir);
 
@@ -264,14 +254,12 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     //Console.WriteLine($"Đã copy: {newFileName}");
                 }
                 status = true;
-
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
                 status = false;
             }
-
 
             return status;
         }
@@ -327,12 +315,12 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return Convert.ToInt16(versionParts[0].Substring(1)); // Lấy số sau chữ V
         }
 
-        public bool Delete_Folder_ECO (int ECONo)
+        public bool Delete_Folder_ECO(int ECONo)
         {
             // Xóa thư mục ECONo
             bool status = false;
             string FolderECONopath = Properties.Settings.Default.LinkDataPart;
-            FolderECONopath = FolderECONopath + "\\ECOTEMP\\" + ECONo.ToString() ;
+            FolderECONopath = FolderECONopath + "\\ECOTEMP\\" + ECONo.ToString();
 
             if (Directory.Exists(FolderECONopath))
             {
@@ -363,10 +351,9 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
         }
 
-
         public bool CopyFile_to_DataPart_If_UpStage(string partcode, int newstageID, int oldstageID)
         {
-            bool status= false;
+            bool status = false;
             // -------------------------------------------------
             // ===        Bước 1 : Lấy các đường dẫn
             // ------------------------------------------------
@@ -380,27 +367,22 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             // Tạo tên file mới
             string newBaseName = partcode + "_V" + newstageID.ToString() + ".0";
 
-            
-
             try
             {
-                
                 foreach (string filePath in files)
                 {
                     string extension = Path.GetExtension(filePath); // Lấy đuôi file, ví dụ .pdf, .txt, .jpg
                     string filename = Path.GetFileNameWithoutExtension(filePath); // Lấy tên file không có đuôi
                     int ver = getversion(filename);
                     int stage = getstage(filename);
-                    if(stage == oldstageID && ver == lastestversion)
+                    if (stage == oldstageID && ver == lastestversion)
                     {
                         // Nếu trùng hợp hết thì sẽ lấy file  và copy với tên mới
                         string newFileName = Path.Combine(folderPath, newBaseName + extension);
                         File.Copy(filePath, newFileName, true);
                     }
-                   
                 }
                 status = true;
-
             }
             catch (Exception ex)
             {
@@ -408,13 +390,10 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 status = false;
             }
 
-
             return status;
-            
-            
         }
 
-        public bool InsertNewRelation_in_tblRelationTemp_BLL (string ParentCode, string ChildCode, int Quantity)
+        public bool InsertNewRelation_in_tblRelationTemp_BLL(string ParentCode, string ChildCode, int Quantity)
         {
             return ecoDAL.InsertNewRelation_in_tblRelationTemp_DAL(ParentCode, ChildCode, Quantity);
         }
@@ -423,6 +402,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return ecoDAL.Delete_tblRelationTemp_DAL(parentcode, childcode);
         }
+
         public bool Delete_tblRelationTemp_BLL(DataTable delete_table)
         {
             return ecoDAL.Delete_tblRelationTemp_DAL(delete_table);
@@ -433,11 +413,15 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return ecoDAL.Write_ECONo_to_tblPart_DAL(PartCode, ECONo);
         }
 
-        public DataTable Get_ECO_Information_BLL ( int ECONo)
+        public bool Insert_NewPartID_to_tblPur_Part_BLL(string PartCode)
+        {
+            return ecoDAL.Insert_NewPartID_to_tblPur_Part_DAL(PartCode);
+        }
+
+        public DataTable Get_ECO_Information_BLL(int ECONo)
         {
             return commonInforDAL.Get_ECO_Information_DAL(ECONo);
         }
-
 
         public bool GetAllFileinFolder_ECOTEMP(string ECONo, DataGridView dgvListFile)
         {
@@ -446,8 +430,8 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             //dgvListFile.AutoGenerateColumns = true;
 
             string DataPath = Properties.Settings.Default.LinkDataPart;
-            
-            string filepath = DataPath + "\\" + "ECOTEMP" + "\\" + ECONo ;
+
+            string filepath = DataPath + "\\" + "ECOTEMP" + "\\" + ECONo;
             try
             {
                 // Xóa dữ liệu cũ trong DataGritView
@@ -485,7 +469,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
         }
 
-        public bool GetAllFileinFolder_ECOTEMP(string partcode, DataGridView dgvListFile , string version)
+        public bool GetAllFileinFolder_ECOTEMP(string partcode, DataGridView dgvListFile, string version)
         {
             // Chuyển partcode thành đường dẫn
 
@@ -519,14 +503,12 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 foreach (string file in files)
                 {
                     FileInfo fileInfor = new FileInfo(file);
-                    if(file.Contains(ver))
+                    if (file.Contains(ver))
                     {
                         // Thêm 1 dòng vào DataGritView
                         dgvListFile.Rows.Add(fileInfor.Name, fileInfor.Length / 1024 + "KB", fileInfor.Extension, fileInfor.CreationTime);
                         // Tên - Kích thước file - Đuôi file - Ngày khởi tạo
                     }
-
-
                 }
                 return true;
             }
@@ -536,9 +518,5 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 return false;
             }
         }
-
-
-
-
     }
 }

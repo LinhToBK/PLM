@@ -105,7 +105,7 @@
             // 
             this.txtPartMaterial.Location = new System.Drawing.Point(204, 151);
             this.txtPartMaterial.Name = "txtPartMaterial";
-            this.txtPartMaterial.Size = new System.Drawing.Size(126, 27);
+            this.txtPartMaterial.Size = new System.Drawing.Size(126, 23);
             this.txtPartMaterial.TabIndex = 12;
             // 
             // cboMaterial
@@ -113,7 +113,7 @@
             this.cboMaterial.FormattingEnabled = true;
             this.cboMaterial.Location = new System.Drawing.Point(92, 151);
             this.cboMaterial.Name = "cboMaterial";
-            this.cboMaterial.Size = new System.Drawing.Size(100, 28);
+            this.cboMaterial.Size = new System.Drawing.Size(100, 23);
             this.cboMaterial.TabIndex = 11;
             this.cboMaterial.SelectedIndexChanged += new System.EventHandler(this.cboMaterial_SelectedIndexChanged);
             // 
@@ -122,7 +122,7 @@
             this.labelTemplate.AutoSize = true;
             this.labelTemplate.Location = new System.Drawing.Point(356, 180);
             this.labelTemplate.Name = "labelTemplate";
-            this.labelTemplate.Size = new System.Drawing.Size(130, 20);
+            this.labelTemplate.Size = new System.Drawing.Size(101, 15);
             this.labelTemplate.TabIndex = 10;
             this.labelTemplate.Text = "Template Descript";
             // 
@@ -150,7 +150,7 @@
             this.txtFamilyDescription.Location = new System.Drawing.Point(229, 12);
             this.txtFamilyDescription.Name = "txtFamilyDescription";
             this.txtFamilyDescription.ReadOnly = true;
-            this.txtFamilyDescription.Size = new System.Drawing.Size(289, 27);
+            this.txtFamilyDescription.Size = new System.Drawing.Size(289, 23);
             this.txtFamilyDescription.TabIndex = 7;
             // 
             // labelNote1
@@ -160,7 +160,7 @@
             this.labelNote1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.labelNote1.Location = new System.Drawing.Point(9, 181);
             this.labelNote1.Name = "labelNote1";
-            this.labelNote1.Size = new System.Drawing.Size(347, 40);
+            this.labelNote1.Size = new System.Drawing.Size(285, 30);
             this.labelNote1.TabIndex = 5;
             this.labelNote1.Text = "Gợi ý :  PartName nên ghi rõ tên model và tính năng \r\nDescription :nên ghi kích t" +
     "hước bao";
@@ -172,7 +172,7 @@
             this.labelNote3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.labelNote3.Location = new System.Drawing.Point(7, 237);
             this.labelNote3.Name = "labelNote3";
-            this.labelNote3.Size = new System.Drawing.Size(402, 20);
+            this.labelNote3.Size = new System.Drawing.Size(330, 15);
             this.labelNote3.TabIndex = 5;
             this.labelNote3.Text = "Có thể kéo thả file vào vùng Part File Attachment để thêm file\r\n";
             // 
@@ -183,7 +183,7 @@
             this.labelNote2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.labelNote2.Location = new System.Drawing.Point(9, 218);
             this.labelNote2.Name = "labelNote2";
-            this.labelNote2.Size = new System.Drawing.Size(372, 20);
+            this.labelNote2.Size = new System.Drawing.Size(311, 15);
             this.labelNote2.TabIndex = 5;
             this.labelNote2.Text = "File đính kèm có đuôi : .jpg .PDF, .dwg, .dwf, .stp, iegs, .prt";
             // 
@@ -192,7 +192,7 @@
             this.cboPartFamily.FormattingEnabled = true;
             this.cboPartFamily.Location = new System.Drawing.Point(92, 11);
             this.cboPartFamily.Name = "cboPartFamily";
-            this.cboPartFamily.Size = new System.Drawing.Size(120, 28);
+            this.cboPartFamily.Size = new System.Drawing.Size(120, 23);
             this.cboPartFamily.TabIndex = 4;
             this.cboPartFamily.SelectionChangeCommitted += new System.EventHandler(this.cboPartFamily_SelectionChangeCommitted);
             // 
@@ -209,7 +209,7 @@
             // 
             this.txtPartName.Location = new System.Drawing.Point(92, 43);
             this.txtPartName.Name = "txtPartName";
-            this.txtPartName.Size = new System.Drawing.Size(426, 27);
+            this.txtPartName.Size = new System.Drawing.Size(426, 23);
             this.txtPartName.TabIndex = 1;
             // 
             // groupBoxFile
@@ -285,7 +285,7 @@
             this.labelFamily.AutoSize = true;
             this.labelFamily.Location = new System.Drawing.Point(16, 15);
             this.labelFamily.Name = "labelFamily";
-            this.labelFamily.Size = new System.Drawing.Size(80, 20);
+            this.labelFamily.Size = new System.Drawing.Size(66, 15);
             this.labelFamily.TabIndex = 0;
             this.labelFamily.Text = "Part Family";
             // 
@@ -294,7 +294,7 @@
             this.labelMaterial.AutoSize = true;
             this.labelMaterial.Location = new System.Drawing.Point(16, 155);
             this.labelMaterial.Name = "labelMaterial";
-            this.labelMaterial.Size = new System.Drawing.Size(93, 20);
+            this.labelMaterial.Size = new System.Drawing.Size(74, 15);
             this.labelMaterial.TabIndex = 0;
             this.labelMaterial.Text = "Part Material";
             // 
@@ -303,7 +303,7 @@
             this.labelDescript.AutoSize = true;
             this.labelDescript.Location = new System.Drawing.Point(16, 99);
             this.labelDescript.Name = "labelDescript";
-            this.labelDescript.Size = new System.Drawing.Size(93, 20);
+            this.labelDescript.Size = new System.Drawing.Size(74, 15);
             this.labelDescript.TabIndex = 0;
             this.labelDescript.Text = "Part Descript";
             // 
@@ -312,7 +312,7 @@
             this.labelName.AutoSize = true;
             this.labelName.Location = new System.Drawing.Point(16, 47);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(78, 20);
+            this.labelName.Size = new System.Drawing.Size(63, 15);
             this.labelName.TabIndex = 0;
             this.labelName.Text = "Part Name";
             // 
@@ -349,9 +349,9 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(227, 23);
+            this.btnExit.Location = new System.Drawing.Point(164, 30);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(107, 40);
+            this.btnExit.Size = new System.Drawing.Size(56, 33);
             this.btnExit.TabIndex = 1;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -361,9 +361,9 @@
             // 
             this.btnAddPart.Image = ((System.Drawing.Image)(resources.GetObject("btnAddPart.Image")));
             this.btnAddPart.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnAddPart.Location = new System.Drawing.Point(50, 23);
+            this.btnAddPart.Location = new System.Drawing.Point(18, 30);
             this.btnAddPart.Name = "btnAddPart";
-            this.btnAddPart.Size = new System.Drawing.Size(120, 40);
+            this.btnAddPart.Size = new System.Drawing.Size(120, 33);
             this.btnAddPart.TabIndex = 0;
             this.btnAddPart.Text = "Add New Part";
             this.btnAddPart.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -372,7 +372,7 @@
             // 
             // frmMakeNewPart
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(978, 527);
             this.Controls.Add(this.splitContainer1);

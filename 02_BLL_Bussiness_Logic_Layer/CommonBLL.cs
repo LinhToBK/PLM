@@ -62,20 +62,17 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     {
                         result = true;
                         pictureBox.Image = (System.Drawing.Image)newimage.Clone();
-
                     }
                 }
                 else
                 {
-                    
                     pictureBox.Image = null;
                     return false;
-
                 }
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show( ex.Message, "Error");
+                MessageBox.Show(ex.Message, "Error");
                 result = false;
             }
             return result;
@@ -88,15 +85,16 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             string[] input = partCode.Split('-');
             string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
 
-            string[] files = Directory.GetFiles(filepath,  "*.jpg");
+            string[] files = Directory.GetFiles(filepath, "*.jpg");
             //double maxversion = 1.0;
-            // Nếu chỉ có 1 file thì sao 
+            // Nếu chỉ có 1 file thì sao
 
-            if(files.Length == 0)
+            if (files.Length == 0)
             {
                 return null;
-            };
-            if(files.Length == 1)
+            }
+            ;
+            if (files.Length == 1)
             {
                 //MessageBox.Show("Chỉ có 1 file .jpg");
                 return Path.GetFileName(files[0]);
@@ -127,10 +125,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 string result = partCode + "_V" + stage.ToString() + "." + version.ToString() + ".jpg";
                 //MessageBox.Show(result);
                 return result;
-            } 
-                
-
-            
+            }
         }
 
         /// <summary>
@@ -254,8 +249,8 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     }
 
                     // Nếu là file.stp hoặc .step thì mở bằng eDrawing Solidwork
-                    if (Path.GetExtension(docfile).ToLower() == ".stp" 
-                        || Path.GetExtension(docfile).ToLower() == ".step" 
+                    if (Path.GetExtension(docfile).ToLower() == ".stp"
+                        || Path.GetExtension(docfile).ToLower() == ".step"
                         || Path.GetExtension(docfile).ToLower() == ".prt"
                         || Path.GetExtension(docfile).ToLower() == ".sldprt"
                         || Path.GetExtension(docfile).ToLower() == ".sldasm"
@@ -311,7 +306,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         /// <param name="delaytime"></param>
         public async void popup(int delaytime)
         {
-            // Đang mở file 
+            // Đang mở file
             Label lbl = new Label
             {
                 Text = "Opening File ....",
@@ -332,7 +327,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             thongbao.Show();
             await Task.Delay(delaytime); // Đợi form hiển thị
             thongbao.Close();
-
         }
 
         private bool IsFileLocked(string filePath)
@@ -642,7 +636,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             int stage = 1;
             int version = 0;
 
-
             // Duyệt qua từng file và lấy số phiên bản từ tên file
             foreach (string file in files)
             {
@@ -686,7 +679,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                 string filepath = imagefilepath + "\\" + input[0] + "\\" + input[1];
 
                 string[] files = Directory.GetFiles(filepath);
-                
+
                 // Xác định version mới nhất
                 int stage = 1;
                 int version = 0;
@@ -720,7 +713,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                         {
                             string destinationPath = Path.Combine(DestinationFolder, partcode + "-" + partname + lastesversion + extension);
                             File.Copy(file, destinationPath, overwrite: true);
-                            dem = dem + 1; 
+                            dem = dem + 1;
                         }
                     }
                 }
@@ -738,9 +731,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
                     File.AppendAllText(downloadlog, content);
                 }
             }
-               
-        
-
             catch (Exception ex)
             {
                 content = DateTime.Now.ToString() + " || " + partcode + " || " + partname + " || " + ex.Message + " \r\n";
@@ -751,26 +741,237 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return result;
         }
 
-private CommonInforDAL _commonInforDAL = new CommonInforDAL();
+        private CommonInforDAL _commonInforDAL = new CommonInforDAL();
 
-public tblCommonInfor GetCommonInforValue(string inforname)
-{
-    return _commonInforDAL.GetCommonInforValue_DAL(inforname);
-}
+        public tblCommonInfor GetCommonInforValue(string inforname)
+        {
+            return _commonInforDAL.GetCommonInforValue_DAL(inforname);
+        }
 
-public DataTable GetAllVersionInfor_BLL()
-{
-    return _commoninforDAL.GetAllVersionInfor_DAL();
-}
+        public DataTable GetAllVersionInfor_BLL()
+        {
+            return _commoninforDAL.GetAllVersionInfor_DAL();
+        }
 
-public bool UpdateCompanyInfor_BLL(string name, string location, string phone, string tax)
-{
-    return _commonInforDAL.UpdateCompanyInfor_DAL(name, location, phone, tax);
-}
+        public bool UpdateCompanyInfor_BLL(string name, string location, string phone, string tax)
+        {
+            return _commonInforDAL.UpdateCompanyInfor_DAL(name, location, phone, tax);
+        }
 
-public bool InsertNewVersion_BLL(string ID, string content)
-{
-    return _commoninforDAL.InsertNewVersion_DAL(ID, content);
+        public bool InsertNewVersion_BLL(string ID, string content)
+        {
+            return _commoninforDAL.InsertNewVersion_DAL(ID, content);
+        }
+
+        public DataTable Get_Attribute_from_DatagridView(DataGridView dgv)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("Show", typeof(bool)); // Checkbox
+            dt.Columns.Add("ColumnName", typeof(string)); // Tên cột
+            dt.Columns.Add("ColumnWidth", typeof(int)); // Chiều rộng cột
+            dt.Columns.Add("ColumnHeader", typeof(string)); // Tiêu đề cột
+
+            foreach (DataGridViewColumn column in dgv.Columns)
+            {
+                DataRow row = dt.NewRow();
+                row["Show"] = column.Visible; // Hiển thị checkbox
+                row["ColumnName"] = column.Name; // Tên cột
+                row["ColumnWidth"] = column.Width; // Chiều rộng cột
+                row["ColumnHeader"] = column.HeaderText; // Tiêu đề cột
+                dt.Rows.Add(row);
+            }
+            return dt;
+        }
+
+        public void Set_Attribute_to_DatagridView(DataGridView dgv, DataTable dt, int Col_Mode)
+        {
+            foreach (DataRow row in dt.Rows)
+            {
+                string columnName = row["ColumnName"].ToString();
+                if (dgv.Columns.Contains(columnName))
+                {
+                    DataGridViewColumn column = dgv.Columns[columnName];
+                    column.Visible = Convert.ToBoolean(row["Show"]); // Hiển thị hoặc ẩn cột
+                    column.Width = Convert.ToInt32(row["ColumnWidth"]); // Chiều rộng cột
+                    column.HeaderText = row["ColumnHeader"].ToString(); // Tiêu đề cột
+                }
+            }
+
+            switch (Col_Mode)
+            {
+                case 0: // None
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.None;
+                    break;
+
+                case 1:
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.ColumnHeader;
+                    break;
+
+                case 2:
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCellsExceptHeader;
+                    break;
+
+                case 3:
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+                    break;
+
+                case 4:
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCellsExceptHeader;
+                    break;
+
+                case 5:
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                    break;
+
+                case 6:
+                    dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    break;
+            }
+        } // End Class CommonBLL
+
+
+
+        public DataTable Convert_ClipBoard_to_Datatable_V2(string ClipBoard)
+        {
+            string clipboardText = Clipboard.GetText();
+
+            if (string.IsNullOrWhiteSpace(clipboardText))
+                return null;
+
+            // Dòng → dòng (ngắt dòng)
+            string[] lines = clipboardText
+                .Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Cột → cột (tab phân cách)
+            string[][] cells = lines
+                .Select(line => line.Split('\t'))
+                .ToArray();
+
+            DataTable table = new DataTable();
+
+            int columnCount = cells[0].Length;
+
+            if (columnCount == 1)
+            {
+                // Trường hợp 1 cột → Tạo cột PartCode
+                table.Columns.Add("1_Col");
+
+                foreach (var row in cells)
+                {
+                    DataRow dr = table.NewRow();
+                    dr[0] = row[0];
+                    table.Rows.Add(dr);
+                }
+            }
+            else
+            {
+                // Trường hợp nhiều cột → Dòng đầu tiên là tên cột
+                string[] columnNames = cells[0];
+                foreach (var colName in columnNames)
+                    table.Columns.Add(colName);
+
+                // Bắt đầu từ dòng thứ 2 trở đi là dữ liệu
+                for (int i = 1; i < cells.Length; i++)
+                {
+                    DataRow dr = table.NewRow();
+                    for (int j = 0; j < columnCount; j++)
+                    {
+                        dr[j] = cells[i][j];
+                    }
+                    table.Rows.Add(dr);
+                }
+            }
+
+            return table;
+        }
+
+
+
+        public DataTable Copy_Single_Column_to_NewTable(DataTable SourceTable, string ColumnName)
+        {
+            DataTable newTable = new DataTable();
+            newTable.Columns.Add(ColumnName, typeof(string)); // Thêm cột mới
+            foreach (DataRow row in SourceTable.Rows)
+            {
+                DataRow newRow = newTable.NewRow();
+                newRow[ColumnName] = row[ColumnName].ToString().Trim(); // Sao chép giá trị từ cột
+                newTable.Rows.Add(newRow);
+            }
+            return newTable;
+        }
+
+        /// <summary>
+        /// Copy dữ liệu từ SourceData sang ResultData
+        /// </summary>
+        /// <param name="SourceData"></param>
+        /// <param name="ResultData"></param>
+        /// <returns></returns>
+        public void Insert_data_to_Datatable(DataTable SourceData, DataTable ResultData)
+        {
+            // Kiểm tra nếu SourceData có dữ liệu
+            foreach (DataRow row in SourceData.Rows)
+            {
+                // Tạo một hàng mới trong ResultData
+                DataRow newRow = ResultData.NewRow();
+                // Sao chép dữ liệu từ SourceData sang ResultData
+                foreach (DataColumn column in SourceData.Columns)
+                {
+                    newRow[column.ColumnName] = row[column.ColumnName];
+                }
+                // Thêm hàng mới vào ResultData
+                ResultData.Rows.Add(newRow);
+            }
+        }
+
+        public void Delete_Duplicate_Row_In_DataTable(DataTable dt, string ColumnName)
+        {
+            // Sử dụng LINQ để xóa các hàng trùng lặp dựa trên cột cụ thể
+            var distinctRows = dt.AsEnumerable()
+                .GroupBy(row => row[ColumnName])
+                .Select(group => group.First()); // Lấy hàng đầu tiên trong mỗi nhóm
+            // Tạo một DataTable mới từ các hàng duy nhất
+            DataTable newDt = distinctRows.CopyToDataTable();
+            // Xóa tất cả các hàng trong DataTable gốc
+            dt.Clear();
+            // Thêm các hàng duy nhất vào DataTable gốc
+            foreach (DataRow row in newDt.Rows)
+            {
+                dt.ImportRow(row);
+            }
+        }
+
+
+        public DataTable Get_All_File_In_Folder(string folder)
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.Add("FileName", typeof(string));
+            dt.Columns.Add("FilePath", typeof(string));
+            dt.Columns.Add("FileSize", typeof(long)); // Size in bytes
+            dt.Columns.Add("FileType", typeof(string)); // e.g., "pdf", "docx"
+            dt.Columns.Add("DateCreated", typeof(DateTime)); // Date when the file was created
+
+           
+            if (!Directory.Exists(folder))
+            {
+                MessageBox.Show("Folder doesn't exist : " + folder);
+                return null;
+            }
+            // Lấy tất cả các file trong thư mục
+            string[] files = Directory.GetFiles(folder);
+            foreach (string file in files)
+            {
+                FileInfo fileInfo = new FileInfo(file);
+                DataRow row = dt.NewRow();
+                row["FileName"] = fileInfo.Name; // Tên file
+                row["FilePath"] = fileInfo.FullName; // Đường dẫn đầy đủ
+                row["FileSize"] = fileInfo.Length; // Kích thước file
+                row["FileType"] = fileInfo.Extension.TrimStart('.'); // Loại file (không có dấu chấm)
+                row["DateCreated"] = fileInfo.CreationTime; // Ngày tạo file
+                dt.Rows.Add(row);
+            }
+
+            return dt;
+
+        }
+    } // End NameSpace
 }
-    } // End Class CommonBLL
-} // End NameSpace

@@ -92,7 +92,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
         ///
         private bool IsAllowedExtension(string filePath)
         {
-            string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf", ".prt", ".step" };
+            string[] allowedExtensions = { ".stp", ".jpg", ".dwg", ".dxf", ".pdf", ".prt", ".step" ,".sldprt" , ".slddrw" , ".sldasm", ".drw"  };
             string fileExtension = System.IO.Path.GetExtension(filePath).ToLower();
             return allowedExtensions.Contains(fileExtension);
         }
@@ -233,7 +233,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
                 filternote = filternote + @"DWG Files (*.dwg)|*.dwg|";
                 filternote = filternote + @"DXF Files (*.dxf)|*.dxf|";
                 filternote = filternote + @"PRT Files (*.prt)|*.prt|";
-                filternote = filternote + @"All Supported Files (*.pdf;*.stp;*.dwg;*.dxf;*.jpg;*.prt)|*.jpg;*.pdf;*.stp;*.dwg;*.dxf;*.prt";
+                filternote = filternote + @"Solidworks Files (*.sldasm;*.sldprt;*.slddrw;*.drw)|*.sldasm;*.sldprt;*.slddrw;*.drw|";
+                filternote = filternote + @"All Supported Files (*.pdf;*.stp;*.dwg;*.dxf;*.jpg;*.prt;*.sldasm;*.sldprt;*.slddrw;*.drw)|*.jpg;*.pdf;*.stp;*.dwg;*.dxf;*.prt;*.sldasm;*.sldprt;*.slddrw;*.drw";
                 open.Filter = filternote;
 
                 // Nếu người dùng chọn 1 file
@@ -274,10 +275,10 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
         private void btnAddPart_Click(object sender, EventArgs e)
         {
-            string PartName = txtPartName.Text;
-            string PartDescript = txtPartDescript.Text;
-            string PartFamily = cboPartFamily.Text;
-            string PartMaterial = txtPartMaterial.Text;
+            string PartName = txtPartName.Text.Trim();
+            string PartDescript = txtPartDescript.Text.Trim();
+            string PartFamily = cboPartFamily.Text.Trim();
+            string PartMaterial = txtPartMaterial.Text.Trim();
             string ThongBao = rm.GetString("t5");
             ThongBao += "\r\n " + "+) PartName : " + PartName + "\n +) PartFamily : " + PartFamily + "\n +) Part Description : " + PartDescript;
             ThongBao = ThongBao + "\n +) Part Material : " + PartMaterial;
@@ -305,11 +306,16 @@ namespace PLM_Lynx._03_GUI_User_Interface
                     //--------------------------------------
                     if (newestpartcode != null)
                     {
+                        
+
                         string[] FolderName = newestpartcode.Split('-');
                         // FolderName[0] : XXX : PartFamily
                         // FolderName[1] : YYYYY : PartNo
                         // -- Tạo Folder  bằng PartCode mới
-                        string FolderPath = Properties.Settings.Default.LinkDataPart + "//" + FolderName[0] + "//" + FolderName[1];
+                        //string FolderPath = Properties.Settings.Default.LinkDataPart + "\\" + FolderName[0] + "\\" + FolderName[1];
+
+                        string FolderPath;
+                        FolderPath = Path.Combine(Properties.Settings.Default.LinkDataPart, FolderName[0], FolderName[1]);
                         //string Ghichep;
                         try
                         {
@@ -344,7 +350,8 @@ namespace PLM_Lynx._03_GUI_User_Interface
                                     string FileExtension = row.Cells[2].Value.ToString();
 
                                     // Tạo tên File mới dựa trên  tên thư mục và phần mở rộng của file
-                                    string NewFileName = FolderPath + "//" + newestpartcode + "_V1.0" + FileExtension;
+                                    // string NewFileName = FolderPath + "//" + newestpartcode + "_V1.0" + FileExtension;
+                                    string NewFileName = Path.Combine(FolderPath, newestpartcode + "_V1.0" + FileExtension);
                                     // Tên đường dẫn đến folder + tên partcode mới + . đuôi file
                                     string TargetFilePart = Path.Combine(FolderPath, NewFileName);
 
@@ -367,7 +374,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
 
                         //------------------------------------------------------------
                         string PartLogAdd = NewECONo.ToString(); ;
-                        if (_ecoBLL.Write_ECONo_to_tblPart_BLL(newestpartcode, PartLogAdd) == true)
+                        if (_ecoBLL.Write_ECONo_to_tblPart_BLL(newestpartcode, PartLogAdd) == true && _ecoBLL.Insert_NewPartID_to_tblPur_Part_BLL(newestpartcode)==true)
                         {
                             //MessageBox.Show("Tạo thành công Part mới");
 
@@ -381,8 +388,7 @@ namespace PLM_Lynx._03_GUI_User_Interface
                             {
                                 MessageBox.Show(rm.GetString("t7"));   //MessageBox.Show("Ghi ECO Thất Bại");
                             }
-                            //frmListNear frm = new frmListNear();
-                            //frm.ShowDialog();
+                     
                         }
                         else
                         {
@@ -546,6 +552,11 @@ namespace PLM_Lynx._03_GUI_User_Interface
         private void cboMaterial_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtPartMaterial.Text = cboMaterial.SelectedItem.ToString();
+        }
+
+        private void advancedDataGridViewSearchToolBar1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }

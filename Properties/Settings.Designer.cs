@@ -12,7 +12,7 @@ namespace PLM_Lynx.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.13.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "17.14.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -26,7 +26,7 @@ namespace PLM_Lynx.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=61.14.233.166;Initial Catalog=SAMPLE_0;User ID=sa;;Password=\"yourStro" +
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=61.14.233.166;Initial Catalog=SAMPLE_1;User ID=sa;;Password=\"yourStro" +
             "ngPass@123003\";Trust Server Certificate=True; Connect Timeout=60;")]
         public string Datacon {
             get {
@@ -63,7 +63,7 @@ namespace PLM_Lynx.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_0\\DATA\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_1\\DATA\\")]
         public string LinkDataPart {
             get {
                 return ((string)(this["LinkDataPart"]));
@@ -75,7 +75,7 @@ namespace PLM_Lynx.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_0\\TRASH\\")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_1\\TRASH\\")]
         public string TrashDataPart {
             get {
                 return ((string)(this["TrashDataPart"]));
@@ -99,13 +99,13 @@ namespace PLM_Lynx.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\Admin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_0\\PODATA\\")]
-        public string POData {
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Users\\tolin\\OneDrive\\WORKING DSGLOBAL\\06. PLM Lynx\\SAMPLE_1\\PURCHASEDATA\\")]
+        public string PurchaseData {
             get {
-                return ((string)(this["POData"]));
+                return ((string)(this["PurchaseData"]));
             }
             set {
-                this["POData"] = value;
+                this["PurchaseData"] = value;
             }
         }
     }

@@ -112,7 +112,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             string[] devide = POCode.Split('-');
             string POYear = devide[0];
             string POMonth = devide[1];
-            string POPath = Properties.Settings.Default.POData;
+            string POPath = Properties.Settings.Default.PurchaseData;
 
             // Kiểm tra đường dẫn, nếu không có thì tạo mới
             if (!System.IO.Directory.Exists(POPath))
@@ -156,7 +156,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             string[] devide = POCode.Split('-');
             string POYear = devide[0];
             string POMonth = devide[1];
-            string POPath = Properties.Settings.Default.POData;
+            string POPath = Properties.Settings.Default.PurchaseData;
             DataTable dt = new DataTable();
             dt.Columns.Add("Name");
             dt.Columns.Add("Exension");
@@ -188,7 +188,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             string[] devide = POCode.Split('-');
             string POYear = devide[0];
             string POMonth = devide[1];
-            string POPath = Properties.Settings.Default.POData;
+            string POPath = Properties.Settings.Default.PurchaseData;
             string path = "";
             if (System.IO.Directory.Exists(POPath + "\\" + POYear + "\\" + POMonth + "\\" + POCode))
             {

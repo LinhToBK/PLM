@@ -165,7 +165,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
             // Điền thông tin chung vào các ô textbox
             txtDataPart.Text = Properties.Settings.Default.LinkDataPart;
             txtDataTrash.Text = Properties.Settings.Default.TrashDataPart;
-            txtDataPO.Text = Properties.Settings.Default.POData;
+            txtDataPO.Text = Properties.Settings.Default.PurchaseData;
             string Connect = Properties.Settings.Default.Datacon;
             string[] ServerNameList = Connect.Split(';');
             string ServerName = ServerNameList[1];
@@ -335,7 +335,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_6_Help
                 // Cập nhật đường dẫn vào file config
                 Properties.Settings.Default.LinkDataPart = datapart;
                 Properties.Settings.Default.TrashDataPart = trashpart;
-                Properties.Settings.Default.POData = popath;
+                Properties.Settings.Default.PurchaseData = popath;
                 Properties.Settings.Default.Save();
                 return true;
             }

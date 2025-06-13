@@ -423,7 +423,7 @@
             "Template 1"});
             this.cboTemplate.Location = new System.Drawing.Point(233, 108);
             this.cboTemplate.Name = "cboTemplate";
-            this.cboTemplate.Size = new System.Drawing.Size(137, 28);
+            this.cboTemplate.Size = new System.Drawing.Size(137, 23);
             this.cboTemplate.TabIndex = 11;
             // 
             // btnAddItems
@@ -479,13 +479,13 @@
             this.addItemToolStripMenuItem,
             this.openPartToolStripMenuItem1});
             this.cms_dgvListTimKiem.Name = "cms_dgvListTimKiem";
-            this.cms_dgvListTimKiem.Size = new System.Drawing.Size(148, 56);
+            this.cms_dgvListTimKiem.Size = new System.Drawing.Size(132, 56);
             // 
             // addItemToolStripMenuItem
             // 
             this.addItemToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addItemToolStripMenuItem.Image")));
             this.addItemToolStripMenuItem.Name = "addItemToolStripMenuItem";
-            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(147, 26);
+            this.addItemToolStripMenuItem.Size = new System.Drawing.Size(131, 26);
             this.addItemToolStripMenuItem.Text = "Add Item";
             this.addItemToolStripMenuItem.Click += new System.EventHandler(this.addItemToolStripMenuItem_Click);
             // 
@@ -493,7 +493,7 @@
             // 
             this.openPartToolStripMenuItem1.Image = ((System.Drawing.Image)(resources.GetObject("openPartToolStripMenuItem1.Image")));
             this.openPartToolStripMenuItem1.Name = "openPartToolStripMenuItem1";
-            this.openPartToolStripMenuItem1.Size = new System.Drawing.Size(147, 26);
+            this.openPartToolStripMenuItem1.Size = new System.Drawing.Size(131, 26);
             this.openPartToolStripMenuItem1.Text = "Open Part";
             this.openPartToolStripMenuItem1.Click += new System.EventHandler(this.openPartToolStripMenuItem1_Click);
             // 
@@ -555,7 +555,7 @@
             this.tableLayoutPanel2.Controls.Add(this.txtPartPrice, 1, 2);
             this.tableLayoutPanel2.Controls.Add(this.btnAddchild, 1, 4);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 23);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 19);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 5;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -563,7 +563,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(208, 186);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(208, 190);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // labelPartCode
@@ -619,7 +619,7 @@
             this.label4.Font = new System.Drawing.Font("Segoe UI", 7.8F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(3, 110);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(69, 17);
+            this.label4.Size = new System.Drawing.Size(69, 13);
             this.label4.TabIndex = 4;
             this.label4.Text = "(Shift + C)";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -644,7 +644,7 @@
             this.ckcViewChild.Dock = System.Windows.Forms.DockStyle.Left;
             this.ckcViewChild.Location = new System.Drawing.Point(78, 113);
             this.ckcViewChild.Name = "ckcViewChild";
-            this.ckcViewChild.Size = new System.Drawing.Size(101, 24);
+            this.ckcViewChild.Size = new System.Drawing.Size(82, 19);
             this.ckcViewChild.TabIndex = 2;
             this.ckcViewChild.Text = "View Child";
             this.ckcViewChild.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -664,7 +664,7 @@
             // btnAddchild
             // 
             this.btnAddchild.Dock = System.Windows.Forms.DockStyle.Top;
-            this.btnAddchild.Location = new System.Drawing.Point(78, 143);
+            this.btnAddchild.Location = new System.Drawing.Point(78, 138);
             this.btnAddchild.Name = "btnAddchild";
             this.btnAddchild.Size = new System.Drawing.Size(127, 33);
             this.btnAddchild.TabIndex = 3;
@@ -697,13 +697,13 @@
             this.addItemToPOToolStripMenuItem,
             this.openPartToolStripMenuItem});
             this.cms_dgvListChild.Name = "contextMenuStrip1";
-            this.cms_dgvListChild.Size = new System.Drawing.Size(186, 56);
+            this.cms_dgvListChild.Size = new System.Drawing.Size(161, 56);
             // 
             // addItemToPOToolStripMenuItem
             // 
             this.addItemToPOToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addItemToPOToolStripMenuItem.Image")));
             this.addItemToPOToolStripMenuItem.Name = "addItemToPOToolStripMenuItem";
-            this.addItemToPOToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
+            this.addItemToPOToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.addItemToPOToolStripMenuItem.Text = "Add item to PO";
             this.addItemToPOToolStripMenuItem.Click += new System.EventHandler(this.addItemToPOToolStripMenuItem_Click);
             // 
@@ -711,7 +711,7 @@
             // 
             this.openPartToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openPartToolStripMenuItem.Image")));
             this.openPartToolStripMenuItem.Name = "openPartToolStripMenuItem";
-            this.openPartToolStripMenuItem.Size = new System.Drawing.Size(185, 26);
+            this.openPartToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
             this.openPartToolStripMenuItem.Text = "Open Part";
             this.openPartToolStripMenuItem.Click += new System.EventHandler(this.openPartToolStripMenuItem_Click);
             // 
@@ -823,7 +823,7 @@
             this.txtPONumber.Location = new System.Drawing.Point(103, 3);
             this.txtPONumber.Name = "txtPONumber";
             this.txtPONumber.ReadOnly = true;
-            this.txtPONumber.Size = new System.Drawing.Size(170, 27);
+            this.txtPONumber.Size = new System.Drawing.Size(170, 23);
             this.txtPONumber.TabIndex = 2;
             // 
             // txtCompanyName
@@ -879,7 +879,7 @@
             this.txtCompanyPhone.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCompanyPhone.Location = new System.Drawing.Point(103, 3);
             this.txtCompanyPhone.Name = "txtCompanyPhone";
-            this.txtCompanyPhone.Size = new System.Drawing.Size(141, 27);
+            this.txtCompanyPhone.Size = new System.Drawing.Size(141, 23);
             this.txtCompanyPhone.TabIndex = 2;
             // 
             // txtCompanyTaxCode
@@ -887,7 +887,7 @@
             this.txtCompanyTaxCode.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtCompanyTaxCode.Location = new System.Drawing.Point(250, 3);
             this.txtCompanyTaxCode.Name = "txtCompanyTaxCode";
-            this.txtCompanyTaxCode.Size = new System.Drawing.Size(141, 27);
+            this.txtCompanyTaxCode.Size = new System.Drawing.Size(141, 23);
             this.txtCompanyTaxCode.TabIndex = 2;
             // 
             // flowLayoutPanel1
@@ -905,7 +905,7 @@
             this.txtOrderDate.Location = new System.Drawing.Point(3, 3);
             this.txtOrderDate.Name = "txtOrderDate";
             this.txtOrderDate.ReadOnly = true;
-            this.txtOrderDate.Size = new System.Drawing.Size(100, 27);
+            this.txtOrderDate.Size = new System.Drawing.Size(100, 23);
             this.txtOrderDate.TabIndex = 2;
             // 
             // BtnManageSupplier
@@ -957,7 +957,7 @@
             this.cboSupplierName.FormattingEnabled = true;
             this.cboSupplierName.Location = new System.Drawing.Point(123, 3);
             this.cboSupplierName.Name = "cboSupplierName";
-            this.cboSupplierName.Size = new System.Drawing.Size(194, 28);
+            this.cboSupplierName.Size = new System.Drawing.Size(194, 23);
             this.cboSupplierName.TabIndex = 3;
             this.cboSupplierName.SelectedIndexChanged += new System.EventHandler(this.cboSupplierName_SelectedIndexChanged);
             // 
@@ -978,7 +978,7 @@
             this.txtSupplierID.Location = new System.Drawing.Point(423, 3);
             this.txtSupplierID.Name = "txtSupplierID";
             this.txtSupplierID.ReadOnly = true;
-            this.txtSupplierID.Size = new System.Drawing.Size(79, 27);
+            this.txtSupplierID.Size = new System.Drawing.Size(79, 23);
             this.txtSupplierID.TabIndex = 2;
             // 
             // tableLayoutPanel7
@@ -1052,7 +1052,7 @@
             this.txtSupplierPhone.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtSupplierPhone.Location = new System.Drawing.Point(110, 3);
             this.txtSupplierPhone.Name = "txtSupplierPhone";
-            this.txtSupplierPhone.Size = new System.Drawing.Size(119, 27);
+            this.txtSupplierPhone.Size = new System.Drawing.Size(119, 23);
             this.txtSupplierPhone.TabIndex = 9;
             // 
             // labelSupplierTax
@@ -1072,7 +1072,7 @@
             this.txtSupplierTax.Location = new System.Drawing.Point(301, 3);
             this.txtSupplierTax.Name = "txtSupplierTax";
             this.txtSupplierTax.ReadOnly = true;
-            this.txtSupplierTax.Size = new System.Drawing.Size(201, 27);
+            this.txtSupplierTax.Size = new System.Drawing.Size(201, 23);
             this.txtSupplierTax.TabIndex = 2;
             // 
             // tableLayoutPanel9
@@ -1110,7 +1110,7 @@
             this.txtRate.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtRate.Location = new System.Drawing.Point(53, 3);
             this.txtRate.Name = "txtRate";
-            this.txtRate.Size = new System.Drawing.Size(71, 27);
+            this.txtRate.Size = new System.Drawing.Size(71, 23);
             this.txtRate.TabIndex = 1;
             this.txtRate.Text = "25000";
             this.txtRate.TextChanged += new System.EventHandler(this.txtRate_TextChanged);
@@ -1193,7 +1193,7 @@
             this.cboCurrency.FormattingEnabled = true;
             this.cboCurrency.Location = new System.Drawing.Point(173, 3);
             this.cboCurrency.Name = "cboCurrency";
-            this.cboCurrency.Size = new System.Drawing.Size(54, 28);
+            this.cboCurrency.Size = new System.Drawing.Size(54, 23);
             this.cboCurrency.TabIndex = 2;
             // 
             // tableLayoutPanel11
@@ -1300,13 +1300,13 @@
             this.deleteItemsToolStripMenuItem,
             this.clearListToolStripMenuItem});
             this.cms_dgvListItems.Name = "cms_dgvListItems";
-            this.cms_dgvListItems.Size = new System.Drawing.Size(217, 134);
+            this.cms_dgvListItems.Size = new System.Drawing.Size(187, 134);
             // 
             // changeUnitToolStripMenuItem
             // 
             this.changeUnitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeUnitToolStripMenuItem.Image")));
             this.changeUnitToolStripMenuItem.Name = "changeUnitToolStripMenuItem";
-            this.changeUnitToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.changeUnitToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.changeUnitToolStripMenuItem.Text = "Change Unit";
             this.changeUnitToolStripMenuItem.Click += new System.EventHandler(this.changeUnitToolStripMenuItem_Click);
             // 
@@ -1314,7 +1314,7 @@
             // 
             this.changeMoneyTypeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeMoneyTypeToolStripMenuItem.Image")));
             this.changeMoneyTypeToolStripMenuItem.Name = "changeMoneyTypeToolStripMenuItem";
-            this.changeMoneyTypeToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.changeMoneyTypeToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.changeMoneyTypeToolStripMenuItem.Text = "Change Money Type";
             this.changeMoneyTypeToolStripMenuItem.Click += new System.EventHandler(this.changeMoneyTypeToolStripMenuItem_Click);
             // 
@@ -1322,14 +1322,14 @@
             // 
             this.viewHistoryToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewHistoryToolStripMenuItem.Image")));
             this.viewHistoryToolStripMenuItem.Name = "viewHistoryToolStripMenuItem";
-            this.viewHistoryToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.viewHistoryToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.viewHistoryToolStripMenuItem.Text = "View History";
             // 
             // deleteItemsToolStripMenuItem
             // 
             this.deleteItemsToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteItemsToolStripMenuItem.Image")));
             this.deleteItemsToolStripMenuItem.Name = "deleteItemsToolStripMenuItem";
-            this.deleteItemsToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.deleteItemsToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.deleteItemsToolStripMenuItem.Text = "Delete Items";
             this.deleteItemsToolStripMenuItem.Click += new System.EventHandler(this.deleteItemsToolStripMenuItem_Click);
             // 
@@ -1337,13 +1337,13 @@
             // 
             this.clearListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearListToolStripMenuItem.Image")));
             this.clearListToolStripMenuItem.Name = "clearListToolStripMenuItem";
-            this.clearListToolStripMenuItem.Size = new System.Drawing.Size(216, 26);
+            this.clearListToolStripMenuItem.Size = new System.Drawing.Size(186, 26);
             this.clearListToolStripMenuItem.Text = "Clear List";
             this.clearListToolStripMenuItem.Click += new System.EventHandler(this.clearListToolStripMenuItem_Click);
             // 
             // frmMakePO
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.ClientSize = new System.Drawing.Size(1517, 669);

@@ -9,12 +9,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Markup.Localizer;
 
 namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 {
     public partial class frmManage_Purchasing : Form
     {
         #region ===== 01. FORM CONSTRUCTOR =====
+
         private CommonBLL _commonBLL = new CommonBLL();
 
         private Purchase_V2_BLL _purchase_V2_BLL = new Purchase_V2_BLL();
@@ -28,10 +30,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         // -- public variables
         public string _userName { get; set; } = string.Empty;
-        #endregion 
+
+        #endregion ===== 01. FORM CONSTRUCTOR =====
 
         // =====================================
         // =====================================
+
         #region ===== 02. FORM LOAD =====
 
         public frmManage_Purchasing()
@@ -44,6 +48,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
         {
             Load_Component_Information();
             btnSearch_by_Supplier.PerformClick();
+            dgv_Search_PO.Focus();
             View_dgv_Search_PO();
         }
 
@@ -61,7 +66,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         private void View_dgv_Search_PO()
         {
-            // Read Only for all columns except for the fist column 
+            // Read Only for all columns except for the fist column
             foreach (DataGridViewColumn column in dgv_Search_PO.Columns)
             {
                 if (column.Index != 0) // Assuming the first column is editable
@@ -75,26 +80,32 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 if (column.ValueType == typeof(decimal) || column.ValueType == typeof(double))
                 {
                     column.DefaultCellStyle.Format = "0.00"; // Set the format to 2 decimal places
-                    column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight; 
+                    column.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
                 }
             }
         }
-        #endregion
+
+        #endregion ===== 02. FORM LOAD =====
 
         // =====================================
         // =====================================
+
         #region ===== 03. METHOD  =====
-        private void Test()
+
+        private bool Check_Supplier()
         {
-            MessageBox.Show("");
+            bool isOK = true;
+
+            return isOK;
         }
 
+        #endregion ===== 03. METHOD  =====
 
-
-        #endregion
         // =====================================
         // =====================================
+
         #region ===== 04. EVENT HANDLER =====
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             string message = "Do you want to close the form?";
@@ -102,7 +113,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             if (result == DialogResult.Yes)
             {
                 this.Close();
-
             }
         }
 
@@ -142,13 +152,14 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                             tblPur_Search_PO = _purchase_V2_BLL.Select_tblPur_PO_by_CreateDate_BLL(DateFrom, DateTo);
                             dgv_Search_PO.DataSource = tblPur_Search_PO;
                         }
-
                     }
                     break;
+
                 case 1:
                     // Handle search by date in the second tab if needed
                     MessageBox.Show("Searching by date in the second tab is not implemented yet.");
                     break;
+
                 default:
                     MessageBox.Show("Please select a valid tab.");
                     break;
@@ -159,26 +170,25 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
         {
             if (tab_Control.SelectedIndex == 0)
             {
-               
                 int _supplierID = Convert.ToInt32(cbo_tblPur_Supplier.SelectedValue);
-                if(ckcViewTop100.Checked ==true)
+                if (ckcViewTop100.Checked == true)
                 {
                     tblPur_Search_PO = _purchase_V2_BLL.Select_tblPur_PO_by_SupplierID_BLL(_supplierID, 100);
                     dgv_Search_PO.DataSource = tblPur_Search_PO;
-                }    
+                    dgv_Search_PO.Focus();
+                }
                 else
                 {
                     tblPur_Search_PO = _purchase_V2_BLL.Select_tblPur_PO_by_SupplierID_BLL(_supplierID);
-                    dgv_Search_PO.DataSource= tblPur_Search_PO;
-                }    
-
+                    dgv_Search_PO.DataSource = tblPur_Search_PO;
+                }
             }
             else
             {
                 MessageBox.Show("Đang ở tab khác ");
-            }    
-
+            }
         }
+
         private void cms_dgv_Search_PO_Edit_View_Table_Click(object sender, EventArgs e)
         {
             string Col_Mode = dgv_Search_PO.AutoSizeColumnsMode.ToString();
@@ -201,34 +211,98 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 frm._poNumber = Convert.ToInt32(dgv_Search_PO.CurrentRow.Cells["PONumber"].Value.ToString());
                 frm.ShowDialog();
             }
-
         }
 
-        #endregion
+        #endregion ===== 04. EVENT HANDLER =====
 
-        private void dgv_Search_PO_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        private void btnCopytoGRPO_Click(object sender, EventArgs e)
         {
-            // Brush green color for the row if the "Status" is true
-            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            string messsage = "Do you want to copy this PO to GRPO ? ";
+            DialogResult result = MessageBox.Show(messsage, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
             {
-                DataGridViewRow row = dgv_Search_PO.Rows[e.RowIndex];
-                if (row.Cells["Status"].Value != null && Convert.ToBoolean(row.Cells["Status"].Value) == true)
-                {
-                    row.DefaultCellStyle.BackColor = Color.LightGreen;
-                }
-                else
-                {
-                    row.DefaultCellStyle.BackColor = Color.White; // Reset to default color
-                }
+                frm_Make_New_GRPO frm = new frm_Make_New_GRPO();
+                int PONumber = Convert.ToInt32(dgv_Search_PO.CurrentRow.Cells["PONumber"].Value.ToString());
+                frm._poNumber = PONumber;
+                frm.ShowDialog();
             }
         }
 
-        private void dgv_Search_PO_CurrentCellDirtyStateChanged(object sender, EventArgs e)
+        private void cms_dgv_Search_PO_Copy_to_GRPO_Click(object sender, EventArgs e)
         {
-            if(dgv_Search_PO.IsCurrentCellDirty)
+            btnCopytoGRPO.PerformClick();
+        }
+
+        // Đánh số thứ tự cho các hàng trong DataGridView
+        private void dgv_Search_PO_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            var grid = sender as DataGridView;
+            string stt = (e.RowIndex + 1).ToString();
+            var centerFormat = new StringFormat()
             {
-                // Commit the change to the cell value
-                dgv_Search_PO.CommitEdit(DataGridViewDataErrorContexts.Commit);
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
+
+            Rectangle headerBounds = new Rectangle(
+                e.RowBounds.Left,
+                e.RowBounds.Top,
+                grid.RowHeadersWidth,
+                e.RowBounds.Height);
+
+            e.Graphics.DrawString(stt, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+        }
+
+        private void dgv_Search_PO_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Bỏ tô màu các dòng khác (nếu muốn chỉ highlight dòng vừa click)
+            foreach (DataGridViewRow row in dgv_Search_PO.Rows)
+            {
+                row.DefaultCellStyle.BackColor = Color.White; // Màu nền mặc định
+            }
+
+            // Kiểm tra dòng được chọn có hợp lệ không
+            if (e.RowIndex >= 0 && e.RowIndex < dgv_Search_PO.Rows.Count)
+            {
+                DataGridViewRow selectedRow = dgv_Search_PO.Rows[e.RowIndex];
+                selectedRow.DefaultCellStyle.BackColor = Color.AliceBlue; // Màu nền highlight cho dòng được chọn
+            }
+        }
+
+        private void frmManage_Purchasing_KeyDown(object sender, KeyEventArgs e)
+        {
+            // Creat shortkey
+            // 1. Alt + F4 to close the form
+            if (e.Alt && e.KeyCode == Keys.F4)
+            {
+                e.SuppressKeyPress = true; // Ngăn chặn hành động mặc định của Alt + F4
+                btnExit.PerformClick(); // Gọi sự kiện click của nút thoát
+            }
+            // 2. Ctrl + G to btnCopytoGRPO_Click
+            else if (e.Control && e.KeyCode == Keys.G)
+            {
+                e.SuppressKeyPress = true; // Ngăn chặn hành động mặc định của Ctrl + G
+                btnCopytoGRPO.PerformClick(); // Gọi sự kiện click của nút Copy to GRPO
+            }
+            // 3. Ctrl + M to btnModifyPO_Click
+            else if (e.Control && e.KeyCode == Keys.M)
+            {
+                e.SuppressKeyPress = true; // Ngăn chặn hành động mặc định của Ctrl + M
+                btnModifyPO.PerformClick(); // Gọi sự kiện click của nút Modify PO
+            }
+        }
+
+        private void tab_Control_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (tab_Control.SelectedIndex)
+            {
+                case 0:
+                    dgv_Search_PO.Focus();
+                    break;
+
+                case 1:
+                    btnExit.Focus();
+                    break;
             }
         }
     }

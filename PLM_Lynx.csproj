@@ -79,12 +79,6 @@
     <Reference Include="Azure.Identity, Version=1.11.4.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>packages\Azure.Identity.1.11.4\lib\netstandard2.0\Azure.Identity.dll</HintPath>
     </Reference>
-    <Reference Include="BouncyCastle.Crypto, Version=1.8.9.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
-      <HintPath>packages\BouncyCastle.1.8.9\lib\BouncyCastle.Crypto.dll</HintPath>
-    </Reference>
-    <Reference Include="GemBox.Spreadsheet, Version=47.0.0.1398, Culture=neutral, PublicKeyToken=b1b72c69714d4847, processorArchitecture=MSIL">
-      <HintPath>packages\GemBox.Spreadsheet.47.0.1398\lib\net35\GemBox.Spreadsheet.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.AspNetCore.Cryptography.Internal, Version=9.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>packages\Microsoft.AspNetCore.Cryptography.Internal.9.0.0\lib\net462\Microsoft.AspNetCore.Cryptography.Internal.dll</HintPath>
     </Reference>
@@ -606,6 +600,12 @@
     <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmPurchase_Common_Information.Designer.cs">
       <DependentUpon>frmPurchase_Common_Information.cs</DependentUpon>
     </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Multi-Rows.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Multi-Rows.Designer.cs">
+      <DependentUpon>frm_Choose_Multi-Rows.cs</DependentUpon>
+    </Compile>
     <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Supplier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -623,6 +623,18 @@
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Unit.Designer.cs">
       <DependentUpon>frm_Choose_Unit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_WareHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_WareHouse.Designer.cs">
+      <DependentUpon>frm_Choose_WareHouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Make_New_GRPO.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Make_New_GRPO.Designer.cs">
+      <DependentUpon>frm_Make_New_GRPO.cs</DependentUpon>
     </Compile>
     <Compile Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Pur_Supplier_Infor.cs">
       <SubType>Form</SubType>
@@ -894,6 +906,9 @@
     <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frmPurchase_Common_Information.resx">
       <DependentUpon>frmPurchase_Common_Information.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Multi-Rows.resx">
+      <DependentUpon>frm_Choose_Multi-Rows.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Supplier.resx">
       <DependentUpon>frm_Choose_Supplier.cs</DependentUpon>
     </EmbeddedResource>
@@ -902,6 +917,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_Unit.resx">
       <DependentUpon>frm_Choose_Unit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Choose_WareHouse.resx">
+      <DependentUpon>frm_Choose_WareHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Make_New_GRPO.resx">
+      <DependentUpon>frm_Make_New_GRPO.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="03_GUI_User_Interface\3_7_Purchase_version_Hue\frm_Pur_Supplier_Infor.resx">
       <DependentUpon>frm_Pur_Supplier_Infor.cs</DependentUpon>

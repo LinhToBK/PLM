@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.IdentityModel.Metadata;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -644,15 +645,23 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable result = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                SqlCommand cmd = new SqlCommand("Select_tbl_PartID_Part_Code", conn); // Tên của stored procedure
-                cmd.CommandType = CommandType.StoredProcedure;
+                
+                string sql_query = @"   SELECT 
+                                            p.PartID,
+                                            t.PartCode
+                                        FROM tblPur_Part AS p
+                                        JOIN tblPart AS t ON t.PartID = p.PartID
+                                        JOIN @tblPartCode AS c ON c.PartCode = t.PartCode; ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                SqlParameter tvpParam_Update = cmd.Parameters.AddWithValue("@tblPartCode", ListPartCode);
+                tvpParam_Update.SqlDbType = SqlDbType.Structured;
+                tvpParam_Update.TypeName = "tblListPartCode ";
 
-                SqlParameter tvpParam = cmd.Parameters.AddWithValue("@tblPartCode", ListPartCode);  // Tên bảng truyền vào
-                tvpParam.SqlDbType = SqlDbType.Structured;
-                tvpParam.TypeName = "dbo.tblListPartCode"; // Tên kiểu bảng bạn đã tạo trong SQL      // Tên bảng người dùng định nghĩa
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(result);
 
-                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                adapter.Fill(result);
+
             }
 
             return result;
@@ -844,7 +853,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                         )
                                         SELECT
                                             p.PONumber,
-	                                        p.PODateCreate,
+                                         p.PODateCreate,
                                             pi.PartCode,
                                             pi.PartName,
                                             d.UnitPrice,
@@ -855,6 +864,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                         INNER JOIN PO_Detail AS d ON d.PONumber = p.PONumber
                                         INNER JOIN Part_Info AS pi ON pi.PartID = d.PartID
                                         WHERE p.POSupplierID = @SupplierID order by PODateCreate desc; ";
+
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.Add("@SupplierID", SqlDbType.Int).Value = SupplierID;
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
@@ -876,23 +886,25 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"select 
-	                                    p.PONumber,
-	                                    p.PODateCreate,
-	                                    p.POEstimateDeliveryDate,
-	                                    s.SupplierName,
-	                                    p.POSupplierContactPerson,
-	                                    p.POUser,
-	                                    t.StatusName,
-	                                    w.WareHouseName,
-	                                    p.POToTalPayment, 
-                                        c.CurrencyName
+                string sql_query = @"select
+                                        p.PONumber,
+                                        p.PODateCreate,
+                                        p.POEstimateDeliveryDate,
+                                        s.SupplierName,
+                                        p.POSupplierContactPerson,
+                                        p.POUser,
+                                        t.StatusName,
+                                        w.WareHouseName,
+                                        p.POToTalPayment, 
+                                        c.CurrencyName,
+	                                    x.TaxName
 	
                                     from tblPur_PO  as p
                                     inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
                                     inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
                                     inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
                                     inner join tblPur_Status as t on t.StatusID = p.POStatusID
+                                    inner join tblPur_Tax as x on x.TaxID = p.POTaxID
                                     Where p.POSupplierID = @SupplierID ";
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.Add("@SupplierID", SqlDbType.Int).Value = SupplierID;
@@ -909,23 +921,26 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"select 
-	                                     p.PONumber,
-	                                    p.PODateCreate,
-	                                    p.POEstimateDeliveryDate,
-	                                    s.SupplierName,
-	                                    p.POSupplierContactPerson,
-	                                    p.POUser,
-	                                    t.StatusName,
-	                                    w.WareHouseName,
-	                                    p.POToTalPayment, 
-                                        c.CurrencyName
+                string sql_query = @"select
+                                        p.PONumber,
+                                        p.PODateCreate,
+                                        p.POEstimateDeliveryDate,
+                                        s.SupplierName,
+                                        p.POSupplierContactPerson,
+                                        p.POUser,
+                                        t.StatusName,
+                                        w.WareHouseName,
+                                        p.POToTalPayment, 
+                                        c.CurrencyName,
+	                                    x.TaxName
 	
                                     from tblPur_PO  as p
                                     inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
                                     inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
                                     inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
                                     inner join tblPur_Status as t on t.StatusID = p.POStatusID
+                                    inner join tblPur_Tax as x on x.TaxID = p.POTaxID
+
                                     Where p.POSupplierID = @SupplierID 
                                     ORDER BY p.PODateCreate DESC
                                     OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
@@ -951,22 +966,26 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"SELECT 
-                                         p.PONumber,
-	                                    p.PODateCreate,
-	                                    p.POEstimateDeliveryDate,
-	                                    s.SupplierName,
-	                                    p.POSupplierContactPerson,
-	                                    p.POUser,
-	                                    t.StatusName,
-	                                    w.WareHouseName,
-	                                    p.POToTalPayment, 
-                                        c.CurrencyName
-                                    FROM tblPur_PO AS p
-                                    INNER JOIN tblPur_Supplier AS s ON s.SupplierID = p.POSupplierID
-                                    INNER JOIN tblPur_Currency AS c ON c.CurrencyID = p.POCurrencyID 
-                                    INNER JOIN tblPur_WareHouse AS w ON w.WareHouseID = p.WareHouseID
-                                    INNER JOIN tblPur_Status AS t ON t.StatusID = p.POStatusID
+                string sql_query = @"select
+                                        p.PONumber,
+                                        p.PODateCreate,
+                                        p.POEstimateDeliveryDate,
+                                        s.SupplierName,
+                                        p.POSupplierContactPerson,
+                                        p.POUser,
+                                        t.StatusName,
+                                        w.WareHouseName,
+                                        p.POToTalPayment, 
+                                        c.CurrencyName,
+	                                    x.TaxName
+	
+                                    from tblPur_PO  as p
+                                    inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
+                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
+                                    inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
+                                    inner join tblPur_Status as t on t.StatusID = p.POStatusID
+                                    inner join tblPur_Tax as x on x.TaxID = p.POTaxID
+
                                     WHERE p.PODateCreate >= @DateFrom AND p.PODateCreate <= @DateTo
                                     ORDER BY p.PONumber DESC ";
                                     
@@ -986,22 +1005,26 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"SELECT 
-                                         p.PONumber,
-	                                    p.PODateCreate,
-	                                    p.POEstimateDeliveryDate,
-	                                    s.SupplierName,
-	                                    p.POSupplierContactPerson,
-	                                    p.POUser,
-	                                    t.StatusName,
-	                                    w.WareHouseName,
-	                                    p.POToTalPayment, 
-                                        c.CurrencyName
-                                    FROM tblPur_PO AS p
-                                    INNER JOIN tblPur_Supplier AS s ON s.SupplierID = p.POSupplierID
-                                    INNER JOIN tblPur_Currency AS c ON c.CurrencyID = p.POCurrencyID 
-                                    INNER JOIN tblPur_WareHouse AS w ON w.WareHouseID = p.WareHouseID
-                                    INNER JOIN tblPur_Status AS t ON t.StatusID = p.POStatusID
+                string sql_query = @"select
+                                        p.PONumber,
+                                        p.PODateCreate,
+                                        p.POEstimateDeliveryDate,
+                                        s.SupplierName,
+                                        p.POSupplierContactPerson,
+                                        p.POUser,
+                                        t.StatusName,
+                                        w.WareHouseName,
+                                        p.POToTalPayment, 
+                                        c.CurrencyName,
+	                                    x.TaxName
+	
+                                    from tblPur_PO  as p
+                                    inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
+                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
+                                    inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
+                                    inner join tblPur_Status as t on t.StatusID = p.POStatusID
+                                    inner join tblPur_Tax as x on x.TaxID = p.POTaxID
+
                                     WHERE p.PODateCreate >= @DateFrom AND p.PODateCreate <= @DateTo
                                     ORDER BY p.PONumber DESC 
                                     OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
@@ -1094,7 +1117,26 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
-
+        /// <summary>
+        /// 27. UPDATE - Cập nhật thông tin đơn đặt hàng (Purchase Order) đã tồn tại trong bảng tblPur_PO
+        /// </summary>
+        /// <param name="PONumber"></param>
+        /// <param name="_dcreate"></param>
+        /// <param name="_destimate"></param>
+        /// <param name="SupID"></param>
+        /// <param name="SupPerson"></param>
+        /// <param name="CurID"></param>
+        /// <param name="user"></param>
+        /// <param name="StatusID"></param>
+        /// <param name="Remark"></param>
+        /// <param name="PaymentTerm"></param>
+        /// <param name="WareHouseID"></param>
+        /// <param name="TotalPayment"></param>
+        /// <param name="TaxID"></param>
+        /// <param name="tblUpdate"></param>
+        /// <param name="tblDelete"></param>
+        /// <param name="tblInsert"></param>
+        /// <returns></returns>
         public bool Update_Existing_PO_DAL(int PONumber, DateTime _dcreate, DateTime _destimate,int SupID, string SupPerson, int CurID , string user, int StatusID, string Remark, 
             string PaymentTerm, int WareHouseID, decimal TotalPayment, int TaxID,  DataTable tblUpdate, DataTable tblDelete, DataTable tblInsert)
         {
@@ -1153,6 +1195,49 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 27. SELECT - Lấy dữ liệu từ bảng tblPur_PO_Detail cho việc tạo GRPO
+        /// </summary>
+        /// <param name="tbl_ListPONumber"></param>
+        /// <returns></returns>
+        public DataTable Select_tbl_Pur_PO_Detail_for_GRPO_DAL(DataTable tbl_ListPONumber)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"       SELECT 
+                                                d.PONumber,
+                                                t.PartCode,
+                                                r.TaxCode,
+                                                d.Quantity_Order,
+                                                1 AS Received_Quantity ,
+                                                d.UnitPrice AS Price,
+                                                u.UnitName AS Unit,
+                                                d.Discount,
+                                                p.TaxName,
+                                                d.Amount AS Total,
+                                                p.CurrencyName as Currency,
+		                                        p.POUser ,
+		                                        p.POWareHouse as WareHouse
+                                            FROM tblPur_PO_Detail AS d
+                                            INNER JOIN @PONumbers AS p ON p.PONumber = d.PONumber
+                                            INNER JOIN tblPart AS t ON t.PartID = d.PartID
+                                            INNER JOIN tblPur_Part AS r ON r.PartID = d.PartID
+                                            INNER JOIN tblPur_Unit AS u ON d.UnitID = u.UnitID Order by d.PONumber desc;";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                SqlParameter tvpParam_Update = cmd.Parameters.AddWithValue("@PONumbers", tbl_ListPONumber);
+                tvpParam_Update.SqlDbType = SqlDbType.Structured;
+                tvpParam_Update.TypeName = "tbl_List_PONumber ";
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
         }
 
     }

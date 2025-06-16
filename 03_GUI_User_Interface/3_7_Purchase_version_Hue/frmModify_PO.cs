@@ -362,6 +362,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
             txtTotalTax.Text = _Total_Tax.ToString("N2");
             txtTotalPayment.Text = _Total_After_Tax.ToString("N2");
+            txtCountRow.Text = tblPur_Content.Rows.Count.ToString();
         }
 
         private bool Check_Input_Information()
@@ -760,10 +761,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             for (int i = 0; i < icount; i++)
             {
                 DataRow row = tblPur_Content.Rows[i];
-                
+
                 if (row["RowID"] != DBNull.Value)
                 {
-                    if(Check_Value_of_Content_is_in_Old(row) == true)
+                    if (Check_Value_of_Content_is_in_Old(row) == true)
                     {
                         continue; // Hàng này không thay đổi giá trị gì cả , không cần update
                     }
@@ -781,7 +782,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                         }
                     }
                     newRow["PartID"] = partID;
-                    newRow["PONumber"] = _poNumber; 
+                    newRow["PONumber"] = _poNumber;
                     newRow["Quantity_Order"] = row["Quantity"];
                     newRow["UnitID"] = Convert_UnitName_to_UnitID(row["Unit"].ToString());
                     newRow["UnitPrice"] = row["UnitPrice"];
@@ -841,7 +842,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 }
             }
 
-            if(tblPur_PO_Details_Delete.Rows.Count > 0)
+            if (tblPur_PO_Details_Delete.Rows.Count > 0)
             {
                 MessageBox.Show("Delete: " + tblPur_PO_Details_Delete.Rows.Count);
             }
@@ -873,7 +874,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                     string oldUnit = oldRow["Unit"].ToString().Trim();
                     decimal oldDiscount = Convert.ToDecimal(oldRow["Discount"]);
 
-                    if( oldRowID == rowID &&
+                    if (oldRowID == rowID &&
                         oldPartCode.Equals(partCode, StringComparison.OrdinalIgnoreCase) &&
                         oldQuantity == quantity &&
                         oldUnitPrice == unitPrice &&
@@ -905,7 +906,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                             break; // Found the matching PartID, no need to continue checking
                         }
                     }
-                    newRow["PartID"] = partID; 
+                    newRow["PartID"] = partID;
                     newRow["Quantity_Order"] = row["Quantity"];
                     newRow["UnitID"] = Convert_UnitName_to_UnitID(row["Unit"].ToString());
                     newRow["UnitPrice"] = row["UnitPrice"];
@@ -915,7 +916,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 }
             }
 
-            if(tblPur_PO_Details_Insert.Rows.Count > 0)
+            if (tblPur_PO_Details_Insert.Rows.Count > 0)
             {
                 MessageBox.Show("Inseert: " + tblPur_PO_Details_Insert.Rows.Count);
             }
@@ -1040,10 +1041,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 Get_tblPur_PO_Details_Update();
                 Get_tblPur_PO_Details_Delete();
                 Get_tblPur_PO_Details_Insert();
-                
 
-                if (_purchase_V2_BLL.Update_Existing_PO_BLL(_poNumber,_dcreate,_destimate,SupID,SupPerson,CurID,user,StatusID,Remark,PaymentTerm,WareHouseID,
-                    TotalPayemnt,TaxID,tblPur_PO_Details_Update, tblPur_PO_Details_Delete, tblPur_PO_Details_Insert) == true)
+                if (_purchase_V2_BLL.Update_Existing_PO_BLL(_poNumber, _dcreate, _destimate, SupID, SupPerson, CurID, user, StatusID, Remark, PaymentTerm, WareHouseID,
+                    TotalPayemnt, TaxID, tblPur_PO_Details_Update, tblPur_PO_Details_Delete, tblPur_PO_Details_Insert) == true)
                 {
                     MessageBox.Show("Update purchase order successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     this.DialogResult = DialogResult.OK; // Set the dialog result to OK
@@ -1317,5 +1317,65 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
         }
 
         #endregion ===== 04.CONTROL EVENTS =======
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            using (frm_Choose_Multi_Rows frm = new frm_Choose_Multi_Rows())
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    int numberOfRows = frm.SelectedRowCount;
+                    if (numberOfRows > 0)
+                    {
+                        for (int i = 0; i < numberOfRows; i++)
+                        {
+                            DataRow newRow = tblPur_Content.NewRow();
+                            tblPur_Content.Rows.Add(newRow);
+                        }
+                        dgv_List_Content.Refresh(); // Refresh the DataGridView to show the new rows
+                    }
+                }
+            }
+        }
+
+        private void toolStripMenuItem2_Click(object sender, EventArgs e)
+        {
+            string message = "Do you want to insert the selected items into the GRPO content?";
+            string title = "Insert Items to GRPO Content";
+            List<string> _ListPartCode = new List<string>();
+            foreach (DataGridViewRow row in dgv_Search_Items.SelectedRows)
+            {
+                if (row.Cells["PartCode"].Value != null)
+                {
+                    _ListPartCode.Add(row.Cells["PartCode"].Value.ToString().Trim());
+                }
+            }
+            string _partcode = dgv_Search_Items.CurrentRow.Cells["PartCode"].Value.ToString();
+            string _partname = dgv_Search_Items.CurrentRow.Cells["PartName"].Value.ToString();
+            if (_ListPartCode.Contains(_partcode) == true)
+            {
+                MessageBox.Show("PartCode already exists in the content.", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                decimal _UnitPrice = Convert.ToDecimal(dgv_Search_Items.CurrentRow.Cells["UnitPrice"].Value.ToString());
+                DataRow row = tblPur_Content.NewRow();
+                row["PartCode"] = _partcode;
+                row["PartName"] = _partname;
+                row["Quantity"] = 1; // Default value for Quantity
+                row["UnitPrice"] = _UnitPrice;
+                row["Unit"] = tblPur_Unit.DefaultView[0]["UnitName"];
+                row["Discount"] = 0.00m; // Default value for Discount
+                row["Total"] = 0.00m; // Default value for Total
+                row["RowID"] = 0; // Default value for RowID
+                tblPur_Content.Rows.Add(row);
+                MessageBox.Show("Item inserted successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                Calculate_Total();
+            }
+        }
     }
 }

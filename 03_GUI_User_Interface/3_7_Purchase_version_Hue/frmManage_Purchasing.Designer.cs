@@ -199,6 +199,7 @@
             this.tab_Control.SelectedIndex = 0;
             this.tab_Control.Size = new System.Drawing.Size(931, 489);
             this.tab_Control.TabIndex = 1;
+            this.tab_Control.SelectedIndexChanged += new System.EventHandler(this.tab_Control_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -240,13 +241,14 @@
             this.dgv_Search_PO.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgv_Search_PO.Location = new System.Drawing.Point(153, 3);
             this.dgv_Search_PO.MaxFilterButtonImageHeight = 23;
+            this.dgv_Search_PO.MultiSelect = false;
             this.dgv_Search_PO.Name = "dgv_Search_PO";
             this.dgv_Search_PO.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgv_Search_PO.Size = new System.Drawing.Size(761, 447);
             this.dgv_Search_PO.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgv_Search_PO.TabIndex = 1;
-            this.dgv_Search_PO.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Search_PO_CellValueChanged);
-            this.dgv_Search_PO.CurrentCellDirtyStateChanged += new System.EventHandler(this.dgv_Search_PO_CurrentCellDirtyStateChanged);
+            this.dgv_Search_PO.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Search_PO_CellClick);
+            this.dgv_Search_PO.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Search_PO_RowPostPaint);
             // 
             // cms_dgv_Search_PO
             // 
@@ -272,6 +274,7 @@
             this.cms_dgv_Search_PO_Copy_to_GRPO.Name = "cms_dgv_Search_PO_Copy_to_GRPO";
             this.cms_dgv_Search_PO_Copy_to_GRPO.Size = new System.Drawing.Size(153, 22);
             this.cms_dgv_Search_PO_Copy_to_GRPO.Text = "Copy to GRPO";
+            this.cms_dgv_Search_PO_Copy_to_GRPO.Click += new System.EventHandler(this.cms_dgv_Search_PO_Copy_to_GRPO_Click);
             // 
             // toolStripSeparator1
             // 
@@ -320,6 +323,7 @@
             this.btnCopytoGRPO.Text = "Copy To GRPO";
             this.btnCopytoGRPO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnCopytoGRPO.UseVisualStyleBackColor = true;
+            this.btnCopytoGRPO.Click += new System.EventHandler(this.btnCopytoGRPO_Click);
             // 
             // tabPage2
             // 
@@ -358,10 +362,12 @@
             this.ClientSize = new System.Drawing.Size(937, 615);
             this.Controls.Add(this.table_Main);
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmManage_Purchasing";
             this.Text = "frmManage_Purchasing";
             this.Load += new System.EventHandler(this.frmManage_Purchasing_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmManage_Purchasing_KeyDown);
             this.table_Main.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();

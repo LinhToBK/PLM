@@ -37,6 +37,8 @@
             this.cms_dgv_tblPur_Supplier = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.addNewSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modifyThisSupplierToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.refreshToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editTableViewingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.dgvContactPersonList = new Zuby.ADGV.AdvancedDataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -63,39 +65,39 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtStatusID = new System.Windows.Forms.TextBox();
             this.tabUnit = new System.Windows.Forms.TabPage();
-            this.tabCurrency = new System.Windows.Forms.TabPage();
-            this.tabWareHouse = new System.Windows.Forms.TabPage();
-            this.imageList = new System.Windows.Forms.ImageList(this.components);
-            this.dgv_tblPur_Unit = new Zuby.ADGV.AdvancedDataGridView();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.btnModifyUnit = new System.Windows.Forms.Button();
+            this.txtUnitContent = new System.Windows.Forms.TextBox();
+            this.txtUnitValue = new System.Windows.Forms.TextBox();
+            this.txtUnitName = new System.Windows.Forms.TextBox();
+            this.txtUnitID = new System.Windows.Forms.TextBox();
             this.btnSaveUnit = new System.Windows.Forms.Button();
             this.btnNewUnit = new System.Windows.Forms.Button();
-            this.txtUnitID = new System.Windows.Forms.TextBox();
-            this.txtUnitName = new System.Windows.Forms.TextBox();
-            this.txtUnitValue = new System.Windows.Forms.TextBox();
-            this.txtUnitContent = new System.Windows.Forms.TextBox();
-            this.dgv_tblPur_Currency = new Zuby.ADGV.AdvancedDataGridView();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.txtCurrencyID = new System.Windows.Forms.TextBox();
-            this.txtCurrencyName = new System.Windows.Forms.TextBox();
-            this.txtCurrencyRate = new System.Windows.Forms.TextBox();
-            this.btnNewCurrency = new System.Windows.Forms.Button();
-            this.btnModifyCurrency = new System.Windows.Forms.Button();
+            this.btnModifyUnit = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dgv_tblPur_Unit = new Zuby.ADGV.AdvancedDataGridView();
+            this.tabCurrency = new System.Windows.Forms.TabPage();
             this.btnSaveCurrency = new System.Windows.Forms.Button();
-            this.dgv_tblPur_WareHouse = new Zuby.ADGV.AdvancedDataGridView();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtWareHouseID = new System.Windows.Forms.TextBox();
-            this.txtWareHouseName = new System.Windows.Forms.TextBox();
-            this.btnNewWareHouse = new System.Windows.Forms.Button();
-            this.btnModifyWareHouse = new System.Windows.Forms.Button();
+            this.btnModifyCurrency = new System.Windows.Forms.Button();
+            this.btnNewCurrency = new System.Windows.Forms.Button();
+            this.txtCurrencyRate = new System.Windows.Forms.TextBox();
+            this.txtCurrencyName = new System.Windows.Forms.TextBox();
+            this.txtCurrencyID = new System.Windows.Forms.TextBox();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.dgv_tblPur_Currency = new Zuby.ADGV.AdvancedDataGridView();
+            this.tabWareHouse = new System.Windows.Forms.TabPage();
             this.btnSaveWareHouse = new System.Windows.Forms.Button();
+            this.btnModifyWareHouse = new System.Windows.Forms.Button();
+            this.btnNewWareHouse = new System.Windows.Forms.Button();
+            this.txtWareHouseName = new System.Windows.Forms.TextBox();
+            this.txtWareHouseID = new System.Windows.Forms.TextBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.dgv_tblPur_WareHouse = new Zuby.ADGV.AdvancedDataGridView();
+            this.imageList = new System.Windows.Forms.ImageList(this.components);
             this.tabChung.SuspendLayout();
             this.tabSupplier.SuspendLayout();
             this.tableLayoutSupplier.SuspendLayout();
@@ -107,10 +109,10 @@
             this.tabStatus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Status)).BeginInit();
             this.tabUnit.SuspendLayout();
-            this.tabCurrency.SuspendLayout();
-            this.tabWareHouse.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Unit)).BeginInit();
+            this.tabCurrency.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Currency)).BeginInit();
+            this.tabWareHouse.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_WareHouse)).BeginInit();
             this.SuspendLayout();
             // 
@@ -158,6 +160,8 @@
             // 
             // dgv_tblPur_Supplier
             // 
+            this.dgv_tblPur_Supplier.AllowUserToAddRows = false;
+            this.dgv_tblPur_Supplier.AllowUserToDeleteRows = false;
             this.dgv_tblPur_Supplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_tblPur_Supplier.ContextMenuStrip = this.cms_dgv_tblPur_Supplier;
             this.dgv_tblPur_Supplier.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -165,6 +169,7 @@
             this.dgv_tblPur_Supplier.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgv_tblPur_Supplier.Location = new System.Drawing.Point(3, 3);
             this.dgv_tblPur_Supplier.MaxFilterButtonImageHeight = 23;
+            this.dgv_tblPur_Supplier.MultiSelect = false;
             this.dgv_tblPur_Supplier.Name = "dgv_tblPur_Supplier";
             this.dgv_tblPur_Supplier.RightToLeft = System.Windows.Forms.RightToLeft.No;
             this.dgv_tblPur_Supplier.Size = new System.Drawing.Size(774, 214);
@@ -177,9 +182,11 @@
             this.cms_dgv_tblPur_Supplier.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.cms_dgv_tblPur_Supplier.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.addNewSupplierToolStripMenuItem,
-            this.modifyThisSupplierToolStripMenuItem});
+            this.modifyThisSupplierToolStripMenuItem,
+            this.refreshToolStripMenuItem,
+            this.editTableViewingToolStripMenuItem});
             this.cms_dgv_tblPur_Supplier.Name = "cms_dgv_tblPur_Supplier";
-            this.cms_dgv_tblPur_Supplier.Size = new System.Drawing.Size(185, 56);
+            this.cms_dgv_tblPur_Supplier.Size = new System.Drawing.Size(185, 108);
             // 
             // addNewSupplierToolStripMenuItem
             // 
@@ -196,6 +203,22 @@
             this.modifyThisSupplierToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
             this.modifyThisSupplierToolStripMenuItem.Text = "Modify this Supplier";
             this.modifyThisSupplierToolStripMenuItem.Click += new System.EventHandler(this.modifyThisSupplierToolStripMenuItem_Click);
+            // 
+            // refreshToolStripMenuItem
+            // 
+            this.refreshToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("refreshToolStripMenuItem.Image")));
+            this.refreshToolStripMenuItem.Name = "refreshToolStripMenuItem";
+            this.refreshToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.refreshToolStripMenuItem.Text = "Refresh Data";
+            this.refreshToolStripMenuItem.Click += new System.EventHandler(this.refreshToolStripMenuItem_Click);
+            // 
+            // editTableViewingToolStripMenuItem
+            // 
+            this.editTableViewingToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editTableViewingToolStripMenuItem.Image")));
+            this.editTableViewingToolStripMenuItem.Name = "editTableViewingToolStripMenuItem";
+            this.editTableViewingToolStripMenuItem.Size = new System.Drawing.Size(184, 26);
+            this.editTableViewingToolStripMenuItem.Text = "Edit Table Viewing";
+            this.editTableViewingToolStripMenuItem.Click += new System.EventHandler(this.editTableViewingToolStripMenuItem_Click);
             // 
             // tableLayoutPanel2
             // 
@@ -488,115 +511,37 @@
             this.tabUnit.Text = "03. Unit";
             this.tabUnit.UseVisualStyleBackColor = true;
             // 
-            // tabCurrency
+            // txtUnitContent
             // 
-            this.tabCurrency.Controls.Add(this.btnSaveCurrency);
-            this.tabCurrency.Controls.Add(this.btnModifyCurrency);
-            this.tabCurrency.Controls.Add(this.btnNewCurrency);
-            this.tabCurrency.Controls.Add(this.txtCurrencyRate);
-            this.tabCurrency.Controls.Add(this.txtCurrencyName);
-            this.tabCurrency.Controls.Add(this.txtCurrencyID);
-            this.tabCurrency.Controls.Add(this.label16);
-            this.tabCurrency.Controls.Add(this.label15);
-            this.tabCurrency.Controls.Add(this.label14);
-            this.tabCurrency.Controls.Add(this.dgv_tblPur_Currency);
-            this.tabCurrency.ImageIndex = 1;
-            this.tabCurrency.Location = new System.Drawing.Point(4, 26);
-            this.tabCurrency.Name = "tabCurrency";
-            this.tabCurrency.Padding = new System.Windows.Forms.Padding(3);
-            this.tabCurrency.Size = new System.Drawing.Size(786, 446);
-            this.tabCurrency.TabIndex = 3;
-            this.tabCurrency.Text = "04. Currency";
-            this.tabCurrency.UseVisualStyleBackColor = true;
+            this.txtUnitContent.Location = new System.Drawing.Point(538, 153);
+            this.txtUnitContent.Name = "txtUnitContent";
+            this.txtUnitContent.ReadOnly = true;
+            this.txtUnitContent.Size = new System.Drawing.Size(188, 25);
+            this.txtUnitContent.TabIndex = 2;
             // 
-            // tabWareHouse
+            // txtUnitValue
             // 
-            this.tabWareHouse.Controls.Add(this.btnSaveWareHouse);
-            this.tabWareHouse.Controls.Add(this.btnModifyWareHouse);
-            this.tabWareHouse.Controls.Add(this.btnNewWareHouse);
-            this.tabWareHouse.Controls.Add(this.txtWareHouseName);
-            this.tabWareHouse.Controls.Add(this.txtWareHouseID);
-            this.tabWareHouse.Controls.Add(this.label18);
-            this.tabWareHouse.Controls.Add(this.label17);
-            this.tabWareHouse.Controls.Add(this.dgv_tblPur_WareHouse);
-            this.tabWareHouse.ImageIndex = 4;
-            this.tabWareHouse.Location = new System.Drawing.Point(4, 26);
-            this.tabWareHouse.Name = "tabWareHouse";
-            this.tabWareHouse.Padding = new System.Windows.Forms.Padding(3);
-            this.tabWareHouse.Size = new System.Drawing.Size(786, 446);
-            this.tabWareHouse.TabIndex = 4;
-            this.tabWareHouse.Text = "05. WareHouse";
-            this.tabWareHouse.UseVisualStyleBackColor = true;
+            this.txtUnitValue.Location = new System.Drawing.Point(538, 109);
+            this.txtUnitValue.Name = "txtUnitValue";
+            this.txtUnitValue.ReadOnly = true;
+            this.txtUnitValue.Size = new System.Drawing.Size(188, 25);
+            this.txtUnitValue.TabIndex = 1;
             // 
-            // imageList
+            // txtUnitName
             // 
-            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
-            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList.Images.SetKeyName(0, "icons8-supplier-25.png");
-            this.imageList.Images.SetKeyName(1, "icons8-money-25.png");
-            this.imageList.Images.SetKeyName(2, "icons8-unit-25.png");
-            this.imageList.Images.SetKeyName(3, "icons8-status-25.png");
-            this.imageList.Images.SetKeyName(4, "icons8-warehouse-25.png");
+            this.txtUnitName.Location = new System.Drawing.Point(538, 65);
+            this.txtUnitName.Name = "txtUnitName";
+            this.txtUnitName.ReadOnly = true;
+            this.txtUnitName.Size = new System.Drawing.Size(188, 25);
+            this.txtUnitName.TabIndex = 0;
             // 
-            // dgv_tblPur_Unit
+            // txtUnitID
             // 
-            this.dgv_tblPur_Unit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgv_tblPur_Unit.FilterAndSortEnabled = true;
-            this.dgv_tblPur_Unit.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.dgv_tblPur_Unit.Location = new System.Drawing.Point(28, 17);
-            this.dgv_tblPur_Unit.MaxFilterButtonImageHeight = 23;
-            this.dgv_tblPur_Unit.Name = "dgv_tblPur_Unit";
-            this.dgv_tblPur_Unit.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgv_tblPur_Unit.Size = new System.Drawing.Size(391, 181);
-            this.dgv_tblPur_Unit.SortStringChangedInvokeBeforeDatasourceUpdate = true;
-            this.dgv_tblPur_Unit.TabIndex = 0;
-            this.dgv_tblPur_Unit.Click += new System.EventHandler(this.dgv_tblPur_Unit_Click);
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(435, 25);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(47, 17);
-            this.label10.TabIndex = 1;
-            this.label10.Text = "Unit ID";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(435, 69);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(70, 17);
-            this.label11.TabIndex = 1;
-            this.label11.Text = "Unit Name";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(435, 113);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(66, 17);
-            this.label12.TabIndex = 1;
-            this.label12.Text = "Unit Value";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(435, 157);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(80, 17);
-            this.label13.TabIndex = 1;
-            this.label13.Text = "Unit Content";
-            // 
-            // btnModifyUnit
-            // 
-            this.btnModifyUnit.Location = new System.Drawing.Point(175, 210);
-            this.btnModifyUnit.Name = "btnModifyUnit";
-            this.btnModifyUnit.Size = new System.Drawing.Size(118, 34);
-            this.btnModifyUnit.TabIndex = 4;
-            this.btnModifyUnit.Text = "Modify Unit";
-            this.btnModifyUnit.UseVisualStyleBackColor = true;
-            this.btnModifyUnit.Click += new System.EventHandler(this.btnModifyUnit_Click);
+            this.txtUnitID.Location = new System.Drawing.Point(538, 21);
+            this.txtUnitID.Name = "txtUnitID";
+            this.txtUnitID.ReadOnly = true;
+            this.txtUnitID.Size = new System.Drawing.Size(85, 25);
+            this.txtUnitID.TabIndex = 3;
             // 
             // btnSaveUnit
             // 
@@ -618,37 +563,167 @@
             this.btnNewUnit.UseVisualStyleBackColor = true;
             this.btnNewUnit.Click += new System.EventHandler(this.btnNewUnit_Click);
             // 
-            // txtUnitID
+            // btnModifyUnit
             // 
-            this.txtUnitID.Location = new System.Drawing.Point(538, 21);
-            this.txtUnitID.Name = "txtUnitID";
-            this.txtUnitID.ReadOnly = true;
-            this.txtUnitID.Size = new System.Drawing.Size(85, 25);
-            this.txtUnitID.TabIndex = 3;
+            this.btnModifyUnit.Location = new System.Drawing.Point(175, 210);
+            this.btnModifyUnit.Name = "btnModifyUnit";
+            this.btnModifyUnit.Size = new System.Drawing.Size(118, 34);
+            this.btnModifyUnit.TabIndex = 4;
+            this.btnModifyUnit.Text = "Modify Unit";
+            this.btnModifyUnit.UseVisualStyleBackColor = true;
+            this.btnModifyUnit.Click += new System.EventHandler(this.btnModifyUnit_Click);
             // 
-            // txtUnitName
+            // label13
             // 
-            this.txtUnitName.Location = new System.Drawing.Point(538, 65);
-            this.txtUnitName.Name = "txtUnitName";
-            this.txtUnitName.ReadOnly = true;
-            this.txtUnitName.Size = new System.Drawing.Size(188, 25);
-            this.txtUnitName.TabIndex = 0;
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(435, 157);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(80, 17);
+            this.label13.TabIndex = 1;
+            this.label13.Text = "Unit Content";
             // 
-            // txtUnitValue
+            // label12
             // 
-            this.txtUnitValue.Location = new System.Drawing.Point(538, 109);
-            this.txtUnitValue.Name = "txtUnitValue";
-            this.txtUnitValue.ReadOnly = true;
-            this.txtUnitValue.Size = new System.Drawing.Size(188, 25);
-            this.txtUnitValue.TabIndex = 1;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(435, 113);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(66, 17);
+            this.label12.TabIndex = 1;
+            this.label12.Text = "Unit Value";
             // 
-            // txtUnitContent
+            // label11
             // 
-            this.txtUnitContent.Location = new System.Drawing.Point(538, 153);
-            this.txtUnitContent.Name = "txtUnitContent";
-            this.txtUnitContent.ReadOnly = true;
-            this.txtUnitContent.Size = new System.Drawing.Size(188, 25);
-            this.txtUnitContent.TabIndex = 2;
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(435, 69);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(70, 17);
+            this.label11.TabIndex = 1;
+            this.label11.Text = "Unit Name";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(435, 25);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(47, 17);
+            this.label10.TabIndex = 1;
+            this.label10.Text = "Unit ID";
+            // 
+            // dgv_tblPur_Unit
+            // 
+            this.dgv_tblPur_Unit.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_tblPur_Unit.FilterAndSortEnabled = true;
+            this.dgv_tblPur_Unit.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgv_tblPur_Unit.Location = new System.Drawing.Point(28, 17);
+            this.dgv_tblPur_Unit.MaxFilterButtonImageHeight = 23;
+            this.dgv_tblPur_Unit.Name = "dgv_tblPur_Unit";
+            this.dgv_tblPur_Unit.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgv_tblPur_Unit.Size = new System.Drawing.Size(391, 181);
+            this.dgv_tblPur_Unit.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgv_tblPur_Unit.TabIndex = 0;
+            this.dgv_tblPur_Unit.Click += new System.EventHandler(this.dgv_tblPur_Unit_Click);
+            // 
+            // tabCurrency
+            // 
+            this.tabCurrency.Controls.Add(this.btnSaveCurrency);
+            this.tabCurrency.Controls.Add(this.btnModifyCurrency);
+            this.tabCurrency.Controls.Add(this.btnNewCurrency);
+            this.tabCurrency.Controls.Add(this.txtCurrencyRate);
+            this.tabCurrency.Controls.Add(this.txtCurrencyName);
+            this.tabCurrency.Controls.Add(this.txtCurrencyID);
+            this.tabCurrency.Controls.Add(this.label16);
+            this.tabCurrency.Controls.Add(this.label15);
+            this.tabCurrency.Controls.Add(this.label14);
+            this.tabCurrency.Controls.Add(this.dgv_tblPur_Currency);
+            this.tabCurrency.ImageIndex = 1;
+            this.tabCurrency.Location = new System.Drawing.Point(4, 26);
+            this.tabCurrency.Name = "tabCurrency";
+            this.tabCurrency.Padding = new System.Windows.Forms.Padding(3);
+            this.tabCurrency.Size = new System.Drawing.Size(786, 446);
+            this.tabCurrency.TabIndex = 3;
+            this.tabCurrency.Text = "04. Currency";
+            this.tabCurrency.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveCurrency
+            // 
+            this.btnSaveCurrency.Location = new System.Drawing.Point(366, 181);
+            this.btnSaveCurrency.Name = "btnSaveCurrency";
+            this.btnSaveCurrency.Size = new System.Drawing.Size(71, 34);
+            this.btnSaveCurrency.TabIndex = 3;
+            this.btnSaveCurrency.Text = "Save";
+            this.btnSaveCurrency.UseVisualStyleBackColor = true;
+            this.btnSaveCurrency.Click += new System.EventHandler(this.btnSaveCurrency_Click);
+            // 
+            // btnModifyCurrency
+            // 
+            this.btnModifyCurrency.Location = new System.Drawing.Point(191, 181);
+            this.btnModifyCurrency.Name = "btnModifyCurrency";
+            this.btnModifyCurrency.Size = new System.Drawing.Size(126, 34);
+            this.btnModifyCurrency.TabIndex = 3;
+            this.btnModifyCurrency.Text = "Modify Currency";
+            this.btnModifyCurrency.UseVisualStyleBackColor = true;
+            this.btnModifyCurrency.Click += new System.EventHandler(this.btnModifyCurrency_Click);
+            // 
+            // btnNewCurrency
+            // 
+            this.btnNewCurrency.Location = new System.Drawing.Point(17, 181);
+            this.btnNewCurrency.Name = "btnNewCurrency";
+            this.btnNewCurrency.Size = new System.Drawing.Size(126, 34);
+            this.btnNewCurrency.TabIndex = 3;
+            this.btnNewCurrency.Text = "New Currency";
+            this.btnNewCurrency.UseVisualStyleBackColor = true;
+            this.btnNewCurrency.Click += new System.EventHandler(this.btnNewCurrency_Click);
+            // 
+            // txtCurrencyRate
+            // 
+            this.txtCurrencyRate.Location = new System.Drawing.Point(443, 144);
+            this.txtCurrencyRate.Name = "txtCurrencyRate";
+            this.txtCurrencyRate.ReadOnly = true;
+            this.txtCurrencyRate.Size = new System.Drawing.Size(111, 25);
+            this.txtCurrencyRate.TabIndex = 1;
+            // 
+            // txtCurrencyName
+            // 
+            this.txtCurrencyName.Location = new System.Drawing.Point(443, 78);
+            this.txtCurrencyName.Name = "txtCurrencyName";
+            this.txtCurrencyName.ReadOnly = true;
+            this.txtCurrencyName.Size = new System.Drawing.Size(111, 25);
+            this.txtCurrencyName.TabIndex = 0;
+            // 
+            // txtCurrencyID
+            // 
+            this.txtCurrencyID.Location = new System.Drawing.Point(443, 16);
+            this.txtCurrencyID.Name = "txtCurrencyID";
+            this.txtCurrencyID.ReadOnly = true;
+            this.txtCurrencyID.Size = new System.Drawing.Size(76, 25);
+            this.txtCurrencyID.TabIndex = 2;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(339, 148);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(89, 17);
+            this.label16.TabIndex = 1;
+            this.label16.Text = "Currency Rate";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(339, 82);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(98, 17);
+            this.label15.TabIndex = 1;
+            this.label15.Text = "Currency Name";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(343, 16);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(75, 17);
+            this.label14.TabIndex = 1;
+            this.label14.Text = "Currency ID";
             // 
             // dgv_tblPur_Currency
             // 
@@ -664,86 +739,88 @@
             this.dgv_tblPur_Currency.TabIndex = 0;
             this.dgv_tblPur_Currency.Click += new System.EventHandler(this.dgv_tblPur_Currency_Click);
             // 
-            // label14
+            // tabWareHouse
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(343, 16);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(75, 17);
-            this.label14.TabIndex = 1;
-            this.label14.Text = "Currency ID";
+            this.tabWareHouse.Controls.Add(this.btnSaveWareHouse);
+            this.tabWareHouse.Controls.Add(this.btnModifyWareHouse);
+            this.tabWareHouse.Controls.Add(this.btnNewWareHouse);
+            this.tabWareHouse.Controls.Add(this.txtWareHouseName);
+            this.tabWareHouse.Controls.Add(this.txtWareHouseID);
+            this.tabWareHouse.Controls.Add(this.label18);
+            this.tabWareHouse.Controls.Add(this.label17);
+            this.tabWareHouse.Controls.Add(this.dgv_tblPur_WareHouse);
+            this.tabWareHouse.ImageIndex = 4;
+            this.tabWareHouse.Location = new System.Drawing.Point(4, 26);
+            this.tabWareHouse.Name = "tabWareHouse";
+            this.tabWareHouse.Padding = new System.Windows.Forms.Padding(3);
+            this.tabWareHouse.Size = new System.Drawing.Size(786, 446);
+            this.tabWareHouse.TabIndex = 4;
+            this.tabWareHouse.Text = "05. WareHouse";
+            this.tabWareHouse.UseVisualStyleBackColor = true;
             // 
-            // label15
+            // btnSaveWareHouse
             // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(339, 82);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(98, 17);
-            this.label15.TabIndex = 1;
-            this.label15.Text = "Currency Name";
+            this.btnSaveWareHouse.Location = new System.Drawing.Point(409, 189);
+            this.btnSaveWareHouse.Name = "btnSaveWareHouse";
+            this.btnSaveWareHouse.Size = new System.Drawing.Size(67, 37);
+            this.btnSaveWareHouse.TabIndex = 3;
+            this.btnSaveWareHouse.Text = "Save";
+            this.btnSaveWareHouse.UseVisualStyleBackColor = true;
+            this.btnSaveWareHouse.Click += new System.EventHandler(this.btnSaveWareHouse_Click);
             // 
-            // label16
+            // btnModifyWareHouse
             // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(339, 148);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(89, 17);
-            this.label16.TabIndex = 1;
-            this.label16.Text = "Currency Rate";
+            this.btnModifyWareHouse.Location = new System.Drawing.Point(218, 189);
+            this.btnModifyWareHouse.Name = "btnModifyWareHouse";
+            this.btnModifyWareHouse.Size = new System.Drawing.Size(143, 37);
+            this.btnModifyWareHouse.TabIndex = 3;
+            this.btnModifyWareHouse.Text = "Modify Warehouse";
+            this.btnModifyWareHouse.UseVisualStyleBackColor = true;
+            this.btnModifyWareHouse.Click += new System.EventHandler(this.btnModifyWareHouse_Click);
             // 
-            // txtCurrencyID
+            // btnNewWareHouse
             // 
-            this.txtCurrencyID.Location = new System.Drawing.Point(443, 16);
-            this.txtCurrencyID.Name = "txtCurrencyID";
-            this.txtCurrencyID.ReadOnly = true;
-            this.txtCurrencyID.Size = new System.Drawing.Size(76, 25);
-            this.txtCurrencyID.TabIndex = 2;
+            this.btnNewWareHouse.Location = new System.Drawing.Point(24, 189);
+            this.btnNewWareHouse.Name = "btnNewWareHouse";
+            this.btnNewWareHouse.Size = new System.Drawing.Size(143, 37);
+            this.btnNewWareHouse.TabIndex = 3;
+            this.btnNewWareHouse.Text = "New Warehouse";
+            this.btnNewWareHouse.UseVisualStyleBackColor = true;
+            this.btnNewWareHouse.Click += new System.EventHandler(this.btnNewWareHouse_Click);
             // 
-            // txtCurrencyName
+            // txtWareHouseName
             // 
-            this.txtCurrencyName.Location = new System.Drawing.Point(443, 78);
-            this.txtCurrencyName.Name = "txtCurrencyName";
-            this.txtCurrencyName.ReadOnly = true;
-            this.txtCurrencyName.Size = new System.Drawing.Size(111, 25);
-            this.txtCurrencyName.TabIndex = 0;
+            this.txtWareHouseName.Location = new System.Drawing.Point(286, 145);
+            this.txtWareHouseName.Name = "txtWareHouseName";
+            this.txtWareHouseName.ReadOnly = true;
+            this.txtWareHouseName.Size = new System.Drawing.Size(190, 25);
+            this.txtWareHouseName.TabIndex = 2;
             // 
-            // txtCurrencyRate
+            // txtWareHouseID
             // 
-            this.txtCurrencyRate.Location = new System.Drawing.Point(443, 144);
-            this.txtCurrencyRate.Name = "txtCurrencyRate";
-            this.txtCurrencyRate.ReadOnly = true;
-            this.txtCurrencyRate.Size = new System.Drawing.Size(111, 25);
-            this.txtCurrencyRate.TabIndex = 1;
+            this.txtWareHouseID.Location = new System.Drawing.Point(286, 59);
+            this.txtWareHouseID.Name = "txtWareHouseID";
+            this.txtWareHouseID.ReadOnly = true;
+            this.txtWareHouseID.Size = new System.Drawing.Size(100, 25);
+            this.txtWareHouseID.TabIndex = 2;
             // 
-            // btnNewCurrency
+            // label18
             // 
-            this.btnNewCurrency.Location = new System.Drawing.Point(17, 181);
-            this.btnNewCurrency.Name = "btnNewCurrency";
-            this.btnNewCurrency.Size = new System.Drawing.Size(126, 34);
-            this.btnNewCurrency.TabIndex = 3;
-            this.btnNewCurrency.Text = "New Currency";
-            this.btnNewCurrency.UseVisualStyleBackColor = true;
-            this.btnNewCurrency.Click += new System.EventHandler(this.btnNewCurrency_Click);
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(286, 106);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(112, 17);
+            this.label18.TabIndex = 1;
+            this.label18.Text = "Warehouse Name";
             // 
-            // btnModifyCurrency
+            // label17
             // 
-            this.btnModifyCurrency.Location = new System.Drawing.Point(191, 181);
-            this.btnModifyCurrency.Name = "btnModifyCurrency";
-            this.btnModifyCurrency.Size = new System.Drawing.Size(126, 34);
-            this.btnModifyCurrency.TabIndex = 3;
-            this.btnModifyCurrency.Text = "Modify Currency";
-            this.btnModifyCurrency.UseVisualStyleBackColor = true;
-            this.btnModifyCurrency.Click += new System.EventHandler(this.btnModifyCurrency_Click);
-            // 
-            // btnSaveCurrency
-            // 
-            this.btnSaveCurrency.Location = new System.Drawing.Point(366, 181);
-            this.btnSaveCurrency.Name = "btnSaveCurrency";
-            this.btnSaveCurrency.Size = new System.Drawing.Size(71, 34);
-            this.btnSaveCurrency.TabIndex = 3;
-            this.btnSaveCurrency.Text = "Save";
-            this.btnSaveCurrency.UseVisualStyleBackColor = true;
-            this.btnSaveCurrency.Click += new System.EventHandler(this.btnSaveCurrency_Click);
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(286, 20);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(89, 17);
+            this.label17.TabIndex = 1;
+            this.label17.Text = "Warehouse ID";
             // 
             // dgv_tblPur_WareHouse
             // 
@@ -759,69 +836,15 @@
             this.dgv_tblPur_WareHouse.TabIndex = 0;
             this.dgv_tblPur_WareHouse.Click += new System.EventHandler(this.dgv_tblPur_WareHouse_Click);
             // 
-            // label17
+            // imageList
             // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(286, 20);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(89, 17);
-            this.label17.TabIndex = 1;
-            this.label17.Text = "Warehouse ID";
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(286, 106);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(112, 17);
-            this.label18.TabIndex = 1;
-            this.label18.Text = "Warehouse Name";
-            // 
-            // txtWareHouseID
-            // 
-            this.txtWareHouseID.Location = new System.Drawing.Point(286, 59);
-            this.txtWareHouseID.Name = "txtWareHouseID";
-            this.txtWareHouseID.ReadOnly = true;
-            this.txtWareHouseID.Size = new System.Drawing.Size(100, 25);
-            this.txtWareHouseID.TabIndex = 2;
-            // 
-            // txtWareHouseName
-            // 
-            this.txtWareHouseName.Location = new System.Drawing.Point(286, 145);
-            this.txtWareHouseName.Name = "txtWareHouseName";
-            this.txtWareHouseName.ReadOnly = true;
-            this.txtWareHouseName.Size = new System.Drawing.Size(190, 25);
-            this.txtWareHouseName.TabIndex = 2;
-            // 
-            // btnNewWareHouse
-            // 
-            this.btnNewWareHouse.Location = new System.Drawing.Point(24, 189);
-            this.btnNewWareHouse.Name = "btnNewWareHouse";
-            this.btnNewWareHouse.Size = new System.Drawing.Size(143, 37);
-            this.btnNewWareHouse.TabIndex = 3;
-            this.btnNewWareHouse.Text = "New Warehouse";
-            this.btnNewWareHouse.UseVisualStyleBackColor = true;
-            this.btnNewWareHouse.Click += new System.EventHandler(this.btnNewWareHouse_Click);
-            // 
-            // btnModifyWareHouse
-            // 
-            this.btnModifyWareHouse.Location = new System.Drawing.Point(218, 189);
-            this.btnModifyWareHouse.Name = "btnModifyWareHouse";
-            this.btnModifyWareHouse.Size = new System.Drawing.Size(143, 37);
-            this.btnModifyWareHouse.TabIndex = 3;
-            this.btnModifyWareHouse.Text = "Modify Warehouse";
-            this.btnModifyWareHouse.UseVisualStyleBackColor = true;
-            this.btnModifyWareHouse.Click += new System.EventHandler(this.btnModifyWareHouse_Click);
-            // 
-            // btnSaveWareHouse
-            // 
-            this.btnSaveWareHouse.Location = new System.Drawing.Point(409, 189);
-            this.btnSaveWareHouse.Name = "btnSaveWareHouse";
-            this.btnSaveWareHouse.Size = new System.Drawing.Size(67, 37);
-            this.btnSaveWareHouse.TabIndex = 3;
-            this.btnSaveWareHouse.Text = "Save";
-            this.btnSaveWareHouse.UseVisualStyleBackColor = true;
-            this.btnSaveWareHouse.Click += new System.EventHandler(this.btnSaveWareHouse_Click);
+            this.imageList.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList.ImageStream")));
+            this.imageList.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList.Images.SetKeyName(0, "icons8-supplier-25.png");
+            this.imageList.Images.SetKeyName(1, "icons8-money-25.png");
+            this.imageList.Images.SetKeyName(2, "icons8-unit-25.png");
+            this.imageList.Images.SetKeyName(3, "icons8-status-25.png");
+            this.imageList.Images.SetKeyName(4, "icons8-warehouse-25.png");
             // 
             // frmPurchase_Common_Information
             // 
@@ -849,12 +872,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Status)).EndInit();
             this.tabUnit.ResumeLayout(false);
             this.tabUnit.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Unit)).EndInit();
             this.tabCurrency.ResumeLayout(false);
             this.tabCurrency.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Currency)).EndInit();
             this.tabWareHouse.ResumeLayout(false);
             this.tabWareHouse.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Unit)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_Currency)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_tblPur_WareHouse)).EndInit();
             this.ResumeLayout(false);
 
@@ -928,5 +951,7 @@
         private System.Windows.Forms.Button btnSaveWareHouse;
         private System.Windows.Forms.Button btnModifyWareHouse;
         private System.Windows.Forms.Button btnNewWareHouse;
+        private System.Windows.Forms.ToolStripMenuItem refreshToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem editTableViewingToolStripMenuItem;
     }
 }

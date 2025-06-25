@@ -48,36 +48,8 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return tbl_ContactPerson;
         }
 
-        public bool Insert_New_PO_BLL(
-                    DateTime PODateCreate,
-                    DateTime POEstimateDeliveryDate,
-                    int POSupplierID,
-                    string POSupplierContactPerson,
-                    int POCurrencyID,
-                    string POUser,
-                    int POStatusID,
-                    string PORemark,
-                    string POPaymentTerm,
-                    int WarehouseID,
-                    decimal POTotalPayment,
-                    int POTaxID,
-                    DataTable tblPur_PO_Detail)
-        {
-            return _purchase_V2_DAL.Insert_New_PO_DAL(
-                PODateCreate,
-                POEstimateDeliveryDate,
-                POSupplierID,
-                POSupplierContactPerson,
-                POCurrencyID,
-                POUser,
-                POStatusID,
-                PORemark,
-                POPaymentTerm,
-                WarehouseID,
-                POTotalPayment,
-                POTaxID,
-                tblPur_PO_Detail);
-        }
+        public bool Insert_New_PO_BLL(DateTime PODateCreate, DateTime POEstimateDeliveryDate, int POSupplierID, string POSupplierContactPerson, int POCurrencyID, string POUser, int POStatusID, string PORemark, string POPaymentTerm, int WarehouseID, decimal POTotalPayment, int POTaxID, DataTable tblPur_PO_Detail)
+        { return _purchase_V2_DAL.Insert_New_PO_DAL(PODateCreate, POEstimateDeliveryDate, POSupplierID, POSupplierContactPerson, POCurrencyID, POUser, POStatusID, PORemark, POPaymentTerm, WarehouseID, POTotalPayment, POTaxID, tblPur_PO_Detail); }
 
         public bool Insert_NewCurrency_BLL(string Name, decimal Rate)
         {
@@ -240,21 +212,21 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         }
 
         /// <summary>
-        /// return table [ PONumber, PODateCreate, POEstimateDeliveryDate, SupplierName, POSupplierContactPerson, CurrencyName, POUser, StatusName, WareHouseName, POTotalPayment, POTaxID ]
+        /// Method : Lấy dữ liệu bảng tblPur_PO theo PONumber
         /// </summary>
         /// <param name="PONumber"></param>
-        /// <returns></returns>
+        /// <returns> Table (PONumber, PODateCreate, POEstimateDeliveryDate, POSupplierID, POSupplierContactPerson, POCurrencyID ,PORemark,POPaymentTerm , WareHouseID, POToTalPayment, POTaxID ) </returns>
         public DataTable Select_tblPur_PO_by_PONumber_BLL(int PONumber)
         {
             return _purchase_V2_DAL.Select_tblPur_PO_by_PONumber_DAL(PONumber);
         }
 
         /// <summary>
-        /// return table [ PONumber, PODateCreate, POEstimateDeliveryDate, SupplierName, POSupplierContactPerson, CurrencyName, POUser, StatusName, WareHouseName, POTotalPayment
+        /// return 
         /// </summary>
         /// <param name="SupplierID"></param>
         /// <param name="ShowRow"></param>
-        /// <returns></returns>
+        /// <returns> table [ PONumber, PODateCreate, POEstimateDeliveryDate, SupplierName, POSupplierContactPerson, CurrencyName, POUser, StatusName, WareHouseName, POTotalPayment</returns>
         public DataTable Select_tblPur_PO_by_SupplierID_BLL(int SupplierID, int ShowRow)
         {
             DataTable result = _purchase_V2_DAL.Select_tblPur_PO_by_SupplierID_DAL(SupplierID, ShowRow);
@@ -271,7 +243,12 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
 
             return result;
         }
-
+        /// <summary>
+        /// return 
+        /// </summary>
+        /// <param name="SupplierID"></param>
+        /// <param name="ShowRow"></param>
+        /// <returns> table [ PONumber, PODateCreate, POEstimateDeliveryDate, SupplierName, POSupplierContactPerson, CurrencyName, POUser, StatusName, WareHouseName, POTotalPayment</returns>
         public DataTable Select_tblPur_PO_by_SupplierID_BLL(int SupplierID)
         {
             DataTable result = _purchase_V2_DAL.Select_tblPur_PO_by_SupplierID_DAL(SupplierID);
@@ -285,6 +262,31 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             //{
             //    row["Status"] = false;
             //}
+
+            return result;
+        }
+
+        /// <summary>
+        ///  return table [ GRPONumber, ReceivedDate, PONumber, WareHouseName, TaxName, ReceivedAmount, CurrencyName ]
+        /// </summary>
+        /// <param name="SupplierID"></param>
+        /// <param name="ShowRow"></param>
+        /// <returns> table [ GRPONumber, ReceivedDate, PONumber, WareHouseName, TaxName, ReceivedAmount, CurrencyName ]</returns>
+        public DataTable Select_tblPur_GRPO_by_SupplierID_BLL(int SupplierID, int ShowRow)
+        {
+            DataTable result = _purchase_V2_DAL.Select_tblPur_GRPO_by_SupplierID_DAL(SupplierID, ShowRow);
+
+            return result;
+        }
+        /// <summary>
+        ///  return table [ GRPONumber, ReceivedDate, PONumber, WareHouseName, TaxName, ReceivedAmount, CurrencyName ]
+        /// </summary>
+        /// <param name="SupplierID"></param>
+        /// <param name="ShowRow"></param>
+        /// <returns> table [ GRPONumber, ReceivedDate, PONumber, WareHouseName, TaxName, ReceivedAmount, CurrencyName ]</returns>
+        public DataTable Select_tblPur_GRPO_by_SupplierID_BLL(int SupplierID)
+        {
+            DataTable result = _purchase_V2_DAL.Select_tblPur_GRPO_by_SupplierID_DAL(SupplierID);
 
             return result;
         }
@@ -316,6 +318,7 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return _purchase_V2_DAL.Select_tblPur_Supplier_DAL();
         }
+
         /// <summary>
         /// return table [ TaxID, TaxCode, TaxName, TaxRate, TaxNote ]
         /// </summary>
@@ -343,6 +346,29 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return _purchase_V2_DAL.Select_tblPur_WareHouse_DAL();
         }
 
+        /// <summary>
+        /// return table [ GRPONumber, ReceivedDate, PONumber, Status, WareHouseName, TaxType, TotalAmount, Currency ]
+        /// </summary>
+        /// <param name="DateFrom"></param>
+        /// <param name="DateTo"></param>
+        /// <param name="ShowRow"></param>
+        /// <returns></returns>
+        public DataTable Select_tblPur_GRPO_by_CreateDate_BLL(DateTime DateFrom, DateTime DateTo, int ShowRow)
+        {
+            return _purchase_V2_DAL.Select_tblPur_GRPO_by_CreateDate_DAL(DateFrom, DateTo, ShowRow);
+        }
+
+        /// <summary>
+        /// return table [ GRPONumber, ReceivedDate, PONumber, Status, WareHouseName, TaxType, TotalAmount, Currency ]
+        /// </summary>
+        /// <param name="DateFrom"></param>
+        /// <param name="DateTo"></param>
+        /// <returns></returns>
+        public DataTable Select_tblPur_GRPO_by_CreateDate_BLL(DateTime DateFrom, DateTime DateTo)
+        {
+            return _purchase_V2_DAL.Select_tblPur_GRPO_by_CreateDate_DAL(DateFrom, DateTo);
+        }
+
         public bool Update_Existing_PO_BLL(int PONumber, DateTime _dcreate, DateTime _destimate, int SupID, string SupPerson, int CurID, string user, int StatusID, string Remark,
             string PaymentTerm, int WareHouseID, decimal TotalPayment, int TaxID, DataTable tblUpdate, DataTable tblDelete, DataTable tblInsert)
         {
@@ -364,17 +390,138 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
         {
             return _purchase_V2_DAL.Update_ExistingSupplier_DAL(ID, Code, Name, Phone, Tax, Location, Note, ContactPerson);
         }
+
         public bool Update_ExistingUnit_BLL(int ID, string Name, decimal Value, string Content)
         {
             return _purchase_V2_DAL.Update_ExistingUnit_DAL(ID, Name, Value, Content);
         }
+
         public bool Update_ExistingWareHouse_BLL(int ID, string Name)
         {
             return _purchase_V2_DAL.Update_ExistingWareHouse_DAL(ID, Name);
         }
+
         public bool Update_tblPur_Part_BLL(DataTable tblUpdated_Part)
         {
             return _purchase_V2_DAL.Update_tblPur_Part_DAL(tblUpdated_Part);
         }
+
+        public bool Insert_New_GRPO_BLL(DataTable _tblPur_GRPO, DataTable _tblPur_GPPO_Detail, DataTable _tblInventory, DataTable _tblInventory_Summary)
+        {
+            return _purchase_V2_DAL.Insert_New_GRPO_DAL(_tblPur_GRPO, _tblPur_GPPO_Detail , _tblInventory, _tblInventory_Summary);
+        }
+
+        /// <summary>
+        /// return table [ GRPOID, GRPONumber, PONumber, ReceivedDate, ReceivedAmount, GRPORemark, GRPOStatusID, GRPOCurrencyID, GRPOWareHouseID, GRPOTaxID ]
+        /// </summary>
+        /// <param name="GRPONumber"></param>
+        /// <returns></returns>
+        public DataTable Select_tblPur_GRPO_by_GRPONumber_BLL(int GRPONumber)
+        {
+            return _purchase_V2_DAL.Select_tblPur_GRPO_by_GRPONumber_DAL(GRPONumber);
+        }
+
+        /// <summary>
+        /// Method : Lấy dữ liệu bảng tblPur_GRPO_Detail theo GRPONumber
+        /// </summary>
+        /// <param name="GRPONumber"></param>
+        /// <returns>Table ( PartCode, PartName, Quantity_Order, QuantityReceived, UnitPriceReceived, DiscountReceived,UnitName, PODetail_RowID , ExpiredDate, TaxCode )</returns>
+        public DataTable Select_tblPur_GRPO_Detail_by_GRPONumber_BLL(int GRPONumber)
+
+        {
+            return _purchase_V2_DAL.Select_tblPur_GRPO_Detail_by_GRPONumber_DAL(GRPONumber);
+        }
+
+        public bool Update_Existing_GRPO_BLL(DataTable _tblPur_Existing_GRPO, DataTable _tblPur_GRPO_Detail , DataTable _tblInventory, DataTable _tblInventory_Summary)
+        {
+            return _purchase_V2_DAL.Update_Existing_GRPO_DAL(_tblPur_Existing_GRPO, _tblPur_GRPO_Detail, _tblInventory, _tblInventory_Summary);
+        }
+
+        public bool Cancelation_Existing_GRPO_BLL(int GRPOID)
+        {
+            return _purchase_V2_DAL.Cancelation_Existing_GRPO_DAL(GRPOID);
+        }
+
+        public bool Cancelation_Existing_PO_BLL(int PONumber)
+        {
+            return  _purchase_V2_DAL.Cancelation_Existing_PO_DAL(PONumber);
+        }
+
+        public bool Closed_Existing_PO_BLL(int PONumber)
+        {
+            return _purchase_V2_DAL.Closed_Existing_PO_DAL(PONumber);
+        }
+
+        public bool Closed_Existing_GRPO_BLL(int GRPONumber)
+        {
+            return _purchase_V2_DAL.Closed_Existing_GRPO_DAL(GRPONumber);
+        }
+
+        public DataTable Select_PartCode_PartName_BLL(DataTable ListPartCode)
+        {
+            return _purchase_V2_DAL.Select_PartCode_PartName_DAL(ListPartCode);
+        }
+
+        public bool Insert_New_APInvoice_BLL(DataTable _tblAPInvoice, DataTable _tblAPInvoice_Detail)
+        {
+            return _purchase_V2_DAL.Insert_New_APInvoice_DAL(_tblAPInvoice, _tblAPInvoice_Detail);
+        }
+
+        /// <summary>
+        /// Lấy dữ liệu bảng tblPur_APInvoice trong 1 khoảng thời gian
+        /// </summary>
+        /// <param name="DateFrom"></param>
+        /// <param name="DateTo"></param>
+        /// <param name="ShowRow"></param>
+        /// <returns> Table ( ID, GRPOID, PONumber, Status, Supplier, Created, Updated, Payment, Currency, Tax )</returns>
+        public DataTable Select_tblPur_APInvoice_by_CreateDate_BLL(DateTime DateFrom, DateTime DateTo, int ShowRow)
+        {
+            return _purchase_V2_DAL.Select_tblPur_APInvoice_by_CreateDate_DAL(DateFrom, DateTo, ShowRow);
+        }
+        public DataTable Select_tblPur_APInvoice_by_CreateDate_BLL(DateTime DateFrom, DateTime DateTo)
+        {
+            return _purchase_V2_DAL.Select_tblPur_APInvoice_by_CreateDate_DAL(DateFrom, DateTo);
+        }
+        /// <summary>
+        /// Lấy dữ liệu bảng tblPur_APInvoice theo SupplierID
+        /// </summary>
+        /// <param name="SupplierID"></param>
+        /// <returns>Table ( ID, GRPOID, PONumber, Status, Supplier, Created, Updated, Payment, Currency, Tax )</returns>
+        public DataTable Select_tblPur_APInvoice_by_SupplierID_BLL(int SupplierID)
+        {
+            return _purchase_V2_DAL.Select_tblPur_APInvoice_by_SupplierID_DAL(SupplierID);
+        }
+        public DataTable Select_tblPur_APInvoice_by_SupplierID_BLL(int SupplierID, int ShowRow)
+        {
+            return _purchase_V2_DAL.Select_tblPur_APInvoice_by_SupplierID_DAL(SupplierID, ShowRow);
+        }
+
+
+        /// <summary>
+        /// Lấy dữ liệu bảng tblPur_APInvoice_Detail theo APInvoiceID
+        /// </summary>
+        /// <param name="APInvoiceID"></param>
+        /// <returns> 
+        /// return table (PartCode, PartName, Qty_Received, Qty_Payment, UnitPrice, Discount, Total, Unit, TaxCode, RowID)
+        /// </returns>
+        public DataTable Select_tblPur_APInvoice_Detail_by_APInvoiceID_BLL(int APInvoiceID)
+        {
+            return _purchase_V2_DAL.Select_tblPur_APInvoice_Detail_by_APInvoiceID_DAL(APInvoiceID);
+        }
+
+
+        /// <summary>
+        /// Lấy dữ liệu bảng tblPur_APInvoice theo APInvoiceID
+        /// </summary>
+        /// <param name="APInvoiceID"></param>
+        /// <returns>
+        /// return table ( APInvoiceID, GRPOID, PONumber, APInvoice_SupplierID, CreatedDate, UpdatedDate, APInvoice_ToTalPayment, APInvoice_Remark, APInvoice_StatusID, APInvoice_CurrencyID, APInvoice_TaxID )
+        /// </returns>
+        public DataTable Select_tblPur_APInvoice_by_APInvoiceID_BLL(int APInvoiceID)
+        {
+            return _purchase_V2_DAL.Select_tblPur_APInvoice_by_APInvoiceID_DAL(APInvoiceID);
+        }
+
+
     }
 }

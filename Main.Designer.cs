@@ -59,6 +59,7 @@
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.mnuEngineer,
@@ -258,7 +259,7 @@
             // 
             this.mnuAboutMe.Image = ((System.Drawing.Image)(resources.GetObject("mnuAboutMe.Image")));
             this.mnuAboutMe.Name = "mnuAboutMe";
-            this.mnuAboutMe.Size = new System.Drawing.Size(231, 26);
+            this.mnuAboutMe.Size = new System.Drawing.Size(235, 26);
             this.mnuAboutMe.Text = "Common Information";
             this.mnuAboutMe.Click += new System.EventHandler(this.mnuAboutMe_Click);
             // 
@@ -266,7 +267,7 @@
             // 
             this.mnuUserGuide.Image = ((System.Drawing.Image)(resources.GetObject("mnuUserGuide.Image")));
             this.mnuUserGuide.Name = "mnuUserGuide";
-            this.mnuUserGuide.Size = new System.Drawing.Size(231, 26);
+            this.mnuUserGuide.Size = new System.Drawing.Size(235, 26);
             this.mnuUserGuide.Text = "User Guide";
             this.mnuUserGuide.Click += new System.EventHandler(this.mnuUserGuide_Click);
             // 
@@ -274,7 +275,7 @@
             // 
             this.mnuRestart.Image = ((System.Drawing.Image)(resources.GetObject("mnuRestart.Image")));
             this.mnuRestart.Name = "mnuRestart";
-            this.mnuRestart.Size = new System.Drawing.Size(231, 26);
+            this.mnuRestart.Size = new System.Drawing.Size(235, 26);
             this.mnuRestart.Text = "Restart App";
             this.mnuRestart.Click += new System.EventHandler(this.mnuRestart_Click);
             // 

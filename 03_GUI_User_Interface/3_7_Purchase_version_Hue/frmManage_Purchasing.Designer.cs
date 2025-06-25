@@ -50,11 +50,33 @@
             this.cms_dgv_Search_PO_Copy_to_GRPO = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.cms_dgv_Search_PO_Edit_View_Table = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_PO_Refresh_Data = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnMake_New_PO = new System.Windows.Forms.Button();
             this.btnModifyPO = new System.Windows.Forms.Button();
             this.btnCopytoGRPO = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnUpdate_GRPO = new System.Windows.Forms.Button();
+            this.btnCopy_to_AP_Invoice = new System.Windows.Forms.Button();
+            this.dgv_Search_GRPO = new Zuby.ADGV.AdvancedDataGridView();
+            this.cms_dgv_Search_GRPO = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cms_dgv_Search_GRPO_Update_GRPO = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_GRPO_Copy_AP_Invoice = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.cms_dgv_Search_GRPO_Edit_Table_Viewing = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_GRPO_Refresh_Data = new System.Windows.Forms.ToolStripMenuItem();
             this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.flowLayoutPanel3 = new System.Windows.Forms.FlowLayoutPanel();
+            this.btnUpdate_APInvoice = new System.Windows.Forms.Button();
+            this.dgv_Search_APInvoice = new Zuby.ADGV.AdvancedDataGridView();
+            this.cms_dgv_Search_APInvoice = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.cms_dgv_Search_APInvoice_Update_APInvoice = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.cms_dgv_Search_APInvoice_Edit_Table_Viewing = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_APInvoice_Refresh_Data = new System.Windows.Forms.ToolStripMenuItem();
             this.DsachAnh = new System.Windows.Forms.ImageList(this.components);
             this.table_Main.SuspendLayout();
             this.panel1.SuspendLayout();
@@ -64,6 +86,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Search_PO)).BeginInit();
             this.cms_dgv_Search_PO.SuspendLayout();
             this.flowLayoutPanel1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
+            this.flowLayoutPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Search_GRPO)).BeginInit();
+            this.cms_dgv_Search_GRPO.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
+            this.flowLayoutPanel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Search_APInvoice)).BeginInit();
+            this.cms_dgv_Search_APInvoice.SuspendLayout();
             this.SuspendLayout();
             // 
             // table_Main
@@ -188,6 +220,7 @@
             // 
             // tab_Control
             // 
+            this.tab_Control.Appearance = System.Windows.Forms.TabAppearance.Buttons;
             this.tab_Control.Controls.Add(this.tabPage1);
             this.tab_Control.Controls.Add(this.tabPage2);
             this.tab_Control.Controls.Add(this.tabPage3);
@@ -206,10 +239,10 @@
             this.tabPage1.Controls.Add(this.tableLayoutPO);
             this.tabPage1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage1.ImageIndex = 0;
-            this.tabPage1.Location = new System.Drawing.Point(4, 26);
+            this.tabPage1.Location = new System.Drawing.Point(4, 29);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(923, 459);
+            this.tabPage1.Size = new System.Drawing.Size(923, 456);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "01. Purchase Order";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -226,7 +259,7 @@
             this.tableLayoutPO.Name = "tableLayoutPO";
             this.tableLayoutPO.RowCount = 1;
             this.tableLayoutPO.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPO.Size = new System.Drawing.Size(917, 453);
+            this.tableLayoutPO.Size = new System.Drawing.Size(917, 450);
             this.tableLayoutPO.TabIndex = 2;
             // 
             // dgv_Search_PO
@@ -244,7 +277,7 @@
             this.dgv_Search_PO.MultiSelect = false;
             this.dgv_Search_PO.Name = "dgv_Search_PO";
             this.dgv_Search_PO.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgv_Search_PO.Size = new System.Drawing.Size(761, 447);
+            this.dgv_Search_PO.Size = new System.Drawing.Size(761, 444);
             this.dgv_Search_PO.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgv_Search_PO.TabIndex = 1;
             this.dgv_Search_PO.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Search_PO_CellClick);
@@ -256,9 +289,10 @@
             this.cms_dgv_Search_PO_ModifyPO,
             this.cms_dgv_Search_PO_Copy_to_GRPO,
             this.toolStripSeparator1,
-            this.cms_dgv_Search_PO_Edit_View_Table});
+            this.cms_dgv_Search_PO_Edit_View_Table,
+            this.cms_dgv_Search_PO_Refresh_Data});
             this.cms_dgv_Search_PO.Name = "cms_dgv_Search_PO";
-            this.cms_dgv_Search_PO.Size = new System.Drawing.Size(154, 76);
+            this.cms_dgv_Search_PO.Size = new System.Drawing.Size(154, 98);
             // 
             // cms_dgv_Search_PO_ModifyPO
             // 
@@ -289,21 +323,43 @@
             this.cms_dgv_Search_PO_Edit_View_Table.Text = "Edit View Table";
             this.cms_dgv_Search_PO_Edit_View_Table.Click += new System.EventHandler(this.cms_dgv_Search_PO_Edit_View_Table_Click);
             // 
+            // cms_dgv_Search_PO_Refresh_Data
+            // 
+            this.cms_dgv_Search_PO_Refresh_Data.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_PO_Refresh_Data.Image")));
+            this.cms_dgv_Search_PO_Refresh_Data.Name = "cms_dgv_Search_PO_Refresh_Data";
+            this.cms_dgv_Search_PO_Refresh_Data.Size = new System.Drawing.Size(153, 22);
+            this.cms_dgv_Search_PO_Refresh_Data.Text = "Refresh Data";
+            this.cms_dgv_Search_PO_Refresh_Data.Click += new System.EventHandler(this.cms_dgv_Search_PO_Refresh_Data_Click);
+            // 
             // flowLayoutPanel1
             // 
+            this.flowLayoutPanel1.Controls.Add(this.btnMake_New_PO);
             this.flowLayoutPanel1.Controls.Add(this.btnModifyPO);
             this.flowLayoutPanel1.Controls.Add(this.btnCopytoGRPO);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(144, 447);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(144, 444);
             this.flowLayoutPanel1.TabIndex = 2;
+            // 
+            // btnMake_New_PO
+            // 
+            this.btnMake_New_PO.Image = ((System.Drawing.Image)(resources.GetObject("btnMake_New_PO.Image")));
+            this.btnMake_New_PO.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnMake_New_PO.Location = new System.Drawing.Point(3, 3);
+            this.btnMake_New_PO.Name = "btnMake_New_PO";
+            this.btnMake_New_PO.Size = new System.Drawing.Size(141, 37);
+            this.btnMake_New_PO.TabIndex = 4;
+            this.btnMake_New_PO.Text = "Make New PO";
+            this.btnMake_New_PO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnMake_New_PO.UseVisualStyleBackColor = true;
+            this.btnMake_New_PO.Click += new System.EventHandler(this.btnMake_New_PO_Click);
             // 
             // btnModifyPO
             // 
             this.btnModifyPO.Image = ((System.Drawing.Image)(resources.GetObject("btnModifyPO.Image")));
             this.btnModifyPO.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnModifyPO.Location = new System.Drawing.Point(3, 3);
+            this.btnModifyPO.Location = new System.Drawing.Point(3, 46);
             this.btnModifyPO.Name = "btnModifyPO";
             this.btnModifyPO.Size = new System.Drawing.Size(141, 37);
             this.btnModifyPO.TabIndex = 3;
@@ -316,7 +372,7 @@
             // 
             this.btnCopytoGRPO.Image = ((System.Drawing.Image)(resources.GetObject("btnCopytoGRPO.Image")));
             this.btnCopytoGRPO.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnCopytoGRPO.Location = new System.Drawing.Point(3, 46);
+            this.btnCopytoGRPO.Location = new System.Drawing.Point(3, 89);
             this.btnCopytoGRPO.Name = "btnCopytoGRPO";
             this.btnCopytoGRPO.Size = new System.Drawing.Size(141, 37);
             this.btnCopytoGRPO.TabIndex = 2;
@@ -327,25 +383,242 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.tableLayoutPanel1);
             this.tabPage2.ImageIndex = 1;
-            this.tabPage2.Location = new System.Drawing.Point(4, 26);
+            this.tabPage2.Location = new System.Drawing.Point(4, 29);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(923, 459);
+            this.tabPage2.Size = new System.Drawing.Size(923, 456);
             this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "02. Good Receip PO";
+            this.tabPage2.Text = "02. Goods Receipt PO";
             this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.flowLayoutPanel2, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.dgv_Search_GRPO, 1, 0);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(917, 450);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // flowLayoutPanel2
+            // 
+            this.flowLayoutPanel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.flowLayoutPanel2.Controls.Add(this.btnUpdate_GRPO);
+            this.flowLayoutPanel2.Controls.Add(this.btnCopy_to_AP_Invoice);
+            this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel2.Name = "flowLayoutPanel2";
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(144, 444);
+            this.flowLayoutPanel2.TabIndex = 1;
+            // 
+            // btnUpdate_GRPO
+            // 
+            this.btnUpdate_GRPO.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate_GRPO.Image = ((System.Drawing.Image)(resources.GetObject("btnUpdate_GRPO.Image")));
+            this.btnUpdate_GRPO.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnUpdate_GRPO.Location = new System.Drawing.Point(3, 3);
+            this.btnUpdate_GRPO.Name = "btnUpdate_GRPO";
+            this.btnUpdate_GRPO.Size = new System.Drawing.Size(130, 36);
+            this.btnUpdate_GRPO.TabIndex = 0;
+            this.btnUpdate_GRPO.Text = "Update GRPO";
+            this.btnUpdate_GRPO.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnUpdate_GRPO.UseVisualStyleBackColor = true;
+            this.btnUpdate_GRPO.Click += new System.EventHandler(this.btnUpdate_GRPO_Click);
+            // 
+            // btnCopy_to_AP_Invoice
+            // 
+            this.btnCopy_to_AP_Invoice.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnCopy_to_AP_Invoice.Location = new System.Drawing.Point(3, 45);
+            this.btnCopy_to_AP_Invoice.Name = "btnCopy_to_AP_Invoice";
+            this.btnCopy_to_AP_Invoice.Size = new System.Drawing.Size(130, 36);
+            this.btnCopy_to_AP_Invoice.TabIndex = 1;
+            this.btnCopy_to_AP_Invoice.Text = "Copy AP Invoice";
+            this.btnCopy_to_AP_Invoice.UseVisualStyleBackColor = true;
+            this.btnCopy_to_AP_Invoice.Click += new System.EventHandler(this.btnCopy_to_AP_Invoice_Click);
+            // 
+            // dgv_Search_GRPO
+            // 
+            this.dgv_Search_GRPO.AllowUserToAddRows = false;
+            this.dgv_Search_GRPO.AllowUserToDeleteRows = false;
+            this.dgv_Search_GRPO.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_Search_GRPO.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Search_GRPO.ContextMenuStrip = this.cms_dgv_Search_GRPO;
+            this.dgv_Search_GRPO.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_Search_GRPO.FilterAndSortEnabled = true;
+            this.dgv_Search_GRPO.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgv_Search_GRPO.Location = new System.Drawing.Point(153, 3);
+            this.dgv_Search_GRPO.MaxFilterButtonImageHeight = 23;
+            this.dgv_Search_GRPO.MultiSelect = false;
+            this.dgv_Search_GRPO.Name = "dgv_Search_GRPO";
+            this.dgv_Search_GRPO.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgv_Search_GRPO.Size = new System.Drawing.Size(761, 444);
+            this.dgv_Search_GRPO.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgv_Search_GRPO.TabIndex = 2;
+            this.dgv_Search_GRPO.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Search_GRPO_CellClick);
+            this.dgv_Search_GRPO.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Search_GRPO_RowPostPaint);
+            // 
+            // cms_dgv_Search_GRPO
+            // 
+            this.cms_dgv_Search_GRPO.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cms_dgv_Search_GRPO_Update_GRPO,
+            this.cms_dgv_Search_GRPO_Copy_AP_Invoice,
+            this.toolStripSeparator2,
+            this.cms_dgv_Search_GRPO_Edit_Table_Viewing,
+            this.cms_dgv_Search_GRPO_Refresh_Data});
+            this.cms_dgv_Search_GRPO.Name = "cms_dgv_Search_GRPO";
+            this.cms_dgv_Search_GRPO.Size = new System.Drawing.Size(170, 98);
+            // 
+            // cms_dgv_Search_GRPO_Update_GRPO
+            // 
+            this.cms_dgv_Search_GRPO_Update_GRPO.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_GRPO_Update_GRPO.Image")));
+            this.cms_dgv_Search_GRPO_Update_GRPO.Name = "cms_dgv_Search_GRPO_Update_GRPO";
+            this.cms_dgv_Search_GRPO_Update_GRPO.Size = new System.Drawing.Size(169, 22);
+            this.cms_dgv_Search_GRPO_Update_GRPO.Text = "Update GRPO";
+            this.cms_dgv_Search_GRPO_Update_GRPO.Click += new System.EventHandler(this.cms_dgv_Search_GRPO_Update_GRPO_Click);
+            // 
+            // cms_dgv_Search_GRPO_Copy_AP_Invoice
+            // 
+            this.cms_dgv_Search_GRPO_Copy_AP_Invoice.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_GRPO_Copy_AP_Invoice.Image")));
+            this.cms_dgv_Search_GRPO_Copy_AP_Invoice.Name = "cms_dgv_Search_GRPO_Copy_AP_Invoice";
+            this.cms_dgv_Search_GRPO_Copy_AP_Invoice.Size = new System.Drawing.Size(169, 22);
+            this.cms_dgv_Search_GRPO_Copy_AP_Invoice.Text = "Copy AP Invoice";
+            this.cms_dgv_Search_GRPO_Copy_AP_Invoice.Click += new System.EventHandler(this.cms_dgv_Search_GRPO_Copy_AP_Invoice_Click);
+            // 
+            // toolStripSeparator2
+            // 
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(166, 6);
+            // 
+            // cms_dgv_Search_GRPO_Edit_Table_Viewing
+            // 
+            this.cms_dgv_Search_GRPO_Edit_Table_Viewing.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_GRPO_Edit_Table_Viewing.Image")));
+            this.cms_dgv_Search_GRPO_Edit_Table_Viewing.Name = "cms_dgv_Search_GRPO_Edit_Table_Viewing";
+            this.cms_dgv_Search_GRPO_Edit_Table_Viewing.Size = new System.Drawing.Size(169, 22);
+            this.cms_dgv_Search_GRPO_Edit_Table_Viewing.Text = "Edit Table Viewing";
+            this.cms_dgv_Search_GRPO_Edit_Table_Viewing.Click += new System.EventHandler(this.cms_dgv_Search_GRPO_Edit_Table_Viewing_Click);
+            // 
+            // cms_dgv_Search_GRPO_Refresh_Data
+            // 
+            this.cms_dgv_Search_GRPO_Refresh_Data.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_GRPO_Refresh_Data.Image")));
+            this.cms_dgv_Search_GRPO_Refresh_Data.Name = "cms_dgv_Search_GRPO_Refresh_Data";
+            this.cms_dgv_Search_GRPO_Refresh_Data.Size = new System.Drawing.Size(169, 22);
+            this.cms_dgv_Search_GRPO_Refresh_Data.Text = "Refresh Data";
+            this.cms_dgv_Search_GRPO_Refresh_Data.Click += new System.EventHandler(this.cms_dgv_Search_GRPO_Refresh_Data_Click);
             // 
             // tabPage3
             // 
+            this.tabPage3.Controls.Add(this.tableLayoutPanel2);
             this.tabPage3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tabPage3.ImageIndex = 2;
-            this.tabPage3.Location = new System.Drawing.Point(4, 26);
+            this.tabPage3.Location = new System.Drawing.Point(4, 29);
             this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(923, 459);
+            this.tabPage3.Size = new System.Drawing.Size(923, 456);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "03. AP Invoice";
             this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel2
+            // 
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 150F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Controls.Add(this.flowLayoutPanel3, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.dgv_Search_APInvoice, 1, 0);
+            this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel2.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 1;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(923, 456);
+            this.tableLayoutPanel2.TabIndex = 0;
+            // 
+            // flowLayoutPanel3
+            // 
+            this.flowLayoutPanel3.Controls.Add(this.btnUpdate_APInvoice);
+            this.flowLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.flowLayoutPanel3.Location = new System.Drawing.Point(3, 3);
+            this.flowLayoutPanel3.Name = "flowLayoutPanel3";
+            this.flowLayoutPanel3.Size = new System.Drawing.Size(144, 450);
+            this.flowLayoutPanel3.TabIndex = 0;
+            // 
+            // btnUpdate_APInvoice
+            // 
+            this.btnUpdate_APInvoice.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnUpdate_APInvoice.Location = new System.Drawing.Point(3, 3);
+            this.btnUpdate_APInvoice.Name = "btnUpdate_APInvoice";
+            this.btnUpdate_APInvoice.Size = new System.Drawing.Size(141, 42);
+            this.btnUpdate_APInvoice.TabIndex = 0;
+            this.btnUpdate_APInvoice.Text = "Update AP Invoice";
+            this.btnUpdate_APInvoice.UseVisualStyleBackColor = true;
+            this.btnUpdate_APInvoice.Click += new System.EventHandler(this.btnUpdate_APInvoice_Click);
+            // 
+            // dgv_Search_APInvoice
+            // 
+            this.dgv_Search_APInvoice.AllowUserToAddRows = false;
+            this.dgv_Search_APInvoice.AllowUserToDeleteRows = false;
+            this.dgv_Search_APInvoice.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Search_APInvoice.ContextMenuStrip = this.cms_dgv_Search_APInvoice;
+            this.dgv_Search_APInvoice.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgv_Search_APInvoice.FilterAndSortEnabled = true;
+            this.dgv_Search_APInvoice.FilterStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgv_Search_APInvoice.Location = new System.Drawing.Point(153, 3);
+            this.dgv_Search_APInvoice.MaxFilterButtonImageHeight = 23;
+            this.dgv_Search_APInvoice.Name = "dgv_Search_APInvoice";
+            this.dgv_Search_APInvoice.RightToLeft = System.Windows.Forms.RightToLeft.No;
+            this.dgv_Search_APInvoice.Size = new System.Drawing.Size(767, 450);
+            this.dgv_Search_APInvoice.SortStringChangedInvokeBeforeDatasourceUpdate = true;
+            this.dgv_Search_APInvoice.TabIndex = 1;
+            this.dgv_Search_APInvoice.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_Search_APInvoice_CellClick);
+            this.dgv_Search_APInvoice.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgv_Search_APInvoice_RowPostPaint);
+            // 
+            // cms_dgv_Search_APInvoice
+            // 
+            this.cms_dgv_Search_APInvoice.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cms_dgv_Search_APInvoice_Update_APInvoice,
+            this.toolStripSeparator3,
+            this.cms_dgv_Search_APInvoice_Edit_Table_Viewing,
+            this.cms_dgv_Search_APInvoice_Refresh_Data});
+            this.cms_dgv_Search_APInvoice.Name = "cms_dgv_Search_APInvoice";
+            this.cms_dgv_Search_APInvoice.Size = new System.Drawing.Size(181, 98);
+            // 
+            // cms_dgv_Search_APInvoice_Update_APInvoice
+            // 
+            this.cms_dgv_Search_APInvoice_Update_APInvoice.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_APInvoice_Update_APInvoice.Image")));
+            this.cms_dgv_Search_APInvoice_Update_APInvoice.Name = "cms_dgv_Search_APInvoice_Update_APInvoice";
+            this.cms_dgv_Search_APInvoice_Update_APInvoice.Size = new System.Drawing.Size(180, 22);
+            this.cms_dgv_Search_APInvoice_Update_APInvoice.Text = "Update AP Invoice";
+            this.cms_dgv_Search_APInvoice_Update_APInvoice.Click += new System.EventHandler(this.cms_dgv_Search_APInvoice_Update_APInvoice_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            // 
+            // cms_dgv_Search_APInvoice_Edit_Table_Viewing
+            // 
+            this.cms_dgv_Search_APInvoice_Edit_Table_Viewing.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_APInvoice_Edit_Table_Viewing.Image")));
+            this.cms_dgv_Search_APInvoice_Edit_Table_Viewing.Name = "cms_dgv_Search_APInvoice_Edit_Table_Viewing";
+            this.cms_dgv_Search_APInvoice_Edit_Table_Viewing.Size = new System.Drawing.Size(180, 22);
+            this.cms_dgv_Search_APInvoice_Edit_Table_Viewing.Text = "Edit Table Viewing";
+            this.cms_dgv_Search_APInvoice_Edit_Table_Viewing.Click += new System.EventHandler(this.cms_dgv_Search_APInvoice_Edit_Table_Viewing_Click);
+            // 
+            // cms_dgv_Search_APInvoice_Refresh_Data
+            // 
+            this.cms_dgv_Search_APInvoice_Refresh_Data.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_APInvoice_Refresh_Data.Image")));
+            this.cms_dgv_Search_APInvoice_Refresh_Data.Name = "cms_dgv_Search_APInvoice_Refresh_Data";
+            this.cms_dgv_Search_APInvoice_Refresh_Data.Size = new System.Drawing.Size(180, 22);
+            this.cms_dgv_Search_APInvoice_Refresh_Data.Text = "Refresh Data";
+            this.cms_dgv_Search_APInvoice_Refresh_Data.Click += new System.EventHandler(this.cms_dgv_Search_APInvoice_Refresh_Data_Click);
             // 
             // DsachAnh
             // 
@@ -365,7 +638,7 @@
             this.KeyPreview = true;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "frmManage_Purchasing";
-            this.Text = "frmManage_Purchasing";
+            this.Text = "Manage Purchase Operations";
             this.Load += new System.EventHandler(this.frmManage_Purchasing_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.frmManage_Purchasing_KeyDown);
             this.table_Main.ResumeLayout(false);
@@ -377,6 +650,16 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgv_Search_PO)).EndInit();
             this.cms_dgv_Search_PO.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.flowLayoutPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Search_GRPO)).EndInit();
+            this.cms_dgv_Search_GRPO.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.flowLayoutPanel3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Search_APInvoice)).EndInit();
+            this.cms_dgv_Search_APInvoice.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -395,7 +678,6 @@
         private System.Windows.Forms.ImageList DsachAnh;
         private Zuby.ADGV.AdvancedDataGridView dgv_Search_PO;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPO;
-        private System.Windows.Forms.Button btnCopytoGRPO;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.ContextMenuStrip cms_dgv_Search_PO;
         private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_PO_ModifyPO;
@@ -407,7 +689,30 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnSearch_By_Date;
         private System.Windows.Forms.CheckBox ckcViewTop100;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Button btnUpdate_GRPO;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
+        private System.Windows.Forms.Button btnCopy_to_AP_Invoice;
+        private Zuby.ADGV.AdvancedDataGridView dgv_Search_GRPO;
+        private System.Windows.Forms.ContextMenuStrip cms_dgv_Search_GRPO;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_GRPO_Update_GRPO;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_GRPO_Copy_AP_Invoice;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_GRPO_Edit_Table_Viewing;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
+        private System.Windows.Forms.Button btnMake_New_PO;
         private System.Windows.Forms.Button btnModifyPO;
+        private System.Windows.Forms.Button btnCopytoGRPO;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_GRPO_Refresh_Data;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_PO_Refresh_Data;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel3;
+        private Zuby.ADGV.AdvancedDataGridView dgv_Search_APInvoice;
+        private System.Windows.Forms.Button btnUpdate_APInvoice;
+        private System.Windows.Forms.ContextMenuStrip cms_dgv_Search_APInvoice;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_APInvoice_Update_APInvoice;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_APInvoice_Edit_Table_Viewing;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_APInvoice_Refresh_Data;
     }
 }

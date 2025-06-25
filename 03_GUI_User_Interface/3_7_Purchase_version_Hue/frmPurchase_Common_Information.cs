@@ -1,4 +1,5 @@
 ﻿using PLM_Lynx._02_BLL_Bussiness_Logic_Layer;
+using PLM_Lynx._03_GUI_User_Interface._00_Common;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,6 +15,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
     public partial class frmPurchase_Common_Information : Form
     {
         private Purchase_V2_BLL _purchase_V2_BLL = new Purchase_V2_BLL();
+        private CommonBLL _commonBLL = new CommonBLL();
 
         // SupplierID , SupplierCode, SupplierName, SupplierLocation, SupplierPhone, SupplierTaxNumber, SupplierNote, SupplierContactPerson
         private DataTable tblPur_Supplier = new DataTable();
@@ -96,8 +98,6 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
         {
             if (dgv_tblPur_Supplier.Rows.Count > 0)
             {
-                dgv_tblPur_Supplier.AllowUserToAddRows = false;
-                dgv_tblPur_Supplier.AllowUserToDeleteRows = false;
                 dgv_tblPur_Supplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 // Hiển thị tên các cột
                 dgv_tblPur_Supplier.Columns["SupplierID"].HeaderText = "ID";
@@ -115,9 +115,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 dgv_tblPur_Supplier.Columns["SupplierPhone"].Width = 100;
                 dgv_tblPur_Supplier.Columns["SupplierTaxNumber"].Width = 100;
 
-                // Ẩn các cột không cần thiết
-                dgv_tblPur_Supplier.Columns["SupplierNote"].Visible = false; // Ẩn cột này nếu không cần thiết
-                dgv_tblPur_Supplier.Columns["SupplierContactPerson"].Visible = false; // Ẩn cột này nếu không cần thiết
+             
             }
         }
 
@@ -222,20 +220,23 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         private void modifyThisSupplierToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Mở form để sửa thông tin nhà cung cấp đã chọn
-            frm_Pur_Supplier_Infor frm = new frm_Pur_Supplier_Infor();
-            frm.SupplierID = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierID"].Value.ToString();
-            frm.SupplierCode = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierCode"].Value.ToString();
-            frm.SupplierName = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierName"].Value.ToString();
-            frm.SupplierLocation = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierLocation"].Value.ToString();
-            frm.SupplierPhone = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierPhone"].Value.ToString();
-            frm.SupplierTaxNumber = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierTaxNumber"].Value.ToString();
-            frm.SupplierNote = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierNote"].Value.ToString();
-            frm.SupplierContactPerson = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierContactPerson"].Value.ToString();
-            frm.ShowDialog();
-
-            // Sau khi đóng form, load lại thông tin nhà cung cấp
-            LoadAllInformation();
+            using (frm_Pur_Supplier_Infor frm = new frm_Pur_Supplier_Infor())
+            {
+                frm.SupplierID = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierID"].Value.ToString();
+                frm.SupplierCode = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierCode"].Value.ToString();
+                frm.SupplierName = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierName"].Value.ToString();
+                frm.SupplierLocation = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierLocation"].Value.ToString();
+                frm.SupplierPhone = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierPhone"].Value.ToString();
+                frm.SupplierTaxNumber = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierTaxNumber"].Value.ToString();
+                frm.SupplierNote = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierNote"].Value.ToString();
+                frm.SupplierContactPerson = dgv_tblPur_Supplier.CurrentRow.Cells["SupplierContactPerson"].Value.ToString();
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    // Cập nhật thông tin nhà cung cấp sau khi sửa
+                    LoadAllInformation();
+                    refreshToolStripMenuItem.PerformClick(); // Refresh the supplier list
+                }
+            }
         }
 
         private void btnModifyStatus_Click(object sender, EventArgs e)
@@ -569,6 +570,25 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                         MessageBox.Show("Failed to update warehouse.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
+            }
+        }
+
+        private void refreshToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            tblPur_Supplier.Columns.Clear();
+            tblPur_Supplier = _purchase_V2_BLL.Select_tblPur_Supplier_BLL();
+            dgv_tblPur_Supplier.DataSource = tblPur_Supplier;
+        }
+
+        private void editTableViewingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string Col_Mode = dgv_tblPur_Supplier.AutoSizeColumnsMode.ToString();
+
+            frmDataGridView_Modify frm = new frmDataGridView_Modify(_commonBLL.Get_Attribute_from_DatagridView(dgv_tblPur_Supplier), Col_Mode);
+
+            if (frm.ShowDialog() == DialogResult.OK)
+            {
+                _commonBLL.Set_Attribute_to_DatagridView(dgv_tblPur_Supplier, frm.table_Updated_Att, frm.Col_ModeID);
             }
         }
     }

@@ -829,8 +829,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
         } // End Class CommonBLL
 
-
-
         public DataTable Convert_ClipBoard_to_Datatable_V2(string ClipBoard)
         {
             string clipboardText = Clipboard.GetText();
@@ -885,8 +883,12 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             return table;
         }
 
-
-
+        /// <summary>
+        /// Copy cột từ DataTable để tạo thành 1 DataTable mới chỉ chứa cột đó
+        /// </summary>
+        /// <param name="SourceTable"></param>
+        /// <param name="ColumnName"></param>
+        /// <returns></returns>
         public DataTable Copy_Single_Column_to_NewTable(DataTable SourceTable, string ColumnName)
         {
             DataTable newTable = new DataTable();
@@ -923,6 +925,11 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
         }
 
+        /// <summary>
+        /// Xóa những hàng có 1 cột giá trị trùng lặp trong DataTable
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="ColumnName"></param>
         public void Delete_Duplicate_Row_In_DataTable(DataTable dt, string ColumnName)
         {
             // Sử dụng LINQ để xóa các hàng trùng lặp dựa trên cột cụ thể
@@ -938,9 +945,17 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             {
                 dt.ImportRow(row);
             }
+
+          
         }
 
 
+
+        /// <summary>
+        /// Lấy danh sách tất cả các file trong một thư mục đưa 1 DataTable
+        /// </summary>
+        /// <param name="folder"></param>
+        /// <returns> FileName || FilePath || FileSize || FileType || DateCreated </returns>
         public DataTable Get_All_File_In_Folder(string folder)
         {
             DataTable dt = new DataTable();
@@ -950,7 +965,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             dt.Columns.Add("FileType", typeof(string)); // e.g., "pdf", "docx"
             dt.Columns.Add("DateCreated", typeof(DateTime)); // Date when the file was created
 
-           
             if (!Directory.Exists(folder))
             {
                 MessageBox.Show("Folder doesn't exist : " + folder);
@@ -971,7 +985,6 @@ namespace PLM_Lynx._02_BLL_Bussiness_Logic_Layer
             }
 
             return dt;
-
         }
     } // End NameSpace
 }

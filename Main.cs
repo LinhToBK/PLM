@@ -65,6 +65,7 @@ namespace PLM_Lynx
                     mnuRelationPart.Enabled = false;
 
                     frmManage_Purchasing frm = new frmManage_Purchasing();
+                    frm._userName = tennguoidung;
                     frm.MdiParent = this;
                     frm.WindowState = FormWindowState.Maximized;
                     frm.Show();
@@ -104,6 +105,7 @@ namespace PLM_Lynx
 
                     //Mở form Make New PO V2
                     frmManage_Purchasing frmA = new frmManage_Purchasing();
+                    frmA._userName = tennguoidung;
                     frmA.MdiParent = this;
                     frmA.WindowState = FormWindowState.Maximized;
                     frmA.Show();

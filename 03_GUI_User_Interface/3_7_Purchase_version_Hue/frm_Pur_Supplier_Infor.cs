@@ -131,6 +131,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                         if (_purchase_V2_BLL.Update_ExistingSupplier_BLL(id, code, name, phone, tax, location, note, contactPerson))
                         {
                             MessageBox.Show("Supplier information updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.DialogResult = DialogResult.OK; 
                             this.Close();
                         }
                         else

@@ -12,6 +12,8 @@ using System.Runtime.InteropServices;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Forms;
+using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using DataTable = System.Data.DataTable;
 
 namespace PLM_Lynx._01_DAL_Data_Access_Layer
@@ -19,6 +21,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
     public class Purchase_V2_DAL
     {
         private string Dataconnect = Properties.Settings.Default.Datacon;
+
+        #region 1. COMMON DATABASE FUNCTIONS
 
         /// <summary>
         /// 01. SELECT - Lấy dữ liệu từ bảng tblPur_Supplier
@@ -131,8 +135,9 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                             SupplierName = @Name ,
                                             SupplierPhone = @Phone,
                                             SupplierTaxNumber = @TaxID,
-                                            SupplierLocation = @Location ,
-                                            SupplierContactPerson = @ContactPerson
+                                            SupplierLocation = @Location,
+                                            SupplierContactPerson = @ContactPerson,
+                                            SupplierNote = @Note
                                             where SupplierID = @ID ";
 
                     using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
@@ -569,6 +574,14 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
+        #endregion 1. COMMON DATABASE FUNCTIONS
+
+        //================================================================================================================
+        //================================================================================================================
+        //================================================================================================================
+
+        #region 2. MANAGE PRICE FUNCTIONS
+
         /// <summary>
         /// 16. SELT - Lấy dữ liệu khi tìm kiếm từ khóa KeySearch trong bảng tblPur_Part và tblPart
         /// </summary>
@@ -645,8 +658,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable result = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                
-                string sql_query = @"   SELECT 
+                string sql_query = @"   SELECT
                                             p.PartID,
                                             t.PartCode
                                         FROM tblPur_Part AS p
@@ -660,14 +672,13 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 SqlDataAdapter adap = new SqlDataAdapter(cmd);
                 conn.Open();
                 adap.Fill(result);
-
-
             }
 
             return result;
             // return datatable
             // PartCode, PartName, PartPurchasePrice, PartSalePrice, Eable_Purchase, Eable_Inventory, Eable_Sale, TaxCode, SupplierIDPrefer, TaxIDPrefer
         }
+
         /// <summary>
         /// 19. UPDATE - Cập nhật dữ liệu cho bảng tblPur_Part
         /// </summary>
@@ -707,6 +718,14 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             }
         }
 
+        #endregion 2. MANAGE PRICE FUNCTIONS
+
+        //================================================================================================================
+        //================================================================================================================
+        //================================================================================================================
+
+        #region 3. MANAGE PURCHASE ORDER FUNCTIONS
+
         /// <summary>
         /// 20. SELECT - Lấy số PO mới nhất trong ngày
         /// </summary>
@@ -730,19 +749,19 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 adap.Fill(BangDuLieu);
             }
 
-            if(BangDuLieu == null || BangDuLieu.Rows.Count == 0)
+            if (BangDuLieu == null || BangDuLieu.Rows.Count == 0)
             {
                 string date = DateTime.Now.ToString("yyMMdd");
-                NewestPONumber = Convert.ToInt32(date + "001"); 
-            }   
+                NewestPONumber = Convert.ToInt32(date + "001");
+            }
             else
             {
                 NewestPONumber = Convert.ToInt32(BangDuLieu.Rows[0]["PONumber"].ToString()) + 1;
-
-            }    
+            }
 
             return NewestPONumber;
         }
+
         /// <summary>
         /// 21. INSERT - Thêm mới một đơn đặt hàng (Purchase Order) vào bảng tblPur_PO
         /// </summary>
@@ -760,19 +779,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="tblPur_PO_Detail"></param>
         /// <returns></returns>
         public bool Insert_New_PO_DAL(
-            DateTime PODateCreate,
-            DateTime POEstimateDeliveryDate,
-            int POSupplierID,
-            string POSupplierContactPerson,
-            int POCurrencyID,
-            string POUser,
-            int POStatusID,
-            string PORemark,
-            string POPaymentTerm,
-            int WarehouseID,
-            decimal POTotalPayment,
-            int POTaxID,
-            DataTable tblPur_PO_Detail)
+            DateTime PODateCreate, DateTime POEstimateDeliveryDate, int POSupplierID, string POSupplierContactPerson, int POCurrencyID, string POUser, int POStatusID, string PORemark,
+            string POPaymentTerm, int WarehouseID, decimal POTotalPayment, int POTaxID, DataTable tblPur_PO_Detail)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
@@ -876,7 +884,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         }
 
         /// <summary>
-        /// 23. SELECT - Lấy dữ liệu từ bảng tblPur_PO 
+        /// 23. SELECT - Lấy dữ liệu từ bảng tblPur_PO
         /// Có 2 hàm  dùng cho việc lấy 100 dòng hay không lấy 100 dòng
         /// </summary>
         /// <param name="SupplierID"></param>
@@ -895,13 +903,13 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                         p.POUser,
                                         t.StatusName,
                                         w.WareHouseName,
-                                        p.POToTalPayment, 
+                                        p.POToTalPayment,
                                         c.CurrencyName,
 	                                    x.TaxName
-	
+
                                     from tblPur_PO  as p
                                     inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
-                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
+                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID
                                     inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
                                     inner join tblPur_Status as t on t.StatusID = p.POStatusID
                                     inner join tblPur_Tax as x on x.TaxID = p.POTaxID
@@ -916,7 +924,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
-        public DataTable Select_tblPur_PO_by_SupplierID_DAL(int SupplierID , int ShowRow)
+        public DataTable Select_tblPur_PO_by_SupplierID_DAL(int SupplierID, int ShowRow)
         {
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
@@ -930,18 +938,18 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                         p.POUser,
                                         t.StatusName,
                                         w.WareHouseName,
-                                        p.POToTalPayment, 
+                                        p.POToTalPayment,
                                         c.CurrencyName,
 	                                    x.TaxName
-	
+
                                     from tblPur_PO  as p
                                     inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
-                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
+                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID
                                     inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
                                     inner join tblPur_Status as t on t.StatusID = p.POStatusID
                                     inner join tblPur_Tax as x on x.TaxID = p.POTaxID
 
-                                    Where p.POSupplierID = @SupplierID 
+                                    Where p.POSupplierID = @SupplierID
                                     ORDER BY p.PODateCreate DESC
                                     OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
@@ -961,7 +969,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="DateFrom"></param>
         /// <param name="DateTo"></param>
         /// <returns></returns>
-        public DataTable Select_tblPur_PO_by_CreateDate_DAL(DateTime DateFrom , DateTime DateTo)
+        public DataTable Select_tblPur_PO_by_CreateDate_DAL(DateTime DateFrom, DateTime DateTo)
         {
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
@@ -975,20 +983,20 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                         p.POUser,
                                         t.StatusName,
                                         w.WareHouseName,
-                                        p.POToTalPayment, 
+                                        p.POToTalPayment,
                                         c.CurrencyName,
 	                                    x.TaxName
-	
+
                                     from tblPur_PO  as p
                                     inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
-                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
+                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID
                                     inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
                                     inner join tblPur_Status as t on t.StatusID = p.POStatusID
                                     inner join tblPur_Tax as x on x.TaxID = p.POTaxID
 
                                     WHERE p.PODateCreate >= @DateFrom AND p.PODateCreate <= @DateTo
                                     ORDER BY p.PONumber DESC ";
-                                    
+
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
                 cmd.Parameters.Add("@DateFrom", SqlDbType.DateTime).Value = DateFrom.Date;
                 cmd.Parameters.Add("@DateTo", SqlDbType.DateTime).Value = DateTo.Date;
@@ -1000,7 +1008,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
-        public DataTable Select_tblPur_PO_by_CreateDate_DAL(DateTime DateFrom, DateTime DateTo , int ShowRow)
+        public DataTable Select_tblPur_PO_by_CreateDate_DAL(DateTime DateFrom, DateTime DateTo, int ShowRow)
         {
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
@@ -1014,19 +1022,19 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                                         p.POUser,
                                         t.StatusName,
                                         w.WareHouseName,
-                                        p.POToTalPayment, 
+                                        p.POToTalPayment,
                                         c.CurrencyName,
 	                                    x.TaxName
-	
+
                                     from tblPur_PO  as p
                                     inner join tblPur_Supplier as s on s.SupplierID = p.POSupplierID
-                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID 
+                                    inner join tblPur_Currency as c on c.CurrencyID = p.POCurrencyID
                                     inner join tblPur_WareHouse as w on w.WareHouseID = p.WareHouseID
                                     inner join tblPur_Status as t on t.StatusID = p.POStatusID
                                     inner join tblPur_Tax as x on x.TaxID = p.POTaxID
 
                                     WHERE p.PODateCreate >= @DateFrom AND p.PODateCreate <= @DateTo
-                                    ORDER BY p.PONumber DESC 
+                                    ORDER BY p.PONumber DESC
                                     OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
 
                 SqlCommand cmd = new SqlCommand(sql_query, conn);
@@ -1041,18 +1049,17 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
-
         /// <summary>
         /// 25. SELECT - Lấy dữ liệu từ bảng tblPur_PO theo PONumber
         /// </summary>
         /// <param name="PONumber"></param>
-        /// <returns></returns>
+        /// <returns> Return table (PONumber, PODateCreate, POEstimateDeliveryDate, POSupplierID, POSupplierContactPerson, POCurrencyID ,PORemark,POPaymentTerm , WareHouseID, POToTalPayment, POTaxID ) </returns>
         public DataTable Select_tblPur_PO_by_PONumber_DAL(int PONumber)
         {
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"select 
+                string sql_query = @"select
 	                                    p.PONumber,
 	                                    p.PODateCreate,
 	                                    p.POEstimateDeliveryDate,
@@ -1093,7 +1100,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                 string sql_query = @"select
 	                                    p.PartCode,
 	                                    p.PartName,
-	                                    d.Quantity_Order as Quantity, 
+	                                    d.Quantity_Order as Quantity,
 	                                    d.UnitPrice ,
 	                                    u.UnitName as Unit,
 	                                    d.Discount,
@@ -1137,8 +1144,8 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
         /// <param name="tblDelete"></param>
         /// <param name="tblInsert"></param>
         /// <returns></returns>
-        public bool Update_Existing_PO_DAL(int PONumber, DateTime _dcreate, DateTime _destimate,int SupID, string SupPerson, int CurID , string user, int StatusID, string Remark, 
-            string PaymentTerm, int WareHouseID, decimal TotalPayment, int TaxID,  DataTable tblUpdate, DataTable tblDelete, DataTable tblInsert)
+        public bool Update_Existing_PO_DAL(int PONumber, DateTime _dcreate, DateTime _destimate, int SupID, string SupPerson, int CurID, string user, int StatusID, string Remark,
+            string PaymentTerm, int WareHouseID, decimal TotalPayment, int TaxID, DataTable tblUpdate, DataTable tblDelete, DataTable tblInsert)
         {
             using (SqlConnection con = new SqlConnection(Dataconnect))
             {
@@ -1158,14 +1165,14 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
                             cmd.Parameters.Add("@POEstimateDeliveryDate", SqlDbType.Date).Value = _destimate;
                             cmd.Parameters.Add("@POSupplierID", SqlDbType.Int).Value = SupID;
                             cmd.Parameters.Add("@POSupplierContactPerson", SqlDbType.NVarChar, 100).Value = SupPerson;
-                            cmd.Parameters.Add("@POCurrencyID", SqlDbType.Int).Value =CurID;
+                            cmd.Parameters.Add("@POCurrencyID", SqlDbType.Int).Value = CurID;
                             cmd.Parameters.Add("@POUser", SqlDbType.NVarChar, 50).Value = user;
                             cmd.Parameters.Add("@POStatusID", SqlDbType.Int).Value = StatusID;
                             cmd.Parameters.Add("@PORemark", SqlDbType.NVarChar, 200).Value = Remark;
                             cmd.Parameters.Add("@POPaymentTerm", SqlDbType.NVarChar, 100).Value = PaymentTerm;
                             cmd.Parameters.Add("@WareHouseID", SqlDbType.Int).Value = WareHouseID;
                             cmd.Parameters.Add("@POToTalPayment", SqlDbType.Decimal).Value = TotalPayment;
-                            cmd.Parameters.Add("@POTaxID", SqlDbType.Int).Value = TaxID; 
+                            cmd.Parameters.Add("@POTaxID", SqlDbType.Int).Value = TaxID;
 
                             // Thêm bảng chi tiết kiểu TVP (Table-Valued Parameter)
                             SqlParameter tvpParam_Update = cmd.Parameters.AddWithValue("@tbl_Pur_PO_Detail_Update", tblUpdate);
@@ -1207,7 +1214,7 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             DataTable BangDuLieu = new DataTable();
             using (SqlConnection conn = new SqlConnection(Dataconnect))
             {
-                string sql_query = @"       SELECT 
+                string sql_query = @"       SELECT
                                                 d.PONumber,
                                                 t.PartCode,
                                                 r.TaxCode,
@@ -1240,5 +1247,839 @@ namespace PLM_Lynx._01_DAL_Data_Access_Layer
             return BangDuLieu;
         }
 
+        #endregion 3. MANAGE PURCHASE ORDER FUNCTIONS
+
+        //================================================================================================================
+        //================================================================================================================
+        //================================================================================================================
+
+        #region 4. MANAGE GOODS RECEIPT PURCHASE ORDER FUNCTIONS
+
+        /// <summary>
+        /// 28. INSERT - Thêm mới một phiếu nhập kho (GRPO) vào bảng tblPur_GRPO và tblPur_GRPO_Detail
+        /// </summary>
+        /// <param name="_tblPur_GRPO"></param>
+        /// <param name="_tblPur_GPPO_Detail"></param>
+        /// <returns></returns>
+        public bool Insert_New_GRPO_DAL(DataTable _tblPur_GRPO, DataTable _tblPur_GPPO_Detail, DataTable _tblInventory, DataTable _tblInventory_Summary)
+        {
+            // Lấy các giá trị từ DataTable
+            int _poNumber = Convert.ToInt32(_tblPur_GRPO.Rows[0]["PONumber"]);
+            DateTime _receivedDate = Convert.ToDateTime(_tblPur_GRPO.Rows[0]["ReceivedDate"]);
+            decimal _receivedAmount = Convert.ToDecimal(_tblPur_GRPO.Rows[0]["ReceivedAmount"]);
+            int _grpoStatusID = Convert.ToInt32(_tblPur_GRPO.Rows[0]["GRPOStatusID"]);
+            string _grpoRemark = _tblPur_GRPO.Rows[0]["GRPORemark"].ToString();
+            int _grpoCurrencyID = Convert.ToInt32(_tblPur_GRPO.Rows[0]["GRPOCurrencyID"]);
+            int _grpoTaxID = Convert.ToInt32(_tblPur_GRPO.Rows[0]["GRPOTaxID"]);
+            int _grpoWareHouseID = Convert.ToInt32(_tblPur_GRPO.Rows[0]["GRPOWareHouseID"]);
+
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand("Insert_New_GRPO", con, transaction))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            // Truyền các tham số đầu vào
+                            cmd.Parameters.Add("@PONumber", SqlDbType.Int).Value = _poNumber;
+                            cmd.Parameters.Add("@ReceivedDate", SqlDbType.DateTime).Value = _receivedDate;
+                            cmd.Parameters.Add("@ReceivedAmount", SqlDbType.Decimal).Value = _receivedAmount;
+                            cmd.Parameters.Add("@GRPOStatusID", SqlDbType.Int).Value = _grpoStatusID;
+                            cmd.Parameters.Add("@GRPORemark", SqlDbType.NVarChar, 200).Value = _grpoRemark;
+                            cmd.Parameters.Add("@GRPOCurrencyID", SqlDbType.Int).Value = _grpoCurrencyID;
+                            cmd.Parameters.Add("@GRPOTaxID", SqlDbType.Int).Value = _grpoTaxID;
+                            cmd.Parameters.Add("@GRPOWareHouseID", SqlDbType.Int).Value = _grpoWareHouseID;
+
+                            // Thêm bảng chi tiết kiểu TVP (Table-Valued Parameter)
+                            SqlParameter tvpParam = cmd.Parameters.AddWithValue("@tblDetails", _tblPur_GPPO_Detail);
+                            tvpParam.SqlDbType = SqlDbType.Structured;
+                            tvpParam.TypeName = "tblPur_GRPO_Detail_Full_Defined"; // Phải khớp với type bạn tạo trong SQL
+                            //
+                            SqlParameter tvpParam_tblInventory = cmd.Parameters.AddWithValue("@_tblInventory", _tblInventory);
+                            tvpParam_tblInventory.SqlDbType = SqlDbType.Structured;
+                            tvpParam_tblInventory.TypeName = "tblInventory_Full_Defined"; // Phải khớp với type bạn tạo trong SQL
+                            //
+                            SqlParameter tvpParam_tblInventory_Summary = cmd.Parameters.AddWithValue("@_tblInventory_Summary", _tblInventory_Summary);
+                            tvpParam_tblInventory_Summary.SqlDbType = SqlDbType.Structured;
+                            tvpParam_tblInventory_Summary.TypeName = "tblInventory_Summary_Full_Defined"; // Phải khớp với type bạn tạo trong SQL
+
+                            // Thực thi stored procedure
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// 29. SELECT - Lấy dữ liệu từ bảng tblPur_GRPO theo SupplierID
+        /// </summary>
+        /// <param name="SupplierID"></param>
+        /// <returns></returns>
+        public DataTable Select_tblPur_GRPO_by_SupplierID_DAL(int SupplierID)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select
+	                                    g.GRPONumber,
+	                                    g.ReceivedDate,
+	                                    g.PONumber,
+	                                    st.StatusName as Status,
+	                                    w.WareHouseName as WareHouse,
+	                                    t.TaxName as TaxType,
+	                                    g.ReceivedAmount as TotalAmount,
+	                                    c.CurrencyName as Currency
+                                    from tblPur_GRPO as g
+                                    inner join tblPur_PO as p on p.PONumber = g.PONumber
+                                    inner join tblPur_Currency as c on c.CurrencyID = g.GRPOCurrencyID
+                                    inner join tblPur_WareHouse as w on w.WareHouseID = g.GRPOWareHouseID
+                                    inner join tblPur_Tax as t on t.TaxID = g.GRPOTaxID
+                                    inner join tblPur_Status as st on st.StatusID = g.GRPOStatusID
+                                    where p.POSupplierID = @SupplierID
+                                    Order by g.GRPONumber desc ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@SupplierID", SqlDbType.Int).Value = SupplierID;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        public DataTable Select_tblPur_GRPO_by_SupplierID_DAL(int SupplierID, int ShowRow)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select
+	                                    g.GRPONumber,
+	                                    g.ReceivedDate,
+	                                    g.PONumber,
+	                                    st.StatusName as Status,
+	                                    w.WareHouseName as WareHouse,
+	                                    t.TaxName as TaxType,
+	                                    g.ReceivedAmount as TotalAmount,
+	                                    c.CurrencyName as Currency
+                                    from tblPur_GRPO as g
+                                    inner join tblPur_PO as p on p.PONumber = g.PONumber
+                                    inner join tblPur_Currency as c on c.CurrencyID = g.GRPOCurrencyID
+                                    inner join tblPur_WareHouse as w on w.WareHouseID = g.GRPOWareHouseID
+                                    inner join tblPur_Tax as t on t.TaxID = g.GRPOTaxID
+                                    inner join tblPur_Status as st on st.StatusID = g.GRPOStatusID
+                                    where p.POSupplierID = @SupplierID
+                                    Order by g.GRPONumber desc
+                                    OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@SupplierID", SqlDbType.Int).Value = SupplierID;
+                cmd.Parameters.Add("@ShowRow", SqlDbType.Int).Value = ShowRow;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        /// <summary>
+        /// 30. SELECT - Lấy dữ liệu từ bảng tblPur_GRPO theo ngày tạo trong 1 khoảng thời gian
+        /// </summary>
+        /// <param name="DateFrom"></param>
+        /// <param name="DateTo"></param>
+        /// <returns></returns>
+        public DataTable Select_tblPur_GRPO_by_CreateDate_DAL(DateTime DateFrom, DateTime DateTo)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select
+	                                    g.GRPONumber,
+	                                    g.ReceivedDate,
+	                                    g.PONumber,
+	                                    st.StatusName as Status,
+	                                    w.WareHouseName as WareHouse,
+	                                    t.TaxName as TaxType,
+	                                    g.ReceivedAmount as TotalAmount,
+	                                    c.CurrencyName as Currency
+                                    from tblPur_GRPO as g
+                                    inner join tblPur_PO as p on p.PONumber = g.PONumber
+                                    inner join tblPur_Currency as c on c.CurrencyID = g.GRPOCurrencyID
+                                    inner join tblPur_WareHouse as w on w.WareHouseID = g.GRPOWareHouseID
+                                    inner join tblPur_Tax as t on t.TaxID = g.GRPOTaxID
+                                    inner join tblPur_Status as st on st.StatusID = g.GRPOStatusID
+                                    WHERE g.ReceivedDate >= @DateFrom AND g.ReceivedDate <= @DateTo
+                                    ORDER BY g.GRPONumber DESC ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@DateFrom", SqlDbType.DateTime).Value = DateFrom.Date;
+                cmd.Parameters.Add("@DateTo", SqlDbType.DateTime).Value = DateTo.Date;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        public DataTable Select_tblPur_GRPO_by_CreateDate_DAL(DateTime DateFrom, DateTime DateTo, int ShowRow)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select
+	                                    g.GRPONumber,
+	                                    g.ReceivedDate,
+	                                    g.PONumber,
+	                                    st.StatusName as Status,
+	                                    w.WareHouseName as WareHouse,
+	                                    t.TaxName as TaxType,
+	                                    g.ReceivedAmount as TotalAmount,
+	                                    c.CurrencyName as Currency
+                                    from tblPur_GRPO as g
+                                    inner join tblPur_PO as p on p.PONumber = g.PONumber
+                                    inner join tblPur_Currency as c on c.CurrencyID = g.GRPOCurrencyID
+                                    inner join tblPur_WareHouse as w on w.WareHouseID = g.GRPOWareHouseID
+                                    inner join tblPur_Tax as t on t.TaxID = g.GRPOTaxID
+                                    inner join tblPur_Status as st on st.StatusID = g.GRPOStatusID
+
+                                    WHERE g.ReceivedDate >= @DateFrom AND g.ReceivedDate <= @DateTo
+                                    ORDER BY g.GRPONumber DESC
+                                    OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@DateFrom", SqlDbType.DateTime).Value = DateFrom.Date;
+                cmd.Parameters.Add("@DateTo", SqlDbType.DateTime).Value = DateTo.Date;
+                cmd.Parameters.Add("@ShowRow", SqlDbType.Int).Value = ShowRow;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        /// <summary>
+        /// 31. SELECT - Lấy dữ liệu từ bảng tblPur_GRPO theo GRPONumber
+        /// </summary>
+        /// <param name="GRPONumber"></param>
+        /// <returns>return table ( GRPOID, GRPONumber, PONumber, ReceivedDate, ReceivedAmount, GRPORemark, GRPOStatusID, GRPOCurrencyID, GRPOWareHouseID, GRPOTaxID)</returns>
+        public DataTable Select_tblPur_GRPO_by_GRPONumber_DAL(int GRPONumber)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select
+	                                    g.GRPOID,
+	                                    g.GRPONumber,
+	                                    g.PONumber,
+	                                    g.ReceivedDate,
+	                                    g.ReceivedAmount,
+	                                    g.GRPORemark,
+	                                    g.GRPOStatusID,
+	                                    g.GRPOCurrencyID,
+	                                    g.GRPOWareHouseID,
+	                                    g.GRPOTaxID
+                                    from tblPur_GRPO as g
+                                    where g.GRPONumber = @GRPONumber  ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@GRPONumber", SqlDbType.Int).Value = GRPONumber;
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        /// <summary>
+        /// 32. SELECT - Lấy dữ liệu từ bảng tblPur_GRPO_Detail theo GRPONumber
+        /// </summary>
+        /// <param name="GRPONumber"></param>
+        /// <returns>Table ( PartCode, PartName, Quantity_Order, QuantityReceived, UnitPriceReceived, DiscountReceived,UnitName, PODetail_RowID , ExpiredDate, TaxCode )</returns>
+        public DataTable Select_tblPur_GRPO_Detail_by_GRPONumber_DAL(int GRPONumber)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select
+	                                    p.PartCode,
+	                                    p.PartName,
+	                                    pd.Quantity_Order,
+	                                    d.QuantityReceived,
+                                        d.UnitPriceReceived,
+	                                    d.DiscountReceived,
+	                                    u.UnitName,
+	                                    d.PODetail_RowID,
+                                        d.ExpiredDate,
+										k.TaxCode
+                                    from tblPur_GRPO_Detail as d
+                                    inner join tblPur_PO_Detail as pd on pd.PODetail_RowID = d.PODetail_RowID
+                                    inner join tblPur_GRPO as pg on pg.GRPOID = d.GRPOID
+                                    inner join tblPart as p on pd.PartID = p.PartID
+									inner join tblPur_Part as k on k.PartID = pd.PartID
+                                    inner join tblPur_Unit as u on u.UnitID = d.UnitReceivedID
+                                    where pg.GRPONumber = @GRPONumber ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@GRPONumber", SqlDbType.Int).Value = GRPONumber;
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        /// <summary>
+        /// 33. UPDATE - Cập nhật thông tin phiếu nhập kho (GRPO) đã tồn tại trong bảng tblPur_GRPO và tblPur_GRPO_Detail
+        /// </summary>
+        /// <param name="_tblPur_Existing_GRPO"></param>
+        /// <param name="_tblPur_GRPO_Detail"></param>
+        /// <returns></returns>
+        public bool Update_Existing_GRPO_DAL(DataTable _tblPur_Existing_GRPO, DataTable _tblPur_GRPO_Detail, DataTable _tblInventory, DataTable _tblInventory_Summary)
+        {
+            int GRPOID = Convert.ToInt32(_tblPur_Existing_GRPO.Rows[0]["GRPOID"]);
+            int GRPONumber = Convert.ToInt32(_tblPur_Existing_GRPO.Rows[0]["GRPONumber"]);
+            int PONumber = Convert.ToInt32(_tblPur_Existing_GRPO.Rows[0]["PONumber"]);
+            DateTime ReceivedDate = Convert.ToDateTime(_tblPur_Existing_GRPO.Rows[0]["ReceivedDate"]);
+            decimal ReceivedAmount = Convert.ToDecimal(_tblPur_Existing_GRPO.Rows[0]["ReceivedAmount"]);
+            int GRPOStatusID = Convert.ToInt32(_tblPur_Existing_GRPO.Rows[0]["GRPOStatusID"]);
+            string GRPORemark = _tblPur_Existing_GRPO.Rows[0]["GRPORemark"].ToString();
+            int GRPOCurrencyID = Convert.ToInt32(_tblPur_Existing_GRPO.Rows[0]["GRPOCurrencyID"]);
+            int GRPOTaxID = Convert.ToInt32(_tblPur_Existing_GRPO.Rows[0]["GRPOTaxID"]);
+            int GRPOWareHouseID = Convert.ToInt32(_tblPur_Existing_GRPO.Rows[0]["GRPOWareHouseID"]);
+
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand("Update_Existing_GRPO", con, transaction))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                            // Truyền các tham số đầu vào
+                            cmd.Parameters.Add("@GRPOID", SqlDbType.Int).Value = GRPOID;
+                            cmd.Parameters.Add("@GRPONumber", SqlDbType.Int).Value = GRPONumber;
+                            cmd.Parameters.Add("@PONumber", SqlDbType.Int).Value = PONumber;
+                            cmd.Parameters.Add("@ReceivedDate", SqlDbType.Date).Value = ReceivedDate;
+                            cmd.Parameters.Add("@ReceivedAmount", SqlDbType.Decimal).Value = ReceivedAmount;
+                            cmd.Parameters.Add("@GRPORemark", SqlDbType.NVarChar, 200).Value = GRPORemark;
+                            cmd.Parameters.Add("@GRPOStatusID", SqlDbType.Int).Value = GRPOStatusID;
+                            cmd.Parameters.Add("@GRPOCurrencyID", SqlDbType.Int).Value = GRPOCurrencyID;
+                            cmd.Parameters.Add("@GRPOWareHouseID", SqlDbType.Int).Value = GRPOWareHouseID;
+                            cmd.Parameters.Add("@GRPOTaxID", SqlDbType.Int).Value = GRPOTaxID;
+
+                            // Thêm bảng chi tiết kiểu TVP (Table-Valued Parameter)
+                            SqlParameter tvpParam_Update = cmd.Parameters.AddWithValue("@tblDetails", _tblPur_GRPO_Detail);
+                            tvpParam_Update.SqlDbType = SqlDbType.Structured;
+                            tvpParam_Update.TypeName = "tblPur_GRPO_Detail_Full_Defined "; // Phải khớp với type bạn tạo trong SQL
+
+                            // Thêm bảng chi tiết kiểu TVP (Table-Valued Parameter)
+                            SqlParameter tvpParam_Inventory = cmd.Parameters.AddWithValue("@_tblInventory", _tblInventory);
+                            tvpParam_Inventory.SqlDbType = SqlDbType.Structured;
+                            tvpParam_Inventory.TypeName = "tblInventory_Full_Defined "; // Phải khớp với type bạn tạo trong SQL
+
+
+                            // Thêm bảng chi tiết kiểu TVP (Table-Valued Parameter)
+                            SqlParameter tvpParam_Inventory_Summary = cmd.Parameters.AddWithValue("@_tblInventory_Summary", _tblInventory_Summary);
+                            tvpParam_Inventory_Summary.SqlDbType = SqlDbType.Structured;
+                            tvpParam_Inventory_Summary.TypeName = "tblInventory_Summary_Full_Defined "; // Phải khớp với type bạn tạo trong SQL
+
+
+                            // Thực thi stored procedure
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// 34. DELETE - Xóa một phiếu nhập kho (GRPO) đã tồn tại trong bảng tblPur_GRPO - Cho về trạng thái Cancelation
+        /// </summary>
+        /// <param name="GRPOID"></param>
+        /// <returns></returns>
+        public bool Cancelation_Existing_GRPO_DAL(int GRPOID)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    string sql_query = @"update tblPur_GRPO set GRPOStatusID = 3  where GRPOID = @GRPOID ";
+
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@GRPOID", SqlDbType.Int).Value = GRPOID;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Hoàn tác nếu có lỗi
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 35. DELETE - Xóa một đơn đặt hàng (Purchase Order) đã tồn tại trong bảng tblPur_PO - Cho về trạng thái Cancelation
+        /// </summary>
+        /// <param name="PONumber"></param>
+        /// <returns></returns>
+        public bool Cancelation_Existing_PO_DAL(int PONumber)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    string sql_query = @"update tblPur_PO set POStatusID = 3 where PONumber = @PONumber ";
+
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@PONumber", SqlDbType.Int).Value = PONumber;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Hoàn tác nếu có lỗi
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 35. UPDATE - Đóng một đơn đặt hàng (Purchase Order) đã tồn tại trong bảng tblPur_PO - Cho về trạng thái Closed
+        /// </summary>
+        /// <param name="PONumber"></param>
+        /// <returns></returns>
+        public bool Closed_Existing_PO_DAL(int PONumber)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    string sql_query = @"update tblPur_PO set POStatusID = 2 where PONumber = @PONumber ";
+
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@PONumber", SqlDbType.Int).Value = PONumber;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Hoàn tác nếu có lỗi
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 36. UPDATE - Đóng một phiếu nhập kho (GRPO) đã tồn tại trong bảng tblPur_GRPO - Cho về trạng thái Closed 
+        /// </summary>
+        /// <param name="PONumber"></param>
+        /// <returns></returns>
+        public bool Closed_Existing_GRPO_DAL(int GRPONumber)
+        {
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+                SqlTransaction transaction = con.BeginTransaction();
+
+                try
+                {
+                    string sql_query = @"update tblPur_GRPO set GRPOStatusID = 2 where GRPONumber = @GRPONumber ";
+
+                    using (SqlCommand cmd = new SqlCommand(sql_query, con, transaction))
+                    {
+                        cmd.Parameters.Add("@GRPONumber", SqlDbType.Int).Value = GRPONumber;
+                        cmd.ExecuteNonQuery();
+                    }
+
+                    transaction.Commit();
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    transaction.Rollback(); // Hoàn tác nếu có lỗi
+                    Console.WriteLine("Lỗi: " + ex.Message);
+                    return false;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 37. SELECT - Lấy PartCode và PartName từ bảng tblPart dựa trên danh sách mã hàng hóa (ListPartCode)
+        /// </summary>
+        /// <param name="ListPartCode"></param>
+        /// <returns></returns>
+        public DataTable Select_PartCode_PartName_DAL(DataTable ListPartCode)
+        {
+            DataTable result = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"   SELECT
+                                            p.PartCode,
+                                            p.PartName
+                                        FROM tblPart AS p
+                                        JOIN @tblPartCode AS c ON c.PartCode = p.PartCode; ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                SqlParameter tvpParam_Update = cmd.Parameters.AddWithValue("@tblPartCode", ListPartCode);
+                tvpParam_Update.SqlDbType = SqlDbType.Structured;
+                tvpParam_Update.TypeName = "tblListPartCode ";
+
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(result);
+            }
+
+            return result;
+            // return datatable
+            // PartCode, PartName, PartPurchasePrice, PartSalePrice, Eable_Purchase, Eable_Inventory, Eable_Sale, TaxCode, SupplierIDPrefer, TaxIDPrefer
+        }
+
+
+        /// <summary>
+        /// 38. INSERT - Thêm mới một hóa đơn mua hàng (APInvoice) vào bảng tblPur_APInvoice và tblPur_APInvoice_Detail
+        /// </summary>
+        /// <param name="_tblAPInvoice"></param>
+        /// <param name="_tblAPInvoice_Detail"></param>
+        /// <returns></returns>
+        public bool Insert_New_APInvoice_DAL(DataTable _tblAPInvoice, DataTable _tblAPInvoice_Detail)
+        {
+            
+
+            using (SqlConnection con = new SqlConnection(Dataconnect))
+            {
+                con.Open();
+
+                using (SqlTransaction transaction = con.BeginTransaction())
+                {
+                    try
+                    {
+                        using (SqlCommand cmd = new SqlCommand("Insert_New_APInvoice", con, transaction))
+                        {
+                            cmd.CommandType = CommandType.StoredProcedure;
+
+                           
+
+                            // Thêm bảng chi tiết kiểu TVP (Table-Valued Parameter)
+                            SqlParameter tvpParam_APInvoice = cmd.Parameters.AddWithValue("@_tblAPInvoice", _tblAPInvoice);
+                            tvpParam_APInvoice.SqlDbType = SqlDbType.Structured;
+                            tvpParam_APInvoice.TypeName = "tblPur_APInvoice_Full_Defined"; // Phải khớp với type bạn tạo trong SQL
+                            //
+                            SqlParameter tvpParam_APInvoice_Detail = cmd.Parameters.AddWithValue("@_tblAPInvoice_Detail", _tblAPInvoice_Detail);
+                            tvpParam_APInvoice_Detail.SqlDbType = SqlDbType.Structured;
+                            tvpParam_APInvoice_Detail.TypeName = "tblPur_APInvoice_Detail_Full_Defined"; // Phải khớp với type bạn tạo trong SQL
+                            
+
+                            // Thực thi stored procedure
+                            cmd.ExecuteNonQuery();
+                        }
+
+                        transaction.Commit();
+                        return true;
+                    }
+                    catch (Exception ex)
+                    {
+                        transaction.Rollback();
+                        Console.WriteLine("Error: " + ex.Message);
+                        return false;
+                    }
+                }
+            }
+        }
+
+
+
+        /// <summary>
+        /// 39. SELECT - Lấy dữ liệu từ bảng tblPur_APInvoice theo SupplierID
+        /// </summary>
+        /// <param name="SupplierID"></param>
+        /// <returns>Table ( ID, GRPOID, PONumber, Status, Supplier, Created, Updated, Payment, Currency, Tax )</returns>
+        public DataTable Select_tblPur_APInvoice_by_SupplierID_DAL(int SupplierID)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select 
+	                                    a.APInvoiceID as ID ,
+	                                    a.GRPOID,
+	                                    a.PONumber,
+	                                    st.StatusName as Status,
+	                                    s.SupplierName as Supplier,
+	                                    a.CreatedDate as Created,
+	                                    a.UpdatedDate as Updated,
+	                                    a.APInvoice_ToTalPayment as Payment,
+	                                    c.CurrencyName as Currency,
+	                                    tx.TaxName as Tax
+                                    from tblPur_APInvoice as a
+                                    inner join tblPur_Supplier as s on s.SupplierID = a.APInvoice_SupplierID 
+                                    inner join tblPur_Status as st on st.StatusID = a.APInvoice_StatusID
+                                    inner join tblPur_Currency as c on c.CurrencyID = a.APInvoice_CurrencyID
+                                    inner join tblPur_Tax as tx on tx.TaxID = a.APInvoice_TaxID
+                                    where a.APInvoice_SupplierID = @SupplierID
+                                    order by a.APInvoiceID desc ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@SupplierID", SqlDbType.Int).Value = SupplierID;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        public DataTable Select_tblPur_APInvoice_by_SupplierID_DAL(int SupplierID, int ShowRow)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select 
+	                                    a.APInvoiceID as ID ,
+	                                    a.GRPOID,
+	                                    a.PONumber,
+	                                    st.StatusName as Status,
+	                                    s.SupplierName as Supplier,
+	                                    a.CreatedDate as Created,
+	                                    a.UpdatedDate as Updated,
+	                                    a.APInvoice_ToTalPayment as Payment,
+	                                    c.CurrencyName as Currency,
+	                                    tx.TaxName as Tax
+                                    from tblPur_APInvoice as a
+                                    inner join tblPur_Supplier as s on s.SupplierID = a.APInvoice_SupplierID 
+                                    inner join tblPur_Status as st on st.StatusID = a.APInvoice_StatusID
+                                    inner join tblPur_Currency as c on c.CurrencyID = a.APInvoice_CurrencyID
+                                    inner join tblPur_Tax as tx on tx.TaxID = a.APInvoice_TaxID
+                                    where a.APInvoice_SupplierID = @SupplierID
+                                    order by a.APInvoiceID desc
+                                    OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@SupplierID", SqlDbType.Int).Value = SupplierID;
+                cmd.Parameters.Add("@ShowRow", SqlDbType.Int).Value = ShowRow;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+
+        /// <summary>
+        /// 40. SELECT - Lấy dữ liệu từ bảng tblPur_APInvoice theo ngày tạo trong 1 khoảng thời gian
+        /// </summary>
+        /// <param name="DateFrom"></param>
+        /// <param name="DateTo"></param>
+        /// <returns>Table ( ID, GRPOID, PONumber, Status, Supplier, Created, Updated, Payment, Currency, Tax )</returns>
+        public DataTable Select_tblPur_APInvoice_by_CreateDate_DAL(DateTime DateFrom, DateTime DateTo)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select 
+	                                    a.APInvoiceID as ID ,
+	                                    a.GRPOID,
+	                                    a.PONumber,
+	                                    st.StatusName as Status,
+	                                    s.SupplierName as Supplier,
+	                                    a.CreatedDate as Created,
+	                                    a.UpdatedDate as Updated,
+	                                    a.APInvoice_ToTalPayment as Payment,
+	                                    c.CurrencyName as Currency,
+	                                    tx.TaxName as Tax
+                                    from tblPur_APInvoice as a
+                                    inner join tblPur_Supplier as s on s.SupplierID = a.APInvoice_SupplierID 
+                                    inner join tblPur_Status as st on st.StatusID = a.APInvoice_StatusID
+                                    inner join tblPur_Currency as c on c.CurrencyID = a.APInvoice_CurrencyID
+                                    inner join tblPur_Tax as tx on tx.TaxID = a.APInvoice_TaxID
+                                    WHERE a.UpdatedDate >= @DateFrom AND a.UpdatedDate <= @DateTo
+                                     order by a.APInvoiceID desc ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@DateFrom", SqlDbType.DateTime).Value = DateFrom.Date;
+                cmd.Parameters.Add("@DateTo", SqlDbType.DateTime).Value = DateTo.Date;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+        public DataTable Select_tblPur_APInvoice_by_CreateDate_DAL(DateTime DateFrom, DateTime DateTo, int ShowRow)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select 
+	                                    a.APInvoiceID as ID ,
+	                                    a.GRPOID,
+	                                    a.PONumber,
+	                                    st.StatusName as Status,
+	                                    s.SupplierName as Supplier,
+	                                    a.CreatedDate as Created,
+	                                    a.UpdatedDate as Updated,
+	                                    a.APInvoice_ToTalPayment as Payment,
+	                                    c.CurrencyName as Currency,
+	                                    tx.TaxName as Tax
+                                    from tblPur_APInvoice as a
+                                    inner join tblPur_Supplier as s on s.SupplierID = a.APInvoice_SupplierID 
+                                    inner join tblPur_Status as st on st.StatusID = a.APInvoice_StatusID
+                                    inner join tblPur_Currency as c on c.CurrencyID = a.APInvoice_CurrencyID
+                                    inner join tblPur_Tax as tx on tx.TaxID = a.APInvoice_TaxID
+                                    WHERE a.UpdatedDate >= @DateFrom AND a.UpdatedDate <= @DateTo
+                                     order by a.APInvoiceID desc
+                                    OFFSET 0 ROWS FETCH NEXT @ShowRow ROWS ONLY; ";
+
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@DateFrom", SqlDbType.DateTime).Value = DateFrom.Date;
+                cmd.Parameters.Add("@DateTo", SqlDbType.DateTime).Value = DateTo.Date;
+                cmd.Parameters.Add("@ShowRow", SqlDbType.Int).Value = ShowRow;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+
+            return BangDuLieu;
+        }
+
+
+
+        /// <summary>
+        /// 41. SELECT - Lấy dữ liệu từ bảng tblPur_APInvoice theo APInvoiceID
+        /// </summary>
+        /// <param name="APInvoiceID"></param>
+        /// <returns> return table ( APInvoiceID, GRPOID, PONumber, APInvoice_SupplierID, CreatedDate, UpdatedDate, APInvoice_ToTalPayment, APInvoice_Remark, APInvoice_StatusID, APInvoice_CurrencyID, APInvoice_TaxID ) </returns>
+        public DataTable Select_tblPur_APInvoice_by_APInvoiceID_DAL(int APInvoiceID)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"Select 
+	                                    i.APInvoiceID , 
+	                                    i.GRPOID,
+	                                    i.PONumber,
+	                                    i.APInvoice_SupplierID ,
+	                                    i.CreatedDate,
+	                                    i.UpdatedDate,
+	                                    i.APInvoice_ToTalPayment ,
+	                                    i.APInvoice_Remark ,
+	                                    i.APInvoice_StatusID,
+	                                    i.APInvoice_CurrencyID,
+	                                    i.APInvoice_TaxID
+                                    from tblPur_APInvoice as i
+                                    where i.APInvoiceID = @APInvoiceID ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@APInvoiceID", SqlDbType.Int).Value = APInvoiceID;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
+
+        /// <summary>
+        /// 42. SELECT - Lấy dữ liệu từ bảng tblPur_APInvoice_Detail theo APInvoiceID
+        /// </summary>
+        /// <param name="APInvoiceID"></param>
+        /// <returns> /// return table (PartCode, PartName, Qty_Received, Qty_Payment, UnitPrice, Discount, Total, Unit, TaxCode, RowID) /// </returns>
+        public DataTable Select_tblPur_APInvoice_Detail_by_APInvoiceID_DAL(int APInvoiceID)
+        {
+            DataTable BangDuLieu = new DataTable();
+            using (SqlConnection conn = new SqlConnection(Dataconnect))
+            {
+                string sql_query = @"select 
+                                        p.PartCode,
+                                        p.PartName,
+	                                    gpd.QuantityReceived as Qty_Received,
+                                        d.APInvoice_Quantity as Qty_Payment,
+	                                    d.APInvoice_UnitPrice as UnitPrice,
+	                                    d.APInvoice_Discount as Discount,
+	                                    d.APInvoice_TotalPayment as Total,
+	                                    d.APInvoice_UnitID as Unit,
+	                                    pp.TaxCode,
+                                        d.PODetail_RowID as RowID
+                                    from tblPur_APInvoice_Detail as d
+                                    inner join tblPur_PO_Detail as pd on pd.PODetail_RowID = d.PODetail_RowID
+                                    inner join tblPart as p on p.PartID = pd.PartID
+                                    inner join tblPur_Part  as pp on pp.PartID = pd.PartID
+                                    inner join tblPur_GRPO_Detail as gpd on gpd.PODetail_RowID = d.PODetail_RowID
+                                    where d.APInvoiceID = @APInvoiceID ";
+                SqlCommand cmd = new SqlCommand(sql_query, conn);
+                cmd.Parameters.Add("@APInvoiceID", SqlDbType.Int).Value = APInvoiceID;
+                SqlDataAdapter adap = new SqlDataAdapter(cmd);
+                conn.Open();
+                adap.Fill(BangDuLieu);
+            }
+            return BangDuLieu;
+        }
+
+        #endregion 4. MANAGE GOODS RECEIPT PURCHASE ORDER FUNCTIONS
+
+        //================================================================================================================
+        //================================================================================================================
+        //================================================================================================================
+        public void Dispose()
+        {
+            // Dispose resources if necessary
+            GC.SuppressFinalize(this);
+        }
     }
 }

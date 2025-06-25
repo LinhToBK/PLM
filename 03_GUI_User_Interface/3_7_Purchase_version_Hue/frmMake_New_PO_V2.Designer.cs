@@ -56,19 +56,20 @@
             this.tabContents = new System.Windows.Forms.TabPage();
             this.dgv_List_Content = new Zuby.ADGV.AdvancedDataGridView();
             this.cms_dgv_List_Content = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openPartToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openInventoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Open_Part_Feature = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Open_Inventory = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.viewTableToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.insertNewRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.pasteDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Edit_Table_Viewing = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Insert_New_Row = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Insert_Multi_Rows = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Paste_Data = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteRowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.clearDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.changeUnitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Clear_Data = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Change_Unit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
-            this.autoFillDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkInputDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteDupliCatePartCodeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Auto_Fill_Data = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Check_Input_Data = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_List_Content_Delete_Duplicate_PartCode = new System.Windows.Forms.ToolStripMenuItem();
             this.tabAttachments = new System.Windows.Forms.TabPage();
             this.btnDeleteFile = new System.Windows.Forms.Button();
             this.btnAddFile = new System.Windows.Forms.Button();
@@ -77,15 +78,16 @@
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.dgv_Search_Items = new Zuby.ADGV.AdvancedDataGridView();
             this.cms_dgv_Search_Items = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openPartFeatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openInventoryInformationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_Items_Open_Part_Feature = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_Items_Open_Inventory_Information = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
-            this.editTableVieingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_Items_Edit_Table_Viewing = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Search_Items_Show_PartCode_Only = new System.Windows.Forms.ToolStripMenuItem();
             this.flowLayoutPanel2 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnFind_Item_Supplier = new System.Windows.Forms.Button();
             this.DsAnh = new System.Windows.Forms.ImageList(this.components);
             this.panelC = new System.Windows.Forms.Panel();
+            this.txtCountRow = new System.Windows.Forms.TextBox();
             this.label21 = new System.Windows.Forms.Label();
             this.txtTax = new System.Windows.Forms.TextBox();
             this.txtPaymentTerm = new System.Windows.Forms.TextBox();
@@ -105,15 +107,17 @@
             this.lblCurrencyD = new System.Windows.Forms.Label();
             this.lblCurrencyC = new System.Windows.Forms.Label();
             this.lblCurrencyA = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.label10 = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAdd = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnCopyTo = new System.Windows.Forms.Button();
+            this.label13 = new System.Windows.Forms.Label();
             this.cms_dgv_Attachment_Files = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.openFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addFileToAttachmentListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deleteFileInAttachmentListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Attachment_Files_Open_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Attachment_Files_Add_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.cms_dgv_Attachment_Files_Delete_File = new System.Windows.Forms.ToolStripMenuItem();
             this.table_Main.SuspendLayout();
             this.tableA.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -136,17 +140,19 @@
             // 
             this.table_Main.ColumnCount = 1;
             this.table_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.table_Main.Controls.Add(this.tableA, 0, 0);
-            this.table_Main.Controls.Add(this.tabControl, 0, 1);
-            this.table_Main.Controls.Add(this.panelC, 0, 2);
-            this.table_Main.Controls.Add(this.flowLayoutPanel1, 0, 3);
+            this.table_Main.Controls.Add(this.tableA, 0, 1);
+            this.table_Main.Controls.Add(this.tabControl, 0, 2);
+            this.table_Main.Controls.Add(this.panelC, 0, 3);
+            this.table_Main.Controls.Add(this.flowLayoutPanel1, 0, 4);
+            this.table_Main.Controls.Add(this.label13, 0, 0);
             this.table_Main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.table_Main.Location = new System.Drawing.Point(0, 0);
             this.table_Main.Name = "table_Main";
-            this.table_Main.RowCount = 4;
+            this.table_Main.RowCount = 5;
+            this.table_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 35F));
             this.table_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 160F));
-            this.table_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 59.99999F));
-            this.table_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
+            this.table_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 60F));
+            this.table_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40.00001F));
             this.table_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 40F));
             this.table_Main.Size = new System.Drawing.Size(885, 675);
             this.table_Main.TabIndex = 0;
@@ -154,6 +160,7 @@
             // tableA
             // 
             this.tableA.AutoScroll = true;
+            this.tableA.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.tableA.ColumnCount = 5;
             this.tableA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableA.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
@@ -181,7 +188,7 @@
             this.tableA.Controls.Add(this.label17, 3, 4);
             this.tableA.Controls.Add(this.txtPONumber, 4, 4);
             this.tableA.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableA.Location = new System.Drawing.Point(3, 3);
+            this.tableA.Location = new System.Drawing.Point(3, 38);
             this.tableA.Name = "tableA";
             this.tableA.RowCount = 5;
             this.tableA.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 30F));
@@ -397,10 +404,10 @@
             this.tabControl.Controls.Add(this.tabFindItems);
             this.tabControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl.ImageList = this.DsAnh;
-            this.tabControl.Location = new System.Drawing.Point(3, 163);
+            this.tabControl.Location = new System.Drawing.Point(3, 198);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(879, 279);
+            this.tabControl.Size = new System.Drawing.Size(879, 257);
             this.tabControl.TabIndex = 1;
             // 
             // tabContents
@@ -411,13 +418,15 @@
             this.tabContents.Location = new System.Drawing.Point(4, 26);
             this.tabContents.Name = "tabContents";
             this.tabContents.Padding = new System.Windows.Forms.Padding(3);
-            this.tabContents.Size = new System.Drawing.Size(871, 249);
+            this.tabContents.Size = new System.Drawing.Size(871, 227);
             this.tabContents.TabIndex = 0;
             this.tabContents.Text = "01. Contents";
             this.tabContents.UseVisualStyleBackColor = true;
             // 
             // dgv_List_Content
             // 
+            this.dgv_List_Content.AllowUserToAddRows = false;
+            this.dgv_List_Content.AllowUserToDeleteRows = false;
             this.dgv_List_Content.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgv_List_Content.ContextMenuStrip = this.cms_dgv_List_Content;
             this.dgv_List_Content.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -427,7 +436,7 @@
             this.dgv_List_Content.MaxFilterButtonImageHeight = 23;
             this.dgv_List_Content.Name = "dgv_List_Content";
             this.dgv_List_Content.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgv_List_Content.Size = new System.Drawing.Size(865, 243);
+            this.dgv_List_Content.Size = new System.Drawing.Size(865, 221);
             this.dgv_List_Content.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgv_List_Content.TabIndex = 1;
             this.dgv_List_Content.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_List_Content_CellValueChanged);
@@ -437,65 +446,74 @@
             // cms_dgv_List_Content
             // 
             this.cms_dgv_List_Content.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openPartToolStripMenuItem,
-            this.openInventoryToolStripMenuItem,
+            this.cms_dgv_List_Content_Open_Part_Feature,
+            this.cms_dgv_List_Content_Open_Inventory,
             this.toolStripSeparator1,
-            this.viewTableToolStripMenuItem,
-            this.insertNewRowToolStripMenuItem,
-            this.pasteDataToolStripMenuItem,
+            this.cms_dgv_List_Content_Edit_Table_Viewing,
+            this.cms_dgv_List_Content_Insert_New_Row,
+            this.cms_dgv_List_Content_Insert_Multi_Rows,
+            this.cms_dgv_List_Content_Paste_Data,
             this.deleteRowToolStripMenuItem,
-            this.clearDataToolStripMenuItem,
-            this.changeUnitToolStripMenuItem,
+            this.cms_dgv_List_Content_Clear_Data,
+            this.cms_dgv_List_Content_Change_Unit,
             this.toolStripSeparator2,
-            this.autoFillDataToolStripMenuItem,
-            this.checkInputDataToolStripMenuItem,
-            this.deleteDupliCatePartCodeToolStripMenuItem});
+            this.cms_dgv_List_Content_Auto_Fill_Data,
+            this.cms_dgv_List_Content_Check_Input_Data,
+            this.cms_dgv_List_Content_Delete_Duplicate_PartCode});
             this.cms_dgv_List_Content.Name = "cms_dgv_List_Content";
-            this.cms_dgv_List_Content.Size = new System.Drawing.Size(223, 258);
+            this.cms_dgv_List_Content.Size = new System.Drawing.Size(223, 280);
             // 
-            // openPartToolStripMenuItem
+            // cms_dgv_List_Content_Open_Part_Feature
             // 
-            this.openPartToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openPartToolStripMenuItem.Image")));
-            this.openPartToolStripMenuItem.Name = "openPartToolStripMenuItem";
-            this.openPartToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.openPartToolStripMenuItem.Text = "Open Part Feature";
-            this.openPartToolStripMenuItem.Click += new System.EventHandler(this.openPartToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Open_Part_Feature.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Open_Part_Feature.Image")));
+            this.cms_dgv_List_Content_Open_Part_Feature.Name = "cms_dgv_List_Content_Open_Part_Feature";
+            this.cms_dgv_List_Content_Open_Part_Feature.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Open_Part_Feature.Text = "Open Part Feature";
+            this.cms_dgv_List_Content_Open_Part_Feature.Click += new System.EventHandler(this.cms_dgv_List_Content_Open_Part_Feature_Click);
             // 
-            // openInventoryToolStripMenuItem
+            // cms_dgv_List_Content_Open_Inventory
             // 
-            this.openInventoryToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openInventoryToolStripMenuItem.Image")));
-            this.openInventoryToolStripMenuItem.Name = "openInventoryToolStripMenuItem";
-            this.openInventoryToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.openInventoryToolStripMenuItem.Text = "Open Inventory Information";
+            this.cms_dgv_List_Content_Open_Inventory.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Open_Inventory.Image")));
+            this.cms_dgv_List_Content_Open_Inventory.Name = "cms_dgv_List_Content_Open_Inventory";
+            this.cms_dgv_List_Content_Open_Inventory.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Open_Inventory.Text = "Open Inventory Information";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
             this.toolStripSeparator1.Size = new System.Drawing.Size(219, 6);
             // 
-            // viewTableToolStripMenuItem
+            // cms_dgv_List_Content_Edit_Table_Viewing
             // 
-            this.viewTableToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("viewTableToolStripMenuItem.Image")));
-            this.viewTableToolStripMenuItem.Name = "viewTableToolStripMenuItem";
-            this.viewTableToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.viewTableToolStripMenuItem.Text = "Edit Table Viewing";
-            this.viewTableToolStripMenuItem.Click += new System.EventHandler(this.viewTableToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Edit_Table_Viewing.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Edit_Table_Viewing.Image")));
+            this.cms_dgv_List_Content_Edit_Table_Viewing.Name = "cms_dgv_List_Content_Edit_Table_Viewing";
+            this.cms_dgv_List_Content_Edit_Table_Viewing.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Edit_Table_Viewing.Text = "Edit Table Viewing";
+            this.cms_dgv_List_Content_Edit_Table_Viewing.Click += new System.EventHandler(this.cms_dgv_List_Content_Edit_Table_Viewing_Click);
             // 
-            // insertNewRowToolStripMenuItem
+            // cms_dgv_List_Content_Insert_New_Row
             // 
-            this.insertNewRowToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("insertNewRowToolStripMenuItem.Image")));
-            this.insertNewRowToolStripMenuItem.Name = "insertNewRowToolStripMenuItem";
-            this.insertNewRowToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.insertNewRowToolStripMenuItem.Text = "Insert New Row";
-            this.insertNewRowToolStripMenuItem.Click += new System.EventHandler(this.insertNewRowToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Insert_New_Row.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Insert_New_Row.Image")));
+            this.cms_dgv_List_Content_Insert_New_Row.Name = "cms_dgv_List_Content_Insert_New_Row";
+            this.cms_dgv_List_Content_Insert_New_Row.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Insert_New_Row.Text = "Insert New Row";
+            this.cms_dgv_List_Content_Insert_New_Row.Click += new System.EventHandler(this.cms_dgv_List_Content_Insert_New_Row_Click);
             // 
-            // pasteDataToolStripMenuItem
+            // cms_dgv_List_Content_Insert_Multi_Rows
             // 
-            this.pasteDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("pasteDataToolStripMenuItem.Image")));
-            this.pasteDataToolStripMenuItem.Name = "pasteDataToolStripMenuItem";
-            this.pasteDataToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.pasteDataToolStripMenuItem.Text = "Paste Data";
-            this.pasteDataToolStripMenuItem.Click += new System.EventHandler(this.pasteDataToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Insert_Multi_Rows.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Insert_Multi_Rows.Image")));
+            this.cms_dgv_List_Content_Insert_Multi_Rows.Name = "cms_dgv_List_Content_Insert_Multi_Rows";
+            this.cms_dgv_List_Content_Insert_Multi_Rows.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Insert_Multi_Rows.Text = "Insert Multi Rows";
+            this.cms_dgv_List_Content_Insert_Multi_Rows.Click += new System.EventHandler(this.cms_dgv_List_Content_Insert_Multi_Rows_Click);
+            // 
+            // cms_dgv_List_Content_Paste_Data
+            // 
+            this.cms_dgv_List_Content_Paste_Data.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Paste_Data.Image")));
+            this.cms_dgv_List_Content_Paste_Data.Name = "cms_dgv_List_Content_Paste_Data";
+            this.cms_dgv_List_Content_Paste_Data.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Paste_Data.Text = "Paste Data";
+            this.cms_dgv_List_Content_Paste_Data.Click += new System.EventHandler(this.cms_dgv_List_Content_Paste_Data_Click);
             // 
             // deleteRowToolStripMenuItem
             // 
@@ -505,50 +523,50 @@
             this.deleteRowToolStripMenuItem.Text = "Delete Row";
             this.deleteRowToolStripMenuItem.Click += new System.EventHandler(this.deleteRowToolStripMenuItem_Click);
             // 
-            // clearDataToolStripMenuItem
+            // cms_dgv_List_Content_Clear_Data
             // 
-            this.clearDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("clearDataToolStripMenuItem.Image")));
-            this.clearDataToolStripMenuItem.Name = "clearDataToolStripMenuItem";
-            this.clearDataToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.clearDataToolStripMenuItem.Text = "Clear Data";
-            this.clearDataToolStripMenuItem.Click += new System.EventHandler(this.clearDataToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Clear_Data.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Clear_Data.Image")));
+            this.cms_dgv_List_Content_Clear_Data.Name = "cms_dgv_List_Content_Clear_Data";
+            this.cms_dgv_List_Content_Clear_Data.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Clear_Data.Text = "Clear Data";
+            this.cms_dgv_List_Content_Clear_Data.Click += new System.EventHandler(this.cms_dgv_List_Content_Clear_Data_Click);
             // 
-            // changeUnitToolStripMenuItem
+            // cms_dgv_List_Content_Change_Unit
             // 
-            this.changeUnitToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("changeUnitToolStripMenuItem.Image")));
-            this.changeUnitToolStripMenuItem.Name = "changeUnitToolStripMenuItem";
-            this.changeUnitToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.changeUnitToolStripMenuItem.Text = "Change Unit";
-            this.changeUnitToolStripMenuItem.Click += new System.EventHandler(this.changeUnitToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Change_Unit.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Change_Unit.Image")));
+            this.cms_dgv_List_Content_Change_Unit.Name = "cms_dgv_List_Content_Change_Unit";
+            this.cms_dgv_List_Content_Change_Unit.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Change_Unit.Text = "Change Unit";
+            this.cms_dgv_List_Content_Change_Unit.Click += new System.EventHandler(this.cms_dgv_List_Content_Change_Unit_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
             this.toolStripSeparator2.Size = new System.Drawing.Size(219, 6);
             // 
-            // autoFillDataToolStripMenuItem
+            // cms_dgv_List_Content_Auto_Fill_Data
             // 
-            this.autoFillDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("autoFillDataToolStripMenuItem.Image")));
-            this.autoFillDataToolStripMenuItem.Name = "autoFillDataToolStripMenuItem";
-            this.autoFillDataToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.autoFillDataToolStripMenuItem.Text = "Auto Fill Data";
-            this.autoFillDataToolStripMenuItem.Click += new System.EventHandler(this.autoFillDataToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Auto_Fill_Data.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Auto_Fill_Data.Image")));
+            this.cms_dgv_List_Content_Auto_Fill_Data.Name = "cms_dgv_List_Content_Auto_Fill_Data";
+            this.cms_dgv_List_Content_Auto_Fill_Data.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Auto_Fill_Data.Text = "Auto Fill Data";
+            this.cms_dgv_List_Content_Auto_Fill_Data.Click += new System.EventHandler(this.cms_dgv_List_Content_Auto_Fill_Data_Click);
             // 
-            // checkInputDataToolStripMenuItem
+            // cms_dgv_List_Content_Check_Input_Data
             // 
-            this.checkInputDataToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("checkInputDataToolStripMenuItem.Image")));
-            this.checkInputDataToolStripMenuItem.Name = "checkInputDataToolStripMenuItem";
-            this.checkInputDataToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.checkInputDataToolStripMenuItem.Text = "Check Input Data";
-            this.checkInputDataToolStripMenuItem.Click += new System.EventHandler(this.checkInputDataToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Check_Input_Data.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Check_Input_Data.Image")));
+            this.cms_dgv_List_Content_Check_Input_Data.Name = "cms_dgv_List_Content_Check_Input_Data";
+            this.cms_dgv_List_Content_Check_Input_Data.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Check_Input_Data.Text = "Check Input Data";
+            this.cms_dgv_List_Content_Check_Input_Data.Click += new System.EventHandler(this.cms_dgv_List_Content_Check_Input_Data_Click);
             // 
-            // deleteDupliCatePartCodeToolStripMenuItem
+            // cms_dgv_List_Content_Delete_Duplicate_PartCode
             // 
-            this.deleteDupliCatePartCodeToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteDupliCatePartCodeToolStripMenuItem.Image")));
-            this.deleteDupliCatePartCodeToolStripMenuItem.Name = "deleteDupliCatePartCodeToolStripMenuItem";
-            this.deleteDupliCatePartCodeToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.deleteDupliCatePartCodeToolStripMenuItem.Text = "Delete DupliCate PartCode";
-            this.deleteDupliCatePartCodeToolStripMenuItem.Click += new System.EventHandler(this.deleteDupliCatePartCodeToolStripMenuItem_Click);
+            this.cms_dgv_List_Content_Delete_Duplicate_PartCode.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_List_Content_Delete_Duplicate_PartCode.Image")));
+            this.cms_dgv_List_Content_Delete_Duplicate_PartCode.Name = "cms_dgv_List_Content_Delete_Duplicate_PartCode";
+            this.cms_dgv_List_Content_Delete_Duplicate_PartCode.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_List_Content_Delete_Duplicate_PartCode.Text = "Delete DupliCate PartCode";
+            this.cms_dgv_List_Content_Delete_Duplicate_PartCode.Click += new System.EventHandler(this.cms_dgv_List_Content_Delete_Duplicate_PartCode_Click);
             // 
             // tabAttachments
             // 
@@ -560,7 +578,7 @@
             this.tabAttachments.Location = new System.Drawing.Point(4, 26);
             this.tabAttachments.Name = "tabAttachments";
             this.tabAttachments.Padding = new System.Windows.Forms.Padding(3);
-            this.tabAttachments.Size = new System.Drawing.Size(871, 249);
+            this.tabAttachments.Size = new System.Drawing.Size(871, 227);
             this.tabAttachments.TabIndex = 1;
             this.tabAttachments.Text = "02. Attachments";
             this.tabAttachments.UseVisualStyleBackColor = true;
@@ -597,7 +615,7 @@
             this.dgv_AttachmentFiles.MaxFilterButtonImageHeight = 23;
             this.dgv_AttachmentFiles.Name = "dgv_AttachmentFiles";
             this.dgv_AttachmentFiles.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgv_AttachmentFiles.Size = new System.Drawing.Size(671, 243);
+            this.dgv_AttachmentFiles.Size = new System.Drawing.Size(671, 221);
             this.dgv_AttachmentFiles.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgv_AttachmentFiles.TabIndex = 0;
             // 
@@ -608,7 +626,7 @@
             this.tabFindItems.Location = new System.Drawing.Point(4, 26);
             this.tabFindItems.Name = "tabFindItems";
             this.tabFindItems.Padding = new System.Windows.Forms.Padding(3);
-            this.tabFindItems.Size = new System.Drawing.Size(871, 249);
+            this.tabFindItems.Size = new System.Drawing.Size(871, 227);
             this.tabFindItems.TabIndex = 2;
             this.tabFindItems.Text = "03. Find Items";
             this.tabFindItems.UseVisualStyleBackColor = true;
@@ -625,7 +643,7 @@
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 1;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(865, 243);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(865, 221);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // dgv_Search_Items
@@ -639,56 +657,56 @@
             this.dgv_Search_Items.MaxFilterButtonImageHeight = 23;
             this.dgv_Search_Items.Name = "dgv_Search_Items";
             this.dgv_Search_Items.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.dgv_Search_Items.Size = new System.Drawing.Size(709, 237);
+            this.dgv_Search_Items.Size = new System.Drawing.Size(709, 215);
             this.dgv_Search_Items.SortStringChangedInvokeBeforeDatasourceUpdate = true;
             this.dgv_Search_Items.TabIndex = 0;
             // 
             // cms_dgv_Search_Items
             // 
             this.cms_dgv_Search_Items.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openPartFeatureToolStripMenuItem,
-            this.openInventoryInformationToolStripMenuItem,
+            this.cms_dgv_Search_Items_Open_Part_Feature,
+            this.cms_dgv_Search_Items_Open_Inventory_Information,
             this.toolStripSeparator3,
-            this.editTableVieingToolStripMenuItem,
-            this.showToolStripMenuItem});
+            this.cms_dgv_Search_Items_Edit_Table_Viewing,
+            this.cms_dgv_Search_Items_Show_PartCode_Only});
             this.cms_dgv_Search_Items.Name = "cms_dgv_Search_Items";
             this.cms_dgv_Search_Items.Size = new System.Drawing.Size(223, 98);
             // 
-            // openPartFeatureToolStripMenuItem
+            // cms_dgv_Search_Items_Open_Part_Feature
             // 
-            this.openPartFeatureToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openPartFeatureToolStripMenuItem.Image")));
-            this.openPartFeatureToolStripMenuItem.Name = "openPartFeatureToolStripMenuItem";
-            this.openPartFeatureToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.openPartFeatureToolStripMenuItem.Text = "Open Part Feature";
-            this.openPartFeatureToolStripMenuItem.Click += new System.EventHandler(this.openPartFeatureToolStripMenuItem_Click);
+            this.cms_dgv_Search_Items_Open_Part_Feature.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_Items_Open_Part_Feature.Image")));
+            this.cms_dgv_Search_Items_Open_Part_Feature.Name = "cms_dgv_Search_Items_Open_Part_Feature";
+            this.cms_dgv_Search_Items_Open_Part_Feature.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_Search_Items_Open_Part_Feature.Text = "Open Part Feature";
+            this.cms_dgv_Search_Items_Open_Part_Feature.Click += new System.EventHandler(this.cms_dgv_Search_Items_Open_Part_Feature_Click);
             // 
-            // openInventoryInformationToolStripMenuItem
+            // cms_dgv_Search_Items_Open_Inventory_Information
             // 
-            this.openInventoryInformationToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openInventoryInformationToolStripMenuItem.Image")));
-            this.openInventoryInformationToolStripMenuItem.Name = "openInventoryInformationToolStripMenuItem";
-            this.openInventoryInformationToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.openInventoryInformationToolStripMenuItem.Text = "Open Inventory Information";
+            this.cms_dgv_Search_Items_Open_Inventory_Information.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_Items_Open_Inventory_Information.Image")));
+            this.cms_dgv_Search_Items_Open_Inventory_Information.Name = "cms_dgv_Search_Items_Open_Inventory_Information";
+            this.cms_dgv_Search_Items_Open_Inventory_Information.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_Search_Items_Open_Inventory_Information.Text = "Open Inventory Information";
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
             this.toolStripSeparator3.Size = new System.Drawing.Size(219, 6);
             // 
-            // editTableVieingToolStripMenuItem
+            // cms_dgv_Search_Items_Edit_Table_Viewing
             // 
-            this.editTableVieingToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("editTableVieingToolStripMenuItem.Image")));
-            this.editTableVieingToolStripMenuItem.Name = "editTableVieingToolStripMenuItem";
-            this.editTableVieingToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.editTableVieingToolStripMenuItem.Text = "Edit Table Viewing";
-            this.editTableVieingToolStripMenuItem.Click += new System.EventHandler(this.editTableVieingToolStripMenuItem_Click);
+            this.cms_dgv_Search_Items_Edit_Table_Viewing.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_Items_Edit_Table_Viewing.Image")));
+            this.cms_dgv_Search_Items_Edit_Table_Viewing.Name = "cms_dgv_Search_Items_Edit_Table_Viewing";
+            this.cms_dgv_Search_Items_Edit_Table_Viewing.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_Search_Items_Edit_Table_Viewing.Text = "Edit Table Viewing";
+            this.cms_dgv_Search_Items_Edit_Table_Viewing.Click += new System.EventHandler(this.cms_dgv_Search_Items_Edit_Table_Viewing_Click);
             // 
-            // showToolStripMenuItem
+            // cms_dgv_Search_Items_Show_PartCode_Only
             // 
-            this.showToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("showToolStripMenuItem.Image")));
-            this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(222, 22);
-            this.showToolStripMenuItem.Text = "Show PartCode Only";
-            this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
+            this.cms_dgv_Search_Items_Show_PartCode_Only.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Search_Items_Show_PartCode_Only.Image")));
+            this.cms_dgv_Search_Items_Show_PartCode_Only.Name = "cms_dgv_Search_Items_Show_PartCode_Only";
+            this.cms_dgv_Search_Items_Show_PartCode_Only.Size = new System.Drawing.Size(222, 22);
+            this.cms_dgv_Search_Items_Show_PartCode_Only.Text = "Show PartCode Only";
+            this.cms_dgv_Search_Items_Show_PartCode_Only.Click += new System.EventHandler(this.cms_dgv_Search_Items_Show_PartCode_Only_Click);
             // 
             // flowLayoutPanel2
             // 
@@ -697,16 +715,16 @@
             this.flowLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.flowLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.flowLayoutPanel2.Name = "flowLayoutPanel2";
-            this.flowLayoutPanel2.Size = new System.Drawing.Size(144, 237);
+            this.flowLayoutPanel2.Size = new System.Drawing.Size(144, 215);
             this.flowLayoutPanel2.TabIndex = 1;
             // 
             // btnFind_Item_Supplier
             // 
             this.btnFind_Item_Supplier.Location = new System.Drawing.Point(3, 3);
             this.btnFind_Item_Supplier.Name = "btnFind_Item_Supplier";
-            this.btnFind_Item_Supplier.Size = new System.Drawing.Size(141, 48);
+            this.btnFind_Item_Supplier.Size = new System.Drawing.Size(126, 48);
             this.btnFind_Item_Supplier.TabIndex = 1;
-            this.btnFind_Item_Supplier.Text = "Find Items with Supplier";
+            this.btnFind_Item_Supplier.Text = "Find Items by Supplier in History";
             this.btnFind_Item_Supplier.UseVisualStyleBackColor = true;
             this.btnFind_Item_Supplier.Click += new System.EventHandler(this.btnFind_Item_Supplier_Click);
             // 
@@ -722,6 +740,7 @@
             // panelC
             // 
             this.panelC.AutoScroll = true;
+            this.panelC.Controls.Add(this.txtCountRow);
             this.panelC.Controls.Add(this.label21);
             this.panelC.Controls.Add(this.txtTax);
             this.panelC.Controls.Add(this.txtPaymentTerm);
@@ -741,12 +760,21 @@
             this.panelC.Controls.Add(this.lblCurrencyD);
             this.panelC.Controls.Add(this.lblCurrencyC);
             this.panelC.Controls.Add(this.lblCurrencyA);
+            this.panelC.Controls.Add(this.label11);
             this.panelC.Controls.Add(this.label10);
             this.panelC.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelC.Location = new System.Drawing.Point(3, 448);
+            this.panelC.Location = new System.Drawing.Point(3, 461);
             this.panelC.Name = "panelC";
-            this.panelC.Size = new System.Drawing.Size(879, 184);
+            this.panelC.Size = new System.Drawing.Size(879, 170);
             this.panelC.TabIndex = 2;
+            // 
+            // txtCountRow
+            // 
+            this.txtCountRow.Location = new System.Drawing.Point(334, 9);
+            this.txtCountRow.Name = "txtCountRow";
+            this.txtCountRow.ReadOnly = true;
+            this.txtCountRow.Size = new System.Drawing.Size(36, 25);
+            this.txtCountRow.TabIndex = 7;
             // 
             // label21
             // 
@@ -768,7 +796,7 @@
             // 
             // txtPaymentTerm
             // 
-            this.txtPaymentTerm.Location = new System.Drawing.Point(415, 129);
+            this.txtPaymentTerm.Location = new System.Drawing.Point(414, 102);
             this.txtPaymentTerm.Multiline = true;
             this.txtPaymentTerm.Name = "txtPaymentTerm";
             this.txtPaymentTerm.Size = new System.Drawing.Size(342, 44);
@@ -776,10 +804,10 @@
             // 
             // txtRemark
             // 
-            this.txtRemark.Location = new System.Drawing.Point(102, 73);
+            this.txtRemark.Location = new System.Drawing.Point(102, 69);
             this.txtRemark.Multiline = true;
             this.txtRemark.Name = "txtRemark";
-            this.txtRemark.Size = new System.Drawing.Size(177, 100);
+            this.txtRemark.Size = new System.Drawing.Size(177, 73);
             this.txtRemark.TabIndex = 4;
             // 
             // cbo_tblPur_WareHouse
@@ -857,7 +885,7 @@
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(300, 143);
+            this.label19.Location = new System.Drawing.Point(302, 116);
             this.label19.Name = "label19";
             this.label19.Size = new System.Drawing.Size(90, 17);
             this.label19.TabIndex = 0;
@@ -924,6 +952,16 @@
             this.lblCurrencyA.Text = "_C";
             this.lblCurrencyA.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(285, 13);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(42, 17);
+            this.label11.TabIndex = 0;
+            this.label11.Text = "Count";
+            this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -940,9 +978,9 @@
             this.flowLayoutPanel1.Controls.Add(this.btnCancel);
             this.flowLayoutPanel1.Controls.Add(this.btnCopyTo);
             this.flowLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 638);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(3, 637);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(879, 34);
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(879, 35);
             this.flowLayoutPanel1.TabIndex = 3;
             // 
             // btnAdd
@@ -976,38 +1014,50 @@
             this.btnCopyTo.Text = "Copy To GRPO";
             this.btnCopyTo.UseVisualStyleBackColor = true;
             // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(3, 0);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(879, 35);
+            this.label13.TabIndex = 4;
+            this.label13.Text = "--- [Make New] Purchase Order ---";
+            this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // cms_dgv_Attachment_Files
             // 
             this.cms_dgv_Attachment_Files.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openFileToolStripMenuItem,
-            this.addFileToAttachmentListToolStripMenuItem,
-            this.deleteFileInAttachmentListToolStripMenuItem});
+            this.cms_dgv_Attachment_Files_Open_File,
+            this.cms_dgv_Attachment_Files_Add_File,
+            this.cms_dgv_Attachment_Files_Delete_File});
             this.cms_dgv_Attachment_Files.Name = "cms_dgv_Attachment_Files";
             this.cms_dgv_Attachment_Files.Size = new System.Drawing.Size(229, 70);
             // 
-            // openFileToolStripMenuItem
+            // cms_dgv_Attachment_Files_Open_File
             // 
-            this.openFileToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("openFileToolStripMenuItem.Image")));
-            this.openFileToolStripMenuItem.Name = "openFileToolStripMenuItem";
-            this.openFileToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.openFileToolStripMenuItem.Text = "Open File";
-            this.openFileToolStripMenuItem.Click += new System.EventHandler(this.openFileToolStripMenuItem_Click);
+            this.cms_dgv_Attachment_Files_Open_File.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Attachment_Files_Open_File.Image")));
+            this.cms_dgv_Attachment_Files_Open_File.Name = "cms_dgv_Attachment_Files_Open_File";
+            this.cms_dgv_Attachment_Files_Open_File.Size = new System.Drawing.Size(228, 22);
+            this.cms_dgv_Attachment_Files_Open_File.Text = "Open File";
+            this.cms_dgv_Attachment_Files_Open_File.Click += new System.EventHandler(this.cms_dgv_Attachment_Files_Open_File_Click);
             // 
-            // addFileToAttachmentListToolStripMenuItem
+            // cms_dgv_Attachment_Files_Add_File
             // 
-            this.addFileToAttachmentListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("addFileToAttachmentListToolStripMenuItem.Image")));
-            this.addFileToAttachmentListToolStripMenuItem.Name = "addFileToAttachmentListToolStripMenuItem";
-            this.addFileToAttachmentListToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.addFileToAttachmentListToolStripMenuItem.Text = "Add File to Attachment List";
-            this.addFileToAttachmentListToolStripMenuItem.Click += new System.EventHandler(this.addFileToAttachmentListToolStripMenuItem_Click);
+            this.cms_dgv_Attachment_Files_Add_File.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Attachment_Files_Add_File.Image")));
+            this.cms_dgv_Attachment_Files_Add_File.Name = "cms_dgv_Attachment_Files_Add_File";
+            this.cms_dgv_Attachment_Files_Add_File.Size = new System.Drawing.Size(228, 22);
+            this.cms_dgv_Attachment_Files_Add_File.Text = "Add File to Attachment List";
+            this.cms_dgv_Attachment_Files_Add_File.Click += new System.EventHandler(this.cms_dgv_Attachment_Files_Add_File_Click);
             // 
-            // deleteFileInAttachmentListToolStripMenuItem
+            // cms_dgv_Attachment_Files_Delete_File
             // 
-            this.deleteFileInAttachmentListToolStripMenuItem.Image = ((System.Drawing.Image)(resources.GetObject("deleteFileInAttachmentListToolStripMenuItem.Image")));
-            this.deleteFileInAttachmentListToolStripMenuItem.Name = "deleteFileInAttachmentListToolStripMenuItem";
-            this.deleteFileInAttachmentListToolStripMenuItem.Size = new System.Drawing.Size(228, 22);
-            this.deleteFileInAttachmentListToolStripMenuItem.Text = "Delete File in Attachment List";
-            this.deleteFileInAttachmentListToolStripMenuItem.Click += new System.EventHandler(this.deleteFileInAttachmentListToolStripMenuItem_Click);
+            this.cms_dgv_Attachment_Files_Delete_File.Image = ((System.Drawing.Image)(resources.GetObject("cms_dgv_Attachment_Files_Delete_File.Image")));
+            this.cms_dgv_Attachment_Files_Delete_File.Name = "cms_dgv_Attachment_Files_Delete_File";
+            this.cms_dgv_Attachment_Files_Delete_File.Size = new System.Drawing.Size(228, 22);
+            this.cms_dgv_Attachment_Files_Delete_File.Text = "Delete File in Attachment List";
+            this.cms_dgv_Attachment_Files_Delete_File.Click += new System.EventHandler(this.cms_dgv_Attachment_Files_Delete_File_Click);
             // 
             // frmMake_New_PO_V2
             // 
@@ -1022,6 +1072,7 @@
             this.Text = "Make New Purchase Order";
             this.Load += new System.EventHandler(this.frmMake_New_PO_V2_Load);
             this.table_Main.ResumeLayout(false);
+            this.table_Main.PerformLayout();
             this.tableA.ResumeLayout(false);
             this.tableA.PerformLayout();
             this.tabControl.ResumeLayout(false);
@@ -1089,9 +1140,9 @@
         private System.Windows.Forms.TextBox txtPaymentTerm;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.ContextMenuStrip cms_dgv_List_Content;
-        private System.Windows.Forms.ToolStripMenuItem openPartToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openInventoryToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem viewTableToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Open_Part_Feature;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Open_Inventory;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Edit_Table_Viewing;
         private System.Windows.Forms.TextBox txtTax;
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TabControl tabControl;
@@ -1099,35 +1150,39 @@
         private Zuby.ADGV.AdvancedDataGridView dgv_List_Content;
         private System.Windows.Forms.TabPage tabAttachments;
         private System.Windows.Forms.TabPage tabFindItems;
-        private System.Windows.Forms.ToolStripMenuItem pasteDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem autoFillDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem checkInputDataToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteDupliCatePartCodeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Paste_Data;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Auto_Fill_Data;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Check_Input_Data;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Delete_Duplicate_PartCode;
         private System.Windows.Forms.Label lblCurrencyD;
         private System.Windows.Forms.Label lblCurrencyC;
         private System.Windows.Forms.Label lblCurrencyA;
         private Zuby.ADGV.AdvancedDataGridView dgv_Search_Items;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem deleteRowToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem clearDataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Clear_Data;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.ToolStripMenuItem changeUnitToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Change_Unit;
         private System.Windows.Forms.Button btnDeleteFile;
         private System.Windows.Forms.Button btnAddFile;
         private Zuby.ADGV.AdvancedDataGridView dgv_AttachmentFiles;
-        private System.Windows.Forms.ToolStripMenuItem insertNewRowToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Insert_New_Row;
         private System.Windows.Forms.ContextMenuStrip cms_dgv_Attachment_Files;
-        private System.Windows.Forms.ToolStripMenuItem openFileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addFileToAttachmentListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deleteFileInAttachmentListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Attachment_Files_Open_File;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Attachment_Files_Add_File;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Attachment_Files_Delete_File;
         private System.Windows.Forms.Button btnFind_Item_Supplier;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel2;
         private System.Windows.Forms.ContextMenuStrip cms_dgv_Search_Items;
-        private System.Windows.Forms.ToolStripMenuItem editTableVieingToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openPartFeatureToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openInventoryInformationToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_Items_Edit_Table_Viewing;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_Items_Open_Part_Feature;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_Items_Open_Inventory_Information;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ToolStripMenuItem showToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_Search_Items_Show_PartCode_Only;
+        private System.Windows.Forms.ToolStripMenuItem cms_dgv_List_Content_Insert_Multi_Rows;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtCountRow;
+        private System.Windows.Forms.Label label13;
     }
 }

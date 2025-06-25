@@ -20,9 +20,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         private Dictionary<int, string> _dic_RowID_PartCode = new Dictionary<int, string>();
 
-        private bool _is_Received_Other_PartCode_Valid;
-        private bool _is_Received_Quantity_Bigger_Valid;
-        private bool _is_Received_Quantity_Smaller_Valid;
+        private bool _is_Having_Other_PartCode; // return true : Nếu có partcode khác với RowID
+        private bool _is_Received_Over_Quantity; // return true : Nếu có partcode có Received_Quantity > Quantity
+        private bool _is_Received_Under_Quantity; // return true : Nếu có partcode có Received_Quantity < Quantity
         private DateTime _poDateCreate;
 
         private DateTime _poEstimateDeliveryDate;
@@ -44,51 +44,67 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         private int _taxID;
 
+        // 1.2 Common Table in Database - Danh sách các table chung trong Database
+
         /// <summary>
-        /// 1.2
+        /// Return Table ( CurrencyID, CurrencyName, CurrencyRate )
         /// </summary>
+        private DataTable tblPur_Currency = new DataTable();
+
+        /// <summary>
+        /// Return Table ( StatusID, StatusName )
+        /// </summary>
+        private DataTable tblPur_Status = new DataTable();
+
+        /// <summary>
+        /// Return Table ( SupplierID, SupplierCode, SupplierName, SupplierLocation, SupplierPhone, SupplierTaxNumber, SupplierNote, SupplierContactPerson )
+        /// </summary>
+        private DataTable tblPur_Supplier = new DataTable();
+
+        /// <summary>
+        /// Return Table ( TaxID, TaxName, TaxValue )
+        /// </summary>
+        private DataTable tblPur_Tax = new DataTable();
+
+        /// <summary>
+        /// Return Table ( UnitID, UnitName, UnitValue, UnitContent )
+        /// </summary>
+        private DataTable tblPur_Unit = new DataTable();
+
+        /// <summary>
+        /// Return Table ( WareHouseID, WareHouseName )
+        /// </summary>
+        private DataTable tblPur_WareHouse = new DataTable();
+
+        /// <summary>
+        /// 1.3 Danh sách biến cục bộ để lưu trữ thông tin
+        /// </summary>
+        private DataTable tblAttached_File = new DataTable();
+
+        /// <summary>
+        /// Return Table ( PONumber, PODateCreate, POEstimateDeliveryDate, POSupplierID, POSupplierContactPerson, POCurrencyID, POUser, POStatusID, PORemark, POPaymentTerm, WareHouseID, POTotalPayment ,POTaxID )
+        /// </summary>
+        private DataTable tblPur_PO_by_PONumber = new DataTable();
+
+        /// <summary>
+        /// Return table ( PartID, PartCode )
+        /// </summary>
+        // PartID, PartCode
+        private DataTable tblPartID_PartCode = new DataTable();
+
+        /// <summary>
+        /// Return Table ( PartCode, PartName, Quantity, UnitPrice, Unit, Discount, Total, TaxCode, RowID )
+        /// </summary>
+        private DataTable tblPur_Content = new DataTable();
+
+        private DataTable tblPur_Content_Original = new DataTable();
+
+        private DataTable tblPur_Search_Items = new DataTable();
         private decimal _Total_After_Tax = 0.00m;
 
         private decimal _Total_Before_Tax = 0.00m;
         private decimal _Total_Discount = 0.00m;
         private decimal _Total_Tax = 0.00m;
-        private decimal _totalPayment;
-        private int _wareHouseID;
-        private DataTable tbl_ContactPerson = new DataTable();
-        private DataTable tbl_Pur_GRPO_Items = new DataTable();
-        private DataTable tblAttached_File = new DataTable();
-
-        // PartID, PartCode
-        private DataTable tblPartID_PartCode = new DataTable();
-
-        // PartCode, PartName, Quantity, UnitPrice, Unit, Discount, Total, TaxCode
-        private DataTable tblPur_Content = new DataTable();
-
-        private DataTable tblPur_Content_Original = new DataTable();
-
-        // CurrencyID, CurrencyName, CurrencyRate
-        private DataTable tblPur_Currency = new DataTable();
-
-        // PONumber, PODateCreate, POEstimateDeliveryDate, POSupplierID, POSupplierContactPerson, POCurrencyID, POUser, POStatusID, PORemark, POPaymentTerm, WareHouseID, POTotalPayment ,POTaxID
-        private DataTable tblPur_PO_by_PONumber = new DataTable();
-
-        private DataTable tblPur_Search_Items = new DataTable();
-
-        // StatusID, StatusName
-        private DataTable tblPur_Status = new DataTable();
-
-        // SupplierID , SupplierCode, SupplierName, SupplierLocation, SupplierPhone, SupplierTaxNumber, SupplierNote, SupplierContactPerson
-        private DataTable tblPur_Supplier = new DataTable();
-
-        // TaxID, TaxName, TaxValue
-        private DataTable tblPur_Tax = new DataTable();
-
-        // UnitID, UnitName, UnitValue, UnitContent
-        private DataTable tblPur_Unit = new DataTable();
-
-        // WareHouseID, WareHouseName
-        private DataTable tblPur_WareHouse = new DataTable();
-
         public int _poNumber { get; set; }
         public string _UserName { get; set; }
 
@@ -126,6 +142,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
             tblPur_Content.Columns.Add("Status", typeof(string));
             tblPur_Content.Columns.Add("Received_Quantity", typeof(int));
+            tblPur_Content.Columns.Add("ExpiredDate", typeof(DateTime)); // Optional, if you want to store ExpiredDate
 
             // Set "Status" column  is first column, and "Received_Quantity" is 4th column
             tblPur_Content.Columns["Status"].SetOrdinal(0);
@@ -139,6 +156,16 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             // - Supplier
             int supplierID = Convert.ToInt32(tblPur_PO_by_PONumber.Rows[0]["POSupplierID"]);
             cbo_tblPur_Supplier.SelectedValue = supplierID;
+            foreach (DataRow splr in tblPur_Supplier.Rows)
+            {
+                if (Convert.ToInt32(splr["SupplierID"]) == supplierID)
+                {
+                    txtSupplierLocation.Text = splr["SupplierName"].ToString();
+                    txtSupplierNote.Text = splr["SupplierNote"].ToString();
+                }
+                break;
+            }
+
             // Contact Person
             string supplierContactPerson = tblPur_PO_by_PONumber.Rows[0]["POSupplierContactPerson"].ToString();
             cboSupplierContactPerson.Text = supplierContactPerson;
@@ -161,7 +188,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             cbo_tblPur_WareHouse.SelectedValue = wareHouseID;
             txtRemark.Text = tblPur_PO_by_PONumber.Rows[0]["PORemark"].ToString();
             txtPaymentTerm.Text = tblPur_PO_by_PONumber.Rows[0]["POPaymentTerm"].ToString();
-            txtTotalPayment.Text = tblPur_PO_by_PONumber.Rows[0]["POTotalPayment"].ToString();
+
             txtStaffName.Text = tblPur_PO_by_PONumber.Rows[0]["POUser"].ToString();
             int TaxID = Convert.ToInt32(tblPur_PO_by_PONumber.Rows[0]["POTaxID"]);
             cbo_tblPur_Tax.SelectedValue = Convert_TaxID_to_TaxValue(TaxID);
@@ -184,6 +211,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             // Disable the all comboboxes
             cbo_tblPur_Supplier.Enabled = false;
             cbo_tblPur_Status.Enabled = false;
+            Calculate_Total();
         }
 
         private void Load_Common_Information()
@@ -296,16 +324,20 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         private void Calculate_Total()
         {
+            _Total_Before_Tax = 0.00m;
+            _Total_Discount = 0.00m;
+            _Total_Tax = 0.00m;
+            _Total_After_Tax = 0.00m;
             if (tblPur_Content.Rows.Count > 0)
             {
                 foreach (DataRow row in tblPur_Content.Rows)
                 {
-                    if (row["UnitPrice"] != DBNull.Value && row["Quantity"] != DBNull.Value && row["Discount"] != DBNull.Value)
+                    if (row["UnitPrice"] != DBNull.Value && row["Received_Quantity"] != DBNull.Value && row["Discount"] != DBNull.Value)
                     {
                         decimal unitPrice = Convert.ToDecimal(row["UnitPrice"]);
-                        int quantity = Convert.ToInt32(row["Quantity"]);
+                        int received_quantity = Convert.ToInt32(row["Received_Quantity"]);
                         decimal _discount = Convert.ToDecimal(row["Discount"]);
-                        decimal total = (unitPrice * quantity) * (100 - _discount) / 100;
+                        decimal total = (unitPrice * received_quantity) * (100 - _discount) / 100;
                         row["Total"] = total;
                     }
                     else
@@ -334,6 +366,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
             txtTotalTax.Text = _Total_Tax.ToString("N2");
             txtTotalPayment.Text = _Total_After_Tax.ToString("N2");
+            txtCountRow.Text = tblPur_Content.Rows.Count.ToString();
         }
 
         private bool Check_Col_PartCode_Valid()
@@ -366,9 +399,9 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
         /// return false : Nếu có 1 PartCode không hợp lệ so với RowID
         /// </summary>
         /// <returns></returns>
-        private bool Check_Col_PartCode_vs_RowID()
+        private void Check_Col_PartCode_vs_RowID()
         {
-            bool isValid = true;
+            _is_Having_Other_PartCode = false; // Reset the flag
 
             foreach (DataGridViewRow row in dgv_List_Content.Rows)
             {
@@ -386,20 +419,19 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                     {
                         // Không hợp lệ
 
-                        isValid = false;
+                        _is_Having_Other_PartCode = true;
                         row.Cells["Status"].Value = "PartCode is not in PO";
                         row.Cells["PartCode"].Style.BackColor = Color.Yellow;
                     }
                 }
             }
-            return isValid;
         }
 
         private void Check_Col_Received_Quantity_Valid()
         {
-            // Check if Received_Quantity is valid
-            bool is_Received_Quantity_Bigger_Valid = true;
-            bool is_Received_Quantity_Smaller_Valid = true;
+            // reset the flags
+            _is_Received_Over_Quantity = false;
+            _is_Received_Under_Quantity = false;
 
             foreach (DataGridViewRow row in dgv_List_Content.Rows)
             {
@@ -407,7 +439,8 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 if (recceived_quantity < 0)
                 {
                     row.Cells["Received_Quantity"].Style.BackColor = Color.DodgerBlue;
-                    row.Cells["Status"].Value = row.Cells["Status"].Value.ToString() + "Received Quantity is invalid"; // Set status message
+                    row.Cells["Status"].Value = row.Cells["Status"].Value.ToString() + "Received Quantity is invalid";
+                    _is_Received_Under_Quantity = true;
                 }
                 else
                 {
@@ -417,7 +450,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                     {
                         row.Cells["Received_Quantity"].Style.BackColor = Color.Red; // Highlight the row in orange
                         row.Cells["Status"].Value = row.Cells["Status"].Value.ToString() + "Received Quantity > Quantity"; // Set status message
-                        is_Received_Quantity_Bigger_Valid = false;
+                        _is_Received_Over_Quantity = true;
                     }
                     else if (recceived_quantity == quantity)
                     {
@@ -427,15 +460,10 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                     {
                         row.Cells["Status"].Value = row.Cells["Status"].Value.ToString() + "Received Quantity < Quantity"; // Set status message
                         row.Cells["Received_Quantity"].Style.BackColor = Color.DodgerBlue;
-                        is_Received_Quantity_Smaller_Valid = false;
+                        _is_Received_Under_Quantity = true;
                     }
                 }
             }
-
-            if (is_Received_Quantity_Bigger_Valid) { ckcReceived_Quantity_Bigger.Checked = false; }
-            else { ckcReceived_Quantity_Bigger.Checked = true; }
-            if (is_Received_Quantity_Smaller_Valid) { ckcReceived_Quantity_Smaller.Checked = false; }
-            else { ckcReceived_Quantity_Smaller.Checked = true; }
         }
 
         private void Check_tblPur_Content_Data_Valid()
@@ -499,6 +527,20 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             return TaxID;
         }
 
+        private int Convert_UnitName_to_UnitID(string unitName)
+        {
+            int unitID = 0;
+            if (tblPur_Unit != null && tblPur_Unit.Rows.Count > 0)
+            {
+                DataRow[] foundRows = tblPur_Unit.Select($"UnitName = '{unitName}'");
+                if (foundRows.Length > 0)
+                {
+                    unitID = Convert.ToInt32(foundRows[0]["UnitID"]);
+                }
+            }
+            return unitID;
+        }
+
         private void Delete_EmptyRow_in_dgv_List_Content()
         {
             // Clear empty rows in dgv_List_Content
@@ -512,6 +554,197 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 }
             }
             txtCountRow.Text = tblPur_Content.Rows.Count.ToString();
+        }
+
+        private void Insert_New_GRPO()
+        {
+            // ==>  Bước 1 : Tạo bảng tblPur_GRPO
+
+            // PONumber, ReceivedDate, Received_Amount, GRPO_StatusID, Have_over_quantity, Have_under_quantity, Have_other_partcode
+            DataTable tblPur_GRPO = new DataTable();
+            tblPur_GRPO.Columns.Add("PONumber", typeof(int));
+            tblPur_GRPO.Columns.Add("ReceivedDate", typeof(DateTime));
+            tblPur_GRPO.Columns.Add("ReceivedAmount", typeof(decimal));
+            tblPur_GRPO.Columns.Add("GRPOStatusID", typeof(int));
+            tblPur_GRPO.Columns.Add("GRPORemark", typeof(string));
+            tblPur_GRPO.Columns.Add("GRPOCurrencyID", typeof(int));
+            tblPur_GRPO.Columns.Add("GRPOWareHouseID", typeof(int));
+            tblPur_GRPO.Columns.Add("GRPOTaxID", typeof(int));
+
+            //Add Value to tblPur_GRPO
+            DataRow newRow = tblPur_GRPO.NewRow();
+            newRow["PONumber"] = _poNumber;
+            newRow["ReceivedDate"] = DateTime.Now;
+            newRow["ReceivedAmount"] = Convert.ToDecimal(txtTotalPayment.Text.Trim());
+            newRow["GRPOStatusID"] = Convert.ToInt32(cbo_tblPur_Status.SelectedValue);
+            newRow["GRPORemark"] = txtRemark.Text.Trim();
+            newRow["GRPOCurrencyID"] = Convert.ToInt32(cbo_tblPur_Currency.SelectedValue);
+            newRow["GRPOWareHouseID"] = Convert.ToInt32(cbo_tblPur_WareHouse.SelectedValue);
+            newRow["GRPOTaxID"] = Convert_TaxValue_to_TaxID(Convert.ToDecimal(cbo_tblPur_Tax.SelectedValue));
+            tblPur_GRPO.Rows.Add(newRow);
+
+            // ==> Bước 2 : Tạo bảng tblPur_GRPO_Detail
+
+            DataTable tblPur_GRPO_Detail = new DataTable();
+            // GRPOID, PONumber_RowID, Quantity_Received, UnitID_Received
+            tblPur_GRPO_Detail.Columns.Add("GRPOID", typeof(int));
+            tblPur_GRPO_Detail.Columns.Add("PODetail_RowID", typeof(int));
+            tblPur_GRPO_Detail.Columns.Add("QuantityReceived", typeof(int));
+            tblPur_GRPO_Detail.Columns.Add("UnitReceivedID", typeof(int));
+            tblPur_GRPO_Detail.Columns.Add("UnitPriceReceived", typeof(decimal));
+            tblPur_GRPO_Detail.Columns.Add("DiscountReceived", typeof(decimal));
+            tblPur_GRPO_Detail.Columns.Add("AmountReceived", typeof(decimal));
+            tblPur_GRPO_Detail.Columns.Add("ExpiredDate", typeof(DateTime)); // Optional, if you want to store TaxCode
+
+            foreach (DataRow dataRow in tblPur_Content.Rows)
+            {
+                DataRow rw = tblPur_GRPO_Detail.NewRow();
+                rw["GRPOID"] = 1;
+                rw["PODetail_RowID"] = Convert.ToInt32(dataRow["RowID"]);
+                rw["QuantityReceived"] = Convert.IsDBNull(dataRow["Received_Quantity"]) ? 0 : Convert.ToInt32(dataRow["Received_Quantity"]);
+                rw["UnitReceivedID"] = Convert_UnitName_to_UnitID(dataRow["Unit"].ToString().Trim());
+                rw["UnitPriceReceived"] = Convert.IsDBNull(dataRow["UnitPrice"]) ? 0.00m : Convert.ToDecimal(dataRow["UnitPrice"]);
+                rw["DiscountReceived"] = Convert.IsDBNull(dataRow["Discount"]) ? 0.00m : Convert.ToDecimal(dataRow["Discount"]);
+                rw["AmountReceived"] = Convert.IsDBNull(dataRow["Total"]) ? 0.00m : Convert.ToDecimal(dataRow["Total"]);
+                rw["ExpiredDate"] = Convert.IsDBNull(dataRow["ExpiredDate"]) ? DateTime.Now.Date : Convert.ToDateTime(dataRow["ExpiredDate"]);
+                tblPur_GRPO_Detail.Rows.Add(rw);
+            }
+
+            // ==> Bước 3 : Tạo bảng tblInventory
+
+            DataTable _tblInventory = new DataTable();
+            // Inventory_RowID, PartID, PODetail_RowID,SODetail_RowID, UnitID, CreatedDate, ExpiredDate, WareHouseID, Quantity
+            _tblInventory.Columns.Add("Inventory_RowID", typeof(int));
+            _tblInventory.Columns.Add("PartID", typeof(int));
+            _tblInventory.Columns.Add("PODetail_RowID", typeof(int));
+            _tblInventory.Columns.Add("SODetail_RowID", typeof(int));
+            _tblInventory.Columns.Add("UnitID", typeof(int));
+            _tblInventory.Columns.Add("CreatedDate", typeof(DateTime));
+            _tblInventory.Columns.Add("ExpiredDate", typeof(DateTime));
+            _tblInventory.Columns.Add("WareHouseID", typeof(int));
+            _tblInventory.Columns.Add("Quantity", typeof(int));
+
+            DataTable _tbl_PartID_PartCode = _purchase_V2_BLL.Select_PartID_PartCode_BLL(_commonBLL.Copy_Single_Column_to_NewTable(tblPur_Content, "PartCode"));
+
+            // Convert _tbl_PartID_PartCode to Dictionary<int, string> for quick lookup
+            Dictionary<int, string> partID_PartCode_Dictionary = new Dictionary<int, string>();
+            foreach (DataRow row in _tbl_PartID_PartCode.Rows)
+            {
+                if (row["PartID"] != DBNull.Value && row["PartCode"] != DBNull.Value)
+                {
+                    int partID = Convert.ToInt32(row["PartID"]);
+                    string partCode = row["PartCode"].ToString().Trim();
+                    if (!partID_PartCode_Dictionary.ContainsKey(partID))
+                    {
+                        partID_PartCode_Dictionary[partID] = partCode;
+                    }
+                }
+            }
+
+            int count = tblPur_GRPO_Detail.Rows.Count;
+            for (int i = 0; i < count; i++)
+            {
+                DataRow row = tblPur_GRPO_Detail.Rows[i];
+                int podetail_RowID = Convert.ToInt32(row["PODetail_RowID"]);
+                int quantityReceived = Convert.IsDBNull(row["QuantityReceived"]) ? 0 : Convert.ToInt32(row["QuantityReceived"]);
+                int unitReceivedID = Convert.IsDBNull(row["UnitReceivedID"]) ? 0 : Convert.ToInt32(row["UnitReceivedID"]);
+                DateTime expiredDate = Convert.IsDBNull(row["ExpiredDate"]) ? DateTime.Now.Date : Convert.ToDateTime(row["ExpiredDate"]);
+                // Get PartID from partID_PartCode_Dictionary using PartCode
+                string partCode = _dic_RowID_PartCode.ContainsKey(podetail_RowID) ? _dic_RowID_PartCode[podetail_RowID] : string.Empty;
+                int partID = partID_PartCode_Dictionary.FirstOrDefault(x => x.Value == partCode).Key;
+                DataRow inventoryRow = _tblInventory.NewRow();
+                inventoryRow["Inventory_RowID"] = 1; // Default = 1
+                inventoryRow["PartID"] = partID;
+                inventoryRow["PODetail_RowID"] = podetail_RowID;
+                inventoryRow["SODetail_RowID"] = DBNull.Value; // Assuming no Sales Order detail for GRPO
+                inventoryRow["UnitID"] = unitReceivedID;
+                inventoryRow["CreatedDate"] = DateTime.Now.Date;
+                inventoryRow["ExpiredDate"] = expiredDate;
+                inventoryRow["WareHouseID"] = Convert.ToInt32(cbo_tblPur_WareHouse.SelectedValue);
+                inventoryRow["Quantity"] = quantityReceived;
+                _tblInventory.Rows.Add(inventoryRow);
+            }
+
+            // Tạo bảng PartCode vs PartName
+            DataTable _tblPartCode_PartName = _purchase_V2_BLL.Select_PartCode_PartName_BLL(_commonBLL.Copy_Single_Column_to_NewTable(tblPur_Content, "PartCode"));
+
+            // Tạo Dictinary <int, string> for quick lookup of RowID và TaxCode trong tblPur_Content
+            Dictionary<int, string> _dic_RowID_TaxCode = new Dictionary<int, string>();
+            foreach (DataRow row in tblPur_Content.Rows)
+            {
+                if (row["RowID"] != DBNull.Value && row["TaxCode"] != DBNull.Value)
+                {
+                    int rowID = Convert.ToInt32(row["RowID"]);
+                    string taxCode = row["TaxCode"].ToString().Trim();
+                    if (!_dic_RowID_TaxCode.ContainsKey(rowID))
+                    {
+                        _dic_RowID_TaxCode[rowID] = taxCode;
+                    }
+                }
+            }
+
+            // // Bước 4 : Tạo bảng tblInventory_Summary
+            DataTable _tblInventory_Summary = new DataTable();
+            // PartID, PartName, TaxCode , UnitID, WareHouseID, Quantity_Inventory, UpdatedDate
+            _tblInventory_Summary.Columns.Add("PartID", typeof(int));
+            _tblInventory_Summary.Columns.Add("PartName", typeof(string));
+            _tblInventory_Summary.Columns.Add("TaxCode", typeof(string)); // Assuming TaxCode is a string, adjust as needed
+            _tblInventory_Summary.Columns.Add("UnitID", typeof(int));
+            _tblInventory_Summary.Columns.Add("WareHouseID", typeof(int));
+            _tblInventory_Summary.Columns.Add("Quantity_Inventory", typeof(int));
+            _tblInventory_Summary.Columns.Add("UpdatedDate", typeof(DateTime));
+
+            for (int i = 0; i < count; i++)
+            {
+                DataRow row = tblPur_GRPO_Detail.Rows[i];
+                int podetail_RowID = Convert.ToInt32(row["PODetail_RowID"]);
+                int quantityReceived = Convert.IsDBNull(row["QuantityReceived"]) ? 0 : Convert.ToInt32(row["QuantityReceived"]);
+                int unitReceivedID = Convert.IsDBNull(row["UnitReceivedID"]) ? 0 : Convert.ToInt32(row["UnitReceivedID"]);
+                int unitValue = 1;
+                foreach (DataRow unitRow in tblPur_Unit.Rows)
+                {
+                    if (Convert.ToInt32(unitRow["UnitID"]) == unitReceivedID)
+                    {
+                        unitValue = Convert.ToInt32(unitRow["UnitValue"]);
+                        break;
+                    }
+                }
+
+                DateTime expiredDate = Convert.IsDBNull(row["ExpiredDate"]) ? DateTime.Now.Date : Convert.ToDateTime(row["ExpiredDate"]);
+                // Get PartID from partID_PartCode_Dictionary using PartCode
+                string partCode = _dic_RowID_PartCode.ContainsKey(podetail_RowID) ? _dic_RowID_PartCode[podetail_RowID] : string.Empty;
+                int partID = partID_PartCode_Dictionary.FirstOrDefault(x => x.Value == partCode).Key;
+                // Get PartName from _tblPartCode_PartName
+                string partName = _tblPartCode_PartName.AsEnumerable()
+                    .Where(r => r.Field<string>("PartCode") == partCode)
+                    .Select(r => r.Field<string>("PartName"))
+                    .FirstOrDefault() ?? string.Empty; // Default to empty if not found
+                DataRow inventorySummaryRow = _tblInventory_Summary.NewRow();
+                inventorySummaryRow["PartID"] = partID;
+                inventorySummaryRow["PartName"] = partName;
+
+                // Find TaxCode using _dic_RowID_TaxCode
+                string taxCode = _dic_RowID_TaxCode.ContainsKey(podetail_RowID) ? _dic_RowID_TaxCode[podetail_RowID] : string.Empty;
+                inventorySummaryRow["TaxCode"] = taxCode;
+
+                inventorySummaryRow["UnitID"] = 1;
+                inventorySummaryRow["WareHouseID"] = Convert.ToInt32(cbo_tblPur_WareHouse.SelectedValue);
+                inventorySummaryRow["Quantity_Inventory"] = quantityReceived * unitValue;
+                inventorySummaryRow["UpdatedDate"] = DateTime.Now.Date;
+                _tblInventory_Summary.Rows.Add(inventorySummaryRow);
+            }
+
+            MessageBox.Show("Tạm thời dừng ở đây ");
+
+            if (_purchase_V2_BLL.Insert_New_GRPO_BLL(tblPur_GRPO, tblPur_GRPO_Detail, _tblInventory, _tblInventory_Summary))
+            {
+                MessageBox.Show("Create GRPO successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+            {
+                MessageBox.Show("Failed to create GRPO.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void PasteClipboardToGrid()
@@ -576,56 +809,12 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 }
 
                 dgv_List_Content.Refresh();
+                Calculate_Total();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Lỗi khi dán dữ liệu: " + ex.Message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-        }
-
-        private void Insert_New_GRPO()
-        {
-            DataTable tbl_Pur_GRPO = new DataTable();
-            // PONumber, RecevedDate, ReceivedAmount, GRPORemark, GRPOStatusID, Over_Quantity, Under_Quantity, Other_PartCode
-            tbl_Pur_GRPO.Columns.Add("PONumber", typeof(int));
-            tbl_Pur_GRPO.Columns.Add("ReceivedDate", typeof(DateTime));
-            tbl_Pur_GRPO.Columns.Add("ReceivedAmount", typeof(decimal));
-            tbl_Pur_GRPO.Columns.Add("GRPORemark", typeof(string));
-            tbl_Pur_GRPO.Columns.Add("GRPOStatusID", typeof(int));
-            tbl_Pur_GRPO.Columns.Add("Over_Quantity", typeof(bool));
-            tbl_Pur_GRPO.Columns.Add("Under_Quantity", typeof(bool));
-            tbl_Pur_GRPO.Columns.Add("Other_PartCode", typeof(bool));
-
-            // Add values to the DataTable
-            DataRow newRow = tbl_Pur_GRPO.NewRow();
-            newRow["PONumber"] = _poNumber;
-            newRow["ReceivedDate"] = dtpReceived_Date.Value;
-            newRow["ReceivedAmount"] = Convert.ToDecimal(txtTotalPayment.Text.Trim());
-            newRow["GRPORemark"] = txtRemark.Text.Trim();
-            newRow["GRPOStatusID"] = Convert.ToInt32(cbo_tblPur_Status.SelectedValue);
-            newRow["Over_Quantity"] = ckcReceived_Quantity_Bigger.Checked;
-            newRow["Under_Quantity"] = ckcReceived_Quantity_Smaller.Checked;
-            nameof(newRow["Other_PartCode"]) = ckcReceived_Other_PartCode.Checked;
-
-
-            DataTable tblPur_GRPO_Detail = new DataTable();
-            // GRPOID, PODetail-RowID, Quantity_Received, UnitReceivedID
-            
-            tbl_Pur_GRPO_Detail.Columns.Add("PODetail_RowID", typeof(int));
-            tbl_Pur_GRPO_Detail.Columns.Add("Quantity_Received", typeof(int));
-            tbl_Pur_GRPO_Detail.Columns.Add("UnitReceivedID", typeof(int)); // Assuming you have a UnitReceivedID column
-
-            foreach (DataRow row in tblPur_Content.Rows)
-            {
-               
-                    DataRow newDetailRow = tblPur_GRPO_Detail.NewRow();
-                    newDetailRow["PODetail_RowID"] = Convert.ToInt32(row["RowID"]);
-                    newDetailRow["Quantity_Received"] = Convert.ToInt32(row["Received_Quantity"]);
-                    newDetailRow["UnitReceivedID"] = 
-                    tblPur_GRPO_Detail.Rows.Add(newDetailRow);
-               
-            }
-
         }
 
         #endregion ===== 03. BUSINESS LOGIC =======
@@ -640,31 +829,41 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             cms_dgv_List_Content_Check_Data.PerformClick();
 
             Calculate_Total();
-
-            if (ckcReceived_Quantity_Smaller.Checked == true)
+            // Nếu có partcode khác với RowID, thì không cho phép tạo GRPO
+            if (_is_Having_Other_PartCode == true)
             {
-                string mes3 = "Received Quantity is smaller than Quantity. \r\n Do you want to continue?";
-                DialogResult result3 = MessageBox.Show(mes3, "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (result3 == DialogResult.No)
-                {
-                    return; // If user chooses No, exit the method
-                }
-            }
-            ckcReceived_Quantity_Smaller.Checked = false;
-
-            if (ckcReceived_Other_PartCode.Checked || ckcReceived_Quantity_Bigger.Checked || ckcReceived_Quantity_Smaller.Checked == true)
-            {
-                string message2 = "There are some issues with the data. Please check the status column for details.";
-                string title2 = "Data Validation Error";
-                MessageBox.Show(message2, title2, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Because you add new partcode, you need to modify this PO firstly.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            string message = "Do you want to create a new GRPO?";
-            string title = "Create GRPO";
-            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (result == DialogResult.Yes)
+
+            if (_is_Received_Over_Quantity == true)
             {
-                Insert_New_GRPO();
+                MessageBox.Show("Because [ Received Quantity ]  is bigger than [ Order Quantity ], you need to modify this PO firstly", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (_is_Received_Under_Quantity == true)
+            {
+                string messageA = "Because [ Received Quantity ] is smaller than [ Order Quantity ], Do you want to continue making new GRPO ?";
+                DialogResult resultA = MessageBox.Show(messageA, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (resultA == DialogResult.No)
+                {
+                    return; // User chose not to create a new GRPO
+                }
+                else
+                {
+                    Insert_New_GRPO();
+                }
+            }
+            else
+            {
+                string message = "Do you want to create a new GRPO?";
+                string title = "Create GRPO";
+                DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    Insert_New_GRPO();
+                }
             }
         }
 
@@ -745,6 +944,38 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             }
         }
 
+        private void cbo_tblPur_Currency_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string currencyValue = Convert_CurrencyID_to_CurrencyName(cbo_tblPur_Currency.SelectedIndex + 1);
+            lblCurrencyA.Text = currencyValue;
+            lblCurrencyC.Text = currencyValue;
+            lblCurrencyD.Text = currencyValue;
+        }
+
+        private void cbo_tblPur_Tax_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            // Lấy giá trị thuế từ ComboBox và cập nhật vào TextBox
+            if (cbo_tblPur_Tax.SelectedValue != null)
+            {
+                string taxValue = cbo_tblPur_Tax.SelectedValue.ToString();
+                if (decimal.TryParse(taxValue, out decimal taxDecimal))
+                {
+                    txtTax.Text = taxDecimal.ToString("0.00"); // Hiển thị giá trị thuế với 2 chữ số thập phân
+                    Calculate_Total();
+                }
+                else
+                {
+                    txtTax.Text = "0.00"; // Nếu không phải là số hợp lệ, đặt về 0.00
+                    Calculate_Total();
+                }
+            }
+            else
+            {
+                txtTax.Text = "0.00"; // Nếu không có giá trị nào được chọn, đặt về 0.00
+                Calculate_Total();
+            }
+        }
+
         private void cm_dgv_List_Content_Insert_Multi_Rows_Click(object sender, EventArgs e)
         {
             using (frm_Choose_Multi_Rows frm = new frm_Choose_Multi_Rows())
@@ -764,6 +995,29 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 }
             }
             txtCountRow.Text = tblPur_Content.Rows.Count.ToString();
+        }
+
+        private void cms_dgv_List_Content_Change_Unit_Items_Click(object sender, EventArgs e)
+        {
+            using (frm_Choose_Unit frm = new frm_Choose_Unit())
+            {
+                if (frm.ShowDialog() == DialogResult.OK)
+                {
+                    int selectedUnitID = Convert.ToInt32(frm.SelectedUnitID);
+                    string selectedUnitName = frm.SelectedUnitName;
+                    // Update for the current row in dgv_List_Content
+                    foreach (DataGridViewCell cell in dgv_List_Content.SelectedCells)
+                    {
+                        int rowIndex = cell.RowIndex;
+
+                        if (!dgv_List_Content.Rows[rowIndex].IsNewRow)
+                        {
+                            dgv_List_Content.Rows[rowIndex].Cells["Unit"].Value = selectedUnitName;
+                        }
+                    }
+                    MessageBox.Show("Unit updated successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
 
         private void cms_dgv_List_Content_Check_Data_Click(object sender, EventArgs e)
@@ -787,14 +1041,33 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
             }
 
             // 4. Kiểm tra xem PartCode có nằm trong PONumber không ?
-            if (Check_Col_PartCode_vs_RowID() == false)
+            Check_Col_PartCode_vs_RowID();
+            if (_is_Having_Other_PartCode)
             {
-                MessageBox.Show("PartCode does not match RowID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                _is_Received_Other_PartCode_Valid = true;
                 ckcReceived_Other_PartCode.Checked = true;
+            }
+            else
+            {
+                ckcReceived_Other_PartCode.Checked = false;
             }
             // 5. Kiểm tra lại giá trị của "Received_Quantity"
             Check_Col_Received_Quantity_Valid();
+            if (_is_Received_Under_Quantity)
+            {
+                ckcReceived_Quantity_Smaller.Checked = true;
+            }
+            else
+            {
+                ckcReceived_Quantity_Smaller.Checked = false;
+            }
+            if (_is_Received_Over_Quantity)
+            {
+                ckcReceived_Quantity_Bigger.Checked = true;
+            }
+            else
+            {
+                ckcReceived_Quantity_Bigger.Checked = false;
+            }
 
             // 6. Kiểm tra các cột dữ liệu khác trong tblPur_Content
             Check_tblPur_Content_Data_Valid();
@@ -881,6 +1154,11 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
                 frm.ShowDetailInfor(partcode);
                 frm.ShowDialog();
             }
+        }
+
+        private void cms_dgv_List_Content_Paste_Data_Click(object sender, EventArgs e)
+        {
+            PasteClipboardToGrid();
         }
 
         private void cms_dgv_List_Content_Reset_Original_Data_Click(object sender, EventArgs e)
@@ -976,7 +1254,7 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         private void dgv_List_Content_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (dgv_List_Content.Columns[e.ColumnIndex].Name == "Quantity" || dgv_List_Content.Columns[e.ColumnIndex].Name == "UnitPrice" || dgv_List_Content.Columns[e.ColumnIndex].Name == "Discount")
+            if (dgv_List_Content.Columns[e.ColumnIndex].Name == "Received_Quantity" || dgv_List_Content.Columns[e.ColumnIndex].Name == "UnitPrice" || dgv_List_Content.Columns[e.ColumnIndex].Name == "Discount")
             {
                 Calculate_Total();
             }
@@ -992,21 +1270,21 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
 
         private void dgv_List_Content_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            //var grid = sender as DataGridView;
-            //string stt = (e.RowIndex + 1).ToString();
-            //var centerFormat = new StringFormat()
-            //{
-            //    Alignment = StringAlignment.Center,
-            //    LineAlignment = StringAlignment.Center
-            //};
+            var grid = sender as DataGridView;
+            string stt = (e.RowIndex + 1).ToString();
+            var centerFormat = new StringFormat()
+            {
+                Alignment = StringAlignment.Center,
+                LineAlignment = StringAlignment.Center
+            };
 
-            //Rectangle headerBounds = new Rectangle(
-            //    e.RowBounds.Left,
-            //    e.RowBounds.Top,
-            //    grid.RowHeadersWidth,
-            //    e.RowBounds.Height);
+            Rectangle headerBounds = new Rectangle(
+                e.RowBounds.Left,
+                e.RowBounds.Top,
+                grid.RowHeadersWidth,
+                e.RowBounds.Height);
 
-            //e.Graphics.DrawString(stt, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
+            e.Graphics.DrawString(stt, this.Font, SystemBrushes.ControlText, headerBounds, centerFormat);
         }
 
         #endregion ===== 04.CONTROL EVENTS =======

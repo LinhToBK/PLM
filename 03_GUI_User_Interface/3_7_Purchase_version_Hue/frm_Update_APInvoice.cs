@@ -768,5 +768,17 @@ namespace PLM_Lynx._03_GUI_User_Interface._3_7_Purchase_version_Hue
         }
 
         #endregion ===== 04. Xử lý sự kiện của các control =====
+
+        private void btn_Update_This_Invoice_Click(object sender, EventArgs e)
+        {
+            string message = "Bạn có chắc chắn muốn cập nhật thông tin của AP Invoice này không?";
+            string title = "Xác nhận cập nhật";
+            DialogResult result = MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+
+            }
+
+        }
     }
 }

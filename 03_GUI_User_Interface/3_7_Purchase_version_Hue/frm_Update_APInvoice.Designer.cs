@@ -950,6 +950,7 @@
             this.btn_Update_This_Invoice.Text = "Update This AP Invoice";
             this.btn_Update_This_Invoice.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btn_Update_This_Invoice.UseVisualStyleBackColor = true;
+            this.btn_Update_This_Invoice.Click += new System.EventHandler(this.btn_Update_This_Invoice_Click);
             // 
             // btnCancel
             // 
